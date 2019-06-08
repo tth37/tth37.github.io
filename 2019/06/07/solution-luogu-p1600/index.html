@@ -118,14 +118,14 @@
 <meta property="og:site_name" content="tth37&#39;s Blog">
 <meta property="og:description" content="题目链接  准备写一篇较为详细的题解。部分思路来自《算法竞赛进阶指南》。  游戏地图构成树形结构，为方便处理，可以取$1$号节点作为根，转化为有根树处理。 可以发现，从S到T的路径有且只有一条，并且必将经过$lca(S,T)$。 不妨设$x$节点上有一名观察员，其观察时间为$W[x]$。我们可以对$x$的位置进行分情况讨论。  $x$在$S$到$lca(S,T)$的路径上（该路径包含$lca(S">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://yoursite.com/2019/06/07/solution-luogu-p1600/tth37.cn/images/tmp1.png">
-<meta property="og:image" content="http://yoursite.com/2019/06/07/solution-luogu-p1600/tth37.cn/images/tmp2.png">
-<meta property="og:image" content="http://yoursite.com/2019/06/07/solution-luogu-p1600/tth37.cn/images/tmp3.png">
-<meta property="og:updated_time" content="2019-06-08T18:14:31.217Z">
+<meta property="og:image" content="http://yoursite.com/images/tmp1.png">
+<meta property="og:image" content="http://yoursite.com/images/tmp2.png">
+<meta property="og:image" content="http://yoursite.com/images/tmp3.png">
+<meta property="og:updated_time" content="2019-06-08T18:17:47.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="题解-luogu-p1600天天爱跑步(Beta)">
 <meta name="twitter:description" content="题目链接  准备写一篇较为详细的题解。部分思路来自《算法竞赛进阶指南》。  游戏地图构成树形结构，为方便处理，可以取$1$号节点作为根，转化为有根树处理。 可以发现，从S到T的路径有且只有一条，并且必将经过$lca(S,T)$。 不妨设$x$节点上有一名观察员，其观察时间为$W[x]$。我们可以对$x$的位置进行分情况讨论。  $x$在$S$到$lca(S,T)$的路径上（该路径包含$lca(S">
-<meta name="twitter:image" content="http://yoursite.com/2019/06/07/solution-luogu-p1600/tth37.cn/images/tmp1.png">
+<meta name="twitter:image" content="http://yoursite.com/images/tmp1.png">
 
 
 
@@ -534,7 +534,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-09 02:14:31" itemprop="dateModified" datetime="2019-06-09T02:14:31+08:00">2019-06-09</time>
+                <time title="修改时间：2019-06-09 02:17:47" itemprop="dateModified" datetime="2019-06-09T02:17:47+08:00">2019-06-09</time>
               
             
           </span>
@@ -630,17 +630,17 @@
 <p>不妨设$x$节点上有一名观察员，其观察时间为$W[x]$。我们可以对$x$的位置进行分情况讨论。</p>
 <ol>
 <li><p>$x$在$S$到$lca(S,T)$的路径上（该路径包含$lca(S,T)$）。</p>
-<p><img src="tth37.cn/images/tmp1.png" alt></p>
+<p><img src="/images/tmp1.png" alt></p>
 <p>为方便说明，假设$S=6$，$T=4$。那么，此时$x$可能为$1$，$3$或$6$。<strong>如果此观察员可以观察到当前玩家，当且仅当</strong>$W[x]=d[S]-d[x]$（$d$数组表示节点深度）。对上式移项，得到$W[x]+d[x]=d[S]$。</p>
 <p>接下来，我们给每一个节点分配若干个权值，即在每一个节点上开一个一维数组，记录各个权值。根据上式，我们可以将$S$到$lca(S,T)$的路径上每一个节点的$d[S]$号权值加一。按照这种方式处理完所有玩家的信息之后，我们遍历所有节点，每个节点上的$(W[x]+d[x])$号权值即为所求。</p>
-<p><img src="tth37.cn/images/tmp2.png" alt></p>
+<p><img src="/images/tmp2.png" alt></p>
 <p>该方法的正确性应该不难理解。$(W[x]+d[x])$号权值的意义即为该节点上满足前文所述等式的玩家个数，而满足等式意味着玩家将会在观察员探头时经过观察点，符合题意。</p>
 <p>但是这种暴力方法显然还有优化的空间。在有根树的一条链上进行权值更改，可以尝试用树上差分的知识解决。<strong>在节点$S$上的$d[S]$号权值加一，节点$fa[lca(S,T)]$上的$d[S]$号权值减一</strong>（可以在每个节点上开一个不定长数组vector记录当前节点上的加减操作），最后进行统计时，计算<strong>当前子树所有$(W[x]+d[x])$号权值和</strong>即可。但即便如此，答案统计也并不容易实现；我们可以使用以下方法：</p>
 <p>建立全局数组$s$，其中$s[i]$表示$i$号权值之和。深度优先遍历所有节点，在<strong>刚访问到当前节点时，记录$cnt=s[W[x]+d[x]]$</strong>。遍历当前节点上的vector，执行加减操作（例如：vector中的一项操作把$3$号权值减一，则$s[3]=s[3]-1$）。递归访问当前节点的所有子节点。<strong>访问结束后，$(s[W[x]+d[x]]-cnt)$即为所求</strong>。</p>
 <p>结合dfs序的相关知识，访问完当前节点的所有子节点之后，$s$数组已经记录了以$x$为根的子树上所有操作。因此将访问后与访问前的权值相减，即为树上差分所得到的答案。</p>
 <p>别忘了才分类讨论了一半呢……</p>
 </li>
-<li><p>$x$在$lca(S,T)$到$T$的路径上（该路径不包含$lca(S,T)$）。<br><img src="tth37.cn/images/tmp3.png" alt><br>同样假设$S=6$，$T=4$。此时$x$可能为$2$或$4$。<strong>如果此观察员可以观察到当前玩家，当且仅当</strong>$W[x]=(d[S]-d[lca(S,T)])+(d[x]-d[lca(S,T)])$。对上式移项，得到$W[x]-d[x]=d[S]-2*d[lca(S,T)]$。</p>
+<li><p>$x$在$lca(S,T)$到$T$的路径上（该路径不包含$lca(S,T)$）。<br><img src="/images/tmp3.png" alt><br>同样假设$S=6$，$T=4$。此时$x$可能为$2$或$4$。<strong>如果此观察员可以观察到当前玩家，当且仅当</strong>$W[x]=(d[S]-d[lca(S,T)])+(d[x]-d[lca(S,T)])$。对上式移项，得到$W[x]-d[x]=d[S]-2*d[lca(S,T)]$。</p>
 <p>类似地，我们只需将操作改为对$(d[S]-2*d[lca(S,T)])$号权值的操作即可。由于权值有可能为负，需要将序号整体平移$N$个单位，即改为对$(d[S]-2*d[lca(S,T)]+N)$号权值的操作。在每个节点上另开一个操作vector，统计答案时另开一个$s$数组，将计算出的答案与第一种情况的答案相加即可。</p>
 </li>
 </ol>
