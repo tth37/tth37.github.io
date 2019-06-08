@@ -592,7 +592,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数"></span>
+                <span title="本文字数">1.5k</span>
               
 
               
@@ -632,6 +632,7 @@
 <p>经过分析，你会发现本题一点也不难实现。其关键在于对数据状态的准确描述。用清晰、简洁的变量描述状态，根据不同的状态采取不同的措施，这便是编程学习的一大基本素养。</p>
 <p>代码如下：</p>
 <a id="more"></a>
+
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> l,r;<span class="comment">//l代表系数，r代表常数 </span></span><br><span class="line"><span class="keyword">char</span> x; <span class="comment">//用x存储字母 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">int</span> f1=<span class="number">1</span>,f2=<span class="number">1</span>,tmp=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%c"</span>,&amp;c))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>)<span class="comment">//类似快读的读入方式 </span></span><br><span class="line">        &#123;</span><br><span class="line">            tmp*=<span class="number">10</span>;</span><br><span class="line">            tmp+=c-<span class="string">'0'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(c&gt;=<span class="string">'a'</span>&amp;&amp;c&lt;=<span class="string">'z'</span>) l+=(tmp==<span class="number">0</span>)?f2*f1:tmp*f2*f1,x=c;<span class="comment">//判断系数是否为1 </span></span><br><span class="line">            <span class="keyword">else</span> r+=tmp*(-f2)*f1;</span><br><span class="line">            tmp=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(c==<span class="string">'+'</span>) &#123;f1=<span class="number">1</span>;<span class="keyword">continue</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span>(c==<span class="string">'-'</span>) &#123;f1=<span class="number">-1</span>;<span class="keyword">continue</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span>(c==<span class="string">'='</span>) &#123;f2=<span class="number">-1</span>;f1=<span class="number">1</span>;<span class="keyword">continue</span>;&#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    solve(); </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%c=%0.3f"</span>,x,(<span class="keyword">float</span>)r/l==<span class="number">0</span>?<span class="built_in">abs</span>((<span class="keyword">float</span>)r/l):(<span class="keyword">float</span>)r/l);</span><br><span class="line"> 	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
@@ -640,7 +641,7 @@
 
     
 
-    
+    <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\04\13\algorithm-maths-primecheck\" title="算法学习-数论专题-素数的判定" rel="bookmark">算法学习-数论专题-素数的判定</a></h3></div></li></ul>
 
     
     
@@ -980,7 +981,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数"></span>
+    <span title="站点总字数">42k</span>
   
 
   

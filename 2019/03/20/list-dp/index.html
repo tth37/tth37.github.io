@@ -591,7 +591,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数"></span>
+                <span title="本文字数">3k</span>
               
 
               
@@ -651,6 +651,7 @@
 </ol>
 <p>   二分发怒程度$M$，$f$数组中存储选择当前题目最少多少体力。统计最终答案只需检验最后$M$个状态即可。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ans=INF;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=N-M;i&lt;=N;++i) ans=min(ans,f[i]);</span><br></pre></td></tr></table></figure>
+
 <hr>
 <ol start="8">
 <li><h5 id="股票交易（单调队列-很多条件）"><a href="#股票交易（单调队列-很多条件）" class="headerlink" title="股票交易（单调队列+很多条件）"></a><a href="https://www.luogu.org/problemnew/show/P2569" target="_blank" rel="noopener">股票交易</a>（单调队列+很多条件）</h5><p>$$<br>f[i][j]=-AP[i]*j(0 \le j \le AS[i])<br>$$</p>
@@ -716,6 +717,7 @@
 </li>
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//玄学方法：</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N+<span class="number">1</span>;++i)&#123;</span><br><span class="line">    <span class="keyword">while</span>(cnt&gt;<span class="number">0</span>&amp;&amp;a[s[cnt]]&gt;=a[i])&#123;</span><br><span class="line">        ans=max(ans,(i-s[cnt<span class="number">-1</span>]<span class="number">-1</span>)*a[s[cnt]]);</span><br><span class="line">        cnt--;</span><br><span class="line">    &#125;</span><br><span class="line">    s[++cnt]=i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//通用方法：</span></span><br><span class="line">先处理出每个位置左边第一个比它小的，再处理出右边第一个比它小的，最后枚举</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -1082,7 +1084,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数"></span>
+    <span title="站点总字数">42k</span>
   
 
   

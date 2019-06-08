@@ -573,7 +573,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数"></span>
+                <span title="本文字数">481</span>
               
 
               
@@ -599,11 +599,13 @@
       
         <p>动态规划题目列表~速戳</p>
 <a id="more"></a>
+
 <p>【例1】<a href="https://www.luogu.org/problemnew/show/P1216" target="_blank" rel="noopener">数字三角形</a></p>
 <p>【变1】<a href="http://noi.openjudge.cn/ch0206/2728/" target="_blank" rel="noopener">数字矩形</a></p>
 <p>【变2】数字矩形+</p>
 <p>【变3】<a href="https://www.luogu.org/problemnew/show/U71342" target="_blank" rel="noopener">数字矩形++</a></p>
  <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=n;++i)</span><br><span class="line">    f[i][m]=a[i][m];</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j=m<span class="number">-1</span>;j&gt;=<span class="number">1</span>;--j)&#123;</span><br><span class="line">    f[<span class="number">1</span>][j]=a[<span class="number">1</span>][j]+max(f[<span class="number">1</span>][j+<span class="number">1</span>],f[<span class="number">2</span>][j+<span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;n;++i)&#123;</span><br><span class="line">        f[i][j]=a[i][j]+max(max(f[i<span class="number">-1</span>][j+<span class="number">1</span>],f[i][j+<span class="number">1</span>]),f[i+<span class="number">1</span>][j+<span class="number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    f[n][j]=a[n][j]+max(f[n][j+<span class="number">1</span>],f[n<span class="number">-1</span>][j+<span class="number">1</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>【例2】最长路经</p>
 <p>【变1】<a href="https://www.luogu.org/problemnew/show/UVA10285" target="_blank" rel="noopener">滑雪</a></p>
 <p>【变2】矩形嵌套</p>
@@ -929,7 +931,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数"></span>
+    <span title="站点总字数">42k</span>
   
 
   

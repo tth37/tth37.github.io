@@ -591,7 +591,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数"></span>
+                <span title="本文字数">852</span>
               
 
               
@@ -618,6 +618,9 @@
         <ol>
 <li><h5 id="方格取数问题（二分图-建模技巧）"><a href="#方格取数问题（二分图-建模技巧）" class="headerlink" title="方格取数问题（二分图+建模技巧）"></a><a href="https://www.luogu.org/problemnew/show/P2774" target="_blank" rel="noopener">方格取数问题</a>（二分图+建模技巧）</h5><p>将原图黑白染色，并保证产生矛盾的两个位置颜色不同。源点连接黑点，白点连接汇点，黑点连接与之产生矛盾的白点。通过 最大和=全局和-最小割，在建立的网络上跑最小割（最大流）即可。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=M;++i)&#123;</span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> j=<span class="number">1</span>;j&lt;=N;++j)&#123;</span><br><span class="line">           <span class="keyword">int</span> w;</span><br><span class="line">           <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;w);</span><br><span class="line">           sum+=w;</span><br><span class="line">           <span class="keyword">if</span>((i+j)&amp;<span class="number">1</span>)&#123;</span><br><span class="line">               AddEdge(S,(i<span class="number">-1</span>)*N+j,w);</span><br><span class="line">               AddEdge((i<span class="number">-1</span>)*N+j,S,INF);</span><br><span class="line">               <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> k=<span class="number">0</span>;k&lt;=<span class="number">3</span>;++k)&#123;</span><br><span class="line">                   <span class="keyword">int</span> tx=i+nx[k],ty=j+ny[k];</span><br><span class="line">                   <span class="keyword">if</span>(tx&lt;<span class="number">1</span>||tx&gt;M||ty&lt;<span class="number">1</span>||ty&gt;N) <span class="keyword">continue</span>;</span><br><span class="line">                   AddEdge((i<span class="number">-1</span>)*N+j,(tx<span class="number">-1</span>)*N+ty,INF);</span><br><span class="line">                   AddEdge((tx<span class="number">-1</span>)*N+ty,(i<span class="number">-1</span>)*N+j,<span class="number">0</span>);</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="keyword">else</span>&#123;</span><br><span class="line">               AddEdge((i<span class="number">-1</span>)*N+j,T,w);</span><br><span class="line">               AddEdge(T,(i<span class="number">-1</span>)*N+j,INF);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
 
@@ -986,7 +989,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数"></span>
+    <span title="站点总字数">42k</span>
   
 
   
