@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[公告 2019-6-20]]></title>
+    <url>%2F2019%2F06%2F20%2Fbulletin-2019-6-20%2F</url>
+    <content type="text"><![CDATA[招募启事tth37最近发现，他写了好多好多题解啦。但是这些题解全都被展示在Homepage里，导致Homepage不够简洁，题目检索不太方便。 于是，tth37决定在每篇题解最前面，写一段题目内容的一句话总结。但是tth37比较忙，实在不想做这件事，因此他决定招募跪求巨佬来帮他完成这项工作。 一份完整的一句话总结必须清楚地概括题面（拒绝花里胡哨），并且给出数据范围。一切字母必须采用$L^AT_EX公式。（百度一下？） 写好一句话总结后，请将其上传至洛谷剪贴板，并将剪贴板链接发给tth37。tth37会根据其质量，酌情发送0.01~0.66元红包作为报酬。 如果在座的各位对本活动反响不够热烈，tth37可能会强迫你们当中的一些人完成这项任务。当然，没有报酬。]]></content>
+      <categories>
+        <category>公告</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[题解-luogu-p3953逛公园]]></title>
     <url>%2F2019%2F06%2F19%2Fsolution-luogu-p3953%2F</url>
     <content type="text"><![CDATA[题目链接 一道看似图论实则可以用动态规划解决的题目。 朴素的状态定义：$f[u][k]$表示从$1$号节点走到$u$号节点，路径长度为$k$的方案总数。状态转移方程：$$f[u][k]=\sum_{(u,v)\in E}f[v][k-w(u,v)]$$但是这样的状态定义有一个严重的问题：空间消耗过大。考虑到题目中给出的$K$值并不大，我们可以利用题目所要求的信息来优化状态设计。 优化后的状态定义：$d[u]$表示从$1$号节点走到$u$号节点的最短路长度，$f[u][k]$表示从$1$号节点走到$u$号节点，路径长度为$d[u]+k$的方案总数。 如此一来，状态所需的空间大大减少，但相应的状态转移略显复杂。不妨设$f[u][k]$状态可以由$f[v][x]$转移得到，则：$$d[v]+x+w(u,v)=d[u]+k$$移项，得到：$$x=d[u]-d[v]+k-w(u,v)$$因此，完整的状态转移方程如下：$$f[u][k]=\sum_{(u,v)\in E}f[v][d[u]-d[v]+k-w(u,v)]$$我们最终要求的答案即为$\sum_{i=0}^Kf[N][i]$，用记忆化搜索实现即可。 代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879808182// luogu-judger-enable-o2#include &lt;bits/stdc++.h&gt;using namespace std;const int MAXN = 100001;struct Edge &#123;int v, w;&#125;;vector&lt;Edge&gt; G1[MAXN], G2[MAXN];int T, N, M, K, P;bool fail;int f[MAXN][51];int d[MAXN];bool vis[MAXN];bool ins[MAXN][51];void Dijkstra() &#123; memset(vis, 0, sizeof(vis)); memset(d, 0x3f, sizeof(d)); priority_queue&lt;pair&lt;int, int&gt; &gt; q; q.push(make_pair(0, 1)); d[1] = 0; while (q.size()) &#123; int u = q.top().second; q.pop(); if (vis[u]) continue; vis[u] = 1; for (vector&lt;Edge&gt;::iterator it = G1[u].begin(); it != G1[u].end(); it++) &#123; int v = it-&gt;v, w = it-&gt;w; if (d[u] + w &lt; d[v]) &#123; d[v] = d[u] + w; q.push(make_pair(-d[v], v)); &#125; &#125; &#125;&#125;inline int dp(int u, int k) &#123; if (k &lt; 0) return 0; if (ins[u][k])&#123; fail = 1; return 0; &#125; if (f[u][k]) return f[u][k]; ins[u][k] = 1; int ans = 0; for (vector&lt;Edge&gt;::iterator it = G2[u].begin(); it != G2[u].end(); it++) &#123; int p = it-&gt;v, w = it-&gt;w; ans = (ans + dp(p, d[u] - d[p] + k - w))%P; if (fail == 1) return 0; &#125; ins[u][k] = 0; return f[u][k] = ans;&#125;int main() &#123; scanf("%d", &amp;T); while (T--) &#123; scanf("%d%d%d%d", &amp;N, &amp;M, &amp;K, &amp;P); for (register int i = 1; i &lt;= M; ++i) &#123; int u, v, w; scanf("%d%d%d", &amp;u, &amp;v, &amp;w); G1[u].push_back((Edge)&#123;v, w&#125;); G2[v].push_back((Edge)&#123;u, w&#125;); &#125; Dijkstra(); dp(1, 0); f[1][0] = 1; int ans = 0; for (register int i = 0; i &lt;= K; ++i) &#123; ans = (ans + dp(N, i))%P; &#125; if(fail == 1) puts("-1"); else printf("%d\n", ans); fail = 0; memset(f, 0, sizeof(f)); memset(ins, 0, sizeof(ins)); for (register int i = 1; i &lt;= N; ++i) &#123; G1[i].clear(), G2[i].clear(); &#125; &#125;&#125;]]></content>
@@ -201,8 +209,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>贪心</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
