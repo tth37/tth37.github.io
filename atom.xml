@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-06-19T16:44:02.869Z</updated>
+  <updated>2019-06-19T17:05:34.484Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,16 +21,17 @@
     <link href="http://yoursite.com/2019/06/20/bulletin-2019-6-20/"/>
     <id>http://yoursite.com/2019/06/20/bulletin-2019-6-20/</id>
     <published>2019-06-19T16:16:06.000Z</published>
-    <updated>2019-06-19T16:44:02.869Z</updated>
+    <updated>2019-06-19T17:05:34.484Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="招募启事"><a href="#招募启事" class="headerlink" title="招募启事"></a>招募启事</h2><p>tth37最近发现，他写了<del>好多好多</del>题解啦。但是这些题解全都被展示在Homepage里，导致Homepage不够简洁，题目检索不太方便。</p><p>于是，tth37决定在每篇题解最前面，写一段<strong>题目内容的一句话总结</strong>。但是tth37比较忙，实在不想做这件事，因此他决定<del>招募</del>跪求巨佬来帮他完成这项工作。</p><p>一份完整的一句话总结必须<strong>清楚地概括题面（拒绝花里胡哨）</strong>，并且给出<strong>数据范围</strong>。一切字母必须采用$L^AT_EX公式。（百度一下？）</p><p>写好一句话总结后，请将其上传至<strong>洛谷剪贴板</strong>，并将剪贴板链接发给tth37。tth37会根据其质量，酌情发送<strong>0.01~0.66元红包</strong>作为报酬。</p><p>如果在座的各位对本活动反响不够热烈，tth37可能会<strong>强迫</strong>你们当中的一些人完成这项任务。当然，<strong>没有报酬</strong>。</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="招募启事"><a href="#招募启事" class="headerlink" title="招募启事"></a>招募启事</h2><p>tth37最近发现，他写了<del>好多好多</del>题解啦。但是这些题解全都被展示在Homepage里，导致Homepage不够简洁，题目检索不太方便。</p><p>于是，tth37决定在每篇题解最前面，写一段<strong>题目内容的一句话总结</strong>。但是tth37比较忙，实在不想做这件事，因此他决定<del>招募</del>跪求巨佬来帮他完成这项工作。</p><p>一份完整的一句话总结必须<strong>清楚地概括题面（拒绝花里胡哨）</strong>，并且给出<strong>数据范围</strong>。一切字母必须采用$L^AT_EX$公式。（百度一下？）</p><p>写好一句话总结后，请将其上传至<strong>洛谷剪贴板</strong>，并将剪贴板链接发给tth37。tth37会根据其质量，酌情发送<strong>0.01~0.66元红包</strong>作为报酬。</p><p>如果在座的各位对本活动反响不够热烈，tth37可能会<strong>强迫</strong>你们当中的一些人完成这项任务。当然，<strong>没有报酬</strong>。</p><a id="more"></a>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;h2 id=&quot;招募启事&quot;&gt;&lt;a href=&quot;#招募启事&quot; class=&quot;headerlink&quot; title=&quot;招募启事&quot;&gt;&lt;/a&gt;招募启事&lt;/h2&gt;&lt;p&gt;tth37最近发现，他写了&lt;del&gt;好多好多&lt;/del&gt;题解啦。但是这些题解全都被展示在Homepage里，导致Homepa
-      
+      &lt;h2 id=&quot;招募启事&quot;&gt;&lt;a href=&quot;#招募启事&quot; class=&quot;headerlink&quot; title=&quot;招募启事&quot;&gt;&lt;/a&gt;招募启事&lt;/h2&gt;&lt;p&gt;tth37最近发现，他写了&lt;del&gt;好多好多&lt;/del&gt;题解啦。但是这些题解全都被展示在Homepage里，导致Homepage不够简洁，题目检索不太方便。&lt;/p&gt;
+&lt;p&gt;于是，tth37决定在每篇题解最前面，写一段&lt;strong&gt;题目内容的一句话总结&lt;/strong&gt;。但是tth37比较忙，实在不想做这件事，因此他决定&lt;del&gt;招募&lt;/del&gt;跪求巨佬来帮他完成这项工作。&lt;/p&gt;
+&lt;p&gt;一份完整的一句话总结必须&lt;strong&gt;清楚地概括题面（拒绝花里胡哨）&lt;/strong&gt;，并且给出&lt;strong&gt;数据范围&lt;/strong&gt;。一切字母必须采用$L^AT_EX$公式。（百度一下？）&lt;/p&gt;
+&lt;p&gt;写好一句话总结后，请将其上传至&lt;strong&gt;洛谷剪贴板&lt;/strong&gt;，并将剪贴板链接发给tth37。tth37会根据其质量，酌情发送&lt;strong&gt;0.01~0.66元红包&lt;/strong&gt;作为报酬。&lt;/p&gt;
+&lt;p&gt;如果在座的各位对本活动反响不够热烈，tth37可能会&lt;strong&gt;强迫&lt;/strong&gt;你们当中的一些人完成这项任务。当然，&lt;strong&gt;没有报酬&lt;/strong&gt;。&lt;/p&gt;
     
     </summary>
     
@@ -608,9 +609,9 @@
       <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="贪心" scheme="http://yoursite.com/tags/%E8%B4%AA%E5%BF%83/"/>
-    
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="贪心" scheme="http://yoursite.com/tags/%E8%B4%AA%E5%BF%83/"/>
     
   </entry>
   
