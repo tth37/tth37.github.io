@@ -949,12 +949,24 @@
                 
               
 
-              <time title="创建时间：2019-06-09 01:42:17 / 修改时间：02:15:36" itemprop="dateCreated datePublished" datetime="2019-06-09T01:42:17+08:00">2019-06-09</time>
+              <time title="创建时间：2019-06-09 01:42:17" itemprop="dateCreated datePublished" datetime="2019-06-09T01:42:17+08:00">2019-06-09</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-23 01:04:58" itemprop="dateModified" datetime="2019-06-23T01:04:58+08:00">2019-06-23</time>
               
             
           </span>
@@ -1034,20 +1046,21 @@
 
       
         
-          <blockquote>
-<p><a href="https://www.luogu.org/problemnew/show/P2627" target="_blank" rel="noopener">题目链接</a></p>
-</blockquote>
-<p>一道单调队列入门题。</p>
-<p>面对动规题，首先设计状态转移方程。令$f[i]$表示$1-i$中连取不超过$K$个数，且<strong>第$i$个数不取</strong>所能累加的最大和。</p>
-<p>因为第$i$个数不取，所以在$i$之前一定连取了一段数。这段数的长度可能为$0-K$（注意是$0-K$而不是$1-K$，可以通过手推样例发现最优解中可能存在连着两个数不取的情况）。连取的一段数所能累加的和可以用前缀和计算。考虑边界条件后，状态转移方程如下：</p>
-<p>$$<br>f[i]=\max_{i-K-1\le j \le i-1} \lbrace f[j]+s[i-1]-s[j] \rbrace<br>$$</p>
-<p>由于$max$函数的循环变量是$j$，所以<strong>只与$i$相关的变量</strong>$s[i-1]$可以作为常数提出到$max$函数之外，即：</p>
-<p>$$<br>f[i]=\max_{i-K-1\le j \le i-1}\lbrace f[j]-s[j]\rbrace +s[i-1]<br>$$</p>
-<p>将状态转移方程化简到这样，就已经可以用单调队列进行优化了。我们可以用单调队列维护$f[j]-s[j]$的最值，在循环时将其最大值取出再加上$s[i-1]$即为$f[i]$。</p>
-<p>如果想不到该如何操作，也可以这样理解：</p>
-<p>$$<br>g[i]=f[i]-s[i]<br>$$<br>$$<br>f[i]=\max_{i-K-1\le j \le i-1}\lbrace g[j]\rbrace+s[i-1]<br>$$</p>
-<p>由于我们定义$f[i]$是第$i$个数不取的最优解，可以强行求解$f[N+1]$（虽然它似乎没有实际意义）作为本题的最终答案。</p>
-<p>代码如下：</p>
+          
+            <p>
+              
+题目链接
+读入$n$个整数，选取其中若干个数，最多连续取$k$个，求取到数字和的最大值
+$1\le k \le n \le 100000$
+感谢@oy 的贡献
+
+一道单调队列入门题。
+面对动规题，首先设计状态转移方程。令$f[i]$表示$1-i$中连取不超过$K$个数，且第$i$个数不取所能累加的最大和。
+因为第$i$个数不取，所以在$i$之前一定连取了一段数。这段数的长度可能为$0-K$（注意是$0-K$而不是$1-K$，可以通过手推样例发现最优解中可能存在连着两个数不取的情况）。连取的一段数所能累加的和可以用前缀和计算。考虑边界条件后，状态转移方程如下：
+$$f[i]=\max_{i-K-1\le j \le i-1} \lbrace f[j]+s[i-1]-s[j] \rbrace$$
+由于$max$函
+              ...
+            </p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1065,7 +1078,7 @@
 
     
 
-    <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\03\25\algorithm-knapsacktreedp\" title="算法学习-背包类树形dp" rel="bookmark">算法学习-背包类树形dp</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\06\19\solution-luogu-p3953\" title="题解-luogu-p3953逛公园" rel="bookmark">题解-luogu-p3953逛公园</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\03\28\solution-luogu-p4516\" title="题解-luogu-p4516潜入行动" rel="bookmark">题解-luogu-p4516潜入行动</a></h3></div></li></ul>
+    <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\03\25\algorithm-knapsacktreedp\" title="算法学习-背包类树形dp" rel="bookmark">算法学习-背包类树形dp</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\03\28\solution-luogu-p4516\" title="题解-luogu-p4516潜入行动" rel="bookmark">题解-luogu-p4516潜入行动</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\06\19\solution-luogu-p3953\" title="题解-luogu-p3953逛公园" rel="bookmark">题解-luogu-p3953逛公园</a></h3></div></li></ul>
 
     
     

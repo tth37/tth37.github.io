@@ -110,18 +110,18 @@
 
 
 
-  <meta name="description" content="题目链接  一道单调队列入门题。 面对动规题，首先设计状态转移方程。令$f[i]$表示$1-i$中连取不超过$K$个数，且第$i$个数不取所能累加的最大和。 因为第$i$个数不取，所以在$i$之前一定连取了一段数。这段数的长度可能为$0-K$（注意是$0-K$而不是$1-K$，可以通过手推样例发现最优解中可能存在连着两个数不取的情况）。连取的一段数所能累加的和可以用前缀和计算。考虑边界条件后，状">
+  <meta name="description" content="题目链接 读入$n$个整数，选取其中若干个数，最多连续取$k$个，求取到数字和的最大值 $1\le k \le n \le 100000$ 感谢@oy 的贡献  一道单调队列入门题。 面对动规题，首先设计状态转移方程。令$f[i]$表示$1-i$中连取不超过$K$个数，且第$i$个数不取所能累加的最大和。 因为第$i$个数不取，所以在$i$之前一定连取了一段数。这段数的长度可能为$0-K$（注意">
 <meta name="keywords" content="动态规划,单调队列">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题解-luogu-p2627修剪草坪">
 <meta property="og:url" content="http://yoursite.com/2019/06/09/solution-luogu-p2627/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="题目链接  一道单调队列入门题。 面对动规题，首先设计状态转移方程。令$f[i]$表示$1-i$中连取不超过$K$个数，且第$i$个数不取所能累加的最大和。 因为第$i$个数不取，所以在$i$之前一定连取了一段数。这段数的长度可能为$0-K$（注意是$0-K$而不是$1-K$，可以通过手推样例发现最优解中可能存在连着两个数不取的情况）。连取的一段数所能累加的和可以用前缀和计算。考虑边界条件后，状">
+<meta property="og:description" content="题目链接 读入$n$个整数，选取其中若干个数，最多连续取$k$个，求取到数字和的最大值 $1\le k \le n \le 100000$ 感谢@oy 的贡献  一道单调队列入门题。 面对动规题，首先设计状态转移方程。令$f[i]$表示$1-i$中连取不超过$K$个数，且第$i$个数不取所能累加的最大和。 因为第$i$个数不取，所以在$i$之前一定连取了一段数。这段数的长度可能为$0-K$（注意">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-08T18:15:36.255Z">
+<meta property="og:updated_time" content="2019-06-22T17:04:58.772Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="题解-luogu-p2627修剪草坪">
-<meta name="twitter:description" content="题目链接  一道单调队列入门题。 面对动规题，首先设计状态转移方程。令$f[i]$表示$1-i$中连取不超过$K$个数，且第$i$个数不取所能累加的最大和。 因为第$i$个数不取，所以在$i$之前一定连取了一段数。这段数的长度可能为$0-K$（注意是$0-K$而不是$1-K$，可以通过手推样例发现最优解中可能存在连着两个数不取的情况）。连取的一段数所能累加的和可以用前缀和计算。考虑边界条件后，状">
+<meta name="twitter:description" content="题目链接 读入$n$个整数，选取其中若干个数，最多连续取$k$个，求取到数字和的最大值 $1\le k \le n \le 100000$ 感谢@oy 的贡献  一道单调队列入门题。 面对动规题，首先设计状态转移方程。令$f[i]$表示$1-i$中连取不超过$K$个数，且第$i$个数不取所能累加的最大和。 因为第$i$个数不取，所以在$i$之前一定连取了一段数。这段数的长度可能为$0-K$（注意">
 
 
 
@@ -513,12 +513,24 @@
                 
               
 
-              <time title="创建时间：2019-06-09 01:42:17 / 修改时间：02:15:36" itemprop="dateCreated datePublished" datetime="2019-06-09T01:42:17+08:00">2019-06-09</time>
+              <time title="创建时间：2019-06-09 01:42:17" itemprop="dateCreated datePublished" datetime="2019-06-09T01:42:17+08:00">2019-06-09</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-06-23 01:04:58" itemprop="dateModified" datetime="2019-06-23T01:04:58+08:00">2019-06-23</time>
               
             
           </span>
@@ -606,6 +618,9 @@
       
         <blockquote>
 <p><a href="https://www.luogu.org/problemnew/show/P2627" target="_blank" rel="noopener">题目链接</a></p>
+<p>读入$n$个整数，选取其中若干个数，最多连续取$k$个，求取到数字和的最大值</p>
+<p>$1\le k \le n \le 100000$</p>
+<p>感谢@oy 的贡献</p>
 </blockquote>
 <p>一道单调队列入门题。</p>
 <p>面对动规题，首先设计状态转移方程。令$f[i]$表示$1-i$中连取不超过$K$个数，且<strong>第$i$个数不取</strong>所能累加的最大和。</p>
@@ -618,8 +633,6 @@
 <p>$$<br>g[i]=f[i]-s[i]<br>$$<br>$$<br>f[i]=\max_{i-K-1\le j \le i-1}\lbrace g[j]\rbrace+s[i-1]<br>$$</p>
 <p>由于我们定义$f[i]$是第$i$个数不取的最优解，可以强行求解$f[N+1]$（虽然它似乎没有实际意义）作为本题的最终答案。</p>
 <p>代码如下：</p>
-<a id="more"></a>
-
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N, K;</span><br><span class="line">ll s[<span class="number">100005</span>], f[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> q[<span class="number">100005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;N, &amp;K);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;s[i]);</span><br><span class="line">        s[i] += s[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">0</span>, r = <span class="number">1</span>;</span><br><span class="line">    q[<span class="number">0</span>] = <span class="number">0</span>, f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r &amp;&amp; q[l] &lt; i - K - <span class="number">1</span>) l++;</span><br><span class="line">        f[i] = f[q[l]] - s[q[l]] + s[i<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r &amp;&amp; f[q[r - <span class="number">1</span>]] - s[q[r - <span class="number">1</span>]] &lt; f[i] - s[i]) r--;</span><br><span class="line">        q[r++] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, f[N + <span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
@@ -628,7 +641,7 @@
 
     
 
-    <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\03\25\algorithm-knapsacktreedp\" title="算法学习-背包类树形dp" rel="bookmark">算法学习-背包类树形dp</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\06\19\solution-luogu-p3953\" title="题解-luogu-p3953逛公园" rel="bookmark">题解-luogu-p3953逛公园</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\03\28\solution-luogu-p4516\" title="题解-luogu-p4516潜入行动" rel="bookmark">题解-luogu-p4516潜入行动</a></h3></div></li></ul>
+    <ul class="popular-posts"><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\03\25\algorithm-knapsacktreedp\" title="算法学习-背包类树形dp" rel="bookmark">算法学习-背包类树形dp</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\03\28\solution-luogu-p4516\" title="题解-luogu-p4516潜入行动" rel="bookmark">题解-luogu-p4516潜入行动</a></h3></div></li><li class="popular-posts-item"><div class="popular-posts-title"><h3><a href="\2019\06\19\solution-luogu-p3953\" title="题解-luogu-p3953逛公园" rel="bookmark">题解-luogu-p3953逛公园</a></h3></div></li></ul>
 
     
     
@@ -646,7 +659,7 @@
   <p><span>本文标题:</span><a href="/2019/06/09/solution-luogu-p2627/">题解-luogu-p2627修剪草坪</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 tth37 的个人博客">tth37</a></p>
   <p><span>发布时间:</span>2019年06月09日 - 01:06</p>
-  <p><span>最后更新:</span>2019年06月09日 - 02:06</p>
+  <p><span>最后更新:</span>2019年06月23日 - 01:06</p>
   <p><span>原始链接:</span><a href="/2019/06/09/solution-luogu-p2627/" title="题解-luogu-p2627修剪草坪">http://yoursite.com/2019/06/09/solution-luogu-p2627/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/06/09/solution-luogu-p2627/" aria-label="复制成功！"></i></span>
   </p>
