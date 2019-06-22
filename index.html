@@ -966,7 +966,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-23 01:04:58" itemprop="dateModified" datetime="2019-06-23T01:04:58+08:00">2019-06-23</time>
+                <time title="修改时间：2019-06-23 01:15:10" itemprop="dateModified" datetime="2019-06-23T01:15:10+08:00">2019-06-23</time>
               
             
           </span>
@@ -1046,21 +1046,12 @@
 
       
         
-          
-            <p>
-              
-题目链接
-读入$n$个整数，选取其中若干个数，最多连续取$k$个，求取到数字和的最大值
-$1\le k \le n \le 100000$
-感谢@oy 的贡献
-
-一道单调队列入门题。
-面对动规题，首先设计状态转移方程。令$f[i]$表示$1-i$中连取不超过$K$个数，且第$i$个数不取所能累加的最大和。
-因为第$i$个数不取，所以在$i$之前一定连取了一段数。这段数的长度可能为$0-K$（注意是$0-K$而不是$1-K$，可以通过手推样例发现最优解中可能存在连着两个数不取的情况）。连取的一段数所能累加的和可以用前缀和计算。考虑边界条件后，状态转移方程如下：
-$$f[i]=\max_{i-K-1\le j \le i-1} \lbrace f[j]+s[i-1]-s[j] \rbrace$$
-由于$max$函
-              ...
-            </p>
+          <blockquote>
+<p><a href="https://www.luogu.org/problemnew/show/P2627" target="_blank" rel="noopener">题目链接</a></p>
+<p>读入$n$个整数，选取其中若干个数，最多连续取$k$个，求取到数字和的最大值</p>
+<p>$1\le k \le n \le 100000$</p>
+<p>感谢@oy 的贡献</p>
+</blockquote>
           <!--noindex-->
           
             <div class="post-button text-center">
