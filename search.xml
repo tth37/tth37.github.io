@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-luogu-p3959宝藏]]></title>
+    <url>%2F2019%2F06%2F30%2Fsolution-luogu-p3959%2F</url>
+    <content type="text"><![CDATA[题目链接 征集题目概括中~ 这道题做了很长时间，从一开始推出错误的状态转移方程，到埋头优化正确的状态转移，前后花了一个多星期…… 本题题解可以保证正确性（当然欢迎Hack），却在速度上略有欠缺。 状态定义：$f[s][u][d]$ s表示当前已联通的点集，$u$表示当前点集生成树的树根，$d$表示$u$到起点的距离。（注意：$u$不是起点） 状态转移：状态肯定是通过挖通道来转移的。如果将$u$和$v$之间挖通，则$u$所在的连通块和$v$所在的连通块将会合并。如果以$u$作为根，$u$到起点的距离为$d$，则$v$到起点的距离为$(d+1)$。方程如下：$$f[s][u][d]=min\lbrace f[s1][u][d]+f[s2][v][d+1]+w(u,v)*d\rbrace$$其中：$$s1 \cup s2=s,u\in s1,v\in s2,w(u,v)\not= \inf$$最终要求的答案即为$\min_{1\le i \le n}f[(1&lt;&lt;n)-1][i][1]$，采用记忆化搜索实现。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142#pragma GCC optimize(3)#include &lt;bits/stdc++.h&gt;using namespace std;const int INF = 0x3f3f3f3f;int N, M;int w[13][13];int f[1&lt;&lt;13][13][13];inline int dp(int s, int u, int d) &#123; if (f[s][u][d] != -1) return f[s][u][d]; if (s == (1 &lt;&lt; (u - 1))) return f[s][u][d] = 0; int&amp; ans = f[s][u][d] = INF; for (register int s1 = s; s1; s1 = (s1 - 1) &amp; s) &#123; if (!(s1 &amp; (1 &lt;&lt; (u - 1)))) continue; for (register int v = 1; v &lt;= N; ++v) &#123; if (!(s &amp; (1 &lt;&lt; (v - 1)))) continue; if (w[u][v] == INF) continue; int s2 = s ^ s1; ans = min(ans, dp(s1, u, d) + dp(s2, v, d + 1) + w[u][v] * d); &#125; &#125; return ans;&#125;int main() &#123; memset(w, 0x3f, sizeof(w)); memset(f, -1, sizeof(f)); scanf("%d%d", &amp;N, &amp;M); for (register int i = 1; i &lt;= M; ++i) &#123; int u, v, t; scanf("%d%d%d", &amp;u, &amp;v, &amp;t); w[u][v] = w[v][u] = min(w[u][v], t); &#125; int ans = INF; for (register int u = 1; u &lt;= N; ++u) &#123; ans = min(ans, dp((1 &lt;&lt; N) - 1, u, 1)); &#125; printf("%d", ans); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>状态压缩</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[公告 2019-6-20]]></title>
     <url>%2F2019%2F06%2F20%2Fbulletin-2019-6-20%2F</url>
     <content type="text"><![CDATA[招募启事tth37最近发现，他写了好多好多题解啦。但是这些题解全都被展示在Homepage里，导致Homepage不够简洁，题目检索不太方便。 于是，tth37决定在每篇题解最前面，写一段题目内容的一句话总结。但是tth37比较忙，实在不想做这件事，因此他决定招募跪求巨佬来帮他完成这项工作。 一份完整的一句话总结必须清楚地概括题面（拒绝花里胡哨），并且给出数据范围。一切字母必须采用$L^AT_EX$公式。（百度一下？） 写好一句话总结后，请将其上传至洛谷剪贴板，并将剪贴板链接发给tth37。tth37会根据其质量，酌情发送0.01~0.66元红包作为报酬。 如果在座的各位对本活动反响不够热烈，tth37可能会强迫你们当中的一些人完成这项任务。当然，没有报酬。]]></content>
