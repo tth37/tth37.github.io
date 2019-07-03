@@ -950,7 +950,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-03 16:45:49" itemprop="dateModified" datetime="2019-07-03T16:45:49+08:00">2019-07-03</time>
+                <time title="修改时间：2019-07-03 16:52:26" itemprop="dateModified" datetime="2019-07-03T16:52:26+08:00">2019-07-03</time>
               
             
           </span>
@@ -1033,6 +1033,7 @@
           <blockquote>
 <p><a href="https://www.luogu.org/problemnew/show/P3959" target="_blank" rel="noopener">题目链接</a></p>
 <p>输入一个有$n$个点$m$条边的有权无向图。选定任意节点作为根节点。构造一棵生成树，使得树上所有真实边权的总和最小。真实边权的计算公式：$w(u,v)\times L$，其中$L$为根节点到$u$路径上的节点总数。</p>
+<p>$1\le n \le 12,1 \le m \le 1000$</p>
 <p>感谢@oy的贡献</p>
 </blockquote>
           <!--noindex-->
@@ -1837,12 +1838,24 @@
                 
               
 
-              <time title="创建时间：2019-05-20 19:04:53 / 修改时间：19:22:20" itemprop="dateCreated datePublished" datetime="2019-05-20T19:04:53+08:00">2019-05-20</time>
+              <time title="创建时间：2019-05-20 19:04:53" itemprop="dateCreated datePublished" datetime="2019-05-20T19:04:53+08:00">2019-05-20</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-03 16:55:45" itemprop="dateModified" datetime="2019-07-03T16:55:45+08:00">2019-07-03</time>
               
             
           </span>
@@ -1897,7 +1910,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3.4k</span>
+                <span title="本文字数">3.5k</span>
               
 
               
@@ -1924,11 +1937,10 @@
         
           <blockquote>
 <p><a href="https://www.luogu.org/problemnew/show/P2633" target="_blank" rel="noopener">题目链接</a></p>
+<p>给定一棵$n$个节点的树，每个节点上有一个权值。对于$m$次询问，需要输出$u$到$v$的最短路径上第$k$小的点权。</p>
+<p>$1\le n\le 100000,1 \le m\le 100000$</p>
+<p>感谢@tth37 的贡献</p>
 </blockquote>
-<blockquote>
-<p>这题不难呀，怎么调了这么久？         ——Mr. G</p>
-</blockquote>
-<p>前置知识是主席树。在利用主席树求解区间第K小数时可以发现，主席树是一种类似前缀和的数据结构，具有和前缀和类似的区间加减及差分等优秀性质。在求解线性区间的第K小数时，我们需要将该区间内的所有数值信息扔到一棵主席树中，并在这棵主席树上左右递归，以找到第K小数；同样的，我们可以类比树上前缀和的操作，定义$s[u]$为从根节点到第$u$号节点的“前缀主席树”（感性理解谢谢）。那么，包含$u$到$v$上所有数值信息的主席树就应该是：<br>$$<br>s[u]+s[v]-s[lca(u,v)]-s[fa[lca(u,v)]]<br>$$<br>理解上式后，问题基本可以解决了。另外注意离散化和主席树的代码细节。代码如下：</p>
           <!--noindex-->
           
             <div class="post-button text-center">
