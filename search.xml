@@ -9,8 +9,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>树链剖分</tag>
         <tag>线段树</tag>
+        <tag>树链剖分</tag>
         <tag>dfs序</tag>
       </tags>
   </entry>
@@ -173,9 +173,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>可持久化trie</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -247,8 +247,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>贪心</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
