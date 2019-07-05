@@ -37,9 +37,9 @@
     
       <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
-    
       <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+      <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
       <category term="dfs序" scheme="http://yoursite.com/tags/dfs%E5%BA%8F/"/>
     
@@ -106,7 +106,7 @@
     <link href="http://yoursite.com/2019/06/20/bulletin-2019-6-20/"/>
     <id>http://yoursite.com/2019/06/20/bulletin-2019-6-20/</id>
     <published>2019-06-19T16:16:06.000Z</published>
-    <updated>2019-06-19T17:05:34.484Z</updated>
+    <updated>2019-07-05T16:08:30.575Z</updated>
     
     <content type="html"><![CDATA[<h2 id="招募启事"><a href="#招募启事" class="headerlink" title="招募启事"></a>招募启事</h2><p>tth37最近发现，他写了<del>好多好多</del>题解啦。但是这些题解全都被展示在Homepage里，导致Homepage不够简洁，题目检索不太方便。</p><p>于是，tth37决定在每篇题解最前面，写一段<strong>题目内容的一句话总结</strong>。但是tth37比较忙，实在不想做这件事，因此他决定<del>招募</del>跪求巨佬来帮他完成这项工作。</p><p>一份完整的一句话总结必须<strong>清楚地概括题面（拒绝花里胡哨）</strong>，并且给出<strong>数据范围</strong>。一切字母必须采用$L^AT_EX$公式。（百度一下？）</p><p>写好一句话总结后，请将其上传至<strong>洛谷剪贴板</strong>，并将剪贴板链接发给tth37。tth37会根据其质量，酌情发送<strong>0.01~0.66元红包</strong>作为报酬。</p><p>如果在座的各位对本活动反响不够热烈，tth37可能会<strong>强迫</strong>你们当中的一些人完成这项任务。当然，<strong>没有报酬</strong>。</p><a id="more"></a>]]></content>
     
@@ -484,11 +484,11 @@
     
       <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
       <category term="可持久化trie" scheme="http://yoursite.com/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96trie/"/>
     
       <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
+    
+      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
   </entry>
   
