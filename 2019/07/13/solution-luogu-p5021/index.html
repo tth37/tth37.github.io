@@ -110,18 +110,18 @@
 
 
 
-  <meta name="description" content="题目链接 征集题目概括中~  题目要求使$m$条赛道中最短赛道的长度尽可能大，不难想到二分最短赛道的长度$len$，并判定是否能修建出$m$条赛道。 定义$f[u]$为自节点$u$向下延伸的不作为赛道的最长链长度。假设已知所有的$f[v]+w(u,v) (v\in son(u))$（即自节点$u$向下延伸的所有链的长度），则我们应在保证这些链能组成最多赛道的前提下，使保留下来的$f[v]+w(u">
+  <meta name="description" content="题目链接 征集题目概括中~">
 <meta name="keywords" content="动态规划,二分答案">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题解-luogu-p5021赛道修建">
 <meta property="og:url" content="http://yoursite.com/2019/07/13/solution-luogu-p5021/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="题目链接 征集题目概括中~  题目要求使$m$条赛道中最短赛道的长度尽可能大，不难想到二分最短赛道的长度$len$，并判定是否能修建出$m$条赛道。 定义$f[u]$为自节点$u$向下延伸的不作为赛道的最长链长度。假设已知所有的$f[v]+w(u,v) (v\in son(u))$（即自节点$u$向下延伸的所有链的长度），则我们应在保证这些链能组成最多赛道的前提下，使保留下来的$f[v]+w(u">
+<meta property="og:description" content="题目链接 征集题目概括中~">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-12T17:13:12.565Z">
+<meta property="og:updated_time" content="2019-07-12T17:16:20.993Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="题解-luogu-p5021赛道修建">
-<meta name="twitter:description" content="题目链接 征集题目概括中~  题目要求使$m$条赛道中最短赛道的长度尽可能大，不难想到二分最短赛道的长度$len$，并判定是否能修建出$m$条赛道。 定义$f[u]$为自节点$u$向下延伸的不作为赛道的最长链长度。假设已知所有的$f[v]+w(u,v) (v\in son(u))$（即自节点$u$向下延伸的所有链的长度），则我们应在保证这些链能组成最多赛道的前提下，使保留下来的$f[v]+w(u">
+<meta name="twitter:description" content="题目链接 征集题目概括中~">
 
 
 
@@ -513,7 +513,7 @@
                 
               
 
-              <time title="创建时间：2019-07-13 00:54:10 / 修改时间：01:13:12" itemprop="dateCreated datePublished" datetime="2019-07-13T00:54:10+08:00">2019-07-13</time>
+              <time title="创建时间：2019-07-13 00:54:10 / 修改时间：01:16:20" itemprop="dateCreated datePublished" datetime="2019-07-13T00:54:10+08:00">2019-07-13</time>
             
 
             
@@ -608,6 +608,8 @@
 <p><a href="https://www.luogu.org/problemnew/show/P5021" target="_blank" rel="noopener">题目链接</a></p>
 <p>征集题目概括中~</p>
 </blockquote>
+<a id="more"></a>
+
 <p>题目要求使$m$条赛道中最短赛道的长度尽可能大，不难想到二分最短赛道的长度$len$，并判定是否能修建出$m$条赛道。</p>
 <p>定义$f[u]$为自节点$u$向下延伸的<strong>不作为赛道</strong>的最长链长度。假设已知所有的$f[v]+w(u,v) (v\in son(u))$（即自节点$u$向下延伸的所有链的长度），则我们应在保证这些链能组成最多赛道的前提下，使保留下来的$f[v]+w(u,v)$最大。</p>
 <p>考虑贪心。对于$f[v]+w(u,v)\ge len$的情况，可以直接将其作为一条赛道。而剩余的链，只能将它们两两拼接成赛道。由于需要使保留下来的$f[v]+w(u,v)$取最大值，所以我们可以优先使较短的链得到匹配，在剩余的无法匹配的链中取最值作为新的$f[u]$。</p>

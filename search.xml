@@ -21,8 +21,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>树链剖分</tag>
         <tag>线段树</tag>
+        <tag>树链剖分</tag>
         <tag>dfs序</tag>
       </tags>
   </entry>
@@ -185,9 +185,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>可持久化trie</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
