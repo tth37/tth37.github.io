@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[算法学习-数论专题-乘法逆元]]></title>
+    <url>%2F2019%2F07%2F13%2Falgorithm-maths-multiplicativeinversion%2F</url>
+    <content type="text"><![CDATA[概述 乘法逆元定义：如果一个线性同余方程$ax\equiv 1 (\mod b)$，则$x$成为$a \mod b$的逆元，记作$a^-1$。 乘法逆元一般用于求$a/b(\mod p)$的值（$p$通常为质数），是解决模意义下分数数值的必要手段。 对于$a/b(\mod p)$，我们可以求出$b$在$\mod p$下的逆元，然后乘上$a$再$\mod p$，就是这个分数的值了。 求解逆元的方法扩展欧几里得法求解$ax\equiv 1 (mod b)$ 等价于解不定方程 $ax+by=1$，求解出的$x$即为$a \mod b$的逆元。 12345678void exgcd(int a, int b, int&amp; x, int&amp; y) &#123; if (b == 0) &#123; x = 1, y = 0; return; &#125; exgcd(b, a % b, y, x); y -= a / b * x;&#125; 快速幂法 费马小定理 若$p$为质数，$a$为正整数，且$a$、$p$互质，则$a^{p-1}\equiv 1 (\mod p)$。 因为$ax\equiv 1(\mod b)$ 所以$ax\equiv a^{b-1}(\mod b)$ 所以$x\equiv a^{b-2}(\mod b)$ 然后可以使用快速幂求解逆元。 代码略。 线性求逆元假设现在要求$inv[i]$。 考虑带余除法，设$p=iq+r$，则有$iq+r\equiv 0(\mod p)$ 注意到$p$是质数，因此$r$不为$0$，$r$的逆元存在 等式两边乘$i^{-1}r^{-1}$，得到$qr^{-1}+i^{-1}\equiv 0(\mod p)$ 因此$i^{-1}\equiv -qr^{-1}\equiv -(p/i)(p \mod i)^{-1}(\mod p)$ 12for (inv[1] = 1, i = 2; i &lt;= n; ++i) inv[i] = (p - p / i) * inv[p % i] % p;]]></content>
+      <categories>
+        <category>算法学习</category>
+        <category>数论专题</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>乘法逆元</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[题解-luogu-p5021赛道修建]]></title>
     <url>%2F2019%2F07%2F13%2Fsolution-luogu-p5021%2F</url>
     <content type="text"><![CDATA[题目链接 征集题目概括中~ 题目要求使$m$条赛道中最短赛道的长度尽可能大，不难想到二分最短赛道的长度$len$，并判定是否能修建出$m$条赛道。 定义$f[u]$为自节点$u$向下延伸的不作为赛道的最长链长度。假设已知所有的$f[v]+w(u,v) (v\in son(u))$（即自节点$u$向下延伸的所有链的长度），则我们应在保证这些链能组成最多赛道的前提下，使保留下来的$f[v]+w(u,v)$最大。 考虑贪心。对于$f[v]+w(u,v)\ge len$的情况，可以直接将其作为一条赛道。而剩余的链，只能将它们两两拼接成赛道。由于需要使保留下来的$f[v]+w(u,v)$取最大值，所以我们可以优先使较短的链得到匹配，在剩余的无法匹配的链中取最值作为新的$f[u]$。 贪心操作可以用$multiset$实现。 代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#include &lt;bits/stdc++.h&gt;using namespace std;const int MAXN = 50005;struct Edge &#123;int v, w;&#125;;vector&lt;Edge&gt; G[MAXN];int N, M, L, cnt;int f[MAXN];inline bool cmp(int a, int b) &#123;return a &gt; b;&#125;inline void dfs(int u, int fa) &#123; multiset&lt;int&gt; s; for (vector&lt;Edge&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = it -&gt; v, w = it -&gt; w; if (v == fa) continue; dfs(v, u); if (f[v] + w &gt;= L) cnt++; else s.insert(f[v] + w); &#125; while (!s.empty()) &#123; multiset&lt;int&gt;::iterator it = s.begin(); s.erase(it); multiset&lt;int&gt;::iterator it1 = s.lower_bound(L - *it); if (it1 == s.end()) f[u] = max(f[u], *it); else &#123; cnt++; s.erase(it1); &#125; &#125;&#125;inline bool check() &#123; memset(f, 0, sizeof(f)); cnt = 0; dfs(1, 0); if (cnt &gt;= M) return 1; return 0;&#125;int main() &#123; scanf("%d%d", &amp;N, &amp;M); for (register int i = 1; i &lt; N; ++i) &#123; int u, v, w; scanf("%d%d%d", &amp;u, &amp;v, &amp;w); G[u].push_back((Edge)&#123;v, w&#125;); G[v].push_back((Edge)&#123;u, w&#125;); &#125; int l = 0, r = 500000000; int ans = 0; while (l &lt;= r) &#123; int mid = (l + r) &gt;&gt; 1; L = mid; if (check()) &#123; ans = mid; l = mid + 1; &#125; else r = mid - 1; &#125; printf("%d", ans); return 0;&#125;]]></content>
@@ -21,8 +34,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>树链剖分</tag>
+        <tag>线段树</tag>
         <tag>dfs序</tag>
       </tags>
   </entry>
@@ -185,9 +198,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
+        <tag>线段树</tag>
         <tag>可持久化trie</tag>
         <tag>主席树</tag>
-        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>

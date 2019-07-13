@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-12T17:16:20.993Z</updated>
+  <updated>2019-07-13T06:20:20.006Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>算法学习-数论专题-乘法逆元</title>
+    <link href="http://yoursite.com/2019/07/13/algorithm-maths-multiplicativeinversion/"/>
+    <id>http://yoursite.com/2019/07/13/algorithm-maths-multiplicativeinversion/</id>
+    <published>2019-07-13T04:59:09.000Z</published>
+    <updated>2019-07-13T06:20:20.006Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote><p>乘法逆元定义：如果一个线性同余方程$ax\equiv 1 (\mod b)$，则$x$成为$a \mod b$的逆元，记作$a^-1$。</p></blockquote><p>乘法逆元一般用于求$a/b(\mod p)$的值（$p$通常为质数），是解决模意义下分数数值的必要手段。</p><p>对于$a/b(\mod p)$，我们可以求出$b$在$\mod p$下的逆元，然后乘上$a$再$\mod p$，就是这个分数的值了。</p><a id="more"></a><h2 id="求解逆元的方法"><a href="#求解逆元的方法" class="headerlink" title="求解逆元的方法"></a>求解逆元的方法</h2><h3 id="扩展欧几里得法"><a href="#扩展欧几里得法" class="headerlink" title="扩展欧几里得法"></a>扩展欧几里得法</h3><p>求解$ax\equiv 1 (mod b)$ 等价于解不定方程 $ax+by=1$，求解出的$x$即为$a \mod b$的逆元。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span>&amp; x, <span class="keyword">int</span>&amp; y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) &#123;</span><br><span class="line">        x = <span class="number">1</span>, y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    exgcd(b, a % b, y, x);</span><br><span class="line">    y -= a / b * x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="快速幂法"><a href="#快速幂法" class="headerlink" title="快速幂法"></a>快速幂法</h3><blockquote><p>费马小定理</p><p>若$p$为质数，$a$为正整数，且$a$、$p$互质，则$a^{p-1}\equiv 1 (\mod p)$。</p></blockquote><p>因为$ax\equiv 1(\mod b)$</p><p>所以$ax\equiv a^{b-1}(\mod b)$</p><p>所以$x\equiv a^{b-2}(\mod b)$</p><p>然后可以使用快速幂求解逆元。</p><p>代码略。</p><h3 id="线性求逆元"><a href="#线性求逆元" class="headerlink" title="线性求逆元"></a>线性求逆元</h3><p>假设现在要求$inv[i]$。</p><p>考虑带余除法，设$p=iq+r$，则有$iq+r\equiv 0(\mod p)$</p><p>注意到$p$是质数，因此$r$不为$0$，$r$的逆元存在</p><p>等式两边乘$i^{-1}r^{-1}$，得到$qr^{-1}+i^{-1}\equiv 0(\mod p)$</p><p>因此$i^{-1}\equiv -qr^{-1}\equiv -(p/i)(p \mod i)^{-1}(\mod p)$</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (inv[<span class="number">1</span>] = <span class="number">1</span>, i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">    inv[i] = (p - p / i) * inv[p % i] % p;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;乘法逆元定义：如果一个线性同余方程$ax\equiv 1 (\mod b)$，则$x$成为$a \mod b$的逆元，记作$a^-1$。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;乘法逆元一般用于求$a/b(\mod p)$的值（$p$通常为质数），是解决模意义下分数数值的必要手段。&lt;/p&gt;
+&lt;p&gt;对于$a/b(\mod p)$，我们可以求出$b$在$\mod p$下的逆元，然后乘上$a$再$\mod p$，就是这个分数的值了。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="算法学习" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="数论专题" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
+    
+    
+      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="乘法逆元" scheme="http://yoursite.com/tags/%E4%B9%98%E6%B3%95%E9%80%86%E5%85%83/"/>
+    
+  </entry>
   
   <entry>
     <title>题解-luogu-p5021赛道修建</title>
@@ -64,9 +94,9 @@
     
       <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
       <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
+      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
       <category term="dfs序" scheme="http://yoursite.com/tags/dfs%E5%BA%8F/"/>
     
@@ -490,11 +520,11 @@
     
       <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
+      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
       <category term="可持久化trie" scheme="http://yoursite.com/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96trie/"/>
     
       <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
-    
-      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
   </entry>
   
