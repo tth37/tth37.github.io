@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-luogu-p1641生成字符串]]></title>
+    <url>%2F2019%2F07%2F13%2Fsolution-luogu-p1641%2F</url>
+    <content type="text"><![CDATA[题目链接 将$n$个$1$和$m$个$0$组成字符串，使得在任意的前$k$个字符中，$1$的个数不能少于$0$的个数。求满足条件的字符串共有多少个。 $1\le m \le n \le 1000000$ 本题是卡特兰数的一个简单变式。 回忆卡特兰数的推导过程，可以生成的所有字符串共有$C_{n+m}^n$个，其中不合法的字符串有$C_{n+m}^{n+1}$个。最终答案即为$C_{n+m}^{n}-C_{n+m}^{n+1}$。计算组合数前须预处理出阶乘逆元。 代码如下： 1234567891011121314151617181920#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int p = 20100403;int N, M;int inv[2000005], fac[2000005], facinv[2000005];int C(int n, int m) &#123; return (ll) fac[n] * facinv[m] % p * facinv[n - m] % p;&#125;int main() &#123; cin &gt;&gt; N &gt;&gt; M; inv[1] = 1; fac[0] = fac[1] = 1; facinv[1] = 1; for (register int i = 2; i &lt;= N + M; ++i) &#123; inv[i] = (ll) (p - p / i) * inv[p % i] % p; fac[i] = (ll) i * fac[i - 1] % p; facinv[i] = (ll) facinv[i - 1] * inv[i] % p; &#125; cout &lt;&lt; (C(N + M, N) - C(N + M, N + 1) + p) % p; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>卡特兰数</tag>
+        <tag>逆元</tag>
+        <tag>组合数</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[算法学习-数论专题-乘法逆元]]></title>
     <url>%2F2019%2F07%2F13%2Falgorithm-maths-multiplicativeinversion%2F</url>
-    <content type="text"><![CDATA[概述 乘法逆元定义：如果一个线性同余方程$ax\equiv 1 (\mod b)$，则$x$成为$a \mod b$的逆元，记作$a^-1$。 乘法逆元一般用于求$a/b(\mod p)$的值（$p$通常为质数），是解决模意义下分数数值的必要手段。 对于$a/b(\mod p)$，我们可以求出$b$在$\mod p$下的逆元，然后乘上$a$再$\mod p$，就是这个分数的值了。 求解逆元的方法扩展欧几里得法求解$ax\equiv 1 (mod b)$ 等价于解不定方程 $ax+by=1$，求解出的$x$即为$a \mod b$的逆元。 12345678void exgcd(int a, int b, int&amp; x, int&amp; y) &#123; if (b == 0) &#123; x = 1, y = 0; return; &#125; exgcd(b, a % b, y, x); y -= a / b * x;&#125; 快速幂法 费马小定理 若$p$为质数，$a$为正整数，且$a$、$p$互质，则$a^{p-1}\equiv 1 (\mod p)$。 因为$ax\equiv 1(\mod b)$ 所以$ax\equiv a^{b-1}(\mod b)$ 所以$x\equiv a^{b-2}(\mod b)$ 然后可以使用快速幂求解逆元。 代码略。 线性求逆元假设现在要求$inv[i]$。 考虑带余除法，设$p=iq+r$，则有$iq+r\equiv 0(\mod p)$ 注意到$p$是质数，因此$r$不为$0$，$r$的逆元存在 等式两边乘$i^{-1}r^{-1}$，得到$qr^{-1}+i^{-1}\equiv 0(\mod p)$ 因此$i^{-1}\equiv -qr^{-1}\equiv -(p/i)(p \mod i)^{-1}(\mod p)$ 12for (inv[1] = 1, i = 2; i &lt;= n; ++i) inv[i] = (p - p / i) * inv[p % i] % p;]]></content>
+    <content type="text"><![CDATA[概述 乘法逆元定义：如果一个线性同余方程$ax\equiv 1 \mod b$，则$x$成为$a \mod b$的逆元，记作$a^{-1}$。 乘法逆元一般用于求$a/b\mod p$的值（$p$通常为质数），是解决模意义下分数数值的必要手段。 对于$a/b\mod p$，我们可以求出$b$在$\mod p$下的逆元，然后乘上$a$再$\mod p$，就是这个分数的值了。 求解逆元的方法扩展欧几里得法求解$ax\equiv 1 \mod b$ 等价于解不定方程 $ax+by=1$，求解出的$x$即为$a \mod b$的逆元。 12345678void exgcd(int a, int b, int&amp; x, int&amp; y) &#123; if (b == 0) &#123; x = 1, y = 0; return; &#125; exgcd(b, a % b, y, x); y -= a / b * x;&#125; 快速幂法 费马小定理 若$p$为质数，$a$为正整数，且$a$、$p$互质，则$a^{p-1}\equiv 1 (\mod p)$。 因为$ax\equiv 1\mod b$ 所以$ax\equiv a^{b-1}\mod b$ 所以$x\equiv a^{b-2}\mod b$ 然后可以使用快速幂求解逆元。 代码略。 线性求逆元假设现在要求$inv[i]$。 考虑带余除法，设$p=iq+r$，则有$iq+r\equiv 0\mod p$ 注意到$p$是质数，因此$r$不为$0$，$r$的逆元存在 等式两边乘$i^{-1}r^{-1}$，得到$qr^{-1}+i^{-1}\equiv 0\mod p$ 因此$i^{-1}\equiv -qr^{-1}\equiv -(p/i)(p \mod i)^{-1}\mod p$ 12for (inv[1] = 1, i = 2; i &lt;= n; ++i) inv[i] = (p - p / i) * inv[p % i] % p;]]></content>
       <categories>
         <category>算法学习</category>
         <category>数论专题</category>
@@ -34,8 +48,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>树链剖分</tag>
         <tag>线段树</tag>
+        <tag>树链剖分</tag>
         <tag>dfs序</tag>
       </tags>
   </entry>
@@ -198,9 +212,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>可持久化trie</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>

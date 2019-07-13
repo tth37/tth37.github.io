@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-07-13T06:20:20.006Z</updated>
+  <updated>2019-07-13T15:33:00.647Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,21 +17,53 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>题解-luogu-p1641生成字符串</title>
+    <link href="http://yoursite.com/2019/07/13/solution-luogu-p1641/"/>
+    <id>http://yoursite.com/2019/07/13/solution-luogu-p1641/</id>
+    <published>2019-07-13T15:19:46.000Z</published>
+    <updated>2019-07-13T15:33:00.647Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://www.luogu.org/problemnew/show/P1641" target="_blank" rel="noopener">题目链接</a></p><p>将$n$个$1$和$m$个$0$组成字符串，使得在任意的前$k$个字符中，$1$的个数不能少于$0$的个数。求满足条件的字符串共有多少个。</p><p>$1\le m \le n \le 1000000$</p></blockquote><a id="more"></a><p>本题是卡特兰数的一个简单变式。</p><p>回忆卡特兰数的推导过程，可以生成的所有字符串共有$C_{n+m}^n$个，其中不合法的字符串有$C_{n+m}^{n+1}$个。最终答案即为$C_{n+m}^{n}-C_{n+m}^{n+1}$。计算组合数前须预处理出阶乘逆元。</p><p>代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> p = <span class="number">20100403</span>;</span><br><span class="line"><span class="keyword">int</span> N, M;</span><br><span class="line"><span class="keyword">int</span> inv[<span class="number">2000005</span>], fac[<span class="number">2000005</span>], facinv[<span class="number">2000005</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (ll) fac[n] * facinv[m] % p * facinv[n - m] % p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; N &gt;&gt; M;</span><br><span class="line">    inv[<span class="number">1</span>] = <span class="number">1</span>; fac[<span class="number">0</span>] = fac[<span class="number">1</span>] = <span class="number">1</span>; facinv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N + M; ++i) &#123;</span><br><span class="line">        inv[i] = (ll) (p - p / i) * inv[p % i] % p;</span><br><span class="line">        fac[i] = (ll) i * fac[i - <span class="number">1</span>] % p;</span><br><span class="line">        facinv[i] = (ll) facinv[i - <span class="number">1</span>] * inv[i] % p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; (C(N + M, N) - C(N + M, N + <span class="number">1</span>) + p) % p;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.luogu.org/problemnew/show/P1641&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;将$n$个$1$和$m$个$0$组成字符串，使得在任意的前$k$个字符中，$1$的个数不能少于$0$的个数。求满足条件的字符串共有多少个。&lt;/p&gt;
+&lt;p&gt;$1\le m \le n \le 1000000$&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="逆元" scheme="http://yoursite.com/tags/%E9%80%86%E5%85%83/"/>
+    
+      <category term="组合数" scheme="http://yoursite.com/tags/%E7%BB%84%E5%90%88%E6%95%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>算法学习-数论专题-乘法逆元</title>
     <link href="http://yoursite.com/2019/07/13/algorithm-maths-multiplicativeinversion/"/>
     <id>http://yoursite.com/2019/07/13/algorithm-maths-multiplicativeinversion/</id>
     <published>2019-07-13T04:59:09.000Z</published>
-    <updated>2019-07-13T06:20:20.006Z</updated>
+    <updated>2019-07-13T08:34:13.350Z</updated>
     
-    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote><p>乘法逆元定义：如果一个线性同余方程$ax\equiv 1 (\mod b)$，则$x$成为$a \mod b$的逆元，记作$a^-1$。</p></blockquote><p>乘法逆元一般用于求$a/b(\mod p)$的值（$p$通常为质数），是解决模意义下分数数值的必要手段。</p><p>对于$a/b(\mod p)$，我们可以求出$b$在$\mod p$下的逆元，然后乘上$a$再$\mod p$，就是这个分数的值了。</p><a id="more"></a><h2 id="求解逆元的方法"><a href="#求解逆元的方法" class="headerlink" title="求解逆元的方法"></a>求解逆元的方法</h2><h3 id="扩展欧几里得法"><a href="#扩展欧几里得法" class="headerlink" title="扩展欧几里得法"></a>扩展欧几里得法</h3><p>求解$ax\equiv 1 (mod b)$ 等价于解不定方程 $ax+by=1$，求解出的$x$即为$a \mod b$的逆元。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span>&amp; x, <span class="keyword">int</span>&amp; y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) &#123;</span><br><span class="line">        x = <span class="number">1</span>, y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    exgcd(b, a % b, y, x);</span><br><span class="line">    y -= a / b * x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="快速幂法"><a href="#快速幂法" class="headerlink" title="快速幂法"></a>快速幂法</h3><blockquote><p>费马小定理</p><p>若$p$为质数，$a$为正整数，且$a$、$p$互质，则$a^{p-1}\equiv 1 (\mod p)$。</p></blockquote><p>因为$ax\equiv 1(\mod b)$</p><p>所以$ax\equiv a^{b-1}(\mod b)$</p><p>所以$x\equiv a^{b-2}(\mod b)$</p><p>然后可以使用快速幂求解逆元。</p><p>代码略。</p><h3 id="线性求逆元"><a href="#线性求逆元" class="headerlink" title="线性求逆元"></a>线性求逆元</h3><p>假设现在要求$inv[i]$。</p><p>考虑带余除法，设$p=iq+r$，则有$iq+r\equiv 0(\mod p)$</p><p>注意到$p$是质数，因此$r$不为$0$，$r$的逆元存在</p><p>等式两边乘$i^{-1}r^{-1}$，得到$qr^{-1}+i^{-1}\equiv 0(\mod p)$</p><p>因此$i^{-1}\equiv -qr^{-1}\equiv -(p/i)(p \mod i)^{-1}(\mod p)$</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (inv[<span class="number">1</span>] = <span class="number">1</span>, i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">    inv[i] = (p - p / i) * inv[p % i] % p;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote><p>乘法逆元定义：如果一个线性同余方程$ax\equiv 1 \mod b$，则$x$成为$a \mod b$的逆元，记作$a^{-1}$。</p></blockquote><p>乘法逆元一般用于求$a/b\mod p$的值（$p$通常为质数），是解决模意义下分数数值的必要手段。</p><p>对于$a/b\mod p$，我们可以求出$b$在$\mod p$下的逆元，然后乘上$a$再$\mod p$，就是这个分数的值了。</p><a id="more"></a><h2 id="求解逆元的方法"><a href="#求解逆元的方法" class="headerlink" title="求解逆元的方法"></a>求解逆元的方法</h2><h3 id="扩展欧几里得法"><a href="#扩展欧几里得法" class="headerlink" title="扩展欧几里得法"></a>扩展欧几里得法</h3><p>求解$ax\equiv 1 \mod b$ 等价于解不定方程 $ax+by=1$，求解出的$x$即为$a \mod b$的逆元。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span>&amp; x, <span class="keyword">int</span>&amp; y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) &#123;</span><br><span class="line">        x = <span class="number">1</span>, y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    exgcd(b, a % b, y, x);</span><br><span class="line">    y -= a / b * x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="快速幂法"><a href="#快速幂法" class="headerlink" title="快速幂法"></a>快速幂法</h3><blockquote><p>费马小定理</p><p>若$p$为质数，$a$为正整数，且$a$、$p$互质，则$a^{p-1}\equiv 1 (\mod p)$。</p></blockquote><p>因为$ax\equiv 1\mod b$</p><p>所以$ax\equiv a^{b-1}\mod b$</p><p>所以$x\equiv a^{b-2}\mod b$</p><p>然后可以使用快速幂求解逆元。</p><p>代码略。</p><h3 id="线性求逆元"><a href="#线性求逆元" class="headerlink" title="线性求逆元"></a>线性求逆元</h3><p>假设现在要求$inv[i]$。</p><p>考虑带余除法，设$p=iq+r$，则有$iq+r\equiv 0\mod p$</p><p>注意到$p$是质数，因此$r$不为$0$，$r$的逆元存在</p><p>等式两边乘$i^{-1}r^{-1}$，得到$qr^{-1}+i^{-1}\equiv 0\mod p$</p><p>因此$i^{-1}\equiv -qr^{-1}\equiv -(p/i)(p \mod i)^{-1}\mod p$</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (inv[<span class="number">1</span>] = <span class="number">1</span>, i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">    inv[i] = (p - p / i) * inv[p % i] % p;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
       &lt;h2 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h2&gt;&lt;blockquote&gt;
-&lt;p&gt;乘法逆元定义：如果一个线性同余方程$ax\equiv 1 (\mod b)$，则$x$成为$a \mod b$的逆元，记作$a^-1$。&lt;/p&gt;
+&lt;p&gt;乘法逆元定义：如果一个线性同余方程$ax\equiv 1 \mod b$，则$x$成为$a \mod b$的逆元，记作$a^{-1}$。&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;乘法逆元一般用于求$a/b(\mod p)$的值（$p$通常为质数），是解决模意义下分数数值的必要手段。&lt;/p&gt;
-&lt;p&gt;对于$a/b(\mod p)$，我们可以求出$b$在$\mod p$下的逆元，然后乘上$a$再$\mod p$，就是这个分数的值了。&lt;/p&gt;
+&lt;p&gt;乘法逆元一般用于求$a/b\mod p$的值（$p$通常为质数），是解决模意义下分数数值的必要手段。&lt;/p&gt;
+&lt;p&gt;对于$a/b\mod p$，我们可以求出$b$在$\mod p$下的逆元，然后乘上$a$再$\mod p$，就是这个分数的值了。&lt;/p&gt;
     
     </summary>
     
@@ -94,9 +126,9 @@
     
       <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
-    
       <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+      <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
       <category term="dfs序" scheme="http://yoursite.com/tags/dfs%E5%BA%8F/"/>
     
@@ -520,11 +552,11 @@
     
       <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
       <category term="可持久化trie" scheme="http://yoursite.com/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96trie/"/>
     
       <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
+    
+      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
   </entry>
   
