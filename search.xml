@@ -9,8 +9,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
       </tags>
   </entry>
   <entry>
@@ -21,8 +21,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -69,7 +69,7 @@
   <entry>
     <title><![CDATA[题解-luogu-p2831愤怒的小鸟]]></title>
     <url>%2F2019%2F07%2F03%2Fsolution-luogu-p2831%2F</url>
-    <content type="text"><![CDATA[题目链接 在平面直角坐标系中给定$N$个第一象限的点，求最少需要从原点引出多少条开口向下的抛物线，使它们经过所有的点。 $ 1 \le n \le 18 ,0 \le m \le 2, 0&lt;x_i,y_i&lt;10$ 感谢@oy的贡献 一道并不是特别难的状压dp。 状态定义：$f[s]$表示将所有剩余的猪消灭至少需要多少只小鸟，其中$s$表示已经消灭的猪的集合。 考虑状态转移，发射一个小鸟可以消灭尚未被消灭的猪。记$curve[i][j]$为一个二进制集合，表示经过第$i$、$j$号猪的抛物线能消灭哪些猪。 即：$$f[s]=min\lbrace f[s|curve[i][j]]+1\rbrace$$可以用记忆化搜索实现，注意精度控制和触摸状态。 代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556#include &lt;bits/stdc++.h&gt;using namespace std;const int INF = 0x3f3f3f3f;const double EPS = 1e-7;int T;int N, M;double x[19], y[19];int curve[19][19];int f[524289];inline void equals(double&amp; a, double&amp; b, double x1, double y1, double x2, double y2) &#123; a = (y1 * x2 - x1 * y2) / (x1 * x1 * x2 - x2 * x2 * x1); b = (y1 - x1 * x1 * a) / x1;&#125;inline int dp(int s) &#123; if (f[s] != -1) return f[s]; if (s == (1 &lt;&lt; N) - 1) return f[s] = 0; f[s] = INF; for (register int i = 1; i &lt;= N; ++i) &#123; for (register int j = i; j &lt;= N; ++j) &#123; f[s] = min(f[s], dp(s | curve[i][j]) + 1); &#125; &#125; return f[s];&#125;int main() &#123; scanf("%d", &amp;T); while (T--) &#123; memset(curve, 0, sizeof(curve)); scanf("%d%d", &amp;N, &amp;M); for (register int i = 1; i &lt;= N; ++i) scanf("%lf%lf", &amp;x[i], &amp;y[i]); for (register int p1 = 1; p1 &lt;= N; ++p1) &#123; for (register int p2 = p1 + 1; p2 &lt;= N; ++p2) &#123; double a, b; equals(a, b, x[p1], y[p1], x[p2], y[p2]); if (a &gt;= 0) continue; for (register int i = 1; i &lt;= N; ++i) &#123; if (x[i] * x[i] * a + x[i] * b &gt;= y[i] - EPS &amp;&amp; x[i] * x[i] * a + x[i] * b &lt;= y[i] + EPS) &#123; curve[p1][p2] |= (1 &lt;&lt; (i - 1)); curve[p2][p1] |= (1 &lt;&lt; (i - 1)); &#125; &#125; &#125; &#125; for (register int p = 1; p &lt;= N; ++p) curve[p][p] = (1 &lt;&lt; (p - 1)); memset(f, -1, sizeof(f)); printf("%d\n", dp(0)); &#125; return 0;&#125;]]></content>
+    <content type="text"><![CDATA[题目链接 在平面直角坐标系中给定$n$个位于第一象限的点，求至少需要从原点引出多少条开口向下的抛物线，使它们经过所有的点。 $ 1 \le n \le 18 $ 感谢@oy的贡献 一道并不是特别难的状压dp。 状态定义：$f[s]$表示将所有剩余的猪消灭至少需要多少只小鸟，其中$s$表示已经消灭的猪的集合。 考虑状态转移，发射一个小鸟可以消灭尚未被消灭的猪。记$curve[i][j]$为一个二进制集合，表示经过第$i$、$j$号猪的抛物线能消灭哪些猪。 即：$$f[s]=min\lbrace f[s|curve[i][j]]+1\rbrace$$可以用记忆化搜索实现，注意精度控制和触摸状态。 代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556#include &lt;bits/stdc++.h&gt;using namespace std;const int INF = 0x3f3f3f3f;const double EPS = 1e-7;int T;int N, M;double x[19], y[19];int curve[19][19];int f[524289];inline void equals(double&amp; a, double&amp; b, double x1, double y1, double x2, double y2) &#123; a = (y1 * x2 - x1 * y2) / (x1 * x1 * x2 - x2 * x2 * x1); b = (y1 - x1 * x1 * a) / x1;&#125;inline int dp(int s) &#123; if (f[s] != -1) return f[s]; if (s == (1 &lt;&lt; N) - 1) return f[s] = 0; f[s] = INF; for (register int i = 1; i &lt;= N; ++i) &#123; for (register int j = i; j &lt;= N; ++j) &#123; f[s] = min(f[s], dp(s | curve[i][j]) + 1); &#125; &#125; return f[s];&#125;int main() &#123; scanf("%d", &amp;T); while (T--) &#123; memset(curve, 0, sizeof(curve)); scanf("%d%d", &amp;N, &amp;M); for (register int i = 1; i &lt;= N; ++i) scanf("%lf%lf", &amp;x[i], &amp;y[i]); for (register int p1 = 1; p1 &lt;= N; ++p1) &#123; for (register int p2 = p1 + 1; p2 &lt;= N; ++p2) &#123; double a, b; equals(a, b, x[p1], y[p1], x[p2], y[p2]); if (a &gt;= 0) continue; for (register int i = 1; i &lt;= N; ++i) &#123; if (x[i] * x[i] * a + x[i] * b &gt;= y[i] - EPS &amp;&amp; x[i] * x[i] * a + x[i] * b &lt;= y[i] + EPS) &#123; curve[p1][p2] |= (1 &lt;&lt; (i - 1)); curve[p2][p1] |= (1 &lt;&lt; (i - 1)); &#125; &#125; &#125; &#125; for (register int p = 1; p &lt;= N; ++p) curve[p][p] = (1 &lt;&lt; (p - 1)); memset(f, -1, sizeof(f)); printf("%d\n", dp(0)); &#125; return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
