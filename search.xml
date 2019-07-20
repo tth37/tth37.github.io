@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-luogu-cf1195c Basketball Exercise]]></title>
+    <url>%2F2019%2F07%2F18%2Fsolution-luogu-cf1195c%2F</url>
+    <content type="text"><![CDATA[题目链接 给定一个$2*n$的矩阵，从中选出若干数，且任意两个数不上下或左右相邻，求这些数的最大总和 $1\le n \le 100000,1 \le h_{i,j}\le 1000000000$ 很水的一道C题……目测难度在黄~绿左右。请各位切题者合理评分。 注意到可以选择的球员编号是严格递增的，因此可以把状态的第一维定义为球员编号，第二维描述编号同为 $i$ 的两名球员的选取情况。 定义状态：$f[i][0/1/2]$ 表示选取了编号在 $i$ 及以前的球员，所能得到的身高总和最大值。其中，第二维的 $0$ 表示编号为 $i$ 的球员一个都不选；$1$ 表示只选上面一个；$i$ 表示只选下面一个。（显然没有上下都选的情况） 状态转移方程：$$f[i][0]=max\lbrace f[i-1][0],f[i-1][1],f[i-1][2]\rbrace$$$$f[i][1]=max\lbrace f[i-1][0],f[i-1][2]\rbrace+height[i][1]$$$$f[i][2]=max\lbrace f[i-1][0],f[i-1][1]\rbrace+height[i][2]$$ Update: 用贪心可以证明，在最优解中，不会出现连续两列一个不取的情况。因此， $f[i][0]$ 其实没有必要考虑来自 $f[i-1][0]$ 的状态转移。 代码如下： 123456789101112131415161718192021#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;int N;ll h[100005][3];ll f[100005][3];int main() &#123; cin &gt;&gt; N; for (register int i = 1; i &lt;= N; ++i) cin &gt;&gt; h[i][1]; for (register int i = 1; i &lt;= N; ++i) cin &gt;&gt; h[i][2]; f[1][0] = 0; f[1][1] = h[1][1]; f[1][2] = h[1][2]; for (register int i = 2; i &lt;= N; ++i) &#123; f[i][0] = max(f[i - 1][0], max(f[i - 1][1], f[i - 1][2])); f[i][1] = max(f[i - 1][0], f[i - 1][2]) + h[i][1]; f[i][2] = max(f[i - 1][0], f[i - 1][1]) + h[i][2]; &#125; cout &lt;&lt; max(f[N][0], max(f[N][1], f[N][2])); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[算法学习-数论专题-卡特兰数]]></title>
     <url>%2F2019%2F07%2F14%2Falgorithm-maths-catalan%2F</url>
     <content type="text"><![CDATA[咕咕咕~]]></content>
@@ -9,8 +20,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -21,8 +32,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -43,7 +54,7 @@
   <entry>
     <title><![CDATA[题解-luogu-p5021赛道修建]]></title>
     <url>%2F2019%2F07%2F13%2Fsolution-luogu-p5021%2F</url>
-    <content type="text"><![CDATA[题目链接 征集题目概括中~ 题目要求使$m$条赛道中最短赛道的长度尽可能大，不难想到二分最短赛道的长度$len$，并判定是否能修建出$m$条赛道。 定义$f[u]$为自节点$u$向下延伸的不作为赛道的最长链长度。假设已知所有的$f[v]+w(u,v) (v\in son(u))$（即自节点$u$向下延伸的所有链的长度），则我们应在保证这些链能组成最多赛道的前提下，使保留下来的$f[v]+w(u,v)$最大。 考虑贪心。对于$f[v]+w(u,v)\ge len$的情况，可以直接将其作为一条赛道。而剩余的链，只能将它们两两拼接成赛道。由于需要使保留下来的$f[v]+w(u,v)$取最大值，所以我们可以优先使较短的链得到匹配，在剩余的无法匹配的链中取最值作为新的$f[u]$。 贪心操作可以用$multiset$实现。 代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#include &lt;bits/stdc++.h&gt;using namespace std;const int MAXN = 50005;struct Edge &#123;int v, w;&#125;;vector&lt;Edge&gt; G[MAXN];int N, M, L, cnt;int f[MAXN];inline bool cmp(int a, int b) &#123;return a &gt; b;&#125;inline void dfs(int u, int fa) &#123; multiset&lt;int&gt; s; for (vector&lt;Edge&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = it -&gt; v, w = it -&gt; w; if (v == fa) continue; dfs(v, u); if (f[v] + w &gt;= L) cnt++; else s.insert(f[v] + w); &#125; while (!s.empty()) &#123; multiset&lt;int&gt;::iterator it = s.begin(); s.erase(it); multiset&lt;int&gt;::iterator it1 = s.lower_bound(L - *it); if (it1 == s.end()) f[u] = max(f[u], *it); else &#123; cnt++; s.erase(it1); &#125; &#125;&#125;inline bool check() &#123; memset(f, 0, sizeof(f)); cnt = 0; dfs(1, 0); if (cnt &gt;= M) return 1; return 0;&#125;int main() &#123; scanf("%d%d", &amp;N, &amp;M); for (register int i = 1; i &lt; N; ++i) &#123; int u, v, w; scanf("%d%d%d", &amp;u, &amp;v, &amp;w); G[u].push_back((Edge)&#123;v, w&#125;); G[v].push_back((Edge)&#123;u, w&#125;); &#125; int l = 0, r = 500000000; int ans = 0; while (l &lt;= r) &#123; int mid = (l + r) &gt;&gt; 1; L = mid; if (check()) &#123; ans = mid; l = mid + 1; &#125; else r = mid - 1; &#125; printf("%d", ans); return 0;&#125;]]></content>
+    <content type="text"><![CDATA[题目链接 给定一个有$n$个节点的树，在其中选出$m$条没有公共边的路径，并使得$m$条路径中最短路径的长度尽可能大。输出这个最短路径的长度。 $2\le n \le 50000,1\le m\le n-1 $ 题目要求使$m$条赛道中最短赛道的长度尽可能大，不难想到二分最短赛道的长度$len$，并判定是否能修建出$m$条赛道。 定义$f[u]$为自节点$u$向下延伸的不作为赛道的最长链长度。假设已知所有的$f[v]+w(u,v) (v\in son(u))$（即自节点$u$向下延伸的所有链的长度），则我们应在保证这些链能组成最多赛道的前提下，使保留下来的$f[v]+w(u,v)$最大。 考虑贪心。对于$f[v]+w(u,v)\ge len$的情况，可以直接将其作为一条赛道。而剩余的链，只能将它们两两拼接成赛道。由于需要使保留下来的$f[v]+w(u,v)$取最大值，所以我们可以优先使较短的链得到匹配，在剩余的无法匹配的链中取最值作为新的$f[u]$。 贪心操作可以用$multiset$实现。 代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#include &lt;bits/stdc++.h&gt;using namespace std;const int MAXN = 50005;struct Edge &#123;int v, w;&#125;;vector&lt;Edge&gt; G[MAXN];int N, M, L, cnt;int f[MAXN];inline bool cmp(int a, int b) &#123;return a &gt; b;&#125;inline void dfs(int u, int fa) &#123; multiset&lt;int&gt; s; for (vector&lt;Edge&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = it -&gt; v, w = it -&gt; w; if (v == fa) continue; dfs(v, u); if (f[v] + w &gt;= L) cnt++; else s.insert(f[v] + w); &#125; while (!s.empty()) &#123; multiset&lt;int&gt;::iterator it = s.begin(); s.erase(it); multiset&lt;int&gt;::iterator it1 = s.lower_bound(L - *it); if (it1 == s.end()) f[u] = max(f[u], *it); else &#123; cnt++; s.erase(it1); &#125; &#125;&#125;inline bool check() &#123; memset(f, 0, sizeof(f)); cnt = 0; dfs(1, 0); if (cnt &gt;= M) return 1; return 0;&#125;int main() &#123; scanf("%d%d", &amp;N, &amp;M); for (register int i = 1; i &lt; N; ++i) &#123; int u, v, w; scanf("%d%d%d", &amp;u, &amp;v, &amp;w); G[u].push_back((Edge)&#123;v, w&#125;); G[v].push_back((Edge)&#123;u, w&#125;); &#125; int l = 0, r = 500000000; int ans = 0; while (l &lt;= r) &#123; int mid = (l + r) &gt;&gt; 1; L = mid; if (check()) &#123; ans = mid; l = mid + 1; &#125; else r = mid - 1; &#125; printf("%d", ans); return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -61,8 +72,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>树链剖分</tag>
+        <tag>线段树</tag>
         <tag>dfs序</tag>
       </tags>
   </entry>
@@ -225,9 +236,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
+        <tag>线段树</tag>
         <tag>可持久化trie</tag>
         <tag>主席树</tag>
-        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
