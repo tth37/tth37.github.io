@@ -3,14 +3,14 @@
   <entry>
     <title><![CDATA[题解-luogu-p4175网络管理]]></title>
     <url>%2F2019%2F07%2F21%2Fsolution-luogu-p4175%2F</url>
-    <content type="text"><![CDATA[题目链接 注意事项如下： 数据范围不要括号 数据范围要换两行 字母一律小写 拒绝错别字 思路：树链剖分+树状数组套主席树 考虑到权值线段树自带buff——整体二分，不难想到对树链上的权值线段树求和，并在合并后的权值线段树上求第 $k$ 大即可愉快地解决本题。 在树链上的求和操作可以用树剖加线性数据结构进行维护。本题需要支持的操作只有单点修改和区间查询，所以可以用树状数组套主席树维护 $dfs$ 序上的信息。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123#include &lt;bits/stdc++.h&gt;using namespace std;#define id(x) (lower_bound(b + 1, b + L + 1, x) - b)#define rid(x) (b[x])#define lson(x) (node[x].l)#define rson(x) (node[x].r)#define sum(x) (node[x].sum)#define lowbit(x) (x &amp; (-x))const int MAXN = 80005 * 2;vector&lt;int&gt; G[MAXN];struct opt &#123;int k, a, b;&#125; op[MAXN];struct Node &#123; int l, r, sum; Node() &#123;l = r = sum = 0;&#125;&#125; node[MAXN * 80];int c[MAXN], cnt;int N, Q, L;int t[MAXN], b[MAXN];int q1[MAXN], q2[MAXN], len1, len2;int dep[MAXN], dfn[MAXN], f[MAXN], son[MAXN], top[MAXN], size[MAXN], dfn_idx;void insert(int&amp; u, int l, int r, int p, int val) &#123; if (u == 0) u = ++cnt; sum(u) += val; if (l == r) return; int mid = (l + r) &gt;&gt; 1; if (p &lt;= mid) insert(lson(u), l, mid, p, val); else insert(rson(u), mid + 1, r, p, val);&#125;void modify(int u, int p, int val) &#123; for (; u &lt;= N; u += lowbit(u)) insert(c[u], 1, L, p, val);&#125;void dfs1(int u, int fa) &#123; dep[u] = dep[fa] + 1; f[u] = fa; size[u] = 1; for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; if (v == fa) continue; dfs1(v, u); if (size[v] &gt; size[son[u]]) son[u] = v; size[u] += size[v]; &#125;&#125;void dfs2(int u, int topc) &#123; dfn[u] = ++dfn_idx; top[u] = topc; modify(dfn[u], t[u], 1); if (son[u]) dfs2(son[u], topc); for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; if (v == son[u] || v == f[u]) continue; dfs2(v, v); &#125;&#125;void pre_bin(int u, int* a, int&amp; len) &#123; for (; u &gt;= 1; u -= lowbit(u)) a[++len] = c[u];&#125;int pre(int u, int v) &#123; len1 = len2 = 0; while (top[u] != top[v]) &#123; if (dep[top[u]] &lt; dep[top[v]]) swap(u, v); pre_bin(dfn[u], q1, len1); pre_bin(dfn[top[u]] - 1, q2, len2); u = f[top[u]]; &#125; if (dep[u] &lt; dep[v]) swap(u, v); pre_bin(dfn[u], q1, len1); pre_bin(dfn[v] - 1, q2, len2); return v;&#125;int query(int l, int r, int k) &#123; if (l == r) return l; int mid = (l + r) &gt;&gt; 1, rsum = 0; for (int i = 1; i &lt;= len1; ++i) rsum += sum(rson(q1[i])); for (int i = 1; i &lt;= len2; ++i) rsum -= sum(rson(q2[i])); if (k &lt;= rsum) &#123; for (int i = 1; i &lt;= len1; ++i) q1[i] = rson(q1[i]); for (int i = 1; i &lt;= len2; ++i) q2[i] = rson(q2[i]); return query(mid + 1, r, k); &#125; else &#123; for (int i = 1; i &lt;= len1; ++i) q1[i] = lson(q1[i]); for (int i = 1; i &lt;= len2; ++i) q2[i] = lson(q2[i]); return query(l, mid, k - rsum); &#125;&#125;int main() &#123; scanf("%d%d", &amp;N, &amp;Q); for (register int i = 1; i &lt;= N; ++i) scanf("%d", &amp;t[i]), b[++L] = t[i], c[i] = ++cnt; for (register int i = 1; i &lt; N; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); G[u].push_back(v), G[v].push_back(u); &#125; for (register int i = 1; i &lt;= Q; ++i) &#123; scanf("%d%d%d", &amp;op[i].k, &amp;op[i].a, &amp;op[i].b); if (op[i].k == 0) b[++L] = op[i].b; &#125; sort(b + 1, b + L + 1); L = unique(b + 1, b + L + 1) - b - 1; for (register int i = 1; i &lt;= N; ++i) t[i] = id(t[i]); dfs1(1, 0); dfs2(1, 1); for (register int i = 1; i &lt;= Q; ++i) &#123; int k = op[i].k, a = op[i].a, b_ = op[i].b; if (k == 0) &#123; b_ = id(b_); modify(dfn[a], t[a], -1); t[a] = b_; modify(dfn[a], t[a], 1); &#125; else &#123; int lca = pre(a, b_); int maxk = dep[a] + dep[b_] - dep[lca] * 2 + 1; if (maxk &lt; k) &#123; puts("invalid request!"); continue; &#125; printf("%d\n", rid(query(1, L, k))); &#125; &#125; return 0;&#125;]]></content>
+    <content type="text"><![CDATA[题目链接 注意事项如下： 数据范围不要括号 数据范围要换两行 字母一律小写 拒绝错别字 思路：树链剖分+树状数组套主席树 考虑到权值线段树自带buff——整体二分，不难想到对树链上的权值线段树求和，并在合并后的权值线段树上求第 $k$ 大即可愉快地解决本题。 在树链上的求和操作可以用树剖加线性数据结构进行维护。本题需要支持的操作只有单点修改和区间查询，所以可以用树状数组套主席树维护 dfs 序上的信息。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123#include &lt;bits/stdc++.h&gt;using namespace std;#define id(x) (lower_bound(b + 1, b + L + 1, x) - b)#define rid(x) (b[x])#define lson(x) (node[x].l)#define rson(x) (node[x].r)#define sum(x) (node[x].sum)#define lowbit(x) (x &amp; (-x))const int MAXN = 80005 * 2;vector&lt;int&gt; G[MAXN];struct opt &#123;int k, a, b;&#125; op[MAXN];struct Node &#123; int l, r, sum; Node() &#123;l = r = sum = 0;&#125;&#125; node[MAXN * 80];int c[MAXN], cnt;int N, Q, L;int t[MAXN], b[MAXN];int q1[MAXN], q2[MAXN], len1, len2;int dep[MAXN], dfn[MAXN], f[MAXN], son[MAXN], top[MAXN], size[MAXN], dfn_idx;void insert(int&amp; u, int l, int r, int p, int val) &#123; if (u == 0) u = ++cnt; sum(u) += val; if (l == r) return; int mid = (l + r) &gt;&gt; 1; if (p &lt;= mid) insert(lson(u), l, mid, p, val); else insert(rson(u), mid + 1, r, p, val);&#125;void modify(int u, int p, int val) &#123; for (; u &lt;= N; u += lowbit(u)) insert(c[u], 1, L, p, val);&#125;void dfs1(int u, int fa) &#123; dep[u] = dep[fa] + 1; f[u] = fa; size[u] = 1; for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; if (v == fa) continue; dfs1(v, u); if (size[v] &gt; size[son[u]]) son[u] = v; size[u] += size[v]; &#125;&#125;void dfs2(int u, int topc) &#123; dfn[u] = ++dfn_idx; top[u] = topc; modify(dfn[u], t[u], 1); if (son[u]) dfs2(son[u], topc); for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; if (v == son[u] || v == f[u]) continue; dfs2(v, v); &#125;&#125;void pre_bin(int u, int* a, int&amp; len) &#123; for (; u &gt;= 1; u -= lowbit(u)) a[++len] = c[u];&#125;int pre(int u, int v) &#123; len1 = len2 = 0; while (top[u] != top[v]) &#123; if (dep[top[u]] &lt; dep[top[v]]) swap(u, v); pre_bin(dfn[u], q1, len1); pre_bin(dfn[top[u]] - 1, q2, len2); u = f[top[u]]; &#125; if (dep[u] &lt; dep[v]) swap(u, v); pre_bin(dfn[u], q1, len1); pre_bin(dfn[v] - 1, q2, len2); return v;&#125;int query(int l, int r, int k) &#123; if (l == r) return l; int mid = (l + r) &gt;&gt; 1, rsum = 0; for (int i = 1; i &lt;= len1; ++i) rsum += sum(rson(q1[i])); for (int i = 1; i &lt;= len2; ++i) rsum -= sum(rson(q2[i])); if (k &lt;= rsum) &#123; for (int i = 1; i &lt;= len1; ++i) q1[i] = rson(q1[i]); for (int i = 1; i &lt;= len2; ++i) q2[i] = rson(q2[i]); return query(mid + 1, r, k); &#125; else &#123; for (int i = 1; i &lt;= len1; ++i) q1[i] = lson(q1[i]); for (int i = 1; i &lt;= len2; ++i) q2[i] = lson(q2[i]); return query(l, mid, k - rsum); &#125;&#125;int main() &#123; scanf("%d%d", &amp;N, &amp;Q); for (register int i = 1; i &lt;= N; ++i) scanf("%d", &amp;t[i]), b[++L] = t[i], c[i] = ++cnt; for (register int i = 1; i &lt; N; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); G[u].push_back(v), G[v].push_back(u); &#125; for (register int i = 1; i &lt;= Q; ++i) &#123; scanf("%d%d%d", &amp;op[i].k, &amp;op[i].a, &amp;op[i].b); if (op[i].k == 0) b[++L] = op[i].b; &#125; sort(b + 1, b + L + 1); L = unique(b + 1, b + L + 1) - b - 1; for (register int i = 1; i &lt;= N; ++i) t[i] = id(t[i]); dfs1(1, 0); dfs2(1, 1); for (register int i = 1; i &lt;= Q; ++i) &#123; int k = op[i].k, a = op[i].a, b_ = op[i].b; if (k == 0) &#123; b_ = id(b_); modify(dfn[a], t[a], -1); t[a] = b_; modify(dfn[a], t[a], 1); &#125; else &#123; int lca = pre(a, b_); int maxk = dep[a] + dep[b_] - dep[lca] * 2 + 1; if (maxk &lt; k) &#123; puts("invalid request!"); continue; &#125; printf("%d\n", rid(query(1, L, k))); &#125; &#125; return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树状数组</tag>
         <tag>树链剖分</tag>
+        <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
@@ -23,8 +23,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -264,9 +264,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
-        <tag>主席树</tag>
         <tag>可持久化trie</tag>
+        <tag>主席树</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -338,8 +338,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>贪心</tag>
         <tag>python</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
