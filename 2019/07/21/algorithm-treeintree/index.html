@@ -110,18 +110,18 @@
 
 
 
-  <meta name="description" content="概述普通数据结构维护单一维度信息，树套树维护多维度信息。">
-<meta name="keywords" content="数据结构,线段树,主席树,树状数组">
+  <meta name="description" content="本文部分内容转载自 OI Wiki 树状数组套主席树  概述普通数据结构维护单一维度信息，树套树维护多维度信息。">
+<meta name="keywords" content="数据结构,主席树,线段树,树状数组">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法学习-树套树">
 <meta property="og:url" content="http://yoursite.com/2019/07/21/algorithm-treeintree/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="概述普通数据结构维护单一维度信息，树套树维护多维度信息。">
+<meta property="og:description" content="本文部分内容转载自 OI Wiki 树状数组套主席树  概述普通数据结构维护单一维度信息，树套树维护多维度信息。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-07-21T05:56:13.785Z">
+<meta property="og:updated_time" content="2019-07-23T17:23:55.898Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法学习-树套树">
-<meta name="twitter:description" content="概述普通数据结构维护单一维度信息，树套树维护多维度信息。">
+<meta name="twitter:description" content="本文部分内容转载自 OI Wiki 树状数组套主席树  概述普通数据结构维护单一维度信息，树套树维护多维度信息。">
 
 
 
@@ -311,7 +311,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">32</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">33</span></a>
 
   </li>
         
@@ -349,7 +349,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">33</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">34</span></a>
 
   </li>
         
@@ -513,12 +513,24 @@
                 
               
 
-              <time title="创建时间：2019-07-21 13:39:53 / 修改时间：13:56:13" itemprop="dateCreated datePublished" datetime="2019-07-21T13:39:53+08:00">2019-07-21</time>
+              <time title="创建时间：2019-07-21 13:39:53" itemprop="dateCreated datePublished" datetime="2019-07-21T13:39:53+08:00">2019-07-21</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-24 01:23:55" itemprop="dateModified" datetime="2019-07-24T01:23:55+08:00">2019-07-24</time>
               
             
           </span>
@@ -604,13 +616,13 @@
       
 
       
-        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>普通数据结构维护单一维度信息，树套树维护多维度信息。</p>
+        <blockquote>
+<p>本文部分内容转载自 <a href="https://oi-wiki.org/ds/persistent-in-bit/" target="_blank" rel="noopener">OI Wiki 树状数组套主席树</a></p>
+</blockquote>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>普通数据结构维护单一维度信息，树套树维护多维度信息。</p>
 <a id="more"></a>
 
-<h2 id="树状数组套权值线段树"><a href="#树状数组套权值线段树" class="headerlink" title="树状数组套权值线段树"></a>树状数组套权值线段树</h2><blockquote>
-<p>本节部分内容转载自 <a href="https://oi-wiki.org/ds/persistent-in-bit/" target="_blank" rel="noopener">OI Wiki 树状数组套主席树</a></p>
-</blockquote>
-<p>树状数组套权值线段树可以在 $O(n \log^2 n)$ 的时间复杂度解决动态区间 $k$ 小值问题。</p>
+<h2 id="树状数组套权值线段树"><a href="#树状数组套权值线段树" class="headerlink" title="树状数组套权值线段树"></a>树状数组套权值线段树</h2><p>树状数组套权值线段树可以在 $O(n \log^2 n)$ 的时间复杂度解决动态区间 $k$ 小值问题。</p>
 <p>如果用<a href="https://oi-wiki.org/ds/balanced-in-seg/" target="_blank" rel="noopener">线段树套平衡树</a>中所论述的，用线段树套平衡树，即对于线段树的每一个节点，对于其所表示的区间维护一个平衡树，然后用二分来查找 $k$ 小值。由于每次查询操作都要覆盖多个区间，即有多个节点，但是平衡树并不能多个值一起查找，所以时间复杂度是 $O(n\log^3 n)$，并不是最优的。</p>
 <p>思路是，把二分答案的操作和查询小于一个值的数的数量两种操作结合起来。最好的方法是使用 <strong>线段树套主席树</strong> 。</p>
 <p>说是主席树其实不准确，因为并不是对线段树的可持久化，各个线段树之间也没有像主席树各版本之间的强关联性，所以称为 <strong>动态开点权值线段树</strong> 更为确切。</p>
@@ -657,9 +669,9 @@
           
             <a href="/tags/数据结构/" rel="tag"># 数据结构</a>
           
-            <a href="/tags/线段树/" rel="tag"># 线段树</a>
-          
             <a href="/tags/主席树/" rel="tag"># 主席树</a>
+          
+            <a href="/tags/线段树/" rel="tag"># 线段树</a>
           
             <a href="/tags/树状数组/" rel="tag"># 树状数组</a>
           
@@ -762,7 +774,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-count">34</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -862,7 +874,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">32</span>
+                      
+                    
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -992,7 +1006,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">70k</span>
+    <span title="站点总字数">72k</span>
   
 
   
