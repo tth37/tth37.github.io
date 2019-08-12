@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[算法学习-Pólya计数与Burnside引理]]></title>
     <url>%2F2019%2F08%2F13%2Falgorithm-polya%2F</url>
-    <content type="text"><![CDATA[概述可以利用Pólya计数原理解决等价类计数问题。 模板置换置换实际上就是一一映射，$f$ 可以看成定义域和值域为 $\lbrace 1,2,3,…,n\rbrace$ 的函数，其中 $f(1)=a_1$， $f(2)=a_2$ 等等。 f= \left(\begin{array}{cccc} 1&2&...&n \\ a_1&a_2&...&a_n \\ \end{array}\right)函数复合如果 f= \left(\begin{array}{cccc} 1&2&...&n \\ a_1&a_2&...&a_n \\ \end{array}\right)且 g=\left(\begin{array}{cccc} 1&2&...&n \\ b_1&b_2&...&b_n \\ \end{array}\right)是 $\lbrace 1,2,3,…,n\rbrace$ 的两个置换，则他们的复合按照先 $f$ 后 $g$ 的顺序放置得到一个新置换： g\circ f= \left(\begin{array}{cccc} 1&2&...&n \\\\ a_1&a_2&...&a_n \\ \end{array}\right) \circ \left(\begin{array}{cccc} 1&2&...&n \\ b_1&b_2&...&b_n \\ \end{array}\right) g\circ f=\binom{1}{k}+\binom{n-1}{k-1}循环为了处理方便，常常把置换分解成循环的乘积，其中每个循环代表一些元素“循环移位”。比如 $(1,4,3)$ 这个循环表示 $1\rightarrow 4$，$4\rightarrow 3$，$3\rightarrow 1$。 易证任意置换都可以分解为循环乘积的形式。 例题 在 2*2 方格中涂黑白两色，方格允许旋转，有几种方法？ 假设不考虑方格允许旋转，则共有 16 种上色方案。本题中“旋转后相同”即为一个等价关系，有了等价关系，所有元素会被分为若干个等价类，我们需要统计的即为等价类的个数。 对于一个置换 $f$ ，若一个着色方案 $s$ 经过置换后不变，称 $s$ 为 $f$ 的不动点。将 $f$ 的不动点数目记为 $C(f)$，则可以证明等价类数目为置换群中所有 $C(f)$ 的平均值。此结论称为 Burnside 引理。 一般地，如果置换 $f$ 被分解为 $m(f)$ 个循环的乘积，那么每个循环内所有位置的颜色必须相同，假设涂 $k$ 种颜色，则有 $C(f)=k^{m(f)}$。带入 Burnside 引理的表达式之后得到 Pólya 定理：等价类的个数等于置换群种所有置换 $f$ 的 $k^{m(f)}$ 的平均数。 将 $t$ 种颜色的 $n$ 个小球排成一个环，允许旋转和翻转，有几种方法？ 首先考虑旋转置换。记置换 $f_i$ 为将环形顺时针旋转 $i$ 个单位长度。显然，$m(f_i)=gcd(i,n)$ 。 其次考虑翻转置换。当 $n$ 为奇数时，$|G|=n$，且 $m(f)=(n-1)/2+1$；当 $n$ 为偶数时，$|G|=n$，且 $m(f)=n/2+1$。 根据上述内容已经可以计算出最终答案。]]></content>
+    <content type="text"><![CDATA[概述可以利用Pólya计数原理解决等价类计数问题。 模板置换置换实际上就是一一映射，$f$ 可以看成定义域和值域为 $\lbrace 1,2,3,…,n\rbrace$ 的函数，其中 $f(1)=a_1$， $f(2)=a_2$ 等等。 f= \left(\begin{array}{cccc} 1&2&...&n \\ a_1&a_2&...&a_n \\ \end{array}\right)函数复合如果 f= \left(\begin{array}{cccc} 1&2&...&n \\ a_1&a_2&...&a_n \\ \end{array}\right)且 g=\left(\begin{array}{cccc} 1&2&...&n \\ b_1&b_2&...&b_n \\ \end{array}\right)是 $\lbrace 1,2,3,…,n\rbrace$ 的两个置换，则他们的复合按照先 $f$ 后 $g$ 的顺序放置得到一个新置换： g\circ f= \left(\begin{array}{cccc} 1&2&...&n \\\ a_1&a_2&...&a_n \\ \end{array}\right) \circ \left(\begin{array}{cccc} 1&2&...&n \\ b_1&b_2&...&b_n \\ \end{array}\right) g\circ f=\binom{1}{k}+\binom{n-1}{k-1}循环为了处理方便，常常把置换分解成循环的乘积，其中每个循环代表一些元素“循环移位”。比如 $(1,4,3)$ 这个循环表示 $1\rightarrow 4$，$4\rightarrow 3$，$3\rightarrow 1$。 易证任意置换都可以分解为循环乘积的形式。 例题 在 2*2 方格中涂黑白两色，方格允许旋转，有几种方法？ 假设不考虑方格允许旋转，则共有 16 种上色方案。本题中“旋转后相同”即为一个等价关系，有了等价关系，所有元素会被分为若干个等价类，我们需要统计的即为等价类的个数。 对于一个置换 $f$ ，若一个着色方案 $s$ 经过置换后不变，称 $s$ 为 $f$ 的不动点。将 $f$ 的不动点数目记为 $C(f)$，则可以证明等价类数目为置换群中所有 $C(f)$ 的平均值。此结论称为 Burnside 引理。 一般地，如果置换 $f$ 被分解为 $m(f)$ 个循环的乘积，那么每个循环内所有位置的颜色必须相同，假设涂 $k$ 种颜色，则有 $C(f)=k^{m(f)}$。带入 Burnside 引理的表达式之后得到 Pólya 定理：等价类的个数等于置换群种所有置换 $f$ 的 $k^{m(f)}$ 的平均数。 将 $t$ 种颜色的 $n$ 个小球排成一个环，允许旋转和翻转，有几种方法？ 首先考虑旋转置换。记置换 $f_i$ 为将环形顺时针旋转 $i$ 个单位长度。显然，$m(f_i)=gcd(i,n)$ 。 其次考虑翻转置换。当 $n$ 为奇数时，$|G|=n$，且 $m(f)=(n-1)/2+1$；当 $n$ 为偶数时，$|G|=n$，且 $m(f)=n/2+1$。 根据上述内容已经可以计算出最终答案。]]></content>
       <tags>
         <tag>数论</tag>
         <tag>群论</tag>
@@ -62,8 +62,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树状数组</tag>
         <tag>树链剖分</tag>
+        <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
@@ -101,8 +101,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
       </tags>
   </entry>
   <entry>
@@ -113,8 +113,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
