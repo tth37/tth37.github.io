@@ -14,7 +14,7 @@
 
 <html class="theme-next gemini" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -185,7 +185,7 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -811,7 +811,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">852</span>
+                <span title="本文字数">849</span>
               
 
               
@@ -1261,7 +1261,7 @@ p.s. 可能会将洛谷博客上的文章搬运过来，所以有些文章的发
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">3k</span>
+                <span title="本文字数">35</span>
               
 
               
@@ -1289,24 +1289,38 @@ p.s. 可能会将洛谷博客上的文章搬运过来，所以有些文章的发
           
             <p>
               
-任务安排（斜率优化+费用提前计算）$$f[i]=min_{0\le j&lt;i}{f[j]-(S+T[i])*C[i]+T[i]*C[i]+S*C[N]}$$
+任务安排（斜率优化+费用提前计算）
+f[i]=min_{0\le j
+
+
+
+特别行动队（斜率优化）
+f[i]=max_{0\le j
+
+
+
+玩具装箱（斜率优化）
+f[i]=min_{0\le j斜率优化的适用范围是只有一个自变量。
+形如这样的转移方程：
+
+f[i]=min_{0\le j操作难度较大，可以将$S[i]+i$存在$A$数组中，即可全部化为一个自变量。
 
 
 
 
-特别行动队（斜率优化）$$f[i]=max_{0\le j&lt;i}{f[j]+A*(S[i]-S[j])^2+B*(S[i]-S[j])+C}$$
+锯木厂选址（斜率优化）
+f[i]=min_{1\le j
 
 
 
-
-玩具装箱（斜率优化）$$f[i]=min_{0\le j&lt;i}{f[j]+(A[i]-A[j]-L-1)^2}$$斜率优化的适用范围是只有一个自变量。
-形如这样的转移方程：$$f[i]=min_{0\le j&lt;i}{f[j]+(i-j+S[i]-S[j]-L-1)^2}$$
-操作难度较大，可以将$S[i]+i$存在$A$数组中，即可全部化为一个自变量。
+打印文章（斜率优化）
+f[i]=min_{0\le j调到心态爆炸……getK函数中如果除数为0则要返回1e100
 
 
 
-
-锯木厂选址（
+序列分割（斜率优化）
+f[i][j]=max_{0 \le k不开long long见祖宗。题目中如果说“非负整数”一定记得判断除数是否为0。
+对于转移方程
               ...
             </p>
           <!--noindex-->
@@ -1499,7 +1513,7 @@ p.s. 可能会将洛谷博客上的文章搬运过来，所以有些文章的发
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">362</span>
+                <span title="本文字数">361</span>
               
 
               
@@ -2312,7 +2326,7 @@ p.s. 可能会将洛谷博客上的文章搬运过来，所以有些文章的发
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">79k</span>
+    <span title="站点总字数">76k</span>
   
 
   
@@ -2997,7 +3011,24 @@ p.s. 可能会将洛谷博客上的文章搬运过来，所以有些文章的发
         }, 300);
       }).append(e);
     })
-  </script>
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
   

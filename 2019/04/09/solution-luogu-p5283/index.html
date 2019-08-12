@@ -14,7 +14,7 @@
 
 <html class="theme-next gemini" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -187,7 +187,7 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -198,7 +198,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <a href="https://github.com/tth37" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -628,9 +628,7 @@
 <p>另外，在将<code>(1&lt;&lt;d)</code>这样的式子转<code>long long</code>时，不能写成<code>(long long)(1&lt;&lt;d)</code>，而是<code>((long long)1&lt;&lt;d)</code>。</p>
 <p>代码如下：</p>
 <a id="more"></a>
-
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN=<span class="number">500005</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> DEP=<span class="number">31</span>;</span><br><span class="line"><span class="keyword">int</span> N,M;</span><br><span class="line">ll ans,s[MAXN];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">State</span>&#123;</span></span><br><span class="line">    ll val;</span><br><span class="line">    <span class="keyword">int</span> r,k;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> State&amp; rhs) <span class="keyword">const</span> &#123;<span class="keyword">return</span> val&lt;rhs.val;&#125;</span><br><span class="line">&#125;;</span><br><span class="line">priority_queue&lt;State&gt; q;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> son[<span class="number">2</span>],sum;</span><br><span class="line">&#125;trie[MAXN*(DEP+<span class="number">2</span>)];</span><br><span class="line"><span class="keyword">int</span> head[MAXN],cnt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(Node c,Node&amp; u,ll val,<span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    u.sum=c.sum+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(d&lt;<span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> x=(val&gt;&gt;d)&amp;<span class="number">1</span>;</span><br><span class="line">    u.son[!x]=c.son[!x];</span><br><span class="line">    insert(trie[c.son[x]],trie[u.son[x]=++cnt],val,d<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">query</span><span class="params">(Node u,ll val,<span class="keyword">int</span> d,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(d&lt;<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> x=(val&gt;&gt;d)&amp;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> lsum=trie[u.son[!x]].sum;</span><br><span class="line">    <span class="keyword">if</span>(lsum&gt;=k)</span><br><span class="line">      	<span class="keyword">return</span> ((ll)<span class="number">1</span>&lt;&lt;d)+(ll)query(trie[u.son[!x]],val,d<span class="number">-1</span>,k);</span><br><span class="line">    <span class="keyword">return</span> (ll)query(trie[u.son[x]],val,d<span class="number">-1</span>,k-lsum);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    trie[<span class="number">0</span>].son[<span class="number">0</span>]=trie[<span class="number">0</span>].son[<span class="number">1</span>]=trie[<span class="number">0</span>].sum=<span class="number">0</span>;</span><br><span class="line">    insert(trie[<span class="number">0</span>],trie[head[<span class="number">0</span>]=++cnt],<span class="number">0</span>,DEP);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;N,&amp;M);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;++i)&#123;</span><br><span class="line">        ll a;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a);</span><br><span class="line">        s[i]=s[i<span class="number">-1</span>]^a;</span><br><span class="line">        insert(trie[head[i<span class="number">-1</span>]],trie[head[i]=++cnt],s[i],DEP);</span><br><span class="line">        q.push((State)&#123;query(trie[head[i<span class="number">-1</span>]],s[i],DEP,<span class="number">1</span>),i,<span class="number">1</span>&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=M;++i)&#123;</span><br><span class="line">        ans+=q.top().val;</span><br><span class="line">        <span class="keyword">int</span> r=q.top().r,k=q.top().k;</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">if</span>(k==r) <span class="keyword">continue</span>;</span><br><span class="line">        q.push((State)&#123;query(trie[head[r<span class="number">-1</span>]],s[r],DEP,k+<span class="number">1</span>),r,k+<span class="number">1</span>&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>$p.s.$洛谷评测机有点小慢，不开<code>O2</code>会小概率发生TLE QwQ</p>
 
       
@@ -1014,7 +1012,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">79k</span>
+    <span title="站点总字数">76k</span>
   
 
   
@@ -1687,7 +1685,24 @@
         }, 300);
       }).append(e);
     })
-  </script>
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
   

@@ -14,7 +14,7 @@
 
 <html class="theme-next gemini" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -185,7 +185,7 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -196,7 +196,7 @@
     
   
 
-  <div class="container sidebar-position-left 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -609,8 +609,8 @@
           <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
 <p>乘法逆元定义：如果一个线性同余方程$ax\equiv 1 \mod b$，则$x$成为$a \mod b$的逆元，记作$a^{-1}$。</p>
 </blockquote>
-<p>乘法逆元一般用于求$a/b\mod p$的值（$p$通常为质数），是解决模意义下分数数值的必要手段。</p>
-<p>对于$a/b\mod p$，我们可以求出$b$在$\mod p$下的逆元，然后乘上$a$再$\mod p$，就是这个分数的值了。</p>
+<p>乘法逆元一般用于求$a\/b\mod p$的值（$p$通常为质数），是解决模意义下分数数值的必要手段。</p>
+<p>对于$a\/b\mod p$，我们可以求出$b$在$\mod p$下的逆元，然后乘上$a$再$\mod p$，就是这个分数的值了。</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -1680,7 +1680,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">336</span>
+                <span title="本文字数">335</span>
               
 
               
@@ -2922,7 +2922,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">79k</span>
+    <span title="站点总字数">76k</span>
   
 
   
@@ -3613,7 +3613,24 @@
         }, 300);
       }).append(e);
     })
-  </script>
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
   

@@ -14,7 +14,7 @@
 
 <html class="theme-next gemini" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -187,7 +187,7 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -198,7 +198,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <a href="https://github.com/tth37" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -623,17 +623,17 @@
 <p>感谢@oy 的贡献</p>
 </blockquote>
 <a id="more"></a>
-
 <p>一道单调队列入门题。</p>
 <p>面对动规题，首先设计状态转移方程。令$f[i]$表示$1-i$中连取不超过$K$个数，且<strong>第$i$个数不取</strong>所能累加的最大和。</p>
 <p>因为第$i$个数不取，所以在$i$之前一定连取了一段数。这段数的长度可能为$0-K$（注意是$0-K$而不是$1-K$，可以通过手推样例发现最优解中可能存在连着两个数不取的情况）。连取的一段数所能累加的和可以用前缀和计算。考虑边界条件后，状态转移方程如下：</p>
-<p>$$<br>f[i]=\max_{i-K-1\le j \le i-1} \lbrace f[j]+s[i-1]-s[j] \rbrace<br>$$</p>
-<p>由于$max$函数的循环变量是$j$，所以<strong>只与$i$相关的变量</strong>$s[i-1]$可以作为常数提出到$max$函数之外，即：</p>
-<p>$$<br>f[i]=\max_{i-K-1\le j \le i-1}\lbrace f[j]-s[j]\rbrace +s[i-1]<br>$$</p>
-<p>将状态转移方程化简到这样，就已经可以用单调队列进行优化了。我们可以用单调队列维护$f[j]-s[j]$的最值，在循环时将其最大值取出再加上$s[i-1]$即为$f[i]$。</p>
+<script type="math/tex; mode=display">
+f[i]=\max_{i-K-1\le j \le i-1} \lbrace f[j]+s[i-1]-s[j] \rbrace</script><p>由于$max$函数的循环变量是$j$，所以<strong>只与$i$相关的变量</strong>$s[i-1]$可以作为常数提出到$max$函数之外，即：</p>
+<script type="math/tex; mode=display">
+f[i]=\max_{i-K-1\le j \le i-1}\lbrace f[j]-s[j]\rbrace +s[i-1]</script><p>将状态转移方程化简到这样，就已经可以用单调队列进行优化了。我们可以用单调队列维护$f[j]-s[j]$的最值，在循环时将其最大值取出再加上$s[i-1]$即为$f[i]$。</p>
 <p>如果想不到该如何操作，也可以这样理解：</p>
-<p>$$<br>g[i]=f[i]-s[i]<br>$$<br>$$<br>f[i]=\max_{i-K-1\le j \le i-1}\lbrace g[j]\rbrace+s[i-1]<br>$$</p>
-<p>由于我们定义$f[i]$是第$i$个数不取的最优解，可以强行求解$f[N+1]$（虽然它似乎没有实际意义）作为本题的最终答案。</p>
+<script type="math/tex; mode=display">
+g[i]=f[i]-s[i]</script><script type="math/tex; mode=display">
+f[i]=\max_{i-K-1\le j \le i-1}\lbrace g[j]\rbrace+s[i-1]</script><p>由于我们定义$f[i]$是第$i$个数不取的最优解，可以强行求解$f[N+1]$（虽然它似乎没有实际意义）作为本题的最终答案。</p>
 <p>代码如下：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N, K;</span><br><span class="line">ll s[<span class="number">100005</span>], f[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> q[<span class="number">100005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;N, &amp;K);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;s[i]);</span><br><span class="line">        s[i] += s[i<span class="number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">0</span>, r = <span class="number">1</span>;</span><br><span class="line">    q[<span class="number">0</span>] = <span class="number">0</span>, f[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r &amp;&amp; q[l] &lt; i - K - <span class="number">1</span>) l++;</span><br><span class="line">        f[i] = f[q[l]] - s[q[l]] + s[i<span class="number">-1</span>];</span><br><span class="line">        <span class="keyword">while</span> (l &lt; r &amp;&amp; f[q[r - <span class="number">1</span>]] - s[q[r - <span class="number">1</span>]] &lt; f[i] - s[i]) r--;</span><br><span class="line">        q[r++] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, f[N + <span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
@@ -1015,7 +1015,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">79k</span>
+    <span title="站点总字数">76k</span>
   
 
   
@@ -1688,7 +1688,24 @@
         }, 300);
       }).append(e);
     })
-  </script>
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
   

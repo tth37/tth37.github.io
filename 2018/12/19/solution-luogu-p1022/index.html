@@ -14,7 +14,7 @@
 
 <html class="theme-next gemini" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.9.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
@@ -111,7 +111,7 @@
 
 
   <meta name="description" content="题目链接  本题是一道非常漂亮的模拟。只要能理清思路，代码并不会特别复杂。 首先分析题目。解一元一次方程最简单的方法就是移项，把常数移到等号右侧，把一次项系数移到等号左侧，用常数除以系数即为答案。那么在读入字符串的过程中，便可以进行操作。 对于字符串中的数据，我们可以用类似快读的方法读入。然而，要判断这些数据从哪里来，到哪里去，便是本题的关键所在。 对于每个数据，要想清楚地辨别它的身份，我们只需">
-<meta name="keywords" content="数学,字符串">
+<meta name="keywords" content="字符串,数学">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题解-luogu-p1022计算器的改良">
 <meta property="og:url" content="http://yoursite.com/2018/12/19/solution-luogu-p1022/index.html">
@@ -187,7 +187,7 @@
   .use-motion .logo-line-before i { left: initial; }
   .use-motion .logo-line-after i { right: initial; }
   </style>
-</noscript>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -198,7 +198,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <a href="https://github.com/tth37" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -632,7 +632,6 @@
 <p>经过分析，你会发现本题一点也不难实现。其关键在于对数据状态的准确描述。用清晰、简洁的变量描述状态，根据不同的状态采取不同的措施，这便是编程学习的一大基本素养。</p>
 <p>代码如下：</p>
 <a id="more"></a>
-
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> l,r;<span class="comment">//l代表系数，r代表常数 </span></span><br><span class="line"><span class="keyword">char</span> x; <span class="comment">//用x存储字母 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> c;</span><br><span class="line">    <span class="keyword">int</span> f1=<span class="number">1</span>,f2=<span class="number">1</span>,tmp=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(~<span class="built_in">scanf</span>(<span class="string">"%c"</span>,&amp;c))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(c&gt;=<span class="string">'0'</span>&amp;&amp;c&lt;=<span class="string">'9'</span>)<span class="comment">//类似快读的读入方式 </span></span><br><span class="line">        &#123;</span><br><span class="line">            tmp*=<span class="number">10</span>;</span><br><span class="line">            tmp+=c-<span class="string">'0'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(c&gt;=<span class="string">'a'</span>&amp;&amp;c&lt;=<span class="string">'z'</span>) l+=(tmp==<span class="number">0</span>)?f2*f1:tmp*f2*f1,x=c;<span class="comment">//判断系数是否为1 </span></span><br><span class="line">            <span class="keyword">else</span> r+=tmp*(-f2)*f1;</span><br><span class="line">            tmp=<span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(c==<span class="string">'+'</span>) &#123;f1=<span class="number">1</span>;<span class="keyword">continue</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span>(c==<span class="string">'-'</span>) &#123;f1=<span class="number">-1</span>;<span class="keyword">continue</span>;&#125;</span><br><span class="line">        <span class="keyword">if</span>(c==<span class="string">'='</span>) &#123;f2=<span class="number">-1</span>;f1=<span class="number">1</span>;<span class="keyword">continue</span>;&#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    solve(); </span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%c=%0.3f"</span>,x,(<span class="keyword">float</span>)r/l==<span class="number">0</span>?<span class="built_in">abs</span>((<span class="keyword">float</span>)r/l):(<span class="keyword">float</span>)r/l);</span><br><span class="line"> 	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
@@ -696,9 +695,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数学/" rel="tag"># 数学</a>
-          
             <a href="/tags/字符串/" rel="tag"># 字符串</a>
+          
+            <a href="/tags/数学/" rel="tag"># 数学</a>
           
         </div>
       
@@ -1013,7 +1012,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">79k</span>
+    <span title="站点总字数">76k</span>
   
 
   
@@ -1686,7 +1685,24 @@
         }, 300);
       }).append(e);
     })
-  </script>
+  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
 
 
   
