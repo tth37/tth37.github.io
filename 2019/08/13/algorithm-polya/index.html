@@ -110,18 +110,18 @@
 
 
 
-  <meta name="description" content="概述可以利用Pólya计数原理解决等价类计数问题。">
+  <meta name="description" content="概述如果题目中定义一种等价关系，满足等价关系的元素被看成同一类，只统计一次；这样的问题称为等价类计数问题。一般的等价类计数问题可以用 Burnside 引理或 Pólya定理解决。">
 <meta name="keywords" content="数论,群论,Pólya计数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="算法学习-Pólya计数与Burnside引理">
 <meta property="og:url" content="http://yoursite.com/2019/08/13/algorithm-polya/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="概述可以利用Pólya计数原理解决等价类计数问题。">
+<meta property="og:description" content="概述如果题目中定义一种等价关系，满足等价关系的元素被看成同一类，只统计一次；这样的问题称为等价类计数问题。一般的等价类计数问题可以用 Burnside 引理或 Pólya定理解决。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-12T18:31:41.378Z">
+<meta property="og:updated_time" content="2019-08-12T18:50:14.929Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法学习-Pólya计数与Burnside引理">
-<meta name="twitter:description" content="概述可以利用Pólya计数原理解决等价类计数问题。">
+<meta name="twitter:description" content="概述如果题目中定义一种等价关系，满足等价关系的元素被看成同一类，只统计一次；这样的问题称为等价类计数问题。一般的等价类计数问题可以用 Burnside 引理或 Pólya定理解决。">
 
 
 
@@ -513,7 +513,7 @@
                 
               
 
-              <time title="创建时间：2019-08-13 01:00:09 / 修改时间：02:31:41" itemprop="dateCreated datePublished" datetime="2019-08-13T01:00:09+08:00">2019-08-13</time>
+              <time title="创建时间：2019-08-13 01:00:09 / 修改时间：02:50:14" itemprop="dateCreated datePublished" datetime="2019-08-13T01:00:09+08:00">2019-08-13</time>
             
 
             
@@ -562,7 +562,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.4k</span>
+                <span title="本文字数">1.6k</span>
               
 
               
@@ -586,7 +586,7 @@
       
 
       
-        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>可以利用Pólya计数原理解决<strong>等价类计数问题</strong>。</p>
+        <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>如果题目中定义一种等价关系，满足等价关系的元素被看成同一类，只统计一次；这样的问题称为<strong>等价类计数问题</strong>。一般的等价类计数问题可以用 Burnside 引理或 Pólya定理解决。</p>
 <a id="more"></a>
 <h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><h4 id="置换"><a href="#置换" class="headerlink" title="置换"></a>置换</h4><p>置换实际上就是一一映射，$f$ 可以看成定义域和值域为 $\lbrace 1,2,3,…,n\rbrace$ 的函数，其中 $f(1)=a_1$， $f(2)=a_2$ 等等。</p>
 <script type="math/tex; mode=display">
@@ -628,7 +628,13 @@ g\circ f=
 </blockquote>
 <p>首先考虑旋转置换。记置换 $f_i$ 为将环形顺时针旋转 $i$ 个单位长度。显然，$m(f_i)=gcd(i,n)$ 。</p>
 <p>其次考虑翻转置换。当 $n$ 为奇数时，$|G|=n$，且 $m(f)=(n-1)/2+1$；当 $n$ 为偶数时，$|G|=n$，且 $m(f)=n/2+1$。</p>
-<p>根据上述内容已经可以计算出最终答案。</p>
+<p>记：</p>
+<script type="math/tex; mode=display">
+a=\Sigma_{i=0}^{n-1} t^{gcd(i,n)}\\
+b=\begin{cases}
+t^{(n-1)/2+1} , n=2k+1\\
+t^{n/2+1},n=2k
+\end{cases}</script><p>最终答案 $ans=(a+b)/2n$。</p>
 
       
     </div>
