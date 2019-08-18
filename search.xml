@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-luogu-p2279消防局的设立]]></title>
+    <url>%2F2019%2F08%2F19%2Fsolution-luogu-p2279%2F</url>
+    <content type="text"><![CDATA[题目链接 咕 实际上就是这道题的简化版。 首先定义状态。$f[u][4]$ 表示节点 $u$ 的二级祖先（父亲的父亲）及以下节点被完全覆盖，所需的最小代价。$f[u][3]$ 表示节点 $u$ 的一级祖先及以下节点被完全覆盖所需最小代价。以此类推， $f[u][0]$ 表示节点 $u$ 的二级儿子（儿子的儿子）及以下节点被完全覆盖所需的最小代价。 考虑 $f[u][4]$ 的推导。由于每个节点被选中后只能覆盖到与其距离小于等于二的节点，要使 $u$ 的二级祖先被覆盖到，则节点 $u$ 必须被选取。对节点 $u$ 的各个儿子没有要求。因此，$f[u][4]=1+\Sigma f[v][0…4]$ 。 考虑 $f[u][3]$。由于只需要覆盖到节点 $u$ 的父亲，只需使节点 $u$ 的至少一个子节点可以覆盖到其二级祖先即可。同时，该子节点在覆盖到节点 $u$ 的二级祖先时，可以同时覆盖到节点 $u$ 的其他儿子，因此节点 $u$ 的其他儿子不必被覆盖。$f[u][3]=f[k][4]+\Sigma f[v][1…4]$。 $f[u][2]$ 的情况与 $f[u][3]$ 类似，只需保证一个儿子能将节点 $u$ 覆盖即可。 $f[u][2]=f[k][3]+\Sigma f[v][2…4]$ 。 $f[u][1]$ 与 $f[u][0]$ 的推导相对简单，因为各个子节点之间不会相互影响。 $f[u][1]=\Sigma f[v][2…4]$，$f[u][0]=\Sigma f[v][1…4]$。 对转移方程进行简单优化即可。代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;bits/stdc++.h&gt;using namespace std;vector&lt;int&gt; G[1005];int N;int f[1005][10];void dp(int u, int fa) &#123; f[u][3] = 0x3f3f3f3f; f[u][2] = 0x3f3f3f3f; f[u][4] = 1; for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; if (v == fa) continue; dp(v, u); f[u][0] += f[v][1]; f[u][1] += f[v][2]; f[u][2] = min(f[u][2], f[v][3] - f[v][2]); f[u][3] = min(f[u][3], f[v][4] - f[v][1]); f[u][4] += f[v][0]; &#125; f[u][2] += f[u][1]; f[u][3] += f[u][0]; f[u][3] = min(f[u][3], f[u][4]); f[u][2] = min(f[u][2], f[u][3]); f[u][1] = min(f[u][1], f[u][2]); f[u][0] = min(f[u][0], f[u][1]); &#125;int main() &#123; scanf("%d", &amp;N); for (register int u = 2; u &lt;= N; ++u) &#123; int v; scanf("%d", &amp;v); G[u].push_back(v); G[v].push_back(u); &#125; dp(1, 0); printf("%d", f[1][2]); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>树形dp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[算法学习-Pólya计数与Burnside引理]]></title>
     <url>%2F2019%2F08%2F13%2Falgorithm-polya%2F</url>
     <content type="text"><![CDATA[概述如果题目中定义一种等价关系，满足等价关系的元素被看成同一类，只统计一次；这样的问题称为等价类计数问题。一般的等价类计数问题可以用 Burnside 引理或 Pólya定理解决。 模板置换置换实际上就是一一映射，$f$ 可以看成定义域和值域为 $\lbrace 1,2,3,…,n\rbrace$ 的函数，其中 $f(1)=a_1$， $f(2)=a_2$ 等等。 f= \left(\begin{array}{cccc} 1&2&...&n \\ a_1&a_2&...&a_n \\ \end{array}\right)函数复合如果 f= \left(\begin{array}{cccc} 1&2&...&n \\ a_1&a_2&...&a_n \\ \end{array}\right)且 g=\left(\begin{array}{cccc} 1&2&...&n \\ b_1&b_2&...&b_n \\ \end{array}\right)是 $\lbrace 1,2,3,…,n\rbrace$ 的两个置换，则他们的复合按照先 $f$ 后 $g$ 的顺序放置得到一个新置换： g\circ f= \left(\begin{array}{cccc} 1&2&...&n \\\ a_1&a_2&...&a_n \\ \end{array}\right) \circ \left(\begin{array}{cccc} 1&2&...&n \\ b_1&b_2&...&b_n \\ \end{array}\right)循环为了处理方便，常常把置换分解成循环的乘积，其中每个循环代表一些元素“循环移位”。比如 $(1,4,3)$ 这个循环表示 $1\rightarrow 4$，$4\rightarrow 3$，$3\rightarrow 1$。 易证任意置换都可以分解为循环乘积的形式。 例题 在 2*2 方格中涂黑白两色，方格允许旋转，有几种方法？ 假设不考虑方格允许旋转，则共有 16 种上色方案。本题中“旋转后相同”即为一个等价关系，有了等价关系，所有元素会被分为若干个等价类，我们需要统计的即为等价类的个数。 对于一个置换 $f$ ，若一个着色方案 $s$ 经过置换后不变，称 $s$ 为 $f$ 的不动点。将 $f$ 的不动点数目记为 $C(f)$，则可以证明等价类数目为置换群中所有 $C(f)$ 的平均值。此结论称为 Burnside 引理。 一般地，如果置换 $f$ 被分解为 $m(f)$ 个循环的乘积，那么每个循环内所有位置的颜色必须相同，假设涂 $k$ 种颜色，则有 $C(f)=k^{m(f)}$。带入 Burnside 引理的表达式之后得到 Pólya 定理：等价类的个数等于置换群种所有置换 $f$ 的 $k^{m(f)}$ 的平均数。 将 $t$ 种颜色的 $n$ 个小球排成一个环，允许旋转和翻转，有几种方法？ 首先考虑旋转置换。记置换 $f_i$ 为将环形顺时针旋转 $i$ 个单位长度。显然，$m(f_i)=gcd(i,n)$ 。 其次考虑翻转置换。当 $n$ 为奇数时，$|G|=n$，且 $m(f)=(n-1)/2+1$；当 $n$ 为偶数时，$|G|=n$，且 $m(f)=n/2+1$。 记： a=\Sigma_{i=0}^{n-1} t^{gcd(i,n)}\\ b=\begin{cases} t^{(n-1)/2+1} , n=2k+1\\ t^{n/2+1},n=2k \end{cases}最终答案 $ans=(a+b)/2n$。]]></content>
@@ -62,8 +74,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树链剖分</tag>
         <tag>树状数组</tag>
+        <tag>树链剖分</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
@@ -403,8 +415,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>

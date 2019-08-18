@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-12T18:50:14.929Z</updated>
+  <updated>2019-08-18T17:35:30.420Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>题解-luogu-p2279消防局的设立</title>
+    <link href="http://yoursite.com/2019/08/19/solution-luogu-p2279/"/>
+    <id>http://yoursite.com/2019/08/19/solution-luogu-p2279/</id>
+    <published>2019-08-18T16:24:39.000Z</published>
+    <updated>2019-08-18T17:35:30.420Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://www.luogu.org/problemnew/show/P2279" target="_blank" rel="noopener">题目链接</a></p><p>咕</p></blockquote><a id="more"></a><p>实际上就是<a href="https://www.luogu.org/problem/P3267" target="_blank" rel="noopener">这道题</a>的简化版。</p><p>首先定义状态。$f[u][4]$ 表示节点 $u$ 的二级祖先（父亲的父亲）及以下节点被完全覆盖，所需的最小代价。$f[u][3]$ 表示节点 $u$ 的一级祖先及以下节点被完全覆盖所需最小代价。以此类推， $f[u][0]$ 表示节点 $u$ 的二级儿子（儿子的儿子）及以下节点被完全覆盖所需的最小代价。</p><p>考虑 $f[u][4]$ 的推导。由于每个节点被选中后只能覆盖到与其距离小于等于二的节点，要使 $u$ 的二级祖先被覆盖到，则节点 $u$ 必须被选取。对节点 $u$ 的各个儿子没有要求。因此，$f[u][4]=1+\Sigma f[v][0…4]$ 。</p><p>考虑 $f[u][3]$。由于只需要覆盖到节点 $u$ 的父亲，只需使节点 $u$ 的<strong>至少一个</strong>子节点可以覆盖到其二级祖先即可。同时，该子节点在覆盖到节点 $u$ 的二级祖先时，可以同时覆盖到节点 $u$  的其他儿子，因此节点 $u$ 的其他儿子不必被覆盖。$f[u][3]=f[k][4]+\Sigma f[v][1…4]$。</p><p>$f[u][2]$ 的情况与 $f[u][3]$ 类似，只需保证一个儿子能将节点 $u$ 覆盖即可。 $f[u][2]=f[k][3]+\Sigma f[v][2…4]$ 。</p><p>$f[u][1]$ 与 $f[u][0]$ 的推导相对简单，因为各个子节点之间不会相互影响。 $f[u][1]=\Sigma f[v][2…4]$，$f[u][0]=\Sigma f[v][1…4]$。</p><p>对转移方程进行简单优化即可。代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[<span class="number">1005</span>];</span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">1005</span>][<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dp</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">f[u][<span class="number">3</span>] = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">f[u][<span class="number">2</span>] = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">f[u][<span class="number">4</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line"><span class="keyword">int</span> v = *it;</span><br><span class="line"><span class="keyword">if</span> (v == fa) <span class="keyword">continue</span>;</span><br><span class="line">dp(v, u);</span><br><span class="line">f[u][<span class="number">0</span>] += f[v][<span class="number">1</span>];</span><br><span class="line">f[u][<span class="number">1</span>] += f[v][<span class="number">2</span>];</span><br><span class="line">f[u][<span class="number">2</span>] = min(f[u][<span class="number">2</span>], f[v][<span class="number">3</span>] - f[v][<span class="number">2</span>]);</span><br><span class="line">f[u][<span class="number">3</span>] = min(f[u][<span class="number">3</span>], f[v][<span class="number">4</span>] - f[v][<span class="number">1</span>]);</span><br><span class="line">f[u][<span class="number">4</span>] += f[v][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line">f[u][<span class="number">2</span>] += f[u][<span class="number">1</span>];</span><br><span class="line">f[u][<span class="number">3</span>] += f[u][<span class="number">0</span>];</span><br><span class="line">f[u][<span class="number">3</span>] = min(f[u][<span class="number">3</span>], f[u][<span class="number">4</span>]);</span><br><span class="line">f[u][<span class="number">2</span>] = min(f[u][<span class="number">2</span>], f[u][<span class="number">3</span>]);</span><br><span class="line">f[u][<span class="number">1</span>] = min(f[u][<span class="number">1</span>], f[u][<span class="number">2</span>]);</span><br><span class="line">f[u][<span class="number">0</span>] = min(f[u][<span class="number">0</span>], f[u][<span class="number">1</span>]);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N);</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> u = <span class="number">2</span>; u &lt;= N; ++u) &#123;</span><br><span class="line"><span class="keyword">int</span> v;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;v);</span><br><span class="line">G[u].push_back(v);</span><br><span class="line">G[v].push_back(u);</span><br><span class="line">&#125;</span><br><span class="line">dp(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, f[<span class="number">1</span>][<span class="number">2</span>]);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.luogu.org/problemnew/show/P2279&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;咕&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+      <category term="动态规划" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+      <category term="树形dp" scheme="http://yoursite.com/tags/%E6%A0%91%E5%BD%A2dp/"/>
+    
+  </entry>
   
   <entry>
     <title>算法学习-Pólya计数与Burnside引理</title>
@@ -167,9 +194,9 @@
     
       <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
-      <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
-    
       <category term="树状数组" scheme="http://yoursite.com/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
       <category term="树套树" scheme="http://yoursite.com/tags/%E6%A0%91%E5%A5%97%E6%A0%91/"/>
     
@@ -1040,9 +1067,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
       <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   
