@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-18T17:35:30.420Z</updated>
+  <updated>2019-08-18T17:38:21.343Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>算法学习-概率与数学期望</title>
+    <link href="http://yoursite.com/2019/08/19/algorithm-expectation/"/>
+    <id>http://yoursite.com/2019/08/19/algorithm-expectation/</id>
+    <published>2019-08-18T17:37:11.000Z</published>
+    <updated>2019-08-18T17:38:21.343Z</updated>
+    
+    <content type="html"><![CDATA[<p>太困了 写不动了</p><p>先占个坑qwq</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;太困了 写不动了&lt;/p&gt;
+&lt;p&gt;先占个坑qwq&lt;/p&gt;
+
+      
+    
+    </summary>
+    
+      <category term="算法学习" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="期望" scheme="http://yoursite.com/tags/%E6%9C%9F%E6%9C%9B/"/>
+    
+      <category term="概率" scheme="http://yoursite.com/tags/%E6%A6%82%E7%8E%87/"/>
+    
+  </entry>
   
   <entry>
     <title>题解-luogu-p2279消防局的设立</title>
