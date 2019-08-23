@@ -310,7 +310,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">38</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">37</span></a>
 
   </li>
         
@@ -467,7 +467,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/19/algorithm-expectation/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/23/solution-luogu-uva11021/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tth37">
@@ -487,7 +487,7 @@
           <h1 class="post-title" itemprop="name headline">
                 
                 
-                <a href="/2019/08/19/algorithm-expectation/" class="post-title-link" itemprop="url">算法学习-概率与数学期望</a>
+                <a href="/2019/08/23/solution-luogu-uva11021/" class="post-title-link" itemprop="url">题解-luogu-uva11021麻球繁衍</a>
               
             
           </h1>
@@ -514,7 +514,7 @@
                 
               
 
-              <time title="创建时间：2019-08-19 01:37:11 / 修改时间：01:38:21" itemprop="dateCreated datePublished" datetime="2019-08-19T01:37:11+08:00">2019-08-19</time>
+              <time title="创建时间：2019-08-23 22:11:12 / 修改时间：22:20:07" itemprop="dateCreated datePublished" datetime="2019-08-23T22:11:12+08:00">2019-08-23</time>
             
 
             
@@ -536,7 +536,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/算法学习/" itemprop="url" rel="index"><span itemprop="name">算法学习</span></a></span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/题解/" itemprop="url" rel="index"><span itemprop="name">题解</span></a></span>
 
                 
                 
@@ -551,8 +551,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2019/08/19/algorithm-expectation/#comments" itemprop="discussionUrl">
-                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/08/19/algorithm-expectation/" itemprop="commentCount"></span>
+                <a href="/2019/08/23/solution-luogu-uva11021/#comments" itemprop="discussionUrl">
+                  <span class="post-meta-item-text">评论数：</span> <span class="post-comments-count valine-comment-count" data-xid="/2019/08/23/solution-luogu-uva11021/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -574,7 +574,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">17</span>
+                <span title="本文字数">988</span>
               
 
               
@@ -601,15 +601,22 @@
         
           
             <p>
-              太困了 写不动了
-先占个坑qwq
-
               
+题目链接
+有 $k$ 只麻球，每只活一天就会死亡，临死前可能会生出一些新的麻球。具体来说，生 $i$ 只麻球的概率为 $P_i$ 。给定 $m$ ，求 $m$ 天后所有麻球均死亡的概率。
+我感谢我自己
+
+每只麻球均可视为一个独立的问题。设 $f[i]$ 表示第一天只有 $1$ 只麻球，在第 $i$ 天它及它的后代全部死亡的概率。由全概率公式，有
+
+f[i]=P_0+P_1f[i-1]+P_2f[i-1]^2+P_3f[i-1]^3+...+P_{n-1}f[i-1]^{n-1}其中 $P_jf[i-j]^j$ 的含义是这个麻球生了 $j$ 个后代，并且它们在 $i-1$ 天后全部死亡的概率。由于一开始有 $k$ 只麻球，最终答案为 $f[m]^k$ 。
+代码如下：
+#include&lt;bits/stdc+
+              ...
             </p>
           <!--noindex-->
           
             <div class="post-button text-center">
-              <a class="btn" href="/2019/08/19/algorithm-expectation/#more" rel="contents">
+              <a class="btn" href="/2019/08/23/solution-luogu-uva11021/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -2704,9 +2711,7 @@
                     
                       
                     
-                      
-                    
-                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-count">37</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -2819,7 +2824,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">78k</span>
+    <span title="站点总字数">79k</span>
   
 
   

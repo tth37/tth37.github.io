@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[算法学习-概率与数学期望]]></title>
-    <url>%2F2019%2F08%2F19%2Falgorithm-expectation%2F</url>
-    <content type="text"><![CDATA[太困了 写不动了 先占个坑qwq]]></content>
+    <title><![CDATA[题解-luogu-uva11021麻球繁衍]]></title>
+    <url>%2F2019%2F08%2F23%2Fsolution-luogu-uva11021%2F</url>
+    <content type="text"><![CDATA[题目链接 有 $k$ 只麻球，每只活一天就会死亡，临死前可能会生出一些新的麻球。具体来说，生 $i$ 只麻球的概率为 $P_i$ 。给定 $m$ ，求 $m$ 天后所有麻球均死亡的概率。 我感谢我自己 每只麻球均可视为一个独立的问题。设 $f[i]$ 表示第一天只有 $1$ 只麻球，在第 $i$ 天它及它的后代全部死亡的概率。由全概率公式，有 f[i]=P_0+P_1f[i-1]+P_2f[i-1]^2+P_3f[i-1]^3+...+P_{n-1}f[i-1]^{n-1}其中 $P_jf[i-j]^j$ 的含义是这个麻球生了 $j$ 个后代，并且它们在 $i-1$ 天后全部死亡的概率。由于一开始有 $k$ 只麻球，最终答案为 $f[m]^k$ 。 代码如下： 1234567891011121314151617181920212223242526#include&lt;bits/stdc++.h&gt;using namespace std;int T;int N, K, M;double P[1005];double f[1005];int main() &#123; cin &gt;&gt; T; for (register int Case = 1; Case &lt;= T; ++Case) &#123; cin &gt;&gt; N &gt;&gt; K &gt;&gt; M; for (register int i = 0; i &lt; N; ++i) cin &gt;&gt; P[i]; f[0] = 0; for (register int i = 1; i &lt;= M; ++i) &#123; f[i] = 0; for (register int j = 0; j &lt; N; ++j) f[i] += P[j] * pow(f[i - 1], j); &#125; cout &lt;&lt; "Case #" &lt;&lt; Case &lt;&lt; ": "; cout &lt;&lt; fixed &lt;&lt; setprecision(8) &lt;&lt; pow(f[M], K) &lt;&lt; endl; &#125; return 0;&#125;]]></content>
       <categories>
-        <category>算法学习</category>
+        <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
-        <tag>期望</tag>
         <tag>概率</tag>
       </tags>
   </entry>
@@ -87,8 +85,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树链剖分</tag>
         <tag>树状数组</tag>
+        <tag>树链剖分</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
@@ -126,8 +124,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -138,8 +136,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
