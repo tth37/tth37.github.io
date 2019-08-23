@@ -110,18 +110,18 @@
 
 
 
-  <meta name="description" content="题目链接 有 $k$ 只麻球，每只活一天就会死亡，临死前可能会生出一些新的麻球。具体来说，生 $i$ 只麻球的概率为 $P_i$ 。给定 $m$ ，求 $m$ 天后所有麻球均死亡的概率。 我感谢我自己  每只麻球均可视为一个独立的问题。设 $f[i]$ 表示第一天只有 $1$ 只麻球，在第 $i$ 天它及它的后代全部死亡的概率。由全概率公式，有  f[i]=P_0+P_1f[i-1]+P_2f[">
+  <meta name="description" content="题目链接 有 $k$ 只麻球，每只活一天就会死亡，临死前可能会生出一些新的麻球。具体来说，生 $i$ 只麻球的概率为 $P_i$ 。给定 $m$ ，求 $m$ 天后所有麻球均死亡的概率。 我感谢我自己">
 <meta name="keywords" content="概率">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题解-luogu-uva11021麻球繁衍">
 <meta property="og:url" content="http://yoursite.com/2019/08/23/solution-luogu-uva11021/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="题目链接 有 $k$ 只麻球，每只活一天就会死亡，临死前可能会生出一些新的麻球。具体来说，生 $i$ 只麻球的概率为 $P_i$ 。给定 $m$ ，求 $m$ 天后所有麻球均死亡的概率。 我感谢我自己  每只麻球均可视为一个独立的问题。设 $f[i]$ 表示第一天只有 $1$ 只麻球，在第 $i$ 天它及它的后代全部死亡的概率。由全概率公式，有  f[i]=P_0+P_1f[i-1]+P_2f[">
+<meta property="og:description" content="题目链接 有 $k$ 只麻球，每只活一天就会死亡，临死前可能会生出一些新的麻球。具体来说，生 $i$ 只麻球的概率为 $P_i$ 。给定 $m$ ，求 $m$ 天后所有麻球均死亡的概率。 我感谢我自己">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-23T14:20:07.073Z">
+<meta property="og:updated_time" content="2019-08-23T14:22:20.823Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="题解-luogu-uva11021麻球繁衍">
-<meta name="twitter:description" content="题目链接 有 $k$ 只麻球，每只活一天就会死亡，临死前可能会生出一些新的麻球。具体来说，生 $i$ 只麻球的概率为 $P_i$ 。给定 $m$ ，求 $m$ 天后所有麻球均死亡的概率。 我感谢我自己  每只麻球均可视为一个独立的问题。设 $f[i]$ 表示第一天只有 $1$ 只麻球，在第 $i$ 天它及它的后代全部死亡的概率。由全概率公式，有  f[i]=P_0+P_1f[i-1]+P_2f[">
+<meta name="twitter:description" content="题目链接 有 $k$ 只麻球，每只活一天就会死亡，临死前可能会生出一些新的麻球。具体来说，生 $i$ 只麻球的概率为 $P_i$ 。给定 $m$ ，求 $m$ 天后所有麻球均死亡的概率。 我感谢我自己">
 
 
 
@@ -513,7 +513,7 @@
                 
               
 
-              <time title="创建时间：2019-08-23 22:11:12 / 修改时间：22:20:07" itemprop="dateCreated datePublished" datetime="2019-08-23T22:11:12+08:00">2019-08-23</time>
+              <time title="创建时间：2019-08-23 22:11:12 / 修改时间：22:22:20" itemprop="dateCreated datePublished" datetime="2019-08-23T22:11:12+08:00">2019-08-23</time>
             
 
             
@@ -580,7 +580,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">988</span>
+                <span title="本文字数">989</span>
               
 
               
@@ -609,6 +609,7 @@
 <p>有 $k$ 只麻球，每只活一天就会死亡，临死前可能会生出一些新的麻球。具体来说，生 $i$ 只麻球的概率为 $P_i$ 。给定 $m$ ，求 $m$ 天后所有麻球均死亡的概率。</p>
 <p>我感谢我自己</p>
 </blockquote>
+<a id="more"></a>
 <p>每只麻球均可视为一个独立的问题。设 $f[i]$ 表示第一天只有 $1$ 只麻球，在第 $i$ 天它及它的后代全部死亡的概率。由全概率公式，有</p>
 <script type="math/tex; mode=display">
 f[i]=P_0+P_1f[i-1]+P_2f[i-1]^2+P_3f[i-1]^3+...+P_{n-1}f[i-1]^{n-1}</script><p>其中 $P_jf[i-j]^j$ 的含义是这个麻球生了 $j$ 个后代，并且它们在 $i-1$ 天后全部死亡的概率。由于一开始有 $k$ 只麻球，最终答案为 $f[m]^k$ 。</p>
