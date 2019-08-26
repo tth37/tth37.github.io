@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[公告 2019-8-26]]></title>
+    <url>%2F2019%2F08%2F26%2Fbulletin-2019-8-26%2F</url>
+    <content type="text"><![CDATA[上一篇公告 Hi~ 访问我网站的小崽子们~ 想在评论区发言的同时留下自己的个人头像吗？快快注册一个Github账号吧！学信息没个Github账号怎么行 我的网站与Github完全兼容，可以使用Github登录我的网站，并且在文章下方评论！ 可以在这里测试一下 虽然网站是国家顶级域名（*.cn），但是Github头像的更新是实时的，注册Github账号之后立刻可以到我的博客评论！ 谢谢资瓷！]]></content>
+      <categories>
+        <category>公告</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[题解-luogu-p5502最大公约数]]></title>
     <url>%2F2019%2F08%2F23%2Fsolution-luogu-p5502%2F</url>
     <content type="text"><![CDATA[题目链接 咕咕咕 对于求解区间权值 $=value *length$ 的最值问题时，我们通常可以枚举区间左端点，然后高效地找出右端点更新答案。 朴素的想法是枚举右端点 $r\in [l,n]$ 。根据显然的贪心策略，如果右端点在某一区间移动时，$\gcd(a_l,a_{l+1},…,a_r)$ 保持不变，则右端点越大越好。 因此可以用倍增优化右端点的确定。但是在倍增的过程中，需要多次查询区间最大公约数；我们可以用ST表的思路对序列预处理，做到 $O(1)$ 复杂度查询。 但是，如果已经确定左端点 $l$ ，不同的右端点选取会对应许多不同的最大公约数值，那么该算法的复杂度将无法承受。 稍加观察，可以发现当左端点确定时，右端点右移一个单位，原子段的最大公约数要么维持不变；要么变为原最大公约数的一个约数。换言之，当左端点确定时，不同的右端点最多对应 $\log_2n$ 个不同的最大公约数值。算法复杂度得以控制在 $O(n(\log n)^2)$ 。 代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;inline ll gcd(ll a, ll b) &#123; return b == 0 ? a : gcd(b, a % b);&#125;int T, N;ll ans;ll a[100005];ll st[100005][18];int lg[100005];inline ll query(int l, int r) &#123; int k = lg[r - l + 1]; return gcd(st[l][k], st[r - (1 &lt;&lt; k) + 1][k]);&#125;int main() &#123; lg[1] = 0; for (register int i = 2; i &lt;= 100000; ++i) lg[i] = lg[i &gt;&gt; 1] + 1; scanf("%d", &amp;N); for (register int i = 1; i &lt;= N; ++i) scanf("%lld", &amp;st[i][0]); for (register int j = 1; j &lt;= lg[N]; ++j) for (register int i = 1; i + (1 &lt;&lt; j) - 1 &lt;= N; ++i) st[i][j] = gcd(st[i][j - 1], st[i + (1 &lt;&lt; (j - 1))][j - 1]); for (register int l = 1; l &lt;= N; ++l) &#123; int r = l; while (r &lt;= N) &#123; ll cur = query(l, r); for (register int i = lg[N]; i &gt;= 0; --i) &#123; if (r + (1 &lt;&lt; i) &lt;= N &amp;&amp; query(l, r + (1 &lt;&lt; i)) == cur) r += (1 &lt;&lt; i); &#125; ans = max(ans, cur * (r - l + 1)); r += 1; &#125; &#125; printf("%lld", ans); return 0;&#125;]]></content>
@@ -98,8 +106,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树状数组</tag>
         <tag>树链剖分</tag>
+        <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
@@ -404,14 +412,6 @@
       </categories>
   </entry>
   <entry>
-    <title><![CDATA[公告 2019-03-24]]></title>
-    <url>%2F2019%2F03%2F24%2Fbulletin-2019-3-24%2F</url>
-    <content type="text"><![CDATA[2019/3/24，tth37搭建了这个github博客。 tth37希望在这个博客里记录一些自己学习OI的心得，并发布一些题解，贴出学习规划。 但tth37实在是太弱了，因此他会更新得十分缓慢。 另外，还请shiwt巨佬多多指教。 任何一个伟大的思想，都有一个微不足道的开始。 p.s. 可能会将洛谷博客上的文章搬运过来，所以有些文章的发布时间可能在此之前，请别见怪。]]></content>
-      <categories>
-        <category>公告</category>
-      </categories>
-  </entry>
-  <entry>
     <title><![CDATA[题目列表-动态规划]]></title>
     <url>%2F2019%2F03%2F20%2Flist-dp%2F</url>
     <content type="text"><![CDATA[任务安排（斜率优化+费用提前计算） f[i]=min_{0\le j]]></content>
@@ -439,8 +439,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>

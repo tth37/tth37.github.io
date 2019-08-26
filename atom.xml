@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-23T15:23:12.327Z</updated>
+  <updated>2019-08-26T06:23:09.853Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>公告 2019-8-26</title>
+    <link href="http://yoursite.com/2019/08/26/bulletin-2019-8-26/"/>
+    <id>http://yoursite.com/2019/08/26/bulletin-2019-8-26/</id>
+    <published>2019-08-26T06:18:33.000Z</published>
+    <updated>2019-08-26T06:23:09.853Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://tth37.cn/2019/05/18/bulletin-2019-5-18/" target="_blank" rel="noopener">上一篇公告</a></p></blockquote><p>Hi~ 访问我网站的小崽子们~</p><p>想在评论区发言的同时留下自己的个人头像吗？快快注册一个<a href="https://www.github.com" target="_blank" rel="noopener">Github</a>账号吧！<del>学信息没个Github账号怎么行</del>  我的网站与Github完全兼容，可以使用Github登录我的网站，并且在文章下方评论！</p><p><a href="https://tth37.cn/message/" target="_blank" rel="noopener">可以在这里测试一下</a></p><p>虽然网站是国家顶级域名（<code>*.cn</code>），但是Github头像的更新是实时的，注册Github账号之后立刻可以到我的博客评论！</p><p>谢谢资瓷！</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://tth37.cn/2019/05/18/bulletin-2019-5-18/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;上一篇公告&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Hi~ 
+      
+    
+    </summary>
+    
+      <category term="公告" scheme="http://yoursite.com/categories/%E5%85%AC%E5%91%8A/"/>
+    
+    
+  </entry>
   
   <entry>
     <title>题解-luogu-p5502最大公约数</title>
@@ -249,9 +275,9 @@
     
       <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
-      <category term="树状数组" scheme="http://yoursite.com/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
-    
       <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
+      <category term="树状数组" scheme="http://yoursite.com/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
       <category term="树套树" scheme="http://yoursite.com/tags/%E6%A0%91%E5%A5%97%E6%A0%91/"/>
     
@@ -1013,32 +1039,6 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
   </entry>
   
   <entry>
-    <title>公告 2019-03-24</title>
-    <link href="http://yoursite.com/2019/03/24/bulletin-2019-3-24/"/>
-    <id>http://yoursite.com/2019/03/24/bulletin-2019-3-24/</id>
-    <published>2019-03-24T05:13:13.000Z</published>
-    <updated>2019-04-08T15:47:56.942Z</updated>
-    
-    <content type="html"><![CDATA[<p>2019/3/24，tth37搭建了这个github博客。</p><p>tth37希望在这个博客里记录一些自己学习OI的心得，并发布一些题解，贴出学习规划。</p><p>但tth37实在是太弱了，因此他会更新得十分缓慢。</p><p>另外，还请shiwt巨佬多多指教。</p><blockquote><p>任何一个伟大的思想，都有一个微不足道的开始。</p></blockquote><p>p.s. 可能会将洛谷博客上的文章搬运过来，所以有些文章的发布时间可能在此之前，请别见怪。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;2019/3/24，tth37搭建了这个github博客。&lt;/p&gt;
-&lt;p&gt;tth37希望在这个博客里记录一些自己学习OI的心得，并发布一些题解，贴出学习规划。&lt;/p&gt;
-&lt;p&gt;但tth37实在是太弱了，因此他会更新得十分缓慢。&lt;/p&gt;
-&lt;p&gt;另外，还请shiwt巨佬多多指教。
-      
-    
-    </summary>
-    
-      <category term="公告" scheme="http://yoursite.com/categories/%E5%85%AC%E5%91%8A/"/>
-    
-    
-  </entry>
-  
-  <entry>
     <title>题目列表-动态规划</title>
     <link href="http://yoursite.com/2019/03/20/list-dp/"/>
     <id>http://yoursite.com/2019/03/20/list-dp/</id>
@@ -1122,9 +1122,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
       <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   
