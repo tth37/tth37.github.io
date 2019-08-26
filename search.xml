@@ -35,7 +35,7 @@
   <entry>
     <title><![CDATA[题解-luogu-p2279消防局的设立]]></title>
     <url>%2F2019%2F08%2F19%2Fsolution-luogu-p2279%2F</url>
-    <content type="text"><![CDATA[题目链接 咕 实际上就是这道题的简化版。 首先定义状态。$f[u][4]$ 表示节点 $u$ 的二级祖先（父亲的父亲）及以下节点被完全覆盖，所需的最小代价。$f[u][3]$ 表示节点 $u$ 的一级祖先及以下节点被完全覆盖所需最小代价。以此类推， $f[u][0]$ 表示节点 $u$ 的二级儿子（儿子的儿子）及以下节点被完全覆盖所需的最小代价。 考虑 $f[u][4]$ 的推导。由于每个节点被选中后只能覆盖到与其距离小于等于二的节点，要使 $u$ 的二级祖先被覆盖到，则节点 $u$ 必须被选取。对节点 $u$ 的各个儿子没有要求。因此，$f[u][4]=1+\Sigma f[v][0…4]$ 。 考虑 $f[u][3]$。由于只需要覆盖到节点 $u$ 的父亲，只需使节点 $u$ 的至少一个子节点可以覆盖到其二级祖先即可。同时，该子节点在覆盖到节点 $u$ 的二级祖先时，可以同时覆盖到节点 $u$ 的其他儿子，因此节点 $u$ 的其他儿子不必被覆盖。$f[u][3]=f[k][4]+\Sigma f[v][1…4]$。 $f[u][2]$ 的情况与 $f[u][3]$ 类似，只需保证一个儿子能将节点 $u$ 覆盖即可。 $f[u][2]=f[k][3]+\Sigma f[v][2…4]$ 。 $f[u][1]$ 与 $f[u][0]$ 的推导相对简单，因为各个子节点之间不会相互影响。 $f[u][1]=\Sigma f[v][2…4]$，$f[u][0]=\Sigma f[v][1…4]$。 对转移方程进行简单优化即可。代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;bits/stdc++.h&gt;using namespace std;vector&lt;int&gt; G[1005];int N;int f[1005][10];void dp(int u, int fa) &#123; f[u][3] = 0x3f3f3f3f; f[u][2] = 0x3f3f3f3f; f[u][4] = 1; for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; if (v == fa) continue; dp(v, u); f[u][0] += f[v][1]; f[u][1] += f[v][2]; f[u][2] = min(f[u][2], f[v][3] - f[v][2]); f[u][3] = min(f[u][3], f[v][4] - f[v][1]); f[u][4] += f[v][0]; &#125; f[u][2] += f[u][1]; f[u][3] += f[u][0]; f[u][3] = min(f[u][3], f[u][4]); f[u][2] = min(f[u][2], f[u][3]); f[u][1] = min(f[u][1], f[u][2]); f[u][0] = min(f[u][0], f[u][1]); &#125;int main() &#123; scanf("%d", &amp;N); for (register int u = 2; u &lt;= N; ++u) &#123; int v; scanf("%d", &amp;v); G[u].push_back(v); G[v].push_back(u); &#125; dp(1, 0); printf("%d", f[1][2]); return 0;&#125;]]></content>
+    <content type="text"><![CDATA[题目链接 给定一棵有 $n$ 个节点的树，求至少需要标记多少个点使得树上任意两个点的距离均小于等于 $2$ $n \le 1000$ 感谢@oy的贡献 实际上就是这道题的简化版。 首先定义状态。$f[u][4]$ 表示节点 $u$ 的二级祖先（父亲的父亲）及以下节点被完全覆盖，所需的最小代价。$f[u][3]$ 表示节点 $u$ 的一级祖先及以下节点被完全覆盖所需最小代价。以此类推， $f[u][0]$ 表示节点 $u$ 的二级儿子（儿子的儿子）及以下节点被完全覆盖所需的最小代价。 考虑 $f[u][4]$ 的推导。由于每个节点被选中后只能覆盖到与其距离小于等于二的节点，要使 $u$ 的二级祖先被覆盖到，则节点 $u$ 必须被选取。对节点 $u$ 的各个儿子没有要求。因此，$f[u][4]=1+\Sigma f[v][0…4]$ 。 考虑 $f[u][3]$。由于只需要覆盖到节点 $u$ 的父亲，只需使节点 $u$ 的至少一个子节点可以覆盖到其二级祖先即可。同时，该子节点在覆盖到节点 $u$ 的二级祖先时，可以同时覆盖到节点 $u$ 的其他儿子，因此节点 $u$ 的其他儿子不必被覆盖。$f[u][3]=f[k][4]+\Sigma f[v][1…4]$。 $f[u][2]$ 的情况与 $f[u][3]$ 类似，只需保证一个儿子能将节点 $u$ 覆盖即可。 $f[u][2]=f[k][3]+\Sigma f[v][2…4]$ 。 $f[u][1]$ 与 $f[u][0]$ 的推导相对简单，因为各个子节点之间不会相互影响。 $f[u][1]=\Sigma f[v][2…4]$，$f[u][0]=\Sigma f[v][1…4]$。 对转移方程进行简单优化即可。代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142#include&lt;bits/stdc++.h&gt;using namespace std;vector&lt;int&gt; G[1005];int N;int f[1005][10];void dp(int u, int fa) &#123; f[u][3] = 0x3f3f3f3f; f[u][2] = 0x3f3f3f3f; f[u][4] = 1; for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; if (v == fa) continue; dp(v, u); f[u][0] += f[v][1]; f[u][1] += f[v][2]; f[u][2] = min(f[u][2], f[v][3] - f[v][2]); f[u][3] = min(f[u][3], f[v][4] - f[v][1]); f[u][4] += f[v][0]; &#125; f[u][2] += f[u][1]; f[u][3] += f[u][0]; f[u][3] = min(f[u][3], f[u][4]); f[u][2] = min(f[u][2], f[u][3]); f[u][1] = min(f[u][1], f[u][2]); f[u][0] = min(f[u][0], f[u][1]); &#125;int main() &#123; scanf("%d", &amp;N); for (register int u = 2; u &lt;= N; ++u) &#123; int v; scanf("%d", &amp;v); G[u].push_back(v); G[v].push_back(u); &#125; dp(1, 0); printf("%d", f[1][2]); return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -145,8 +145,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
       </tags>
   </entry>
   <entry>
@@ -157,8 +157,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -439,8 +439,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>字符串</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
