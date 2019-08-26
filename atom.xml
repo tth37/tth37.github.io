@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-26T13:03:23.489Z</updated>
+  <updated>2019-08-26T15:52:59.472Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,31 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>题解-luogu-p5503灯塔</title>
+    <link href="http://yoursite.com/2019/08/26/solution-luogu-p5503/"/>
+    <id>http://yoursite.com/2019/08/26/solution-luogu-p5503/</id>
+    <published>2019-08-26T15:29:57.000Z</published>
+    <updated>2019-08-26T15:52:59.472Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://www.luogu.org/problem/P5503" target="_blank" rel="noopener">题目链接</a></p><p>咕咕咕</p></blockquote><a id="more"></a><p>由于根号的存在，本题并没有什么明显的单调性，不能通过二分或单调队列实现。</p><p>本题的关键在于问题转化。记 $l_i$ 表示在山峰 $i$ 上建灯塔，并使得山峰 $1…i$ 全部被照亮的最小高度。</p><script type="math/tex; mode=display">h_j\le h_i+l_i - \sqrt{i-j} (1\le j\le i)</script><script type="math/tex; mode=display">h_j+\sqrt{i-j}-h_i\le l_i(1\le j\le i)</script><script type="math/tex; mode=display">l_i=\max_{1\le j\le i}\lbrace  h_j+\lceil  (\sqrt{i-j})  \rceil \rbrace-h_i</script><p>这样 ${l}$ 数组的求解即转化为区间求解最值问题，然而 $\max$ 函数中的 $\lceil  (\sqrt{i-j})  \rceil$ 似乎有些棘手。然而观察到当 $\lceil  (\sqrt{i-j})  \rceil$ 相等时，只有该区间内最大的 $h_j$ 才会对答案产生贡献。因此我们可以枚举 $\lceil  (\sqrt{i-j})  \rceil$ 的值，求出对应的 $j$ 区间内 $h_j$ 的最值作为 $l_i$ 的候选答案。</p><p>$r_i$ 的定义与 $l_i$ 类似，最终的 $p_i$ 即为 $\max \lbrace l_i,r_i\rbrace$ 。</p><p>求解区间最值可以用 ST 表实现。</p><p>代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> st[<span class="number">100005</span>][<span class="number">18</span>];</span><br><span class="line"><span class="keyword">int</span> lg[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> power[<span class="number">320</span>];</span><br><span class="line"><span class="keyword">int</span> p[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> s = lg[r - l + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> max(st[l][s], st[r - (<span class="number">1</span> &lt;&lt; s) + <span class="number">1</span>][s]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    lg[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">100000</span>; ++i)</span><br><span class="line">        lg[i] = lg[i &gt;&gt; <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">319</span>; ++i) &#123;</span><br><span class="line">        power[i] = i * i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;st[i][<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= lg[N]; ++j)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i + (<span class="number">1</span> &lt;&lt; j) - <span class="number">1</span> &lt;= N; ++i)</span><br><span class="line">            st[i][j] = max(st[i][j - <span class="number">1</span>], st[i + (<span class="number">1</span> &lt;&lt; (j - <span class="number">1</span>))][j - <span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> delta = <span class="number">0</span>, l = i, r = i;</span><br><span class="line">        <span class="keyword">while</span> (l &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">            p[i] = max(p[i], query(l, r) + delta - st[i][<span class="number">0</span>]);</span><br><span class="line">            r = l - <span class="number">1</span>, l = i - power[++delta];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (r &gt;= <span class="number">1</span>) p[i] = max(p[i], query(<span class="number">1</span>, r) + delta - st[i][<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = N; i &gt;= <span class="number">1</span>; --i) &#123;</span><br><span class="line">        <span class="keyword">int</span> delta = <span class="number">0</span>, l = i, r = i;</span><br><span class="line">        <span class="keyword">while</span> (r &lt;= N) &#123;</span><br><span class="line">            p[i] = max(p[i], query(l, r) + delta - st[i][<span class="number">0</span>]);</span><br><span class="line">            l = r + <span class="number">1</span>, r = i + power[++delta];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (l &lt;= N) p[i] = max(p[i], query(l, N) + delta - st[i][<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, p[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.luogu.org/problem/P5503&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;咕咕咕&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+      <category term="ST算法" scheme="http://yoursite.com/tags/ST%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>模板-常数优化</title>
@@ -392,9 +417,9 @@
       <category term="数论专题" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
     
     
-      <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
-    
       <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
     
   </entry>
   
@@ -420,9 +445,9 @@
       <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
-    
       <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
     
       <category term="逆元" scheme="http://yoursite.com/tags/%E9%80%86%E5%85%83/"/>
     
@@ -1112,9 +1137,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
-    
       <category term="贪心" scheme="http://yoursite.com/tags/%E8%B4%AA%E5%BF%83/"/>
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
     
   </entry>
   
