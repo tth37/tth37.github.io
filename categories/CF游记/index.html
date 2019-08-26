@@ -953,36 +953,6 @@
 
 
 
-  
-  
-  
-    
-  
-  
-    
-  
-  <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3/dist/av-min.js"></script>
-  <script src="//cdn.jsdelivr.net/npm/valine@1/dist/Valine.min.js"></script>
-  <script>
-    var GUEST = ['nick','mail','link'];
-    var guest = 'nick,mail';
-    guest = guest.split(',').filter(function (item) {
-      return GUEST.indexOf(item) > -1;
-    });
-    new Valine({
-      el: '#comments' ,
-      verify: true,
-      notify: false,
-      appId: '3gjqC8wA7kbYSN6UwAWhl4qc-gzGzoHsz',
-      appKey: 'SqboaQjM5xxfQ7sxqsR9JAyW',
-      placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
-      avatar: 'mm',
-      meta:guest,
-      pageSize: '10' || 10,
-      visitor: false
-    });
-  </script>
-
 
 
 
