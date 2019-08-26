@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[题解-luogu-p5503灯塔]]></title>
     <url>%2F2019%2F08%2F26%2Fsolution-luogu-p5503%2F</url>
-    <content type="text"><![CDATA[题目链接 咕咕咕 由于根号的存在，本题并没有什么明显的单调性，不能通过二分或单调队列实现。 本题的关键在于问题转化。记 $l_i$ 表示在山峰 $i$ 上建灯塔，并使得山峰 $1…i$ 全部被照亮的最小高度。 h_j\le h_i+l_i - \sqrt{i-j} (1\le j\le i) h_j+\sqrt{i-j}-h_i\le l_i(1\le j\le i) l_i=\max_{1\le j\le i}\lbrace h_j+\lceil (\sqrt{i-j}) \rceil \rbrace-h_i这样 ${l}$ 数组的求解即转化为区间求解最值问题，然而 $\max$ 函数中的 $\lceil (\sqrt{i-j}) \rceil$ 似乎有些棘手。然而观察到当 $\lceil (\sqrt{i-j}) \rceil$ 相等时，只有该区间内最大的 $h_j$ 才会对答案产生贡献。因此我们可以枚举 $\lceil (\sqrt{i-j}) \rceil$ 的值，求出对应的 $j$ 区间内 $h_j$ 的最值作为 $l_i$ 的候选答案。 $r_i$ 的定义与 $l_i$ 类似，最终的 $p_i$ 即为 $\max \lbrace l_i,r_i\rbrace$ 。 求解区间最值可以用 ST 表实现。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include &lt;bits/stdc++.h&gt;using namespace std;int st[100005][18];int lg[100005];int power[320];int p[100005];int N;inline int query(int l, int r) &#123; int s = lg[r - l + 1]; return max(st[l][s], st[r - (1 &lt;&lt; s) + 1][s]);&#125;int main() &#123; lg[1] = 0; for (register int i = 2; i &lt;= 100000; ++i) lg[i] = lg[i &gt;&gt; 1] + 1; for (register int i = 1; i &lt;= 319; ++i) &#123; power[i] = i * i; &#125; scanf("%d", &amp;N); for (register int i = 1; i &lt;= N; ++i) scanf("%d", &amp;st[i][0]); for (register int j = 1; j &lt;= lg[N]; ++j) for (register int i = 1; i + (1 &lt;&lt; j) - 1 &lt;= N; ++i) st[i][j] = max(st[i][j - 1], st[i + (1 &lt;&lt; (j - 1))][j - 1]); for (register int i = 1; i &lt;= N; ++i) &#123; int delta = 0, l = i, r = i; while (l &gt;= 1) &#123; p[i] = max(p[i], query(l, r) + delta - st[i][0]); r = l - 1, l = i - power[++delta]; &#125; if (r &gt;= 1) p[i] = max(p[i], query(1, r) + delta - st[i][0]); &#125; for (register int i = N; i &gt;= 1; --i) &#123; int delta = 0, l = i, r = i; while (r &lt;= N) &#123; p[i] = max(p[i], query(l, r) + delta - st[i][0]); l = r + 1, r = i + power[++delta]; &#125; if (l &lt;= N) p[i] = max(p[i], query(l, N) + delta - st[i][0]); &#125; for (register int i = 1; i &lt;= N; ++i) printf("%d\n", p[i]); return 0;&#125;]]></content>
+    <content type="text"><![CDATA[题目链接 咕咕咕 由于根号的存在，本题并没有什么明显的单调性，不能通过二分或单调队列实现。 本题的关键在于问题转化。记 $l_i$ 表示在山峰 $i$ 上建灯塔，并使得山峰 $1…i$ 全部被照亮的最小高度。 h_j\le h_i+l_i - \sqrt{i-j} (1\le j\le i)\\ h_j+\sqrt{i-j}-h_i\le l_i(1\le j\le i)\\ l_i=\max_{1\le j\le i}\lbrace h_j+\lceil (\sqrt{i-j}) \rceil \rbrace-h_i这样 ${l}$ 数组的求解即转化为区间求解最值问题，然而 $\max$ 函数中的 $\lceil (\sqrt{i-j}) \rceil$ 似乎有些棘手。然而观察到当 $\lceil (\sqrt{i-j}) \rceil$ 相等时，只有该区间内最大的 $h_j$ 才会对答案产生贡献。因此我们可以枚举 $\lceil (\sqrt{i-j}) \rceil$ 的值，求出对应的 $j$ 区间内 $h_j$ 的最值作为 $l_i$ 的候选答案。 $r_i$ 的定义与 $l_i$ 类似，最终的 $p_i$ 即为 $\max \lbrace l_i,r_i\rbrace$ 。 求解区间最值可以用 ST 表实现。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include &lt;bits/stdc++.h&gt;using namespace std;int st[100005][18];int lg[100005];int power[320];int p[100005];int N;inline int query(int l, int r) &#123; int s = lg[r - l + 1]; return max(st[l][s], st[r - (1 &lt;&lt; s) + 1][s]);&#125;int main() &#123; lg[1] = 0; for (register int i = 2; i &lt;= 100000; ++i) lg[i] = lg[i &gt;&gt; 1] + 1; for (register int i = 1; i &lt;= 319; ++i) &#123; power[i] = i * i; &#125; scanf("%d", &amp;N); for (register int i = 1; i &lt;= N; ++i) scanf("%d", &amp;st[i][0]); for (register int j = 1; j &lt;= lg[N]; ++j) for (register int i = 1; i + (1 &lt;&lt; j) - 1 &lt;= N; ++i) st[i][j] = max(st[i][j - 1], st[i + (1 &lt;&lt; (j - 1))][j - 1]); for (register int i = 1; i &lt;= N; ++i) &#123; int delta = 0, l = i, r = i; while (l &gt;= 1) &#123; p[i] = max(p[i], query(l, r) + delta - st[i][0]); r = l - 1, l = i - power[++delta]; &#125; if (r &gt;= 1) p[i] = max(p[i], query(1, r) + delta - st[i][0]); &#125; for (register int i = N; i &gt;= 1; --i) &#123; int delta = 0, l = i, r = i; while (r &lt;= N) &#123; p[i] = max(p[i], query(l, r) + delta - st[i][0]); l = r + 1, r = i + power[++delta]; &#125; if (l &lt;= N) p[i] = max(p[i], query(l, N) + delta - st[i][0]); &#125; for (register int i = 1; i &lt;= N; ++i) printf("%d\n", p[i]); return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -36,8 +36,8 @@
       </categories>
       <tags>
         <tag>数学</tag>
-        <tag>倍增</tag>
         <tag>ST算法</tag>
+        <tag>倍增</tag>
       </tags>
   </entry>
   <entry>
@@ -164,8 +164,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -176,8 +176,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>

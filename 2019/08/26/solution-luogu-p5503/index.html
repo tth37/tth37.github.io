@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="tth37&#39;s Blog">
 <meta property="og:description" content="题目链接 咕咕咕">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-26T15:52:59.472Z">
+<meta property="og:updated_time" content="2019-08-26T15:54:03.189Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="题解-luogu-p5503灯塔">
 <meta name="twitter:description" content="题目链接 咕咕咕">
@@ -513,7 +513,7 @@
                 
               
 
-              <time title="创建时间：2019-08-26 23:29:57 / 修改时间：23:52:59" itemprop="dateCreated datePublished" datetime="2019-08-26T23:29:57+08:00">2019-08-26</time>
+              <time title="创建时间：2019-08-26 23:29:57 / 修改时间：23:54:03" itemprop="dateCreated datePublished" datetime="2019-08-26T23:29:57+08:00">2019-08-26</time>
             
 
             
@@ -602,8 +602,10 @@
 <p>由于根号的存在，本题并没有什么明显的单调性，不能通过二分或单调队列实现。</p>
 <p>本题的关键在于问题转化。记 $l_i$ 表示在山峰 $i$ 上建灯塔，并使得山峰 $1…i$ 全部被照亮的最小高度。</p>
 <script type="math/tex; mode=display">
-h_j\le h_i+l_i - \sqrt{i-j} (1\le j\le i)</script><script type="math/tex; mode=display">
-h_j+\sqrt{i-j}-h_i\le l_i(1\le j\le i)</script><script type="math/tex; mode=display">
+h_j\le h_i+l_i - \sqrt{i-j} (1\le j\le i)\\
+
+h_j+\sqrt{i-j}-h_i\le l_i(1\le j\le i)\\
+
 l_i=\max_{1\le j\le i}\lbrace  h_j+\lceil  (\sqrt{i-j})  \rceil \rbrace-h_i</script><p>这样 ${l}$ 数组的求解即转化为区间求解最值问题，然而 $\max$ 函数中的 $\lceil  (\sqrt{i-j})  \rceil$ 似乎有些棘手。然而观察到当 $\lceil  (\sqrt{i-j})  \rceil$ 相等时，只有该区间内最大的 $h_j$ 才会对答案产生贡献。因此我们可以枚举 $\lceil  (\sqrt{i-j})  \rceil$ 的值，求出对应的 $j$ 区间内 $h_j$ 的最值作为 $l_i$ 的候选答案。</p>
 <p>$r_i$ 的定义与 $l_i$ 类似，最终的 $p_i$ 即为 $\max \lbrace l_i,r_i\rbrace$ 。</p>
 <p>求解区间最值可以用 ST 表实现。</p>
