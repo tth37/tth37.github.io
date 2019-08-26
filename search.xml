@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[模板-常数优化]]></title>
+    <url>%2F2019%2F08%2F26%2Ftemplate-optimization%2F</url>
+    <content type="text"><![CDATA[实用技巧 减少函数参数传递，开全局变量 快速读入123456789void readint() &#123;&#125;template&lt;class T1, class ...T2&gt;void readint(T1 &amp;i, T2&amp;... rest)&#123; i=0;char c;bool f=false; while (!isdigit(c=getchar())) f=c=='-'; do i=(i&lt;&lt;3)+(i&lt;&lt;1)+c-'0'; while (isdigit(c=getchar())); if (f) i=-i; readint(rest...);&#125; 快速输出1暂无]]></content>
+      <categories>
+        <category>模板</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[公告 2019-8-26]]></title>
     <url>%2F2019%2F08%2F26%2Fbulletin-2019-8-26%2F</url>
     <content type="text"><![CDATA[上一篇公告 Hi~ 访问我网站的小崽子们~ 想在评论区发言的同时留下自己的个人头像吗？快快注册一个Github账号吧！学信息没个Github账号怎么行 我的网站与Github完全兼容，可以使用Github登录我的网站，并且在文章下方评论！ 可以在这里测试一下 虽然网站是国家顶级域名（*.cn），但是Github头像的更新是实时的，注册Github账号之后立刻可以到我的博客评论！ 谢谢资瓷！]]></content>
@@ -145,8 +153,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -157,8 +165,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
