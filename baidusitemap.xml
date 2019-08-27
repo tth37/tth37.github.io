@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2019/08/27/solution-luogu-p1314/</loc>
+    <lastmod>2019-08-27</lastmod>
+  </url>  <url>
+    <loc>http://yoursite.com/2019/04/25/solution-luogu-p1273/</loc>
+    <lastmod>2019-08-27</lastmod>
+  </url>  <url>
     <loc>http://yoursite.com/2019/07/24/algorithm-splay/</loc>
     <lastmod>2019-08-27</lastmod>
   </url>  <url>
@@ -101,9 +107,6 @@
     <lastmod>2019-05-12</lastmod>
   </url>  <url>
     <loc>http://yoursite.com/2019/03/28/solution-luogu-p4516/</loc>
-    <lastmod>2019-05-12</lastmod>
-  </url>  <url>
-    <loc>http://yoursite.com/2019/04/25/solution-luogu-p1273/</loc>
     <lastmod>2019-05-12</lastmod>
   </url>  <url>
     <loc>http://yoursite.com/2019/01/26/solution-luogu-p1080/</loc>

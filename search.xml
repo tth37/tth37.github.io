@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-luogu-p1314聪明的质监员]]></title>
+    <url>%2F2019%2F08%2F27%2Fsolution-luogu-p1314%2F</url>
+    <content type="text"><![CDATA[题目链接 咕咕咕 本题难度不大，第一眼就能看出需要用二分答案或倍增答案解决。 需要解决的第一个问题是如何根据一个猜测的参数 $W$ ，快速计算出检验结果 $Y$ 。由于只有 $w_j \ge W$ 的矿石才会对检验结果做出贡献，因此我们可以将 $w_j &lt; W$ 的矿石忽略并预处理前缀和，并且回答 $M$ 个询问即可。 接下来应该考虑如何计算猜测值 $W$ 。观察到 $Y(W)$ 是单调不增的，我们可以用倍增求出满足 $Y \ge S$ 的最大 $W$ 值，那么满足 $Y&lt;S$ 的最小 $W$ 值一定为 $W+1$ 。 最终答案即为 $\min{|Y(W)-S|,|Y(W+1)-S|}$ 。 代码如下： 12345678910111213141516171819202122#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;int N, M, ans = 1; ll S;int w[200005], v[200005], l[200005], r[200005]; ll s1[200005], s2[200005];inline ll Y(int W) &#123; for (register int i = 1; i &lt;= N; ++i) s1[i] = w[i] &gt;= W ? s1[i - 1] + 1 : s1[i - 1], s2[i] = w[i] &gt;= W ? s2[i - 1] + v[i] : s2[i - 1]; ll ret = 0; for (register int i = 1; i &lt;= M; ++i) ret += (s1[r[i]] - s1[l[i] - 1]) * (s2[r[i]] - s2[l[i] - 1]); return ret;&#125;int main() &#123; scanf("%d%d%lld", &amp;N, &amp;M, &amp;S); for (register int i = 1; i &lt;= N; ++i) scanf("%d%d", &amp;w[i], &amp;v[i]); for (register int i = 1; i &lt;= M; ++i) scanf("%d%d", &amp;l[i], &amp;r[i]); for (register int i = 17; i &gt;= 0; --i) ans += Y(ans + (1 &lt;&lt; i)) &gt;= S ? (1 &lt;&lt; i) : 0; printf("%lld", min(Y(ans) - S, S - Y(ans + 1)));&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>二分答案</tag>
+        <tag>倍增</tag>
+        <tag>前缀和</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[题解-luogu-p5503灯塔]]></title>
     <url>%2F2019%2F08%2F26%2Fsolution-luogu-p5503%2F</url>
     <content type="text"><![CDATA[题目链接 咕咕咕 由于根号的存在，本题并没有什么明显的单调性，不能通过二分或单调队列实现。 本题的关键在于问题转化。记 $l_i$ 表示在山峰 $i$ 上建灯塔，并使得山峰 $1…i$ 全部被照亮的最小高度。 h_j\le h_i+l_i - \sqrt{i-j} (1\le j\le i) h_j+\sqrt{i-j}-h_i\le l_i(1\le j\le i) l_i=\max_{1\le j\le i}\lbrace h_j+\lceil (\sqrt{i-j}) \rceil \rbrace-h_i这样 ${l}$ 数组的求解即转化为区间求解最值问题，然而 $\max$ 函数中的 $\lceil (\sqrt{i-j}) \rceil$ 似乎有些棘手。然而观察到当 $\lceil (\sqrt{i-j}) \rceil$ 相等时，只有该区间内最大的 $h_j$ 才会对答案产生贡献。因此我们可以枚举 $\lceil (\sqrt{i-j}) \rceil$ 的值，求出对应的 $j$ 区间内 $h_j$ 的最值作为 $l_i$ 的候选答案。 $r_i$ 的定义与 $l_i$ 类似，最终的 $p_i$ 即为 $\max \lbrace l_i,r_i\rbrace$ 。 求解区间最值可以用 ST 表实现。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include &lt;bits/stdc++.h&gt;using namespace std;int st[100005][18];int lg[100005];int power[320];int p[100005];int N;inline int query(int l, int r) &#123; int s = lg[r - l + 1]; return max(st[l][s], st[r - (1 &lt;&lt; s) + 1][s]);&#125;int main() &#123; lg[1] = 0; for (register int i = 2; i &lt;= 100000; ++i) lg[i] = lg[i &gt;&gt; 1] + 1; for (register int i = 1; i &lt;= 319; ++i) &#123; power[i] = i * i; &#125; scanf("%d", &amp;N); for (register int i = 1; i &lt;= N; ++i) scanf("%d", &amp;st[i][0]); for (register int j = 1; j &lt;= lg[N]; ++j) for (register int i = 1; i + (1 &lt;&lt; j) - 1 &lt;= N; ++i) st[i][j] = max(st[i][j - 1], st[i + (1 &lt;&lt; (j - 1))][j - 1]); for (register int i = 1; i &lt;= N; ++i) &#123; int delta = 0, l = i, r = i; while (l &gt;= 1) &#123; p[i] = max(p[i], query(l, r) + delta - st[i][0]); r = l - 1, l = i - power[++delta]; &#125; if (r &gt;= 1) p[i] = max(p[i], query(1, r) + delta - st[i][0]); &#125; for (register int i = N; i &gt;= 1; --i) &#123; int delta = 0, l = i, r = i; while (r &lt;= N) &#123; p[i] = max(p[i], query(l, r) + delta - st[i][0]); l = r + 1, r = i + power[++delta]; &#125; if (l &lt;= N) p[i] = max(p[i], query(l, N) + delta - st[i][0]); &#125; for (register int i = 1; i &lt;= N; ++i) printf("%d\n", p[i]); return 0;&#125;]]></content>
@@ -125,8 +138,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树状数组</tag>
         <tag>树链剖分</tag>
+        <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
@@ -316,7 +329,7 @@
   <entry>
     <title><![CDATA[题解-luogu-p1273有线电视网]]></title>
     <url>%2F2019%2F04%2F25%2Fsolution-luogu-p1273%2F</url>
-    <content type="text"><![CDATA[题目链接 背包类树形dp。本题需要运用分组背包模型。 首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。 可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移： f[u][i]=max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}其中，$v$为$u$的子节点，$w$为这条边的权值。在$u$每个子节点上有许多“物品”，“物品”总数即为以$v$为根的子树上用户的个数；每个“物品”所具有的价值即为其最大利润，即$f[v][j]$。同时不应忽略边权对利润带来的影响。 注意细节处理及边界。代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#include&lt;bits/stdc++.h&gt;using namespace std;struct Edge&#123; int v,w,nxt;&#125;mem[3005*2];int head[3005],cnt;int size[3005];inline void AddEdge(int u,int v,int w)&#123; mem[++cnt].v=v; mem[cnt].w=w; mem[cnt].nxt=head[u]; head[u]=cnt;&#125;int N,M;int leaf[3005];int f[3005][3005];inline void dfs(int u)&#123; if(leaf[u])&#123; f[u][1]=leaf[u]; size[u]=1; return; &#125; for(register int i=head[u];i;i=mem[i].nxt)&#123; int v=mem[i].v,w=mem[i].w; dfs(v); size[u]+=size[v]; for(register int j=M;j&gt;=1;--j) for(register int k=0;k&lt;=min(size[v],j);++k) f[u][j]=max(f[u][j],f[u][j-k]+f[v][k]-w); &#125;&#125;int main()&#123; memset(f,0xcf,sizeof(f)); scanf("%d%d",&amp;N,&amp;M); for(register int i=1;i&lt;=N-M;++i)&#123; int k; scanf("%d",&amp;k); for(register int j=1;j&lt;=k;++j)&#123; int a,c; scanf("%d%d",&amp;a,&amp;c); AddEdge(i,a,c); &#125; &#125; for(register int i=1;i&lt;=M;++i) scanf("%d",&amp;leaf[N-M+i]); for(register int i=1;i&lt;=N;++i) f[i][0]=0; dfs(1); for(register int i=M;i&gt;=1;--i)&#123; if(f[1][i]&gt;=0)&#123; printf("%d",i); return 0; &#125; &#125; return 0;&#125;]]></content>
+    <content type="text"><![CDATA[题目链接 背包类树形dp。本题需要运用分组背包模型。 首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。 可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移： f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}其中，$v$为$u$的子节点，$w$为这条边的权值。在$u$每个子节点上有许多“物品”，“物品”总数即为以$v$为根的子树上用户的个数；每个“物品”所具有的价值即为其最大利润，即$f[v][j]$。同时不应忽略边权对利润带来的影响。 注意细节处理及边界。代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#include&lt;bits/stdc++.h&gt;using namespace std;struct Edge&#123; int v,w,nxt;&#125;mem[3005*2];int head[3005],cnt;int size[3005];inline void AddEdge(int u,int v,int w)&#123; mem[++cnt].v=v; mem[cnt].w=w; mem[cnt].nxt=head[u]; head[u]=cnt;&#125;int N,M;int leaf[3005];int f[3005][3005];inline void dfs(int u)&#123; if(leaf[u])&#123; f[u][1]=leaf[u]; size[u]=1; return; &#125; for(register int i=head[u];i;i=mem[i].nxt)&#123; int v=mem[i].v,w=mem[i].w; dfs(v); size[u]+=size[v]; for(register int j=M;j&gt;=1;--j) for(register int k=0;k&lt;=min(size[v],j);++k) f[u][j]=max(f[u][j],f[u][j-k]+f[v][k]-w); &#125;&#125;int main()&#123; memset(f,0xcf,sizeof(f)); scanf("%d%d",&amp;N,&amp;M); for(register int i=1;i&lt;=N-M;++i)&#123; int k; scanf("%d",&amp;k); for(register int j=1;j&lt;=k;++j)&#123; int a,c; scanf("%d%d",&amp;a,&amp;c); AddEdge(i,a,c); &#125; &#125; for(register int i=1;i&lt;=M;++i) scanf("%d",&amp;leaf[N-M+i]); for(register int i=1;i&lt;=N;++i) f[i][0]=0; dfs(1); for(register int i=M;i&gt;=1;--i)&#123; if(f[1][i]&gt;=0)&#123; printf("%d",i); return 0; &#125; &#125; return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -446,8 +459,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>贪心</tag>
         <tag>python</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -458,8 +471,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
