@@ -118,7 +118,7 @@
 <meta property="og:site_name" content="tth37&#39;s Blog">
 <meta property="og:description" content="题目链接 咕咕咕">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-27T07:52:19.557Z">
+<meta property="og:updated_time" content="2019-08-27T08:08:44.429Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="题解-luogu-p1314聪明的质监员">
 <meta name="twitter:description" content="题目链接 咕咕咕">
@@ -513,7 +513,7 @@
                 
               
 
-              <time title="创建时间：2019-08-27 15:49:57 / 修改时间：15:52:19" itemprop="dateCreated datePublished" datetime="2019-08-27T15:49:57+08:00">2019-08-27</time>
+              <time title="创建时间：2019-08-27 15:49:57 / 修改时间：16:08:44" itemprop="dateCreated datePublished" datetime="2019-08-27T15:49:57+08:00">2019-08-27</time>
             
 
             
@@ -602,7 +602,7 @@
 <p>本题难度不大，第一眼就能看出需要用二分答案或<strong>倍增答案</strong>解决。</p>
 <p>需要解决的第一个问题是如何根据一个猜测的参数 $W$ ，快速计算出检验结果 $Y$ 。由于只有 $w_j \ge W$ 的矿石才会对检验结果做出贡献，因此我们可以将 $w_j &lt; W$ 的矿石忽略并预处理前缀和，并且回答 $M$ 个询问即可。</p>
 <p>接下来应该考虑如何计算猜测值 $W$ 。观察到 $Y(W)$ 是单调不增的，我们可以用<strong>倍增</strong>求出满足 $Y \ge S$  的最大 $W$ 值，那么满足 $Y&lt;S$ 的最小 $W$ 值一定为 $W+1$ 。</p>
-<p>最终答案即为 $\min{|Y(W)-S|,|Y(W+1)-S|}$ 。</p>
+<p>最终答案即为 $\min\lbrace |Y(W)-S|,|Y(W+1)-S|\rbrace$ 。</p>
 <p>代码如下：</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">int</span> N, M, ans = <span class="number">1</span>; ll S;</span><br><span class="line"><span class="keyword">int</span> w[<span class="number">200005</span>], v[<span class="number">200005</span>], l[<span class="number">200005</span>], r[<span class="number">200005</span>]; ll s1[<span class="number">200005</span>], s2[<span class="number">200005</span>];</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">Y</span><span class="params">(<span class="keyword">int</span> W)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        s1[i] = w[i] &gt;= W ? s1[i - <span class="number">1</span>] + <span class="number">1</span> : s1[i - <span class="number">1</span>],</span><br><span class="line">        s2[i] = w[i] &gt;= W ? s2[i - <span class="number">1</span>] + v[i] : s2[i - <span class="number">1</span>];</span><br><span class="line">    ll ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; ++i)</span><br><span class="line">        ret += (s1[r[i]] - s1[l[i] - <span class="number">1</span>]) * (s2[r[i]] - s2[l[i] - <span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%lld"</span>, &amp;N, &amp;M, &amp;S);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;w[i], &amp;v[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; ++i) <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;l[i], &amp;r[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">17</span>; i &gt;= <span class="number">0</span>; --i)</span><br><span class="line">        ans += Y(ans + (<span class="number">1</span> &lt;&lt; i)) &gt;= S ? (<span class="number">1</span> &lt;&lt; i) : <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, min(Y(ans) - S, S - Y(ans + <span class="number">1</span>)));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
@@ -630,7 +630,7 @@
   <p><span>本文标题:</span><a href="/2019/08/27/solution-luogu-p1314/">题解-luogu-p1314聪明的质监员</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 tth37 的个人博客">tth37</a></p>
   <p><span>发布时间:</span>2019年08月27日 - 15:08</p>
-  <p><span>最后更新:</span>2019年08月27日 - 15:08</p>
+  <p><span>最后更新:</span>2019年08月27日 - 16:08</p>
   <p><span>原始链接:</span><a href="/2019/08/27/solution-luogu-p1314/" title="题解-luogu-p1314聪明的质监员">http://yoursite.com/2019/08/27/solution-luogu-p1314/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/08/27/solution-luogu-p1314/" aria-label="复制成功！"></i></span>
   </p>
