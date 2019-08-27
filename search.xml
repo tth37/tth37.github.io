@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[GoodbyeOy!]]></title>
+    <url>%2F2019%2F08%2F27%2FGoodbyeOy%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[题解-luogu-p1314聪明的质监员]]></title>
     <url>%2F2019%2F08%2F27%2Fsolution-luogu-p1314%2F</url>
     <content type="text"><![CDATA[题目链接 咕咕咕 本题难度不大，第一眼就能看出需要用二分答案或倍增答案解决。 需要解决的第一个问题是如何根据一个猜测的参数 $W$ ，快速计算出检验结果 $Y$ 。由于只有 $w_j \ge W$ 的矿石才会对检验结果做出贡献，因此我们可以将 $w_j &lt; W$ 的矿石忽略并预处理前缀和，并且回答 $M$ 个询问即可。 接下来应该考虑如何计算猜测值 $W$ 。观察到 $Y(W)$ 是单调不增的，我们可以用倍增求出满足 $Y \ge S$ 的最大 $W$ 值，那么满足 $Y&lt;S$ 的最小 $W$ 值一定为 $W+1$ 。 最终答案即为 $\min\lbrace |Y(W)-S|,|Y(W+1)-S|\rbrace$ 。 代码如下： 12345678910111213141516171819202122#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;int N, M, ans = 1; ll S;int w[200005], v[200005], l[200005], r[200005]; ll s1[200005], s2[200005];inline ll Y(int W) &#123; for (register int i = 1; i &lt;= N; ++i) s1[i] = w[i] &gt;= W ? s1[i - 1] + 1 : s1[i - 1], s2[i] = w[i] &gt;= W ? s2[i - 1] + v[i] : s2[i - 1]; ll ret = 0; for (register int i = 1; i &lt;= M; ++i) ret += (s1[r[i]] - s1[l[i] - 1]) * (s2[r[i]] - s2[l[i] - 1]); return ret;&#125;int main() &#123; scanf("%d%d%lld", &amp;N, &amp;M, &amp;S); for (register int i = 1; i &lt;= N; ++i) scanf("%d%d", &amp;w[i], &amp;v[i]); for (register int i = 1; i &lt;= M; ++i) scanf("%d%d", &amp;l[i], &amp;r[i]); for (register int i = 17; i &gt;= 0; --i) ans += Y(ans + (1 &lt;&lt; i)) &gt;= S ? (1 &lt;&lt; i) : 0; printf("%lld", min(Y(ans) - S, S - Y(ans + 1)));&#125;]]></content>
@@ -177,8 +182,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -189,8 +194,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -459,8 +464,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>贪心</tag>
         <tag>python</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>

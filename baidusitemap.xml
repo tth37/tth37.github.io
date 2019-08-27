@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>http://yoursite.com/2019/08/27/solution-luogu-p1314/</loc>
+    <loc>http://yoursite.com/2019/08/26/bulletin-2019-8-26/</loc>
+    <lastmod>2019-08-27</lastmod>
+  </url>  <url>
+    <loc>http://yoursite.com/2019/08/27/GoodbyeOy/</loc>
     <lastmod>2019-08-27</lastmod>
   </url>  <url>
     <loc>http://yoursite.com/2019/04/25/solution-luogu-p1273/</loc>
+    <lastmod>2019-08-27</lastmod>
+  </url>  <url>
+    <loc>http://yoursite.com/2019/08/27/solution-luogu-p1314/</loc>
     <lastmod>2019-08-27</lastmod>
   </url>  <url>
     <loc>http://yoursite.com/2019/07/24/algorithm-splay/</loc>
@@ -17,9 +23,6 @@
     <lastmod>2019-08-26</lastmod>
   </url>  <url>
     <loc>http://yoursite.com/2019/08/19/solution-luogu-p2279/</loc>
-    <lastmod>2019-08-26</lastmod>
-  </url>  <url>
-    <loc>http://yoursite.com/2019/08/26/bulletin-2019-8-26/</loc>
     <lastmod>2019-08-26</lastmod>
   </url>  <url>
     <loc>http://yoursite.com/2019/08/23/solution-luogu-p5502/</loc>

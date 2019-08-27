@@ -52,6 +52,12 @@
 
 
 
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.min.css">
+
 
 
 
@@ -89,7 +95,7 @@
     scheme: 'Pisces',
     version: '6.7.0',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":true,"scrollpercent":true,"onmobile":false},
-    fancybox: false,
+    fancybox: true,
     fastclick: true,
     lazyload: true,
     tabs: true,
@@ -348,7 +354,7 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">43</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">44</span></a>
 
   </li>
         
@@ -451,6 +457,220 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/25/solution-luogu-p1273/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tth37">
+      <meta itemprop="description" content="shiwt巨佬的小弟">
+      <meta itemprop="image" content="/images/main.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tth37's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/04/25/solution-luogu-p1273/" class="post-title-link" itemprop="url">题解-luogu-p1273有线电视网</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-25 17:25:50" itemprop="dateCreated datePublished" datetime="2019-04-25T17:25:50+08:00">2019-04-25</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-27 16:10:26" itemprop="dateModified" datetime="2019-08-27T16:10:26+08:00">2019-08-27</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/题解/" itemprop="url" rel="index"><span itemprop="name">题解</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">1.8k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <blockquote>
+<p><a href="https://www.luogu.org/fe/problem/P1273" target="_blank" rel="noopener">题目链接</a></p>
+</blockquote>
+<p>背包类树形dp。本题需要运用分组背包模型。</p>
+<p>首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。</p>
+<p>可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：</p>
+<script type="math/tex; mode=display">
+f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$的子节点，$w$为这条边的权值。在$u$每个子节点上有许多“物品”，“物品”总数即为以$v$为根的子树上用户的个数；每个“物品”所具有的价值即为其最大利润，即$f[v][j]$。同时不应忽略边权对利润带来的影响。</p>
+<p>注意细节处理及边界。代码如下：</p>
+          <!--noindex-->
+          
+            <div class="post-button text-center">
+              <a class="btn" href="/2019/04/25/solution-luogu-p1273/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          
+          <!--/noindex-->
+        
+      
+    </div>
+
+
+
+    
+
+    
+
+    
+    
+    
+
+    <div>
+      
+    </div>
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -2384,248 +2604,6 @@ for(register int i=1;i&lt;=M;++i)&#123;       for(register int j=1;j&lt;=N;++j)&
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/20/list-dp/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="tth37">
-      <meta itemprop="description" content="shiwt巨佬的小弟">
-      <meta itemprop="image" content="/images/main.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="tth37's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/03/20/list-dp/" class="post-title-link" itemprop="url">题目列表-动态规划</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-03-20 19:24:57" itemprop="dateCreated datePublished" datetime="2019-03-20T19:24:57+08:00">2019-03-20</time>
-            
-
-            
-              
-
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-05-12 19:10:50" itemprop="dateModified" datetime="2019-05-12T19:10:50+08:00">2019-05-12</time>
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/题目列表/" itemprop="url" rel="index"><span itemprop="name">题目列表</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-symbolscount">
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">本文字数：</span>
-                
-                <span title="本文字数">35</span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>
-              
-任务安排（斜率优化+费用提前计算）
-f[i]=min_{0\le j
-
-
-
-特别行动队（斜率优化）
-f[i]=max_{0\le j
-
-
-
-玩具装箱（斜率优化）
-f[i]=min_{0\le j斜率优化的适用范围是只有一个自变量。
-形如这样的转移方程：
-
-f[i]=min_{0\le j操作难度较大，可以将$S[i]+i$存在$A$数组中，即可全部化为一个自变量。
-
-
-
-
-锯木厂选址（斜率优化）
-f[i]=min_{1\le j
-
-
-
-打印文章（斜率优化）
-f[i]=min_{0\le j调到心态爆炸……getK函数中如果除数为0则要返回1e100
-
-
-
-序列分割（斜率优化）
-f[i][j]=max_{0 \le k不开long long见祖宗。题目中如果说“非负整数”一定记得判断除数是否为0。
-对于转移方程
-              ...
-            </p>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/03/20/list-dp/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </div>
-
-
-
-    
-
-    
-
-    
-    
-    
-
-    <div>
-      
-    </div>
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2675,7 +2653,7 @@ f[i][j]=max_{0 \le k不开long long见祖宗。题目中如果说“非负整数
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">43</span>
+                    <span class="site-state-item-count">44</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -2991,6 +2969,8 @@ f[i][j]=max_{0 \le k不开long long见祖宗。题目中如果说“非负整数
 
 
 
+  
+
 
 
 
@@ -3019,6 +2999,9 @@ f[i][j]=max_{0 \le k不开long long见祖宗。题目中如果说“非负整数
 
   
   <script src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+
+  
+  <script src="//cdn.jsdelivr.net/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
 
 
   

@@ -116,18 +116,19 @@
 
 
 
-  <meta name="description" content="题目链接 咕咕咕">
-<meta name="keywords" content="ST算法">
+  <meta name="description" content="shiwt巨佬的小弟">
 <meta property="og:type" content="article">
-<meta property="og:title" content="题解-luogu-p5503灯塔">
-<meta property="og:url" content="http://yoursite.com/2019/08/26/solution-luogu-p5503/index.html">
+<meta property="og:title" content="GoodbyeOy!">
+<meta property="og:url" content="http://yoursite.com/2019/08/27/GoodbyeOy/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="题目链接 咕咕咕">
+<meta property="og:description" content="shiwt巨佬的小弟">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-26T15:55:23.561Z">
+<meta property="og:image" content="https://image.freepik.com/free-vector/goodbye-good-luck-lettering-background_23-2147978205.jpg">
+<meta property="og:updated_time" content="2019-08-27T13:54:01.012Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="题解-luogu-p5503灯塔">
-<meta name="twitter:description" content="题目链接 咕咕咕">
+<meta name="twitter:title" content="GoodbyeOy!">
+<meta name="twitter:description" content="shiwt巨佬的小弟">
+<meta name="twitter:image" content="https://image.freepik.com/free-vector/goodbye-good-luck-lettering-background_23-2147978205.jpg">
 
 
 
@@ -136,7 +137,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/08/26/solution-luogu-p5503/">
+  <link rel="canonical" href="http://yoursite.com/2019/08/27/GoodbyeOy/">
 
 
 
@@ -146,7 +147,7 @@
   };
 </script>
 
-  <title>题解-luogu-p5503灯塔 | tth37's Blog</title>
+  <title>GoodbyeOy! | tth37's Blog</title>
   
 
 
@@ -474,7 +475,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/26/solution-luogu-p5503/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/27/GoodbyeOy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tth37">
@@ -491,7 +492,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">题解-luogu-p5503灯塔
+          <h1 class="post-title" itemprop="name headline">GoodbyeOy!
 
               
             
@@ -506,6 +507,10 @@
             
 
             
+              <i class="fa fa-thumb-tack"></i>
+              <font color="7D26CD">置顶</font>
+              <span class="post-meta-divider">|</span>
+            
 
             
               <span class="post-meta-item-icon">
@@ -519,7 +524,7 @@
                 
               
 
-              <time title="创建时间：2019-08-26 23:29:57 / 修改时间：23:55:23" itemprop="dateCreated datePublished" datetime="2019-08-26T23:29:57+08:00">2019-08-26</time>
+              <time title="创建时间：2019-08-27 21:40:39 / 修改时间：21:54:01" itemprop="dateCreated datePublished" datetime="2019-08-27T21:40:39+08:00">2019-08-27</time>
             
 
             
@@ -529,24 +534,6 @@
             
           </span>
 
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/题解/" itemprop="url" rel="index"><span itemprop="name">题解</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -576,7 +563,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.2k</span>
+                <span title="本文字数">0</span>
               
 
               
@@ -598,24 +585,23 @@
 
       
       
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox" href="https://image.freepik.com/free-vector/goodbye-good-luck-lettering-background_23-2147978205.jpg" rel="gallery_cjztw6keb0001e8tj5mm5844q" itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://image.freepik.com/free-vector/goodbye-good-luck-lettering-background_23-2147978205.jpg" itemprop="contentUrl">
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
 
       
-        <blockquote>
-<p><a href="https://www.luogu.org/problem/P5503" target="_blank" rel="noopener">题目链接</a></p>
-<p>咕咕咕</p>
-</blockquote>
-<a id="more"></a>
-<p>由于根号的存在，本题并没有什么明显的单调性，不能通过二分或单调队列实现。</p>
-<p>本题的关键在于问题转化。记 $l_i$ 表示在山峰 $i$ 上建灯塔，并使得山峰 $1…i$ 全部被照亮的最小高度。</p>
-<script type="math/tex; mode=display">
-h_j\le h_i+l_i - \sqrt{i-j} (1\le j\le i)</script><script type="math/tex; mode=display">
-h_j+\sqrt{i-j}-h_i\le l_i(1\le j\le i)</script><script type="math/tex; mode=display">
-l_i=\max_{1\le j\le i}\lbrace  h_j+\lceil  (\sqrt{i-j})  \rceil \rbrace-h_i</script><p>这样 ${l}$ 数组的求解即转化为区间求解最值问题，然而 $\max$ 函数中的 $\lceil  (\sqrt{i-j})  \rceil$ 似乎有些棘手。然而观察到当 $\lceil  (\sqrt{i-j})  \rceil$ 相等时，只有该区间内最大的 $h_j$ 才会对答案产生贡献。因此我们可以枚举 $\lceil  (\sqrt{i-j})  \rceil$ 的值，求出对应的 $j$ 区间内 $h_j$ 的最值作为 $l_i$ 的候选答案。</p>
-<p>$r_i$ 的定义与 $l_i$ 类似，最终的 $p_i$ 即为 $\max \lbrace l_i,r_i\rbrace$ 。</p>
-<p>求解区间最值可以用 ST 表实现。</p>
-<p>代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> st[<span class="number">100005</span>][<span class="number">18</span>];</span><br><span class="line"><span class="keyword">int</span> lg[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> power[<span class="number">320</span>];</span><br><span class="line"><span class="keyword">int</span> p[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> s = lg[r - l + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> max(st[l][s], st[r - (<span class="number">1</span> &lt;&lt; s) + <span class="number">1</span>][s]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    lg[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">100000</span>; ++i)</span><br><span class="line">        lg[i] = lg[i &gt;&gt; <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">319</span>; ++i) &#123;</span><br><span class="line">        power[i] = i * i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;st[i][<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= lg[N]; ++j)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i + (<span class="number">1</span> &lt;&lt; j) - <span class="number">1</span> &lt;= N; ++i)</span><br><span class="line">            st[i][j] = max(st[i][j - <span class="number">1</span>], st[i + (<span class="number">1</span> &lt;&lt; (j - <span class="number">1</span>))][j - <span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> delta = <span class="number">0</span>, l = i, r = i;</span><br><span class="line">        <span class="keyword">while</span> (l &gt;= <span class="number">1</span>) &#123;</span><br><span class="line">            p[i] = max(p[i], query(l, r) + delta - st[i][<span class="number">0</span>]);</span><br><span class="line">            r = l - <span class="number">1</span>, l = i - power[++delta];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (r &gt;= <span class="number">1</span>) p[i] = max(p[i], query(<span class="number">1</span>, r) + delta - st[i][<span class="number">0</span>]);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = N; i &gt;= <span class="number">1</span>; --i) &#123;</span><br><span class="line">        <span class="keyword">int</span> delta = <span class="number">0</span>, l = i, r = i;</span><br><span class="line">        <span class="keyword">while</span> (r &lt;= N) &#123;</span><br><span class="line">            p[i] = max(p[i], query(l, r) + delta - st[i][<span class="number">0</span>]);</span><br><span class="line">            l = r + <span class="number">1</span>, r = i + power[++delta];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (l &lt;= N) p[i] = max(p[i], query(l, N) + delta - st[i][<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, p[i]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+        
       
     </div>
 
@@ -632,35 +618,6 @@ l_i=\max_{1\le j\le i}\lbrace  h_j+\lceil  (\sqrt{i-j})  \rceil \rbrace-h_i</scr
     <div>
       
         
-<div class="my_post_copyright">
-  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
-
-  <!-- JS库 sweetalert 可修改路径 -->
-  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
-  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2019/08/26/solution-luogu-p5503/">题解-luogu-p5503灯塔</a></p>
-  <p><span>文章作者:</span><a href="/" title="访问 tth37 的个人博客">tth37</a></p>
-  <p><span>发布时间:</span>2019年08月26日 - 23:08</p>
-  <p><span>最后更新:</span>2019年08月26日 - 23:08</p>
-  <p><span>原始链接:</span><a href="/2019/08/26/solution-luogu-p5503/" title="题解-luogu-p5503灯塔">http://yoursite.com/2019/08/26/solution-luogu-p5503/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/08/26/solution-luogu-p5503/" aria-label="复制成功！"></i></span>
-  </p>
-  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>
-</div>
-<script>
-    var clipboard = new Clipboard('.fa-clipboard');
-    $(".fa-clipboard").click(function(){
-      clipboard.on('success', function(){
-        swal({
-          title: "",
-          text: '复制成功',
-          icon: "success",
-          showConfirmButton: true
-          });
-    });
-    });
-</script>
-
 
       
     </div>
@@ -676,12 +633,6 @@ l_i=\max_{1\le j\le i}\lbrace  h_j+\lceil  (\sqrt{i-j})  \rceil \rbrace-h_i</scr
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/ST算法/" rel="tag"># ST算法</a>
-          
-        </div>
-      
 
       
       
@@ -691,8 +642,8 @@ l_i=\max_{1\le j\le i}\lbrace  h_j+\lceil  (\sqrt{i-j})  \rceil \rbrace-h_i</scr
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/26/template-optimization/" rel="next" title="模板-常数优化">
-                <i class="fa fa-chevron-left"></i> 模板-常数优化
+              <a href="/2019/08/27/solution-luogu-p1314/" rel="next" title="题解-luogu-p1314聪明的质监员">
+                <i class="fa fa-chevron-left"></i> 题解-luogu-p1314聪明的质监员
               </a>
             
           </div>
@@ -700,10 +651,6 @@ l_i=\max_{1\le j\le i}\lbrace  h_j+\lceil  (\sqrt{i-j})  \rceil \rbrace-h_i</scr
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/27/solution-luogu-p1314/" rel="prev" title="题解-luogu-p1314聪明的质监员">
-                题解-luogu-p1314聪明的质监员 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
