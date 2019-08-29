@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[算法学习-虚树]]></title>
+    <url>%2F2019%2F08%2F29%2Falgorithm-virtualtree%2F</url>
+    <content type="text"><![CDATA[概述在处理某些树上问题时，并非树上的所有节点都起作用；这时可以借助虚树，将树上重要的点构造成一棵树，在虚树上处理问题，优化时间复杂度。 模板用栈来维护虚树上的一条从根到 $u$ 的链。如果 $u$ 是栈顶节点的儿子，则入栈；否则将栈中 dfn 值大于 $lca(u,s.top())$ 的元素出栈。 伪代码1234567891011将树上所有关键点按照 dfs 序排序stack.push(1)for u = 1 ~ n: //假设当前正在处理节点 u lca = Lca(u, stack.top()) while stack.top != lca: tmp = stack.top() stack.pop() if (dfn[stack.top()] &lt; dfn[lca]): stack.push(lca) AddEdge(stack.top(), tmp) stack.push(u)]]></content>
+      <categories>
+        <category>算法学习</category>
+      </categories>
+      <tags>
+        <tag>虚树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[GoodbyeOy!]]></title>
     <url>%2F2019%2F08%2F27%2FGoodbyeOy%2F</url>
     <content type="text"></content>
@@ -182,8 +193,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
       </tags>
   </entry>
   <entry>
@@ -194,8 +205,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -476,8 +487,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
