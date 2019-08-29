@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2019/08/26/template-optimization/</loc>
+    <lastmod>2019-08-29</lastmod>
+  </url>  <url>
     <loc>http://yoursite.com/2019/08/29/algorithm-virtualtree/</loc>
     <lastmod>2019-08-29</lastmod>
   </url>  <url>
@@ -20,9 +23,6 @@
     <lastmod>2019-08-27</lastmod>
   </url>  <url>
     <loc>http://yoursite.com/2019/08/26/solution-luogu-p5503/</loc>
-    <lastmod>2019-08-26</lastmod>
-  </url>  <url>
-    <loc>http://yoursite.com/2019/08/26/template-optimization/</loc>
     <lastmod>2019-08-26</lastmod>
   </url>  <url>
     <loc>http://yoursite.com/2019/08/19/solution-luogu-p2279/</loc>

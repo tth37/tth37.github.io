@@ -111,19 +111,18 @@
     <link href="http://yoursite.com/2019/08/26/template-optimization/"/>
     <id>http://yoursite.com/2019/08/26/template-optimization/</id>
     <published>2019-08-26T13:00:29.000Z</published>
-    <updated>2019-08-26T13:03:23.489Z</updated>
+    <updated>2019-08-29T05:22:20.602Z</updated>
     
-    <content type="html"><![CDATA[<h4 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h4><ol><li>减少函数参数传递，开全局变量</li></ol><h4 id="快速读入"><a href="#快速读入" class="headerlink" title="快速读入"></a>快速读入</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">readint</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="title">class</span> ...<span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">readint</span>(<span class="title">T1</span> &amp;<span class="title">i</span>, <span class="title">T2</span>&amp;... <span class="title">rest</span>)&#123;</span></span><br><span class="line">    i=<span class="number">0</span>;<span class="keyword">char</span> c;<span class="keyword">bool</span> f=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">isdigit</span>(c=getchar())) f=c==<span class="string">'-'</span>;</span><br><span class="line">    <span class="keyword">do</span> i=(i&lt;&lt;<span class="number">3</span>)+(i&lt;&lt;<span class="number">1</span>)+c-<span class="string">'0'</span>; <span class="keyword">while</span> (<span class="built_in">isdigit</span>(c=getchar()));</span><br><span class="line">    <span class="keyword">if</span> (f) i=-i;</span><br><span class="line">    readint(rest...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="快速输出"><a href="#快速输出" class="headerlink" title="快速输出"></a>快速输出</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">暂无</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<h4 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h4><ol><li><p>减少函数参数传递，开全局变量 <a href="https://www.luogu.org/record/23355022" target="_blank" rel="noopener">血的教训</a></p></li><li><p><code>memset</code> 实在是太慢了！避免大数组的多次 <code>memset</code>，可以在程序的其他位置（如遍历）顺手将数组清空 <a href="https://www.luogu.org/record/23451875" target="_blank" rel="noopener">血的教训</a></p></li></ol><a id="more"></a><h4 id="快速读入"><a href="#快速读入" class="headerlink" title="快速读入"></a>快速读入</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">readint</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="title">class</span> ...<span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">readint</span>(<span class="title">T1</span> &amp;<span class="title">i</span>, <span class="title">T2</span>&amp;... <span class="title">rest</span>)&#123;</span></span><br><span class="line">    i=<span class="number">0</span>;<span class="keyword">char</span> c;<span class="keyword">bool</span> f=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">isdigit</span>(c=getchar())) f=c==<span class="string">'-'</span>;</span><br><span class="line">    <span class="keyword">do</span> i=(i&lt;&lt;<span class="number">3</span>)+(i&lt;&lt;<span class="number">1</span>)+c-<span class="string">'0'</span>; <span class="keyword">while</span> (<span class="built_in">isdigit</span>(c=getchar()));</span><br><span class="line">    <span class="keyword">if</span> (f) i=-i;</span><br><span class="line">    readint(rest...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h4 id="快速输出"><a href="#快速输出" class="headerlink" title="快速输出"></a>快速输出</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">暂无</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;h4 id=&quot;实用技巧&quot;&gt;&lt;a href=&quot;#实用技巧&quot; class=&quot;headerlink&quot; title=&quot;实用技巧&quot;&gt;&lt;/a&gt;实用技巧&lt;/h4&gt;&lt;ol&gt;
-&lt;li&gt;减少函数参数传递，开全局变量&lt;/li&gt;
+      &lt;h4 id=&quot;实用技巧&quot;&gt;&lt;a href=&quot;#实用技巧&quot; class=&quot;headerlink&quot; title=&quot;实用技巧&quot;&gt;&lt;/a&gt;实用技巧&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;减少函数参数传递，开全局变量 &lt;a href=&quot;https://www.luogu.org/record/23355022&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;血的教训&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;memset&lt;/code&gt; 实在是太慢了！避免大数组的多次 &lt;code&gt;memset&lt;/code&gt;，可以在程序的其他位置（如遍历）顺手将数组清空 &lt;a href=&quot;https://www.luogu.org/record/23451875&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;血的教训&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h4 id=&quot;快速读入&quot;&gt;&lt;a href=&quot;#快速读入&quot; 
-      
     
     </summary>
     
@@ -393,9 +392,9 @@
     
       <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
-      <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
-    
       <category term="树状数组" scheme="http://yoursite.com/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
       <category term="树套树" scheme="http://yoursite.com/tags/%E6%A0%91%E5%A5%97%E6%A0%91/"/>
     
@@ -482,9 +481,9 @@
       <category term="数论专题" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
     
     
-      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
@@ -510,9 +509,9 @@
       <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
     
       <category term="逆元" scheme="http://yoursite.com/tags/%E9%80%86%E5%85%83/"/>
     
@@ -1240,9 +1239,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   

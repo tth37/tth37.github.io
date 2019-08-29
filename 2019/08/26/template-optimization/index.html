@@ -116,17 +116,17 @@
 
 
 
-  <meta name="description" content="实用技巧 减少函数参数传递，开全局变量  快速读入123456789void readint() &amp;#123;&amp;#125;template&amp;lt;class T1, class ...T2&amp;gt;void readint(T1 &amp;amp;i, T2&amp;amp;... rest)&amp;#123;    i=0;char c;bool f=false;    while (!isdigit(c=getcha">
+  <meta name="description" content="实用技巧 减少函数参数传递，开全局变量 血的教训  memset 实在是太慢了！避免大数组的多次 memset，可以在程序的其他位置（如遍历）顺手将数组清空 血的教训">
 <meta property="og:type" content="article">
 <meta property="og:title" content="模板-常数优化">
 <meta property="og:url" content="http://yoursite.com/2019/08/26/template-optimization/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="实用技巧 减少函数参数传递，开全局变量  快速读入123456789void readint() &amp;#123;&amp;#125;template&amp;lt;class T1, class ...T2&amp;gt;void readint(T1 &amp;amp;i, T2&amp;amp;... rest)&amp;#123;    i=0;char c;bool f=false;    while (!isdigit(c=getcha">
+<meta property="og:description" content="实用技巧 减少函数参数传递，开全局变量 血的教训  memset 实在是太慢了！避免大数组的多次 memset，可以在程序的其他位置（如遍历）顺手将数组清空 血的教训">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-26T13:03:23.489Z">
+<meta property="og:updated_time" content="2019-08-29T05:22:20.602Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="模板-常数优化">
-<meta name="twitter:description" content="实用技巧 减少函数参数传递，开全局变量  快速读入123456789void readint() &amp;#123;&amp;#125;template&amp;lt;class T1, class ...T2&amp;gt;void readint(T1 &amp;amp;i, T2&amp;amp;... rest)&amp;#123;    i=0;char c;bool f=false;    while (!isdigit(c=getcha">
+<meta name="twitter:description" content="实用技巧 减少函数参数传递，开全局变量 血的教训  memset 实在是太慢了！避免大数组的多次 memset，可以在程序的其他位置（如遍历）顺手将数组清空 血的教训">
 
 
 
@@ -518,12 +518,24 @@
                 
               
 
-              <time title="创建时间：2019-08-26 21:00:29 / 修改时间：21:03:23" itemprop="dateCreated datePublished" datetime="2019-08-26T21:00:29+08:00">2019-08-26</time>
+              <time title="创建时间：2019-08-26 21:00:29" itemprop="dateCreated datePublished" datetime="2019-08-26T21:00:29+08:00">2019-08-26</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-29 13:22:20" itemprop="dateModified" datetime="2019-08-29T13:22:20+08:00">2019-08-29</time>
               
             
           </span>
@@ -575,7 +587,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">338</span>
+                <span title="本文字数">404</span>
               
 
               
@@ -600,8 +612,12 @@
 
       
         <h4 id="实用技巧"><a href="#实用技巧" class="headerlink" title="实用技巧"></a>实用技巧</h4><ol>
-<li>减少函数参数传递，开全局变量</li>
+<li><p>减少函数参数传递，开全局变量 <a href="https://www.luogu.org/record/23355022" target="_blank" rel="noopener">血的教训</a></p>
+</li>
+<li><p><code>memset</code> 实在是太慢了！避免大数组的多次 <code>memset</code>，可以在程序的其他位置（如遍历）顺手将数组清空 <a href="https://www.luogu.org/record/23451875" target="_blank" rel="noopener">血的教训</a></p>
+</li>
 </ol>
+<a id="more"></a>
 <h4 id="快速读入"><a href="#快速读入" class="headerlink" title="快速读入"></a>快速读入</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">readint</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"><span class="keyword">template</span>&lt;<span class="class"><span class="keyword">class</span> <span class="title">T1</span>, <span class="title">class</span> ...<span class="title">T2</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">readint</span>(<span class="title">T1</span> &amp;<span class="title">i</span>, <span class="title">T2</span>&amp;... <span class="title">rest</span>)&#123;</span></span><br><span class="line">    i=<span class="number">0</span>;<span class="keyword">char</span> c;<span class="keyword">bool</span> f=<span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">isdigit</span>(c=getchar())) f=c==<span class="string">'-'</span>;</span><br><span class="line">    <span class="keyword">do</span> i=(i&lt;&lt;<span class="number">3</span>)+(i&lt;&lt;<span class="number">1</span>)+c-<span class="string">'0'</span>; <span class="keyword">while</span> (<span class="built_in">isdigit</span>(c=getchar()));</span><br><span class="line">    <span class="keyword">if</span> (f) i=-i;</span><br><span class="line">    readint(rest...);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="快速输出"><a href="#快速输出" class="headerlink" title="快速输出"></a>快速输出</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">暂无</span><br></pre></td></tr></table></figure>
 
@@ -630,7 +646,7 @@
   <p><span>本文标题:</span><a href="/2019/08/26/template-optimization/">模板-常数优化</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 tth37 的个人博客">tth37</a></p>
   <p><span>发布时间:</span>2019年08月26日 - 21:08</p>
-  <p><span>最后更新:</span>2019年08月26日 - 21:08</p>
+  <p><span>最后更新:</span>2019年08月29日 - 13:08</p>
   <p><span>原始链接:</span><a href="/2019/08/26/template-optimization/" title="模板-常数优化">http://yoursite.com/2019/08/26/template-optimization/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/08/26/template-optimization/" aria-label="复制成功！"></i></span>
   </p>
