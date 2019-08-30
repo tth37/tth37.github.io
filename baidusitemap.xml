@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://yoursite.com/2019/08/30/solution-luogu-p4103/</loc>
+    <lastmod>2019-08-30</lastmod>
+  </url>  <url>
     <loc>http://yoursite.com/2019/08/26/template-optimization/</loc>
     <lastmod>2019-08-29</lastmod>
   </url>  <url>
@@ -102,9 +105,6 @@
   </url>  <url>
     <loc>http://yoursite.com/2019/05/18/bulletin-2019-5-18/</loc>
     <lastmod>2019-06-08</lastmod>
-  </url>  <url>
-    <loc>http://yoursite.com/2019/05/14/list-for-class/</loc>
-    <lastmod>2019-06-07</lastmod>
   </url>  <url>
     <loc>http://yoursite.com/2019/04/09/solution-luogu-p5283/</loc>
     <lastmod>2019-05-12</lastmod>

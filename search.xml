@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-luogu-p4103大工程]]></title>
+    <url>%2F2019%2F08%2F30%2Fsolution-luogu-p4103%2F</url>
+    <content type="text"><![CDATA[题目链接 给定一棵有 $n$ 个节点的树，边权为 $1$ 。共有 $q$ 次询问，每次给出 $k$ 个节点，求： $k$ 个节点间两两距离之总和；最短距离；最长距离。 $1\le n \le 1000000,1 \le q \le 1000000, \Sigma{k}\le 2 * n$ 感谢@tth37 的贡献 本题用到了一些点分治的思想。 考虑 $q=1$ 的情况。一种朴素的做法是：枚举当前节点的所有子节点，并计算子树间关键点形成的路径、更新答案。但是本题与一般点分治题目略有不同，我们可以通过预处理子树信息来优化点分治过程。 稍加观察可以发现，只需预处理每个子树中树根到关键点的最小距离、最大距离，以及子树中关键点的个数、所有关键点到树根的距离总和即可完成点分治全部过程，时间复杂度 $O(n)$ 。 对于 $q\not=1$ 的情况，观察到 $\Sigma{k}$ 与 $n$ 同阶，可以对每次查询建立一棵虚树，在虚树上点分治即可。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123#include &lt;bits/stdc++.h&gt;using namespace std;const int MAXN = 1000005;typedef long long ll;struct Edge &#123;int v, w; Edge(int a, int b) &#123;v = a, w = b;&#125;&#125;;struct Key &#123;int u, dfn;&#125;keys[MAXN];bool cmp(Key a, Key b) &#123;return a.dfn &lt; b.dfn;&#125;vector&lt;Edge&gt; G[MAXN], VT[MAXN];int N, Q, K;int f[MAXN][21], dep[MAXN], dfn[MAXN], dfn_idx;int lg[MAXN];bool h[MAXN];ll g[MAXN];int m[MAXN], n[MAXN];int c[MAXN];ll ans1;int ans2, ans3;inline void dfs0(int u, int fa) &#123; dfn[u] = ++dfn_idx; dep[u] = dep[fa] + 1; f[u][0] = fa; for (int i = 1; i &lt;= lg[dep[u]]; ++i) f[u][i] = f[f[u][i - 1]][i - 1]; for (vector&lt;Edge&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = it -&gt; v; if (v == fa) continue; dfs0(v, u); &#125;&#125;void dfs1(int u) &#123; g[u] = 0; c[u] = h[u]; m[u] = 0x3f3f3f3f; n[u] = -0x3f3f3f3f; if (h[u]) m[u] = n[u] = 0; for (vector&lt;Edge&gt;::iterator it = VT[u].begin(); it != VT[u].end(); it++) &#123; int v = it -&gt; v, w = it -&gt; w; dfs1(v); c[u] += c[v]; g[u] += g[v] + 1ll * w * c[v]; m[u] = min(m[u], w + m[v]); n[u] = max(n[u], w + n[v]); &#125;&#125;void dfs2(int u) &#123; ll sum = 0; int cnt = h[u]; int minn = 0x3f3f3f3f, maxx = -0x3f3f3f3f; if (h[u]) minn = maxx = 0; for (vector&lt;Edge&gt;::iterator it = VT[u].begin(); it != VT[u].end(); it++) &#123; int v = it -&gt; v, w = it -&gt; w; ans1 += 1ll * sum * c[v] + 1ll * w * cnt * c[v] + 1ll * g[v] * cnt; ans2 = min(ans2, minn + w + m[v]); ans3 = max(ans3, maxx + w + n[v]); sum += g[v] + 1ll * c[v] * w; cnt += c[v]; minn = min(minn, w + m[v]); maxx = max(maxx, w + n[v]); dfs2(v); &#125; h[u] = 0; VT[u].clear();&#125;inline int Lca(int u, int v) &#123; if (dep[u] &lt; dep[v]) swap(u, v); while (dep[u] &gt; dep[v]) u = f[u][lg[dep[u] - dep[v]]]; if (u == v) return u; for (int i = lg[dep[u]]; i &gt;= 0; --i) &#123; if (f[u][i] != f[v][i]) u = f[u][i], v = f[v][i]; &#125; return f[u][0];&#125;int main() &#123; for (register int i = 2; i &lt;= 1000000; ++i) lg[i] = lg[i &gt;&gt; 1] + 1; scanf("%d", &amp;N); for (register int i = 1; i &lt; N; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); G[u].push_back(Edge(v, 1)); G[v].push_back(Edge(u, 1)); &#125; dfs0(1, 0); scanf("%d", &amp;Q); while (Q--) &#123; scanf("%d", &amp;K); for (register int i = 1; i &lt;= K; ++i) &#123; int u; scanf("%d", &amp;u); h[u] = 1; keys[i].u = u, keys[i].dfn = dfn[u]; &#125; sort(keys + 1, keys + K + 1, cmp); stack&lt;int&gt; s; s.push(1); for (register int i = 1; i &lt;= K; ++i) &#123; int u = keys[i].u; if (u == 1) continue; int lca = Lca(u, s.top()); while (s.top() != lca) &#123; int tmp = s.top(); s.pop(); if (dfn[s.top()] &lt; lca) s.push(lca); VT[s.top()].push_back(Edge(tmp, dep[tmp] - dep[s.top()])); &#125; s.push(u); &#125; while (s.top() != 1) &#123; int tmp = s.top(); s.pop(); VT[s.top()].push_back(Edge(tmp, dep[tmp] - dep[s.top()])); &#125; dfs1(1); ans1 = ans3 = 0; ans2 = 0x3f3f3f3f; dfs2(1); printf("%lld %d %d\n", ans1, ans2, ans3); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>树形dp</tag>
+        <tag>虚树</tag>
+        <tag>点分治</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[算法学习-虚树]]></title>
     <url>%2F2019%2F08%2F29%2Falgorithm-virtualtree%2F</url>
     <content type="text"><![CDATA[概述在处理某些树上问题时，并非树上的所有节点都起作用；这时可以借助虚树，将树上重要的点构造成一棵树，在虚树上处理问题，优化时间复杂度。 模板用栈来维护虚树上的一条从根到 $u$ 的链。如果 $u$ 是栈顶节点的儿子，则入栈；否则将栈中 dfn 值大于 $lca(u,s.top())$ 的元素出栈。 伪代码1234567891011将树上所有关键点按照 dfs 序排序stack.push(1)for u = 1 ~ n: //假设当前正在处理节点 u lca = Lca(u, stack.top()) while stack.top != lca: tmp = stack.top() stack.pop() if (dfn[stack.top()] &lt; dfn[lca]): stack.push(lca) AddEdge(stack.top(), tmp) stack.push(u)]]></content>
@@ -154,8 +167,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树状数组</tag>
         <tag>树链剖分</tag>
+        <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
@@ -336,11 +349,6 @@
       <categories>
         <category>公告</category>
       </categories>
-  </entry>
-  <entry>
-    <title><![CDATA[题目列表-2019/5/29]]></title>
-    <url>%2F2019%2F05%2F14%2Flist-for-class%2F</url>
-    <content type="text"><![CDATA[动态规划题目列表~速戳 【例1】数字三角形 【变1】数字矩形 【变2】数字矩形+ 【变3】数字矩形++ 123456789for(int i=1;i&lt;=n;++i) f[i][m]=a[i][m];for(int j=m-1;j&gt;=1;--j)&#123; f[1][j]=a[1][j]+max(f[1][j+1],f[2][j+1]); for(int i=2;i&lt;n;++i)&#123; f[i][j]=a[i][j]+max(max(f[i-1][j+1],f[i][j+1]),f[i+1][j+1]); &#125; f[n][j]=a[n][j]+max(f[n][j+1],f[n-1][j+1]);&#125; 【例2】最长路经 【变1】滑雪 【变2】矩形嵌套 【例3】最长不降子序列 【变1】修剪草坪 【变2】烽火传递 【例4】传纸条 【变1】哦呦筷子 【例5】矩阵链乘 【变1】能量项链 【例6】括号配对 【例7】树的最大独立集 【变1】树的独立集 【变2】潜入行动]]></content>
   </entry>
   <entry>
     <title><![CDATA[题解-luogu-p1273有线电视网]]></title>
