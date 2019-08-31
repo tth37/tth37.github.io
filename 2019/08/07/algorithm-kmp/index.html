@@ -124,12 +124,12 @@
 <meta property="og:site_name" content="tth37&#39;s Blog">
 <meta property="og:description" content="概述给定一个文本 $A$ 和一个字符串 $B$ ，我们可以利用 KMP 算法尝试找到并展示 $B$ 在 $A$ 中的所有出现（occurrence）。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://ws1.sinaimg.cn/large/006Xmmmggy1g5rfx53qwuj31uo0n8djq.jpg">
-<meta property="og:updated_time" content="2019-08-07T13:41:47.757Z">
+<meta property="og:image" content="http://tth37.cn/images/kmp.jpg">
+<meta property="og:updated_time" content="2019-08-31T04:05:52.585Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="算法学习-KMP模式匹配">
 <meta name="twitter:description" content="概述给定一个文本 $A$ 和一个字符串 $B$ ，我们可以利用 KMP 算法尝试找到并展示 $B$ 在 $A$ 中的所有出现（occurrence）。">
-<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006Xmmmggy1g5rfx53qwuj31uo0n8djq.jpg">
+<meta name="twitter:image" content="http://tth37.cn/images/kmp.jpg">
 
 
 
@@ -521,12 +521,24 @@
                 
               
 
-              <time title="创建时间：2019-08-07 20:06:38 / 修改时间：21:41:47" itemprop="dateCreated datePublished" datetime="2019-08-07T20:06:38+08:00">2019-08-07</time>
+              <time title="创建时间：2019-08-07 20:06:38" itemprop="dateCreated datePublished" datetime="2019-08-07T20:06:38+08:00">2019-08-07</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-08-31 12:05:52" itemprop="dateModified" datetime="2019-08-31T12:05:52+08:00">2019-08-31</time>
               
             
           </span>
@@ -617,7 +629,7 @@
 <p>考虑我们正在计算的 $next[i]$ 。我们要使 $k$ 最大化，并且保证 $B[1…k]$ 与 $B[i-k+1…i]$ 相等。将其拆成两部分看，我们需要在 $B[1…k-1]$ 与 $B[i-k+1…i-1]$ 相等的同时，保证 $B[k]=B[i]$ ，且 $k$ 取到最大值。</p>
 <p>不难发现，如果只需要最大化 $k-1$ 使得 $B[1…k-1]$ 与 $B[i-k+1…i-1]$ 相等，我们可以很快得出答案。回顾一下前缀函数的定义即可发现，记 $j$ 为 $next[i-1]$，则此时的 $j$ 即为我们需要最大化的 $k-1$ 的值。如果这时又恰好满足 $B[j+1]=B[i]$ ，则我们需要最大化的 $k$ 即为 $j+1$ 。</p>
 <p>然而此时如果不能满足 $B[j+1]=B[i]$ ，我们就只能考虑减小 $j$ 的值。<strong>在减小 $j$ 值的同时，我们要始终保证减小后的 $j’$ 满足 $B[1…j’]=B[j-j’+1…j]$ 。</strong></p>
-<p><img src="https://ws1.sinaimg.cn/large/006Xmmmggy1g5rfx53qwuj31uo0n8djq.jpg" alt></p>
+<p><img src="http://tth37.cn/images/kmp.jpg" alt></p>
 <p>结合上图不难看出，要使得 $B[1…j’]=B[i-j’…i-1]$，即保证 $B[1…j’]=B[j-j’+1…j]$ 。而 $j’$ 的确定也十分简单，再次结合前缀函数的定义可得， $j’$ 的取值应为 $next[j]$ 。</p>
 <h5 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h5><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">next[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>, j = <span class="number">0</span>; i &lt;= M; ++i) &#123;</span><br><span class="line">    <span class="keyword">while</span> (j &gt; <span class="number">0</span> &amp;&amp; B[i] != B[j + <span class="number">1</span>]) j = next[j];</span><br><span class="line">    <span class="keyword">if</span> (B[i] == B[j + <span class="number">1</span>]) j++;</span><br><span class="line">    next[i] = j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h4 id="在目标串中查找子串"><a href="#在目标串中查找子串" class="headerlink" title="在目标串中查找子串"></a>在目标串中查找子串</h4><p>计算出 $f$ 数组，其中 $f[i]$ 为<strong>既是子串 $B[1…i]$ 的前缀同时也是子串 $A[1…i]$ 的后缀的最长前缀</strong>长度。<strong>（注意这里不一定是真前缀）</strong>在预处理前缀函数的过程中，相当于 $B$ 串与自己本身做了一次模式匹配，因此此处的算法流程与上一个操作十分类似。</p>
@@ -657,7 +669,7 @@
   <p><span>本文标题:</span><a href="/2019/08/07/algorithm-kmp/">算法学习-KMP模式匹配</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 tth37 的个人博客">tth37</a></p>
   <p><span>发布时间:</span>2019年08月07日 - 20:08</p>
-  <p><span>最后更新:</span>2019年08月07日 - 21:08</p>
+  <p><span>最后更新:</span>2019年08月31日 - 12:08</p>
   <p><span>原始链接:</span><a href="/2019/08/07/algorithm-kmp/" title="算法学习-KMP模式匹配">http://yoursite.com/2019/08/07/algorithm-kmp/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://yoursite.com/2019/08/07/algorithm-kmp/" aria-label="复制成功！"></i></span>
   </p>
