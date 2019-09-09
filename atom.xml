@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-08-30T14:58:40.135Z</updated>
+  <updated>2019-09-09T15:03:48.508Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>题解-luogu-p1311选择客栈</title>
+    <link href="http://yoursite.com/2019/09/09/solution-luogu-p1311/"/>
+    <id>http://yoursite.com/2019/09/09/solution-luogu-p1311/</id>
+    <published>2019-09-09T14:17:18.000Z</published>
+    <updated>2019-09-09T15:03:48.508Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://www.luogu.org/problem/P1311" target="_blank" rel="noopener">题目链接</a></p><p>现在我随机@一个人 这个人必须帮我写题目概括</p><p>@gzn7264</p></blockquote><p>这篇题解就不在洛谷博客上发布了。</p><p>首先枚举点对的右端点。显而易见，合法的左端点必须满足：</p><ol><li>左端点与右端点颜色相同</li><li>左端点到右端点之间必须存在至少一个客栈，使得其费用小于等于 $P$</li></ol><p>第二个条件有点麻烦，我们可以稍微转化一下。记 $l_i$ 为客栈 $i$ 的左侧第一个费用小于等于 $P$ 的客栈编号。那么，以 $i$ 为右端点的情况下，左端点的可选位置即为 $1-l_i$ 种所有颜色与客栈 $i$ 相同的客栈个数。</p><p> 由于本题卡空间，必须采用滚动数组。数组 $s_i$ 记录颜色 $i$ 的出现次数，数组 $c_i$ 记录颜色 $i$ 的可选左端点个数。每次更新答案时，加上 $c_color$ 即可。</p><p>在示例代码中，可选的左端点包括其本身，因此当 $money\le P$ 时存在重复计算，答案减一。</p><p>代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans;</span><br><span class="line"><span class="keyword">int</span> N, K, P;</span><br><span class="line"><span class="keyword">int</span> c[<span class="number">50</span>], s[<span class="number">50</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;N, &amp;K, &amp;P);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> color, money;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;color, &amp;money);</span><br><span class="line">        s[color]++;</span><br><span class="line">        <span class="keyword">if</span> (money &lt;= P)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; K; ++j)</span><br><span class="line">                c[j] = s[j];</span><br><span class="line">        ans += c[color] - (money &lt;= P);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%I64d"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.luogu.org/problem/P1311&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;现在我随机@一个人 这个人必须帮我写题目概括&lt;/p&gt;
+&lt;p&gt;@
+      
+    
+    </summary>
+    
+      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+      <category term="前缀和" scheme="http://yoursite.com/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
+    
+  </entry>
   
   <entry>
     <title>题解-luogu-p2495消耗战</title>
@@ -134,11 +162,11 @@
       <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
+      <category term="前缀和" scheme="http://yoursite.com/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
+    
       <category term="二分答案" scheme="http://yoursite.com/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/"/>
     
       <category term="倍增" scheme="http://yoursite.com/tags/%E5%80%8D%E5%A2%9E/"/>
-    
-      <category term="前缀和" scheme="http://yoursite.com/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
   </entry>
   
@@ -1282,9 +1310,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
       <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   
