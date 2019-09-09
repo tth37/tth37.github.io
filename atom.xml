@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-09T15:03:48.508Z</updated>
+  <updated>2019-09-09T16:04:10.404Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,19 +21,17 @@
     <link href="http://yoursite.com/2019/09/09/solution-luogu-p1311/"/>
     <id>http://yoursite.com/2019/09/09/solution-luogu-p1311/</id>
     <published>2019-09-09T14:17:18.000Z</published>
-    <updated>2019-09-09T15:03:48.508Z</updated>
+    <updated>2019-09-09T16:04:10.404Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p><a href="https://www.luogu.org/problem/P1311" target="_blank" rel="noopener">题目链接</a></p><p>现在我随机@一个人 这个人必须帮我写题目概括</p><p>@gzn7264</p></blockquote><p>这篇题解就不在洛谷博客上发布了。</p><p>首先枚举点对的右端点。显而易见，合法的左端点必须满足：</p><ol><li>左端点与右端点颜色相同</li><li>左端点到右端点之间必须存在至少一个客栈，使得其费用小于等于 $P$</li></ol><p>第二个条件有点麻烦，我们可以稍微转化一下。记 $l_i$ 为客栈 $i$ 的左侧第一个费用小于等于 $P$ 的客栈编号。那么，以 $i$ 为右端点的情况下，左端点的可选位置即为 $1-l_i$ 种所有颜色与客栈 $i$ 相同的客栈个数。</p><p> 由于本题卡空间，必须采用滚动数组。数组 $s_i$ 记录颜色 $i$ 的出现次数，数组 $c_i$ 记录颜色 $i$ 的可选左端点个数。每次更新答案时，加上 $c_color$ 即可。</p><p>在示例代码中，可选的左端点包括其本身，因此当 $money\le P$ 时存在重复计算，答案减一。</p><p>代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans;</span><br><span class="line"><span class="keyword">int</span> N, K, P;</span><br><span class="line"><span class="keyword">int</span> c[<span class="number">50</span>], s[<span class="number">50</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;N, &amp;K, &amp;P);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> color, money;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;color, &amp;money);</span><br><span class="line">        s[color]++;</span><br><span class="line">        <span class="keyword">if</span> (money &lt;= P)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; K; ++j)</span><br><span class="line">                c[j] = s[j];</span><br><span class="line">        ans += c[color] - (money &lt;= P);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%I64d"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<blockquote><p><a href="https://www.luogu.org/problem/P1311" target="_blank" rel="noopener">题目链接</a></p><p>现在我随机@一个人 这个人必须帮我写题目概括</p><p>@gzn7264</p></blockquote><a id="more"></a><p>这篇题解就不在洛谷博客上发布了。</p><p>首先枚举点对的右端点。显而易见，合法的左端点必须满足：</p><ol><li>左端点与右端点颜色相同</li><li>左端点到右端点之间必须存在至少一个客栈，使得其费用小于等于 $P$</li></ol><p>第二个条件有点麻烦，我们可以稍微转化一下。记 $l_i$ 为客栈 $i$ 的左侧第一个费用小于等于 $P$ 的客栈编号。那么，以 $i$ 为右端点的情况下，左端点的可选位置即为 $1-l_i$ 种所有颜色与客栈 $i$ 相同的客栈个数。</p><p> 由于本题卡空间，必须采用滚动数组。数组 $s_i$ 记录颜色 $i$ 的出现次数，数组 $c_i$ 记录颜色 $i$ 的可选左端点个数。每次更新答案时，加上 $c_{color}$ 即可。</p><p>在示例代码中，可选的左端点包括其本身，因此当 $money\le P$ 时存在重复计算，答案减一。</p><p>代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">long</span> <span class="keyword">long</span> ans;</span><br><span class="line"><span class="keyword">int</span> N, K, P;</span><br><span class="line"><span class="keyword">int</span> c[<span class="number">50</span>], s[<span class="number">50</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;N, &amp;K, &amp;P);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> color, money;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;color, &amp;money);</span><br><span class="line">        s[color]++;</span><br><span class="line">        <span class="keyword">if</span> (money &lt;= P)</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = <span class="number">0</span>; j &lt; K; ++j)</span><br><span class="line">                c[j] = s[j];</span><br><span class="line">        ans += c[color] - (money &lt;= P);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%I64d"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
-      
-      
-        &lt;blockquote&gt;
+      &lt;blockquote&gt;
 &lt;p&gt;&lt;a href=&quot;https://www.luogu.org/problem/P1311&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;现在我随机@一个人 这个人必须帮我写题目概括&lt;/p&gt;
-&lt;p&gt;@
-      
+&lt;p&gt;@gzn7264&lt;/p&gt;
+&lt;/blockquote&gt;
     
     </summary>
     
@@ -479,11 +477,11 @@
       <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
+      <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
       <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
       <category term="树状数组" scheme="http://yoursite.com/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
-    
-      <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
       <category term="树套树" scheme="http://yoursite.com/tags/%E6%A0%91%E5%A5%97%E6%A0%91/"/>
     
@@ -512,9 +510,9 @@
     
       <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
-    
       <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+      <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
       <category term="树状数组" scheme="http://yoursite.com/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
@@ -570,9 +568,9 @@
       <category term="数论专题" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
     
     
-      <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
-    
       <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
     
   </entry>
   
@@ -598,9 +596,9 @@
       <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
-    
       <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
     
       <category term="逆元" scheme="http://yoursite.com/tags/%E9%80%86%E5%85%83/"/>
     
@@ -687,9 +685,9 @@
     
       <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
       <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
+      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
       <category term="dfs序" scheme="http://yoursite.com/tags/dfs%E5%BA%8F/"/>
     
@@ -1099,11 +1097,11 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}&lt;/script&gt;&lt;p&gt;其中�
     
       <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
+      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
       <category term="可持久化trie" scheme="http://yoursite.com/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96trie/"/>
     
       <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
-    
-      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
   </entry>
   

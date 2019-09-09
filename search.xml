@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[题解-luogu-p1311选择客栈]]></title>
     <url>%2F2019%2F09%2F09%2Fsolution-luogu-p1311%2F</url>
-    <content type="text"><![CDATA[题目链接 现在我随机@一个人 这个人必须帮我写题目概括 @gzn7264 这篇题解就不在洛谷博客上发布了。 首先枚举点对的右端点。显而易见，合法的左端点必须满足： 左端点与右端点颜色相同 左端点到右端点之间必须存在至少一个客栈，使得其费用小于等于 $P$ 第二个条件有点麻烦，我们可以稍微转化一下。记 $l_i$ 为客栈 $i$ 的左侧第一个费用小于等于 $P$ 的客栈编号。那么，以 $i$ 为右端点的情况下，左端点的可选位置即为 $1-l_i$ 种所有颜色与客栈 $i$ 相同的客栈个数。 由于本题卡空间，必须采用滚动数组。数组 $s_i$ 记录颜色 $i$ 的出现次数，数组 $c_i$ 记录颜色 $i$ 的可选左端点个数。每次更新答案时，加上 $c_color$ 即可。 在示例代码中，可选的左端点包括其本身，因此当 $money\le P$ 时存在重复计算，答案减一。 代码如下： 12345678910111213141516171819#include &lt;bits/stdc++.h&gt;using namespace std;long long ans;int N, K, P;int c[50], s[50];int main() &#123; scanf("%d%d%d", &amp;N, &amp;K, &amp;P); for (register int i = 1; i &lt;= N; ++i) &#123; int color, money; scanf("%d%d", &amp;color, &amp;money); s[color]++; if (money &lt;= P) for (register int j = 0; j &lt; K; ++j) c[j] = s[j]; ans += c[color] - (money &lt;= P); &#125; printf("%I64d", ans); return 0;&#125;]]></content>
+    <content type="text"><![CDATA[题目链接 现在我随机@一个人 这个人必须帮我写题目概括 @gzn7264 这篇题解就不在洛谷博客上发布了。 首先枚举点对的右端点。显而易见，合法的左端点必须满足： 左端点与右端点颜色相同 左端点到右端点之间必须存在至少一个客栈，使得其费用小于等于 $P$ 第二个条件有点麻烦，我们可以稍微转化一下。记 $l_i$ 为客栈 $i$ 的左侧第一个费用小于等于 $P$ 的客栈编号。那么，以 $i$ 为右端点的情况下，左端点的可选位置即为 $1-l_i$ 种所有颜色与客栈 $i$ 相同的客栈个数。 由于本题卡空间，必须采用滚动数组。数组 $s_i$ 记录颜色 $i$ 的出现次数，数组 $c_i$ 记录颜色 $i$ 的可选左端点个数。每次更新答案时，加上 $c_{color}$ 即可。 在示例代码中，可选的左端点包括其本身，因此当 $money\le P$ 时存在重复计算，答案减一。 代码如下： 12345678910111213141516171819#include &lt;bits/stdc++.h&gt;using namespace std;long long ans;int N, K, P;int c[50], s[50];int main() &#123; scanf("%d%d%d", &amp;N, &amp;K, &amp;P); for (register int i = 1; i &lt;= N; ++i) &#123; int color, money; scanf("%d%d", &amp;color, &amp;money); s[color]++; if (money &lt;= P) for (register int j = 0; j &lt; K; ++j) c[j] = s[j]; ans += c[color] - (money &lt;= P); &#125; printf("%I64d", ans); return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -190,9 +190,9 @@
         <category>题解</category>
       </categories>
       <tags>
+        <tag>树链剖分</tag>
         <tag>主席树</tag>
         <tag>树状数组</tag>
-        <tag>树链剖分</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
@@ -205,8 +205,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>主席树</tag>
         <tag>线段树</tag>
+        <tag>主席树</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -230,8 +230,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
       </tags>
   </entry>
   <entry>
@@ -242,8 +242,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -282,8 +282,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>树链剖分</tag>
+        <tag>线段树</tag>
         <tag>dfs序</tag>
       </tags>
   </entry>
@@ -441,9 +441,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
+        <tag>线段树</tag>
         <tag>可持久化trie</tag>
         <tag>主席树</tag>
-        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
