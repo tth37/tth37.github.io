@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[算法学习-点分治&动态点分治]]></title>
+    <url>%2F2019%2F09%2F11%2Falgorithm-treedivide%2F</url>
+    <content type="text"><![CDATA[点分治概述点分治适合处理大规模的树上路径信息问题。 点分治的实现基于以下结论：一棵子树上的任意一条路径，要么经过树根，要么被完全包含在树根的一棵子树中。 定义 $solve()$ 函数，对每棵子树进行分值处理，并保证 $O(n\log n)$ 的时间复杂度。 模板这么简单还要模板？ 动态点分治（点分树）概述在树上的每个节点上建立数据结构，存储其控制范围内所有点与之的距离信息。在进行修改或查询操作时，只需访问当前节点的所有祖先（最多 $O(\log n)$ 个）即可。 模板代码过于毒瘤 不贴了]]></content>
+      <categories>
+        <category>算法学习</category>
+      </categories>
+      <tags>
+        <tag>点分治</tag>
+        <tag>动态点分治</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[题解-luogu-p1311选择客栈]]></title>
     <url>%2F2019%2F09%2F09%2Fsolution-luogu-p1311%2F</url>
     <content type="text"><![CDATA[题目链接 现在我随机@一个人 这个人必须帮我写题目概括 @gzn7264 这篇题解就不在洛谷博客上发布了。 首先枚举点对的右端点。显而易见，合法的左端点必须满足： 左端点与右端点颜色相同 左端点到右端点之间必须存在至少一个客栈，使得其费用小于等于 $P$ 第二个条件有点麻烦，我们可以稍微转化一下。记 $l_i$ 为客栈 $i$ 的左侧第一个费用小于等于 $P$ 的客栈编号。那么，以 $i$ 为右端点的情况下，左端点的可选位置即为 $1-l_i$ 种所有颜色与客栈 $i$ 相同的客栈个数。 由于本题卡空间，必须采用滚动数组。数组 $s_i$ 记录颜色 $i$ 的出现次数，数组 $c_i$ 记录颜色 $i$ 的可选左端点个数。每次更新答案时，加上 $c_{color}$ 即可。 在示例代码中，可选的左端点包括其本身，因此当 $money\le P$ 时存在重复计算，答案减一。 代码如下： 12345678910111213141516171819#include &lt;bits/stdc++.h&gt;using namespace std;long long ans;int N, K, P;int c[50], s[50];int main() &#123; scanf("%d%d%d", &amp;N, &amp;K, &amp;P); for (register int i = 1; i &lt;= N; ++i) &#123; int color, money; scanf("%d%d", &amp;color, &amp;money); s[color]++; if (money &lt;= P) for (register int j = 0; j &lt; K; ++j) c[j] = s[j]; ans += c[color] - (money &lt;= P); &#125; printf("%I64d", ans); return 0;&#125;]]></content>
@@ -33,8 +45,8 @@
       </categories>
       <tags>
         <tag>树形dp</tag>
-        <tag>虚树</tag>
         <tag>点分治</tag>
+        <tag>虚树</tag>
       </tags>
   </entry>
   <entry>
@@ -190,8 +202,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>树链剖分</tag>
         <tag>主席树</tag>
+        <tag>树链剖分</tag>
         <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
@@ -205,8 +217,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -282,8 +294,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>树链剖分</tag>
         <tag>线段树</tag>
+        <tag>树链剖分</tag>
         <tag>dfs序</tag>
       </tags>
   </entry>
@@ -441,9 +453,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>可持久化trie</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -507,8 +519,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>贪心</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -519,8 +531,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
