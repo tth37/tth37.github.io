@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-luogu-p5290春节十二响]]></title>
+    <url>%2F2019%2F09%2F12%2Fsolution-luogu-p5290%2F</url>
+    <content type="text"><![CDATA[题目链接 给定一棵有 $n$ 个节点的树，将树上所有节点分为若干组，其中每一组中的任意两个节点不能存在祖先-后代关系，每一组的权值为该组中所有节点权值的最大值，求所有组的权值总和最小值。 $1 \le n \le 200000$ 我感谢我自己 首先考虑树退化为链的情况。树根最多有两棵子树，树根需要被单独分为一段，其余段中不能出现同一棵子树内的两个点。 这时我们需要将左子树中的节点与右子树中的节点配对。可以证明，将左子树中的最大值与右子树中的最大值、左子树中的次大值与右子树中的次大值以此类推两两配对，可以使所有段的权值总和最小。 如此一来，两条链实则被合并成为一条链。同理，多条链也可以使用类似的方式合并为一条链。 因此，我们可以维护每个节点到叶子节点的一条等效链，并且要求高效地将两条链合并为一条新链。 不难看出，由于我们需要取最大值的性质，可以使用堆来维护链信息。即，在每个节点上建立一个堆，堆中存储从当前节点到叶子节点的等效链上所有权值信息。 接下来需要解决的即为链的合并即堆的合并问题。假设需要合并堆 $q1$ ，$q2$ 。 如果 $q1.size()&gt;q2.size()$，那么只需取出 $q1$ 的前 $q2.size()$ 项，并将它们与 $q2$ 中的所有元素取最大值即可。时间复杂度 $O(q2.size()\log q2.size())$ 。 如果 $q1.size()&lt;q2.size()$，那么不仅需要取出 $q1$ 的所有项，并将它们与 $q2$ 中的前 $q1.size()$ 项取最大值，还需将 $q2$ 中剩余的元素插入 $q1$ 中。时间复杂度 $O(q2.size()\log q2.size())$ 。 不难看出，将大堆合并进入小堆，时间复杂度在 $O(max(q1.size(),q2.size()))$ 级别。但如果换一种思路，将小堆合并进入大堆，时间复杂度就降到 $O(min(q1.size(),q2.size()))$ 级别。此方法与并查集的按秩合并有异曲同工之妙，被成为启发式合并。 代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;int N;vector&lt;int&gt; G[200005];int M[200005];priority_queue&lt;int&gt; q[200005];int tmp[200005], cnt;void dfs(int u) &#123; for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; dfs(v); cnt = 0; if (q[u].size() &lt; q[v].size()) swap(q[u], q[v]); while(q[v].size()) &#123; tmp[++cnt] = max(q[u].top(), q[v].top()); q[u].pop(), q[v].pop(); &#125; for (int i = 1; i &lt;= cnt; ++i) q[u].push(tmp[i]); &#125; q[u].push(M[u]);&#125;int main() &#123; scanf("%d", &amp;N); for (register int i = 1; i &lt;= N; ++i) scanf("%d", &amp;M[i]); for (register int i = 2; i &lt;= N; ++i) &#123; int f; scanf("%d", &amp;f); G[f].push_back(i); &#125; dfs(1); ll ans = 0; while (q[1].size()) ans += q[1].top(), q[1].pop(); printf("%lld", ans); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>启发式合并</tag>
+        <tag>堆</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[算法学习-点分治&动态点分治]]></title>
     <url>%2F2019%2F09%2F11%2Falgorithm-treedivide%2F</url>
     <content type="text"><![CDATA[点分治概述点分治适合处理大规模的树上路径信息问题。 点分治的实现基于以下结论：一棵子树上的任意一条路径，要么经过树根，要么被完全包含在树根的一棵子树中。 定义 $solve()$ 函数，对每棵子树进行分值处理，并保证 $O(n\log n)$ 的时间复杂度。 模板这么简单还要模板？ 动态点分治（点分树）概述在树上的每个节点上建立数据结构，存储其控制范围内所有点与之的距离信息。在进行修改或查询操作时，只需访问当前节点的所有祖先（最多 $O(\log n)$ 个）即可。 模板代码过于毒瘤 不贴了]]></content>
@@ -242,8 +254,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -254,8 +266,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -519,8 +531,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>贪心</tag>
         <tag>python</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -531,8 +543,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>字符串</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>

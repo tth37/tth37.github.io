@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-09-11T14:56:54.783Z</updated>
+  <updated>2019-09-12T15:46:09.121Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>题解-luogu-p5290春节十二响</title>
+    <link href="http://yoursite.com/2019/09/12/solution-luogu-p5290/"/>
+    <id>http://yoursite.com/2019/09/12/solution-luogu-p5290/</id>
+    <published>2019-09-12T15:19:41.000Z</published>
+    <updated>2019-09-12T15:46:09.121Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://www.luogu.org/problemnew/show/P5290" target="_blank" rel="noopener">题目链接</a></p><p>给定一棵有 $n$ 个节点的树，将树上所有节点分为若干组，其中每一组中的任意两个节点不能存在祖先-后代关系，每一组的权值为该组中所有节点权值的最大值，求所有组的权值总和最小值。</p><p>$1 \le n \le 200000$</p><p>我感谢我自己</p></blockquote><a id="more"></a><p>首先考虑树退化为链的情况。树根最多有两棵子树，树根需要被单独分为一段，其余段中不能出现同一棵子树内的两个点。</p><p>这时我们需要将左子树中的节点与右子树中的节点配对。可以证明，将左子树中的最大值与右子树中的最大值、左子树中的次大值与右子树中的次大值以此类推两两配对，可以使所有段的权值总和最小。</p><p>如此一来，两条链实则被合并成为一条链。同理，多条链也可以使用类似的方式合并为一条链。</p><p>因此，我们可以维护每个节点到叶子节点的一条<strong>等效链</strong>，并且要求高效地将两条链合并为一条新链。</p><p>不难看出，由于我们需要<strong>取最大值</strong>的性质，可以使用堆来维护链信息。即，在每个节点上建立一个堆，堆中存储从当前节点到叶子节点的等效链上所有权值信息。</p><p>接下来需要解决的即为链的合并即<strong>堆的合并</strong>问题。假设需要合并堆 $q1$ ，$q2$ 。</p><p>如果 $q1.size()&gt;q2.size()$，那么只需取出 $q1$ 的前 $q2.size()$ 项，并将它们与 $q2$ 中的所有元素取最大值即可。时间复杂度 $O(q2.size()\log q2.size())$ 。</p><p>如果 $q1.size()&lt;q2.size()$，那么不仅需要取出 $q1$ 的所有项，并将它们与 $q2$ 中的前 $q1.size()$ 项取最大值，还需将 $q2$ 中剩余的元素插入 $q1$ 中。时间复杂度 $O(q2.size()\log q2.size())$ 。</p><p>不难看出，将大堆合并进入小堆，时间复杂度在 $O(max(q1.size(),q2.size()))$ 级别。但如果换一种思路，将小堆合并进入大堆，时间复杂度就降到 $O(min(q1.size(),q2.size()))$ 级别。此方法与并查集的按秩合并有异曲同工之妙，被成为<strong>启发式合并</strong>。</p><p>代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[<span class="number">200005</span>];</span><br><span class="line"><span class="keyword">int</span> M[<span class="number">200005</span>];</span><br><span class="line">priority_queue&lt;<span class="keyword">int</span>&gt; q[<span class="number">200005</span>];</span><br><span class="line"><span class="keyword">int</span> tmp[<span class="number">200005</span>], cnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = *it;</span><br><span class="line">        dfs(v);</span><br><span class="line">        cnt = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (q[u].size() &lt; q[v].size()) swap(q[u], q[v]);</span><br><span class="line">        <span class="keyword">while</span>(q[v].size()) &#123;</span><br><span class="line">            tmp[++cnt] = max(q[u].top(), q[v].top());</span><br><span class="line">            q[u].pop(), q[v].pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= cnt; ++i)</span><br><span class="line">            q[u].push(tmp[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    q[u].push(M[u]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;M[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> f;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;f);</span><br><span class="line">        G[f].push_back(i);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">1</span>);</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> (q[<span class="number">1</span>].size()) ans += q[<span class="number">1</span>].top(), q[<span class="number">1</span>].pop();</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.luogu.org/problemnew/show/P5290&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;给定一棵有 $n$ 个节点的树，将树上所有节点分为若干组，其中每一组中的任意两个节点不能存在祖先-后代关系，每一组的权值为该组中所有节点权值的最大值，求所有组的权值总和最小值。&lt;/p&gt;
+&lt;p&gt;$1 \le n \le 200000$&lt;/p&gt;
+&lt;p&gt;我感谢我自己&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+      <category term="启发式合并" scheme="http://yoursite.com/tags/%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6/"/>
+    
+      <category term="堆" scheme="http://yoursite.com/tags/%E5%A0%86/"/>
+    
+  </entry>
   
   <entry>
     <title>算法学习-点分治&amp;动态点分治</title>
@@ -594,9 +623,9 @@
       <category term="数论专题" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
     
     
-      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
@@ -622,9 +651,9 @@
       <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
     
       <category term="逆元" scheme="http://yoursite.com/tags/%E9%80%86%E5%85%83/"/>
     
@@ -1296,9 +1325,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="贪心" scheme="http://yoursite.com/tags/%E8%B4%AA%E5%BF%83/"/>
-    
       <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="贪心" scheme="http://yoursite.com/tags/%E8%B4%AA%E5%BF%83/"/>
     
   </entry>
   
@@ -1334,9 +1363,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
