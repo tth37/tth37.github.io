@@ -57,8 +57,8 @@
       </categories>
       <tags>
         <tag>树形dp</tag>
-        <tag>虚树</tag>
         <tag>点分治</tag>
+        <tag>虚树</tag>
       </tags>
   </entry>
   <entry>
@@ -254,8 +254,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
       </tags>
   </entry>
   <entry>
@@ -266,8 +266,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -516,6 +516,14 @@
       </categories>
   </entry>
   <entry>
+    <title><![CDATA[公告 2019-03-24]]></title>
+    <url>%2F2019%2F03%2F24%2Fbulletin-2019-3-24%2F</url>
+    <content type="text"><![CDATA[2019/3/24，tth37搭建了这个github博客。 tth37希望在这个博客里记录一些自己学习OI的心得，并发布一些题解，贴出学习规划。 但tth37实在是太弱了，因此他会更新得十分缓慢。 另外，还请shiwt巨佬多多指教。 任何一个伟大的思想，都有一个微不足道的开始。 p.s. 可能会将洛谷博客上的文章搬运过来，所以有些文章的发布时间可能在此之前，请别见怪。]]></content>
+      <categories>
+        <category>公告</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[题目列表-动态规划]]></title>
     <url>%2F2019%2F03%2F20%2Flist-dp%2F</url>
     <content type="text"><![CDATA[任务安排（斜率优化+费用提前计算） f[i]=min_{0\le j]]></content>
@@ -531,8 +539,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>贪心</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
