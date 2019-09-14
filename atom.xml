@@ -5,9 +5,9 @@
   <subtitle>Think twice, code once.</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
+  <link href="https://tth37.cn/"/>
   <updated>2019-09-12T15:46:09.121Z</updated>
-  <id>http://yoursite.com/</id>
+  <id>https://tth37.cn/</id>
   
   <author>
     <name>tth37</name>
@@ -18,8 +18,8 @@
   
   <entry>
     <title>题解-luogu-p5290春节十二响</title>
-    <link href="http://yoursite.com/2019/09/12/solution-luogu-p5290/"/>
-    <id>http://yoursite.com/2019/09/12/solution-luogu-p5290/</id>
+    <link href="https://tth37.cn/2019/09/12/solution-luogu-p5290/"/>
+    <id>https://tth37.cn/2019/09/12/solution-luogu-p5290/</id>
     <published>2019-09-12T15:19:41.000Z</published>
     <updated>2019-09-12T15:46:09.121Z</updated>
     
@@ -36,19 +36,19 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="启发式合并" scheme="http://yoursite.com/tags/%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6/"/>
+      <category term="启发式合并" scheme="https://tth37.cn/tags/%E5%90%AF%E5%8F%91%E5%BC%8F%E5%90%88%E5%B9%B6/"/>
     
-      <category term="堆" scheme="http://yoursite.com/tags/%E5%A0%86/"/>
+      <category term="堆" scheme="https://tth37.cn/tags/%E5%A0%86/"/>
     
   </entry>
   
   <entry>
     <title>算法学习-点分治&amp;动态点分治</title>
-    <link href="http://yoursite.com/2019/09/11/algorithm-treedivide/"/>
-    <id>http://yoursite.com/2019/09/11/algorithm-treedivide/</id>
+    <link href="https://tth37.cn/2019/09/11/algorithm-treedivide/"/>
+    <id>https://tth37.cn/2019/09/11/algorithm-treedivide/</id>
     <published>2019-09-11T14:49:52.000Z</published>
     <updated>2019-09-11T14:56:54.783Z</updated>
     
@@ -62,19 +62,19 @@
     
     </summary>
     
-      <category term="算法学习" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+      <category term="算法学习" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="点分治" scheme="http://yoursite.com/tags/%E7%82%B9%E5%88%86%E6%B2%BB/"/>
+      <category term="点分治" scheme="https://tth37.cn/tags/%E7%82%B9%E5%88%86%E6%B2%BB/"/>
     
-      <category term="动态点分治" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E7%82%B9%E5%88%86%E6%B2%BB/"/>
+      <category term="动态点分治" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E7%82%B9%E5%88%86%E6%B2%BB/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p1311选择客栈</title>
-    <link href="http://yoursite.com/2019/09/09/solution-luogu-p1311/"/>
-    <id>http://yoursite.com/2019/09/09/solution-luogu-p1311/</id>
+    <link href="https://tth37.cn/2019/09/09/solution-luogu-p1311/"/>
+    <id>https://tth37.cn/2019/09/09/solution-luogu-p1311/</id>
     <published>2019-09-09T14:17:18.000Z</published>
     <updated>2019-09-09T16:04:10.404Z</updated>
     
@@ -90,17 +90,17 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="前缀和" scheme="http://yoursite.com/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
+      <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p2495消耗战</title>
-    <link href="http://yoursite.com/2019/08/30/solution-luogu-p2495/"/>
-    <id>http://yoursite.com/2019/08/30/solution-luogu-p2495/</id>
+    <link href="https://tth37.cn/2019/08/30/solution-luogu-p2495/"/>
+    <id>https://tth37.cn/2019/08/30/solution-luogu-p2495/</id>
     <published>2019-08-30T13:58:48.000Z</published>
     <updated>2019-08-30T14:58:40.135Z</updated>
     
@@ -116,21 +116,21 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="树形dp" scheme="http://yoursite.com/tags/%E6%A0%91%E5%BD%A2dp/"/>
+      <category term="树形dp" scheme="https://tth37.cn/tags/%E6%A0%91%E5%BD%A2dp/"/>
     
-      <category term="虚树" scheme="http://yoursite.com/tags/%E8%99%9A%E6%A0%91/"/>
+      <category term="虚树" scheme="https://tth37.cn/tags/%E8%99%9A%E6%A0%91/"/>
     
-      <category term="栈" scheme="http://yoursite.com/tags/%E6%A0%88/"/>
+      <category term="栈" scheme="https://tth37.cn/tags/%E6%A0%88/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p4103大工程</title>
-    <link href="http://yoursite.com/2019/08/30/solution-luogu-p4103/"/>
-    <id>http://yoursite.com/2019/08/30/solution-luogu-p4103/</id>
+    <link href="https://tth37.cn/2019/08/30/solution-luogu-p4103/"/>
+    <id>https://tth37.cn/2019/08/30/solution-luogu-p4103/</id>
     <published>2019-08-30T12:54:26.000Z</published>
     <updated>2019-08-30T13:11:15.234Z</updated>
     
@@ -147,21 +147,21 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="树形dp" scheme="http://yoursite.com/tags/%E6%A0%91%E5%BD%A2dp/"/>
+      <category term="树形dp" scheme="https://tth37.cn/tags/%E6%A0%91%E5%BD%A2dp/"/>
     
-      <category term="点分治" scheme="http://yoursite.com/tags/%E7%82%B9%E5%88%86%E6%B2%BB/"/>
+      <category term="点分治" scheme="https://tth37.cn/tags/%E7%82%B9%E5%88%86%E6%B2%BB/"/>
     
-      <category term="虚树" scheme="http://yoursite.com/tags/%E8%99%9A%E6%A0%91/"/>
+      <category term="虚树" scheme="https://tth37.cn/tags/%E8%99%9A%E6%A0%91/"/>
     
   </entry>
   
   <entry>
     <title>算法学习-虚树</title>
-    <link href="http://yoursite.com/2019/08/29/algorithm-virtualtree/"/>
-    <id>http://yoursite.com/2019/08/29/algorithm-virtualtree/</id>
+    <link href="https://tth37.cn/2019/08/29/algorithm-virtualtree/"/>
+    <id>https://tth37.cn/2019/08/29/algorithm-virtualtree/</id>
     <published>2019-08-29T03:19:56.000Z</published>
     <updated>2019-08-29T03:34:48.476Z</updated>
     
@@ -173,17 +173,17 @@
     
     </summary>
     
-      <category term="算法学习" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+      <category term="算法学习" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="虚树" scheme="http://yoursite.com/tags/%E8%99%9A%E6%A0%91/"/>
+      <category term="虚树" scheme="https://tth37.cn/tags/%E8%99%9A%E6%A0%91/"/>
     
   </entry>
   
   <entry>
     <title>GoodbyeOy!</title>
-    <link href="http://yoursite.com/2019/08/27/GoodbyeOy/"/>
-    <id>http://yoursite.com/2019/08/27/GoodbyeOy/</id>
+    <link href="https://tth37.cn/2019/08/27/GoodbyeOy/"/>
+    <id>https://tth37.cn/2019/08/27/GoodbyeOy/</id>
     <published>2019-08-27T13:40:39.000Z</published>
     <updated>2019-08-27T13:54:01.012Z</updated>
     
@@ -196,8 +196,8 @@
   
   <entry>
     <title>题解-luogu-p1314聪明的质监员</title>
-    <link href="http://yoursite.com/2019/08/27/solution-luogu-p1314/"/>
-    <id>http://yoursite.com/2019/08/27/solution-luogu-p1314/</id>
+    <link href="https://tth37.cn/2019/08/27/solution-luogu-p1314/"/>
+    <id>https://tth37.cn/2019/08/27/solution-luogu-p1314/</id>
     <published>2019-08-27T07:49:57.000Z</published>
     <updated>2019-08-27T08:08:44.429Z</updated>
     
@@ -212,21 +212,21 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="前缀和" scheme="http://yoursite.com/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
+      <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
-      <category term="二分答案" scheme="http://yoursite.com/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/"/>
+      <category term="二分答案" scheme="https://tth37.cn/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/"/>
     
-      <category term="倍增" scheme="http://yoursite.com/tags/%E5%80%8D%E5%A2%9E/"/>
+      <category term="倍增" scheme="https://tth37.cn/tags/%E5%80%8D%E5%A2%9E/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p5503灯塔</title>
-    <link href="http://yoursite.com/2019/08/26/solution-luogu-p5503/"/>
-    <id>http://yoursite.com/2019/08/26/solution-luogu-p5503/</id>
+    <link href="https://tth37.cn/2019/08/26/solution-luogu-p5503/"/>
+    <id>https://tth37.cn/2019/08/26/solution-luogu-p5503/</id>
     <published>2019-08-26T15:29:57.000Z</published>
     <updated>2019-08-26T15:55:23.561Z</updated>
     
@@ -241,17 +241,17 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="ST算法" scheme="http://yoursite.com/tags/ST%E7%AE%97%E6%B3%95/"/>
+      <category term="ST算法" scheme="https://tth37.cn/tags/ST%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>模板-常数优化</title>
-    <link href="http://yoursite.com/2019/08/26/template-optimization/"/>
-    <id>http://yoursite.com/2019/08/26/template-optimization/</id>
+    <link href="https://tth37.cn/2019/08/26/template-optimization/"/>
+    <id>https://tth37.cn/2019/08/26/template-optimization/</id>
     <published>2019-08-26T13:00:29.000Z</published>
     <updated>2019-08-29T05:22:20.602Z</updated>
     
@@ -268,41 +268,42 @@
     
     </summary>
     
-      <category term="模板" scheme="http://yoursite.com/categories/%E6%A8%A1%E6%9D%BF/"/>
+      <category term="模板" scheme="https://tth37.cn/categories/%E6%A8%A1%E6%9D%BF/"/>
     
     
   </entry>
   
   <entry>
     <title>公告 2019-8-26</title>
-    <link href="http://yoursite.com/2019/08/26/bulletin-2019-8-26/"/>
-    <id>http://yoursite.com/2019/08/26/bulletin-2019-8-26/</id>
+    <link href="https://tth37.cn/2019/08/26/bulletin-2019-8-26/"/>
+    <id>https://tth37.cn/2019/08/26/bulletin-2019-8-26/</id>
     <published>2019-08-26T06:18:33.000Z</published>
     <updated>2019-08-27T13:54:12.910Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p><a href="https://tth37.cn/2019/05/18/bulletin-2019-5-18/" target="_blank" rel="noopener">上一篇公告</a></p></blockquote><p>Hi~ 访问我网站的小崽子们~</p><p>想在评论区发言的同时留下自己的个人头像吗？快快注册一个<a href="https://www.github.com" target="_blank" rel="noopener">Github</a>账号吧！<del>学信息没个Github账号怎么行</del>  我的网站与Github完全兼容，可以使用Github登录我的网站，并且在文章下方评论！</p><p><a href="https://tth37.cn/message/" target="_blank" rel="noopener">可以在这里测试一下</a></p><p>虽然网站是国家顶级域名（<code>*.cn</code>），但是Github头像的更新是实时的，注册Github账号之后立刻可以到我的博客评论！</p><p>谢谢资瓷！</p>]]></content>
+    <content type="html"><![CDATA[<blockquote><p><a href="https://tth37.cn/2019/05/18/bulletin-2019-5-18/">上一篇公告</a></p></blockquote><p>Hi~ 访问我网站的小崽子们~</p><p>想在评论区发言的同时留下自己的个人头像吗？快快注册一个<a href="https://www.github.com" target="_blank" rel="noopener">Github</a>账号吧！<del>学信息没个Github账号怎么行</del>  我的网站与Github完全兼容，可以使用Github登录我的网站，并且在文章下方评论！</p><p><a href="https://tth37.cn/message/">可以在这里测试一下</a></p><p>虽然网站是国家顶级域名（<code>*.cn</code>），但是Github头像的更新是实时的，注册Github账号之后立刻可以到我的博客评论！</p><p>谢谢资瓷！</p>]]></content>
     
     <summary type="html">
     
       
       
         &lt;blockquote&gt;
-&lt;p&gt;&lt;a href=&quot;https://tth37.cn/2019/05/18/bulletin-2019-5-18/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;上一篇公告&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://tth37.cn/2019/05/18/bulletin-2019-5-18/&quot;&gt;上一篇公告&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;Hi~ 
+&lt;p&gt;Hi~ 访问我网站的小崽子们~&lt;/p&gt;
+&lt;p&gt;想在评论区发言的同时留下
       
     
     </summary>
     
-      <category term="公告" scheme="http://yoursite.com/categories/%E5%85%AC%E5%91%8A/"/>
+      <category term="公告" scheme="https://tth37.cn/categories/%E5%85%AC%E5%91%8A/"/>
     
     
   </entry>
   
   <entry>
     <title>题解-luogu-p5502最大公约数</title>
-    <link href="http://yoursite.com/2019/08/23/solution-luogu-p5502/"/>
-    <id>http://yoursite.com/2019/08/23/solution-luogu-p5502/</id>
+    <link href="https://tth37.cn/2019/08/23/solution-luogu-p5502/"/>
+    <id>https://tth37.cn/2019/08/23/solution-luogu-p5502/</id>
     <published>2019-08-23T15:21:35.000Z</published>
     <updated>2019-08-23T15:23:12.327Z</updated>
     
@@ -317,21 +318,21 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
-      <category term="倍增" scheme="http://yoursite.com/tags/%E5%80%8D%E5%A2%9E/"/>
+      <category term="倍增" scheme="https://tth37.cn/tags/%E5%80%8D%E5%A2%9E/"/>
     
-      <category term="ST算法" scheme="http://yoursite.com/tags/ST%E7%AE%97%E6%B3%95/"/>
+      <category term="ST算法" scheme="https://tth37.cn/tags/ST%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-uva11021麻球繁衍</title>
-    <link href="http://yoursite.com/2019/08/23/solution-luogu-uva11021/"/>
-    <id>http://yoursite.com/2019/08/23/solution-luogu-uva11021/</id>
+    <link href="https://tth37.cn/2019/08/23/solution-luogu-uva11021/"/>
+    <id>https://tth37.cn/2019/08/23/solution-luogu-uva11021/</id>
     <published>2019-08-23T14:11:12.000Z</published>
     <updated>2019-08-23T14:22:20.823Z</updated>
     
@@ -347,17 +348,17 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="概率" scheme="http://yoursite.com/tags/%E6%A6%82%E7%8E%87/"/>
+      <category term="概率" scheme="https://tth37.cn/tags/%E6%A6%82%E7%8E%87/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p2279消防局的设立</title>
-    <link href="http://yoursite.com/2019/08/19/solution-luogu-p2279/"/>
-    <id>http://yoursite.com/2019/08/19/solution-luogu-p2279/</id>
+    <link href="https://tth37.cn/2019/08/19/solution-luogu-p2279/"/>
+    <id>https://tth37.cn/2019/08/19/solution-luogu-p2279/</id>
     <published>2019-08-18T16:24:39.000Z</published>
     <updated>2019-08-26T10:04:49.452Z</updated>
     
@@ -374,19 +375,19 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="动态规划" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
-      <category term="树形dp" scheme="http://yoursite.com/tags/%E6%A0%91%E5%BD%A2dp/"/>
+      <category term="树形dp" scheme="https://tth37.cn/tags/%E6%A0%91%E5%BD%A2dp/"/>
     
   </entry>
   
   <entry>
     <title>算法学习-Pólya计数与Burnside引理</title>
-    <link href="http://yoursite.com/2019/08/13/algorithm-polya/"/>
-    <id>http://yoursite.com/2019/08/13/algorithm-polya/</id>
+    <link href="https://tth37.cn/2019/08/13/algorithm-polya/"/>
+    <id>https://tth37.cn/2019/08/13/algorithm-polya/</id>
     <published>2019-08-12T17:00:09.000Z</published>
     <updated>2019-08-12T18:50:14.929Z</updated>
     
@@ -399,18 +400,18 @@
     </summary>
     
     
-      <category term="数论" scheme="http://yoursite.com/tags/%E6%95%B0%E8%AE%BA/"/>
+      <category term="数论" scheme="https://tth37.cn/tags/%E6%95%B0%E8%AE%BA/"/>
     
-      <category term="群论" scheme="http://yoursite.com/tags/%E7%BE%A4%E8%AE%BA/"/>
+      <category term="群论" scheme="https://tth37.cn/tags/%E7%BE%A4%E8%AE%BA/"/>
     
-      <category term="Pólya计数" scheme="http://yoursite.com/tags/Polya%E8%AE%A1%E6%95%B0/"/>
+      <category term="Pólya计数" scheme="https://tth37.cn/tags/Polya%E8%AE%A1%E6%95%B0/"/>
     
   </entry>
   
   <entry>
     <title>算法学习-KMP模式匹配</title>
-    <link href="http://yoursite.com/2019/08/07/algorithm-kmp/"/>
-    <id>http://yoursite.com/2019/08/07/algorithm-kmp/</id>
+    <link href="https://tth37.cn/2019/08/07/algorithm-kmp/"/>
+    <id>https://tth37.cn/2019/08/07/algorithm-kmp/</id>
     <published>2019-08-07T12:06:38.000Z</published>
     <updated>2019-08-31T04:05:52.585Z</updated>
     
@@ -422,17 +423,17 @@
     
     </summary>
     
-      <category term="算法学习" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+      <category term="算法学习" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+      <category term="字符串" scheme="https://tth37.cn/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   
   <entry>
     <title>CF游记-Codeforces Round</title>
-    <link href="http://yoursite.com/2019/08/01/codeforces-1199/"/>
-    <id>http://yoursite.com/2019/08/01/codeforces-1199/</id>
+    <link href="https://tth37.cn/2019/08/01/codeforces-1199/"/>
+    <id>https://tth37.cn/2019/08/01/codeforces-1199/</id>
     <published>2019-08-01T15:21:39.000Z</published>
     <updated>2019-08-01T15:49:39.749Z</updated>
     
@@ -447,15 +448,15 @@
     
     </summary>
     
-      <category term="CF游记" scheme="http://yoursite.com/categories/CF%E6%B8%B8%E8%AE%B0/"/>
+      <category term="CF游记" scheme="https://tth37.cn/categories/CF%E6%B8%B8%E8%AE%B0/"/>
     
     
   </entry>
   
   <entry>
     <title>算法学习-splay伸展树</title>
-    <link href="http://yoursite.com/2019/07/24/algorithm-splay/"/>
-    <id>http://yoursite.com/2019/07/24/algorithm-splay/</id>
+    <link href="https://tth37.cn/2019/07/24/algorithm-splay/"/>
+    <id>https://tth37.cn/2019/07/24/algorithm-splay/</id>
     <published>2019-07-23T17:21:01.000Z</published>
     <updated>2019-08-27T05:03:11.657Z</updated>
     
@@ -471,19 +472,19 @@
     
     </summary>
     
-      <category term="算法学习" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+      <category term="算法学习" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="平衡树" scheme="http://yoursite.com/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91/"/>
+      <category term="平衡树" scheme="https://tth37.cn/tags/%E5%B9%B3%E8%A1%A1%E6%A0%91/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p3275糖果</title>
-    <link href="http://yoursite.com/2019/07/23/solution-luogu-p3275/"/>
-    <id>http://yoursite.com/2019/07/23/solution-luogu-p3275/</id>
+    <link href="https://tth37.cn/2019/07/23/solution-luogu-p3275/"/>
+    <id>https://tth37.cn/2019/07/23/solution-luogu-p3275/</id>
     <published>2019-07-23T15:28:24.000Z</published>
     <updated>2019-07-23T15:34:21.841Z</updated>
     
@@ -500,19 +501,19 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="差分约束系统" scheme="http://yoursite.com/tags/%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F%E7%B3%BB%E7%BB%9F/"/>
+      <category term="差分约束系统" scheme="https://tth37.cn/tags/%E5%B7%AE%E5%88%86%E7%BA%A6%E6%9D%9F%E7%B3%BB%E7%BB%9F/"/>
     
-      <category term="最短路" scheme="http://yoursite.com/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/"/>
+      <category term="最短路" scheme="https://tth37.cn/tags/%E6%9C%80%E7%9F%AD%E8%B7%AF/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p4175网络管理</title>
-    <link href="http://yoursite.com/2019/07/21/solution-luogu-p4175/"/>
-    <id>http://yoursite.com/2019/07/21/solution-luogu-p4175/</id>
+    <link href="https://tth37.cn/2019/07/21/solution-luogu-p4175/"/>
+    <id>https://tth37.cn/2019/07/21/solution-luogu-p4175/</id>
     <published>2019-07-21T14:42:33.000Z</published>
     <updated>2019-07-23T15:35:15.422Z</updated>
     
@@ -529,23 +530,23 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
+      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
-      <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+      <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
-      <category term="树状数组" scheme="http://yoursite.com/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
+      <category term="树状数组" scheme="https://tth37.cn/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
-      <category term="树套树" scheme="http://yoursite.com/tags/%E6%A0%91%E5%A5%97%E6%A0%91/"/>
+      <category term="树套树" scheme="https://tth37.cn/tags/%E6%A0%91%E5%A5%97%E6%A0%91/"/>
     
   </entry>
   
   <entry>
     <title>算法学习-树套树</title>
-    <link href="http://yoursite.com/2019/07/21/algorithm-treeintree/"/>
-    <id>http://yoursite.com/2019/07/21/algorithm-treeintree/</id>
+    <link href="https://tth37.cn/2019/07/21/algorithm-treeintree/"/>
+    <id>https://tth37.cn/2019/07/21/algorithm-treeintree/</id>
     <published>2019-07-21T05:39:53.000Z</published>
     <updated>2019-07-23T17:23:55.898Z</updated>
     
@@ -560,23 +561,23 @@
     
     </summary>
     
-      <category term="算法学习" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+      <category term="算法学习" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
+      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
-      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
-      <category term="树状数组" scheme="http://yoursite.com/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
+      <category term="树状数组" scheme="https://tth37.cn/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-cf1195c Basketball Exercise</title>
-    <link href="http://yoursite.com/2019/07/18/solution-luogu-cf1195c/"/>
-    <id>http://yoursite.com/2019/07/18/solution-luogu-cf1195c/</id>
+    <link href="https://tth37.cn/2019/07/18/solution-luogu-cf1195c/"/>
+    <id>https://tth37.cn/2019/07/18/solution-luogu-cf1195c/</id>
     <published>2019-07-18T13:15:10.000Z</published>
     <updated>2019-07-18T13:18:46.024Z</updated>
     
@@ -592,17 +593,17 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="动态规划" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
   </entry>
   
   <entry>
     <title>算法学习-数论专题-卡特兰数</title>
-    <link href="http://yoursite.com/2019/07/14/algorithm-maths-catalan/"/>
-    <id>http://yoursite.com/2019/07/14/algorithm-maths-catalan/</id>
+    <link href="https://tth37.cn/2019/07/14/algorithm-maths-catalan/"/>
+    <id>https://tth37.cn/2019/07/14/algorithm-maths-catalan/</id>
     <published>2019-07-13T16:10:52.000Z</published>
     <updated>2019-07-13T16:11:49.198Z</updated>
     
@@ -618,21 +619,21 @@
     
     </summary>
     
-      <category term="算法学习" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+      <category term="算法学习" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="数论专题" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
+      <category term="数论专题" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
     
     
-      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+      <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
     
-      <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p1641生成字符串</title>
-    <link href="http://yoursite.com/2019/07/13/solution-luogu-p1641/"/>
-    <id>http://yoursite.com/2019/07/13/solution-luogu-p1641/</id>
+    <link href="https://tth37.cn/2019/07/13/solution-luogu-p1641/"/>
+    <id>https://tth37.cn/2019/07/13/solution-luogu-p1641/</id>
     <published>2019-07-13T15:19:46.000Z</published>
     <updated>2019-07-13T15:33:00.647Z</updated>
     
@@ -648,23 +649,23 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+      <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
     
-      <category term="卡特兰数" scheme="http://yoursite.com/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
-      <category term="逆元" scheme="http://yoursite.com/tags/%E9%80%86%E5%85%83/"/>
+      <category term="逆元" scheme="https://tth37.cn/tags/%E9%80%86%E5%85%83/"/>
     
-      <category term="组合数" scheme="http://yoursite.com/tags/%E7%BB%84%E5%90%88%E6%95%B0/"/>
+      <category term="组合数" scheme="https://tth37.cn/tags/%E7%BB%84%E5%90%88%E6%95%B0/"/>
     
   </entry>
   
   <entry>
     <title>算法学习-数论专题-乘法逆元</title>
-    <link href="http://yoursite.com/2019/07/13/algorithm-maths-multiplicativeinversion/"/>
-    <id>http://yoursite.com/2019/07/13/algorithm-maths-multiplicativeinversion/</id>
+    <link href="https://tth37.cn/2019/07/13/algorithm-maths-multiplicativeinversion/"/>
+    <id>https://tth37.cn/2019/07/13/algorithm-maths-multiplicativeinversion/</id>
     <published>2019-07-13T04:59:09.000Z</published>
     <updated>2019-07-13T08:34:13.350Z</updated>
     
@@ -680,21 +681,21 @@
     
     </summary>
     
-      <category term="算法学习" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+      <category term="算法学习" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="数论专题" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
+      <category term="数论专题" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
     
     
-      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
-      <category term="乘法逆元" scheme="http://yoursite.com/tags/%E4%B9%98%E6%B3%95%E9%80%86%E5%85%83/"/>
+      <category term="乘法逆元" scheme="https://tth37.cn/tags/%E4%B9%98%E6%B3%95%E9%80%86%E5%85%83/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p5021赛道修建</title>
-    <link href="http://yoursite.com/2019/07/13/solution-luogu-p5021/"/>
-    <id>http://yoursite.com/2019/07/13/solution-luogu-p5021/</id>
+    <link href="https://tth37.cn/2019/07/13/solution-luogu-p5021/"/>
+    <id>https://tth37.cn/2019/07/13/solution-luogu-p5021/</id>
     <published>2019-07-12T16:54:10.000Z</published>
     <updated>2019-07-18T13:13:16.561Z</updated>
     
@@ -710,19 +711,19 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="动态规划" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
-      <category term="二分答案" scheme="http://yoursite.com/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/"/>
+      <category term="二分答案" scheme="https://tth37.cn/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/"/>
     
   </entry>
   
   <entry>
     <title>算法学习-树链剖分</title>
-    <link href="http://yoursite.com/2019/07/04/algorithm-treechainsectioning/"/>
-    <id>http://yoursite.com/2019/07/04/algorithm-treechainsectioning/</id>
+    <link href="https://tth37.cn/2019/07/04/algorithm-treechainsectioning/"/>
+    <id>https://tth37.cn/2019/07/04/algorithm-treechainsectioning/</id>
     <published>2019-07-04T15:21:49.000Z</published>
     <updated>2019-07-05T05:51:32.501Z</updated>
     
@@ -735,23 +736,23 @@
     
     </summary>
     
-      <category term="算法学习" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+      <category term="算法学习" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
-      <category term="树链剖分" scheme="http://yoursite.com/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+      <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
-      <category term="dfs序" scheme="http://yoursite.com/tags/dfs%E5%BA%8F/"/>
+      <category term="dfs序" scheme="https://tth37.cn/tags/dfs%E5%BA%8F/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p2831愤怒的小鸟</title>
-    <link href="http://yoursite.com/2019/07/03/solution-luogu-p2831/"/>
-    <id>http://yoursite.com/2019/07/03/solution-luogu-p2831/</id>
+    <link href="https://tth37.cn/2019/07/03/solution-luogu-p2831/"/>
+    <id>https://tth37.cn/2019/07/03/solution-luogu-p2831/</id>
     <published>2019-07-03T06:25:55.000Z</published>
     <updated>2019-07-14T08:51:07.995Z</updated>
     
@@ -768,19 +769,19 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="动态规划" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
-      <category term="状态压缩" scheme="http://yoursite.com/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/"/>
+      <category term="状态压缩" scheme="https://tth37.cn/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p3959宝藏</title>
-    <link href="http://yoursite.com/2019/06/30/solution-luogu-p3959/"/>
-    <id>http://yoursite.com/2019/06/30/solution-luogu-p3959/</id>
+    <link href="https://tth37.cn/2019/06/30/solution-luogu-p3959/"/>
+    <id>https://tth37.cn/2019/06/30/solution-luogu-p3959/</id>
     <published>2019-06-29T16:26:07.000Z</published>
     <updated>2019-07-21T14:43:17.704Z</updated>
     
@@ -797,19 +798,19 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="动态规划" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
-      <category term="状态压缩" scheme="http://yoursite.com/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/"/>
+      <category term="状态压缩" scheme="https://tth37.cn/tags/%E7%8A%B6%E6%80%81%E5%8E%8B%E7%BC%A9/"/>
     
   </entry>
   
   <entry>
     <title>公告 2019-6-20</title>
-    <link href="http://yoursite.com/2019/06/20/bulletin-2019-6-20/"/>
-    <id>http://yoursite.com/2019/06/20/bulletin-2019-6-20/</id>
+    <link href="https://tth37.cn/2019/06/20/bulletin-2019-6-20/"/>
+    <id>https://tth37.cn/2019/06/20/bulletin-2019-6-20/</id>
     <published>2019-06-19T16:16:06.000Z</published>
     <updated>2019-07-05T16:08:30.575Z</updated>
     
@@ -825,15 +826,15 @@
     
     </summary>
     
-      <category term="公告" scheme="http://yoursite.com/categories/%E5%85%AC%E5%91%8A/"/>
+      <category term="公告" scheme="https://tth37.cn/categories/%E5%85%AC%E5%91%8A/"/>
     
     
   </entry>
   
   <entry>
     <title>题解-luogu-p3953逛公园</title>
-    <link href="http://yoursite.com/2019/06/19/solution-luogu-p3953/"/>
-    <id>http://yoursite.com/2019/06/19/solution-luogu-p3953/</id>
+    <link href="https://tth37.cn/2019/06/19/solution-luogu-p3953/"/>
+    <id>https://tth37.cn/2019/06/19/solution-luogu-p3953/</id>
     <published>2019-06-19T15:39:55.000Z</published>
     <updated>2019-06-29T17:35:41.267Z</updated>
     
@@ -850,17 +851,17 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="动态规划" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p2627修剪草坪</title>
-    <link href="http://yoursite.com/2019/06/09/solution-luogu-p2627/"/>
-    <id>http://yoursite.com/2019/06/09/solution-luogu-p2627/</id>
+    <link href="https://tth37.cn/2019/06/09/solution-luogu-p2627/"/>
+    <id>https://tth37.cn/2019/06/09/solution-luogu-p2627/</id>
     <published>2019-06-08T17:42:17.000Z</published>
     <updated>2019-06-22T17:15:10.371Z</updated>
     
@@ -877,19 +878,19 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="动态规划" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
-      <category term="单调队列" scheme="http://yoursite.com/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/"/>
+      <category term="单调队列" scheme="https://tth37.cn/tags/%E5%8D%95%E8%B0%83%E9%98%9F%E5%88%97/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p1600天天爱跑步(Beta)</title>
-    <link href="http://yoursite.com/2019/06/07/solution-luogu-p1600/"/>
-    <id>http://yoursite.com/2019/06/07/solution-luogu-p1600/</id>
+    <link href="https://tth37.cn/2019/06/07/solution-luogu-p1600/"/>
+    <id>https://tth37.cn/2019/06/07/solution-luogu-p1600/</id>
     <published>2019-06-07T15:41:27.000Z</published>
     <updated>2019-07-07T06:50:26.902Z</updated>
     
@@ -906,19 +907,19 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="树上差分" scheme="http://yoursite.com/tags/%E6%A0%91%E4%B8%8A%E5%B7%AE%E5%88%86/"/>
+      <category term="树上差分" scheme="https://tth37.cn/tags/%E6%A0%91%E4%B8%8A%E5%B7%AE%E5%88%86/"/>
     
-      <category term="最近公共祖先" scheme="http://yoursite.com/tags/%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/"/>
+      <category term="最近公共祖先" scheme="https://tth37.cn/tags/%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p2633 Count on a tree(COT)</title>
-    <link href="http://yoursite.com/2019/05/20/solution-luogu-p2633/"/>
-    <id>http://yoursite.com/2019/05/20/solution-luogu-p2633/</id>
+    <link href="https://tth37.cn/2019/05/20/solution-luogu-p2633/"/>
+    <id>https://tth37.cn/2019/05/20/solution-luogu-p2633/</id>
     <published>2019-05-20T11:04:53.000Z</published>
     <updated>2019-07-03T08:55:45.060Z</updated>
     
@@ -935,23 +936,23 @@
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
+      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
-      <category term="树上前缀和" scheme="http://yoursite.com/tags/%E6%A0%91%E4%B8%8A%E5%89%8D%E7%BC%80%E5%92%8C/"/>
+      <category term="树上前缀和" scheme="https://tth37.cn/tags/%E6%A0%91%E4%B8%8A%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
   </entry>
   
   <entry>
     <title>公告 2019-5-18</title>
-    <link href="http://yoursite.com/2019/05/18/bulletin-2019-5-18/"/>
-    <id>http://yoursite.com/2019/05/18/bulletin-2019-5-18/</id>
+    <link href="https://tth37.cn/2019/05/18/bulletin-2019-5-18/"/>
+    <id>https://tth37.cn/2019/05/18/bulletin-2019-5-18/</id>
     <published>2019-05-18T09:44:02.000Z</published>
     <updated>2019-06-08T18:13:46.614Z</updated>
     
-    <content type="html"><![CDATA[<p>Hi~ 访问我网站的小崽子们~</p><p>想在评论区发言的同时留下自己的个人头像吗？<a href="http://cn.gravatar.com/" target="_blank" rel="noopener">速戳这里！（Gravatar.com）</a> 在这个网站注册用户，并在评论区留言时留下在<code>Gravatar</code>的账号邮箱，即可在评论区显示头像！</p><p><a href="https://tth37.cn/message/" target="_blank" rel="noopener">可以在这里测试一下</a></p><p>由于网站是国家顶级域名（<code>*.cn</code>），所以缓存可能需要一周（或更长）的时间才能更新，请耐心等待！</p><p>谢谢资瓷！</p>]]></content>
+    <content type="html"><![CDATA[<p>Hi~ 访问我网站的小崽子们~</p><p>想在评论区发言的同时留下自己的个人头像吗？<a href="http://cn.gravatar.com/" target="_blank" rel="noopener">速戳这里！（Gravatar.com）</a> 在这个网站注册用户，并在评论区留言时留下在<code>Gravatar</code>的账号邮箱，即可在评论区显示头像！</p><p><a href="https://tth37.cn/message/">可以在这里测试一下</a></p><p>由于网站是国家顶级域名（<code>*.cn</code>），所以缓存可能需要一周（或更长）的时间才能更新，请耐心等待！</p><p>谢谢资瓷！</p>]]></content>
     
     <summary type="html">
     
@@ -963,15 +964,15 @@
     
     </summary>
     
-      <category term="公告" scheme="http://yoursite.com/categories/%E5%85%AC%E5%91%8A/"/>
+      <category term="公告" scheme="https://tth37.cn/categories/%E5%85%AC%E5%91%8A/"/>
     
     
   </entry>
   
   <entry>
     <title>题解-luogu-p1273有线电视网</title>
-    <link href="http://yoursite.com/2019/04/25/solution-luogu-p1273/"/>
-    <id>http://yoursite.com/2019/04/25/solution-luogu-p1273/</id>
+    <link href="https://tth37.cn/2019/04/25/solution-luogu-p1273/"/>
+    <id>https://tth37.cn/2019/04/25/solution-luogu-p1273/</id>
     <published>2019-04-25T09:25:50.000Z</published>
     <updated>2019-08-27T08:10:26.308Z</updated>
     
@@ -991,19 +992,19 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}&lt;/script&gt;&lt;p&gt;其中�
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="背包" scheme="http://yoursite.com/tags/%E8%83%8C%E5%8C%85/"/>
+      <category term="背包" scheme="https://tth37.cn/tags/%E8%83%8C%E5%8C%85/"/>
     
-      <category term="树形dp" scheme="http://yoursite.com/tags/%E6%A0%91%E5%BD%A2dp/"/>
+      <category term="树形dp" scheme="https://tth37.cn/tags/%E6%A0%91%E5%BD%A2dp/"/>
     
   </entry>
   
   <entry>
     <title>算法学习-数论专题-素数的判定</title>
-    <link href="http://yoursite.com/2019/04/13/algorithm-maths-primecheck/"/>
-    <id>http://yoursite.com/2019/04/13/algorithm-maths-primecheck/</id>
+    <link href="https://tth37.cn/2019/04/13/algorithm-maths-primecheck/"/>
+    <id>https://tth37.cn/2019/04/13/algorithm-maths-primecheck/</id>
     <published>2019-04-13T13:58:41.000Z</published>
     <updated>2019-04-20T09:57:29.594Z</updated>
     
@@ -1021,21 +1022,21 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}&lt;/script&gt;&lt;p&gt;其中�
     
     </summary>
     
-      <category term="算法学习" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+      <category term="算法学习" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
-      <category term="数论专题" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
+      <category term="数论专题" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
     
     
-      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
-      <category term="素数" scheme="http://yoursite.com/tags/%E7%B4%A0%E6%95%B0/"/>
+      <category term="素数" scheme="https://tth37.cn/tags/%E7%B4%A0%E6%95%B0/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p4559列队</title>
-    <link href="http://yoursite.com/2019/04/10/solution-luogu-p4559/"/>
-    <id>http://yoursite.com/2019/04/10/solution-luogu-p4559/</id>
+    <link href="https://tth37.cn/2019/04/10/solution-luogu-p4559/"/>
+    <id>https://tth37.cn/2019/04/10/solution-luogu-p4559/</id>
     <published>2019-04-10T15:42:59.000Z</published>
     <updated>2019-05-12T13:00:53.173Z</updated>
     
@@ -1062,19 +1063,19 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}&lt;/script&gt;&lt;p&gt;其中�
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
+      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p5283异或粽子</title>
-    <link href="http://yoursite.com/2019/04/09/solution-luogu-p5283/"/>
-    <id>http://yoursite.com/2019/04/09/solution-luogu-p5283/</id>
+    <link href="https://tth37.cn/2019/04/09/solution-luogu-p5283/"/>
+    <id>https://tth37.cn/2019/04/09/solution-luogu-p5283/</id>
     <published>2019-04-09T15:41:48.000Z</published>
     <updated>2019-05-12T13:01:05.454Z</updated>
     
@@ -1096,21 +1097,21 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}&lt;/script&gt;&lt;p&gt;其中�
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="可持久化trie" scheme="http://yoursite.com/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96trie/"/>
+      <category term="可持久化trie" scheme="https://tth37.cn/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96trie/"/>
     
-      <category term="异或" scheme="http://yoursite.com/tags/%E5%BC%82%E6%88%96/"/>
+      <category term="异或" scheme="https://tth37.cn/tags/%E5%BC%82%E6%88%96/"/>
     
-      <category term="二叉堆" scheme="http://yoursite.com/tags/%E4%BA%8C%E5%8F%89%E5%A0%86/"/>
+      <category term="二叉堆" scheme="https://tth37.cn/tags/%E4%BA%8C%E5%8F%89%E5%A0%86/"/>
     
   </entry>
   
   <entry>
     <title>公告 2019-04-08</title>
-    <link href="http://yoursite.com/2019/04/08/bulletin-2019-4-8/"/>
-    <id>http://yoursite.com/2019/04/08/bulletin-2019-4-8/</id>
+    <link href="https://tth37.cn/2019/04/08/bulletin-2019-4-8/"/>
+    <id>https://tth37.cn/2019/04/08/bulletin-2019-4-8/</id>
     <published>2019-04-08T15:46:27.000Z</published>
     <updated>2019-04-23T15:51:02.197Z</updated>
     
@@ -1127,15 +1128,15 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}&lt;/script&gt;&lt;p&gt;其中�
     
     </summary>
     
-      <category term="公告" scheme="http://yoursite.com/categories/%E5%85%AC%E5%91%8A/"/>
+      <category term="公告" scheme="https://tth37.cn/categories/%E5%85%AC%E5%91%8A/"/>
     
     
   </entry>
   
   <entry>
     <title>算法学习-可持久化数据结构</title>
-    <link href="http://yoursite.com/2019/03/29/algorithm-persistentdatastructure/"/>
-    <id>http://yoursite.com/2019/03/29/algorithm-persistentdatastructure/</id>
+    <link href="https://tth37.cn/2019/03/29/algorithm-persistentdatastructure/"/>
+    <id>https://tth37.cn/2019/03/29/algorithm-persistentdatastructure/</id>
     <published>2019-03-29T11:19:42.000Z</published>
     <updated>2019-07-04T15:32:34.158Z</updated>
     
@@ -1147,23 +1148,23 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}&lt;/script&gt;&lt;p&gt;其中�
     
     </summary>
     
-      <category term="算法学习" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+      <category term="算法学习" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="数据结构" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+      <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="可持久化trie" scheme="http://yoursite.com/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96trie/"/>
+      <category term="可持久化trie" scheme="https://tth37.cn/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96trie/"/>
     
-      <category term="主席树" scheme="http://yoursite.com/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
+      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
-      <category term="线段树" scheme="http://yoursite.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p4516潜入行动</title>
-    <link href="http://yoursite.com/2019/03/28/solution-luogu-p4516/"/>
-    <id>http://yoursite.com/2019/03/28/solution-luogu-p4516/</id>
+    <link href="https://tth37.cn/2019/03/28/solution-luogu-p4516/"/>
+    <id>https://tth37.cn/2019/03/28/solution-luogu-p4516/</id>
     <published>2019-03-27T17:11:44.000Z</published>
     <updated>2019-05-12T13:00:49.081Z</updated>
     
@@ -1184,21 +1185,21 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="动态规划" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
-      <category term="背包" scheme="http://yoursite.com/tags/%E8%83%8C%E5%8C%85/"/>
+      <category term="背包" scheme="https://tth37.cn/tags/%E8%83%8C%E5%8C%85/"/>
     
-      <category term="树形dp" scheme="http://yoursite.com/tags/%E6%A0%91%E5%BD%A2dp/"/>
+      <category term="树形dp" scheme="https://tth37.cn/tags/%E6%A0%91%E5%BD%A2dp/"/>
     
   </entry>
   
   <entry>
     <title>算法学习-背包类树形dp</title>
-    <link href="http://yoursite.com/2019/03/25/algorithm-knapsacktreedp/"/>
-    <id>http://yoursite.com/2019/03/25/algorithm-knapsacktreedp/</id>
+    <link href="https://tth37.cn/2019/03/25/algorithm-knapsacktreedp/"/>
+    <id>https://tth37.cn/2019/03/25/algorithm-knapsacktreedp/</id>
     <published>2019-03-25T15:21:45.000Z</published>
     <updated>2019-05-12T11:10:35.668Z</updated>
     
@@ -1213,21 +1214,21 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
     
     </summary>
     
-      <category term="算法学习" scheme="http://yoursite.com/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+      <category term="算法学习" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
     
-      <category term="动态规划" scheme="http://yoursite.com/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
-      <category term="背包" scheme="http://yoursite.com/tags/%E8%83%8C%E5%8C%85/"/>
+      <category term="背包" scheme="https://tth37.cn/tags/%E8%83%8C%E5%8C%85/"/>
     
-      <category term="树形dp" scheme="http://yoursite.com/tags/%E6%A0%91%E5%BD%A2dp/"/>
+      <category term="树形dp" scheme="https://tth37.cn/tags/%E6%A0%91%E5%BD%A2dp/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p2774方格取数问题</title>
-    <link href="http://yoursite.com/2019/03/24/solution-luogu-p2774/"/>
-    <id>http://yoursite.com/2019/03/24/solution-luogu-p2774/</id>
+    <link href="https://tth37.cn/2019/03/24/solution-luogu-p2774/"/>
+    <id>https://tth37.cn/2019/03/24/solution-luogu-p2774/</id>
     <published>2019-03-24T14:16:21.000Z</published>
     <updated>2019-07-03T08:35:15.366Z</updated>
     
@@ -1248,17 +1249,17 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="网络流" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/"/>
+      <category term="网络流" scheme="https://tth37.cn/tags/%E7%BD%91%E7%BB%9C%E6%B5%81/"/>
     
   </entry>
   
   <entry>
     <title>题目列表-网络流</title>
-    <link href="http://yoursite.com/2019/03/24/list-networkflow/"/>
-    <id>http://yoursite.com/2019/03/24/list-networkflow/</id>
+    <link href="https://tth37.cn/2019/03/24/list-networkflow/"/>
+    <id>https://tth37.cn/2019/03/24/list-networkflow/</id>
     <published>2019-03-24T14:07:49.000Z</published>
     <updated>2019-05-12T11:10:53.718Z</updated>
     
@@ -1274,15 +1275,15 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
     
     </summary>
     
-      <category term="题目列表" scheme="http://yoursite.com/categories/%E9%A2%98%E7%9B%AE%E5%88%97%E8%A1%A8/"/>
+      <category term="题目列表" scheme="https://tth37.cn/categories/%E9%A2%98%E7%9B%AE%E5%88%97%E8%A1%A8/"/>
     
     
   </entry>
   
   <entry>
     <title>公告 2019-03-24</title>
-    <link href="http://yoursite.com/2019/03/24/bulletin-2019-3-24/"/>
-    <id>http://yoursite.com/2019/03/24/bulletin-2019-3-24/</id>
+    <link href="https://tth37.cn/2019/03/24/bulletin-2019-3-24/"/>
+    <id>https://tth37.cn/2019/03/24/bulletin-2019-3-24/</id>
     <published>2019-03-24T05:13:13.000Z</published>
     <updated>2019-04-08T15:47:56.942Z</updated>
     
@@ -1300,19 +1301,19 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
     
     </summary>
     
-      <category term="公告" scheme="http://yoursite.com/categories/%E5%85%AC%E5%91%8A/"/>
+      <category term="公告" scheme="https://tth37.cn/categories/%E5%85%AC%E5%91%8A/"/>
     
     
   </entry>
   
   <entry>
     <title>题目列表-动态规划</title>
-    <link href="http://yoursite.com/2019/03/20/list-dp/"/>
-    <id>http://yoursite.com/2019/03/20/list-dp/</id>
+    <link href="https://tth37.cn/2019/03/20/list-dp/"/>
+    <id>https://tth37.cn/2019/03/20/list-dp/</id>
     <published>2019-03-20T11:24:57.000Z</published>
     <updated>2019-05-12T11:10:50.859Z</updated>
     
-    <content type="html"><![CDATA[<ol><li><h5 id="任务安排（斜率优化-费用提前计算）"><a href="#任务安排（斜率优化-费用提前计算）" class="headerlink" title="任务安排（斜率优化+费用提前计算）"></a><a href="https://loj.ac/problem/10185" target="_blank" rel="noopener">任务安排</a>（斜率优化+费用提前计算）</h5><script type="math/tex; mode=display">f[i]=min_{0\le j<i}\{f[j]-(S+T[i])\*C[i]+T[i]\*C[i]+S\*C[N]\}</script></li></ol><hr><ol><li><h5 id="特别行动队（斜率优化）"><a href="#特别行动队（斜率优化）" class="headerlink" title="特别行动队（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3628" target="_blank" rel="noopener">特别行动队</a>（斜率优化）</h5><script type="math/tex; mode=display">f[i]=max_{0\le j<i}\{f[j]+A\*(S[i]-S[j])^2+B\*(S[i]-S[j])+C\}</script></li></ol><hr><ol><li><h5 id="玩具装箱（斜率优化）"><a href="#玩具装箱（斜率优化）" class="headerlink" title="玩具装箱（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3195" target="_blank" rel="noopener">玩具装箱</a>（斜率优化）</h5><script type="math/tex; mode=display">f[i]=min_{0\le j<i}\{f[j]+(A[i]-A[j]-L-1)^2\}</script><p>斜率优化的适用范围是只有一个自变量。</p><p>形如这样的转移方程：</p><script type="math/tex; mode=display">f[i]=min_{0\le j<i}\{f[j]+(i-j+S[i]-S[j]-L-1)^2\}</script><p>操作难度较大，可以将$S[i]+i$存在$A$数组中，即可全部化为一个自变量。</p></li></ol><hr><ol><li><h5 id="锯木厂选址（斜率优化）"><a href="#锯木厂选址（斜率优化）" class="headerlink" title="锯木厂选址（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P4360" target="_blank" rel="noopener">锯木厂选址</a>（斜率优化）</h5><script type="math/tex; mode=display">f[i]=min_{1\le j<i}\{C[i-1]-W[j]*(D[i]-D[j])\}</script></li></ol><hr><ol><li><h5 id="打印文章（斜率优化）"><a href="#打印文章（斜率优化）" class="headerlink" title="打印文章（斜率优化）"></a><a href="https://loj.ac/problem/10191" target="_blank" rel="noopener">打印文章</a>（斜率优化）</h5><script type="math/tex; mode=display">f[i]=min_{0\le j<i}\{f[j]+(S[i]-S[j])^2+M\}</script>调到心态爆炸……getK函数中如果除数为0则要返回1e100</li></ol><hr><ol><li><h5 id="序列分割（斜率优化）"><a href="#序列分割（斜率优化）" class="headerlink" title="序列分割（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3648" target="_blank" rel="noopener">序列分割</a>（斜率优化）</h5><script type="math/tex; mode=display">f[i][j]=max_{0 \le k<j}\{f[i-1][k]+S[k]*(S[j]-S[k])\}</script><p>不开long long见祖宗。题目中如果说“非负整数”一定记得判断除数是否为0。</p><p>对于转移方程中的第一维，稍加观察就会发现可以使用滚动数组。（虽然也需要一些额外的数组记录状态）</p></li></ol><hr><ol><li><h5 id="绿色通道（二分答案-单调队列）"><a href="#绿色通道（二分答案-单调队列）" class="headerlink" title="绿色通道（二分答案+单调队列）"></a><a href="https://loj.ac/problem/10181" target="_blank" rel="noopener">绿色通道</a>（二分答案+单调队列）</h5><script type="math/tex; mode=display">f[i]=min_{i-M-1 \le j <i}\{f[j]+a[i]\}</script></li></ol><p>   二分发怒程度$M$，$f$数组中存储选择当前题目最少多少体力。统计最终答案只需检验最后$M$个状态即可。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ans=INF;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=N-M;i&lt;=N;++i) ans=min(ans,f[i]);</span><br></pre></td></tr></table></figure><hr><ol><li><h5 id="股票交易（单调队列-很多条件）"><a href="#股票交易（单调队列-很多条件）" class="headerlink" title="股票交易（单调队列+很多条件）"></a><a href="https://www.luogu.org/problemnew/show/P2569" target="_blank" rel="noopener">股票交易</a>（单调队列+很多条件）</h5><script type="math/tex; mode=display">f[i][j]=-AP[i]*j(0 \le j \le AS[i])</script><script type="math/tex; mode=display">f[i][j]=max\{f[i][j],f[i-1][j]\}(0 \le j \le M)</script><script type="math/tex; mode=display">f[i][j]=max_{j-AS[i] \le k<j}\{f[i-W-1][k]-(j-k)*AP[i]\}(0 \le j \le M)</script><script type="math/tex; mode=display">f[i][j]=max_{j<k \le j+BS[i]}\{f[i-W-1][k]+(k-j)*BP[i]\}(0 \le j \le M)</script><p>条件特别多，需要仔细分析题意并且列出状态转移方程。先进行较简单的转移，再利用单调队列进行复杂转移。注意第四种状态转移要使用逆序循环。</p><p><del>如此恶心的状态转移让我不禁想起<a href="https://www.luogu.org/problemnew/show/P1941" target="_blank" rel="noopener">飞扬的小鸟</a></del></p></li></ol><hr><ol><li><h5 id="潜入行动（背包类树形dp）"><a href="#潜入行动（背包类树形dp）" class="headerlink" title="潜入行动（背包类树形dp）"></a><a href="https://www.luogu.org/problemnew/show/P4516" target="_blank" rel="noopener">潜入行动</a>（背包类树形dp）</h5><script type="math/tex; mode=display">f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]</script><script type="math/tex; mode=display">f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])</script><script type="math/tex; mode=display">f[u][i+j][0][1]=\sum (f[u][i][0][1]\*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]\*f[v][j][1][1]</script><script type="math/tex; mode=display">f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]\*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))</script><p><a href="https://tth37.cn/2019/03/28/solution-luogu-p4516/" target="_blank" rel="noopener">题解链接</a></p><p>特别注意空间问题，中间运算转<code>long long</code>，保存时再转<code>int</code></p></li></ol><hr><ol><li><h5 id="子串（线性dp-滚动数组）"><a href="#子串（线性dp-滚动数组）" class="headerlink" title="子串（线性dp+滚动数组）"></a><a href="https://www.luogu.org/fe/problem/P2679" target="_blank" rel="noopener">子串</a>（线性dp+滚动数组）</h5><script type="math/tex; mode=display">f[i][0][0][0]=1</script><script type="math/tex; mode=display">f[i][j][k][0]=f[i-1][j][k][0]+f[i-1][j][k][1]</script><script type="math/tex; mode=display">a[i]=b[j]:f[i][j][k][1]=f[i-1][j-1][k][1]+f[i-1][j-1][k-1][0]+f[i-1][j-1][k-1][1]</script><script type="math/tex; mode=display">a[i] \ne b[j]:f[i][j][k][1]=0</script><p>滚动数组注意点：</p><ul><li>状态转移方程只依赖前一维或前两维状态</li><li>状态数组要被滚动的一维只开1或2</li><li>对于0/1滚动数组，可以结合位运算<code>&amp;</code>和<code>^</code>进行判断奇偶性和减一操作</li></ul></li></ol><hr><ol><li><h5 id="换教室（期望dp）"><a href="#换教室（期望dp）" class="headerlink" title="换教室（期望dp）"></a><a href="https://www.luogu.org/fe/problem/P1850" target="_blank" rel="noopener">换教室</a>（期望dp）</h5><script type="math/tex; mode=display">f[i][j][0]=min\{f[i-1][j][0]+dis[C[i-1]][C[i]],f[i-1][j][1]+K[i-1]\*dis[D[i-1]][C[i]]+(1-K[i-1])\*dis[C[i-1]][C[i]]\}</script><script type="math/tex; mode=display">f[i][j][1]=min\{f[i-1][j-1][0]+K[i]\*dis[C[i-1]][D[i]]+(1-K[i])\*dis[C[i-1]][C[i]],f[i-1][j-1][1]+K[i-1]\*K[i]\*dis[D[i-1]][D[i]]+K[i-1]\*(1-K[i])\*dis[D[i-1]][C[i]]+(1-K[i-1])\*K[i]\*dis[C[i-1]][D[i]]+(1-K[i-1])\*(1-K[i])\*dis[C[i-1]][C[i]]\}</script><p>期望dp可以单独开一维表示状态，以便于列举出所有情况。本题的转移方程是一个很好的例子。<del>如果tth37开心的话，Ta可能会写一篇数学期望专题具体讲解此类题目。</del></p></li></ol><hr><ol><li><h5 id="过河（线性dp-玄学离散化）"><a href="#过河（线性dp-玄学离散化）" class="headerlink" title="过河（线性dp+玄学离散化）"></a><a href="https://www.luogu.org/problemnew/show/P1052" target="_blank" rel="noopener">过河</a>（线性dp+玄学离散化）</h5><script type="math/tex; mode=display">f[i]=min_{S \le j \le T}\{f[i-j]+flag[i]\}</script><p>由于m非常小，因此采用2520缩点，即两点之间距离超过2520的，可以将距离改为$dis % 2520$，从而离散化。</p></li></ol><hr><ol><li><h5 id="统计单词个数（线性dp-字符串）"><a href="#统计单词个数（线性dp-字符串）" class="headerlink" title="统计单词个数（线性dp+字符串）"></a><a href="https://www.luogu.org/problemnew/show/P1026" target="_blank" rel="noopener">统计单词个数</a>（线性dp+字符串）</h5><script type="math/tex; mode=display">f[i][j]=max\{f[i][j],f[r][j-1]+g[r+1][i]\}</script><p>字符串处理使用string类find函数。</p><p>线性dp时再次强调，需要分清阶段、状态和决策变量；阶段在最外层循环，决策在最内层。在寻找关系时可以从推导或定义角度辨析，也可以根据转移方程进行识别。</p></li></ol><hr><ol><li><h5 id="有线电视网（背包类树形dp）"><a href="#有线电视网（背包类树形dp）" class="headerlink" title="有线电视网（背包类树形dp）"></a><a href="https://www.luogu.org/fe/problem/P1273" target="_blank" rel="noopener">有线电视网</a>（背包类树形dp）</h5><script type="math/tex; mode=display">f[u][i]=max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p><a href="https://tth37.cn/2019/04/25/solution-luogu-p1273/" target="_blank" rel="noopener">题解链接</a></p></li></ol><hr><ol><li><h5 id="棋盘制作（单调栈）"><a href="#棋盘制作（单调栈）" class="headerlink" title="棋盘制作（单调栈）"></a><a href="https://www.luogu.org/problemnew/show/P1169" target="_blank" rel="noopener">棋盘制作</a>（单调栈）</h5><p>似乎没有转移方程</p><p>注意单调栈的处理方式（玄学方法或通用方法），在退栈时务必退干净。</p></li></ol><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//玄学方法：</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N+<span class="number">1</span>;++i)&#123;</span><br><span class="line">    <span class="keyword">while</span>(cnt&gt;<span class="number">0</span>&amp;&amp;a[s[cnt]]&gt;=a[i])&#123;</span><br><span class="line">        ans=max(ans,(i-s[cnt<span class="number">-1</span>]<span class="number">-1</span>)*a[s[cnt]]);</span><br><span class="line">        cnt--;</span><br><span class="line">    &#125;</span><br><span class="line">    s[++cnt]=i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//通用方法：</span></span><br><span class="line">先处理出每个位置左边第一个比它小的，再处理出右边第一个比它小的，最后枚举</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<ol><li><h5 id="任务安排（斜率优化-费用提前计算）"><a href="#任务安排（斜率优化-费用提前计算）" class="headerlink" title="任务安排（斜率优化+费用提前计算）"></a><a href="https://loj.ac/problem/10185" target="_blank" rel="noopener">任务安排</a>（斜率优化+费用提前计算）</h5><script type="math/tex; mode=display">f[i]=min_{0\le j<i}\{f[j]-(S+T[i])\*C[i]+T[i]\*C[i]+S\*C[N]\}</script></li></ol><hr><ol><li><h5 id="特别行动队（斜率优化）"><a href="#特别行动队（斜率优化）" class="headerlink" title="特别行动队（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3628" target="_blank" rel="noopener">特别行动队</a>（斜率优化）</h5><script type="math/tex; mode=display">f[i]=max_{0\le j<i}\{f[j]+A\*(S[i]-S[j])^2+B\*(S[i]-S[j])+C\}</script></li></ol><hr><ol><li><h5 id="玩具装箱（斜率优化）"><a href="#玩具装箱（斜率优化）" class="headerlink" title="玩具装箱（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3195" target="_blank" rel="noopener">玩具装箱</a>（斜率优化）</h5><script type="math/tex; mode=display">f[i]=min_{0\le j<i}\{f[j]+(A[i]-A[j]-L-1)^2\}</script><p>斜率优化的适用范围是只有一个自变量。</p><p>形如这样的转移方程：</p><script type="math/tex; mode=display">f[i]=min_{0\le j<i}\{f[j]+(i-j+S[i]-S[j]-L-1)^2\}</script><p>操作难度较大，可以将$S[i]+i$存在$A$数组中，即可全部化为一个自变量。</p></li></ol><hr><ol><li><h5 id="锯木厂选址（斜率优化）"><a href="#锯木厂选址（斜率优化）" class="headerlink" title="锯木厂选址（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P4360" target="_blank" rel="noopener">锯木厂选址</a>（斜率优化）</h5><script type="math/tex; mode=display">f[i]=min_{1\le j<i}\{C[i-1]-W[j]*(D[i]-D[j])\}</script></li></ol><hr><ol><li><h5 id="打印文章（斜率优化）"><a href="#打印文章（斜率优化）" class="headerlink" title="打印文章（斜率优化）"></a><a href="https://loj.ac/problem/10191" target="_blank" rel="noopener">打印文章</a>（斜率优化）</h5><script type="math/tex; mode=display">f[i]=min_{0\le j<i}\{f[j]+(S[i]-S[j])^2+M\}</script>调到心态爆炸……getK函数中如果除数为0则要返回1e100</li></ol><hr><ol><li><h5 id="序列分割（斜率优化）"><a href="#序列分割（斜率优化）" class="headerlink" title="序列分割（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3648" target="_blank" rel="noopener">序列分割</a>（斜率优化）</h5><script type="math/tex; mode=display">f[i][j]=max_{0 \le k<j}\{f[i-1][k]+S[k]*(S[j]-S[k])\}</script><p>不开long long见祖宗。题目中如果说“非负整数”一定记得判断除数是否为0。</p><p>对于转移方程中的第一维，稍加观察就会发现可以使用滚动数组。（虽然也需要一些额外的数组记录状态）</p></li></ol><hr><ol><li><h5 id="绿色通道（二分答案-单调队列）"><a href="#绿色通道（二分答案-单调队列）" class="headerlink" title="绿色通道（二分答案+单调队列）"></a><a href="https://loj.ac/problem/10181" target="_blank" rel="noopener">绿色通道</a>（二分答案+单调队列）</h5><script type="math/tex; mode=display">f[i]=min_{i-M-1 \le j <i}\{f[j]+a[i]\}</script></li></ol><p>   二分发怒程度$M$，$f$数组中存储选择当前题目最少多少体力。统计最终答案只需检验最后$M$个状态即可。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> ans=INF;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=N-M;i&lt;=N;++i) ans=min(ans,f[i]);</span><br></pre></td></tr></table></figure><hr><ol><li><h5 id="股票交易（单调队列-很多条件）"><a href="#股票交易（单调队列-很多条件）" class="headerlink" title="股票交易（单调队列+很多条件）"></a><a href="https://www.luogu.org/problemnew/show/P2569" target="_blank" rel="noopener">股票交易</a>（单调队列+很多条件）</h5><script type="math/tex; mode=display">f[i][j]=-AP[i]*j(0 \le j \le AS[i])</script><script type="math/tex; mode=display">f[i][j]=max\{f[i][j],f[i-1][j]\}(0 \le j \le M)</script><script type="math/tex; mode=display">f[i][j]=max_{j-AS[i] \le k<j}\{f[i-W-1][k]-(j-k)*AP[i]\}(0 \le j \le M)</script><script type="math/tex; mode=display">f[i][j]=max_{j<k \le j+BS[i]}\{f[i-W-1][k]+(k-j)*BP[i]\}(0 \le j \le M)</script><p>条件特别多，需要仔细分析题意并且列出状态转移方程。先进行较简单的转移，再利用单调队列进行复杂转移。注意第四种状态转移要使用逆序循环。</p><p><del>如此恶心的状态转移让我不禁想起<a href="https://www.luogu.org/problemnew/show/P1941" target="_blank" rel="noopener">飞扬的小鸟</a></del></p></li></ol><hr><ol><li><h5 id="潜入行动（背包类树形dp）"><a href="#潜入行动（背包类树形dp）" class="headerlink" title="潜入行动（背包类树形dp）"></a><a href="https://www.luogu.org/problemnew/show/P4516" target="_blank" rel="noopener">潜入行动</a>（背包类树形dp）</h5><script type="math/tex; mode=display">f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]</script><script type="math/tex; mode=display">f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])</script><script type="math/tex; mode=display">f[u][i+j][0][1]=\sum (f[u][i][0][1]\*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]\*f[v][j][1][1]</script><script type="math/tex; mode=display">f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]\*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))</script><p><a href="https://tth37.cn/2019/03/28/solution-luogu-p4516/">题解链接</a></p><p>特别注意空间问题，中间运算转<code>long long</code>，保存时再转<code>int</code></p></li></ol><hr><ol><li><h5 id="子串（线性dp-滚动数组）"><a href="#子串（线性dp-滚动数组）" class="headerlink" title="子串（线性dp+滚动数组）"></a><a href="https://www.luogu.org/fe/problem/P2679" target="_blank" rel="noopener">子串</a>（线性dp+滚动数组）</h5><script type="math/tex; mode=display">f[i][0][0][0]=1</script><script type="math/tex; mode=display">f[i][j][k][0]=f[i-1][j][k][0]+f[i-1][j][k][1]</script><script type="math/tex; mode=display">a[i]=b[j]:f[i][j][k][1]=f[i-1][j-1][k][1]+f[i-1][j-1][k-1][0]+f[i-1][j-1][k-1][1]</script><script type="math/tex; mode=display">a[i] \ne b[j]:f[i][j][k][1]=0</script><p>滚动数组注意点：</p><ul><li>状态转移方程只依赖前一维或前两维状态</li><li>状态数组要被滚动的一维只开1或2</li><li>对于0/1滚动数组，可以结合位运算<code>&amp;</code>和<code>^</code>进行判断奇偶性和减一操作</li></ul></li></ol><hr><ol><li><h5 id="换教室（期望dp）"><a href="#换教室（期望dp）" class="headerlink" title="换教室（期望dp）"></a><a href="https://www.luogu.org/fe/problem/P1850" target="_blank" rel="noopener">换教室</a>（期望dp）</h5><script type="math/tex; mode=display">f[i][j][0]=min\{f[i-1][j][0]+dis[C[i-1]][C[i]],f[i-1][j][1]+K[i-1]\*dis[D[i-1]][C[i]]+(1-K[i-1])\*dis[C[i-1]][C[i]]\}</script><script type="math/tex; mode=display">f[i][j][1]=min\{f[i-1][j-1][0]+K[i]\*dis[C[i-1]][D[i]]+(1-K[i])\*dis[C[i-1]][C[i]],f[i-1][j-1][1]+K[i-1]\*K[i]\*dis[D[i-1]][D[i]]+K[i-1]\*(1-K[i])\*dis[D[i-1]][C[i]]+(1-K[i-1])\*K[i]\*dis[C[i-1]][D[i]]+(1-K[i-1])\*(1-K[i])\*dis[C[i-1]][C[i]]\}</script><p>期望dp可以单独开一维表示状态，以便于列举出所有情况。本题的转移方程是一个很好的例子。<del>如果tth37开心的话，Ta可能会写一篇数学期望专题具体讲解此类题目。</del></p></li></ol><hr><ol><li><h5 id="过河（线性dp-玄学离散化）"><a href="#过河（线性dp-玄学离散化）" class="headerlink" title="过河（线性dp+玄学离散化）"></a><a href="https://www.luogu.org/problemnew/show/P1052" target="_blank" rel="noopener">过河</a>（线性dp+玄学离散化）</h5><script type="math/tex; mode=display">f[i]=min_{S \le j \le T}\{f[i-j]+flag[i]\}</script><p>由于m非常小，因此采用2520缩点，即两点之间距离超过2520的，可以将距离改为$dis % 2520$，从而离散化。</p></li></ol><hr><ol><li><h5 id="统计单词个数（线性dp-字符串）"><a href="#统计单词个数（线性dp-字符串）" class="headerlink" title="统计单词个数（线性dp+字符串）"></a><a href="https://www.luogu.org/problemnew/show/P1026" target="_blank" rel="noopener">统计单词个数</a>（线性dp+字符串）</h5><script type="math/tex; mode=display">f[i][j]=max\{f[i][j],f[r][j-1]+g[r+1][i]\}</script><p>字符串处理使用string类find函数。</p><p>线性dp时再次强调，需要分清阶段、状态和决策变量；阶段在最外层循环，决策在最内层。在寻找关系时可以从推导或定义角度辨析，也可以根据转移方程进行识别。</p></li></ol><hr><ol><li><h5 id="有线电视网（背包类树形dp）"><a href="#有线电视网（背包类树形dp）" class="headerlink" title="有线电视网（背包类树形dp）"></a><a href="https://www.luogu.org/fe/problem/P1273" target="_blank" rel="noopener">有线电视网</a>（背包类树形dp）</h5><script type="math/tex; mode=display">f[u][i]=max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p><a href="https://tth37.cn/2019/04/25/solution-luogu-p1273/">题解链接</a></p></li></ol><hr><ol><li><h5 id="棋盘制作（单调栈）"><a href="#棋盘制作（单调栈）" class="headerlink" title="棋盘制作（单调栈）"></a><a href="https://www.luogu.org/problemnew/show/P1169" target="_blank" rel="noopener">棋盘制作</a>（单调栈）</h5><p>似乎没有转移方程</p><p>注意单调栈的处理方式（玄学方法或通用方法），在退栈时务必退干净。</p></li></ol><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//玄学方法：</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N+<span class="number">1</span>;++i)&#123;</span><br><span class="line">    <span class="keyword">while</span>(cnt&gt;<span class="number">0</span>&amp;&amp;a[s[cnt]]&gt;=a[i])&#123;</span><br><span class="line">        ans=max(ans,(i-s[cnt<span class="number">-1</span>]<span class="number">-1</span>)*a[s[cnt]]);</span><br><span class="line">        cnt--;</span><br><span class="line">    &#125;</span><br><span class="line">    s[++cnt]=i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//通用方法：</span></span><br><span class="line">先处理出每个位置左边第一个比它小的，再处理出右边第一个比它小的，最后枚举</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
@@ -1324,15 +1325,15 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
     
     </summary>
     
-      <category term="题目列表" scheme="http://yoursite.com/categories/%E9%A2%98%E7%9B%AE%E5%88%97%E8%A1%A8/"/>
+      <category term="题目列表" scheme="https://tth37.cn/categories/%E9%A2%98%E7%9B%AE%E5%88%97%E8%A1%A8/"/>
     
     
   </entry>
   
   <entry>
     <title>题解-luogu-p1080国王游戏</title>
-    <link href="http://yoursite.com/2019/01/26/solution-luogu-p1080/"/>
-    <id>http://yoursite.com/2019/01/26/solution-luogu-p1080/</id>
+    <link href="https://tth37.cn/2019/01/26/solution-luogu-p1080/"/>
+    <id>https://tth37.cn/2019/01/26/solution-luogu-p1080/</id>
     <published>2019-01-26T02:58:39.000Z</published>
     <updated>2019-05-12T13:00:29.465Z</updated>
     
@@ -1348,19 +1349,19 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="贪心" scheme="http://yoursite.com/tags/%E8%B4%AA%E5%BF%83/"/>
+      <category term="python" scheme="https://tth37.cn/tags/python/"/>
     
-      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+      <category term="贪心" scheme="https://tth37.cn/tags/%E8%B4%AA%E5%BF%83/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p1022计算器的改良</title>
-    <link href="http://yoursite.com/2018/12/19/solution-luogu-p1022/"/>
-    <id>http://yoursite.com/2018/12/19/solution-luogu-p1022/</id>
+    <link href="https://tth37.cn/2018/12/19/solution-luogu-p1022/"/>
+    <id>https://tth37.cn/2018/12/19/solution-luogu-p1022/</id>
     <published>2018-12-19T06:14:46.000Z</published>
     <updated>2019-07-18T14:47:45.284Z</updated>
     
@@ -1386,19 +1387,19 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="字符串" scheme="http://yoursite.com/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
-      <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+      <category term="字符串" scheme="https://tth37.cn/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   
   <entry>
     <title>题解-luogu-p1204挤牛奶</title>
-    <link href="http://yoursite.com/2018/12/15/solution-luogu-p1204/"/>
-    <id>http://yoursite.com/2018/12/15/solution-luogu-p1204/</id>
+    <link href="https://tth37.cn/2018/12/15/solution-luogu-p1204/"/>
+    <id>https://tth37.cn/2018/12/15/solution-luogu-p1204/</id>
     <published>2018-12-15T06:51:52.000Z</published>
     <updated>2019-05-12T13:00:14.587Z</updated>
     
@@ -1419,12 +1420,12 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
     
     </summary>
     
-      <category term="题解" scheme="http://yoursite.com/categories/%E9%A2%98%E8%A7%A3/"/>
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="贪心" scheme="http://yoursite.com/tags/%E8%B4%AA%E5%BF%83/"/>
+      <category term="贪心" scheme="https://tth37.cn/tags/%E8%B4%AA%E5%BF%83/"/>
     
-      <category term="排序" scheme="http://yoursite.com/tags/%E6%8E%92%E5%BA%8F/"/>
+      <category term="排序" scheme="https://tth37.cn/tags/%E6%8E%92%E5%BA%8F/"/>
     
   </entry>
   
