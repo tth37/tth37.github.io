@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tth37.cn/"/>
-  <updated>2019-09-19T15:19:00.208Z</updated>
+  <updated>2019-09-20T14:10:55.909Z</updated>
   <id>https://tth37.cn/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>题解-luogu-p2680运输计划(Beta)</title>
+    <link href="https://tth37.cn/2019/09/20/solution-luogu-p2680/"/>
+    <id>https://tth37.cn/2019/09/20/solution-luogu-p2680/</id>
+    <published>2019-09-20T13:46:44.000Z</published>
+    <updated>2019-09-20T14:10:55.909Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://www.luogu.org/problem/P2680" target="_blank" rel="noopener">题目链接</a></p><p>证明及优化树上路径求交算法后 将会在洛谷博客上发布</p></blockquote><p>这是一道暑假集训被劝退的神仙题 在今天的信息课上奇迹般地一遍过</p><p>根据题意，将某一条边的边权从 $w$ 改为 $0$，即为将经过该条边的路径总长度减去 $w$。而我们要做的，就是改造树上的某一条边，使得最长的路径长度最短。</p><p>题目乍一看可以二分，但在这篇题解中采用贪心策略。</p><p>首先将所有路径按照长度降序排序。不难发现，只有在“改造”操作能够同时减小前 $x$ 条路径的长度，该操作才是有意义的，否则不会对答案产生贡献。</p><p>那么如何使“改造”操作同时减小前 $x$ 条路径的长度呢？显然，此时选取的边一定属于前 $x$ 条路径的交。路径的交一定仍是路径，根据贪心，只需在路径的交上选取最大的边权，将这条边的边权改为 $0$，然后更新答案即可。</p><p>仅剩的问题在于如何快速求出前 $x$ 条路径的交。这里介绍一种 <a href="https://tth37.cn">tth37</a> 算法。（开始口胡）</p><blockquote><p>引理：路径 $p(u1,v1)$ 与 $p(u2,v2)$ 如果存在交，则路径的交的端点一定为 $lca(u1,u2),lca(u1,v2),lca(v1,u2),lca(v1,v2)$ 中同时属于两条路径的最远点对。</p></blockquote><p>尚未证明。未完待续。</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.luogu.org/problem/P2680&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;证明及优化树上路径求交算法后 将会在洛谷博客上发布&lt;/p&gt;
+&lt;
+      
+    
+    </summary>
+    
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+      <category term="倍增" scheme="https://tth37.cn/tags/%E5%80%8D%E5%A2%9E/"/>
+    
+      <category term="最近公共祖先" scheme="https://tth37.cn/tags/%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/"/>
+    
+  </entry>
   
   <entry>
     <title>题解-luogu-p1941飞扬的小鸟</title>
@@ -204,9 +234,9 @@
     
       <category term="树形dp" scheme="https://tth37.cn/tags/%E6%A0%91%E5%BD%A2dp/"/>
     
-      <category term="虚树" scheme="https://tth37.cn/tags/%E8%99%9A%E6%A0%91/"/>
-    
       <category term="点分治" scheme="https://tth37.cn/tags/%E7%82%B9%E5%88%86%E6%B2%BB/"/>
+    
+      <category term="虚树" scheme="https://tth37.cn/tags/%E8%99%9A%E6%A0%91/"/>
     
   </entry>
   
@@ -267,11 +297,11 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
+      <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
+    
       <category term="二分答案" scheme="https://tth37.cn/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/"/>
     
       <category term="倍增" scheme="https://tth37.cn/tags/%E5%80%8D%E5%A2%9E/"/>
-    
-      <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
   </entry>
   

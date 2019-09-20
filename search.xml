@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-luogu-p2680运输计划(Beta)]]></title>
+    <url>%2F2019%2F09%2F20%2Fsolution-luogu-p2680%2F</url>
+    <content type="text"><![CDATA[题目链接 证明及优化树上路径求交算法后 将会在洛谷博客上发布 这是一道暑假集训被劝退的神仙题 在今天的信息课上奇迹般地一遍过 根据题意，将某一条边的边权从 $w$ 改为 $0$，即为将经过该条边的路径总长度减去 $w$。而我们要做的，就是改造树上的某一条边，使得最长的路径长度最短。 题目乍一看可以二分，但在这篇题解中采用贪心策略。 首先将所有路径按照长度降序排序。不难发现，只有在“改造”操作能够同时减小前 $x$ 条路径的长度，该操作才是有意义的，否则不会对答案产生贡献。 那么如何使“改造”操作同时减小前 $x$ 条路径的长度呢？显然，此时选取的边一定属于前 $x$ 条路径的交。路径的交一定仍是路径，根据贪心，只需在路径的交上选取最大的边权，将这条边的边权改为 $0$，然后更新答案即可。 仅剩的问题在于如何快速求出前 $x$ 条路径的交。这里介绍一种 tth37 算法。（开始口胡） 引理：路径 $p(u1,v1)$ 与 $p(u2,v2)$ 如果存在交，则路径的交的端点一定为 $lca(u1,u2),lca(u1,v2),lca(v1,u2),lca(v1,v2)$ 中同时属于两条路径的最远点对。 尚未证明。未完待续。]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>倍增</tag>
+        <tag>最近公共祖先</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[题解-luogu-p1941飞扬的小鸟]]></title>
     <url>%2F2019%2F09%2F19%2Fsolution-luogu-p1941%2F</url>
     <content type="text"><![CDATA[题目链接 给定 $n*m$ 的游戏界面，求是否可以通过操作使小鸟通过所有管道以及最少操作次数。 $n\le 10000,m\le 1000$ 这篇博客不会在洛谷发表，所以内容可能比较放飞自我。 神仙shiwt巨佬早在去年的这个时候就已经切掉了这个神仙题。 记 $f[i][j]$ 表示从起点飞到坐标 $(i,j)$ 所需的最小步数。考虑 $f[i][j]$ 的转移。它要么是从 $(i-1,j+Y)$ 那里掉下来的，也有可能是从 $(i-1,j-kX)$ 那里升上来的。 考虑优化。 $(i-1,j-kX)$ 的枚举较为啰嗦；不难发现如果小鸟🐦可以飞到 $(i,j-X)$ ，那么它再飞一下不就到 $(i,j)$ 了吗？ 状态转移方程如下： f[i][j]=\min \{f[i-1][j+Y],f[i][j-X]+1,f[i-1][j-X]+1\}不妨写个滚动数组。 代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include &lt;bits/stdc++.h&gt;using namespace std;const int MAXN = 10005;const int MAXM = 1005;const int INF = 0x3f3f3f3f;int N, M, K;int X[MAXN], Y[MAXN];int L[MAXN], R[MAXN];int f[2][MAXM * 2];int cnt, minn;int main() &#123; scanf("%d%d%d", &amp;N, &amp;M, &amp;K); for (register int i = 1; i &lt;= N; ++i) scanf("%d%d", &amp;X[i], &amp;Y[i]); for (register int i = 1; i &lt;= K; ++i) &#123; int p, l, h; scanf("%d%d%d", &amp;p, &amp;l, &amp;h); L[p] = l, R[p] = h; &#125; for (register int i = 1; i &lt;= N; ++i) &#123; int cur = i &amp; 1; minn = INF; for (register int j = 0; j &lt;= M + X[i]; ++j) f[cur][j] = INF; for (register int j = X[i]; j &lt;= M + X[i]; ++j) f[cur][j] = min(f[cur][j], min(f[cur ^ 1][j - X[i]] + 1, f[cur][j - X[i]] + 1)); for (register int j = M + 1; j &lt;= M + X[i]; ++j) f[cur][M] = min(f[cur][M], f[cur][j]); for (register int j = 0; j &lt;= M - Y[i]; ++j) f[cur][j] = min(f[cur][j], f[cur ^ 1][j + Y[i]]); if (L[i] || R[i]) &#123; for (register int j = 0; j &lt;= L[i]; ++j) f[cur][j] = INF; for (register int j = R[i]; j &lt;= M; ++j) f[cur][j] = INF; &#125; f[cur][0] = INF; for (register int j = 0; j &lt;= M; ++j) minn = min(minn, f[cur][j]); if (minn == INF) &#123; puts("0"); printf("%d", cnt); return 0; &#125; cnt += L[i] || R[i]; &#125; puts("1"); printf("%d", minn); return 0;&#125;]]></content>
@@ -79,8 +91,8 @@
       </categories>
       <tags>
         <tag>树形dp</tag>
-        <tag>虚树</tag>
         <tag>点分治</tag>
+        <tag>虚树</tag>
       </tags>
   </entry>
   <entry>
@@ -107,9 +119,9 @@
         <category>题解</category>
       </categories>
       <tags>
+        <tag>前缀和</tag>
         <tag>二分答案</tag>
         <tag>倍增</tag>
-        <tag>前缀和</tag>
       </tags>
   </entry>
   <entry>
