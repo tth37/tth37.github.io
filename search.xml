@@ -8,8 +8,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>最近公共祖先</tag>
         <tag>倍增</tag>
+        <tag>最近公共祖先</tag>
       </tags>
   </entry>
   <entry>
@@ -91,8 +91,8 @@
       </categories>
       <tags>
         <tag>树形dp</tag>
-        <tag>虚树</tag>
         <tag>点分治</tag>
+        <tag>虚树</tag>
       </tags>
   </entry>
   <entry>
@@ -288,8 +288,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
       </tags>
   </entry>
   <entry>
@@ -300,8 +300,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -585,8 +585,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
