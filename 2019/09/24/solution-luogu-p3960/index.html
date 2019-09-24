@@ -116,18 +116,18 @@
 
 
 
-  <meta name="description" content="题目链接 题目概括征集中~  一道非常有意思的题。 假设我们有一个神奇的数据结构，它可以动态地维护一个长度为 $n$ 的队列，其初始元素为 $1,2,…,n$ 。该队列可以支持两种操作，第一种为删除队列的第 $k$ 项元素，执行“向前看齐”操作，并在队列的末尾补充 $n+1$ （以此类推）。第二种为查询队列的第 $k$ 项元素的数值。 拥有这样一个数据结构，本题就简单多了；观察到“向前看齐”命令">
+  <meta name="description" content="题目链接 题目概括征集中~">
 <meta name="keywords" content="主席树,线段树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题解-luogu-p3960列队">
 <meta property="og:url" content="https://tth37.cn/2019/09/24/solution-luogu-p3960/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="题目链接 题目概括征集中~  一道非常有意思的题。 假设我们有一个神奇的数据结构，它可以动态地维护一个长度为 $n$ 的队列，其初始元素为 $1,2,…,n$ 。该队列可以支持两种操作，第一种为删除队列的第 $k$ 项元素，执行“向前看齐”操作，并在队列的末尾补充 $n+1$ （以此类推）。第二种为查询队列的第 $k$ 项元素的数值。 拥有这样一个数据结构，本题就简单多了；观察到“向前看齐”命令">
+<meta property="og:description" content="题目链接 题目概括征集中~">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-24T15:35:37.229Z">
+<meta property="og:updated_time" content="2019-09-24T15:37:12.436Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="题解-luogu-p3960列队">
-<meta name="twitter:description" content="题目链接 题目概括征集中~  一道非常有意思的题。 假设我们有一个神奇的数据结构，它可以动态地维护一个长度为 $n$ 的队列，其初始元素为 $1,2,…,n$ 。该队列可以支持两种操作，第一种为删除队列的第 $k$ 项元素，执行“向前看齐”操作，并在队列的末尾补充 $n+1$ （以此类推）。第二种为查询队列的第 $k$ 项元素的数值。 拥有这样一个数据结构，本题就简单多了；观察到“向前看齐”命令">
+<meta name="twitter:description" content="题目链接 题目概括征集中~">
 
 
 
@@ -519,7 +519,7 @@
                 
               
 
-              <time title="创建时间：2019-09-24 23:14:36 / 修改时间：23:35:37" itemprop="dateCreated datePublished" datetime="2019-09-24T23:14:36+08:00">2019-09-24</time>
+              <time title="创建时间：2019-09-24 23:14:36 / 修改时间：23:37:12" itemprop="dateCreated datePublished" datetime="2019-09-24T23:14:36+08:00">2019-09-24</time>
             
 
             
@@ -604,6 +604,7 @@
 <p><a href="https://www.luogu.org/problem/P3960" target="_blank" rel="noopener">题目链接</a></p>
 <p>题目概括征集中~</p>
 </blockquote>
+<a id="more"></a>
 <p>一道非常有意思的题。</p>
 <p>假设我们有一个神奇的数据结构，它可以动态地维护一个长度为 $n$ 的队列，其初始元素为 $1,2,…,n$ 。该队列可以支持两种操作，第一种为删除队列的第 $k$ 项元素，执行“向前看齐”操作，并在队列的末尾补充 $n+1$ （以此类推）。第二种为查询队列的第 $k$ 项元素的数值。</p>
 <p>拥有这样一个数据结构，本题就简单多了；观察到“向前看齐”命令只对最后一列产生影响，我们可以在每一行维护一个动态队列，最后一列用另一个动态队列单独处理。</p>
