@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-luogu-p3960列队]]></title>
+    <url>%2F2019%2F09%2F24%2Fsolution-luogu-p3960%2F</url>
+    <content type="text"><![CDATA[题目链接 题目概括征集中~ 一道非常有意思的题。 假设我们有一个神奇的数据结构，它可以动态地维护一个长度为 $n$ 的队列，其初始元素为 $1,2,…,n$ 。该队列可以支持两种操作，第一种为删除队列的第 $k$ 项元素，执行“向前看齐”操作，并在队列的末尾补充 $n+1$ （以此类推）。第二种为查询队列的第 $k$ 项元素的数值。 拥有这样一个数据结构，本题就简单多了；观察到“向前看齐”命令只对最后一列产生影响，我们可以在每一行维护一个动态队列，最后一列用另一个动态队列单独处理。 如果出列的同学位于最后一列，则只需对最后一列进行一次删除操作即可；如果出列的同学不在最后一列，则需要对出列同学所在的那一行与最后一列同时进行操作。实现细节不再赘述。 现在我们来考虑一下如何实现神奇的动态队列。在本题的情况中，假设每个动态队列最多有 $Q$ 次删除操作，那么动态队列的时空复杂度必须只与 $Q$ 相关，否则 $O(n^2)$ 的时空复杂度无法承受。似乎这里可以用平衡树实现，而我采用了较为好写的动态开点权值线段树来维护动态队列。 初始状态，权值线段树下标为 $1,2,…,n$ 的节点大小均为 $1$ 。对于删除操作，我们只需将对应的权值大小减一，并在权值 $n+1$ 的大小加一即可。对于查询操作，只需在权值线段树中查询第 $k$ 小元素即为对应数值。实现细节同样不再赘述。 记得开 long long 。代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677#include &lt;bits/stdc++.h&gt;#define lson(u) (node[u].l)#define rson(u) (node[u].r)#define sum(u) (node[u].sum)using namespace std;typedef long long ll;const int MAXN = 300005;struct Node &#123; int l, r, sum;&#125;node[MAXN * 42];int cnt;int root[MAXN], size[MAXN];vector&lt;ll&gt; ins[MAXN];int N, M, Q, T;void modify(int&amp; u, int l, int r, int p, int val) &#123; if (u == 0) u = ++cnt; if (l == r) &#123; sum(u) += val; return; &#125; int mid = (l + r) &gt;&gt; 1; if (p &lt;= mid) modify(lson(u), l, mid, p, val); else modify(rson(u), mid + 1, r, p, val); sum(u) = sum(lson(u)) + sum(rson(u));&#125;int query(int u, int l, int r, int k) &#123; if (l == r) return l; int mid = (l + r) &gt;&gt; 1; int lsum = sum(lson(u)); if (l &lt;= T) &#123; lsum += (mid &gt; T) ? T - l + 1 : mid - l + 1; &#125; if (k &lt;= lsum) return query(lson(u), l, mid, k); else return query(rson(u), mid + 1, r, k - lsum);&#125;int main() &#123; scanf("%d%d%d", &amp;N, &amp;M, &amp;Q); int Case = Q; while (Case--) &#123; int x, y; scanf("%d%d", &amp;x, &amp;y); ll ans = 0, tmp = 0; if (y == M) &#123; T = N; ans = query(root[N + 1], 1, N + Q, x); modify(root[N + 1], 1, N + Q, ans, -1); modify(root[N + 1], 1, N + Q, N + (++size[N + 1]), 1); if (ans &lt;= N) ans = ans * (ll)M; else ans = ins[N + 1][ans - N - 1]; ins[N + 1].push_back(ans); printf("%lld\n", ans); &#125; else &#123; T = M - 1; ans = query(root[x], 1, M + Q, y); modify(root[x], 1, M + Q, ans, -1); modify(root[x], 1, M + Q, M - 1 + (++size[x]), 1); if (ans &lt;= M - 1) ans += (ll)(x - 1) * M; else ans = ins[x][ans - M]; T = N; tmp = query(root[N + 1], 1, N + Q, x); modify(root[N + 1], 1, N + Q, tmp, -1); modify(root[N + 1], 1, N + Q, N + (++size[N + 1]), 1); if (tmp &lt;= N) tmp = tmp * (ll)M; else tmp = ins[N + 1][tmp - N - 1]; ins[N + 1].push_back(ans); ins[x].push_back(tmp); printf("%lld\n", ans); &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>主席树</tag>
+        <tag>线段树</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[题解-luogu-p2680运输计划(Beta)]]></title>
     <url>%2F2019%2F09%2F20%2Fsolution-luogu-p2680%2F</url>
     <content type="text"><![CDATA[题目链接 证明及优化树上路径求交算法后 将会在洛谷博客上发布 这是一道暑假集训被劝退的神仙题 在今天的信息课上奇迹般地一遍过 根据题意，将某一条边的边权从 $w$ 改为 $0$，即为将经过该条边的路径总长度减去 $w$。而我们要做的，就是改造树上的某一条边，使得最长的路径长度最短。 题目乍一看可以二分，但在这篇题解中采用贪心策略。 首先将所有路径按照长度降序排序。不难发现，只有在“改造”操作能够同时减小前 $x$ 条路径的长度，该操作才是有意义的，否则不会对答案产生贡献。 那么如何使“改造”操作同时减小前 $x$ 条路径的长度呢？显然，此时选取的边一定属于前 $x$ 条路径的交。路径的交一定仍是路径，根据贪心，只需在路径的交上选取最大的边权，将这条边的边权改为 $0$，然后更新答案即可。 仅剩的问题在于如何快速求出前 $x$ 条路径的交。这里介绍一种 tth37 算法。（开始口胡） 引理：路径 $p(u1,v1)$ 与 $p(u2,v2)$ 如果存在交，则路径的交的端点一定为 $lca(u1,u2),lca(u1,v2),lca(v1,u2),lca(v1,v2)$ 中同时属于两条路径的最远点对。 尚未证明。未完待续。]]></content>
@@ -119,9 +131,9 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>前缀和</tag>
         <tag>二分答案</tag>
         <tag>倍增</tag>
+        <tag>前缀和</tag>
       </tags>
   </entry>
   <entry>
@@ -288,8 +300,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -300,8 +312,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -585,8 +597,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>字符串</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>

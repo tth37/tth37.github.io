@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tth37.cn/"/>
-  <updated>2019-09-20T14:14:02.393Z</updated>
+  <updated>2019-09-24T15:35:37.229Z</updated>
   <id>https://tth37.cn/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>题解-luogu-p3960列队</title>
+    <link href="https://tth37.cn/2019/09/24/solution-luogu-p3960/"/>
+    <id>https://tth37.cn/2019/09/24/solution-luogu-p3960/</id>
+    <published>2019-09-24T15:14:36.000Z</published>
+    <updated>2019-09-24T15:35:37.229Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://www.luogu.org/problem/P3960" target="_blank" rel="noopener">题目链接</a></p><p>题目概括征集中~</p></blockquote><p>一道非常有意思的题。</p><p>假设我们有一个神奇的数据结构，它可以动态地维护一个长度为 $n$ 的队列，其初始元素为 $1,2,…,n$ 。该队列可以支持两种操作，第一种为删除队列的第 $k$ 项元素，执行“向前看齐”操作，并在队列的末尾补充 $n+1$ （以此类推）。第二种为查询队列的第 $k$ 项元素的数值。</p><p>拥有这样一个数据结构，本题就简单多了；观察到“向前看齐”命令只对最后一列产生影响，我们可以在每一行维护一个动态队列，最后一列用另一个动态队列单独处理。</p><p>如果出列的同学位于最后一列，则只需对最后一列进行一次删除操作即可；如果出列的同学不在最后一列，则需要对出列同学所在的那一行与最后一列同时进行操作。实现细节不再赘述。</p><p>现在我们来考虑一下如何实现神奇的动态队列。在本题的情况中，假设每个动态队列最多有 $Q$ 次删除操作，那么动态队列的时空复杂度必须只与 $Q$ 相关，否则 $O(n^2)$ 的时空复杂度无法承受。似乎这里可以用平衡树实现，而我采用了较为好写的<strong>动态开点权值线段树</strong>来维护动态队列。</p><p>初始状态，权值线段树下标为 $1,2,…,n$ 的节点大小均为 $1$ 。对于删除操作，我们只需将对应的权值大小减一，并在权值 $n+1$ 的大小加一即可。对于查询操作，只需在权值线段树中查询第 $k$ 小元素即为对应数值。实现细节同样不再赘述。</p><p>记得开 long long 。代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lson(u) (node[u].l)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rson(u) (node[u].r)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sum(u) (node[u].sum)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">300005</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, sum;</span><br><span class="line">&#125;node[MAXN * <span class="number">42</span>];</span><br><span class="line"><span class="keyword">int</span> cnt;</span><br><span class="line"><span class="keyword">int</span> root[MAXN], size[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;ll&gt; ins[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N, M, Q, T;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span>&amp; u, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> p, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (u == <span class="number">0</span>) u = ++cnt;</span><br><span class="line">    <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">        sum(u) += val;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (p &lt;= mid) modify(lson(u), l, mid, p, val);</span><br><span class="line">    <span class="keyword">else</span> modify(rson(u), mid + <span class="number">1</span>, r, p, val);</span><br><span class="line">    sum(u) = sum(lson(u)) + sum(rson(u));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l == r) <span class="keyword">return</span> l;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> lsum = sum(lson(u));</span><br><span class="line">    <span class="keyword">if</span> (l &lt;= T) &#123;</span><br><span class="line">        lsum += (mid &gt; T) ? T - l + <span class="number">1</span> : mid - l + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (k &lt;= lsum) <span class="keyword">return</span> query(lson(u), l, mid, k);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> query(rson(u), mid + <span class="number">1</span>, r, k - lsum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;N, &amp;M, &amp;Q);</span><br><span class="line">    <span class="keyword">int</span> Case = Q;</span><br><span class="line">    <span class="keyword">while</span> (Case--) &#123;</span><br><span class="line">        <span class="keyword">int</span> x, y;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">        ll ans = <span class="number">0</span>, tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (y == M) &#123;</span><br><span class="line">            T = N;</span><br><span class="line">            ans = query(root[N + <span class="number">1</span>], <span class="number">1</span>, N + Q, x);</span><br><span class="line">            modify(root[N + <span class="number">1</span>], <span class="number">1</span>, N + Q, ans, <span class="number">-1</span>);</span><br><span class="line">            modify(root[N + <span class="number">1</span>], <span class="number">1</span>, N + Q, N + (++size[N + <span class="number">1</span>]), <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (ans &lt;= N) ans = ans * (ll)M;</span><br><span class="line">            <span class="keyword">else</span> ans = ins[N + <span class="number">1</span>][ans - N - <span class="number">1</span>];</span><br><span class="line">            ins[N + <span class="number">1</span>].push_back(ans);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            T = M - <span class="number">1</span>;</span><br><span class="line">            ans = query(root[x], <span class="number">1</span>, M + Q, y);</span><br><span class="line">            modify(root[x], <span class="number">1</span>, M + Q, ans, <span class="number">-1</span>);</span><br><span class="line">            modify(root[x], <span class="number">1</span>, M + Q, M - <span class="number">1</span> + (++size[x]), <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (ans &lt;= M - <span class="number">1</span>) ans += (ll)(x - <span class="number">1</span>) * M;</span><br><span class="line">            <span class="keyword">else</span> ans = ins[x][ans - M];</span><br><span class="line">            T = N;</span><br><span class="line">            tmp = query(root[N + <span class="number">1</span>], <span class="number">1</span>, N + Q, x);</span><br><span class="line">            modify(root[N + <span class="number">1</span>], <span class="number">1</span>, N + Q, tmp, <span class="number">-1</span>);</span><br><span class="line">            modify(root[N + <span class="number">1</span>], <span class="number">1</span>, N + Q, N + (++size[N + <span class="number">1</span>]), <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (tmp &lt;= N) tmp = tmp * (ll)M;</span><br><span class="line">            <span class="keyword">else</span> tmp = ins[N + <span class="number">1</span>][tmp - N - <span class="number">1</span>];</span><br><span class="line">            ins[N + <span class="number">1</span>].push_back(ans);</span><br><span class="line">            ins[x].push_back(tmp);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.luogu.org/problem/P3960&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;题目概括征集中~&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;一
+      
+    
+    </summary>
+    
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
+    
+      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+  </entry>
   
   <entry>
     <title>题解-luogu-p2680运输计划(Beta)</title>
@@ -294,11 +325,11 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
-    
       <category term="二分答案" scheme="https://tth37.cn/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/"/>
     
       <category term="倍增" scheme="https://tth37.cn/tags/%E5%80%8D%E5%A2%9E/"/>
+    
+      <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
   </entry>
   
@@ -703,9 +734,9 @@
       <category term="数论专题" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
@@ -731,9 +762,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
       <category term="逆元" scheme="https://tth37.cn/tags/%E9%80%86%E5%85%83/"/>
     
@@ -1469,9 +1500,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="字符串" scheme="https://tth37.cn/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   

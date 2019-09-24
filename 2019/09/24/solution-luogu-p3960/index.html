@@ -116,18 +116,18 @@
 
 
 
-  <meta name="description" content="题目链接 咕咕咕">
-<meta name="keywords" content="数学,倍增,ST算法">
+  <meta name="description" content="题目链接 题目概括征集中~  一道非常有意思的题。 假设我们有一个神奇的数据结构，它可以动态地维护一个长度为 $n$ 的队列，其初始元素为 $1,2,…,n$ 。该队列可以支持两种操作，第一种为删除队列的第 $k$ 项元素，执行“向前看齐”操作，并在队列的末尾补充 $n+1$ （以此类推）。第二种为查询队列的第 $k$ 项元素的数值。 拥有这样一个数据结构，本题就简单多了；观察到“向前看齐”命令">
+<meta name="keywords" content="主席树,线段树">
 <meta property="og:type" content="article">
-<meta property="og:title" content="题解-luogu-p5502最大公约数">
-<meta property="og:url" content="https://tth37.cn/2019/08/23/solution-luogu-p5502/index.html">
+<meta property="og:title" content="题解-luogu-p3960列队">
+<meta property="og:url" content="https://tth37.cn/2019/09/24/solution-luogu-p3960/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="题目链接 咕咕咕">
+<meta property="og:description" content="题目链接 题目概括征集中~  一道非常有意思的题。 假设我们有一个神奇的数据结构，它可以动态地维护一个长度为 $n$ 的队列，其初始元素为 $1,2,…,n$ 。该队列可以支持两种操作，第一种为删除队列的第 $k$ 项元素，执行“向前看齐”操作，并在队列的末尾补充 $n+1$ （以此类推）。第二种为查询队列的第 $k$ 项元素的数值。 拥有这样一个数据结构，本题就简单多了；观察到“向前看齐”命令">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-08-23T15:23:12.327Z">
+<meta property="og:updated_time" content="2019-09-24T15:35:37.229Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="题解-luogu-p5502最大公约数">
-<meta name="twitter:description" content="题目链接 咕咕咕">
+<meta name="twitter:title" content="题解-luogu-p3960列队">
+<meta name="twitter:description" content="题目链接 题目概括征集中~  一道非常有意思的题。 假设我们有一个神奇的数据结构，它可以动态地维护一个长度为 $n$ 的队列，其初始元素为 $1,2,…,n$ 。该队列可以支持两种操作，第一种为删除队列的第 $k$ 项元素，执行“向前看齐”操作，并在队列的末尾补充 $n+1$ （以此类推）。第二种为查询队列的第 $k$ 项元素的数值。 拥有这样一个数据结构，本题就简单多了；观察到“向前看齐”命令">
 
 
 
@@ -136,7 +136,7 @@
 
 
 
-  <link rel="canonical" href="https://tth37.cn/2019/08/23/solution-luogu-p5502/">
+  <link rel="canonical" href="https://tth37.cn/2019/09/24/solution-luogu-p3960/">
 
 
 
@@ -146,7 +146,7 @@
   };
 </script>
 
-  <title>题解-luogu-p5502最大公约数 | tth37's Blog</title>
+  <title>题解-luogu-p3960列队 | tth37's Blog</title>
   
 
 
@@ -474,7 +474,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://tth37.cn/2019/08/23/solution-luogu-p5502/">
+    <link itemprop="mainEntityOfPage" href="https://tth37.cn/2019/09/24/solution-luogu-p3960/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="tth37">
@@ -491,7 +491,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">题解-luogu-p5502最大公约数
+          <h1 class="post-title" itemprop="name headline">题解-luogu-p3960列队
 
               
             
@@ -519,7 +519,7 @@
                 
               
 
-              <time title="创建时间：2019-08-23 23:21:35 / 修改时间：23:23:12" itemprop="dateCreated datePublished" datetime="2019-08-23T23:21:35+08:00">2019-08-23</time>
+              <time title="创建时间：2019-09-24 23:14:36 / 修改时间：23:35:37" itemprop="dateCreated datePublished" datetime="2019-09-24T23:14:36+08:00">2019-09-24</time>
             
 
             
@@ -576,7 +576,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">1.7k</span>
+                <span title="本文字数">3k</span>
               
 
               
@@ -601,17 +601,18 @@
 
       
         <blockquote>
-<p><a href="https://www.luogu.org/problem/P5502" target="_blank" rel="noopener">题目链接</a></p>
-<p>咕咕咕</p>
+<p><a href="https://www.luogu.org/problem/P3960" target="_blank" rel="noopener">题目链接</a></p>
+<p>题目概括征集中~</p>
 </blockquote>
-<a id="more"></a>
-<p>对于求解区间权值 $=value *length$ 的最值问题时，我们通常可以枚举区间左端点，然后高效地找出右端点更新答案。</p>
-<p>朴素的想法是枚举右端点 $r\in [l,n]$ 。根据显然的贪心策略，如果右端点在某一区间移动时，$\gcd(a_l,a_{l+1},…,a_r)$ 保持不变，则右端点越大越好。</p>
-<p>因此可以用倍增优化右端点的确定。但是在倍增的过程中，需要多次查询区间最大公约数；我们可以用ST表的思路对序列预处理，做到 $O(1)$ 复杂度查询。</p>
-<p>但是，如果已经确定左端点 $l$ ，不同的右端点选取会对应许多不同的最大公约数值，那么该算法的复杂度将无法承受。</p>
-<p>稍加观察，可以发现当左端点确定时，右端点右移一个单位，原子段的最大公约数要么维持不变；要么变为原最大公约数的一个约数。换言之，当左端点确定时，不同的右端点最多对应 $\log_2n$ 个不同的最大公约数值。算法复杂度得以控制在 $O(n(\log n)^2)$ 。</p>
-<p>代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">gcd</span><span class="params">(ll a, ll b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> b == <span class="number">0</span> ? a : gcd(b, a % b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T, N;</span><br><span class="line">ll ans;</span><br><span class="line">ll a[<span class="number">100005</span>];</span><br><span class="line">ll st[<span class="number">100005</span>][<span class="number">18</span>];</span><br><span class="line"><span class="keyword">int</span> lg[<span class="number">100005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = lg[r - l + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> gcd(st[l][k], st[r - (<span class="number">1</span> &lt;&lt; k) + <span class="number">1</span>][k]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    lg[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">100000</span>; ++i)</span><br><span class="line">        lg[i] = lg[i &gt;&gt; <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;st[i][<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= lg[N]; ++j)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i + (<span class="number">1</span> &lt;&lt; j) - <span class="number">1</span> &lt;= N; ++i)</span><br><span class="line">            st[i][j] = gcd(st[i][j - <span class="number">1</span>], st[i + (<span class="number">1</span> &lt;&lt; (j - <span class="number">1</span>))][j - <span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> l = <span class="number">1</span>; l &lt;= N; ++l) &#123;</span><br><span class="line">        <span class="keyword">int</span> r = l;</span><br><span class="line">        <span class="keyword">while</span> (r &lt;= N) &#123;</span><br><span class="line">            ll cur = query(l, r);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = lg[N]; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (r + (<span class="number">1</span> &lt;&lt; i) &lt;= N &amp;&amp; query(l, r + (<span class="number">1</span> &lt;&lt; i)) == cur)</span><br><span class="line">                    r += (<span class="number">1</span> &lt;&lt; i);</span><br><span class="line">            &#125;</span><br><span class="line">            ans = max(ans, cur * (r - l + <span class="number">1</span>));</span><br><span class="line">            r += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一道非常有意思的题。</p>
+<p>假设我们有一个神奇的数据结构，它可以动态地维护一个长度为 $n$ 的队列，其初始元素为 $1,2,…,n$ 。该队列可以支持两种操作，第一种为删除队列的第 $k$ 项元素，执行“向前看齐”操作，并在队列的末尾补充 $n+1$ （以此类推）。第二种为查询队列的第 $k$ 项元素的数值。</p>
+<p>拥有这样一个数据结构，本题就简单多了；观察到“向前看齐”命令只对最后一列产生影响，我们可以在每一行维护一个动态队列，最后一列用另一个动态队列单独处理。</p>
+<p>如果出列的同学位于最后一列，则只需对最后一列进行一次删除操作即可；如果出列的同学不在最后一列，则需要对出列同学所在的那一行与最后一列同时进行操作。实现细节不再赘述。</p>
+<p>现在我们来考虑一下如何实现神奇的动态队列。在本题的情况中，假设每个动态队列最多有 $Q$ 次删除操作，那么动态队列的时空复杂度必须只与 $Q$ 相关，否则 $O(n^2)$ 的时空复杂度无法承受。似乎这里可以用平衡树实现，而我采用了较为好写的<strong>动态开点权值线段树</strong>来维护动态队列。</p>
+<p>初始状态，权值线段树下标为 $1,2,…,n$ 的节点大小均为 $1$ 。对于删除操作，我们只需将对应的权值大小减一，并在权值 $n+1$ 的大小加一即可。对于查询操作，只需在权值线段树中查询第 $k$ 小元素即为对应数值。实现细节同样不再赘述。</p>
+<p>记得开 long long 。代码如下：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lson(u) (node[u].l)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rson(u) (node[u].r)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sum(u) (node[u].sum)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">300005</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, sum;</span><br><span class="line">&#125;node[MAXN * <span class="number">42</span>];</span><br><span class="line"><span class="keyword">int</span> cnt;</span><br><span class="line"><span class="keyword">int</span> root[MAXN], size[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;ll&gt; ins[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N, M, Q, T;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span>&amp; u, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> p, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (u == <span class="number">0</span>) u = ++cnt;</span><br><span class="line">    <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">        sum(u) += val;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (p &lt;= mid) modify(lson(u), l, mid, p, val);</span><br><span class="line">    <span class="keyword">else</span> modify(rson(u), mid + <span class="number">1</span>, r, p, val);</span><br><span class="line">    sum(u) = sum(lson(u)) + sum(rson(u));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l == r) <span class="keyword">return</span> l;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> lsum = sum(lson(u));</span><br><span class="line">    <span class="keyword">if</span> (l &lt;= T) &#123;</span><br><span class="line">        lsum += (mid &gt; T) ? T - l + <span class="number">1</span> : mid - l + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (k &lt;= lsum) <span class="keyword">return</span> query(lson(u), l, mid, k);</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> query(rson(u), mid + <span class="number">1</span>, r, k - lsum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;N, &amp;M, &amp;Q);</span><br><span class="line">    <span class="keyword">int</span> Case = Q;</span><br><span class="line">    <span class="keyword">while</span> (Case--) &#123;</span><br><span class="line">        <span class="keyword">int</span> x, y;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">        ll ans = <span class="number">0</span>, tmp = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">if</span> (y == M) &#123;</span><br><span class="line">            T = N;</span><br><span class="line">            ans = query(root[N + <span class="number">1</span>], <span class="number">1</span>, N + Q, x);</span><br><span class="line">            modify(root[N + <span class="number">1</span>], <span class="number">1</span>, N + Q, ans, <span class="number">-1</span>);</span><br><span class="line">            modify(root[N + <span class="number">1</span>], <span class="number">1</span>, N + Q, N + (++size[N + <span class="number">1</span>]), <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (ans &lt;= N) ans = ans * (ll)M;</span><br><span class="line">            <span class="keyword">else</span> ans = ins[N + <span class="number">1</span>][ans - N - <span class="number">1</span>];</span><br><span class="line">            ins[N + <span class="number">1</span>].push_back(ans);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            T = M - <span class="number">1</span>;</span><br><span class="line">            ans = query(root[x], <span class="number">1</span>, M + Q, y);</span><br><span class="line">            modify(root[x], <span class="number">1</span>, M + Q, ans, <span class="number">-1</span>);</span><br><span class="line">            modify(root[x], <span class="number">1</span>, M + Q, M - <span class="number">1</span> + (++size[x]), <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (ans &lt;= M - <span class="number">1</span>) ans += (ll)(x - <span class="number">1</span>) * M;</span><br><span class="line">            <span class="keyword">else</span> ans = ins[x][ans - M];</span><br><span class="line">            T = N;</span><br><span class="line">            tmp = query(root[N + <span class="number">1</span>], <span class="number">1</span>, N + Q, x);</span><br><span class="line">            modify(root[N + <span class="number">1</span>], <span class="number">1</span>, N + Q, tmp, <span class="number">-1</span>);</span><br><span class="line">            modify(root[N + <span class="number">1</span>], <span class="number">1</span>, N + Q, N + (++size[N + <span class="number">1</span>]), <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">if</span> (tmp &lt;= N) tmp = tmp * (ll)M;</span><br><span class="line">            <span class="keyword">else</span> tmp = ins[N + <span class="number">1</span>][tmp - N - <span class="number">1</span>];</span><br><span class="line">            ins[N + <span class="number">1</span>].push_back(ans);</span><br><span class="line">            ins[x].push_back(tmp);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, ans);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -634,12 +635,12 @@
   <!-- JS库 sweetalert 可修改路径 -->
   <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-  <p><span>本文标题:</span><a href="/2019/08/23/solution-luogu-p5502/">题解-luogu-p5502最大公约数</a></p>
+  <p><span>本文标题:</span><a href="/2019/09/24/solution-luogu-p3960/">题解-luogu-p3960列队</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 tth37 的个人博客">tth37</a></p>
-  <p><span>发布时间:</span>2019年08月23日 - 23:08</p>
-  <p><span>最后更新:</span>2019年08月23日 - 23:08</p>
-  <p><span>原始链接:</span><a href="/2019/08/23/solution-luogu-p5502/" title="题解-luogu-p5502最大公约数">https://tth37.cn/2019/08/23/solution-luogu-p5502/</a>
-    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://tth37.cn/2019/08/23/solution-luogu-p5502/" aria-label="复制成功！"></i></span>
+  <p><span>发布时间:</span>2019年09月24日 - 23:09</p>
+  <p><span>最后更新:</span>2019年09月24日 - 23:09</p>
+  <p><span>原始链接:</span><a href="/2019/09/24/solution-luogu-p3960/" title="题解-luogu-p3960列队">https://tth37.cn/2019/09/24/solution-luogu-p3960/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://tth37.cn/2019/09/24/solution-luogu-p3960/" aria-label="复制成功！"></i></span>
   </p>
   <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>
 </div>
@@ -674,11 +675,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/数学/" rel="tag"># 数学</a>
+            <a href="/tags/主席树/" rel="tag"># 主席树</a>
           
-            <a href="/tags/倍增/" rel="tag"># 倍增</a>
-          
-            <a href="/tags/ST算法/" rel="tag"># ST算法</a>
+            <a href="/tags/线段树/" rel="tag"># 线段树</a>
           
         </div>
       
@@ -691,8 +690,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/08/23/solution-luogu-uva11021/" rel="next" title="题解-luogu-uva11021麻球繁衍">
-                <i class="fa fa-chevron-left"></i> 题解-luogu-uva11021麻球繁衍
+              <a href="/2019/09/20/solution-luogu-p2680/" rel="next" title="题解-luogu-p2680运输计划(Beta)">
+                <i class="fa fa-chevron-left"></i> 题解-luogu-p2680运输计划(Beta)
               </a>
             
           </div>
@@ -700,10 +699,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/08/26/bulletin-2019-8-26/" rel="prev" title="公告 2019-8-26">
-                公告 2019-8-26 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
