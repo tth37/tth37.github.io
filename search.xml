@@ -8,8 +8,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>主席树</tag>
         <tag>线段树</tag>
+        <tag>主席树</tag>
       </tags>
   </entry>
   <entry>
@@ -103,8 +103,8 @@
       </categories>
       <tags>
         <tag>树形dp</tag>
-        <tag>点分治</tag>
         <tag>虚树</tag>
+        <tag>点分治</tag>
       </tags>
   </entry>
   <entry>
@@ -260,8 +260,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>主席树</tag>
         <tag>树链剖分</tag>
+        <tag>主席树</tag>
         <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
@@ -275,8 +275,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>主席树</tag>
         <tag>线段树</tag>
+        <tag>主席树</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -352,8 +352,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>树链剖分</tag>
+        <tag>线段树</tag>
         <tag>dfs序</tag>
       </tags>
   </entry>
@@ -420,8 +420,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>树上差分</tag>
         <tag>最近公共祖先</tag>
+        <tag>树上差分</tag>
       </tags>
   </entry>
   <entry>
@@ -511,9 +511,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
+        <tag>线段树</tag>
         <tag>可持久化trie</tag>
         <tag>主席树</tag>
-        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
