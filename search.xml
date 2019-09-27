@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-LibreOJ-6032水箱]]></title>
+    <url>%2F2019%2F09%2F28%2Fsolution-loj-6032%2F</url>
+    <content type="text"><![CDATA[题目链接 题目概括重金征集中~ 比较毒瘤的一道题。 注意到每个条件只有“有水”限制和“没水”限制。问题在于如何统计最多能满足多少条件。假定所有的“没水”条件都能满足，在 DP 中如果在“没水”限制的格子中填入了水，则对答案的贡献减一；如果在“有水”限制的格子中填入了水，则对答案的贡献加一。 根据以上方法，可以定义状态：$f[i][j]$ 表示在从左往右第 $i$ 个格子中，高度为 $j$ 的地方有水时对答案产生的最大贡献。注意：此时假定第 $i$ 个格子的右侧挡板为无限高。 显然，如果 $j$ 小于等于其左侧挡板的高度，上一格的水的高度可以为 $1-h[i]$ 的任意值；如果 $j$ 大于其左侧挡板的高度，那么上一格的水的高度必须同样为 $j$。 状态转移方程如下： f[i][j]= \begin{cases} \sum_{k=1}^{j} w[i][k]+\max_{k=1}^{h[i]}\lbrace f[i-1][k]\rbrace,\ j\le h[i] \\ \sum_{k-1}^{j} w[i][k]+f[i-1][j],\ j>h[i] \end{cases}不难发现可以使用滚动数组优化空间；并且注意到，每个新的 $f[i][j]$ 要么是被修改成某个值，要么是在原来的基础上加上了某些东西。 在本题中，每个格子中限制条件的分布是相对稀疏的。那么，在同一格子的不同高度处，只要其对答案的贡献前缀和相等，则可以作为区间进行快速处理。 具体来说，可以使用线段树维护 $f[1]-f[L]$，并在其中用滚动数组的操作进行状态转移。这棵线段树需要支持区间修改（替换），区间修改（增加），区间查询最大值。 注意需要对高度进行离散化处理。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166#include &lt;bits/stdc++.h&gt;#define lson(u) node[u].l#define rson(u) node[u].r#define val(u) node[u].val#define tag1(u) node[u].tag1#define tag2(u) node[u].tag2#define id(x) (lower_bound(b + 1, b + L + 1, x) - b)#define rid(x) b[x]using namespace std;const int MAXN = 400005;const int inf = 0x3f3f3f3f;struct Node &#123; int l, r, val, tag1, tag2; // val: max // tag1: replace // tag2: add&#125;node[MAXN * 3];int cnt;struct Limit &#123; int x, y, k;&#125;limit[MAXN];int T, N, M;int R, L;int b[MAXN], h[MAXN];inline void build(int&amp; u, int l, int r) &#123; u = ++cnt; tag1(u) = -inf; tag2(u) = 0; if (l == r) return; int mid = (l + r) &gt;&gt; 1; build(lson(u), l, mid); build(rson(u), mid + 1, r);&#125;inline void pushdown(int u) &#123; if (tag1(u) != -inf) &#123; val(lson(u)) = val(rson(u)) = tag1(u); tag1(lson(u)) = tag1(rson(u)) = tag1(u); tag2(lson(u)) = tag2(rson(u)) = 0; tag1(u) = -inf; &#125; if (tag2(u) != 0) &#123; val(lson(u)) += tag2(u); val(rson(u)) += tag2(u); tag2(lson(u)) += tag2(u); tag2(rson(u)) += tag2(u); tag2(u) = 0; &#125;&#125;inline void pushup(int u) &#123; val(u) = max(val(lson(u)), val(rson(u)));&#125;inline void modify_replace(int u, int l, int r, int ql, int qr, int val) &#123; if (ql &gt; qr) return; pushdown(u); if (ql &lt;= l &amp;&amp; r &lt;= qr) &#123; val(u) = val; tag1(u) = val; return; &#125; int mid = (l + r) &gt;&gt; 1; if (ql &lt;= mid) modify_replace(lson(u), l, mid, ql, qr, val); if (mid &lt; qr) modify_replace(rson(u), mid + 1, r, ql, qr, val); pushup(u);&#125;inline void modify_add(int u, int l, int r, int ql, int qr, int val) &#123; if (ql &gt; qr) return; pushdown(u); if (ql &lt;= l &amp;&amp; r &lt;= qr) &#123; val(u) += val; tag2(u) = val; return; &#125; int mid = (l + r) &gt;&gt; 1; if (ql &lt;= mid) modify_add(lson(u), l, mid, ql, qr, val); if (mid &lt; qr) modify_add(rson(u), mid + 1, r, ql, qr, val); pushup(u);&#125;inline int query_max(int u, int l, int r, int ql, int qr) &#123; pushdown(u); if (ql &lt;= l &amp;&amp; r &lt;= qr) &#123; return val(u); &#125; int mid = (l + r) &gt;&gt; 1, ret = -inf; if (ql &lt;= mid) ret = max(ret, query_max(lson(u), l, mid, ql, qr)); if (mid &lt; qr) ret = max(ret, query_max(rson(u), mid + 1, r, ql, qr)); return ret;&#125;inline bool cmp(Limit a, Limit b) &#123; if (a.x != b.x) return a.x &lt; b.x; if (a.y != b.y) return a.y &lt; b.y; return a.k &lt; b.k;&#125;int main() &#123; scanf("%d", &amp;T); while (T--) &#123; memset(node, 0, sizeof(node)); cnt = 0, L = 0, R = 0; int ans1 = 0; scanf("%d%d", &amp;N, &amp;M); for (register int i = 2; i &lt;= N; ++i) &#123; scanf("%d", &amp;h[i]); b[++L] = h[i]; &#125; for (register int i = 1; i &lt;= M; ++i) &#123; scanf("%d%d%d", &amp;limit[i].x, &amp;limit[i].y, &amp;limit[i].k); limit[i].y++; if (limit[i].k == 0) limit[i].k = -1, ans1++; b[++L] = limit[i].y; b[++L] = limit[i].y - 1; &#125; sort(b + 1, b + L + 1); L = unique(b + 1, b + L + 1) - b - 1; h[1] = L; build(R, 1, L); for (register int i = 2; i &lt;= N; ++i) h[i] = id(h[i]); for (register int i = 1; i &lt;= M; ++i) limit[i].y = id(limit[i].y); sort(limit + 1, limit + M + 1, cmp); int cur = 1; for (register int i = 1; i &lt;= N; ++i) &#123; int height = 1, s = 0; int tmp = query_max(R, 1, L, 1, h[i]); while (limit[cur].x == i &amp;&amp; limit[cur].y &lt;= h[i]) &#123; int w = limit[cur].k; while (limit[cur].x == limit[cur + 1].x &amp;&amp; limit[cur].y == limit[cur + 1].y) &#123; w += limit[++cur].k; &#125; modify_replace(R, 1, L, height, id(rid(limit[cur].y) - 1), s + tmp); height = limit[cur].y; s += w; cur++; &#125; if (height &lt;= h[i]) modify_replace(R, 1, L, height, h[i], s + tmp); height = h[i] + 1; while (limit[cur].x == i) &#123; int w = limit[cur].k; while (limit[cur].x == limit[cur + 1].x &amp;&amp; limit[cur].y == limit[cur + 1].y) &#123; w += limit[++cur].k; &#125; modify_add(R, 1, L, height, id(rid(limit[cur].y) - 1), s); height = limit[cur].y; s += w; cur++; &#125; if (height &lt;= L) modify_add(R, 1, L, height, L, s); &#125; printf("%d\n", ans1 + query_max(R, 1, L, 1, L)); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>线段树</tag>
+        <tag>离散化</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[题解-luogu-p3960列队]]></title>
     <url>%2F2019%2F09%2F24%2Fsolution-luogu-p3960%2F</url>
     <content type="text"><![CDATA[题目链接 题目概括征集中~ 一道非常有意思的题。 假设我们有一个神奇的数据结构，它可以动态地维护一个长度为 $n$ 的队列，其初始元素为 $1,2,…,n$ 。该队列可以支持两种操作，第一种为删除队列的第 $k$ 项元素，执行“向前看齐”操作，并在队列的末尾补充 $n+1$ （以此类推）。第二种为查询队列的第 $k$ 项元素的数值。 拥有这样一个数据结构，本题就简单多了；观察到“向前看齐”命令只对最后一列产生影响，我们可以在每一行维护一个动态队列，最后一列用另一个动态队列单独处理。 如果出列的同学位于最后一列，则只需对最后一列进行一次删除操作即可；如果出列的同学不在最后一列，则需要对出列同学所在的那一行与最后一列同时进行操作。实现细节不再赘述。 现在我们来考虑一下如何实现神奇的动态队列。在本题的情况中，假设每个动态队列最多有 $Q$ 次删除操作，那么动态队列的时空复杂度必须只与 $Q$ 相关，否则 $O(n^2)$ 的时空复杂度无法承受。似乎这里可以用平衡树实现，而我采用了较为好写的动态开点权值线段树来维护动态队列。 初始状态，权值线段树下标为 $1,2,…,n$ 的节点大小均为 $1$ 。对于删除操作，我们只需将对应的权值大小减一，并在权值 $n+1$ 的大小加一即可。对于查询操作，只需在权值线段树中查询第 $k$ 小元素即为对应数值。实现细节同样不再赘述。 记得开 long long 。代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677#include &lt;bits/stdc++.h&gt;#define lson(u) (node[u].l)#define rson(u) (node[u].r)#define sum(u) (node[u].sum)using namespace std;typedef long long ll;const int MAXN = 300005;struct Node &#123; int l, r, sum;&#125;node[MAXN * 42];int cnt;int root[MAXN], size[MAXN];vector&lt;ll&gt; ins[MAXN];int N, M, Q, T;void modify(int&amp; u, int l, int r, int p, int val) &#123; if (u == 0) u = ++cnt; if (l == r) &#123; sum(u) += val; return; &#125; int mid = (l + r) &gt;&gt; 1; if (p &lt;= mid) modify(lson(u), l, mid, p, val); else modify(rson(u), mid + 1, r, p, val); sum(u) = sum(lson(u)) + sum(rson(u));&#125;int query(int u, int l, int r, int k) &#123; if (l == r) return l; int mid = (l + r) &gt;&gt; 1; int lsum = sum(lson(u)); if (l &lt;= T) &#123; lsum += (mid &gt; T) ? T - l + 1 : mid - l + 1; &#125; if (k &lt;= lsum) return query(lson(u), l, mid, k); else return query(rson(u), mid + 1, r, k - lsum);&#125;int main() &#123; scanf("%d%d%d", &amp;N, &amp;M, &amp;Q); int Case = Q; while (Case--) &#123; int x, y; scanf("%d%d", &amp;x, &amp;y); ll ans = 0, tmp = 0; if (y == M) &#123; T = N; ans = query(root[N + 1], 1, N + Q, x); modify(root[N + 1], 1, N + Q, ans, -1); modify(root[N + 1], 1, N + Q, N + (++size[N + 1]), 1); if (ans &lt;= N) ans = ans * (ll)M; else ans = ins[N + 1][ans - N - 1]; ins[N + 1].push_back(ans); printf("%lld\n", ans); &#125; else &#123; T = M - 1; ans = query(root[x], 1, M + Q, y); modify(root[x], 1, M + Q, ans, -1); modify(root[x], 1, M + Q, M - 1 + (++size[x]), 1); if (ans &lt;= M - 1) ans += (ll)(x - 1) * M; else ans = ins[x][ans - M]; T = N; tmp = query(root[N + 1], 1, N + Q, x); modify(root[N + 1], 1, N + Q, tmp, -1); modify(root[N + 1], 1, N + Q, N + (++size[N + 1]), 1); if (tmp &lt;= N) tmp = tmp * (ll)M; else tmp = ins[N + 1][tmp - N - 1]; ins[N + 1].push_back(ans); ins[x].push_back(tmp); printf("%lld\n", ans); &#125; &#125; return 0;&#125;]]></content>
@@ -8,8 +21,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -103,8 +116,8 @@
       </categories>
       <tags>
         <tag>树形dp</tag>
-        <tag>虚树</tag>
         <tag>点分治</tag>
+        <tag>虚树</tag>
       </tags>
   </entry>
   <entry>
@@ -260,9 +273,9 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>树链剖分</tag>
         <tag>主席树</tag>
         <tag>树状数组</tag>
+        <tag>树链剖分</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
@@ -275,8 +288,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -352,8 +365,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>树链剖分</tag>
         <tag>线段树</tag>
+        <tag>树链剖分</tag>
         <tag>dfs序</tag>
       </tags>
   </entry>
@@ -420,8 +433,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>最近公共祖先</tag>
         <tag>树上差分</tag>
+        <tag>最近公共祖先</tag>
       </tags>
   </entry>
   <entry>
@@ -511,9 +524,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>可持久化trie</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
