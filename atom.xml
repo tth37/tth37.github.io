@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tth37.cn/"/>
-  <updated>2019-09-29T16:01:05.897Z</updated>
+  <updated>2019-09-29T16:02:42.823Z</updated>
   <id>https://tth37.cn/</id>
   
   <author>
@@ -21,9 +21,9 @@
     <link href="https://tth37.cn/2019/09/29/solution-noip2017pre/"/>
     <id>https://tth37.cn/2019/09/29/solution-noip2017pre/</id>
     <published>2019-09-29T15:23:06.000Z</published>
-    <updated>2019-09-29T16:01:05.897Z</updated>
+    <updated>2019-09-29T16:02:42.823Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>未完待续……</p></blockquote><a id="more"></a><p>第 1 题**</p><p>从（ ）年开始，NOIP 竞赛将不再支持 Pascal 语言。</p><p> A. 2020 B. 2021 C. 2022 D. 2023</p><blockquote><p>送命题。</p></blockquote><p><strong>第 2 题</strong></p><p>在 8 位二进制补码中，10101011 表示的数是十进制下的（ ）。</p><p> A. 43 B. -85 C. -43 D. -84</p><blockquote><div class="table-container"><table><thead><tr><th></th><th>原码</th><th>补码</th><th>反码</th></tr></thead><tbody><tr><td>正数</td><td>符号(0)+数值表示法</td><td>原码</td><td>原码</td></tr><tr><td>负数</td><td>符号(1)+数值表示法</td><td>符号位之外各位取反</td><td>符号位之外各位取反，最低位加1</td></tr></tbody></table></div><script type="math/tex; mode=display">[x]_{补}=10101011</script><script type="math/tex; mode=display">[x]_{反}=10101010</script><script type="math/tex; mode=display">[x]_{原}=11010101</script><script type="math/tex; mode=display">x=-85</script></blockquote><p><strong>第 3 题</strong></p><p>分辨率为 1600x900、16 位色的位图，存储图像信息所需的空间为（ ）。 </p><p>A. 2812.5KB B. 4218.75KB C. 4320KB D. 2880KB</p><blockquote><script type="math/tex; mode=display">8 \ bit= 1\ byte(B)\\1024\ B=1\  KB\\1024\ KB=1\ MB\\1024\ MB=1\ GB</script></blockquote><p><strong>第 4 题</strong></p><p>2017 年 10 月 1 日是星期日，1949 年 10 月 1 日是（ ）。 </p><p>A. 星期三 B. 星期日 C. 星期六 D. 星期二</p><blockquote><p>2017-&gt;2016：星期日-&gt;星期六</p><p>2016-&gt;2015：星期六-&gt;星期四</p><p>2015-&gt;2014：星期四-&gt;星期三</p><p>……</p><p>1950-&gt;1949：星期日-&gt;星期六</p></blockquote><p><strong>第 5 题</strong></p><p>设 G 是有 n 个结点、m 条边（n ≤ m）的连通图，必须删去 G 的（ ）条边， 才能使得 G 变成一棵树。 </p><p>A. m – n + 1 B. m - n C. m + n + 1 D. n – m + 1</p><blockquote><p>树有 n - 1 条边</p></blockquote><p><strong>第 6 题</strong></p><p>若某算法的计算时间表示为递推关系式：<br>T(N) = 2T(N / 2) + N log N<br>T(1) = 1<br>则该算法的时间复杂度为（ ）。 </p><p>A. O(N) B. O(NlogN) C. O(Nlog^2N) D. O(N^2)</p><blockquote><p>$T$ 共有 $\log N$ 次递归调用，每次复杂度为 $O(N\log N)$</p></blockquote><p><strong>第 7 题</strong></p><p>表达式 a <em> (b + c) </em> d 的后缀形式是（ ）。 </p><p>A. a b c d <em> + </em> B. a b c + <em> d </em> C. a <em> b c + </em> d D. b + c <em> a </em> d</p><blockquote><p>普通表达式为中序遍历，后缀表达式为可能的后序遍历</p></blockquote><p><strong><font color="#dd0000">第 8 题 </font></strong></p><p>由四个不同的点构成的简单无向连通图的个数是（ ）。 </p><p>A. 32 B. 35 C. 38 D. 41</p><blockquote><p>由四个点构成的简单无向连通图，它们之间只可能有 6 条不同的边。将四个点按序排列，这 6 条边可分为纵横向及斜向两种边。</p><ol><li><p>纵横边有 1 条</p><p>该情况下，无向图有 4 种摆放位置。要使得图连通，斜向边只有 1 种摆法。</p><p>ans += 4 * 1</p></li><li><p>纵横边有 2 条</p><ul><li><p>两纵/两横</p><p>ans += 2 * 3</p></li><li><p>一纵一横</p><p>ans += 4 * 2</p></li></ul></li><li><p>纵横边有 3 条</p><p>ans += 4 * 4</p></li><li><p>纵横边有 4 条</p><p>ans += 1 * 4</p></li></ol></blockquote><p><strong><font color="#dd0000">第 9 题</font></strong></p><p>将 7 个名额分给 4 个不同的班级，允许有的班级没有名额，有（ ）种不 同的分配方案。 </p><p>A. 60 B. 84 C. 96 D. 120</p><blockquote><p>可重组合。不会</p></blockquote><p><strong><font color="#dd0000">第 10 题</font></strong></p><p>若 f[0] = 0, f[1] = 1, f[n + 1] = (f[n] + f[n - 1]) / 2，则随着 i 的增大，f[i]将接近于( )。 </p><p>A. 1/2 B. 2/3 C. (√5 − 1)/2 D. 1</p><blockquote><p>不会</p></blockquote><p><strong>第 11 题</strong></p><p>设 A 和 B 是两个长为 n 的有序数组，现在需要将 A 和 B 合并成一个排好序的 数组，请问任何以元素比较作为基本运算的归并算法最坏情况下至少要做 （ ）次比较。 </p><p>A. n^2 B. nlogn C. 2n D. 2n-1</p><blockquote><p>构造 A、B 分别为 [1,3,5,7…] [2,4,6,8,…] 此时需要 2n-1 次比较</p></blockquote><p><strong>第 12 题</strong></p><p>在 n（n ≥ 3）枚硬币中有一枚质量不合格的硬币（质量过轻或质量过重）,如果只有一架天平可以用来称重且称重的硬币数没有限制，下面是找出这枚不合格的硬币的算法。请把 a-c 三行代码补全到算法中。<br>a. A ← X ∪ Y<br>b. A ← Z<br>c. n ← |A| 算法 Coin(A, n)1. k ← ⌊n/3⌋   </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">k ← ⌊n/3⌋</span><br><span class="line">将 A 中硬币分成 X，Y，Z 三个集合，使得|X| = |Y| = k,|Z| = n - 2k</span><br><span class="line">if W(X) ≠ W(Y)       //W(X), W(Y)分别为 X 或 Y 的重量</span><br><span class="line">then _____</span><br><span class="line">else _____</span><br><span class="line">_____</span><br><span class="line">if n&gt;2 then goto 1</span><br><span class="line">if n=2 then 任取 A 中1枚硬币与拿走硬币比较，若不等，则它不合格； 若相等，则 A 中剩下的硬币不合格</span><br><span class="line">if n=1 then A 中硬币不合格</span><br></pre></td></tr></table></figure><p>正确的填空顺序是（ ）。 </p><p>A. b, c, a B. c, b, a C. c, a, b D. a, b, c</p><blockquote><p>还没做~</p></blockquote>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>未完待续……</p></blockquote><a id="more"></a><p><strong>第 1 题</strong></p><p>从（ ）年开始，NOIP 竞赛将不再支持 Pascal 语言。</p><p> A. 2020 B. 2021 C. 2022 D. 2023</p><blockquote><p>送命题。</p></blockquote><p><strong>第 2 题</strong></p><p>在 8 位二进制补码中，10101011 表示的数是十进制下的（ ）。</p><p> A. 43 B. -85 C. -43 D. -84</p><blockquote><div class="table-container"><table><thead><tr><th></th><th>原码</th><th>补码</th><th>反码</th></tr></thead><tbody><tr><td>正数</td><td>符号(0)+数值表示法</td><td>原码</td><td>原码</td></tr><tr><td>负数</td><td>符号(1)+数值表示法</td><td>符号位之外各位取反</td><td>符号位之外各位取反，最低位加1</td></tr></tbody></table></div><script type="math/tex; mode=display">[x]_{补}=10101011</script><script type="math/tex; mode=display">[x]_{反}=10101010</script><script type="math/tex; mode=display">[x]_{原}=11010101</script><script type="math/tex; mode=display">x=-85</script></blockquote><p><strong>第 3 题</strong></p><p>分辨率为 1600x900、16 位色的位图，存储图像信息所需的空间为（ ）。 </p><p>A. 2812.5KB B. 4218.75KB C. 4320KB D. 2880KB</p><blockquote><script type="math/tex; mode=display">8 \ bit= 1\ byte(B)\\1024\ B=1\  KB\\1024\ KB=1\ MB\\1024\ MB=1\ GB</script></blockquote><p><strong>第 4 题</strong></p><p>2017 年 10 月 1 日是星期日，1949 年 10 月 1 日是（ ）。 </p><p>A. 星期三 B. 星期日 C. 星期六 D. 星期二</p><blockquote><p>2017-&gt;2016：星期日-&gt;星期六</p><p>2016-&gt;2015：星期六-&gt;星期四</p><p>2015-&gt;2014：星期四-&gt;星期三</p><p>……</p><p>1950-&gt;1949：星期日-&gt;星期六</p></blockquote><p><strong>第 5 题</strong></p><p>设 G 是有 n 个结点、m 条边（n ≤ m）的连通图，必须删去 G 的（ ）条边， 才能使得 G 变成一棵树。 </p><p>A. m – n + 1 B. m - n C. m + n + 1 D. n – m + 1</p><blockquote><p>树有 n - 1 条边</p></blockquote><p><strong>第 6 题</strong></p><p>若某算法的计算时间表示为递推关系式：<br>T(N) = 2T(N / 2) + N log N<br>T(1) = 1<br>则该算法的时间复杂度为（ ）。 </p><p>A. O(N) B. O(NlogN) C. O(Nlog^2N) D. O(N^2)</p><blockquote><p>$T$ 共有 $\log N$ 次递归调用，每次复杂度为 $O(N\log N)$</p></blockquote><p><strong>第 7 题</strong></p><p>表达式 a * (b + c) * d 的后缀形式是（ ）。 </p><p>A. a b c d * + * B. a b c + * d * C. a * b c + * d D. b + c * a * d</p><blockquote><p>普通表达式为中序遍历，后缀表达式为可能的后序遍历</p></blockquote><p><strong><font color="#dd0000">第 8 题 </font></strong></p><p>由四个不同的点构成的简单无向连通图的个数是（ ）。 </p><p>A. 32 B. 35 C. 38 D. 41</p><blockquote><p>由四个点构成的简单无向连通图，它们之间只可能有 6 条不同的边。将四个点按序排列，这 6 条边可分为纵横向及斜向两种边。</p><ol><li><p>纵横边有 1 条</p><p>该情况下，无向图有 4 种摆放位置。要使得图连通，斜向边只有 1 种摆法。</p><p>ans += 4 * 1</p></li><li><p>纵横边有 2 条</p><ul><li><p>两纵/两横</p><p>ans += 2 * 3</p></li><li><p>一纵一横</p><p>ans += 4 * 2</p></li></ul></li><li><p>纵横边有 3 条</p><p>ans += 4 * 4</p></li><li><p>纵横边有 4 条</p><p>ans += 1 * 4</p></li></ol></blockquote><p><strong><font color="#dd0000">第 9 题</font></strong></p><p>将 7 个名额分给 4 个不同的班级，允许有的班级没有名额，有（ ）种不 同的分配方案。 </p><p>A. 60 B. 84 C. 96 D. 120</p><blockquote><p>可重组合。不会</p></blockquote><p><strong><font color="#dd0000">第 10 题</font></strong></p><p>若 f[0] = 0, f[1] = 1, f[n + 1] = (f[n] + f[n - 1]) / 2，则随着 i 的增大，f[i]将接近于( )。 </p><p>A. 1/2 B. 2/3 C. (√5 − 1)/2 D. 1</p><blockquote><p>不会</p></blockquote><p><strong>第 11 题</strong></p><p>设 A 和 B 是两个长为 n 的有序数组，现在需要将 A 和 B 合并成一个排好序的 数组，请问任何以元素比较作为基本运算的归并算法最坏情况下至少要做 （ ）次比较。 </p><p>A. n^2 B. nlogn C. 2n D. 2n-1</p><blockquote><p>构造 A、B 分别为 [1,3,5,7…] [2,4,6,8,…] 此时需要 2n-1 次比较</p></blockquote><p><strong>第 12 题</strong></p><p>在 n（n ≥ 3）枚硬币中有一枚质量不合格的硬币（质量过轻或质量过重）,如果只有一架天平可以用来称重且称重的硬币数没有限制，下面是找出这枚不合格的硬币的算法。请把 a-c 三行代码补全到算法中。<br>a. A ← X ∪ Y<br>b. A ← Z<br>c. n ← |A| 算法 Coin(A, n)1. k ← ⌊n/3⌋   </p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">k ← ⌊n/3⌋</span><br><span class="line">将 A 中硬币分成 X，Y，Z 三个集合，使得|X| = |Y| = k,|Z| = n - 2k</span><br><span class="line">if W(X) ≠ W(Y)       //W(X), W(Y)分别为 X 或 Y 的重量</span><br><span class="line">then _____</span><br><span class="line">else _____</span><br><span class="line">_____</span><br><span class="line">if n&gt;2 then goto 1</span><br><span class="line">if n=2 then 任取 A 中1枚硬币与拿走硬币比较，若不等，则它不合格； 若相等，则 A 中剩下的硬币不合格</span><br><span class="line">if n=1 then A 中硬币不合格</span><br></pre></td></tr></table></figure><p>正确的填空顺序是（ ）。 </p><p>A. b, c, a B. c, b, a C. c, a, b D. a, b, c</p><blockquote><p>还没做~</p></blockquote>]]></content>
     
     <summary type="html">
     
@@ -372,11 +372,11 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
+      <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
+    
       <category term="二分答案" scheme="https://tth37.cn/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/"/>
     
       <category term="倍增" scheme="https://tth37.cn/tags/%E5%80%8D%E5%A2%9E/"/>
-    
-      <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
   </entry>
   
@@ -781,9 +781,9 @@
       <category term="数论专题" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
@@ -809,9 +809,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
       <category term="逆元" scheme="https://tth37.cn/tags/%E9%80%86%E5%85%83/"/>
     
