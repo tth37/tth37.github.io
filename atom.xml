@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tth37.cn/"/>
-  <updated>2019-09-29T16:02:42.823Z</updated>
+  <updated>2019-10-02T15:46:00.748Z</updated>
   <id>https://tth37.cn/</id>
   
   <author>
@@ -15,6 +15,20 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>solution-loj-2071</title>
+    <link href="https://tth37.cn/2019/10/02/solution-loj-2071/"/>
+    <id>https://tth37.cn/2019/10/02/solution-loj-2071/</id>
+    <published>2019-10-02T15:46:00.000Z</published>
+    <updated>2019-10-02T15:46:00.748Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>解题报告-NOIP2017提高组初赛</title>
@@ -59,9 +73,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
       <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
       <category term="离散化" scheme="https://tth37.cn/tags/%E7%A6%BB%E6%95%A3%E5%8C%96/"/>
     
@@ -126,7 +140,7 @@
     <link href="https://tth37.cn/2019/09/19/solution-luogu-p1941/"/>
     <id>https://tth37.cn/2019/09/19/solution-luogu-p1941/</id>
     <published>2019-09-19T14:57:50.000Z</published>
-    <updated>2019-09-19T15:19:00.208Z</updated>
+    <updated>2019-10-02T15:45:27.251Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p><a href="https://www.luogu.org/problem/P1941" target="_blank" rel="noopener">题目链接</a></p><p>给定 $n*m$ 的游戏界面，求是否可以通过操作使小鸟通过所有管道以及最少操作次数。</p><p>$n\le 10000,m\le 1000$</p></blockquote><a id="more"></a><p>这篇博客不会在洛谷发表，所以内容可能比较放飞自我。</p><p>神仙shiwt巨佬早在去年的这个时候就已经切掉了这个神仙题。</p><p>记 $f[i][j]$ 表示从起点飞到坐标 $(i,j)$ 所需的最小步数。考虑 $f[i][j]$ 的转移。它要么是从 $(i-1,j+Y)$ 那里掉下来的，也有可能是从 $(i-1,j-kX)$ 那里升上来的。</p><p>考虑优化。 $(i-1,j-kX)$ 的枚举较为啰嗦；不难发现如果小鸟🐦可以飞到 $(i,j-X)$ ，那么它再飞一下不就到 $(i,j)$ 了吗？</p><p>状态转移方程如下：</p><script type="math/tex; mode=display">f[i][j]=\min \{f[i-1][j+Y],f[i][j-X]+1,f[i-1][j-X]+1\}</script><p>不妨写个滚动数组。</p><p>代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">10005</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXM = <span class="number">1005</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> INF = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N, M, K;</span><br><span class="line"><span class="keyword">int</span> X[MAXN], Y[MAXN];</span><br><span class="line"><span class="keyword">int</span> L[MAXN], R[MAXN];</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">2</span>][MAXM * <span class="number">2</span>];</span><br><span class="line"><span class="keyword">int</span> cnt, minn;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;N, &amp;M, &amp;K);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;X[i], &amp;Y[i]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= K; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> p, l, h;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;p, &amp;l, &amp;h);</span><br><span class="line">        L[p] = l, R[p] = h;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> cur = i &amp; <span class="number">1</span>;</span><br><span class="line">        minn = INF;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M + X[i]; ++j)</span><br><span class="line">            f[cur][j] = INF;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = X[i]; j &lt;= M + X[i]; ++j)</span><br><span class="line">            f[cur][j] = min(f[cur][j], min(f[cur ^ <span class="number">1</span>][j - X[i]] + <span class="number">1</span>, f[cur][j - X[i]] + <span class="number">1</span>));</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = M + <span class="number">1</span>; j &lt;= M + X[i]; ++j)</span><br><span class="line">            f[cur][M] = min(f[cur][M], f[cur][j]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M - Y[i]; ++j)</span><br><span class="line">            f[cur][j] = min(f[cur][j], f[cur ^ <span class="number">1</span>][j + Y[i]]);</span><br><span class="line">        <span class="keyword">if</span> (L[i] || R[i]) &#123;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= L[i]; ++j)</span><br><span class="line">                f[cur][j] = INF;</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = R[i]; j &lt;= M; ++j)</span><br><span class="line">                f[cur][j] = INF;</span><br><span class="line">        &#125;</span><br><span class="line">        f[cur][<span class="number">0</span>] = INF;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= M; ++j)</span><br><span class="line">            minn = min(minn, f[cur][j]);</span><br><span class="line">        <span class="keyword">if</span> (minn == INF) &#123;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"0"</span>);</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%d"</span>, cnt);</span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        cnt += L[i] || R[i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">puts</span>(<span class="string">"1"</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>, minn);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
     
@@ -338,11 +352,11 @@
   </entry>
   
   <entry>
-    <title>中华人民共和国成立70周年</title>
+    <title>2019-10-1 国庆节</title>
     <link href="https://tth37.cn/2019/08/27/NationalDay/"/>
     <id>https://tth37.cn/2019/08/27/NationalDay/</id>
     <published>2019-08-27T13:40:39.000Z</published>
-    <updated>2019-09-30T16:26:31.600Z</updated>
+    <updated>2019-10-02T15:45:03.240Z</updated>
     
     <summary type="html">
     
@@ -372,11 +386,11 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
+      <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
+    
       <category term="二分答案" scheme="https://tth37.cn/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/"/>
     
       <category term="倍增" scheme="https://tth37.cn/tags/%E5%80%8D%E5%A2%9E/"/>
-    
-      <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
   </entry>
   
@@ -692,9 +706,9 @@
     
       <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
-      <category term="树状数组" scheme="https://tth37.cn/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
-    
       <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
+      <category term="树状数组" scheme="https://tth37.cn/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
       <category term="树套树" scheme="https://tth37.cn/tags/%E6%A0%91%E5%A5%97%E6%A0%91/"/>
     
@@ -781,9 +795,9 @@
       <category term="数论专题" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
@@ -809,9 +823,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
       <category term="逆元" scheme="https://tth37.cn/tags/%E9%80%86%E5%85%83/"/>
     
@@ -1547,9 +1561,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="字符串" scheme="https://tth37.cn/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
