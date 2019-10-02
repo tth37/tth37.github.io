@@ -116,18 +116,23 @@
 
 
 
-  <meta name="description" content="未完待续……">
+  <meta name="description" content="NOIP 2017 提高组初赛试题 完全解读！">
 <meta name="keywords" content="OI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="解题报告-NOIP2017提高组初赛">
 <meta property="og:url" content="https://tth37.cn/2019/09/29/solution-noip2017pre/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="未完待续……">
+<meta property="og:description" content="NOIP 2017 提高组初赛试题 完全解读！">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-09-29T16:02:42.823Z">
+<meta property="og:image" content="http://luogu-ipic.oss-cn-shanghai.aliyuncs.com/youti/47.png">
+<meta property="og:image" content="http://luogu-ipic.oss-cn-shanghai.aliyuncs.com/youti/48.png">
+<meta property="og:image" content="http://luogu-ipic.oss-cn-shanghai.aliyuncs.com/youti/49.png">
+<meta property="og:image" content="http://luogu-ipic.oss-cn-shanghai.aliyuncs.com/youti/50.png">
+<meta property="og:updated_time" content="2019-10-02T16:45:34.868Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="解题报告-NOIP2017提高组初赛">
-<meta name="twitter:description" content="未完待续……">
+<meta name="twitter:description" content="NOIP 2017 提高组初赛试题 完全解读！">
+<meta name="twitter:image" content="http://luogu-ipic.oss-cn-shanghai.aliyuncs.com/youti/47.png">
 
 
 
@@ -517,7 +522,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-09-30 00:02:42" itemprop="dateModified" datetime="2019-09-30T00:02:42+08:00">2019-09-30</time>
+                <time title="修改时间：2019-10-03 00:45:34" itemprop="dateModified" datetime="2019-10-03T00:45:34+08:00">2019-10-03</time>
               
             
           </span>
@@ -569,7 +574,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.2k</span>
+                <span title="本文字数">5.3k</span>
               
 
               
@@ -594,7 +599,7 @@
 
       
         <blockquote>
-<p>未完待续……</p>
+<p>NOIP 2017 提高组初赛试题 完全解读！</p>
 </blockquote>
 <a id="more"></a>
 <p><strong>第 1 题</strong></p>
@@ -707,13 +712,15 @@ x=-85</script></blockquote>
 <p>将 7 个名额分给 4 个不同的班级，允许有的班级没有名额，有（ ）种不 同的分配方案。 </p>
 <p>A. 60 B. 84 C. 96 D. 120</p>
 <blockquote>
-<p>可重组合。不会</p>
-</blockquote>
+<p>| 0 | 0 | 0 | 0 | 0 | 0 | 0 |</p>
+<p>插板法。考虑在七个名额间插入 3 个板子，将它们隔成 4 份。插板的方案数即为分配方案数。</p>
+<script type="math/tex; mode=display">
+C_{8+3-1}^{3}=120</script></blockquote>
 <p><strong><font color="#dd0000">第 10 题</font></strong></p>
 <p>若 f[0] = 0, f[1] = 1, f[n + 1] = (f[n] + f[n - 1]) / 2，则随着 i 的增大，f[i]将接近于( )。 </p>
 <p>A. 1/2 B. 2/3 C. (√5 − 1)/2 D. 1</p>
 <blockquote>
-<p>不会</p>
+<p>还是不会</p>
 </blockquote>
 <p><strong>第 11 题</strong></p>
 <p>设 A 和 B 是两个长为 n 的有序数组，现在需要将 A 和 B 合并成一个排好序的 数组，请问任何以元素比较作为基本运算的归并算法最坏情况下至少要做 （ ）次比较。 </p>
@@ -722,12 +729,185 @@ x=-85</script></blockquote>
 <p>构造 A、B 分别为 [1,3,5,7…] [2,4,6,8,…] 此时需要 2n-1 次比较</p>
 </blockquote>
 <p><strong>第 12 题</strong></p>
-<p>在 n（n ≥ 3）枚硬币中有一枚质量不合格的硬币（质量过轻或质量过重）,如果只有一架天平可以用来称重且称重的硬币数没有限制，下面是找出这枚不合格的硬币的算法。请把 a-c 三行代码补全到算法中。<br>a. A ← X ∪ Y<br>b. A ← Z<br>c. n ← |A| 算法 Coin(A, n)1. k ← ⌊n/3⌋   </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">k ← ⌊n/3⌋</span><br><span class="line">将 A 中硬币分成 X，Y，Z 三个集合，使得|X| = |Y| = k,|Z| = n - 2k</span><br><span class="line">if W(X) ≠ W(Y)       //W(X), W(Y)分别为 X 或 Y 的重量</span><br><span class="line">then _____</span><br><span class="line">else _____</span><br><span class="line">_____</span><br><span class="line">if n&gt;2 then goto 1</span><br><span class="line">if n=2 then 任取 A 中1枚硬币与拿走硬币比较，若不等，则它不合格； 若相等，则 A 中剩下的硬币不合格</span><br><span class="line">if n=1 then A 中硬币不合格</span><br></pre></td></tr></table></figure>
+<p>在 n（n ≥ 3）枚硬币中有一枚质量不合格的硬币（质量过轻或质量过重）,如果只有一架天平可以用来称重且称重的硬币数没有限制，下面是找出这枚不合格的硬币的算法。请把 a-c 三行代码补全到算法中。<br>a. <code>A ← X ∪ Y</code><br>b. <code>A ← Z</code><br>c. <code>n ← |A|</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">算法 Coin(A, n)</span><br><span class="line">k ← ⌊n/3⌋</span><br><span class="line">将 A 中硬币分成 X，Y，Z 三个集合，使得|X| = |Y| = k,|Z| = n - 2k</span><br><span class="line">if W(X) ≠ W(Y)       //W(X), W(Y)分别为 X 或 Y 的重量</span><br><span class="line">then _____</span><br><span class="line">else _____</span><br><span class="line">_____</span><br><span class="line">if n&gt;2 then goto 1</span><br><span class="line">if n=2 then 任取 A 中1枚硬币与拿走硬币比较，若不等，则它不合格； 若相等，则 A 中剩下的硬币不合格</span><br><span class="line">if n=1 then A 中硬币不合格</span><br></pre></td></tr></table></figure>
 <p>正确的填空顺序是（ ）。 </p>
 <p>A. b, c, a B. c, b, a C. c, a, b D. a, b, c</p>
 <blockquote>
-<p>还没做~</p>
+<p>如果 X 和 Y 重量不等，则不合格的硬币在 X ∪ Y 中；否则在 Z 中。</p>
+</blockquote>
+<p><strong>第 13 题</strong></p>
+<p>有正实数构成的数字三角形排列形式如图所示。第一行的数为 a11；第二行的数从左到右依次为 a21, a22；… 第 n 行的数为 an1, an2, …, ann。从 a11 开始，每一行的数 aij 只有两条边可以分别通向 下一行的两个数 a(i+1)j 和 a(i+1)(j+1)。用动态规划算 法找出一条从 a11 向下通到 an1, an2, …, ann 中某个数的路径，使得该路径上的数之和达到最大。 令 C[i,j]是从 a11 到 aij 的路径上的数的最大和，并且 C[i,0]=C[0,j]=0, 则 C[i,j]=（ ）。</p>
+<p><img src="http://luogu-ipic.oss-cn-shanghai.aliyuncs.com/youti/47.png" alt></p>
+<p>A. max{C[i-1,j-1], C[i-1,j]} + aij</p>
+<p>B. C[i-1,j-1] + C[i-1,j] </p>
+<p>C. max{C[i-1,j-1], C[i-1,j]} + 1 </p>
+<p>D. max{C[i,j-1],C[i-1,j]} + aij</p>
+<blockquote>
+<p>数字三角形动态规划。</p>
+<p>$f[i][j]=max(f[i-1][j],f[i-1][j-1])+a[i][j]$</p>
+</blockquote>
+<p><strong>第 14 题</strong></p>
+<p>小明要去南美洲旅游，一共乘坐三趟航班才能到达目的地，其中第 1 个航班 准点的概率是 0.9，第 2 个航班准点的概率为 0.8, 第 3 个航班准点的概率为 0.9。如果存在第 i 个（i=1,2）航班晚点，第 i+1 个航班准点，则小明将赶不 上第 i+1 个航班，旅行失败；除了这种情况，其他情况下旅行都能成功。请 问小明此次旅行成功的概率是（ ）。 </p>
+<p>A. 0.5  B. 0.648  C. 0.72  D. 0.74</p>
+<blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">航班1</th>
+<th style="text-align:center">航班2</th>
+<th style="text-align:center">航班3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">准点</td>
+<td style="text-align:center">0.9</td>
+<td style="text-align:center">0.8</td>
+<td style="text-align:center">0.9</td>
+</tr>
+<tr>
+<td style="text-align:center">晚点</td>
+<td style="text-align:center">0.1</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:center">0.1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>枚举。共 8 种情况。</p>
+</blockquote>
+<p><strong>第 15 题</strong></p>
+<p>欢乐喷球：儿童游乐场有个游戏叫“欢乐喷球”，正方形场地中心能不断喷出彩色乒乓球，以场地中心为圆心还有一 个圆形轨道，轨道上有一列小火车在匀速运动，火车有六节车厢。假设乒乓球等概率落到正方形场地的每个地点，包括火车车厢。小朋友玩这个游戏时，只能坐在同一个火车车厢里，可以在自己的车厢里捡落在该车厢内的所有乒乓球，每个人每次游戏有三分钟时间，则一个小朋友独自玩一次游戏期望可以得到（ ）个乒乓球。假设乒乓球喷出的速度为 2 个/秒，每节车厢的面积是整个场地面积的 1/20。</p>
+<p><img src="http://luogu-ipic.oss-cn-shanghai.aliyuncs.com/youti/48.png" alt></p>
+<p> A. 60  B. 108  C. 18  D. 20</p>
+<blockquote>
+<script type="math/tex; mode=display">
+2*3*60/20=18</script></blockquote>
+<p><strong>第 16 题</strong></p>
+<p>以下排序算法在最坏情况下时间复杂度最优的有（ ）。 </p>
+<p>A. 冒泡排序  B. 快速排序  C. 归并排序  D. 堆排</p>
+<blockquote>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">期望复杂度</th>
+<th style="text-align:center">最劣复杂度</th>
+<th style="text-align:center">最优复杂度</th>
+<th style="text-align:center">是否稳定</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">冒泡排序</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">插入排序</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(n)$</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">选择排序</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">不稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">快速排序</td>
+<td style="text-align:center">$O(n\log n)$</td>
+<td style="text-align:center">$O(n^2)$</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">不稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">归并排序</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">$O(n\log n)$</td>
+<td style="text-align:center">$O(n\log n)$</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">堆排序</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">$O(n\log n)$</td>
+<td style="text-align:center">$O(n\log n)$</td>
+<td style="text-align:center">不稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">基数排序</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">$O(nd)$</td>
+<td style="text-align:center">$O(nd)$</td>
+<td style="text-align:center">稳定</td>
+</tr>
+<tr>
+<td style="text-align:center">希尔排序</td>
+<td style="text-align:center">/</td>
+<td style="text-align:center">$O(n\log^2 n)$</td>
+<td style="text-align:center">$O(n^{3/2})$</td>
+<td style="text-align:center">不稳定</td>
+</tr>
+</tbody>
+</table>
+</div>
+</blockquote>
+<p><strong>第 17 题</strong></p>
+<p>对于入栈顺序为 a, b, c, d, e, f, g 的序列，下列（ ）不可能是合法的出栈序 列。 </p>
+<p>A. a, b, c, d, e, f, g </p>
+<p>B. a, d, c, b, e, g, f </p>
+<p>C. a, d, b, c, g, f, e </p>
+<p>D. g, f, e, d, c, b, a</p>
+<blockquote>
+<p>略</p>
+</blockquote>
+<p><strong>第 18 题</strong></p>
+<p>下列算法中，（ ）是稳定的排序算法。 </p>
+<p>A. 快速排序  B. 堆排序  C. 希尔排序  D. 插入排序</p>
+<blockquote>
+<p>见 <strong>第 16 题</strong></p>
+</blockquote>
+<p><strong>第 19 题</strong></p>
+<p>以下是面向对象的高级语言的有（ ）。</p>
+<p>A. 汇编语言  B. C++  C. Fortran  D. Java</p>
+<blockquote>
+<p>面向对象语言：simula 67, Smalltalk, EIFFEL, C++, Java, C# 等</p>
+</blockquote>
+<p><strong>第 20 题</strong></p>
+<p>以下和计算机领域密切相关的奖项有（ ）。 </p>
+<p>A. 奥斯卡奖  B. 图灵奖  C. 诺贝尔奖  D. 王选奖</p>
+<blockquote>
+<p><strong>图灵奖</strong>（英语：ACM A.M. Turing Award），又译<strong>杜林奖</strong>、<strong>A.M.图灵奖</strong>，是<a href="https://zh.wikipedia.org/wiki/计算机协会" target="_blank" rel="noopener">计算机协会</a>（ACM）于1966年设立的奖项，专门奖励对<a href="https://zh.wikipedia.org/wiki/计算机" target="_blank" rel="noopener">计算机</a>事业作出重要贡献的个人。其名称取自世界<a href="https://zh.wikipedia.org/wiki/计算机科学" target="_blank" rel="noopener">计算机科学</a>的先驱、英国科学家、<a href="https://zh.wikipedia.org/wiki/曼彻斯特大学" target="_blank" rel="noopener">曼彻斯特大学</a>教授<a href="https://zh.wikipedia.org/wiki/艾伦·图灵" target="_blank" rel="noopener">艾伦·图灵</a>（A.M. Turing），这个奖设立目的之一是纪念这位现代计算机科学的奠基者。获奖者必须是在计算机领域具有持久而重大的先进性的技术贡献。大多数获奖者是<a href="https://zh.wikipedia.org/wiki/计算机科学家" target="_blank" rel="noopener">计算机科学家</a>。是计算机界最负盛名的奖项，有“计算机界<a href="https://zh.wikipedia.org/wiki/诺贝尔奖" target="_blank" rel="noopener">诺贝尔奖</a>”之称。——<a href="https://zh.wikipedia.org/zh-hans/图灵奖" target="_blank" rel="noopener">中文维基百科</a></p>
+<p><strong>中国计算机学会王选奖</strong> 是<a href="https://zh.wikipedia.org/wiki/中国计算机学会" target="_blank" rel="noopener">中国计算机学会</a>于2005年起设立的奖项。该奖项最初名为<strong>中国计算机学会创新奖</strong>，2006年起更为现名，以纪念著名计算机科学家<a href="https://zh.wikipedia.org/wiki/王选" target="_blank" rel="noopener">王选</a>。——<a href="https://zh.wikipedia.org/zh-hans/中国计算机学会王选奖" target="_blank" rel="noopener">中文维基百科</a></p>
+</blockquote>
+<p><strong>第 21 题</strong></p>
+<p>如右图所示，共有 13 个格子。对任何一个格子进行一 次操作，会使得它自己以及与它上下左右相邻的格子中 的数字改变（由 1 变 0，或由 0 变 1）。现在要使得所 有的格子中的数字都变为 0，至少需要<strong><strong>_</strong></strong>次操作。</p>
+<p><img src="http://luogu-ipic.oss-cn-shanghai.aliyuncs.com/youti/49.png" alt></p>
+<blockquote>
+<p>模拟即可。略</p>
+</blockquote>
+<p><strong>第 22 题</strong></p>
+<p>如下图所示，A 到 B 是连通的。假设删除一条细的边的代价是 1，删除一条粗的边的代价是 2，要让 A、B 不连通，最小代价是(      )（2 分），最小代价的不同方案数是(      )（3 分）。（只要有一条删除的边不同，就是不同的方案）</p>
+<p><img src="http://luogu-ipic.oss-cn-shanghai.aliyuncs.com/youti/50.png" alt></p>
+<blockquote>
+<p>最小割=最大流，易得最大流为 4。</p>
+<p>模拟，共 9 种不同的方案。</p>
+</blockquote>
+<p><strong>第 23 题</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;iostream&gt; </span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;   </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">g</span><span class="params">(<span class="keyword">int</span> m, <span class="keyword">int</span> n, <span class="keyword">int</span> x)</span>   </span></span><br><span class="line"><span class="function"></span>&#123;     </span><br><span class="line">    <span class="keyword">int</span> ans = <span class="number">0</span>;   </span><br><span class="line">    <span class="keyword">int</span> i;   </span><br><span class="line">    <span class="keyword">if</span> (n == <span class="number">1</span>)  </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;     </span><br><span class="line">    <span class="keyword">for</span> (i = x; i &lt;= m / n; i++)         </span><br><span class="line">        ans += g(m - i, n - <span class="number">1</span>, i);     </span><br><span class="line">    <span class="keyword">return</span> ans; </span><br><span class="line">&#125; </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span></span><br><span class="line"><span class="function"></span>&#123;     </span><br><span class="line">    <span class="keyword">int</span> t, m, n;     </span><br><span class="line">    <span class="built_in">cin</span> &gt;&gt; m &gt;&gt; n;    </span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; g(m, n, <span class="number">0</span>) &lt;&lt; <span class="built_in">endl</span>;     </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输入：8 4<br>输出：<strong><strong>_</strong></strong></p>
+<blockquote>
+<p>未完待续…</p>
 </blockquote>
 
       
@@ -755,7 +935,7 @@ x=-85</script></blockquote>
   <p><span>本文标题:</span><a href="/2019/09/29/solution-noip2017pre/">解题报告-NOIP2017提高组初赛</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 tth37 的个人博客">tth37</a></p>
   <p><span>发布时间:</span>2019年09月29日 - 23:09</p>
-  <p><span>最后更新:</span>2019年09月30日 - 00:09</p>
+  <p><span>最后更新:</span>2019年10月03日 - 00:10</p>
   <p><span>原始链接:</span><a href="/2019/09/29/solution-noip2017pre/" title="解题报告-NOIP2017提高组初赛">https://tth37.cn/2019/09/29/solution-noip2017pre/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://tth37.cn/2019/09/29/solution-noip2017pre/" aria-label="复制成功！"></i></span>
   </p>
@@ -1129,7 +1309,7 @@ x=-85</script></blockquote>
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">118k</span>
+    <span title="站点总字数">121k</span>
   
 
   
