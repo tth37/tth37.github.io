@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-luogu-p1792]]></title>
+    <url>%2F2019%2F10%2F04%2Fsolution-luogu-p1792%2F</url>
+    <content type="text"><![CDATA[题目链接 给定一个环，环上有 $n$ 个节点。选出 $m$ 个互不相邻的节点，使得选出节点的权值总和最大。 $n\le 200000$ 比较巧妙的贪心。 引理：如果 $A[i]$ 最大，在最终的方案中不可能只选 $A[i-1],A[i+1]$ 中的一个。 假设最终方案中只选了 $A[i-1]$，那么将 $A[i-1]$ 替换为 $A[i]$ 会导致答案更优。 因此，在取出节点 $i$ 之后，应该设置一个反悔的机会：将节点 $i$ 的权值改为 $A[i-1]+A[i+1]-A[i]$，表示放弃节点 $i$，并同时在 $i-1$、$i+1$ 位置种树。节点的相对位置关系可以用链表维护。 可删堆可以用两个普通的大根堆实现。 代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455#include &lt;bits/stdc++.h&gt;#define pre(u) node[u].l#define nxt(u) node[u].r#define val(u) node[u].valusing namespace std;const int maxn = 200005;struct Node &#123; int l, r, val;&#125;node[maxn];struct Heap &#123; priority_queue&lt;pair&lt;int, int&gt; &gt; a, b; inline void push(pair&lt;int, int&gt; t) &#123;a.push(t);&#125; inline void pop() &#123; while (b.size() &amp;&amp; a.top() == b.top()) a.pop(), b.pop(); a.pop(); &#125; inline void erase(pair&lt;int, int&gt; t) &#123;b.push(t);&#125; inline pair&lt;int, int&gt; top() &#123; while (b.size() &amp;&amp; a.top() == b.top()) a.pop(), b.pop(); return a.top(); &#125;&#125;q;inline void del(int p) &#123; nxt(pre(p)) = nxt(p); pre(nxt(p)) = pre(p);&#125;int N, M;int main() &#123; scanf("%d%d", &amp;N, &amp;M); if (M * 2 &gt; N) return puts("Error!"), 0; for (register int i = 1; i &lt;= N; ++i) scanf("%d", &amp;node[i].val), node[i].l = i - 1, node[i].r = i + 1, q.push(make_pair(node[i].val, i)); node[1].l = N, node[N].r = 1; int ans = 0; for (register int i = 1; i &lt;= M; ++i) &#123; ans += q.top().first; int p = q.top().second; q.pop(); val(p) = val(pre(p)) + val(nxt(p)) - val(p); q.erase(make_pair(val(pre(p)), pre(p))), q.erase(make_pair(val(nxt(p)), nxt(p))); q.push(make_pair(val(p), p)); del(pre(p)), del(nxt(p)); &#125; printf("%d", ans); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>贪心</tag>
+        <tag>堆</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[题解-LibreOJ-3166魔法树]]></title>
     <url>%2F2019%2F10%2F03%2Fsolution-loj-3166%2F</url>
     <content type="text"><![CDATA[题目链接 题目概括重金征集中~ 这是一道非常漂亮的题！ 定义状态： $f[u][i]$ 表示在第 $i$ 天砍掉 $u-&gt;fa[u]$ 的一条边，所能获得的最多果汁数量。 状态转移方程： f[u][i]=\sum_{v\in son(u)}{(\max_{j=1}^{i}f[v][j])}解法一：用动态开点权值线段树维护 $f[u]$，转移时在线段树上操作即可。码量较大，常数较大。 解法二：不难发现 $f[u][1]$ 到 $f[u][k]$ 是单调不下降的，因此设 $g[u][i]=\max_{j=1}^i f[u][j]$。用差分数组维护 $g[u]$，观察到差分数组中非零元素个数不超过 $size[u]$，可以用集合（stl::map) 记录差分数组中的所有非零元素。 在集合合并时，采取 dsu on tree，复杂度 $O(n\log^2 n)$。本题的关键点在于如果当前位置有果实，那么还需要对差分数组进行一些修改：将差分数组的 $d[u]$ 位置加上 $w[u]$，在 $d[u]$ 之后的部分则需依次减掉此次操作的值。 码量较小，常数较小。 代码如下：（自带大常数） 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int maxn = 100005;vector&lt;int&gt; G[maxn];map&lt;int, ll&gt; mp[maxn];int d[maxn];ll w[maxn];int N, M, K;void dfs(int u) &#123; for (auto v: G[u]) &#123; dfs(v); if (mp[u].size() &lt; mp[v].size()) swap(mp[u], mp[v]); for (auto it: mp[v]) &#123; mp[u][it.first] += it.second; &#125; &#125; if (d[u]) &#123; mp[u][d[u]] += w[u]; for (auto it = mp[u].upper_bound(d[u]); it != mp[u].end();) &#123; if (it-&gt;second &gt; w[u]) &#123; it-&gt;second -= w[u]; break; &#125; w[u] -= it-&gt;second; it-&gt;second = 0; mp[u].erase(it++); &#125; &#125;&#125;int main() &#123; scanf("%d%d%d", &amp;N, &amp;M, &amp;K); for (register int i = 2; i &lt;= N; ++i) &#123; int p; scanf("%d", &amp;p); G[p].push_back(i); &#125; for (register int i = 1; i &lt;= M; ++i) &#123; int v; scanf("%d", &amp;v); scanf("%d%I64d", &amp;d[v], &amp;w[v]); &#125; dfs(1); ll ans = 0; for (auto it: mp[1]) ans += it.second; printf("%I64d", ans); return 0;&#125;]]></content>
@@ -348,8 +360,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -360,8 +372,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -645,8 +657,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>字符串</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
