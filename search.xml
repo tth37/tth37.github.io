@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[题解-luogu-p1792]]></title>
+    <title><![CDATA[题解-luogu-p1792种树]]></title>
     <url>%2F2019%2F10%2F04%2Fsolution-luogu-p1792%2F</url>
     <content type="text"><![CDATA[题目链接 给定一个环，环上有 $n$ 个节点。选出 $m$ 个互不相邻的节点，使得选出节点的权值总和最大。 $n\le 200000$ 比较巧妙的贪心。 引理：如果 $A[i]$ 最大，在最终的方案中不可能只选 $A[i-1],A[i+1]$ 中的一个。 假设最终方案中只选了 $A[i-1]$，那么将 $A[i-1]$ 替换为 $A[i]$ 会导致答案更优。 因此，在取出节点 $i$ 之后，应该设置一个反悔的机会：将节点 $i$ 的权值改为 $A[i-1]+A[i+1]-A[i]$，表示放弃节点 $i$，并同时在 $i-1$、$i+1$ 位置种树。节点的相对位置关系可以用链表维护。 可删堆可以用两个普通的大根堆实现。 代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455#include &lt;bits/stdc++.h&gt;#define pre(u) node[u].l#define nxt(u) node[u].r#define val(u) node[u].valusing namespace std;const int maxn = 200005;struct Node &#123; int l, r, val;&#125;node[maxn];struct Heap &#123; priority_queue&lt;pair&lt;int, int&gt; &gt; a, b; inline void push(pair&lt;int, int&gt; t) &#123;a.push(t);&#125; inline void pop() &#123; while (b.size() &amp;&amp; a.top() == b.top()) a.pop(), b.pop(); a.pop(); &#125; inline void erase(pair&lt;int, int&gt; t) &#123;b.push(t);&#125; inline pair&lt;int, int&gt; top() &#123; while (b.size() &amp;&amp; a.top() == b.top()) a.pop(), b.pop(); return a.top(); &#125;&#125;q;inline void del(int p) &#123; nxt(pre(p)) = nxt(p); pre(nxt(p)) = pre(p);&#125;int N, M;int main() &#123; scanf("%d%d", &amp;N, &amp;M); if (M * 2 &gt; N) return puts("Error!"), 0; for (register int i = 1; i &lt;= N; ++i) scanf("%d", &amp;node[i].val), node[i].l = i - 1, node[i].r = i + 1, q.push(make_pair(node[i].val, i)); node[1].l = N, node[N].r = 1; int ans = 0; for (register int i = 1; i &lt;= M; ++i) &#123; ans += q.top().first; int p = q.top().second; q.pop(); val(p) = val(pre(p)) + val(nxt(p)) - val(p); q.erase(make_pair(val(pre(p)), pre(p))), q.erase(make_pair(val(nxt(p)), nxt(p))); q.push(make_pair(val(p), p)); del(pre(p)), del(nxt(p)); &#125; printf("%d", ans); return 0;&#125;]]></content>
       <categories>
@@ -360,8 +360,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
       </tags>
   </entry>
   <entry>
@@ -372,8 +372,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
