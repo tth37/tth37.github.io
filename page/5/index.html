@@ -1800,7 +1800,7 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$�
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-12 21:00:53" itemprop="dateModified" datetime="2019-05-12T21:00:53+08:00">2019-05-12</time>
+                <time title="修改时间：2019-10-04 23:01:56" itemprop="dateModified" datetime="2019-10-04T23:01:56+08:00">2019-10-04</time>
               
             
           </span>
@@ -1845,7 +1845,7 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$�
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.4k</span>
+                <span title="本文字数">2.6k</span>
               
 
               
@@ -1872,20 +1872,9 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$�
         
           <blockquote>
 <p><a href="https://www.luogu.org/problemnew/show/P4559" target="_blank" rel="noopener">题目链接</a></p>
+<p>给定数轴上$n$个点，给出$m$条独立的指令，将编号为$[l,r]$ 的点集中到$[k,k+r-l]$的位置且这些点个点位置不能重合，求每次命令中移动的点的距离和的最小值<br>（$n,m≤5×10^5, 1≤a_i,K≤10^6$）</p>
+<p>感谢@oy的贡献</p>
 </blockquote>
-<p>本题是主席树的一个简单应用。</p>
-<p>阅读题目，不难得出<strong>贪心策略</strong>。在编号位于$[l,r]$的所有人中，其位置最靠前的跑到$K$位置，位置第二靠前的跑到$K+1$位置，以此类推，可以使体力值总和最小。正确性不给出证明。<del>（不会证）</del></p>
-<p>对于所有学生的位置序列，我们可以建立主席树，并可以用主席树的基本查询操作提取出区间为$[l,r]$的学生位置值域信息。</p>
-<p>为了方便学生左右跑动时体力值的统计，我们可以在主席树上额外记录两个数值：$gl$和$gr$，分别表示当前节点对应的区间内所有学生跑动至左端点和右端点所消耗的体力值。在建树过程中即可对这两个变量进行统计，其中$gl$等于当前节点$u$的左儿子上的$gl$，加上$u$的右儿子上的$gl$，再加上右儿子上所有学生从右儿子的左端点跑到$u$的左端点所要消耗的体力值。（可以自己在数轴上模拟一下）</p>
-<p>接下来设计查询函数。参数包括值域的左端点和右端点$l$和$r$，以及目标位置区间的左端点和右端点$ql$和$qr$。显然对于以下情况，函数可以直接通过计算得出答案：</p>
-<ul>
-<li>$r\le ql$ 此时处于当前值域内的所有学生都要往右跑</li>
-<li>$qr\le l$ 此时处于当前值域内的所有学生都要往左跑</li>
-<li>当前值域内没有学生 返回 $0$</li>
-</ul>
-<p>否则，必须将值域拆分，递归到左右子节点进行统计。</p>
-<p>本题最绕的地方在于<strong>学生编号</strong>和<strong>学生位置</strong>是两个不同的东西，在设计查询函数时必须区分值域和编号的概念。</p>
-<p>代码如下：</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -2021,7 +2010,7 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$�
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-12 21:01:05" itemprop="dateModified" datetime="2019-05-12T21:01:05+08:00">2019-05-12</time>
+                <time title="修改时间：2019-10-04 23:00:40" itemprop="dateModified" datetime="2019-10-04T23:00:40+08:00">2019-10-04</time>
               
             
           </span>
@@ -2066,7 +2055,7 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$�
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.3k</span>
+                <span title="本文字数">2.5k</span>
               
 
               
@@ -2093,15 +2082,9 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$�
         
           <blockquote>
 <p><a href="https://www.luogu.org/problemnew/show/P5283" target="_blank" rel="noopener">题目链接</a></p>
+<p>给定一个长度为$n$的数组$a$，取$k$个各不相同的连续区间$[l,r]$ 使得这些区间所有元素的异或和的和最大，求这个最大值<br>（$ 1 \le n \le 5 \times 10^5,1\le k \le min(\frac{n(n-1)}{2},2\times 10^5),0\le  a_i \le 4294967295$）</p>
+<p>感谢@oy的贡献</p>
 </blockquote>
-<p>分析题意，即找出$n$个数中互不相同且异或和最大的前$k$段区间。</p>
-<p>用异或前缀和$s[i]$表示$a[1]\oplus a[2]\oplus … \oplus a[i]$。根据异或运算的性质，区间$[l,r]$的异或和即为$s[r] \oplus  s[l-1]$。</p>
-<p>将$s[1]$到$s[n]$依次插入$01trie$树中，每次找出对于固定的右端点$r$，与$s[r]$异或值最大的$s[l]$。显然，此次操作找到的是固定右端点为$r$时的最大区间异或和。</p>
-<p>将每个不同的$r$值所对应的最大区间异或和插入堆中，显然堆顶的元素即为$n$个数中任意区间的最大异或和。取出堆顶元素，并同时得到这是以$r$为右端点的第$1$大区间异或和。向堆中插入以$r$为右端点的第$2$大区间异或和。</p>
-<p>在查询以$r$为右端点的第$k$大区间异或和时，只需稍微更改在$01trie$树上查找的方式即可，与主席树查询区间第$k$小数的思想类似。由于需要访问$01trie$树的历史状态，因此$01trie$需要可持久化。</p>
-<p>注意：以$r$为右端点的区间异或和一共只有$r$个，因此查询以$r$为右端点的第$r+1$大区间异或和是没有意义的。</p>
-<p>另外，在将<code>(1&lt;&lt;d)</code>这样的式子转<code>long long</code>时，不能写成<code>(long long)(1&lt;&lt;d)</code>，而是<code>((long long)1&lt;&lt;d)</code>。</p>
-<p>代码如下：</p>
           <!--noindex-->
           
             <div class="post-button text-center">
@@ -2881,7 +2864,7 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$�
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">124k</span>
+    <span title="站点总字数">125k</span>
   
 
   

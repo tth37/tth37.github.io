@@ -116,18 +116,18 @@
 
 
 
-  <meta name="description" content="题目链接  分析题意，即找出$n$个数中互不相同且异或和最大的前$k$段区间。 用异或前缀和$s[i]$表示$a[1]\oplus a[2]\oplus … \oplus a[i]$。根据异或运算的性质，区间$[l,r]$的异或和即为$s[r] \oplus  s[l-1]$。 将$s[1]$到$s[n]$依次插入$01trie$树中，每次找出对于固定的右端点$r$，与$s[r]$异或值最大的$">
+  <meta name="description" content="题目链接 给定一个长度为$n$的数组$a$，取$k$个各不相同的连续区间$[l,r]$ 使得这些区间所有元素的异或和的和最大，求这个最大值（$ 1 \le n \le 5 \times 10^5,1\le k \le min(\frac{n(n-1)}{2},2\times 10^5),0\le  a_i \le 4294967295$） 感谢@oy的贡献">
 <meta name="keywords" content="可持久化trie,异或,二叉堆">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题解-luogu-p5283异或粽子">
 <meta property="og:url" content="https://tth37.cn/2019/04/09/solution-luogu-p5283/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="题目链接  分析题意，即找出$n$个数中互不相同且异或和最大的前$k$段区间。 用异或前缀和$s[i]$表示$a[1]\oplus a[2]\oplus … \oplus a[i]$。根据异或运算的性质，区间$[l,r]$的异或和即为$s[r] \oplus  s[l-1]$。 将$s[1]$到$s[n]$依次插入$01trie$树中，每次找出对于固定的右端点$r$，与$s[r]$异或值最大的$">
+<meta property="og:description" content="题目链接 给定一个长度为$n$的数组$a$，取$k$个各不相同的连续区间$[l,r]$ 使得这些区间所有元素的异或和的和最大，求这个最大值（$ 1 \le n \le 5 \times 10^5,1\le k \le min(\frac{n(n-1)}{2},2\times 10^5),0\le  a_i \le 4294967295$） 感谢@oy的贡献">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-12T13:01:05.454Z">
+<meta property="og:updated_time" content="2019-10-04T15:00:40.870Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="题解-luogu-p5283异或粽子">
-<meta name="twitter:description" content="题目链接  分析题意，即找出$n$个数中互不相同且异或和最大的前$k$段区间。 用异或前缀和$s[i]$表示$a[1]\oplus a[2]\oplus … \oplus a[i]$。根据异或运算的性质，区间$[l,r]$的异或和即为$s[r] \oplus  s[l-1]$。 将$s[1]$到$s[n]$依次插入$01trie$树中，每次找出对于固定的右端点$r$，与$s[r]$异或值最大的$">
+<meta name="twitter:description" content="题目链接 给定一个长度为$n$的数组$a$，取$k$个各不相同的连续区间$[l,r]$ 使得这些区间所有元素的异或和的和最大，求这个最大值（$ 1 \le n \le 5 \times 10^5,1\le k \le min(\frac{n(n-1)}{2},2\times 10^5),0\le  a_i \le 4294967295$） 感谢@oy的贡献">
 
 
 
@@ -517,7 +517,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-05-12 21:01:05" itemprop="dateModified" datetime="2019-05-12T21:01:05+08:00">2019-05-12</time>
+                <time title="修改时间：2019-10-04 23:00:40" itemprop="dateModified" datetime="2019-10-04T23:00:40+08:00">2019-10-04</time>
               
             
           </span>
@@ -569,7 +569,7 @@
                 
                   <span class="post-meta-item-text">本文字数：</span>
                 
-                <span title="本文字数">2.3k</span>
+                <span title="本文字数">2.5k</span>
               
 
               
@@ -595,7 +595,10 @@
       
         <blockquote>
 <p><a href="https://www.luogu.org/problemnew/show/P5283" target="_blank" rel="noopener">题目链接</a></p>
+<p>给定一个长度为$n$的数组$a$，取$k$个各不相同的连续区间$[l,r]$ 使得这些区间所有元素的异或和的和最大，求这个最大值<br>（$ 1 \le n \le 5 \times 10^5,1\le k \le min(\frac{n(n-1)}{2},2\times 10^5),0\le  a_i \le 4294967295$）</p>
+<p>感谢@oy的贡献</p>
 </blockquote>
+<a id="more"></a>
 <p>分析题意，即找出$n$个数中互不相同且异或和最大的前$k$段区间。</p>
 <p>用异或前缀和$s[i]$表示$a[1]\oplus a[2]\oplus … \oplus a[i]$。根据异或运算的性质，区间$[l,r]$的异或和即为$s[r] \oplus  s[l-1]$。</p>
 <p>将$s[1]$到$s[n]$依次插入$01trie$树中，每次找出对于固定的右端点$r$，与$s[r]$异或值最大的$s[l]$。显然，此次操作找到的是固定右端点为$r$时的最大区间异或和。</p>
@@ -604,7 +607,6 @@
 <p>注意：以$r$为右端点的区间异或和一共只有$r$个，因此查询以$r$为右端点的第$r+1$大区间异或和是没有意义的。</p>
 <p>另外，在将<code>(1&lt;&lt;d)</code>这样的式子转<code>long long</code>时，不能写成<code>(long long)(1&lt;&lt;d)</code>，而是<code>((long long)1&lt;&lt;d)</code>。</p>
 <p>代码如下：</p>
-<a id="more"></a>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN=<span class="number">500005</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> DEP=<span class="number">31</span>;</span><br><span class="line"><span class="keyword">int</span> N,M;</span><br><span class="line">ll ans,s[MAXN];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">State</span>&#123;</span></span><br><span class="line">    ll val;</span><br><span class="line">    <span class="keyword">int</span> r,k;</span><br><span class="line">    <span class="keyword">bool</span> <span class="keyword">operator</span> &lt;(<span class="keyword">const</span> State&amp; rhs) <span class="keyword">const</span> &#123;<span class="keyword">return</span> val&lt;rhs.val;&#125;</span><br><span class="line">&#125;;</span><br><span class="line">priority_queue&lt;State&gt; q;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line">    <span class="keyword">int</span> son[<span class="number">2</span>],sum;</span><br><span class="line">&#125;trie[MAXN*(DEP+<span class="number">2</span>)];</span><br><span class="line"><span class="keyword">int</span> head[MAXN],cnt;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(Node c,Node&amp; u,ll val,<span class="keyword">int</span> d)</span></span>&#123;</span><br><span class="line">    u.sum=c.sum+<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(d&lt;<span class="number">0</span>) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> x=(val&gt;&gt;d)&amp;<span class="number">1</span>;</span><br><span class="line">    u.son[!x]=c.son[!x];</span><br><span class="line">    insert(trie[c.son[x]],trie[u.son[x]=++cnt],val,d<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">query</span><span class="params">(Node u,ll val,<span class="keyword">int</span> d,<span class="keyword">int</span> k)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(d&lt;<span class="number">0</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> x=(val&gt;&gt;d)&amp;<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> lsum=trie[u.son[!x]].sum;</span><br><span class="line">    <span class="keyword">if</span>(lsum&gt;=k)</span><br><span class="line">      	<span class="keyword">return</span> ((ll)<span class="number">1</span>&lt;&lt;d)+(ll)query(trie[u.son[!x]],val,d<span class="number">-1</span>,k);</span><br><span class="line">    <span class="keyword">return</span> (ll)query(trie[u.son[x]],val,d<span class="number">-1</span>,k-lsum);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    trie[<span class="number">0</span>].son[<span class="number">0</span>]=trie[<span class="number">0</span>].son[<span class="number">1</span>]=trie[<span class="number">0</span>].sum=<span class="number">0</span>;</span><br><span class="line">    insert(trie[<span class="number">0</span>],trie[head[<span class="number">0</span>]=++cnt],<span class="number">0</span>,DEP);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>,&amp;N,&amp;M);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=N;++i)&#123;</span><br><span class="line">        ll a;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>,&amp;a);</span><br><span class="line">        s[i]=s[i<span class="number">-1</span>]^a;</span><br><span class="line">        insert(trie[head[i<span class="number">-1</span>]],trie[head[i]=++cnt],s[i],DEP);</span><br><span class="line">        q.push((State)&#123;query(trie[head[i<span class="number">-1</span>]],s[i],DEP,<span class="number">1</span>),i,<span class="number">1</span>&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">register</span> <span class="keyword">int</span> i=<span class="number">1</span>;i&lt;=M;++i)&#123;</span><br><span class="line">        ans+=q.top().val;</span><br><span class="line">        <span class="keyword">int</span> r=q.top().r,k=q.top().k;</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="keyword">if</span>(k==r) <span class="keyword">continue</span>;</span><br><span class="line">        q.push((State)&#123;query(trie[head[r<span class="number">-1</span>]],s[r],DEP,k+<span class="number">1</span>),r,k+<span class="number">1</span>&#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>,ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>$p.s.$洛谷评测机有点小慢，不开<code>O2</code>会小概率发生TLE QwQ</p>
 
@@ -633,7 +635,7 @@
   <p><span>本文标题:</span><a href="/2019/04/09/solution-luogu-p5283/">题解-luogu-p5283异或粽子</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 tth37 的个人博客">tth37</a></p>
   <p><span>发布时间:</span>2019年04月09日 - 23:04</p>
-  <p><span>最后更新:</span>2019年05月12日 - 21:05</p>
+  <p><span>最后更新:</span>2019年10月04日 - 23:10</p>
   <p><span>原始链接:</span><a href="/2019/04/09/solution-luogu-p5283/" title="题解-luogu-p5283异或粽子">https://tth37.cn/2019/04/09/solution-luogu-p5283/</a>
     <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://tth37.cn/2019/04/09/solution-luogu-p5283/" aria-label="复制成功！"></i></span>
   </p>
@@ -1019,7 +1021,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="站点总字数">124k</span>
+    <span title="站点总字数">125k</span>
   
 
   
