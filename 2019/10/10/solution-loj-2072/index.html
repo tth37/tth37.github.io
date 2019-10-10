@@ -116,17 +116,18 @@
 
 
 
-  <meta name="description" content="CSP-S rp++!">
-<meta name="keywords" content="OI">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tth37&#39;s Blog">
-<meta property="og:url" content="https://tth37.cn/tags/线段树/index.html">
+  <meta name="description" content="题目链接(Luogu) 题目链接(LibreOJ) 给定两棵树 $A$ 和 $B$，在 $B$ 中删除一个叶子节点后满足 $A$ 与 $B’$ 同构；求满足条件的编号最小的叶子节点。 $n \le 100000$ 感谢 @tth37 的贡献">
+<meta name="keywords" content="动态规划,树形dp,哈希(hash),异或">
+<meta property="og:type" content="article">
+<meta property="og:title" content="题解-LibreOJ-2072独特的树叶">
+<meta property="og:url" content="https://tth37.cn/2019/10/10/solution-loj-2072/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="CSP-S rp++!">
+<meta property="og:description" content="题目链接(Luogu) 题目链接(LibreOJ) 给定两棵树 $A$ 和 $B$，在 $B$ 中删除一个叶子节点后满足 $A$ 与 $B’$ 同构；求满足条件的编号最小的叶子节点。 $n \le 100000$ 感谢 @tth37 的贡献">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-10T14:32:01.050Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tth37&#39;s Blog">
-<meta name="twitter:description" content="CSP-S rp++!">
+<meta name="twitter:title" content="题解-LibreOJ-2072独特的树叶">
+<meta name="twitter:description" content="题目链接(Luogu) 题目链接(LibreOJ) 给定两棵树 $A$ 和 $B$，在 $B$ 中删除一个叶子节点后满足 $A$ 与 $B’$ 同构；求满足条件的编号最小的叶子节点。 $n \le 100000$ 感谢 @tth37 的贡献">
 
 
 
@@ -135,7 +136,7 @@
 
 
 
-  <link rel="canonical" href="https://tth37.cn/tags/线段树/">
+  <link rel="canonical" href="https://tth37.cn/2019/10/10/solution-loj-2072/">
 
 
 
@@ -145,7 +146,7 @@
   };
 </script>
 
-  <title>标签: 线段树 | tth37's Blog</title>
+  <title>题解-LibreOJ-2072独特的树叶 | tth37's Blog</title>
   
 
 
@@ -203,7 +204,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <a href="https://github.com/tth37" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -285,7 +286,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -434,192 +435,287 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block tag">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>线段树<small>标签</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tth37.cn/2019/10/10/solution-loj-2072/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tth37">
+      <meta itemprop="description" content="CSP-S rp++!">
+      <meta itemprop="image" content="/images/main.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tth37's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/09/28/solution-loj-6032/" itemprop="url">
-            
-              <span itemprop="name">题解-LibreOJ-6032水箱</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">题解-LibreOJ-2072独特的树叶
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-28T00:04:49+08:00" content="2019-09-28">
-          09-28
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-10 22:08:41 / 修改时间：22:32:01" itemprop="dateCreated datePublished" datetime="2019-10-10T22:08:41+08:00">2019-10-10</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/题解/" itemprop="url" rel="index"><span itemprop="name">题解</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">2.9k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/09/24/solution-luogu-p3960/" itemprop="url">
-            
-              <span itemprop="name">题解-luogu-p3960列队</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-09-24T23:14:36+08:00" content="2019-09-24">
-          09-24
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/21/algorithm-treeintree/" itemprop="url">
-            
-              <span itemprop="name">算法学习-树套树</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-21T13:39:53+08:00" content="2019-07-21">
-          07-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <blockquote>
+<p><a href="https://www.luogu.org/problem/P4323" target="_blank" rel="noopener">题目链接(Luogu)</a></p>
+<p><a href="https://loj.ac/problem/2072" target="_blank" rel="noopener">题目链接(LibreOJ)</a></p>
+<p>给定两棵树 $A$ 和 $B$，在 $B$ 中删除一个叶子节点后满足 $A$ 与 $B’$ 同构；求满足条件的编号最小的叶子节点。</p>
+<p>$n \le 100000$</p>
+<p>感谢 @tth37 的贡献</p>
+</blockquote>
+<a id="more"></a>
+<p>这道题我们需要判断树是否同构。这需要借助 <a href="https://oi-wiki.org/graph/tree-hash/" target="_blank" rel="noopener">树哈希</a> 。</p>
+<p>一千个 OIer 中有一万种哈希写法。这里采用基于<strong>异或</strong>的树哈希。</p>
+<script type="math/tex; mode=display">
+\text{hash[u]}=\bigoplus_{v\in \text{son(u)}}\text{hash[v]}*\text{seed}+\text{size[v]}</script><p>我们可以首先将 $A$ 上每个点作为根节点时的哈希值求出来，并扔到一个 map 里。然后在 $B$ 上枚举删除每个叶子节点后对应的哈希值，如果对应的哈希值出现过，则表明删去该叶子节点后可以形成同构。</p>
+<p>该算法复杂度瓶颈在于求出 $A$ 对应的 $n$ 个哈希值。根据异或的相消性质，可以设计出类似树形 dp 的二次扫描与换根法在 $O(n)$ 时间复杂度求出所有哈希值。</p>
+<p>听着简单，代码还是挺难写的。</p>
+<p>代码如下：（极丑）</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">unsigned</span> <span class="keyword">long</span> <span class="keyword">long</span> ull;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100005</span>;</span><br><span class="line"><span class="keyword">const</span> ull seed = <span class="number">1000000007</span>;</span><br><span class="line"></span><br><span class="line">ull H[maxn], H2[maxn];</span><br><span class="line">ull size[maxn];</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G1[maxn], G2[maxn];</span><br><span class="line"><span class="built_in">map</span>&lt;ull, <span class="keyword">bool</span>&gt; mp;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N, R;</span><br><span class="line"><span class="keyword">int</span> ans = maxn;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs1</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">	H[u] = size[u] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = G1[u].begin(); it != G1[u].end(); it++) &#123;</span><br><span class="line">		<span class="keyword">int</span> v = *it;</span><br><span class="line">		<span class="keyword">if</span> (v == fa) <span class="keyword">continue</span>;</span><br><span class="line">		dfs1(v, u);</span><br><span class="line">		size[u] += size[v];</span><br><span class="line">		H[u] ^= (H[v] * seed + size[v]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs2</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (u != R) &#123;</span><br><span class="line">		H2[u] = H[u] ^ ((H2[fa] ^ (H[u] * seed + size[u])) * seed + ((ull)N - size[u]));</span><br><span class="line">	&#125; <span class="keyword">else</span> H2[u] = H[u];</span><br><span class="line">	<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = G1[u].begin(); it != G1[u].end(); it++) &#123;</span><br><span class="line">		<span class="keyword">int</span> v = *it;</span><br><span class="line">		<span class="keyword">if</span> (v == fa) <span class="keyword">continue</span>;</span><br><span class="line">		dfs2(v, u);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs3</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">	H[u] = size[u] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = G2[u].begin(); it != G2[u].end(); it++) &#123;</span><br><span class="line">		<span class="keyword">int</span> v = *it;</span><br><span class="line">		<span class="keyword">if</span> (v == fa) <span class="keyword">continue</span>;</span><br><span class="line">		dfs3(v, u);</span><br><span class="line">		size[u] += size[v];</span><br><span class="line">		H[u] ^= (H[v] * seed + size[v]);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs4</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (u != R) &#123;</span><br><span class="line">		H2[u] = H[u] ^ ((H2[fa] ^ (H[u] * seed + size[u])) * seed + ((ull)N + <span class="number">1</span> - size[u]));</span><br><span class="line">	&#125; <span class="keyword">else</span> H2[u] = H[u];</span><br><span class="line">	<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = G2[u].begin(); it != G2[u].end(); it++) &#123;</span><br><span class="line">		<span class="keyword">int</span> v = *it;</span><br><span class="line">		<span class="keyword">if</span> (v == fa) <span class="keyword">continue</span>;</span><br><span class="line">		dfs4(v, u);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N; ++i) &#123;</span><br><span class="line">		<span class="keyword">int</span> u, v;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;u, &amp;v);</span><br><span class="line">		G1[u].push_back(v);</span><br><span class="line">		G1[v].push_back(u);</span><br><span class="line">	&#125;</span><br><span class="line">    R = <span class="number">1</span>;</span><br><span class="line">	dfs1(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	dfs2(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">		<span class="keyword">int</span> u, v;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;u, &amp;v);</span><br><span class="line">		G2[u].push_back(v);</span><br><span class="line">		G2[v].push_back(u);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i)</span><br><span class="line">		mp[H2[i]] = <span class="number">1</span>;</span><br><span class="line">    R = <span class="number">2</span>;</span><br><span class="line">	dfs3(<span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">	dfs4(<span class="number">2</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">1</span>; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span> ((<span class="keyword">int</span>)G2[i].size() == <span class="number">1</span>) &#123;</span><br><span class="line">			ull w = H2[G2[i][<span class="number">0</span>]] ^ (H[i] * seed + <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">if</span> (mp[w]) <span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">"%d"</span>, i), <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">    R = <span class="number">1</span>;</span><br><span class="line">    dfs3(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    dfs4(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N + <span class="number">1</span>; ++i) &#123;</span><br><span class="line">		<span class="keyword">if</span> ((<span class="keyword">int</span>)G2[i].size() == <span class="number">1</span>) &#123;</span><br><span class="line">			ull w = H2[G2[i][<span class="number">0</span>]] ^ (H[i] * seed + <span class="number">1</span>);</span><br><span class="line">			<span class="keyword">if</span> (mp[w]) <span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">"%d"</span>, i), <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/04/algorithm-treechainsectioning/" itemprop="url">
-            
-              <span itemprop="name">算法学习-树链剖分</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-04T23:21:49+08:00" content="2019-07-04">
-          07-04
-        </time>
-      </div>
-
-    </header>
-  </article>
+    </div>
 
 
+
+    
+
+    
+
+    
+    
+    
+
+    <div>
       
         
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/03/29/algorithm-persistentdatastructure/" itemprop="url">
-            
-              <span itemprop="name">算法学习-可持久化数据结构</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-03-29T19:19:42+08:00" content="2019-03-29">
-          03-29
-        </time>
-      </div>
-
-    </header>
-  </article>
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/10/10/solution-loj-2072/">题解-LibreOJ-2072独特的树叶</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 tth37 的个人博客">tth37</a></p>
+  <p><span>发布时间:</span>2019年10月10日 - 22:10</p>
+  <p><span>最后更新:</span>2019年10月10日 - 22:10</p>
+  <p><span>原始链接:</span><a href="/2019/10/10/solution-loj-2072/" title="题解-LibreOJ-2072独特的树叶">https://tth37.cn/2019/10/10/solution-loj-2072/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://tth37.cn/2019/10/10/solution-loj-2072/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({
+          title: "",
+          text: '复制成功',
+          icon: "success",
+          showConfirmButton: true
+          });
+    });
+    });
+</script>
 
 
       
     </div>
 
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/动态规划/" rel="tag"># 动态规划</a>
+          
+            <a href="/tags/树形dp/" rel="tag"># 树形dp</a>
+          
+            <a href="/tags/哈希-hash/" rel="tag"># 哈希(hash)</a>
+          
+            <a href="/tags/异或/" rel="tag"># 异或</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/04/solution-luogu-p1792/" rel="next" title="题解-luogu-p1792种树">
+                <i class="fa fa-chevron-left"></i> 题解-luogu-p1792种树
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+    <div id="gitalk-container">
+    </div>
+    
+  
+
+
 
         </div>
         
@@ -1071,6 +1167,10 @@ setInterval("createtime()",250);
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
 
   
 
@@ -1093,6 +1193,36 @@ setInterval("createtime()",250);
 
 
 
+
+
+  
+  
+    
+  
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+  
+  
+  <script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+   <script>
+        var gitalk = new Gitalk({
+          clientID: 'e4bd10e2fdaa62b463db',
+          clientSecret: '198498a0be473b87c8a04fde97cf66e939dca90a',
+          repo: 'tth37.github.io',
+          owner: 'tth37',
+          admin: ['tth37'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')
+       </script>
 
 
   
@@ -1503,7 +1633,7 @@ setInterval("createtime()",250);
   <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-bookmark@1/bookmark.min.js"></script>
   <script>
   
-    bookmark.loadBookmark();
+    bookmark.scrollToMark('auto', "#更多");
   
   </script>
 
