@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[solution-noip2016pre]]></title>
+    <title><![CDATA[解题报告-NOIP2016提高组初赛]]></title>
     <url>%2F2019%2F10%2F11%2Fsolution-noip2016pre%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[NOIP 2016 提高组初赛试题 不完全解读！ 未完待续…… 第 4 题 与二进制小数 0.1 相等的八进进制数是（ ）。 A. 0.8 B. 0.4 C. 0.2 D. 0.1 第 5 题 以比较作为基本运算，在 N 个数中找最小数的最少运算次数为（ ）。 A. N B. N−1 C. N^2 D. logN 第 6 题 表达式 a*(b+c)-d 的后缀表达形式为（ ）。 A. abcd*+- B. abc+*d- C. abc*+d- D. -+*abcd 第 8 题 G 是一个非连通简单无向图，共有 28 条边，则该图至少有（ ）个顶点。 A. 10 B. 9 C. 8 D. 7 第 9 题 某计算机的 CPU 和内存之间的地址总线宽度是 32 位（bit），这台计算机最多可以使用（ ）的内存。 A. 2GB B. 4GB C. 8GB D. 16GB 第 11 题 有 7 个一模一样的苹果，放到 3 个一样的盘子中，一共有（ ）种放法。 A. 7 B. 8 C. 21 D. 3^7]]></content>
+      <categories>
+        <category>解题报告</category>
+      </categories>
   </entry>
   <entry>
     <title><![CDATA[题解-LibreOJ-6514文明]]></title>
@@ -225,8 +228,8 @@
       </categories>
       <tags>
         <tag>二分答案</tag>
-        <tag>倍增</tag>
         <tag>前缀和</tag>
+        <tag>倍增</tag>
       </tags>
   </entry>
   <entry>
@@ -393,8 +396,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
       </tags>
   </entry>
   <entry>
@@ -405,8 +408,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -678,8 +681,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>贪心</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>

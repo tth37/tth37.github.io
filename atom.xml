@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tth37.cn/"/>
-  <updated>2019-10-11T15:36:33.994Z</updated>
+  <updated>2019-10-11T15:47:32.907Z</updated>
   <id>https://tth37.cn/</id>
   
   <author>
@@ -17,15 +17,24 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>solution-noip2016pre</title>
+    <title>解题报告-NOIP2016提高组初赛</title>
     <link href="https://tth37.cn/2019/10/11/solution-noip2016pre/"/>
     <id>https://tth37.cn/2019/10/11/solution-noip2016pre/</id>
     <published>2019-10-11T15:36:33.000Z</published>
-    <updated>2019-10-11T15:36:33.994Z</updated>
+    <updated>2019-10-11T15:47:32.907Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>NOIP 2016 提高组初赛试题 不完全解读！</p><p>未完待续……</p></blockquote><a id="more"></a><p><strong>第 4 题</strong></p><p>与二进制小数 0.1 相等的八进进制数是（ ）。 </p><p>A. 0.8 B. 0.4 C. 0.2 D. 0.1</p><p><strong>第 5 题</strong></p><p>以比较作为基本运算，在 N 个数中找最小数的最少运算次数为（ ）。 </p><p>A. N B. N−1 C. N^2 D. logN</p><p><strong>第 6 题</strong></p><p>表达式 a*(b+c)-d 的后缀表达形式为（ ）。 A. abcd*+- B. abc+*d- C. abc*+d- D. -+*abcd</p><p><strong>第 8 题</strong></p><p>G 是一个非连通简单无向图，共有 28 条边，则该图至少有（ ）个顶点。 </p><p>A. 10 B. 9 C. 8 D. 7</p><p><strong>第 9 题</strong></p><p>某计算机的 CPU 和内存之间的地址总线宽度是 32 位（bit），这台计算机最多可以使用（ ）的内存。 </p><p>A. 2GB B. 4GB C. 8GB D. 16GB</p><p><strong>第 11 题</strong></p><p>有 7 个一模一样的苹果，放到 3 个一样的盘子中，一共有（ ）种放法。 </p><p>A. 7 B. 8 C. 21 D. 3^7</p>]]></content>
     
     <summary type="html">
     
+      &lt;blockquote&gt;
+&lt;p&gt;NOIP 2016 提高组初赛试题 不完全解读！&lt;/p&gt;
+&lt;p&gt;未完待续……&lt;/p&gt;
+&lt;/blockquote&gt;
+    
     </summary>
+    
+      <category term="解题报告" scheme="https://tth37.cn/categories/%E8%A7%A3%E9%A2%98%E6%8A%A5%E5%91%8A/"/>
     
     
   </entry>
@@ -546,9 +555,9 @@
     
       <category term="二分答案" scheme="https://tth37.cn/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/"/>
     
-      <category term="倍增" scheme="https://tth37.cn/tags/%E5%80%8D%E5%A2%9E/"/>
-    
       <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
+    
+      <category term="倍增" scheme="https://tth37.cn/tags/%E5%80%8D%E5%A2%9E/"/>
     
   </entry>
   
@@ -953,9 +962,9 @@
       <category term="数论专题" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
     
     
-      <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
-    
       <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
     
   </entry>
   
@@ -981,9 +990,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
-    
       <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
     
       <category term="逆元" scheme="https://tth37.cn/tags/%E9%80%86%E5%85%83/"/>
     
@@ -1664,9 +1673,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="python" scheme="https://tth37.cn/tags/python/"/>
-    
       <category term="贪心" scheme="https://tth37.cn/tags/%E8%B4%AA%E5%BF%83/"/>
+    
+      <category term="python" scheme="https://tth37.cn/tags/python/"/>
     
   </entry>
   
