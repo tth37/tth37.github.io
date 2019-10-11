@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tth37.cn/"/>
-  <updated>2019-10-11T15:36:00.458Z</updated>
+  <updated>2019-10-11T15:36:33.994Z</updated>
   <id>https://tth37.cn/</id>
   
   <author>
@@ -15,6 +15,20 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>solution-noip2016pre</title>
+    <link href="https://tth37.cn/2019/10/11/solution-noip2016pre/"/>
+    <id>https://tth37.cn/2019/10/11/solution-noip2016pre/</id>
+    <published>2019-10-11T15:36:33.000Z</published>
+    <updated>2019-10-11T15:36:33.994Z</updated>
+    
+    <summary type="html">
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>题解-LibreOJ-6514文明</title>
@@ -246,9 +260,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
       <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
+    
+      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
   </entry>
   
@@ -532,9 +546,9 @@
     
       <category term="二分答案" scheme="https://tth37.cn/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/"/>
     
-      <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
-    
       <category term="倍增" scheme="https://tth37.cn/tags/%E5%80%8D%E5%A2%9E/"/>
+    
+      <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
   </entry>
   
@@ -848,9 +862,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
-    
       <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
+    
+      <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
       <category term="树状数组" scheme="https://tth37.cn/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
@@ -881,9 +895,9 @@
     
       <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
       <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
+    
+      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
       <category term="树状数组" scheme="https://tth37.cn/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
@@ -1056,9 +1070,9 @@
     
       <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
-    
       <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+      <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
       <category term="dfs序" scheme="https://tth37.cn/tags/dfs%E5%BA%8F/"/>
     
@@ -1451,11 +1465,11 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}&lt;/script&gt;&lt;p&gt;其中�
     
       <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
       <category term="可持久化trie" scheme="https://tth37.cn/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96trie/"/>
     
       <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
+    
+      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
   </entry>
   
@@ -1688,9 +1702,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="字符串" scheme="https://tth37.cn/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
