@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tth37.cn/"/>
-  <updated>2019-10-10T14:32:01.050Z</updated>
+  <updated>2019-10-11T15:36:00.458Z</updated>
   <id>https://tth37.cn/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>题解-LibreOJ-6514文明</title>
+    <link href="https://tth37.cn/2019/10/11/solution-loj-6514/"/>
+    <id>https://tth37.cn/2019/10/11/solution-loj-6514/</id>
+    <published>2019-10-11T15:20:54.000Z</published>
+    <updated>2019-10-11T15:36:00.458Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://loj.ac/problem/6514" target="_blank" rel="noopener">题目链接</a></p><p>题目概括<strong>大力</strong>征集中~</p></blockquote><a id="more"></a><p>首先感谢 <a href="https://blog.csdn.net/lcomyn/article/details/45718295" target="_blank" rel="noopener">这篇文章</a> 让我学会了<strong>换根树链剖分</strong>的相关操作。</p><p>首先考虑查询次数为 1 的解法。将黈力所在的国家作为根节点，求出其他所有国家与根节点的<strong>中点</strong>。不难发现，求出的中点及其子树会被其他国家所占领。求出所有中点后，从根节点开始 dfs 整棵树，注意不能访问被标记出的中点。被访问到的节点总数即为所求。</p><p>考虑优化。用 “ dfs 序 + 线段树” 维护一个支持子树修改、子树查询的树形数据结构。每求出一个中点，就将中点及其子树的权值改为 1 。所有操作结束后，节点总数 $N$ 减去所有节点的权值总和即为所求。</p><p>对于查询次数不为 1 的数据，可以在上述数据结构中加上“换根”操作。具体实现可以参考 <a href="https://blog.csdn.net/lcomyn/article/details/45718295" target="_blank" rel="noopener">这篇文章</a> 及我的代码。</p><p>略有点毒瘤。代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lson(u) node[u].l</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rson(u) node[u].r</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sum(u) node[u].sum</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> tag(u) node[u].tag</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">500005</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> sum, l, r, tag;</span><br><span class="line">&#125;node[maxn * <span class="number">3</span>];</span><br><span class="line"><span class="keyword">int</span> R, cnt;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span>&amp; u, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    u = ++cnt;</span><br><span class="line">    tag(u) = <span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">if</span> (l == r) <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    build(lson(u), l, mid);</span><br><span class="line">    build(rson(u), mid + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> llen = mid - l + <span class="number">1</span>, rlen = r - mid;</span><br><span class="line">    <span class="keyword">if</span> (tag(u) != <span class="number">-1</span>) &#123;</span><br><span class="line">        sum(lson(u)) = llen * tag(u);</span><br><span class="line">        sum(rson(u)) = rlen * tag(u);</span><br><span class="line">        tag(lson(u)) = tag(u);</span><br><span class="line">        tag(rson(u)) = tag(u);</span><br><span class="line">        tag(u) = <span class="number">-1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> ql, <span class="keyword">int</span> qr, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (ql &lt;= l &amp;&amp; r &lt;= qr) &#123;</span><br><span class="line">        sum(u) = (r - l + <span class="number">1</span>) * val;</span><br><span class="line">        tag(u) = val;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pushdown(u, l, r);</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (ql &lt;= mid) modify(lson(u), l, mid, ql, qr, val);</span><br><span class="line">    <span class="keyword">if</span> (mid &lt; qr) modify(rson(u), mid + <span class="number">1</span>, r, ql, qr, val);</span><br><span class="line">    sum(u) = sum(lson(u)) + sum(rson(u));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> ql, <span class="keyword">int</span> qr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (ql &lt;= l &amp;&amp; r &lt;= qr)</span><br><span class="line">        <span class="keyword">return</span> sum(u);</span><br><span class="line">    pushdown(u, l, r);</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>, ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (ql &lt;= mid) ret += query(lson(u), l, mid, ql, qr);</span><br><span class="line">    <span class="keyword">if</span> (mid &lt; qr) ret += query(rson(u), mid + <span class="number">1</span>, r, ql, qr);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N, Q, K, root;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];</span><br><span class="line"><span class="keyword">int</span> f[maxn][<span class="number">20</span>], dep[maxn];</span><br><span class="line"><span class="keyword">int</span> dfn[maxn], dfn_idx, size[maxn];</span><br><span class="line"><span class="keyword">int</span> p[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">    size[u] = <span class="number">1</span>;</span><br><span class="line">    dfn[u] = ++dfn_idx;</span><br><span class="line">    dep[u] = dep[fa] + <span class="number">1</span>;</span><br><span class="line">    f[u][<span class="number">0</span>] = fa;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">19</span>; ++i)</span><br><span class="line">        f[u][i] = f[f[u][i - <span class="number">1</span>]][i - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = *it;</span><br><span class="line">        <span class="keyword">if</span> (v == fa) <span class="keyword">continue</span>;</span><br><span class="line">        dfs(v, u);</span><br><span class="line">        size[u] += size[v];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Lca</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (dep[u] &lt; dep[v]) swap(u, v);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">19</span>; ~i; --i)</span><br><span class="line">        <span class="keyword">if</span> (dep[f[u][i]] &gt;= dep[v]) u = f[u][i];</span><br><span class="line">    <span class="keyword">if</span> (u == v) <span class="keyword">return</span> u;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">19</span>; ~i; --i)</span><br><span class="line">        <span class="keyword">if</span> (f[u][i] != f[v][i]) u = f[u][i], v = f[v][i];</span><br><span class="line">    <span class="keyword">return</span> f[u][<span class="number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">Jump</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">19</span>; ~i; --i)</span><br><span class="line">        <span class="keyword">if</span> (d - (<span class="number">1</span> &lt;&lt; i) &gt;= <span class="number">0</span>) u = f[u][i], d -= (<span class="number">1</span> &lt;&lt; i);</span><br><span class="line">    <span class="keyword">return</span> u;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;N, &amp;Q);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt; N; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> u, v;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;u, &amp;v);</span><br><span class="line">        G[u].push_back(v);</span><br><span class="line">        G[v].push_back(u);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    build(R, <span class="number">1</span>, N);</span><br><span class="line">    <span class="keyword">while</span> (Q--) &#123;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;K);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= K; ++i)</span><br><span class="line">            <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;p[i]);</span><br><span class="line">        root = p[<span class="number">1</span>];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= K; ++i) &#123;</span><br><span class="line">            <span class="keyword">int</span> t = p[i];</span><br><span class="line">            <span class="keyword">int</span> lca = Lca(root, t);</span><br><span class="line">            <span class="keyword">int</span> dis = dep[t] + dep[root] - <span class="number">2</span> * dep[lca];</span><br><span class="line">            <span class="keyword">if</span> (dis &amp; <span class="number">1</span>) dis = (dis &gt;&gt; <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">else</span> dis = (dis &gt;&gt; <span class="number">1</span>) - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> dis_root = dep[root] - dep[lca];</span><br><span class="line">            <span class="keyword">int</span> <span class="keyword">dis_t</span> = dep[t] - dep[lca];</span><br><span class="line">            <span class="keyword">int</span> u = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">// Get Middle Point</span></span><br><span class="line">            <span class="keyword">if</span> (dis &lt;= <span class="keyword">dis_t</span>) &#123;</span><br><span class="line">                u = Jump(t, dis);</span><br><span class="line">            &#125; <span class="keyword">else</span> u = Jump(root, dis_root + <span class="keyword">dis_t</span> - dis);</span><br><span class="line">            <span class="keyword">if</span> (Lca(root, u) != u) <span class="comment">// Situation II</span></span><br><span class="line">                modify(R, <span class="number">1</span>, N, dfn[u], dfn[u] + size[u] - <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">            <span class="keyword">else</span> &#123; <span class="comment">// Situation III</span></span><br><span class="line">                <span class="keyword">int</span> v = Jump(root, dep[root] - dep[u] - <span class="number">1</span>); <span class="comment">// * Find the nearest node *</span></span><br><span class="line">                <span class="keyword">if</span> (dfn[v] - <span class="number">1</span> &gt;= <span class="number">1</span>) modify(R, <span class="number">1</span>, N, <span class="number">1</span>, dfn[v] - <span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">                <span class="keyword">if</span> (dfn[v] + size[v] &lt;= N) modify(R, <span class="number">1</span>, N, dfn[v] + size[v], N, <span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, N - query(R, <span class="number">1</span>, N, <span class="number">1</span>, N));</span><br><span class="line">        modify(R, <span class="number">1</span>, N, <span class="number">1</span>, N, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://loj.ac/problem/6514&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;题目概括&lt;strong&gt;大力&lt;/strong&gt;征集中~&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+      <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+      <category term="dfs序" scheme="https://tth37.cn/tags/dfs%E5%BA%8F/"/>
+    
+      <category term="最近公共祖先" scheme="https://tth37.cn/tags/%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/"/>
+    
+  </entry>
   
   <entry>
     <title>题解-LibreOJ-2072独特的树叶</title>
@@ -215,9 +246,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
-    
       <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
   </entry>
   
@@ -436,9 +467,9 @@
     
       <category term="树形dp" scheme="https://tth37.cn/tags/%E6%A0%91%E5%BD%A2dp/"/>
     
-      <category term="虚树" scheme="https://tth37.cn/tags/%E8%99%9A%E6%A0%91/"/>
-    
       <category term="点分治" scheme="https://tth37.cn/tags/%E7%82%B9%E5%88%86%E6%B2%BB/"/>
+    
+      <category term="虚树" scheme="https://tth37.cn/tags/%E8%99%9A%E6%A0%91/"/>
     
   </entry>
   
@@ -817,9 +848,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
-    
       <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
+      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
       <category term="树状数组" scheme="https://tth37.cn/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
@@ -850,9 +881,9 @@
     
       <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
-    
       <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
       <category term="树状数组" scheme="https://tth37.cn/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
@@ -1025,9 +1056,9 @@
     
       <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
       <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
+      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
       <category term="dfs序" scheme="https://tth37.cn/tags/dfs%E5%BA%8F/"/>
     
@@ -1194,9 +1225,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="树上差分" scheme="https://tth37.cn/tags/%E6%A0%91%E4%B8%8A%E5%B7%AE%E5%88%86/"/>
-    
       <category term="最近公共祖先" scheme="https://tth37.cn/tags/%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/"/>
+    
+      <category term="树上差分" scheme="https://tth37.cn/tags/%E6%A0%91%E4%B8%8A%E5%B7%AE%E5%88%86/"/>
     
   </entry>
   
@@ -1420,11 +1451,11 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}&lt;/script&gt;&lt;p&gt;其中�
     
       <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
+      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
       <category term="可持久化trie" scheme="https://tth37.cn/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96trie/"/>
     
       <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
-    
-      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
   </entry>
   

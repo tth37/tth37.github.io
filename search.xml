@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-LibreOJ-6514文明]]></title>
+    <url>%2F2019%2F10%2F11%2Fsolution-loj-6514%2F</url>
+    <content type="text"><![CDATA[题目链接 题目概括大力征集中~ 首先感谢 这篇文章 让我学会了换根树链剖分的相关操作。 首先考虑查询次数为 1 的解法。将黈力所在的国家作为根节点，求出其他所有国家与根节点的中点。不难发现，求出的中点及其子树会被其他国家所占领。求出所有中点后，从根节点开始 dfs 整棵树，注意不能访问被标记出的中点。被访问到的节点总数即为所求。 考虑优化。用 “ dfs 序 + 线段树” 维护一个支持子树修改、子树查询的树形数据结构。每求出一个中点，就将中点及其子树的权值改为 1 。所有操作结束后，节点总数 $N$ 减去所有节点的权值总和即为所求。 对于查询次数不为 1 的数据，可以在上述数据结构中加上“换根”操作。具体实现可以参考 这篇文章 及我的代码。 略有点毒瘤。代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136#include &lt;bits/stdc++.h&gt;using namespace std;#define lson(u) node[u].l#define rson(u) node[u].r#define sum(u) node[u].sum#define tag(u) node[u].tagconst int maxn = 500005;struct Node &#123; int sum, l, r, tag;&#125;node[maxn * 3];int R, cnt;void build(int&amp; u, int l, int r) &#123; u = ++cnt; tag(u) = -1; if (l == r) return; int mid = (l + r) &gt;&gt; 1; build(lson(u), l, mid); build(rson(u), mid + 1, r);&#125;inline void pushdown(int u, int l, int r) &#123; int mid = (l + r) &gt;&gt; 1; int llen = mid - l + 1, rlen = r - mid; if (tag(u) != -1) &#123; sum(lson(u)) = llen * tag(u); sum(rson(u)) = rlen * tag(u); tag(lson(u)) = tag(u); tag(rson(u)) = tag(u); tag(u) = -1; &#125;&#125;void modify(int u, int l, int r, int ql, int qr, int val) &#123; if (ql &lt;= l &amp;&amp; r &lt;= qr) &#123; sum(u) = (r - l + 1) * val; tag(u) = val; return; &#125; pushdown(u, l, r); int mid = (l + r) &gt;&gt; 1; if (ql &lt;= mid) modify(lson(u), l, mid, ql, qr, val); if (mid &lt; qr) modify(rson(u), mid + 1, r, ql, qr, val); sum(u) = sum(lson(u)) + sum(rson(u));&#125;int query(int u, int l, int r, int ql, int qr) &#123; if (ql &lt;= l &amp;&amp; r &lt;= qr) return sum(u); pushdown(u, l, r); int mid = (l + r) &gt;&gt; 1, ret = 0; if (ql &lt;= mid) ret += query(lson(u), l, mid, ql, qr); if (mid &lt; qr) ret += query(rson(u), mid + 1, r, ql, qr); return ret;&#125;int N, Q, K, root;vector&lt;int&gt; G[maxn];int f[maxn][20], dep[maxn];int dfn[maxn], dfn_idx, size[maxn];int p[maxn];void dfs(int u, int fa) &#123; size[u] = 1; dfn[u] = ++dfn_idx; dep[u] = dep[fa] + 1; f[u][0] = fa; for (int i = 1; i &lt;= 19; ++i) f[u][i] = f[f[u][i - 1]][i - 1]; for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; if (v == fa) continue; dfs(v, u); size[u] += size[v]; &#125;&#125;inline int Lca(int u, int v) &#123; if (dep[u] &lt; dep[v]) swap(u, v); for (int i = 19; ~i; --i) if (dep[f[u][i]] &gt;= dep[v]) u = f[u][i]; if (u == v) return u; for (int i = 19; ~i; --i) if (f[u][i] != f[v][i]) u = f[u][i], v = f[v][i]; return f[u][0];&#125;inline int Jump(int u, int d) &#123; for (int i = 19; ~i; --i) if (d - (1 &lt;&lt; i) &gt;= 0) u = f[u][i], d -= (1 &lt;&lt; i); return u;&#125;int main() &#123; scanf("%d%d", &amp;N, &amp;Q); for (register int i = 1; i &lt; N; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); G[u].push_back(v); G[v].push_back(u); &#125; dfs(1, 0); build(R, 1, N); while (Q--) &#123; scanf("%d", &amp;K); for (register int i = 1; i &lt;= K; ++i) scanf("%d", &amp;p[i]); root = p[1]; for (register int i = 2; i &lt;= K; ++i) &#123; int t = p[i]; int lca = Lca(root, t); int dis = dep[t] + dep[root] - 2 * dep[lca]; if (dis &amp; 1) dis = (dis &gt;&gt; 1); else dis = (dis &gt;&gt; 1) - 1; int dis_root = dep[root] - dep[lca]; int dis_t = dep[t] - dep[lca]; int u = 0; // Get Middle Point if (dis &lt;= dis_t) &#123; u = Jump(t, dis); &#125; else u = Jump(root, dis_root + dis_t - dis); if (Lca(root, u) != u) // Situation II modify(R, 1, N, dfn[u], dfn[u] + size[u] - 1, 1); else &#123; // Situation III int v = Jump(root, dep[root] - dep[u] - 1); // * Find the nearest node * if (dfn[v] - 1 &gt;= 1) modify(R, 1, N, 1, dfn[v] - 1, 1); if (dfn[v] + size[v] &lt;= N) modify(R, 1, N, dfn[v] + size[v], N, 1); &#125; &#125; printf("%d\n", N - query(R, 1, N, 1, N)); modify(R, 1, N, 1, N, 0); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数据结构</tag>
+        <tag>线段树</tag>
+        <tag>dfs序</tag>
+        <tag>最近公共祖先</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[题解-LibreOJ-2072独特的树叶]]></title>
     <url>%2F2019%2F10%2F10%2Fsolution-loj-2072%2F</url>
     <content type="text"><![CDATA[题目链接(Luogu) 题目链接(LibreOJ) 给定两棵树 $A$ 和 $B$，在 $B$ 中删除一个叶子节点后满足 $A$ 与 $B’$ 同构；求满足条件的编号最小的叶子节点。 $n \le 100000$ 感谢 @tth37 的贡献 这道题我们需要判断树是否同构。这需要借助 树哈希 。 一千个 OIer 中有一万种哈希写法。这里采用基于异或的树哈希。 \text{hash[u]}=\bigoplus_{v\in \text{son(u)}}\text{hash[v]}*\text{seed}+\text{size[v]}我们可以首先将 $A$ 上每个点作为根节点时的哈希值求出来，并扔到一个 map 里。然后在 $B$ 上枚举删除每个叶子节点后对应的哈希值，如果对应的哈希值出现过，则表明删去该叶子节点后可以形成同构。 该算法复杂度瓶颈在于求出 $A$ 对应的 $n$ 个哈希值。根据异或的相消性质，可以设计出类似树形 dp 的二次扫描与换根法在 $O(n)$ 时间复杂度求出所有哈希值。 听着简单，代码还是挺难写的。 代码如下：（极丑） 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899#include&lt;bits/stdc++.h&gt;using namespace std;typedef unsigned long long ull;const int maxn = 100005;const ull seed = 1000000007;ull H[maxn], H2[maxn];ull size[maxn];vector&lt;int&gt; G1[maxn], G2[maxn];map&lt;ull, bool&gt; mp;int N, R;int ans = maxn;void dfs1(int u, int fa) &#123; H[u] = size[u] = 1; for (vector&lt;int&gt;::iterator it = G1[u].begin(); it != G1[u].end(); it++) &#123; int v = *it; if (v == fa) continue; dfs1(v, u); size[u] += size[v]; H[u] ^= (H[v] * seed + size[v]); &#125;&#125;void dfs2(int u, int fa) &#123; if (u != R) &#123; H2[u] = H[u] ^ ((H2[fa] ^ (H[u] * seed + size[u])) * seed + ((ull)N - size[u])); &#125; else H2[u] = H[u]; for (vector&lt;int&gt;::iterator it = G1[u].begin(); it != G1[u].end(); it++) &#123; int v = *it; if (v == fa) continue; dfs2(v, u); &#125;&#125;void dfs3(int u, int fa) &#123; H[u] = size[u] = 1; for (vector&lt;int&gt;::iterator it = G2[u].begin(); it != G2[u].end(); it++) &#123; int v = *it; if (v == fa) continue; dfs3(v, u); size[u] += size[v]; H[u] ^= (H[v] * seed + size[v]); &#125;&#125;void dfs4(int u, int fa) &#123; if (u != R) &#123; H2[u] = H[u] ^ ((H2[fa] ^ (H[u] * seed + size[u])) * seed + ((ull)N + 1 - size[u])); &#125; else H2[u] = H[u]; for (vector&lt;int&gt;::iterator it = G2[u].begin(); it != G2[u].end(); it++) &#123; int v = *it; if (v == fa) continue; dfs4(v, u); &#125;&#125;int main() &#123; scanf("%d", &amp;N); for (register int i = 1; i &lt; N; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); G1[u].push_back(v); G1[v].push_back(u); &#125; R = 1; dfs1(1, 0); dfs2(1, 0); for (register int i = 1; i &lt;= N; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); G2[u].push_back(v); G2[v].push_back(u); &#125; for (register int i = 1; i &lt;= N; ++i) mp[H2[i]] = 1; R = 2; dfs3(2, 0); dfs4(2, 0); for (register int i = 1; i &lt;= 1; ++i) &#123; if ((int)G2[i].size() == 1) &#123; ull w = H2[G2[i][0]] ^ (H[i] * seed + 1); if (mp[w]) return printf("%d", i), 0; &#125; &#125; R = 1; dfs3(1, 0); dfs4(1, 0); for (register int i = 2; i &lt;= N + 1; ++i) &#123; if ((int)G2[i].size() == 1) &#123; ull w = H2[G2[i][0]] ^ (H[i] * seed + 1); if (mp[w]) return printf("%d", i), 0; &#125; &#125; return 0;&#125;]]></content>
@@ -82,8 +96,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>主席树</tag>
         <tag>线段树</tag>
+        <tag>主席树</tag>
       </tags>
   </entry>
   <entry>
@@ -177,8 +191,8 @@
       </categories>
       <tags>
         <tag>树形dp</tag>
-        <tag>虚树</tag>
         <tag>点分治</tag>
+        <tag>虚树</tag>
       </tags>
   </entry>
   <entry>
@@ -334,8 +348,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>主席树</tag>
         <tag>树链剖分</tag>
+        <tag>主席树</tag>
         <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
@@ -349,8 +363,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>主席树</tag>
         <tag>线段树</tag>
+        <tag>主席树</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -426,8 +440,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>树链剖分</tag>
+        <tag>线段树</tag>
         <tag>dfs序</tag>
       </tags>
   </entry>
@@ -494,8 +508,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>树上差分</tag>
         <tag>最近公共祖先</tag>
+        <tag>树上差分</tag>
       </tags>
   </entry>
   <entry>
@@ -585,9 +599,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
+        <tag>线段树</tag>
         <tag>可持久化trie</tag>
         <tag>主席树</tag>
-        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
