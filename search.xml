@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-LibreOJ-2128数字串拆分]]></title>
+    <url>%2F2019%2F10%2F12%2Fsolution-loj-2128%2F</url>
+    <content type="text"><![CDATA[题目链接(Luogu) 题目链接(LibreOJ) 题目链接大力征集中~ 一道神仙题。对矩阵初学者极不友好。 $f$ 函数的计算非常简单，递推公式如下： f(i)=f(i-1)+f(i-2)+..+f(i-m)容易看出， $f(i)$ 可以使用矩阵加速递推。以 $m=3$ 为例，构造矩阵 A=\left[ \begin{matrix} 1 & 1 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{matrix} \right]那么 $f(n)$ 即为 $(A^n)_{1,1}$ 。 但我们要求的是 $g(S)$ 。考虑将 $g(S)$ 表示为矩阵的形式，最终答案为矩阵的第 $[1,1]$ 项。 考虑 $g(123)$ 的推导。 \begin{align*} g(123) &= f(1+2+3)+f(12+3)+f(1+23)+f(123) \\ &= A^{1+2+3}+A^{12+3}+A^{1+23}+A^{123} \\ &= A^1\times A^2\times A^3+A^{12}\times A^3+A^1\times A^{23}+A^{123} \end{align*}转化为以上形式后，记 $g’(n)$ 为将数字 $S$ 的前 $n$ 项分解后得到的矩阵；在本例中，$g’(3)=g(123)$ 。 可以得到 $g’(i)$ 的递推公式： g'(i)=g'(i-1)\times A^{\text{num[i,i]}}+g'(i-2)\times A^{\text{num[i-1,i]}}+..+g'(0)\times A^{\text{num[1,i]}}其中 $\text{num[l,r]}$ 表示字符串中 $[l,r]$ 区间所对应的数字。例如当 $S=”12345”$ ，$\text{num[2,4]}=234$ 。 考虑 $A^{\text{num[l,r]}}$ 的计算。可以通过预处理加速计算。记 P[i][j]=A^{i*10^j}使用该数组，可以在 $O(n)$ 时间复杂度内计算 $A^{\text{num[l,r]}}$ 。 至此，算法骨架已经成型；时间复杂度为 $O(nm^3+n^2m^3)$ 。实现时需要注意细节优化（如计算 $g’$ 时使用恰当的循环顺序）。 代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798#include&lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int mod = 998244353;struct Matrix &#123; int m, n; ll g[6][6];&#125;;Matrix mul(Matrix a, Matrix b) &#123; Matrix ret; ret.m = a.m, ret.n = b.n; for (int i = 1; i &lt;= ret.n; ++i) &#123; for (int j = 1; j &lt;= ret.m; ++j) &#123; ret.g[i][j] = 0; for (int k = 1; k &lt;= a.n; ++k) ret.g[i][j] = (ret.g[i][j] + a.g[i][k] * b.g[k][j]) % mod; &#125; &#125; return ret;&#125;Matrix add(Matrix a, Matrix b) &#123; Matrix ret; ret.m = a.m, ret.n = a.n; for (int i = 1; i &lt;= a.n; ++i) for (int j = 1; j &lt;= a.m; ++j) ret.g[i][j] = (a.g[i][j] + b.g[i][j]) % mod; return ret;&#125;Matrix power10(Matrix a) &#123; Matrix ret = a; ret = mul(ret, ret); ret = mul(ret, ret); ret = mul(ret, a); ret = mul(ret, ret); return ret;&#125;void Init_Unit_Matrix(Matrix&amp; a, int n) &#123; a.m = a.n = n; for (int i = 1; i &lt;= n; ++i) for (int j = 1; j &lt;= n; ++j) a.g[i][j] = (i == j) ? 1 : 0;&#125;void Init_Empty_Matrix(Matrix&amp; a, int n) &#123; a.m = a.n = n; for (int i = 1; i &lt;= n; ++i) for (int j = 1; j &lt;= n; ++j) a.g[i][j] = 0;&#125;char s[505];int N, M;Matrix A;Matrix P[10][505];Matrix Q[505];Matrix f[505];int main() &#123; cin &gt;&gt; (s + 1); N = strlen(s + 1); cin &gt;&gt; M; Init_Unit_Matrix(P[0][0], M); A.n = A.m = M; for (int i = 1; i &lt;= M; ++i) &#123; for (int j = 1; j &lt;= M; ++j) &#123; A.g[i][j] = 0; if (i == 1) A.g[i][j] = 1; if (i - 1 == j) A.g[i][j] = 1; &#125; &#125; for (int i = 1; i &lt;= 9; ++i) &#123; P[i][0] = mul(P[i - 1][0], A); &#125; for (int j = 1; j &lt;= N; ++j) &#123; for (int i = 0; i &lt;= 9; ++i) &#123; P[i][j] = power10(P[i][j - 1]); &#125; &#125; Init_Unit_Matrix(f[0], M); for (int i = 1; i &lt;= N; ++i) &#123; Init_Empty_Matrix(f[i], M); Matrix t; Init_Unit_Matrix(t, M); for (int j = i, c = 0; j &gt;= 1; --j, ++c) &#123; t = mul(t, P[s[j] - '0'][c]); f[i] = add(f[i], mul(f[j - 1], t)); &#125; &#125; cout &lt;&lt; f[N].g[1][1]; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>矩阵</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[解题报告-NOIP2016提高组初赛]]></title>
     <url>%2F2019%2F10%2F11%2Fsolution-noip2016pre%2F</url>
     <content type="text"><![CDATA[NOIP 2016 提高组初赛试题 不完全解读！ 未完待续…… 第 4 题 与二进制小数 0.1 相等的八进进制数是（ ）。 A. 0.8 B. 0.4 C. 0.2 D. 0.1 第 5 题 以比较作为基本运算，在 N 个数中找最小数的最少运算次数为（ ）。 A. N B. N−1 C. N^2 D. logN 第 6 题 表达式 a*(b+c)-d 的后缀表达形式为（ ）。 A. abcd*+- B. abc+*d- C. abc*+d- D. -+*abcd 第 8 题 G 是一个非连通简单无向图，共有 28 条边，则该图至少有（ ）个顶点。 A. 10 B. 9 C. 8 D. 7 第 9 题 某计算机的 CPU 和内存之间的地址总线宽度是 32 位（bit），这台计算机最多可以使用（ ）的内存。 A. 2GB B. 4GB C. 8GB D. 16GB 第 11 题 有 7 个一模一样的苹果，放到 3 个一样的盘子中，一共有（ ）种放法。 A. 7 B. 8 C. 21 D. 3^7]]></content>
@@ -228,8 +240,8 @@
       </categories>
       <tags>
         <tag>二分答案</tag>
-        <tag>前缀和</tag>
         <tag>倍增</tag>
+        <tag>前缀和</tag>
       </tags>
   </entry>
   <entry>
@@ -396,8 +408,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -408,8 +420,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -681,8 +693,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>贪心</tag>
         <tag>python</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -693,8 +705,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>

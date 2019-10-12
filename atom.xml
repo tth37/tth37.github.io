@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tth37.cn/"/>
-  <updated>2019-10-11T15:47:32.907Z</updated>
+  <updated>2019-10-12T16:30:26.434Z</updated>
   <id>https://tth37.cn/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>题解-LibreOJ-2128数字串拆分</title>
+    <link href="https://tth37.cn/2019/10/12/solution-loj-2128/"/>
+    <id>https://tth37.cn/2019/10/12/solution-loj-2128/</id>
+    <published>2019-10-12T15:58:08.000Z</published>
+    <updated>2019-10-12T16:30:26.434Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://www.luogu.org/problem/P3176" target="_blank" rel="noopener">题目链接(Luogu)</a></p><p><a href="https://loj.ac/problem/2128" target="_blank" rel="noopener">题目链接(LibreOJ)</a></p><p>题目链接<strong>大力</strong>征集中~</p></blockquote><a id="more"></a><p>一道神仙题。对矩阵初学者极不友好。</p><p>$f$ 函数的计算非常简单，递推公式如下：</p><script type="math/tex; mode=display">f(i)=f(i-1)+f(i-2)+..+f(i-m)</script><p>容易看出， $f(i)$ 可以使用矩阵加速递推。以 $m=3$ 为例，构造矩阵</p><script type="math/tex; mode=display">A=\left[ \begin{matrix}   1 & 1 & 1 \\   1 & 0 & 0 \\   0 & 1 & 0  \end{matrix}  \right]</script><p>那么 $f(n)$ 即为 $(A^n)_{1,1}$ 。</p><p>但我们要求的是 $g(S)$ 。考虑将 $g(S)$ 表示为矩阵的形式，最终答案为矩阵的第 $[1,1]$ 项。</p><p>考虑 $g(123)$ 的推导。 </p><script type="math/tex; mode=display">\begin{align*}g(123) &= f(1+2+3)+f(12+3)+f(1+23)+f(123) \\&= A^{1+2+3}+A^{12+3}+A^{1+23}+A^{123} \\&= A^1\times A^2\times A^3+A^{12}\times A^3+A^1\times A^{23}+A^{123}\end{align*}</script><p>转化为以上形式后，记 $g’(n)$ 为将数字 $S$ 的前 $n$ 项分解后得到的矩阵；在本例中，$g’(3)=g(123)$ 。</p><p>可以得到 $g’(i)$ 的递推公式：</p><script type="math/tex; mode=display">g'(i)=g'(i-1)\times A^{\text{num[i,i]}}+g'(i-2)\times A^{\text{num[i-1,i]}}+..+g'(0)\times A^{\text{num[1,i]}}</script><p>其中 $\text{num[l,r]}$ 表示字符串中 $[l,r]$ 区间所对应的数字。例如当 $S=”12345”$ ，$\text{num[2,4]}=234$ 。</p><p>考虑 $A^{\text{num[l,r]}}$ 的计算。可以通过预处理加速计算。记</p><script type="math/tex; mode=display">P[i][j]=A^{i*10^j}</script><p>使用该数组，可以在 $O(n)$ 时间复杂度内计算 $A^{\text{num[l,r]}}$ 。</p><p>至此，算法骨架已经成型；时间复杂度为 $O(n<em>m^3+n^2</em>m^3)$ 。实现时需要注意细节优化（如计算 $g’$ 时使用恰当的循环顺序）。</p><p>代码如下：</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Matrix</span> &#123;</span></span><br><span class="line"><span class="keyword">int</span> m, n;</span><br><span class="line">ll g[<span class="number">6</span>][<span class="number">6</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">Matrix <span class="title">mul</span><span class="params">(Matrix a, Matrix b)</span> </span>&#123;</span><br><span class="line">Matrix ret;</span><br><span class="line">ret.m = a.m, ret.n = b.n;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= ret.n; ++i) &#123;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= ret.m; ++j) &#123;</span><br><span class="line">ret.g[i][j] = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">1</span>; k &lt;= a.n; ++k)</span><br><span class="line">ret.g[i][j] = (ret.g[i][j] + a.g[i][k] * b.g[k][j]) % mod;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Matrix <span class="title">add</span><span class="params">(Matrix a, Matrix b)</span> </span>&#123;</span><br><span class="line">    Matrix ret;</span><br><span class="line">    ret.m = a.m, ret.n = a.n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= a.n; ++i)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= a.m; ++j)</span><br><span class="line">            ret.g[i][j] = (a.g[i][j] + b.g[i][j]) % mod;</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Matrix <span class="title">power10</span><span class="params">(Matrix a)</span> </span>&#123;</span><br><span class="line">    Matrix ret = a;</span><br><span class="line">    ret = mul(ret, ret);</span><br><span class="line">    ret = mul(ret, ret);</span><br><span class="line">    ret = mul(ret, a);</span><br><span class="line">    ret = mul(ret, ret);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Init_Unit_Matrix</span><span class="params">(Matrix&amp; a, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    a.m = a.n = n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j)</span><br><span class="line">            a.g[i][j] = (i == j) ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Init_Empty_Matrix</span><span class="params">(Matrix&amp; a, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    a.m = a.n = n;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; ++j)</span><br><span class="line">            a.g[i][j] = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">char</span> s[<span class="number">505</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N, M;</span><br><span class="line">Matrix A;</span><br><span class="line">Matrix P[<span class="number">10</span>][<span class="number">505</span>];</span><br><span class="line">Matrix Q[<span class="number">505</span>];</span><br><span class="line">Matrix f[<span class="number">505</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; (s + <span class="number">1</span>);</span><br><span class="line">N = <span class="built_in">strlen</span>(s + <span class="number">1</span>);</span><br><span class="line"><span class="built_in">cin</span> &gt;&gt; M;</span><br><span class="line">    Init_Unit_Matrix(P[<span class="number">0</span>][<span class="number">0</span>], M);</span><br><span class="line">A.n = A.m = M;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; ++i) &#123;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= M; ++j) &#123;</span><br><span class="line">A.g[i][j] = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span> (i == <span class="number">1</span>) A.g[i][j] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span> (i - <span class="number">1</span> == j) A.g[i][j] = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">9</span>; ++i) &#123;</span><br><span class="line">        P[i][<span class="number">0</span>] = mul(P[i - <span class="number">1</span>][<span class="number">0</span>], A);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= N; ++j) &#123;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= <span class="number">9</span>; ++i) &#123;</span><br><span class="line">            P[i][j] = power10(P[i][j - <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line">    Init_Unit_Matrix(f[<span class="number">0</span>], M);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        Init_Empty_Matrix(f[i], M);</span><br><span class="line">        Matrix t;</span><br><span class="line">        Init_Unit_Matrix(t, M);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i, c = <span class="number">0</span>; j &gt;= <span class="number">1</span>; --j, ++c) &#123;</span><br><span class="line">            t = mul(t, P[s[j] - <span class="string">'0'</span>][c]);</span><br><span class="line">            f[i] = add(f[i], mul(f[j - <span class="number">1</span>], t));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cout</span> &lt;&lt; f[N].g[<span class="number">1</span>][<span class="number">1</span>];</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.luogu.org/problem/P3176&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接(Luogu)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://loj.ac/problem/2128&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接(LibreOJ)&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;题目链接&lt;strong&gt;大力&lt;/strong&gt;征集中~&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+      <category term="矩阵" scheme="https://tth37.cn/tags/%E7%9F%A9%E9%98%B5/"/>
+    
+  </entry>
   
   <entry>
     <title>解题报告-NOIP2016提高组初赛</title>
@@ -555,9 +583,9 @@
     
       <category term="二分答案" scheme="https://tth37.cn/tags/%E4%BA%8C%E5%88%86%E7%AD%94%E6%A1%88/"/>
     
-      <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
-    
       <category term="倍增" scheme="https://tth37.cn/tags/%E5%80%8D%E5%A2%9E/"/>
+    
+      <category term="前缀和" scheme="https://tth37.cn/tags/%E5%89%8D%E7%BC%80%E5%92%8C/"/>
     
   </entry>
   
@@ -962,9 +990,9 @@
       <category term="数论专题" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
@@ -990,9 +1018,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
       <category term="逆元" scheme="https://tth37.cn/tags/%E9%80%86%E5%85%83/"/>
     
@@ -1673,9 +1701,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="贪心" scheme="https://tth37.cn/tags/%E8%B4%AA%E5%BF%83/"/>
-    
       <category term="python" scheme="https://tth37.cn/tags/python/"/>
+    
+      <category term="贪心" scheme="https://tth37.cn/tags/%E8%B4%AA%E5%BF%83/"/>
     
   </entry>
   
@@ -1711,9 +1739,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="字符串" scheme="https://tth37.cn/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
       <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="字符串" scheme="https://tth37.cn/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   
