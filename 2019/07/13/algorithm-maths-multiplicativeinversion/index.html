@@ -257,8 +257,6 @@
     
 
     
-      
-    
 
     <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
@@ -275,8 +273,6 @@
       
     
 
-    
-      
     
 
     <a href="/message/" rel="section"><i class="menu-item-icon fa fa-fw fa-comment"></i> <br>留言板</a>
@@ -295,10 +291,8 @@
     
 
     
-      
-    
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">51</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
 
   </li>
         
@@ -314,10 +308,8 @@
     
 
     
-      
-    
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">8</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
 
   </li>
         
@@ -333,10 +325,8 @@
     
 
     
-      
-    
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">63</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
 
   </li>
         
@@ -351,8 +341,6 @@
       
     
 
-    
-      
     
 
     <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
@@ -370,8 +358,6 @@
       
     
 
-    
-      
     
 
     <a href="/source/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br>资源</a>
@@ -595,7 +581,7 @@
 <p>对于$a\/b\mod p$，我们可以求出$b$在$\mod p$下的逆元，然后乘上$a$再$\mod p$，就是这个分数的值了。</p>
 <a id="more"></a>
 <h2 id="求解逆元的方法"><a href="#求解逆元的方法" class="headerlink" title="求解逆元的方法"></a>求解逆元的方法</h2><h3 id="扩展欧几里得法"><a href="#扩展欧几里得法" class="headerlink" title="扩展欧几里得法"></a>扩展欧几里得法</h3><p>求解$ax\equiv 1 \mod b$ 等价于解不定方程 $ax+by=1$，求解出的$x$即为$a \mod b$的逆元。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span>&amp; x, <span class="keyword">int</span>&amp; y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) &#123;</span><br><span class="line">        x = <span class="number">1</span>, y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    exgcd(b, a % b, y, x);</span><br><span class="line">    y -= a / b * x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">exgcd</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span>&amp; x, <span class="keyword">int</span>&amp; y)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="number">0</span>) &#123;</span><br><span class="line">        x = <span class="number">1</span>, y = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    exgcd(b, a % b, y, x);</span><br><span class="line">    y -= a / b * x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <h3 id="快速幂法"><a href="#快速幂法" class="headerlink" title="快速幂法"></a>快速幂法</h3><blockquote>
 <p>费马小定理</p>
 <p>若$p$为质数，$a$为正整数，且$a$、$p$互质，则$a^{p-1}\equiv 1 (\mod p)$。</p>
@@ -610,7 +596,7 @@
 <p>注意到$p$是质数，因此$r$不为$0$，$r$的逆元存在</p>
 <p>等式两边乘$i^{-1}r^{-1}$，得到$qr^{-1}+i^{-1}\equiv 0\mod p$</p>
 <p>因此$i^{-1}\equiv -qr^{-1}\equiv -(p\/i)(p \mod i)^{-1}\mod p$</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (inv[<span class="number">1</span>] = <span class="number">1</span>, i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">    inv[i] = (p - p / i) * inv[p % i] % p;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (inv[<span class="number">1</span>] = <span class="number">1</span>, i = <span class="number">2</span>; i &lt;= n; ++i)</span><br><span class="line">    inv[i] = (p - p / i) * inv[p % i] % p;</span><br></pre></td></tr></table></figure></div>
 
       
     </div>
@@ -1012,7 +998,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求解逆元的方法"><span class="nav-number">2.</span> <span class="nav-text">求解逆元的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展欧几里得法"><span class="nav-number">2.1.</span> <span class="nav-text">扩展欧几里得法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速幂法"><span class="nav-number">2.2.</span> <span class="nav-text">快速幂法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性求逆元"><span class="nav-number">2.3.</span> <span class="nav-text">线性求逆元</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求解逆元的方法"><span class="nav-text">求解逆元的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展欧几里得法"><span class="nav-text">扩展欧几里得法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#快速幂法"><span class="nav-text">快速幂法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#线性求逆元"><span class="nav-text">线性求逆元</span></a></li></ol></li></ol></div>
             
 
           </div>

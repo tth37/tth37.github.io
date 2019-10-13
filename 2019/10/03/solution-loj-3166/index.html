@@ -257,8 +257,6 @@
     
 
     
-      
-    
 
     <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
@@ -275,8 +273,6 @@
       
     
 
-    
-      
     
 
     <a href="/message/" rel="section"><i class="menu-item-icon fa fa-fw fa-comment"></i> <br>留言板</a>
@@ -295,10 +291,8 @@
     
 
     
-      
-    
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">51</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
 
   </li>
         
@@ -314,10 +308,8 @@
     
 
     
-      
-    
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">8</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
 
   </li>
         
@@ -333,10 +325,8 @@
     
 
     
-      
-    
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">63</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
 
   </li>
         
@@ -351,8 +341,6 @@
       
     
 
-    
-      
     
 
     <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
@@ -370,8 +358,6 @@
       
     
 
-    
-      
     
 
     <a href="/source/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br>资源</a>
@@ -609,7 +595,7 @@ f[u][i]=\sum_{v\in son(u)}{(\max_{j=1}^{i}f[v][j])}</script><p><strong>解法一
 <p>在集合合并时，采取 dsu on tree，复杂度 $O(n\log^2 n)$。本题的关键点在于如果当前位置有果实，那么还需要对差分数组进行一些修改：将差分数组的 $d[u]$ 位置加上 $w[u]$，在 $d[u]$ 之后的部分则需依次减掉此次操作的值。</p>
 <p>码量较小，常数较小。</p>
 <p>代码如下：（自带大常数）</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100005</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, ll&gt; mp[maxn];</span><br><span class="line"><span class="keyword">int</span> d[maxn];</span><br><span class="line">ll w[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N, M, K;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> v: G[u]) &#123;</span><br><span class="line">        dfs(v);</span><br><span class="line">        <span class="keyword">if</span> (mp[u].size() &lt; mp[v].size()) swap(mp[u], mp[v]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it: mp[v]) &#123;</span><br><span class="line">            mp[u][it.first] += it.second;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (d[u]) &#123;</span><br><span class="line">        mp[u][d[u]] += w[u];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = mp[u].upper_bound(d[u]); it != mp[u].end();) &#123;</span><br><span class="line">            <span class="keyword">if</span> (it-&gt;second &gt; w[u]) &#123;</span><br><span class="line">                it-&gt;second -= w[u];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            w[u] -= it-&gt;second;</span><br><span class="line">            it-&gt;second = <span class="number">0</span>;</span><br><span class="line">            mp[u].erase(it++);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;N, &amp;M, &amp;K);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> p;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;p);</span><br><span class="line">        G[p].push_back(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> v;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;v);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%I64d"</span>, &amp;d[v], &amp;w[v]);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">1</span>);</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it: mp[<span class="number">1</span>]) ans += it.second;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%I64d"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100005</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[maxn];</span><br><span class="line"><span class="built_in">map</span>&lt;<span class="keyword">int</span>, ll&gt; mp[maxn];</span><br><span class="line"><span class="keyword">int</span> d[maxn];</span><br><span class="line">ll w[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N, M, K;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> v: G[u]) &#123;</span><br><span class="line">        dfs(v);</span><br><span class="line">        <span class="keyword">if</span> (mp[u].size() &lt; mp[v].size()) swap(mp[u], mp[v]);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it: mp[v]) &#123;</span><br><span class="line">            mp[u][it.first] += it.second;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (d[u]) &#123;</span><br><span class="line">        mp[u][d[u]] += w[u];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">auto</span> it = mp[u].upper_bound(d[u]); it != mp[u].end();) &#123;</span><br><span class="line">            <span class="keyword">if</span> (it-&gt;second &gt; w[u]) &#123;</span><br><span class="line">                it-&gt;second -= w[u];</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            w[u] -= it-&gt;second;</span><br><span class="line">            it-&gt;second = <span class="number">0</span>;</span><br><span class="line">            mp[u].erase(it++);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;N, &amp;M, &amp;K);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> p;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;p);</span><br><span class="line">        G[p].push_back(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= M; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> v;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;v);</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%I64d"</span>, &amp;d[v], &amp;w[v]);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">1</span>);</span><br><span class="line">    ll ans = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">auto</span> it: mp[<span class="number">1</span>]) ans += it.second;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%I64d"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
       
     </div>

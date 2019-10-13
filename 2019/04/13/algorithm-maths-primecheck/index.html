@@ -257,8 +257,6 @@
     
 
     
-      
-    
 
     <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
@@ -275,8 +273,6 @@
       
     
 
-    
-      
     
 
     <a href="/message/" rel="section"><i class="menu-item-icon fa fa-fw fa-comment"></i> <br>留言板</a>
@@ -295,10 +291,8 @@
     
 
     
-      
-    
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">51</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
 
   </li>
         
@@ -314,10 +308,8 @@
     
 
     
-      
-    
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">8</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
 
   </li>
         
@@ -333,10 +325,8 @@
     
 
     
-      
-    
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">63</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
 
   </li>
         
@@ -351,8 +341,6 @@
       
     
 
-    
-      
     
 
     <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
@@ -370,8 +358,6 @@
       
     
 
-    
-      
     
 
     <a href="/source/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br>资源</a>
@@ -617,14 +603,14 @@
 <p>证明：</p>
 <p>​    若一个数$n$为合数，则它一定拥有一个质因数$k$。可以知道，$n/k$（记为$s$）为$n$的因数，且$s$不等于$n$。$k$和$s$二者必定有一个数小于等于$\sqrt{n}$，否则$k*s$一定大于$n$。所以只要在$\sqrt{n}$以内循环一遍即可。</p>
 <h2 id="埃氏素数筛"><a href="#埃氏素数筛" class="headerlink" title="埃氏素数筛"></a>埃氏素数筛</h2><p>如果用上面的方法判定$1-n$以内所有素数，会发现时间复杂度非常高。那么这个时候就要用筛法了。大致意思是用素数来筛掉合数，然后用$f$数组储存是否是素数。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">f[<span class="number">1</span>]=<span class="literal">true</span>;<span class="comment">//特判还是很必要的</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;++i)&#123;</span><br><span class="line">    <span class="keyword">if</span>(f[i]) <span class="keyword">continue</span>;<span class="comment">//i为合数直接跳过</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=i+i;j&lt;=n;j+=i)&#123;</span><br><span class="line">        f[j]=<span class="literal">true</span>;<span class="comment">//i为素数，i的倍数一定为合数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">f[<span class="number">1</span>]=<span class="literal">true</span>;<span class="comment">//特判还是很必要的</span></span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;++i)&#123;</span><br><span class="line">    <span class="keyword">if</span>(f[i]) <span class="keyword">continue</span>;<span class="comment">//i为合数直接跳过</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=i+i;j&lt;=n;j+=i)&#123;</span><br><span class="line">        f[j]=<span class="literal">true</span>;<span class="comment">//i为素数，i的倍数一定为合数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <p>优化：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">f[<span class="number">1</span>]=<span class="literal">true</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;++i)&#123;</span><br><span class="line">    <span class="keyword">if</span>(f[i]) <span class="keyword">continue</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=i*i;j&lt;=n;j+=i)&#123;<span class="comment">//这里只变了乘号，但是会快很多喔</span></span><br><span class="line">        f[j]=<span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">f[<span class="number">1</span>]=<span class="literal">true</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>;i&lt;=n;++i)&#123;</span><br><span class="line">    <span class="keyword">if</span>(f[i]) <span class="keyword">continue</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=i*i;j&lt;=n;j+=i)&#123;<span class="comment">//这里只变了乘号，但是会快很多喔</span></span><br><span class="line">        f[j]=<span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 <p>原因是：$i*i$以下的所有合数都已经被筛掉了。具体证法，可以接着看下去（在线性筛里有类似的思想，所以看完可以尝试一下自己证明）。</p>
 <h2 id="素数线性筛"><a href="#素数线性筛" class="headerlink" title="素数线性筛"></a>素数线性筛</h2><p>上一个筛法时间复杂度$\Theta(log log n)$非常接近线性。但是要达到线性还差一点（这里不是比赛要求掌握所以就当兴趣学吧）</p>
 <p>上一个筛法的大概想法，是每一个素数的倍数都筛掉，所以是让每一个合数都被它的质因子筛一遍。</p>
 <p>那么接下来的筛法，就是让每个合数的最小质因子筛一遍（要开一个prime数组存所有素数）。先放代码：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line">ll f[<span class="number">10005</span>],prime[<span class="number">10005</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll n,i,j,cnt=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="comment">//这个地方不用特判1,因为我们判定是否为素数的方法是f[i]是否为0; </span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!f[i]) </span><br><span class="line">        &#123;</span><br><span class="line">            prime[++cnt]=i;<span class="comment">//存入素数; </span></span><br><span class="line">            f[i]=i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=cnt;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(prime[j]*i&gt;n||prime[j]&gt;f[i]) <span class="keyword">break</span>;<span class="comment">//判定出界或i的因子中有比当前素数更小的（即prime[j]*i已经被f[i]筛过了）; </span></span><br><span class="line">            f[prime[j]*i]=prime[j];<span class="comment">//标记所有未被标记的i的倍数； </span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;i;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;f[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line">ll f[<span class="number">10005</span>],prime[<span class="number">10005</span>];</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ll n,i,j,cnt=<span class="number">0</span>;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;n;</span><br><span class="line">    <span class="comment">//这个地方不用特判1,因为我们判定是否为素数的方法是f[i]是否为0; </span></span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">2</span>;i&lt;=n;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(!f[i]) </span><br><span class="line">        &#123;</span><br><span class="line">            prime[++cnt]=i;<span class="comment">//存入素数; </span></span><br><span class="line">            f[i]=i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=cnt;++j)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(prime[j]*i&gt;n||prime[j]&gt;f[i]) <span class="keyword">break</span>;<span class="comment">//判定出界或i的因子中有比当前素数更小的（即prime[j]*i已经被f[i]筛过了）; </span></span><br><span class="line">            f[prime[j]*i]=prime[j];<span class="comment">//标记所有未被标记的i的倍数； </span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">cin</span>&gt;&gt;i;</span><br><span class="line">    <span class="built_in">cout</span>&lt;&lt;f[i]&lt;&lt;<span class="string">" "</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></div>
 <p>核心就在于神奇的判定方法，可以多咀嚼咀嚼</p>
 <p>时间复杂度$\Theta(n)$搞定，还可以找到$1-n$内所有合数的最小质因数。</p>
 
@@ -999,7 +985,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单个素数判定"><span class="nav-number">2.</span> <span class="nav-text">单个素数判定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#埃氏素数筛"><span class="nav-number">3.</span> <span class="nav-text">埃氏素数筛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#素数线性筛"><span class="nav-number">4.</span> <span class="nav-text">素数线性筛</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单个素数判定"><span class="nav-text">单个素数判定</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#埃氏素数筛"><span class="nav-text">埃氏素数筛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#素数线性筛"><span class="nav-text">素数线性筛</span></a></li></ol></div>
             
 
           </div>

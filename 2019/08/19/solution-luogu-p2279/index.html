@@ -257,8 +257,6 @@
     
 
     
-      
-    
 
     <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
@@ -275,8 +273,6 @@
       
     
 
-    
-      
     
 
     <a href="/message/" rel="section"><i class="menu-item-icon fa fa-fw fa-comment"></i> <br>留言板</a>
@@ -295,10 +291,8 @@
     
 
     
-      
-    
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">51</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
 
   </li>
         
@@ -314,10 +308,8 @@
     
 
     
-      
-    
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">8</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
 
   </li>
         
@@ -333,10 +325,8 @@
     
 
     
-      
-    
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">63</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
 
   </li>
         
@@ -351,8 +341,6 @@
       
     
 
-    
-      
     
 
     <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
@@ -370,8 +358,6 @@
       
     
 
-    
-      
     
 
     <a href="/source/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br>资源</a>
@@ -607,7 +593,7 @@
 <p>$f[u][2]$ 的情况与 $f[u][3]$ 类似，只需保证一个儿子能将节点 $u$ 覆盖即可。 $f[u][2]=f[k][3]+\Sigma f[v][2…4]$ 。</p>
 <p>$f[u][1]$ 与 $f[u][0]$ 的推导相对简单，因为各个子节点之间不会相互影响。 $f[u][1]=\Sigma f[v][2…4]$，$f[u][0]=\Sigma f[v][1…4]$。</p>
 <p>对转移方程进行简单优化即可。代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[<span class="number">1005</span>];</span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">1005</span>][<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dp</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">	f[u][<span class="number">3</span>] = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">	f[u][<span class="number">2</span>] = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">	f[u][<span class="number">4</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line">		<span class="keyword">int</span> v = *it;</span><br><span class="line">		<span class="keyword">if</span> (v == fa) <span class="keyword">continue</span>;</span><br><span class="line">		dp(v, u);</span><br><span class="line">		f[u][<span class="number">0</span>] += f[v][<span class="number">1</span>];</span><br><span class="line">		f[u][<span class="number">1</span>] += f[v][<span class="number">2</span>];</span><br><span class="line">		f[u][<span class="number">2</span>] = min(f[u][<span class="number">2</span>], f[v][<span class="number">3</span>] - f[v][<span class="number">2</span>]);</span><br><span class="line">		f[u][<span class="number">3</span>] = min(f[u][<span class="number">3</span>], f[v][<span class="number">4</span>] - f[v][<span class="number">1</span>]);</span><br><span class="line">		f[u][<span class="number">4</span>] += f[v][<span class="number">0</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	f[u][<span class="number">2</span>] += f[u][<span class="number">1</span>];</span><br><span class="line">	f[u][<span class="number">3</span>] += f[u][<span class="number">0</span>];</span><br><span class="line">	f[u][<span class="number">3</span>] = min(f[u][<span class="number">3</span>], f[u][<span class="number">4</span>]);</span><br><span class="line">	f[u][<span class="number">2</span>] = min(f[u][<span class="number">2</span>], f[u][<span class="number">3</span>]);</span><br><span class="line">	f[u][<span class="number">1</span>] = min(f[u][<span class="number">1</span>], f[u][<span class="number">2</span>]);</span><br><span class="line">	f[u][<span class="number">0</span>] = min(f[u][<span class="number">0</span>], f[u][<span class="number">1</span>]);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> u = <span class="number">2</span>; u &lt;= N; ++u) &#123;</span><br><span class="line">		<span class="keyword">int</span> v;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;v);</span><br><span class="line">		G[u].push_back(v);</span><br><span class="line">		G[v].push_back(u);	</span><br><span class="line">	&#125;</span><br><span class="line">	dp(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>, f[<span class="number">1</span>][<span class="number">2</span>]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[<span class="number">1005</span>];</span><br><span class="line"><span class="keyword">int</span> N;</span><br><span class="line"><span class="keyword">int</span> f[<span class="number">1005</span>][<span class="number">10</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dp</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">	f[u][<span class="number">3</span>] = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">	f[u][<span class="number">2</span>] = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">	f[u][<span class="number">4</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line">		<span class="keyword">int</span> v = *it;</span><br><span class="line">		<span class="keyword">if</span> (v == fa) <span class="keyword">continue</span>;</span><br><span class="line">		dp(v, u);</span><br><span class="line">		f[u][<span class="number">0</span>] += f[v][<span class="number">1</span>];</span><br><span class="line">		f[u][<span class="number">1</span>] += f[v][<span class="number">2</span>];</span><br><span class="line">		f[u][<span class="number">2</span>] = min(f[u][<span class="number">2</span>], f[v][<span class="number">3</span>] - f[v][<span class="number">2</span>]);</span><br><span class="line">		f[u][<span class="number">3</span>] = min(f[u][<span class="number">3</span>], f[v][<span class="number">4</span>] - f[v][<span class="number">1</span>]);</span><br><span class="line">		f[u][<span class="number">4</span>] += f[v][<span class="number">0</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	f[u][<span class="number">2</span>] += f[u][<span class="number">1</span>];</span><br><span class="line">	f[u][<span class="number">3</span>] += f[u][<span class="number">0</span>];</span><br><span class="line">	f[u][<span class="number">3</span>] = min(f[u][<span class="number">3</span>], f[u][<span class="number">4</span>]);</span><br><span class="line">	f[u][<span class="number">2</span>] = min(f[u][<span class="number">2</span>], f[u][<span class="number">3</span>]);</span><br><span class="line">	f[u][<span class="number">1</span>] = min(f[u][<span class="number">1</span>], f[u][<span class="number">2</span>]);</span><br><span class="line">	f[u][<span class="number">0</span>] = min(f[u][<span class="number">0</span>], f[u][<span class="number">1</span>]);</span><br><span class="line">	</span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N);</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> u = <span class="number">2</span>; u &lt;= N; ++u) &#123;</span><br><span class="line">		<span class="keyword">int</span> v;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;v);</span><br><span class="line">		G[u].push_back(v);</span><br><span class="line">		G[v].push_back(u);	</span><br><span class="line">	&#125;</span><br><span class="line">	dp(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"%d"</span>, f[<span class="number">1</span>][<span class="number">2</span>]);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
 
       
     </div>

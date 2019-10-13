@@ -257,8 +257,6 @@
     
 
     
-      
-    
 
     <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
@@ -275,8 +273,6 @@
       
     
 
-    
-      
     
 
     <a href="/message/" rel="section"><i class="menu-item-icon fa fa-fw fa-comment"></i> <br>留言板</a>
@@ -295,10 +291,8 @@
     
 
     
-      
-    
 
-    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签<span class="badge">51</span></a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
 
   </li>
         
@@ -314,10 +308,8 @@
     
 
     
-      
-    
 
-    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类<span class="badge">8</span></a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
 
   </li>
         
@@ -333,10 +325,8 @@
     
 
     
-      
-    
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档<span class="badge">63</span></a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
 
   </li>
         
@@ -351,8 +341,6 @@
       
     
 
-    
-      
     
 
     <a href="/schedule/" rel="section"><i class="menu-item-icon fa fa-fw fa-calendar"></i> <br>日程表</a>
@@ -370,8 +358,6 @@
       
     
 
-    
-      
     
 
     <a href="/source/" rel="section"><i class="menu-item-icon fa fa-fw fa-link"></i> <br>资源</a>
@@ -592,7 +578,7 @@
 <p>但是，如果已经确定左端点 $l$ ，不同的右端点选取会对应许多不同的最大公约数值，那么该算法的复杂度将无法承受。</p>
 <p>稍加观察，可以发现当左端点确定时，右端点右移一个单位，原子段的最大公约数要么维持不变；要么变为原最大公约数的一个约数。换言之，当左端点确定时，不同的右端点最多对应 $\log_2n$ 个不同的最大公约数值。算法复杂度得以控制在 $O(n(\log n)^2)$ 。</p>
 <p>代码如下：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">gcd</span><span class="params">(ll a, ll b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> b == <span class="number">0</span> ? a : gcd(b, a % b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T, N;</span><br><span class="line">ll ans;</span><br><span class="line">ll a[<span class="number">100005</span>];</span><br><span class="line">ll st[<span class="number">100005</span>][<span class="number">18</span>];</span><br><span class="line"><span class="keyword">int</span> lg[<span class="number">100005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = lg[r - l + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> gcd(st[l][k], st[r - (<span class="number">1</span> &lt;&lt; k) + <span class="number">1</span>][k]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    lg[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">100000</span>; ++i)</span><br><span class="line">        lg[i] = lg[i &gt;&gt; <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;st[i][<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= lg[N]; ++j)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i + (<span class="number">1</span> &lt;&lt; j) - <span class="number">1</span> &lt;= N; ++i)</span><br><span class="line">            st[i][j] = gcd(st[i][j - <span class="number">1</span>], st[i + (<span class="number">1</span> &lt;&lt; (j - <span class="number">1</span>))][j - <span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> l = <span class="number">1</span>; l &lt;= N; ++l) &#123;</span><br><span class="line">        <span class="keyword">int</span> r = l;</span><br><span class="line">        <span class="keyword">while</span> (r &lt;= N) &#123;</span><br><span class="line">            ll cur = query(l, r);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = lg[N]; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (r + (<span class="number">1</span> &lt;&lt; i) &lt;= N &amp;&amp; query(l, r + (<span class="number">1</span> &lt;&lt; i)) == cur)</span><br><span class="line">                    r += (<span class="number">1</span> &lt;&lt; i);</span><br><span class="line">            &#125;</span><br><span class="line">            ans = max(ans, cur * (r - l + <span class="number">1</span>));</span><br><span class="line">            r += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">gcd</span><span class="params">(ll a, ll b)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> b == <span class="number">0</span> ? a : gcd(b, a % b);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> T, N;</span><br><span class="line">ll ans;</span><br><span class="line">ll a[<span class="number">100005</span>];</span><br><span class="line">ll st[<span class="number">100005</span>][<span class="number">18</span>];</span><br><span class="line"><span class="keyword">int</span> lg[<span class="number">100005</span>];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> ll <span class="title">query</span><span class="params">(<span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> k = lg[r - l + <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">return</span> gcd(st[l][k], st[r - (<span class="number">1</span> &lt;&lt; k) + <span class="number">1</span>][k]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    lg[<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= <span class="number">100000</span>; ++i)</span><br><span class="line">        lg[i] = lg[i &gt;&gt; <span class="number">1</span>] + <span class="number">1</span>;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;N);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%lld"</span>, &amp;st[i][<span class="number">0</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= lg[N]; ++j)</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = <span class="number">1</span>; i + (<span class="number">1</span> &lt;&lt; j) - <span class="number">1</span> &lt;= N; ++i)</span><br><span class="line">            st[i][j] = gcd(st[i][j - <span class="number">1</span>], st[i + (<span class="number">1</span> &lt;&lt; (j - <span class="number">1</span>))][j - <span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> l = <span class="number">1</span>; l &lt;= N; ++l) &#123;</span><br><span class="line">        <span class="keyword">int</span> r = l;</span><br><span class="line">        <span class="keyword">while</span> (r &lt;= N) &#123;</span><br><span class="line">            ll cur = query(l, r);</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">register</span> <span class="keyword">int</span> i = lg[N]; i &gt;= <span class="number">0</span>; --i) &#123;</span><br><span class="line">                <span class="keyword">if</span> (r + (<span class="number">1</span> &lt;&lt; i) &lt;= N &amp;&amp; query(l, r + (<span class="number">1</span> &lt;&lt; i)) == cur)</span><br><span class="line">                    r += (<span class="number">1</span> &lt;&lt; i);</span><br><span class="line">            &#125;</span><br><span class="line">            ans = max(ans, cur * (r - l + <span class="number">1</span>));</span><br><span class="line">            r += <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%lld"</span>, ans);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
       
     </div>
 
