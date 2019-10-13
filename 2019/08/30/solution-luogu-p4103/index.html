@@ -117,7 +117,7 @@
 
 
   <meta name="description" content="题目链接 给定一棵有 $n$ 个节点的树，边权为 $1$ 。共有 $q$ 次询问，每次给出 $k$ 个节点，求： $k$ 个节点间两两距离之总和；最短距离；最长距离。 $1\le n \le 1000000,1 \le q \le 1000000, \Sigma{k}\le 2 * n$ 感谢@tth37 的贡献">
-<meta name="keywords" content="树形dp,虚树,点分治">
+<meta name="keywords" content="树形dp,点分治,虚树">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题解-luogu-p4103大工程">
 <meta property="og:url" content="https://tth37.cn/2019/08/30/solution-luogu-p4103/index.html">
@@ -645,9 +645,9 @@
           
             <a href="/tags/树形dp/" rel="tag"># 树形dp</a>
           
-            <a href="/tags/虚树/" rel="tag"># 虚树</a>
-          
             <a href="/tags/点分治/" rel="tag"># 点分治</a>
+          
+            <a href="/tags/虚树/" rel="tag"># 虚树</a>
           
         </div>
       
@@ -739,7 +739,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">63</span>
+                    <span class="site-state-item-count">64</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1622,85 +1622,6 @@ setInterval("createtime()",250);
   
     bookmark.scrollToMark('auto', "#更多");
   
-  </script>
-
-
-  
-  <style>
-    .copy-btn {
-      display: inline-block;
-      padding: 6px 12px;
-      font-size: 13px;
-      font-weight: 700;
-      line-height: 20px;
-      color: #333;
-      white-space: nowrap;
-      vertical-align: middle;
-      cursor: pointer;
-      background-color: #eee;
-      background-image: linear-gradient(#fcfcfc, #eee);
-      border: 1px solid #d5d5d5;
-      border-radius: 3px;
-      user-select: none;
-      outline: 0;
-    }
-
-    .highlight-wrap .copy-btn {
-      transition: opacity .3s ease-in-out;
-      opacity: 0;
-      padding: 2px 6px;
-      position: absolute;
-      right: 4px;
-      top: 8px;
-    }
-
-    .highlight-wrap:hover .copy-btn,
-    .highlight-wrap .copy-btn:focus {
-      opacity: 1
-    }
-
-    .highlight-wrap {
-      position: relative;
-    }
-  </style>
-  <script>
-    $('.highlight').each(function (i, e) {
-      var $wrap = $('<div>').addClass('highlight-wrap');
-      $(e).after($wrap);
-      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
-        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
-          return $(e).text();
-        }).toArray().join('\n');
-        var ta = document.createElement('textarea');
-        var range = document.createRange(); //For Chrome
-        var sel = window.getSelection(); //For Chrome
-        var yPosition = window.pageYOffset || document.documentElement.scrollTop;
-        ta.style.top = yPosition + 'px'; //Prevent page scroll
-        ta.style.position = 'absolute';
-        ta.style.opacity = '0';
-        ta.value = code;
-        ta.textContent = code; //For FireFox
-        ta.contentEditable = true;
-        ta.readOnly = false;
-        document.body.appendChild(ta);
-        range.selectNode(ta);
-        sel.removeAllRanges();
-        sel.addRange(range);
-        ta.setSelectionRange(0, code.length);
-        var result = document.execCommand('copy');
-        
-          if (result) $(this).text('复制成功');
-          else $(this).text('复制失败');
-        
-        ta.blur(); //For iOS
-        $(this).blur();
-      })).on('mouseleave', function (e) {
-        var $b = $(this).find('.copy-btn');
-        setTimeout(function () {
-          $b.text('复制');
-        }, 300);
-      }).append(e);
-    })
   </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
@@ -1720,6 +1641,8 @@ setInterval("createtime()",250);
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
 
+
+  
 
   
   

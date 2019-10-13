@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tth37.cn/"/>
-  <updated>2019-10-12T16:35:39.197Z</updated>
+  <updated>2019-10-13T15:01:30.901Z</updated>
   <id>https://tth37.cn/</id>
   
   <author>
@@ -15,6 +15,27 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>test</title>
+    <link href="https://tth37.cn/2019/10/13/test/"/>
+    <id>https://tth37.cn/2019/10/13/test/</id>
+    <published>2019-10-13T15:00:47.000Z</published>
+    <updated>2019-10-13T15:01:30.901Z</updated>
+    
+    <content type="html"><![CDATA[<div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure></div>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;div class=&quot;highlight-wrap&quot;autocomplete=&quot;off&quot; autocorrect=&quot;off&quot; autocapitalize=&quot;off&quot; spellcheck=&quot;false&quot; contenteditable=&quot;true&quot;data-rel=&quot;CPP&quot;
+      
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>题解-LibreOJ-2128数字串拆分</title>
@@ -518,9 +539,9 @@
     
       <category term="树形dp" scheme="https://tth37.cn/tags/%E6%A0%91%E5%BD%A2dp/"/>
     
-      <category term="虚树" scheme="https://tth37.cn/tags/%E8%99%9A%E6%A0%91/"/>
-    
       <category term="点分治" scheme="https://tth37.cn/tags/%E7%82%B9%E5%88%86%E6%B2%BB/"/>
+    
+      <category term="虚树" scheme="https://tth37.cn/tags/%E8%99%9A%E6%A0%91/"/>
     
   </entry>
   
@@ -1739,9 +1760,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="字符串" scheme="https://tth37.cn/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
       <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="字符串" scheme="https://tth37.cn/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   
