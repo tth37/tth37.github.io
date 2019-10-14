@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-LibreOJ-6515贪玩蓝月]]></title>
+    <url>%2F2019%2F10%2F14%2Fsolution-loj-6515%2F</url>
+    <content type="text"><![CDATA[题目链接(LibreOJ) 题目概括大力征集中~ 提示：动态背包 一道神仙题。 Solution 1: 在线类似动态 dp，本题要求对双端队列操作的同时进行若干次 01 背包处理。 考虑到双端队列的性质，我们可以维护两个栈，用来模拟双端队列。需要注意的是，如果在一个栈执行多次删除操作后该栈为空，则需将另一个栈中所有元素取出进行暴力重构。通过均摊复杂度分析可得复杂度仍为线性。 均摊复杂度证明？ 记录动态规划数组 $f1[i][j]$ 和 $f2[i][j]$ ，分别表示取第 1/2 个栈中的前 $i$ 件物品得到的最有价值。该数组在栈中插入元素时需要暴力计算。 考虑如何统计答案。假设在左右栈中取出特征值总和分别为 $x,y$，则 $(x+y)\mod p\in [l,r]$。不难发现，在确定 $x,y$ 中的一个之后，另一个所在的范围即为一个区间。将对应的 $f$ 数组做一次单调队列统计答案即可。 注意：暴力重构栈时，若需要重构的栈长度为 1 ，则必须将该元素移动至另一个栈；否则会导致删除元素时出现问题 代码异常毒瘤，尤其是单调队列部分，强烈建议手推一遍。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int maxn = 50005;const ll inf = 1ll * 50005 * 1000000000;int TestCase;int M;ll P;pair&lt;int, ll&gt; s1[maxn], s2[maxn];pair&lt;int, ll&gt; t[maxn];ll f1[maxn][505], f2[maxn][505];int len1, len2;ll q[maxn], l, r;inline void Add1(pair&lt;int, ll&gt; t) &#123; s1[++len1] = t; int w = t.first; ll v = t.second; for (int i = 0; i &lt; P; ++i) &#123; f1[len1][i] = max(f1[len1 - 1][i], f1[len1 - 1][(i - w + P) % P] + v); &#125;&#125;inline void Add2(pair&lt;int, ll&gt; t) &#123; s2[++len2] = t; int w = t.first; ll v = t.second; for (int i = 0; i &lt; P; ++i) &#123; f2[len2][i] = max(f2[len2 - 1][i], f2[len2 - 1][(i - w + P) % P] + v); &#125;&#125;inline void Rebuild1() &#123; int cnt = 0; for (int i = 1; i &lt;= len1; ++i) t[++cnt] = s1[i]; int mid = cnt &gt;&gt; 1; mid++; for (int i = mid; i &gt;= 1; --i) Add2(t[i]); len1 = 0; for (int i = mid + 1; i &lt;= cnt; ++i) Add1(t[i]);&#125;inline void Rebuild2() &#123; int cnt = 0; for (int i = 1; i &lt;= len2; ++i) t[++cnt] = s2[i]; int mid = cnt &gt;&gt; 1; mid++; for (int i = mid; i &gt;= 1; --i) Add1(t[i]); len2 = 0; for (int i = mid + 1; i &lt;= cnt; ++i) Add2(t[i]);&#125;inline void Solve(int ql, int qr) &#123; ll *x = f1[len1], *y = f2[len2]; ll ans = -1; l = 0, r = 0, q[0] = 0; for (int i = P - qr + ql; i &lt; P; ++i) &#123; while (l &lt; r &amp;&amp; x[(q[r - 1] + P) % P] &lt;= x[i]) r--; q[r++] = i - P; &#125; for (int i = 0; i &lt; P; ++i) &#123; while (l &lt; r &amp;&amp; q[l] &lt; i - qr + ql) l++; while (l &lt; r &amp;&amp; x[(q[r - 1] + P) % P] &lt;= x[i]) r--; q[r++] = i; ans = max(ans, x[(q[l] + P) % P] + y[(qr - i + P) % P]); &#125; printf("%lld\n", ans);&#125;int main() &#123; scanf("%d", &amp;TestCase); scanf("%d%lld", &amp;M, &amp;P); for (int i = 1; i &lt; P; ++i) f1[0][i] = f2[0][i] = -inf; while (M--) &#123; string op; cin &gt;&gt; op; if (op == "IF") &#123; int w; ll v; scanf("%d%lld", &amp;w, &amp;v), w %= P; Add1(make_pair(w, v)); &#125; else if (op == "IG") &#123; int w; ll v; scanf("%d%lld", &amp;w, &amp;v), w %= P; Add2(make_pair(w, v)); &#125; else if (op == "DF") &#123; if (len1 == 0) Rebuild2(); len1--; &#125; else if (op == "DG") &#123; if (len2 == 0) Rebuild1(); len2--; &#125; else if (op == "QU") &#123; int l, r; scanf("%d%d", &amp;l, &amp;r); Solve(l, r); &#125; &#125; return 0;&#125; Solution 2: 离线离线解法]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[题解-LibreOJ-2128数字串拆分]]></title>
     <url>%2F2019%2F10%2F12%2Fsolution-loj-2128%2F</url>
     <content type="text"><![CDATA[题目链接(Luogu) 题目链接(LibreOJ) 题目概括大力征集中~ 一道神仙题。对矩阵初学者极不友好。 $f$ 函数的计算非常简单，递推公式如下： f(i)=f(i-1)+f(i-2)+..+f(i-m)容易看出， $f(i)$ 可以使用矩阵加速递推。以 $m=3$ 为例，构造矩阵 A=\left[ \begin{matrix} 1 & 1 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{matrix} \right]那么 $f(n)$ 即为 $(A^n)_{1,1}$ 。 但我们要求的是 $g(S)$ 。考虑将 $g(S)$ 表示为矩阵的形式，最终答案为矩阵的第 $[1,1]$ 项。 考虑 $g(123)$ 的推导。 \begin{align*} g(123) &= f(1+2+3)+f(12+3)+f(1+23)+f(123) \\ &= A^{1+2+3}+A^{12+3}+A^{1+23}+A^{123} \\ &= A^1\times A^2\times A^3+A^{12}\times A^3+A^1\times A^{23}+A^{123} \end{align*}转化为以上形式后，记 $g’(n)$ 为将数字 $S$ 的前 $n$ 项分解后得到的矩阵；在本例中，$g’(3)=g(123)$ 。 可以得到 $g’(i)$ 的递推公式： g'(i)=g'(i-1)\times A^{\text{num[i,i]}}+g'(i-2)\times A^{\text{num[i-1,i]}}+..+g'(0)\times A^{\text{num[1,i]}}其中 $\text{num[l,r]}$ 表示字符串中 $[l,r]$ 区间所对应的数字。例如当 $S=”12345”$ ，$\text{num[2,4]}=234$ 。 考虑 $A^{\text{num[l,r]}}$ 的计算。可以通过预处理加速计算。记 P[i][j]=A^{i*10^j}使用该数组，可以在 $O(n)$ 时间复杂度内计算 $A^{\text{num[l,r]}}$ 。 至此，算法骨架已经成型；时间复杂度为 $O(n*m^3+n^2*m^3)$ 。实现时需要注意细节优化（如计算 $g’$ 时使用恰当的循环顺序）。 代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586878889909192939495969798#include&lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int mod = 998244353;struct Matrix &#123; int m, n; ll g[6][6];&#125;;Matrix mul(Matrix a, Matrix b) &#123; Matrix ret; ret.m = a.m, ret.n = b.n; for (int i = 1; i &lt;= ret.n; ++i) &#123; for (int j = 1; j &lt;= ret.m; ++j) &#123; ret.g[i][j] = 0; for (int k = 1; k &lt;= a.n; ++k) ret.g[i][j] = (ret.g[i][j] + a.g[i][k] * b.g[k][j]) % mod; &#125; &#125; return ret;&#125;Matrix add(Matrix a, Matrix b) &#123; Matrix ret; ret.m = a.m, ret.n = a.n; for (int i = 1; i &lt;= a.n; ++i) for (int j = 1; j &lt;= a.m; ++j) ret.g[i][j] = (a.g[i][j] + b.g[i][j]) % mod; return ret;&#125;Matrix power10(Matrix a) &#123; Matrix ret = a; ret = mul(ret, ret); ret = mul(ret, ret); ret = mul(ret, a); ret = mul(ret, ret); return ret;&#125;void Init_Unit_Matrix(Matrix&amp; a, int n) &#123; a.m = a.n = n; for (int i = 1; i &lt;= n; ++i) for (int j = 1; j &lt;= n; ++j) a.g[i][j] = (i == j) ? 1 : 0;&#125;void Init_Empty_Matrix(Matrix&amp; a, int n) &#123; a.m = a.n = n; for (int i = 1; i &lt;= n; ++i) for (int j = 1; j &lt;= n; ++j) a.g[i][j] = 0;&#125;char s[505];int N, M;Matrix A;Matrix P[10][505];Matrix Q[505];Matrix f[505];int main() &#123; cin &gt;&gt; (s + 1); N = strlen(s + 1); cin &gt;&gt; M; Init_Unit_Matrix(P[0][0], M); A.n = A.m = M; for (int i = 1; i &lt;= M; ++i) &#123; for (int j = 1; j &lt;= M; ++j) &#123; A.g[i][j] = 0; if (i == 1) A.g[i][j] = 1; if (i - 1 == j) A.g[i][j] = 1; &#125; &#125; for (int i = 1; i &lt;= 9; ++i) &#123; P[i][0] = mul(P[i - 1][0], A); &#125; for (int j = 1; j &lt;= N; ++j) &#123; for (int i = 0; i &lt;= 9; ++i) &#123; P[i][j] = power10(P[i][j - 1]); &#125; &#125; Init_Unit_Matrix(f[0], M); for (int i = 1; i &lt;= N; ++i) &#123; Init_Empty_Matrix(f[i], M); Matrix t; Init_Unit_Matrix(t, M); for (int j = i, c = 0; j &gt;= 1; --j, ++c) &#123; t = mul(t, P[s[j] - '0'][c]); f[i] = add(f[i], mul(f[j - 1], t)); &#125; &#125; cout &lt;&lt; f[N].g[1][1]; return 0;&#125;]]></content>
@@ -116,8 +121,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -369,8 +374,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树状数组</tag>
         <tag>树链剖分</tag>
+        <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
@@ -383,8 +388,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -619,9 +624,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
-        <tag>主席树</tag>
         <tag>可持久化trie</tag>
+        <tag>主席树</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -705,8 +710,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
