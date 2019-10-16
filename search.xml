@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-LibreOJ-6498农民]]></title>
+    <url>%2F2019%2F10%2F16%2Fsolution-loj-6498%2F</url>
+    <content type="text"><![CDATA[题目链接(LibreOJ) 题目概括征集中~ @oy么么哒 神仙码量题。 观察题意，进行问题转化。对于树上每一条边，可以通过它的肥料权值必定是一段区间：若这条边连接父节点与左儿子，则对应区间为 $(-\infty,a[\text{fa}])$；反之，则为 $(a[\text{fa}], \infty)$。 因此，我们需要维护一棵线段树，每个节点存储状态值 0/1 以及权值 val 。需要支持以下操作： 单点权值修改 区间状态值翻转 区间查询状态为 0/1 的最值 具体地，在线段树的每个节点上维护 max0, min0, max1, min1 。区间状态值翻转则只需交换 max0, max1 和 min0, min1。区间查询与单点修改不再赘述。 对二叉树进行树链剖分，每次查询只需查找该节点到根节点的限制范围；若该节点权值在范围之内，则可以吸收到肥料，反之不能。 注意：线段树的 max、min需要赋极值作为初值；交换时需理清变量所代表的意义 代码实现细节极多，尤其是线段树异常毒瘤。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162163164165166167168169170171172173174#include&lt;bits/stdc++.h&gt;using namespace std;#define lson(u) node[u].l#define rson(u) node[u].r#define val(u) node[u].val#define tag(u) node[u].tagconst int maxn = 100005;const int inf = 0x3f3f3f3f;struct Node &#123; int l, r, val[2][2]; int tag;&#125;node[maxn * 3];int cnt = 0, R;pair&lt;int, int&gt; t[maxn];inline void pushdown(int u) &#123; if (tag(u)) &#123; swap(val(lson(u))[0][0], val(lson(u))[1][0]); swap(val(lson(u))[0][1], val(lson(u))[1][1]); swap(val(rson(u))[0][0], val(rson(u))[1][0]); swap(val(rson(u))[0][1], val(rson(u))[1][1]); tag(lson(u)) ^= 1, tag(rson(u)) ^= 1; tag(u) = 0; &#125;&#125;inline void pushup(int u) &#123; val(u)[0][0] = min(val(lson(u))[0][0], val(rson(u))[0][0]); val(u)[0][1] = max(val(lson(u))[0][1], val(rson(u))[0][1]); val(u)[1][0] = min(val(lson(u))[1][0], val(rson(u))[1][0]); val(u)[1][1] = max(val(lson(u))[1][1], val(rson(u))[1][1]);&#125;void build(int&amp; u, int l, int r) &#123; u = ++cnt; val(u)[0][0] = val(u)[1][0] = inf; val(u)[0][1] = val(u)[1][1] = -inf; if (l == r) &#123; int d = t[l].first, w = t[l].second; val(u)[d][0] = val(u)[d][1] = w; return; &#125; int mid = (l + r) &gt;&gt; 1; build(lson(u), l, mid); build(rson(u), mid + 1, r); pushup(u);&#125;void modify_range_reverse(int u, int l, int r, int ql, int qr) &#123; if (ql &lt;= l &amp;&amp; r &lt;= qr) &#123; swap(val(u)[0][0], val(u)[1][0]); swap(val(u)[0][1], val(u)[1][1]); tag(u) ^= 1; return; &#125; pushdown(u); int mid = (l + r) &gt;&gt; 1; if (ql &lt;= mid) modify_range_reverse(lson(u), l, mid, ql, qr); if (mid &lt; qr) modify_range_reverse(rson(u), mid + 1, r, ql, qr); pushup(u);&#125;void modify_point(int u, int l, int r, int p, int val) &#123; if (l == r) &#123; if (val(u)[0][0] != inf) val(u)[0][0] = val(u)[0][1] = val; else val(u)[1][0] = val(u)[1][1] = val; return; &#125; pushdown(u); int mid = (l + r) &gt;&gt; 1; if (p &lt;= mid) modify_point(lson(u), l, mid, p, val); else modify_point(rson(u), mid + 1, r, p, val); pushup(u);&#125;pair&lt;int, int&gt; query_range(int u, int l, int r, int ql, int qr) &#123; // first: 1:max // second: 0:min if (ql &lt;= l &amp;&amp; r &lt;= qr) return make_pair(val(u)[1][1], val(u)[0][0]); pushdown(u); int mid = (l + r) &gt;&gt; 1; int first = -inf, second = inf; if (ql &lt;= mid) &#123; pair&lt;int, int&gt; t = query_range(lson(u), l, mid, ql, qr); first = max(first, t.first); second = min(second, t.second); &#125; if (mid &lt; qr) &#123; pair&lt;int, int&gt; t = query_range(rson(u), mid + 1, r, ql, qr); first = max(first, t.first); second = min(second, t.second); &#125; return make_pair(first, second);&#125;int N, M;vector&lt;int&gt; G[maxn];int fa[maxn];int dir[maxn], w[maxn];int dep[maxn], size[maxn], son[maxn];int top[maxn], dfn[maxn], dfn_idx;void dfs1(int u) &#123; dep[u] = dep[fa[u]] + 1; size[u] = 1; for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; dfs1(v); size[u] += size[v]; if (size[v] &gt; size[son[u]]) son[u] = v; &#125;&#125;void dfs2(int u, int topc) &#123; dfn[u] = ++dfn_idx; t[dfn[u]] = make_pair(dir[u], w[fa[u]]); top[u] = topc; if (son[u]) dfs2(son[u], topc); for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; if (v == son[u]) continue; dfs2(v, v); &#125;&#125;int main() &#123; scanf("%d%d", &amp;N, &amp;M); for (int i = 1; i &lt;= N; ++i) &#123; int x, y; scanf("%d%d%d", &amp;w[i], &amp;x, &amp;y); dir[x] = 0, dir[y] = 1; fa[x] = fa[y] = i; if (x) G[i].push_back(x); if (y) G[i].push_back(y); &#125; dfs1(1); dfs2(1, 1); build(R, 1, N); while (M--) &#123; int op, x, y; scanf("%d%d", &amp;op, &amp;x); if (op == 1) &#123; scanf("%d", &amp;y); for (vector&lt;int&gt;::iterator it = G[x].begin(); it != G[x].end(); it++) &#123; int v = *it; modify_point(R, 1, N, dfn[v], y); &#125; w[x] = y; &#125; else if (op == 2) &#123; modify_range_reverse(R, 1, N, dfn[x], dfn[x] + size[x] - 1); modify_range_reverse(R, 1, N, dfn[x], dfn[x]); &#125; else &#123; int val = w[x]; int first = -inf, second = inf; while (top[x] != 1) &#123; pair&lt;int, int&gt; t = query_range(R, 1, N, dfn[top[x]], dfn[x]); first = max(first, t.first); second = min(second, t.second); x = fa[top[x]]; &#125; if (x != 1) &#123; pair&lt;int, int&gt; t = query_range(R, 1, N, 2, dfn[x]); first = max(first, t.first); second = min(second, t.second); &#125; if (val &gt; first &amp;&amp; val &lt; second) puts("YES"); else puts("NO"); &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+        <tag>树链剖分</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[题解-LibreOJ-6515贪玩蓝月]]></title>
     <url>%2F2019%2F10%2F14%2Fsolution-loj-6515%2F</url>
     <content type="text"><![CDATA[题目链接(LibreOJ) 题目概括大力征集中~ 提示：动态背包 一道神仙题。 Solution 1: 在线类似动态 dp，本题要求对双端队列操作的同时进行若干次 01 背包处理。 考虑到双端队列的性质，我们可以维护两个栈，用来模拟双端队列。需要注意的是，如果在一个栈执行多次删除操作后该栈为空，则需将另一个栈中所有元素取出进行暴力重构。通过均摊复杂度分析可得复杂度仍为线性。 均摊复杂度证明？ 记录动态规划数组 $f1[i][j]$ 和 $f2[i][j]$ ，分别表示取第 1/2 个栈中的前 $i$ 件物品得到的最有价值。该数组在栈中插入元素时需要暴力计算。 考虑如何统计答案。假设在左右栈中取出特征值总和分别为 $x,y$，则 $(x+y)\mod p\in [l,r]$。不难发现，在确定 $x,y$ 中的一个之后，另一个所在的范围即为一个区间。将对应的 $f$ 数组做一次单调队列统计答案即可。 注意：暴力重构栈时，若需要重构的栈长度为 1 ，则必须将该元素移动至另一个栈；否则会导致删除元素时出现问题 代码异常毒瘤，尤其是单调队列部分，强烈建议手推一遍。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int maxn = 50005;const ll inf = 1ll * 50005 * 1000000000;int TestCase;int M;ll P;pair&lt;int, ll&gt; s1[maxn], s2[maxn];pair&lt;int, ll&gt; t[maxn];ll f1[maxn][505], f2[maxn][505];int len1, len2;ll q[maxn], l, r;inline void Add1(pair&lt;int, ll&gt; t) &#123; s1[++len1] = t; int w = t.first; ll v = t.second; for (int i = 0; i &lt; P; ++i) &#123; f1[len1][i] = max(f1[len1 - 1][i], f1[len1 - 1][(i - w + P) % P] + v); &#125;&#125;inline void Add2(pair&lt;int, ll&gt; t) &#123; s2[++len2] = t; int w = t.first; ll v = t.second; for (int i = 0; i &lt; P; ++i) &#123; f2[len2][i] = max(f2[len2 - 1][i], f2[len2 - 1][(i - w + P) % P] + v); &#125;&#125;inline void Rebuild1() &#123; int cnt = 0; for (int i = 1; i &lt;= len1; ++i) t[++cnt] = s1[i]; int mid = cnt &gt;&gt; 1; mid++; for (int i = mid; i &gt;= 1; --i) Add2(t[i]); len1 = 0; for (int i = mid + 1; i &lt;= cnt; ++i) Add1(t[i]);&#125;inline void Rebuild2() &#123; int cnt = 0; for (int i = 1; i &lt;= len2; ++i) t[++cnt] = s2[i]; int mid = cnt &gt;&gt; 1; mid++; for (int i = mid; i &gt;= 1; --i) Add1(t[i]); len2 = 0; for (int i = mid + 1; i &lt;= cnt; ++i) Add2(t[i]);&#125;inline void Solve(int ql, int qr) &#123; ll *x = f1[len1], *y = f2[len2]; ll ans = -1; l = 0, r = 0, q[0] = 0; for (int i = P - qr + ql; i &lt; P; ++i) &#123; while (l &lt; r &amp;&amp; x[(q[r - 1] + P) % P] &lt;= x[i]) r--; q[r++] = i - P; &#125; for (int i = 0; i &lt; P; ++i) &#123; while (l &lt; r &amp;&amp; q[l] &lt; i - qr + ql) l++; while (l &lt; r &amp;&amp; x[(q[r - 1] + P) % P] &lt;= x[i]) r--; q[r++] = i; ans = max(ans, x[(q[l] + P) % P] + y[(qr - i + P) % P]); &#125; printf("%lld\n", ans);&#125;int main() &#123; scanf("%d", &amp;TestCase); scanf("%d%lld", &amp;M, &amp;P); for (int i = 1; i &lt; P; ++i) f1[0][i] = f2[0][i] = -inf; while (M--) &#123; string op; cin &gt;&gt; op; if (op == "IF") &#123; int w; ll v; scanf("%d%lld", &amp;w, &amp;v), w %= P; Add1(make_pair(w, v)); &#125; else if (op == "IG") &#123; int w; ll v; scanf("%d%lld", &amp;w, &amp;v), w %= P; Add2(make_pair(w, v)); &#125; else if (op == "DF") &#123; if (len1 == 0) Rebuild2(); len1--; &#125; else if (op == "DG") &#123; if (len2 == 0) Rebuild1(); len2--; &#125; else if (op == "QU") &#123; int l, r; scanf("%d%d", &amp;l, &amp;r); Solve(l, r); &#125; &#125; return 0;&#125; Solution 2: 离线离线解法]]></content>
@@ -216,8 +228,8 @@
       </categories>
       <tags>
         <tag>树形dp</tag>
-        <tag>点分治</tag>
         <tag>虚树</tag>
+        <tag>点分治</tag>
       </tags>
   </entry>
   <entry>
@@ -245,8 +257,8 @@
       </categories>
       <tags>
         <tag>二分答案</tag>
-        <tag>前缀和</tag>
         <tag>倍增</tag>
+        <tag>前缀和</tag>
       </tags>
   </entry>
   <entry>
@@ -374,8 +386,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树链剖分</tag>
         <tag>树状数组</tag>
+        <tag>树链剖分</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
@@ -710,8 +722,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
