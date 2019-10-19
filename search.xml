@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-LibreOJ-6495树]]></title>
+    <url>%2F2019%2F10%2F19%2Fsolution-loj-6495%2F</url>
+    <content type="text"><![CDATA[题目链接(LibreOJ) 题目概括征集中~ 正在写~先占坑 这题也太巧妙了叭！ ——Mr. G]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>计数dp</tag>
+        <tag>数学期望</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[题解-LibreOJ-6513足球大战]]></title>
     <url>%2F2019%2F10%2F19%2Fsolution-loj-6513%2F</url>
     <content type="text"><![CDATA[题目链接(LibreOJ) 足球比赛共 $n$ 秒中，主队每秒进球概率为 $p$，客队每秒进球概率为 $q$，求主队获胜概率。 $n \le 10000000$ 记 $f(i,j)$ 表示 $n$ 秒种后，主队进 $i$ 个球，客队进 $j$ 个球的概率。则有： f(i,j)={n \choose i}\times p^i\times (1-p)^{n-i} \times {n\choose j}\times q^j \times (1-q)^{n-j}要使得 $i&gt;j$ ，即求： \sum_{i=1}^n\sum_{j=0}^{i-1}{n\choose i}\times p^i\times (1-p)^{n-i}\times {n\choose j}\times q^j \times (1-q)^{n-j}化简，得： \sum_{i=1}^n {n\choose i}\times p^i\times (1-p)^{n-i}\times(\sum_{j=0}^{i-1}{n\choose j}\times q^j \times (1-q)^{n-j})$O(n)$ 预处理逆元与 $p$、$q$ 的 $n$ 次方即可。组合数可以递推计算以卡常。 注意实现细节，本题还是挺水的。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657#include&lt;bits/stdc++.h&gt;using namespace std;const int maxn = 10000005;const int mod = 1e9 + 7;inline int qpow(int a, int b) &#123; int ret = 1; while (b) &#123; if (b &amp; 1) ret = 1ll * ret * a % mod; a = 1ll * a * a % mod; b &gt;&gt;= 1; &#125; return ret;&#125;int inv[maxn];int n, ans;int p, q, p2, q2;int invp2, invq2;int pa, pb, qa, qb;int powp, powq;int powp2, powq2;int sq;int C;int main() &#123; scanf("%d", &amp;n); scanf("%d%d", &amp;pa, &amp;pb); p = 1ll * pa * qpow(pb, mod - 2) % mod; p2 = (1 - p + mod) % mod; scanf("%d%d", &amp;qa, &amp;qb); q = 1ll * qa * qpow(qb, mod - 2) % mod; q2 = (1 - q + mod) % mod; if (p == 1) return printf("%d", (1 - qpow(q, n) + mod) % mod), 0; inv[1] = 1; for (int i = 2; i &lt;= n; ++i) &#123; inv[i] = 1ll * (mod - mod / i) * inv[mod % i] % mod; &#125; C = 1; powp = 1, powq = 1; powp2 = qpow(p2, n), powq2 = qpow(q2, n); invp2 = qpow(p2, mod - 2), invq2 = qpow(q2, mod - 2); int tp = 1ll * powp * powp2 % mod, tq = 1ll * powq * powq2 % mod; int mp = 1ll * p * invp2 % mod, mq = 1ll * q * invq2 % mod; sq = powq2; for (int i = 1; i &lt;= n; ++i) &#123; C = 1ll * C * (n - i + 1) % mod * inv[i] % mod; tp = 1ll * tp * mp % mod; tq = 1ll * tq * mq % mod; ans = (ans + 1ll * tp % mod * sq % mod * C) % mod; sq = (sq + 1ll * tq % mod * C) % mod; &#125; printf("%d", ans); return 0;&#125;]]></content>
@@ -20,8 +33,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>树链剖分</tag>
         <tag>线段树</tag>
+        <tag>树链剖分</tag>
       </tags>
   </entry>
   <entry>
@@ -145,8 +158,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -240,8 +253,8 @@
       </categories>
       <tags>
         <tag>树形dp</tag>
-        <tag>点分治</tag>
         <tag>虚树</tag>
+        <tag>点分治</tag>
       </tags>
   </entry>
   <entry>
@@ -269,8 +282,8 @@
       </categories>
       <tags>
         <tag>二分答案</tag>
-        <tag>前缀和</tag>
         <tag>倍增</tag>
+        <tag>前缀和</tag>
       </tags>
   </entry>
   <entry>
@@ -397,8 +410,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>树链剖分</tag>
         <tag>主席树</tag>
+        <tag>树链剖分</tag>
         <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
@@ -412,8 +425,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -489,8 +502,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>树链剖分</tag>
         <tag>线段树</tag>
+        <tag>树链剖分</tag>
         <tag>dfs序</tag>
       </tags>
   </entry>
@@ -648,9 +661,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>可持久化trie</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
