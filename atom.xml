@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tth37.cn/"/>
-  <updated>2019-10-16T16:07:12.386Z</updated>
+  <updated>2019-10-19T14:18:31.322Z</updated>
   <id>https://tth37.cn/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>题解-LibreOJ-6513足球大战</title>
+    <link href="https://tth37.cn/2019/10/19/solution-loj-6513/"/>
+    <id>https://tth37.cn/2019/10/19/solution-loj-6513/</id>
+    <published>2019-10-19T14:02:45.000Z</published>
+    <updated>2019-10-19T14:18:31.322Z</updated>
+    
+    <content type="html"><![CDATA[<div class="note info"><p><a href="https://loj.ac/problem/6513" target="_blank" rel="noopener">题目链接(LibreOJ)</a></p></div><blockquote><p>足球比赛共 $n$ 秒中，主队每秒进球概率为 $p$，客队每秒进球概率为 $q$，求主队获胜概率。</p><p>$n \le 10000000$</p></blockquote><a id="more"></a><p>记 $f(i,j)$ 表示 $n$ 秒种后，主队进 $i$ 个球，客队进 $j$ 个球的概率。则有：</p><script type="math/tex; mode=display">f(i,j)={n \choose i}\times p^i\times (1-p)^{n-i} \times {n\choose j}\times q^j \times (1-q)^{n-j}</script><p>要使得 $i&gt;j$ ，即求：</p><script type="math/tex; mode=display">\sum_{i=1}^n\sum_{j=0}^{i-1}{n\choose i}\times p^i\times (1-p)^{n-i}\times {n\choose j}\times q^j \times (1-q)^{n-j}</script><p>化简，得：</p><script type="math/tex; mode=display">\sum_{i=1}^n {n\choose i}\times p^i\times (1-p)^{n-i}\times(\sum_{j=0}^{i-1}{n\choose j}\times q^j \times (1-q)^{n-j})</script><p>$O(n)$ 预处理逆元与 $p$、$q$ 的 $n$ 次方即可。组合数可以递推计算以卡常。</p><p>注意实现细节，本题还是挺水的。</p><p>代码如下：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">10000005</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> mod = <span class="number">1e9</span> + <span class="number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">qpow</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span> </span>&#123;</span><br><span class="line"><span class="keyword">int</span> ret = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (b) &#123;</span><br><span class="line"><span class="keyword">if</span> (b &amp; <span class="number">1</span>) ret = <span class="number">1l</span>l * ret * a % mod;</span><br><span class="line">a = <span class="number">1l</span>l * a * a % mod;</span><br><span class="line">b &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">int</span> inv[maxn];</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, ans;</span><br><span class="line"><span class="keyword">int</span> p, q, p2, q2;</span><br><span class="line"><span class="keyword">int</span> invp2, invq2;</span><br><span class="line"><span class="keyword">int</span> pa, pb, qa, qb;</span><br><span class="line"><span class="keyword">int</span> powp, powq;</span><br><span class="line"><span class="keyword">int</span> powp2, powq2;</span><br><span class="line"><span class="keyword">int</span> sq;</span><br><span class="line"><span class="keyword">int</span> C;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;n);</span><br><span class="line"><span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;pa, &amp;pb);</span><br><span class="line">p = <span class="number">1l</span>l * pa * qpow(pb, mod - <span class="number">2</span>) % mod;</span><br><span class="line">p2 = (<span class="number">1</span> - p + mod) % mod;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;qa, &amp;qb);</span><br><span class="line">q = <span class="number">1l</span>l * qa * qpow(qb, mod - <span class="number">2</span>) % mod;</span><br><span class="line">q2 = (<span class="number">1</span> - q + mod) % mod;</span><br><span class="line"><span class="keyword">if</span> (p == <span class="number">1</span>)</span><br><span class="line"><span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">"%d"</span>, (<span class="number">1</span> - qpow(q, n) + mod) % mod), <span class="number">0</span>;</span><br><span class="line">    inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        inv[i] = <span class="number">1l</span>l * (mod - mod / i) * inv[mod % i] % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    C = <span class="number">1</span>;</span><br><span class="line">    powp = <span class="number">1</span>, powq = <span class="number">1</span>;</span><br><span class="line">    powp2 = qpow(p2, n), powq2 = qpow(q2, n);</span><br><span class="line">    invp2 = qpow(p2, mod - <span class="number">2</span>), invq2 = qpow(q2, mod - <span class="number">2</span>);</span><br><span class="line">    <span class="keyword">int</span> tp = <span class="number">1l</span>l * powp * powp2 % mod, tq = <span class="number">1l</span>l * powq * powq2 % mod;</span><br><span class="line">    <span class="keyword">int</span> mp = <span class="number">1l</span>l * p * invp2 % mod, mq = <span class="number">1l</span>l * q * invq2 % mod;</span><br><span class="line">sq = powq2;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">C = <span class="number">1l</span>l * C * (n - i + <span class="number">1</span>) % mod * inv[i] % mod;</span><br><span class="line">        tp = <span class="number">1l</span>l * tp * mp % mod;</span><br><span class="line">        tq = <span class="number">1l</span>l * tq * mq % mod;</span><br><span class="line">        ans = (ans + <span class="number">1l</span>l * tp % mod * sq % mod * C) % mod;</span><br><span class="line">sq = (sq + <span class="number">1l</span>l * tq % mod * C) % mod;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"%d"</span>, ans);</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;div class=&quot;note info&quot;&gt;&lt;p&gt;
+&lt;a href=&quot;https://loj.ac/problem/6513&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接(LibreOJ)&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;足球比赛共 $n$ 秒中，主队每秒进球概率为 $p$，客队每秒进球概率为 $q$，求主队获胜概率。&lt;/p&gt;
+&lt;p&gt;$n \le 10000000$&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="概率" scheme="https://tth37.cn/tags/%E6%A6%82%E7%8E%87/"/>
+    
+  </entry>
   
   <entry>
     <title>题解-LibreOJ-6498农民</title>
@@ -39,9 +69,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
       <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
+      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
   </entry>
   
@@ -352,9 +382,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
-    
       <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
   </entry>
   
@@ -954,9 +984,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
-    
       <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
+      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
       <category term="树状数组" scheme="https://tth37.cn/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
@@ -987,9 +1017,9 @@
     
       <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
-    
       <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+      <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
       <category term="树状数组" scheme="https://tth37.cn/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
     
@@ -1162,9 +1192,9 @@
     
       <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
-      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
       <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
+      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
       <category term="dfs序" scheme="https://tth37.cn/tags/dfs%E5%BA%8F/"/>
     
@@ -1557,11 +1587,11 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}&lt;/script&gt;&lt;p&gt;其中�
     
       <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
+      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
       <category term="可持久化trie" scheme="https://tth37.cn/tags/%E5%8F%AF%E6%8C%81%E4%B9%85%E5%8C%96trie/"/>
     
       <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
-    
-      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
   </entry>
   
@@ -1794,9 +1824,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="字符串" scheme="https://tth37.cn/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
