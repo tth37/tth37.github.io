@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[计划-2019CSP/S]]></title>
+    <url>%2F2019%2F10%2F21%2Fschedule-2019-CSP%2F</url>
+    <content type="text"><![CDATA[计划表！咕咕预定 个人标准代码检查表 v2.0 实用技术 对拍 二分查找 二分答案 咕咕咕ing]]></content>
+      <categories>
+        <category>计划</category>
+      </categories>
+  </entry>
+  <entry>
+    <title><![CDATA[模板库]]></title>
+    <url>%2F2019%2F10%2F21%2Ftemplates%2F</url>
+    <content type="text"><![CDATA[Hey, password is required here. 98121eb8c2612220489dbf02f23ee94e]]></content>
+      <categories>
+        <category>模板</category>
+      </categories>
+  </entry>
+  <entry>
     <title><![CDATA[题解-LibreOJ-6495树]]></title>
     <url>%2F2019%2F10%2F19%2Fsolution-loj-6495%2F</url>
-    <content type="text"><![CDATA[题目链接(LibreOJ) 题目概括征集中~ 正在写~先占坑 这题也太巧妙了叭！ ——Mr. G]]></content>
+    <content type="text"><![CDATA[题目链接(LibreOJ) 题目概括征集中~ 重金（5 RMB）征集状压 dp 解法~ @所有人 这题也太巧妙了叭！ ——Mr.G Solution 1 : $O(n^4)$注意到节点 2 的父节点一定为 1；因此可以将以 2 为根的子树与剩余部分分开讨论。 定义状态 $f[i][j]$ 表示有 $i$ 个节点，深度为 $j$ 的方案数。 设以 2 为根的子树中共有 $x$ 个节点。情况一：子树 2 的深度恰好为 $j-1$，剩余部分的深度任意；情况二：子树 2 的深度任意，剩余部分的深度恰好为 $j$。 由于两棵子树的节点编号为 $3…i$ 间的任意整数，所以求出方案数之后需乘上标号的方案数。 f[i][j]=\sum_{x=1}^{i-1}[\sum_{k=1}^{j}f[x][j-1]\times f[i-x][k]\times {i-2\choose x-1}+\sum_{k=1}^{j-2}f[x][k]\times f[i-x][j]\times{i-2\choose x-1}]对于期望，只需将 $\sum_{i=1}^n f[n][i]\times i$ 除以 $(n-1)!$ 即可。 对于四舍五入，可打表。（正经） 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int maxn = 30;const int tb[] = &#123;0, 1, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6&#125;;ll n, p;ll fac[maxn], inv[maxn], facinv[maxn];inline int C(int n, int m) &#123; return fac[n] * facinv[n - m] % p * facinv[m] % p;&#125;ll f[maxn][maxn];ll ans = 0;int main() &#123; cin &gt;&gt; n &gt;&gt; p; fac[0] = fac[1] = inv[1] = facinv[0] = facinv[1] = 1; for (int i = 2; i &lt;= n; ++i) &#123; inv[i] = (p - p / i) * inv[p % i] % p; fac[i] = fac[i - 1] * i % p; facinv[i] = facinv[i - 1] * inv[i] % p; &#125; f[1][1] = 1, f[2][2] = 1; for (int i = 3; i &lt;= n; ++i) &#123; for (int j = 1; j &lt;= n; ++j) &#123; for (int x = 1; x &lt;= i - 1; ++x) &#123; int t1 = 0, t2 = 0; for (int k = 1; k &lt;= j; ++k) t1 = (t1 + f[x][j - 1] * f[i - x][k] % p * C(i - 2, x - 1) % p) % p; for (int k = 1; k &lt;= j - 2; ++k) t2 = (t2 + f[x][k] * f[i - x][j] % p * C(i - 2, x - 1) % p) % p; f[i][j] = (f[i][j] + t1 + t2) % p; &#125; &#125; &#125; for (int i = 1; i &lt;= n; ++i) ans = (ans + f[n][i] * i) % p; for (int i = 1; i &lt;= n - 1; ++i) ans = (ans * inv[i]) % p; cout &lt;&lt; tb[n] &lt;&lt; endl &lt;&lt; ans; return 0;&#125; Solution 2 : $O(2^n*n^2)$状压 dp 解法]]></content>
       <categories>
         <category>题解</category>
       </categories>
@@ -40,7 +56,7 @@
   <entry>
     <title><![CDATA[题解-LibreOJ-6515贪玩蓝月]]></title>
     <url>%2F2019%2F10%2F14%2Fsolution-loj-6515%2F</url>
-    <content type="text"><![CDATA[题目链接(LibreOJ) 题目概括大力征集中~ 提示：动态背包 一道神仙题。 Solution 1: 在线类似动态 dp，本题要求对双端队列操作的同时进行若干次 01 背包处理。 考虑到双端队列的性质，我们可以维护两个栈，用来模拟双端队列。需要注意的是，如果在一个栈执行多次删除操作后该栈为空，则需将另一个栈中所有元素取出进行暴力重构。通过均摊复杂度分析可得复杂度仍为线性。 均摊复杂度证明？ 记录动态规划数组 $f1[i][j]$ 和 $f2[i][j]$ ，分别表示取第 1/2 个栈中的前 $i$ 件物品得到的最有价值。该数组在栈中插入元素时需要暴力计算。 考虑如何统计答案。假设在左右栈中取出特征值总和分别为 $x,y$，则 $(x+y)\mod p\in [l,r]$。不难发现，在确定 $x,y$ 中的一个之后，另一个所在的范围即为一个区间。将对应的 $f$ 数组做一次单调队列统计答案即可。 注意：暴力重构栈时，若需要重构的栈长度为 1 ，则必须将该元素移动至另一个栈；否则会导致删除元素时出现问题 代码异常毒瘤，尤其是单调队列部分，强烈建议手推一遍。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int maxn = 50005;const ll inf = 1ll * 50005 * 1000000000;int TestCase;int M;ll P;pair&lt;int, ll&gt; s1[maxn], s2[maxn];pair&lt;int, ll&gt; t[maxn];ll f1[maxn][505], f2[maxn][505];int len1, len2;ll q[maxn], l, r;inline void Add1(pair&lt;int, ll&gt; t) &#123; s1[++len1] = t; int w = t.first; ll v = t.second; for (int i = 0; i &lt; P; ++i) &#123; f1[len1][i] = max(f1[len1 - 1][i], f1[len1 - 1][(i - w + P) % P] + v); &#125;&#125;inline void Add2(pair&lt;int, ll&gt; t) &#123; s2[++len2] = t; int w = t.first; ll v = t.second; for (int i = 0; i &lt; P; ++i) &#123; f2[len2][i] = max(f2[len2 - 1][i], f2[len2 - 1][(i - w + P) % P] + v); &#125;&#125;inline void Rebuild1() &#123; int cnt = 0; for (int i = 1; i &lt;= len1; ++i) t[++cnt] = s1[i]; int mid = cnt &gt;&gt; 1; mid++; for (int i = mid; i &gt;= 1; --i) Add2(t[i]); len1 = 0; for (int i = mid + 1; i &lt;= cnt; ++i) Add1(t[i]);&#125;inline void Rebuild2() &#123; int cnt = 0; for (int i = 1; i &lt;= len2; ++i) t[++cnt] = s2[i]; int mid = cnt &gt;&gt; 1; mid++; for (int i = mid; i &gt;= 1; --i) Add1(t[i]); len2 = 0; for (int i = mid + 1; i &lt;= cnt; ++i) Add2(t[i]);&#125;inline void Solve(int ql, int qr) &#123; ll *x = f1[len1], *y = f2[len2]; ll ans = -1; l = 0, r = 0, q[0] = 0; for (int i = P - qr + ql; i &lt; P; ++i) &#123; while (l &lt; r &amp;&amp; x[(q[r - 1] + P) % P] &lt;= x[i]) r--; q[r++] = i - P; &#125; for (int i = 0; i &lt; P; ++i) &#123; while (l &lt; r &amp;&amp; q[l] &lt; i - qr + ql) l++; while (l &lt; r &amp;&amp; x[(q[r - 1] + P) % P] &lt;= x[i]) r--; q[r++] = i; ans = max(ans, x[(q[l] + P) % P] + y[(qr - i + P) % P]); &#125; printf("%lld\n", ans);&#125;int main() &#123; scanf("%d", &amp;TestCase); scanf("%d%lld", &amp;M, &amp;P); for (int i = 1; i &lt; P; ++i) f1[0][i] = f2[0][i] = -inf; while (M--) &#123; string op; cin &gt;&gt; op; if (op == "IF") &#123; int w; ll v; scanf("%d%lld", &amp;w, &amp;v), w %= P; Add1(make_pair(w, v)); &#125; else if (op == "IG") &#123; int w; ll v; scanf("%d%lld", &amp;w, &amp;v), w %= P; Add2(make_pair(w, v)); &#125; else if (op == "DF") &#123; if (len1 == 0) Rebuild2(); len1--; &#125; else if (op == "DG") &#123; if (len2 == 0) Rebuild1(); len2--; &#125; else if (op == "QU") &#123; int l, r; scanf("%d%d", &amp;l, &amp;r); Solve(l, r); &#125; &#125; return 0;&#125; Solution 2: 离线离线解法]]></content>
+    <content type="text"><![CDATA[题目链接(LibreOJ) 题目概括大力征集中~ 提示：动态背包 一道神仙题。 Solution 1: 在线类似动态 dp，本题要求对双端队列操作的同时进行若干次 01 背包处理。 考虑到双端队列的性质，我们可以维护两个栈，用来模拟双端队列。需要注意的是，如果在一个栈执行多次删除操作后该栈为空，则需将另一个栈中所有元素取出进行暴力重构。通过均摊复杂度分析可得复杂度仍为线性。 均摊复杂度证明？ 记录动态规划数组 $f1[i][j]$ 和 $f2[i][j]$ ，分别表示取第 1/2 个栈中的前 $i$ 件物品得到的最有价值。该数组在栈中插入元素时需要暴力计算。 考虑如何统计答案。假设在左右栈中取出特征值总和分别为 $x,y$，则 $(x+y)\mod p\in [l,r]$。不难发现，在确定 $x,y$ 中的一个之后，另一个所在的范围即为一个区间。将对应的 $f$ 数组做一次单调队列统计答案即可。 注意：暴力重构栈时，若需要重构的栈长度为 1 ，则必须将该元素移动至另一个栈；否则会导致删除元素时出现问题 代码异常毒瘤，尤其是单调队列部分，强烈建议手推一遍。 代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int maxn = 50005;const ll inf = 1ll * 50005 * 1000000000;int TestCase;int M;ll P;pair&lt;int, ll&gt; s1[maxn], s2[maxn];pair&lt;int, ll&gt; t[maxn];ll f1[maxn][505], f2[maxn][505];int len1, len2;ll q[maxn], l, r;inline void Add1(pair&lt;int, ll&gt; t) &#123; s1[++len1] = t; int w = t.first; ll v = t.second; for (int i = 0; i &lt; P; ++i) &#123; f1[len1][i] = max(f1[len1 - 1][i], f1[len1 - 1][(i - w + P) % P] + v); &#125;&#125;inline void Add2(pair&lt;int, ll&gt; t) &#123; s2[++len2] = t; int w = t.first; ll v = t.second; for (int i = 0; i &lt; P; ++i) &#123; f2[len2][i] = max(f2[len2 - 1][i], f2[len2 - 1][(i - w + P) % P] + v); &#125;&#125;inline void Rebuild1() &#123; int cnt = 0; for (int i = 1; i &lt;= len1; ++i) t[++cnt] = s1[i]; int mid = cnt &gt;&gt; 1; mid++; for (int i = mid; i &gt;= 1; --i) Add2(t[i]); len1 = 0; for (int i = mid + 1; i &lt;= cnt; ++i) Add1(t[i]);&#125;inline void Rebuild2() &#123; int cnt = 0; for (int i = 1; i &lt;= len2; ++i) t[++cnt] = s2[i]; int mid = cnt &gt;&gt; 1; mid++; for (int i = mid; i &gt;= 1; --i) Add1(t[i]); len2 = 0; for (int i = mid + 1; i &lt;= cnt; ++i) Add2(t[i]);&#125;inline void Solve(int ql, int qr) &#123; ll *x = f1[len1], *y = f2[len2]; ll ans = -1; l = 0, r = 0, q[0] = 0; for (int i = P - qr + ql; i &lt; P; ++i) &#123; while (l &lt; r &amp;&amp; x[(q[r - 1] + P) % P] &lt;= x[i]) r--; q[r++] = i - P; &#125; for (int i = 0; i &lt; P; ++i) &#123; while (l &lt; r &amp;&amp; q[l] &lt; i - qr + ql) l++; while (l &lt; r &amp;&amp; x[(q[r - 1] + P) % P] &lt;= x[i]) r--; q[r++] = i; ans = max(ans, x[(q[l] + P) % P] + y[(qr - i + P) % P]); &#125; printf("%lld\n", ans);&#125;int main() &#123; scanf("%d", &amp;TestCase); scanf("%d%lld", &amp;M, &amp;P); for (int i = 1; i &lt; P; ++i) f1[0][i] = f2[0][i] = -inf; while (M--) &#123; string op; cin &gt;&gt; op; if (op == "IF") &#123; int w; ll v; scanf("%d%lld", &amp;w, &amp;v), w %= P; Add1(make_pair(w, v)); &#125; else if (op == "IG") &#123; int w; ll v; scanf("%d%lld", &amp;w, &amp;v), w %= P; Add2(make_pair(w, v)); &#125; else if (op == "DF") &#123; if (len1 == 0) Rebuild2(); len1--; &#125; else if (op == "DG") &#123; if (len2 == 0) Rebuild1(); len2--; &#125; else if (op == "QU") &#123; int l, r; scanf("%d%d", &amp;l, &amp;r); Solve(l, r); &#125; &#125; return 0;&#125; #### Solution 2: 离线 离线解法]]></content>
   </entry>
   <entry>
     <title><![CDATA[题解-LibreOJ-2128数字串拆分]]></title>
@@ -282,8 +298,8 @@
       </categories>
       <tags>
         <tag>二分答案</tag>
-        <tag>倍增</tag>
         <tag>前缀和</tag>
+        <tag>倍增</tag>
       </tags>
   </entry>
   <entry>
@@ -411,8 +427,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树链剖分</tag>
         <tag>树状数组</tag>
+        <tag>树链剖分</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
