@@ -128,17 +128,18 @@
 
 
 
-  <meta name="description" content="CSP-S rp++!">
-<meta name="keywords" content="OI">
-<meta property="og:type" content="website">
-<meta property="og:title" content="tth37&#39;s Blog">
-<meta property="og:url" content="https://tth37.cn/tags/数学期望/index.html">
+  <meta name="description" content="题目链接(LibreOJ)   维护一个数据结构，支持区间加减、区间除法（下取整）、区间查询最值、区间查询总和操作。 $n \le 100000, q \le 100000$">
+<meta name="keywords" content="线段树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="题解-LibreOJ-6029市场">
+<meta property="og:url" content="https://tth37.cn/2019/10/21/solution-loj-6029/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="CSP-S rp++!">
+<meta property="og:description" content="题目链接(LibreOJ)   维护一个数据结构，支持区间加减、区间除法（下取整）、区间查询最值、区间查询总和操作。 $n \le 100000, q \le 100000$">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-10-21T15:55:19.489Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="tth37&#39;s Blog">
-<meta name="twitter:description" content="CSP-S rp++!">
+<meta name="twitter:title" content="题解-LibreOJ-6029市场">
+<meta name="twitter:description" content="题目链接(LibreOJ)   维护一个数据结构，支持区间加减、区间除法（下取整）、区间查询最值、区间查询总和操作。 $n \le 100000, q \le 100000$">
 
 
 
@@ -147,7 +148,7 @@
 
 
 
-  <link rel="canonical" href="https://tth37.cn/tags/数学期望/">
+  <link rel="canonical" href="https://tth37.cn/2019/10/21/solution-loj-6029/">
 
 
 
@@ -157,7 +158,7 @@
   };
 </script>
 
-  <title>标签: 数学期望 | tth37's Blog</title>
+  <title>题解-LibreOJ-6029市场 | tth37's Blog</title>
   
 
 
@@ -215,7 +216,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <a href="https://github.com/tth37" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewbox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
@@ -293,7 +294,7 @@
         
         
           
-          <li class="menu-item menu-item-tags menu-item-active">
+          <li class="menu-item menu-item-tags">
 
     
     
@@ -432,88 +433,278 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block tag">
+  <div id="posts" class="posts-expand">
+    
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>数学期望<small>标签</small>
-        </h1>
-      </div>
+  
 
-      
-        
+  
+  
+  
+
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://tth37.cn/2019/10/21/solution-loj-6029/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="tth37">
+      <meta itemprop="description" content="CSP-S rp++!">
+      <meta itemprop="image" content="/images/main.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="tth37's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/10/19/solution-loj-6495/" itemprop="url">
-            
-              <span itemprop="name">题解-LibreOJ-6495树</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">题解-LibreOJ-6029市场
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-10-19T22:21:29+08:00" content="2019-10-19">
-          10-19
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-21 23:49:35 / 修改时间：23:55:19" itemprop="dateCreated datePublished" datetime="2019-10-21T23:49:35+08:00">2019-10-21</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/题解/" itemprop="url" rel="index"><span itemprop="name">题解</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon">
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-symbolscount">
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文字数：</span>
+                
+                <span title="本文字数">4.2k</span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div class="note info"><p>
+<a href="https://loj.ac/problem/6029" target="_blank" rel="noopener">题目链接(LibreOJ)</a></p></div>
+
+<blockquote>
+<p>维护一个数据结构，支持区间加减、区间除法（下取整）、区间查询最值、区间查询总和操作。</p>
+<p>$n \le 100000, q \le 100000$</p>
+</blockquote>
+<a id="more"></a>
+<p>线段树区间除法模板题。可以玄学分析复杂度。</p>
+<p>观察到对某个区间进行除法操作后，其区间内的权值<strong>整体减小某个值</strong>，当且仅当该区间的<strong>最大元素与最小元素减小的值相等</strong>。因此区间除法可以转化为区间减法，只需判断是否满足区间减的条件即可。</p>
+<p><div class="note warning"><p>注意 '/' 运算符对数字进行向零取整，并不是向下取整</p></div></p>
+<p>实现非常简单。代码如下：</p>
+<div class="highlight-wrap" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true" data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">long</span> <span class="keyword">long</span> ll;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lson(u) node[u].l</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> rson(u) node[u].r</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> tag(u) node[u].tag</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> maxx(u) node[u].maxx</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> minn(u) node[u].minn</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> sum(u) node[u].sum</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> maxn = <span class="number">100005</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> inf = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> l, r, tag, minn, maxx;</span><br><span class="line">    ll sum;</span><br><span class="line">&#125;node[maxn &lt;&lt; <span class="number">1</span>];</span><br><span class="line"><span class="keyword">int</span> cnt;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> N, Q, R;</span><br><span class="line"><span class="keyword">int</span> a[maxn];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pushdown</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (tag(u)) &#123;</span><br><span class="line">        <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> llen = mid - l + <span class="number">1</span>, rlen = r - mid;</span><br><span class="line">        sum(lson(u)) += <span class="number">1l</span>l * tag(u) * llen, sum(rson(u)) += <span class="number">1l</span>l * tag(u) * rlen;</span><br><span class="line">        minn(lson(u)) += tag(u), minn(rson(u)) += tag(u);</span><br><span class="line">        maxx(lson(u)) += tag(u), maxx(rson(u)) += tag(u);</span><br><span class="line">        tag(lson(u)) += tag(u), tag(rson(u)) += tag(u);</span><br><span class="line">        tag(u) = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">pushup</span><span class="params">(<span class="keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    sum(u) = sum(lson(u)) + sum(rson(u));</span><br><span class="line">    minn(u) = min(minn(lson(u)), minn(rson(u)));</span><br><span class="line">    maxx(u) = max(maxx(lson(u)), maxx(rson(u)));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">build</span><span class="params">(<span class="keyword">int</span>&amp; u, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    u = ++cnt;</span><br><span class="line">    sum(u) = <span class="number">0</span>, minn(u) = inf, maxx(u) = -inf;</span><br><span class="line">    <span class="keyword">if</span> (l == r) &#123;</span><br><span class="line">        sum(u) = minn(u) = maxx(u) = a[l];</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    build(lson(u), l, mid), build(rson(u), mid + <span class="number">1</span>, r);</span><br><span class="line">    pushup(u);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify_range_add</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> ql, <span class="keyword">int</span> qr, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (ql &lt;= l &amp;&amp; r &lt;= qr) &#123;</span><br><span class="line">        tag(u) += val;</span><br><span class="line">        sum(u) += <span class="number">1l</span>l * val * (r - l + <span class="number">1</span>);</span><br><span class="line">        minn(u) += val;</span><br><span class="line">        maxx(u) += val;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pushdown(u, l, r);</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (ql &lt;= mid) modify_range_add(lson(u), l, mid, ql, qr, val);</span><br><span class="line">    <span class="keyword">if</span> (mid &lt; qr) modify_range_add(rson(u), mid + <span class="number">1</span>, r, ql, qr, val);</span><br><span class="line">    pushup(u);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">modify_range_divide</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> ql, <span class="keyword">int</span> qr, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (ql &lt;= l &amp;&amp; r &lt;= qr) &#123;</span><br><span class="line">        <span class="keyword">int</span> dmin = minn(u) - <span class="built_in">floor</span>(<span class="number">1.0</span> * minn(u) / val), dmax = maxx(u) - <span class="built_in">floor</span>(<span class="number">1.0</span> * maxx(u) / val);</span><br><span class="line">        <span class="keyword">if</span> (dmin == dmax) &#123;</span><br><span class="line">            tag(u) -= dmin;</span><br><span class="line">            sum(u) -= <span class="number">1l</span>l * dmin * (r - l + <span class="number">1</span>);</span><br><span class="line">            minn(u) -= dmin;</span><br><span class="line">            maxx(u) -= dmin;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    pushdown(u, l, r);</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span> (ql &lt;= mid) modify_range_divide(lson(u), l, mid, ql, qr, val);</span><br><span class="line">    <span class="keyword">if</span> (mid &lt; qr) modify_range_divide(rson(u), mid + <span class="number">1</span>, r, ql, qr, val);</span><br><span class="line">    pushup(u);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">query_range_min</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> ql, <span class="keyword">int</span> qr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (ql &lt;= l &amp;&amp; r &lt;= qr) <span class="keyword">return</span> minn(u);</span><br><span class="line">    pushdown(u, l, r);</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>, ret = inf;</span><br><span class="line">    <span class="keyword">if</span> (ql &lt;= mid) ret = min(ret, query_range_min(lson(u), l, mid, ql, qr));</span><br><span class="line">    <span class="keyword">if</span> (mid &lt; qr) ret = min(ret, query_range_min(rson(u), mid + <span class="number">1</span>, r, ql, qr));</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">ll <span class="title">query_range_sum</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> l, <span class="keyword">int</span> r, <span class="keyword">int</span> ql, <span class="keyword">int</span> qr)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (ql &lt;= l &amp;&amp; r &lt;= qr) <span class="keyword">return</span> sum(u);</span><br><span class="line">    pushdown(u, l, r);</span><br><span class="line">    <span class="keyword">int</span> mid = (l + r) &gt;&gt; <span class="number">1</span>; ll ret = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (ql &lt;= mid) ret += query_range_sum(lson(u), l, mid, ql, qr);</span><br><span class="line">    <span class="keyword">if</span> (mid &lt; qr) ret += query_range_sum(rson(u), mid + <span class="number">1</span>, r, ql, qr);</span><br><span class="line">    <span class="keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;N, &amp;Q);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; N; ++i) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]);</span><br><span class="line">    build(R, <span class="number">0</span>, N - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= Q; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> op, l, r, x;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;op, &amp;l, &amp;r);</span><br><span class="line">        <span class="keyword">if</span> (op == <span class="number">1</span>) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;x), modify_range_add(R, <span class="number">0</span>, N - <span class="number">1</span>, l, r, x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="number">2</span>) <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;x), modify_range_divide(R, <span class="number">0</span>, N - <span class="number">1</span>, l, r, x);</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (op == <span class="number">3</span>) <span class="built_in">printf</span>(<span class="string">"%d\n"</span>, query_range_min(R, <span class="number">0</span>, N - <span class="number">1</span>, l, r));</span><br><span class="line">        <span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">"%lld\n"</span>, query_range_sum(R, <span class="number">0</span>, N - <span class="number">1</span>, l, r));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+      
+    </div>
+
+
+
+    
+
+    
+
+    
+    
+    
+
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2019/10/21/solution-loj-6029/">题解-LibreOJ-6029市场</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 tth37 的个人博客">tth37</a></p>
+  <p><span>发布时间:</span>2019年10月21日 - 23:10</p>
+  <p><span>最后更新:</span>2019年10月21日 - 23:10</p>
+  <p><span>原始链接:</span><a href="/2019/10/21/solution-loj-6029/" title="题解-LibreOJ-6029市场">https://tth37.cn/2019/10/21/solution-loj-6029/</a>
+    <span class="copy-path" title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="https://tth37.cn/2019/10/21/solution-loj-6029/" aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>
+</div>
+<script>
+    var clipboard = new Clipboard('.fa-clipboard');
+    $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({
+          title: "",
+          text: '复制成功',
+          icon: "success",
+          showConfirmButton: true
+          });
+    });
+    });
+</script>
 
 
       
     </div>
 
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/线段树/" rel="tag"># 线段树</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/21/schedule-2019-CSP/" rel="next" title="2019CSP-S复习计划">
+                <i class="fa fa-chevron-left"></i> 2019CSP-S复习计划
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
+
+  </div>
 
 
           </div>
           
+
+  
+    <div id="gitalk-container">
+    </div>
+    
+  
+
+
 
         </div>
         
@@ -973,6 +1164,10 @@ setInterval("createtime()",250);
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
 
   
 
@@ -995,6 +1190,36 @@ setInterval("createtime()",250);
 
 
 
+
+
+  
+  
+    
+  
+  <script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+  
+  
+    
+  
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+
+  
+  
+  <script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+   <script>
+        var gitalk = new Gitalk({
+          clientID: 'e4bd10e2fdaa62b463db',
+          clientSecret: '198498a0be473b87c8a04fde97cf66e939dca90a',
+          repo: 'tth37.github.io',
+          owner: 'tth37',
+          admin: ['tth37'],
+          id: md5(location.pathname),
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')
+       </script>
 
 
   
@@ -1405,7 +1630,7 @@ setInterval("createtime()",250);
   <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-bookmark@1/bookmark.min.js"></script>
   <script>
   
-    bookmark.loadBookmark();
+    bookmark.scrollToMark('auto', "#更多");
   
   </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
