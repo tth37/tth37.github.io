@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[题解-LibreOJ-6033棋盘游戏]]></title>
+    <url>%2F2019%2F10%2F25%2Fsolution-loj-6033%2F</url>
+    <content type="text"><![CDATA[题目链接(LibreOJ) 弱弱的征集题目概括 二分图博弈。首先是个人都能看出来将棋盘黑白染色、建二分图。 假设二分图存在完美匹配，则无论起点在哪，Bob 必胜。显然 Bob 可以一直沿匹配边走，Alice 只能走非匹配边直到无路可走。 假设二分图不存在完美匹配，则如果起点为二分图最大匹配的必配点，则 Bob 必胜；反之 Alice 必胜。 证明？ 如何求解某个点是否为二分图最大匹配的必配点？ 考虑找到二分图上所有非必配点。先求解出一个二分图最大匹配。显然，不在该最大匹配中的点均为非必配点。 对于该最大匹配中的点，考虑如果能以之为起点、找到以非匹配点为终点的交错轨，则该点为非必配点。 根据 这篇博客 中的思路，可以将不在最大匹配中的点作为起点，找到的所有交错轨上的点均为非必配点。 将非必配点输出即可。 建图很关键，不要犯傻；否则调都调不出来 代码如下： 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283#include &lt;bits/stdc++.h&gt;using namespace std;int nx[] = &#123;-1, 0, 1, 0&#125;;int ny[] = &#123;0, 1, 0, -1&#125;;int N, M;int a[105][105];int c[105][105];int cnt1, cnt2;vector&lt;int&gt; G[20005];bool vis[20005];int m[20005];bool tag[20005];vector&lt;pair&lt;int, int&gt; &gt; Out;bool find(int u) &#123; if (vis[u]) return 0; vis[u] = 1; for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; if (m[v] == 0 || find(m[v])) &#123; m[u] = v, m[v] = u; return 1; &#125; &#125; return 0;&#125;bool dfs(int u) &#123; if (vis[u]) return 0; vis[u] = 1; if (m[u] == 0) return 1; for (vector&lt;int&gt;::iterator it = G[m[u]].begin(); it != G[m[u]].end(); it++) &#123; int v = *it; if (dfs(v)) return 1; &#125; return 0;&#125;int main() &#123; cin &gt;&gt; N &gt;&gt; M; for (int i = 1; i &lt;= N; ++i) &#123; for (int j = 1; j &lt;= M; ++j) &#123; char ch; cin &gt;&gt; ch; if (ch == '#') continue; if ((i + j) &amp; 1) c[i][j] = ++cnt1; else c[i][j] = ++cnt2 + 10000; &#125; &#125; for (int i = 1; i &lt;= N; ++i) &#123; for (int j = 1; j &lt;= M; ++j) &#123; if (c[i][j] == 0) continue; for (int k = 0; k &lt; 4; ++k) &#123; int ti = i + nx[k], tj = j + ny[k]; if (ti &gt;= 1 &amp;&amp; ti &lt;= N &amp;&amp; tj &gt;= 1 &amp;&amp; tj &lt;= M) &#123; if (c[ti][tj]) G[c[i][j]].push_back(c[ti][tj]); &#125; &#125; &#125; &#125; for (int i = 1; i &lt;= cnt1; ++i) &#123; memset(vis, 0, sizeof(vis)); find(i); &#125; for (int i = 1; i &lt;= N; ++i) &#123; for (int j = 1; j &lt;= M; ++j) &#123; if (c[i][j] == 0) continue; memset(vis, 0, sizeof(vis)); if (dfs(c[i][j])) &#123; Out.push_back(make_pair(i, j)); &#125; &#125; &#125; printf("%d\n", Out.size()); for (int i = 0; i &lt; (int)Out.size(); ++i) printf("%d %d\n", Out[i].first, Out[i].second); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+      </categories>
+      <tags>
+        <tag>二分图匹配</tag>
+        <tag>博弈论</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[题解-LibreOJ-2255炸弹]]></title>
     <url>%2F2019%2F10%2F22%2Fsolution-loj-2255%2F</url>
     <content type="text"><![CDATA[题目链接(Luogu) 题目链接(LibreOJ) 在一条直线上有 $n$ 个炸弹，每个炸弹给定其坐标和爆炸半径；求出引爆每个炸弹时，共有多少炸弹被连锁引爆。 $n\le 500000$ 我感谢我自己 很巧妙的建模方法，是作者在学校 yy 出来的。 考虑朴素做法。将每个炸弹向其能引爆的炸弹连边，求出强连通分量后缩点，在 DAG 上乱搞得到答案。 然而这种解法的边数在 $n^2$ 级别。考虑优化。 注意到一个性质：每个炸弹能引爆的所有炸弹必然属于属于一段连续区间。 在原炸弹序列上建一棵线段树，线段树上的所有父节点向儿子连边。对于一个节点向一段区间内节点的连边操作，我们可以将这些边连到区间的父节点上（好比线段树的区间操作）。边数被控制在 $n\log n$ 级别。 缩点并得到 DAG 后，发现不能简单地进行答案统计；因为会产生重复的状态转移。 观察到本题的一个特殊性质：被连锁反应引爆的范围一定仍然是一段连续区间。我们只需维护区间的最小值和最大值，并以此进行状态转移即可。 是否存在此类问题通解？ 是否存在不用建图的解法？ ge(x) 表示大于等于 x 的最小坐标，le(x) 表示小于等于 x 的最大坐标 实现极为简单。代码如下： 123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114#include &lt;bits/stdc++.h&gt;using namespace std;#define lson(u) node[u].l#define rson(u) node[u].r#define ge(x) (lower_bound(a + 1, a + N + 1, x) - a)#define le(x) (upper_bound(a + 1, a + N + 1, x) - a - 1)typedef long long ll;const int maxn = 1000005;const int mod = 1000000007;const int inf = 0x3f3f3f3f;struct Node &#123; int l, r;&#125;node[maxn &lt;&lt; 1];int cnt;int N, R, ans;ll a[maxn], r[maxn];int num[maxn], range[maxn][2];vector&lt;int&gt; G[maxn], SCC[maxn];int w[maxn], dfn[maxn], low[maxn], dfn_idx;int scc[maxn], scc_cnt;bool ins[maxn];stack&lt;int&gt; s;int f[maxn][2];bool vis[maxn];void build(int&amp; u, int l, int r) &#123; u = ++cnt; range[u][0] = l, range[u][1] = r; if (l == r) &#123; num[l] = u; w[u] = 1; return; &#125; int mid = (l + r) &gt;&gt; 1; build(lson(u), l, mid), build(rson(u), mid + 1, r); G[u].push_back(lson(u)), G[u].push_back(rson(u));&#125;void add_edge_range(int u, int l, int r, int qu, int ql, int qr) &#123; if (ql &lt;= l &amp;&amp; r &lt;= qr) &#123; G[qu].push_back(u); return; &#125; int mid = (l + r) &gt;&gt; 1; if (ql &lt;= mid) add_edge_range(lson(u), l, mid, qu, ql, qr); if (mid &lt; qr) add_edge_range(rson(u), mid + 1, r, qu, ql, qr);&#125;void tarjan(int u) &#123; low[u] = dfn[u] = ++dfn_idx; ins[u] = 1; s.push(u); for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; if (dfn[v] == 0) &#123; tarjan(v); low[u] = min(low[u], low[v]); &#125; else if (ins[v]) &#123; low[u] = min(low[u], dfn[v]); &#125; &#125; if (low[u] == dfn[u]) &#123; scc_cnt++; f[scc_cnt][0] = inf, f[scc_cnt][1] = -inf; while (ins[u]) &#123; int t = s.top(); s.pop(); ins[t] = 0; scc[t] = scc_cnt; f[scc_cnt][0] = min(f[scc_cnt][0], range[t][0]); f[scc_cnt][1] = max(f[scc_cnt][1], range[t][1]); &#125; &#125;&#125;void dp(int u) &#123; if (vis[u]) return; vis[u] = 1; for (vector&lt;int&gt;::iterator it = SCC[u].begin(); it != SCC[u].end(); it++) &#123; int v = *it; dp(v); f[u][0] = min(f[u][0], f[v][0]); f[u][1] = max(f[u][1], f[v][1]); &#125;&#125;int main() &#123; scanf("%d", &amp;N); for (int i = 1; i &lt;= N; ++i) scanf("%lld%lld", &amp;a[i], &amp;r[i]); build(R, 1, N); for (int i = 1; i &lt;= N; ++i) add_edge_range(R, 1, N, num[i], ge(a[i] - r[i]), le(a[i] + r[i])); tarjan(1); for (int u = 1; u &lt;= N; ++u) &#123; for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; if (scc[u] != scc[v]) SCC[scc[u]].push_back(scc[v]); &#125; &#125; for (int i = 1; i &lt;= scc_cnt; ++i) dp(i); for (int i = 1; i &lt;= N; ++i) &#123; ans = (ans + 1ll * i * (f[scc[num[i]]][1] - f[scc[num[i]]][0] + 1)) % mod; &#125; printf("%d", ans); return 0;&#125;]]></content>
@@ -184,8 +196,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>线段树</tag>
+        <tag>动态规划</tag>
         <tag>离散化</tag>
       </tags>
   </entry>
@@ -292,8 +304,8 @@
       </categories>
       <tags>
         <tag>树形dp</tag>
-        <tag>点分治</tag>
         <tag>虚树</tag>
+        <tag>点分治</tag>
       </tags>
   </entry>
   <entry>
@@ -450,8 +462,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树状数组</tag>
         <tag>树链剖分</tag>
+        <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
