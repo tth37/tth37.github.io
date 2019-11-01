@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tth37.cn/"/>
-  <updated>2019-10-30T14:41:53.337Z</updated>
+  <updated>2019-10-31T15:13:23.329Z</updated>
   <id>https://tth37.cn/</id>
   
   <author>
@@ -15,6 +15,56 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>算法学习-高斯消元</title>
+    <link href="https://tth37.cn/2019/10/31/algorithm-gauss/"/>
+    <id>https://tth37.cn/2019/10/31/algorithm-gauss/</id>
+    <published>2019-10-31T13:44:46.000Z</published>
+    <updated>2019-10-31T15:13:23.329Z</updated>
+    
+    <content type="html"><![CDATA[<h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>高斯消元算法可以在 $O(n^3)$ 时间复杂度内求解 $n$ 元一次方程组。</p><blockquote><p>本文绝大部分内容转载自 <a href="https://oi-wiki.org/math/gauss/#_6" target="_blank" rel="noopener">OI-WIKI</a></p></blockquote><a id="more"></a><p>简直太简单了。随便写写就过了模板。</p><h4 id="高斯消元五步骤法"><a href="#高斯消元五步骤法" class="headerlink" title="高斯消元五步骤法"></a>高斯消元五步骤法</h4><p>高斯消元法在将增广矩阵化为最简形后对于自由未知量的赋值，需要掌握线性相关知识，且赋值存在人工经验的因素，使得在学习过程中有一定的困难，将高斯消元法划分为五步骤，从而提出五步骤法，内容如下：</p><ol><li><p>增广矩阵行初等行变换为行最简形；</p></li><li><p>还原线性方程组；</p></li><li><p>求解第一个变量；</p></li><li><p>补充自由未知量；</p></li><li><p>列表示方程组通解。</p></li></ol><p>利用实例进一步说明该算法的运作情况。</p><p>例二：利用高斯消元法五步骤法求解线性方程组：</p><script type="math/tex; mode=display">\left\{\begin{aligned}2x_1+5x_3+6x_4&=9 \notag \\x_3+x_4&=-4 \notag \\2x_3+2x_4&=-8 \notag\end{aligned}\right.</script><h4 id="增广矩阵行（初等）变换为行最简形"><a href="#增广矩阵行（初等）变换为行最简形" class="headerlink" title="增广矩阵行（初等）变换为行最简形"></a>增广矩阵行（初等）变换为行最简形</h4><p>所谓增广矩阵，即为方程组系数矩阵 $A$ 与常数列 $b$ 的并生成的新矩阵，即 $(A | b)$ ，增广矩阵行初等变换化为行最简形，即是利用了高斯消元法的思想理念，省略了变量而用变量的系数位置表示变量，增广矩阵中用竖线隔开了系数矩阵和常数列，代表了等于符号。</p><script type="math/tex; mode=display">\left(\begin{matrix}2 & 0 & 5 & 6 \\0 & 0 & 1 & 1 \\0 & 0 & 2 & 2\end{matrix} \middle|\begin{matrix}9 \\-4 \\-8\end{matrix} \right)</script><script type="math/tex; mode=display">\xrightarrow{r_3-2r_2}\left(\begin{matrix}2 & 0 & 5 & 6 \\0 & 0 & 1 & 1 \\0 & 0 & 0 & 0\end{matrix} \middle|\begin{matrix}9 \\-4 \\0\end{matrix} \right)</script><p>化为行阶梯形</p><script type="math/tex; mode=display">\xrightarrow{\frac{r_1}{2}}\left(\begin{matrix}1 & 0 & 2.5 & 3 \\0 & 0 & 1 & 1 \\0 & 0 & 0 & 0\end{matrix} \middle|\begin{matrix}4.5 \\-4 \\0\end{matrix} \right)</script><script type="math/tex; mode=display">\xrightarrow{r_1-r_2 \times 2.5}\left(\begin{matrix}1 & 0 & 0 & 0.5 \\0 & 0 & 1 & 1 \\0 & 0 & 0 & 0\end{matrix} \middle|\begin{matrix}14.5 \\-4 \\0\end{matrix} \right)</script><p>化为最简形</p><h4 id="还原线性方程组"><a href="#还原线性方程组" class="headerlink" title="还原线性方程组"></a>还原线性方程组</h4><script type="math/tex; mode=display">\left\{\begin{aligned}x_1+0.5x_4 &= 14.5 \notag\\x_3+x_4 &= -4 \notag \\\end{aligned}\right.</script><p>解释</p><blockquote><p>所谓的还原线性方程组，即是在行最简形的基础上，将之重新书写为线性方程组的形式，即将行最简形中各位置的系数重新赋予变量，中间的竖线还原为等号。</p></blockquote><h4 id="求解第一个变量"><a href="#求解第一个变量" class="headerlink" title="求解第一个变量"></a>求解第一个变量</h4><script type="math/tex; mode=display">\left\{\begin{aligned}x_1 &= -0.5x_4+14.5\notag \\x_3 &= -x_4-4\notag\end{aligned}\right.</script><p>解释</p><blockquote><p>即是对于所还原的线性方程组而言，将方程组中每个方程的第一个变量，用其他量表达出来。如方程组两方程中的第一个变量 $x_1$ 和 $x_3$ </p></blockquote><h4 id="补充自由未知量"><a href="#补充自由未知量" class="headerlink" title="补充自由未知量"></a>补充自由未知量</h4><script type="math/tex; mode=display">\left\{\begin{aligned}x_1 &= -0.5x_4+14.5 \notag \\x_2 &= x_2 \notag \\x_3 &= -x_4-4 \notag \\x_4 &= x_4 \notag\end{aligned}\right.</script><p>解释</p><blockquote><p>第 3 步中，求解出变量 $x_1$ 和 $x_3$ ，从而说明了方程剩余的变量 $x_2$ 和 $x_4$ 不受方程组的约束，是自由未知量，可以取任意值，所以需要在第 3 步骤解得基础上进行解得补充，补充的方法为 $x_2 = x_2,x_4 = x_4$ ，这种解得补充方式符合自由未知量定义，并易于理解，因为是自由未知量而不受约束，所以只能自己等于自己。</p></blockquote><h4 id="列表示方程组的通解"><a href="#列表示方程组的通解" class="headerlink" title="列表示方程组的通解"></a>列表示方程组的通解</h4><script type="math/tex; mode=display">\begin{aligned}\begin{pmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{pmatrix} &=\begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix} x_2+\begin{pmatrix} -0.5 \\ 0 \\ -1 \\ 1 \end{pmatrix} x_4 +\begin{pmatrix} 14.5 \\ 0 \\ -4 \\ 0 \end{pmatrix} \notag \\&= \begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix} C_1+\begin{pmatrix} -0.5 \\ 0 \\ -1 \\ 1 \end{pmatrix} C_2 +\begin{pmatrix} 14.5 \\ 0 \\ -4 \\ 0 \end{pmatrix} \notag\end{aligned}</script><p>其中 $C_1$ 和 $C_2$ 为任意常数。</p><p>解释</p><blockquote><p>即在第 4 步的基础上，将解表达为列向量组合的表示形式，同时由于 $x_2$ 和 $x_4$ 是自由未知量，可以取任意值，所以在解得右边，令二者分别为任意常数 $C_1$ 和 $C_2$ ，即实现了对方程组的求解。</p></blockquote><h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><p>其实可以根据自己解方程的习惯写代码……实现非常简单，基本不需要理论知识</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Gauss</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt;= n; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (a[j][i] != <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= n + <span class="number">1</span>; ++k)</span><br><span class="line">                    swap(a[i][k], a[j][k]);</span><br><span class="line">                flag = <span class="number">1</span>;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (flag == <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="built_in">puts</span>(<span class="string">"No Solution"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">double</span> tmp = a[i][i];</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= n + <span class="number">1</span>; ++k)</span><br><span class="line">            a[i][k] /= tmp;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">            tmp = a[j][i];</span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> k = i; k &lt;= n + <span class="number">1</span>; ++k)</span><br><span class="line">                a[j][k] -= tmp * a[i][k];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = n; i &gt;= <span class="number">1</span>; --i) &#123;</span><br><span class="line">        <span class="keyword">double</span> x = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= n; ++j)</span><br><span class="line">            x += ans[j] * a[i][j];</span><br><span class="line">        ans[i] = a[i][n + <span class="number">1</span>] - x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;概述&quot;&gt;&lt;a href=&quot;#概述&quot; class=&quot;headerlink&quot; title=&quot;概述&quot;&gt;&lt;/a&gt;概述&lt;/h4&gt;&lt;p&gt;高斯消元算法可以在 $O(n^3)$ 时间复杂度内求解 $n$ 元一次方程组。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本文绝大部分内容转载自 &lt;a href=&quot;https://oi-wiki.org/math/gauss/#_6&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;OI-WIKI&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+      <category term="算法学习" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    
+      <category term="数论专题" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
+    
+    
+      <category term="高斯消元" scheme="https://tth37.cn/tags/%E9%AB%98%E6%96%AF%E6%B6%88%E5%85%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>题解-LibreOJ-「BJOI2019」光线</title>
+    <link href="https://tth37.cn/2019/10/31/solution-loj-3093/"/>
+    <id>https://tth37.cn/2019/10/31/solution-loj-3093/</id>
+    <published>2019-10-31T13:35:11.000Z</published>
+    <updated>2019-10-31T14:43:18.132Z</updated>
+    
+    <content type="html"><![CDATA[<div class="note info"><p><a href="https://loj.ac/problem/3093" target="_blank" rel="noopener">题目链接(LibreOJ)</a></p></div><blockquote><p>题目概括征集中~</p></blockquote><a id="more"></a><p>一开始愣是套高斯消元想了半天……后来发现是普通 DP 之后答案秒出</p><h4 id="Solution-1-O-n-3"><a href="#Solution-1-O-n-3" class="headerlink" title="Solution 1: $O(n^3)$"></a>Solution 1: $O(n^3)$</h4><script type="math/tex; mode=display">f[i]=f[i-1]\times a[i]+f[i-1]\times b[i]\times g[i-1]\times a[i]+...</script><script type="math/tex; mode=display">f[i]=f[i-1]\times a[i]\times\sum_{j=0}^{+\infty}(b[i]\times g[i-1])^j\\f[i]=f[i-1]\times a[i]\times</script><script type="math/tex; mode=display">g[i]=b[i]+a[i]\times g[i-1]\times a[i]+a[i]\times g[i-1]\times b[i]\times g[i-1]\times a[i]</script><script type="math/tex; mode=display">g[i]=b[i]+a[i]^2\times g[i-1]\times\sum_{j=0}^{+\infty}(b[i]\times g[i-1])^j</script><script type="math/tex; mode=display">\{a_n\}\\a_n=a_{n-1}\times q\ \   (0<q<1)\\\sum_{j=0}^{+\infty}=a_1/(1-q)</script>]]></content>
+    
+    <summary type="html">
+    
+      &lt;div class=&quot;note info&quot;&gt;&lt;p&gt;
+&lt;a href=&quot;https://loj.ac/problem/3093&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接(LibreOJ)&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;题目概括征集中~&lt;/p&gt;
+&lt;/blockquote&gt;
+    
+    </summary>
+    
+    
+  </entry>
   
   <entry>
     <title>题解-LibreOJ-6497「雅礼集训 2018 Day1」图</title>
@@ -41,9 +91,9 @@
       <category term="雅礼集训" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/%E9%9B%85%E7%A4%BC%E9%9B%86%E8%AE%AD/"/>
     
     
-      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
-    
       <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
     
   </entry>
   
@@ -1301,9 +1351,9 @@
     
       <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
-      <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
-    
       <category term="树状数组" scheme="https://tth37.cn/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
+    
+      <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
       <category term="树套树" scheme="https://tth37.cn/tags/%E6%A0%91%E5%A5%97%E6%A0%91/"/>
     
@@ -1390,9 +1440,9 @@
       <category term="数论专题" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/%E6%95%B0%E8%AE%BA%E4%B8%93%E9%A2%98/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
@@ -1418,9 +1468,9 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="卡特兰数" scheme="https://tth37.cn/tags/%E5%8D%A1%E7%89%B9%E5%85%B0%E6%95%B0/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
       <category term="逆元" scheme="https://tth37.cn/tags/%E9%80%86%E5%85%83/"/>
     
@@ -2139,9 +2189,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
-      <category term="字符串" scheme="https://tth37.cn/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
-    
       <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+      <category term="字符串" scheme="https://tth37.cn/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/"/>
     
   </entry>
   

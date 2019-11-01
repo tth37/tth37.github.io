@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[算法学习-高斯消元]]></title>
+    <url>%2F2019%2F10%2F31%2Falgorithm-gauss%2F</url>
+    <content type="text"><![CDATA[概述高斯消元算法可以在 $O(n^3)$ 时间复杂度内求解 $n$ 元一次方程组。 本文绝大部分内容转载自 OI-WIKI 简直太简单了。随便写写就过了模板。 高斯消元五步骤法高斯消元法在将增广矩阵化为最简形后对于自由未知量的赋值，需要掌握线性相关知识，且赋值存在人工经验的因素，使得在学习过程中有一定的困难，将高斯消元法划分为五步骤，从而提出五步骤法，内容如下： 增广矩阵行初等行变换为行最简形； 还原线性方程组； 求解第一个变量； 补充自由未知量； 列表示方程组通解。 利用实例进一步说明该算法的运作情况。 例二：利用高斯消元法五步骤法求解线性方程组： \left\{\begin{aligned} 2x_1+5x_3+6x_4&=9 \notag \\ x_3+x_4&=-4 \notag \\ 2x_3+2x_4&=-8 \notag \end{aligned}\right.增广矩阵行（初等）变换为行最简形所谓增广矩阵，即为方程组系数矩阵 $A$ 与常数列 $b$ 的并生成的新矩阵，即 $(A | b)$ ，增广矩阵行初等变换化为行最简形，即是利用了高斯消元法的思想理念，省略了变量而用变量的系数位置表示变量，增广矩阵中用竖线隔开了系数矩阵和常数列，代表了等于符号。 \left(\begin{matrix} 2 & 0 & 5 & 6 \\ 0 & 0 & 1 & 1 \\ 0 & 0 & 2 & 2 \end{matrix} \middle| \begin{matrix} 9 \\ -4 \\ -8 \end{matrix} \right) \xrightarrow{r_3-2r_2} \left(\begin{matrix} 2 & 0 & 5 & 6 \\ 0 & 0 & 1 & 1 \\ 0 & 0 & 0 & 0 \end{matrix} \middle| \begin{matrix} 9 \\ -4 \\ 0 \end{matrix} \right)化为行阶梯形 \xrightarrow{\frac{r_1}{2}} \left(\begin{matrix} 1 & 0 & 2.5 & 3 \\ 0 & 0 & 1 & 1 \\ 0 & 0 & 0 & 0 \end{matrix} \middle| \begin{matrix} 4.5 \\ -4 \\ 0 \end{matrix} \right) \xrightarrow{r_1-r_2 \times 2.5} \left(\begin{matrix} 1 & 0 & 0 & 0.5 \\ 0 & 0 & 1 & 1 \\ 0 & 0 & 0 & 0 \end{matrix} \middle| \begin{matrix} 14.5 \\ -4 \\ 0 \end{matrix} \right)化为最简形 还原线性方程组 \left\{\begin{aligned} x_1+0.5x_4 &= 14.5 \notag\\ x_3+x_4 &= -4 \notag \\ \end{aligned}\right.解释 所谓的还原线性方程组，即是在行最简形的基础上，将之重新书写为线性方程组的形式，即将行最简形中各位置的系数重新赋予变量，中间的竖线还原为等号。 求解第一个变量 \left\{\begin{aligned} x_1 &= -0.5x_4+14.5\notag \\ x_3 &= -x_4-4\notag \end{aligned}\right.解释 即是对于所还原的线性方程组而言，将方程组中每个方程的第一个变量，用其他量表达出来。如方程组两方程中的第一个变量 $x_1$ 和 $x_3$ 补充自由未知量 \left\{\begin{aligned} x_1 &= -0.5x_4+14.5 \notag \\ x_2 &= x_2 \notag \\ x_3 &= -x_4-4 \notag \\ x_4 &= x_4 \notag \end{aligned}\right.解释 第 3 步中，求解出变量 $x_1$ 和 $x_3$ ，从而说明了方程剩余的变量 $x_2$ 和 $x_4$ 不受方程组的约束，是自由未知量，可以取任意值，所以需要在第 3 步骤解得基础上进行解得补充，补充的方法为 $x_2 = x_2,x_4 = x_4$ ，这种解得补充方式符合自由未知量定义，并易于理解，因为是自由未知量而不受约束，所以只能自己等于自己。 列表示方程组的通解 \begin{aligned} \begin{pmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{pmatrix} &= \begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix} x_2+ \begin{pmatrix} -0.5 \\ 0 \\ -1 \\ 1 \end{pmatrix} x_4 + \begin{pmatrix} 14.5 \\ 0 \\ -4 \\ 0 \end{pmatrix} \notag \\ &= \begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix} C_1+ \begin{pmatrix} -0.5 \\ 0 \\ -1 \\ 1 \end{pmatrix} C_2 + \begin{pmatrix} 14.5 \\ 0 \\ -4 \\ 0 \end{pmatrix} \notag \end{aligned}其中 $C_1$ 和 $C_2$ 为任意常数。 解释 即在第 4 步的基础上，将解表达为列向量组合的表示形式，同时由于 $x_2$ 和 $x_4$ 是自由未知量，可以取任意值，所以在解得右边，令二者分别为任意常数 $C_1$ 和 $C_2$ ，即实现了对方程组的求解。 代码实现其实可以根据自己解方程的习惯写代码……实现非常简单，基本不需要理论知识 12345678910111213141516171819202122232425262728293031void Gauss() &#123; for (int i = 1; i &lt;= n; ++i) &#123; bool flag = 0; for (int j = i; j &lt;= n; ++j) &#123; if (a[j][i] != 0) &#123; for (int k = i; k &lt;= n + 1; ++k) swap(a[i][k], a[j][k]); flag = 1; break; &#125; &#125; if (flag == 0) &#123; puts("No Solution"); exit(0); &#125; double tmp = a[i][i]; for (int k = i; k &lt;= n + 1; ++k) a[i][k] /= tmp; for (int j = i + 1; j &lt;= n; ++j) &#123; tmp = a[j][i]; for (int k = i; k &lt;= n + 1; ++k) a[j][k] -= tmp * a[i][k]; &#125; &#125; for (int i = n; i &gt;= 1; --i) &#123; double x = 0; for (int j = i + 1; j &lt;= n; ++j) x += ans[j] * a[i][j]; ans[i] = a[i][n + 1] - x; &#125;&#125;]]></content>
+      <categories>
+        <category>算法学习</category>
+        <category>数论专题</category>
+      </categories>
+      <tags>
+        <tag>高斯消元</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[题解-LibreOJ-「BJOI2019」光线]]></title>
+    <url>%2F2019%2F10%2F31%2Fsolution-loj-3093%2F</url>
+    <content type="text"><![CDATA[题目链接(LibreOJ) 题目概括征集中~ 一开始愣是套高斯消元想了半天……后来发现是普通 DP 之后答案秒出 Solution 1: $O(n^3)$ f[i]=f[i-1]\times a[i]+f[i-1]\times b[i]\times g[i-1]\times a[i]+... f[i]=f[i-1]\times a[i]\times\sum_{j=0}^{+\infty}(b[i]\times g[i-1])^j\\ f[i]=f[i-1]\times a[i]\times g[i]=b[i]+a[i]\times g[i-1]\times a[i]+a[i]\times g[i-1]\times b[i]\times g[i-1]\times a[i] g[i]=b[i]+a[i]^2\times g[i-1]\times\sum_{j=0}^{+\infty}(b[i]\times g[i-1])^j \{a_n\}\\ a_n=a_{n-1}\times q\ \ (0]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[题解-LibreOJ-6497「雅礼集训 2018 Day1」图]]></title>
     <url>%2F2019%2F10%2F30%2Fsolution-loj-6497%2F</url>
     <content type="text"><![CDATA[题目链接(LibreOJ) 题目概括征集中~ 特别屌的一个计数 DP。 记 $g(i)$ 表示以 $i$ 节点结尾的交错路径条数。 定义状态：$f[i][k][x][y]$ 表示考虑前 $i$ 个节点，奇偶性为 $k=0/1$； $x=0/1$ 表示是否存在 $g()$ 为奇数的黑色节点， $y=0/1$ 表示是否存在 $g()$ 为奇数的白色节点。 考虑转移：假设已经求出 $f[i][k][x][y]$。枚举第 $i+1$ 个节点的颜色。 当第 $i+1$ 个节点为白色时： 如果 $x=0$，即不存在 $g()$ 为奇数的黑色节点，那么无论如何连边，总的原方案的奇偶性一定会发生改变。考虑如果有黑色节点向 $i+1$ 连边，则交错路径会增加偶数条（即增加 $g()$）；如果有白色节点向其连边，则交错路径数不变；第 $i+1$ 个节点单独作为一条路径，因此交错路径增加了奇数条，奇偶性发生改变。 转移方程： f[i+1][k\oplus1][x][1]=f[i+1][k\oplus1][x][1]+2^i\times f[i][k][x][y]如果 $x=1$，那么情况会略微复杂；注意到如果有偶数个 $g()$ 为奇数的黑色节点向 $i+1$ 连边，则奇偶性一定改变；如果有奇数个 $g()$ 为奇数的黑色节点向 $i+1$ 连边，则奇偶性不会改变。假设 $g()$ 为奇数的黑色节点共有 $t$ 个。那么转移方程如下： f[i+1][k\oplus1][x][1]=f[i+1][k\oplus1][x][1]+({t\choose0}+{t\choose2}+..+{t\choose 2m})\times 2^{i-t}\times f[i][k][x][y] f[i+1][k][x][y]=f[i+1][k][x][y]+({t\choose1}+{t\choose3}+..+{t\choose 2m+1})\times 2^{i-t}\times f[i][k][x][y]可以证明： {t\choose0}+{t\choose2}+..+{t\choose 2m}={t\choose1}+{t\choose3}+..+{t\choose 2m+1}=2^{t-1}因此转移方程可以简化为： f[i+1][k\oplus1][x][1]=f[i+1][k\oplus1][x][1]+2^{i-1}\times f[i][k][x][y] f[i+1][k][x][y]=f[i+1][k][x][y]+2^{i-1}\times f[i][k][x][y]当第 $i+1$ 个节点为黑色时，情况类似。 代码实现非常简单，不再赘述。 代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152#include &lt;bits/stdc++.h&gt;using namespace std;const int MAXN = 200005;const int MOD = 998244353;int n, p;int f[MAXN][2][2][2];int c[MAXN];int pow2[MAXN];int main() &#123; scanf("%d%d", &amp;n, &amp;p); for (int i = 1; i &lt;= n; ++i) scanf("%d", &amp;c[i]); pow2[0] = 1; for (int i = 1; i &lt;= n; ++i) &#123; pow2[i] = pow2[i - 1] &lt;&lt; 1; if (pow2[i] &gt; MOD) pow2[i] -= MOD; &#125; f[0][0][0][0] = 1; for (int i = 0; i &lt; n; ++i) for (int k = 0; k &lt;= 1; ++k) for (int x = 0; x &lt;= 1; ++x) for (int y = 0; y &lt;= 1; ++y) &#123; int cur = f[i][k][x][y]; if (c[i + 1] == -1 || c[i + 1] == 0) &#123; if (x == 0) f[i + 1][k ^ 1][x][1] = (f[i + 1][k ^ 1][x][1] + 1ll * pow2[i] * cur) % MOD; else f[i + 1][k ^ 1][x][1] = (f[i + 1][k ^ 1][x][1] + 1ll * pow2[i - 1] * cur) % MOD, f[i + 1][k][x][y] = (f[i + 1][k][x][y] + 1ll * pow2[i - 1] * cur) % MOD; &#125; if (c[i + 1] == -1 || c[i + 1] == 1) &#123; if (y == 0) f[i + 1][k ^ 1][1][y] = (f[i + 1][k ^ 1][1][y] + 1ll * pow2[i] * cur) % MOD; else f[i + 1][k ^ 1][1][y] = (f[i + 1][k ^ 1][1][y] + 1ll * pow2[i - 1] * cur) % MOD, f[i + 1][k][x][y] = (f[i + 1][k][x][y] + 1ll * pow2[i - 1] * cur) % MOD; &#125; &#125; printf("%d", (f[n][p][0][0] + f[n][p][0][1] + f[n][p][1][0] + f[n][p][1][1]) % MOD); return 0;&#125;]]></content>
@@ -9,8 +26,8 @@
         <category>雅礼集训</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -540,8 +557,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树链剖分</tag>
         <tag>树状数组</tag>
+        <tag>树链剖分</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
@@ -579,8 +596,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -591,8 +608,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -876,8 +893,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
