@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://tth37.cn/2019/10/31/algorithm-gauss/</loc>
-    <lastmod>2019-10-31</lastmod>
+    <loc>https://tth37.cn/2019/11/04/solution-jsk-4596B/</loc>
+    <lastmod>2019-11-04</lastmod>
+  </url>  <url>
+    <loc>https://tth37.cn/2019/11/02/algorithm-dynamicdp/</loc>
+    <lastmod>2019-11-02</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2019/10/31/solution-loj-3093/</loc>
+    <lastmod>2019-11-01</lastmod>
+  </url>  <url>
+    <loc>https://tth37.cn/2019/10/31/algorithm-gauss/</loc>
     <lastmod>2019-10-31</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2019/10/28/solution-jsk-4594C/</loc>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://tth37.cn/"/>
-  <updated>2019-10-31T15:13:23.329Z</updated>
+  <updated>2019-11-04T14:54:49.078Z</updated>
   <id>https://tth37.cn/</id>
   
   <author>
@@ -15,6 +15,66 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>题解-计蒜客-4569B咕咕树</title>
+    <link href="https://tth37.cn/2019/11/04/solution-jsk-4596B/"/>
+    <id>https://tth37.cn/2019/11/04/solution-jsk-4596B/</id>
+    <published>2019-11-04T14:19:03.000Z</published>
+    <updated>2019-11-04T14:54:49.078Z</updated>
+    
+    <content type="html"><![CDATA[<div class="note info"><p><a href="https://nanti.jisuanke.com/t/42087" target="_blank" rel="noopener">题目链接</a></p></div><blockquote><p>题目概括咕咕</p></blockquote><p><div class="post-button text-center"><a class="btn" href="https://i.loli.net/2019/11/04/gZrOGEyvsAM56kb.png" rel="noopener" target="_blank"> 给作者投食 QwQ </a></div></p><a id="more"></a><p>高压下的代码实现能力堪忧。比赛 1 小时没敲出来，订正 10 分钟满分。</p><p>官方题解给的是树形背包，但并不是特别好实现。</p><p>定义状态 $f[u][i]$ 表示以 $u$ 为根的子树，有一条以 $u$ 为起点且长度恰好为 $i$ 的链，最少花费的代价。</p><p>考虑状态转移： $f[u][0]$ 显然是切断当前节点后，再将每个子树切断；$f[u][1]$ 即为切出一条长度为 $i$ 的链，对其余子树的链长度进行讨论。</p><script type="math/tex; mode=display">f[u][0]=a[u]+\sum_{v\in son(u)}\min_{j=0}^{l-1}\lbrace f[v][j]\rbrace\\f[u][1]=f[s][i-1]+\sum_{v\in son(u),v\not= s}\min_{j=0}^{\min(i-1,l-i-1)}\lbrace f[v][j]\rbrace</script><p>考虑优化。对所有 $f[u][0..l-1]$ 做前缀最小值，并记 $g[u][i]=\sum_{v\in son(u)}f[v][j]$，则转移方程简化为：</p><script type="math/tex; mode=display">f[u][0]=a[u]+g[u][l-1]\\f[u][1]=f[s][i-1]-f[s][\min(i-1,l-i-1)]+g[u][\min(i-1,l-i-1)]</script><p>注意叶节点的 $f[u][1]$ 应赋值为 $0$。</p><p>时间复杂度 $O(n^2)$。代码如下：</p><div class="highlight-wrap"autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" contenteditable="true"data-rel="CPP"><figure class="iseeu highlight /cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAXN = <span class="number">5005</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> n, l;</span><br><span class="line"><span class="keyword">int</span> a[MAXN];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; G[MAXN];</span><br><span class="line"><span class="keyword">int</span> f[MAXN][MAXN];</span><br><span class="line"><span class="keyword">int</span> g[MAXN][MAXN];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> fa)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = *it;</span><br><span class="line">        <span class="keyword">if</span> (v == fa) <span class="keyword">continue</span>;</span><br><span class="line">        dfs(v, u);</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; l; ++i)</span><br><span class="line">            g[u][i] += f[v][i];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line">        <span class="keyword">int</span> v = *it;</span><br><span class="line">        <span class="keyword">if</span> (v == fa) <span class="keyword">continue</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; l; ++i) &#123;</span><br><span class="line">            f[u][i] = min(f[u][i], g[u][min(i - <span class="number">1</span>, l - i - <span class="number">1</span>)] - f[v][min(i - <span class="number">1</span>, l - i - <span class="number">1</span>)] + f[v][i - <span class="number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    f[u][<span class="number">0</span>] = a[u] + g[u][l - <span class="number">1</span>];</span><br><span class="line">    <span class="keyword">if</span> (u != <span class="number">1</span> &amp;&amp; G[u].size() == <span class="number">1</span>) f[u][<span class="number">1</span>] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; l; ++i)</span><br><span class="line">        f[u][i] = min(f[u][i], f[u][i - <span class="number">1</span>]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">memset</span>(f, <span class="number">0x3f</span>, <span class="keyword">sizeof</span>(f));</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;n, &amp;l);</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]), sum += a[i];</span><br><span class="line">    <span class="keyword">if</span> (l == <span class="number">0</span>) <span class="keyword">return</span> <span class="built_in">printf</span>(<span class="string">"%d"</span>, sum), <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">int</span> u, v;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;u, &amp;v);</span><br><span class="line">        G[u].push_back(v), G[v].push_back(u);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>, f[<span class="number">1</span>][l - <span class="number">1</span>]);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>]]></content>
+    
+    <summary type="html">
+    
+      &lt;div class=&quot;note info&quot;&gt;&lt;p&gt;
+&lt;a href=&quot;https://nanti.jisuanke.com/t/42087&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;题目链接&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;题目概括咕咕&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;div class=&quot;post-button text-center&quot;&gt;&lt;a class=&quot;btn&quot; href=&quot;https://i.loli.net/2019/11/04/gZrOGEyvsAM56kb.png&quot; rel=&quot;noopener&quot; target=&quot;_blank&quot;&gt; 给作者投食 QwQ &lt;/a&gt;&lt;/div&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
+    
+    
+      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+      <category term="背包" scheme="https://tth37.cn/tags/%E8%83%8C%E5%8C%85/"/>
+    
+      <category term="树形dp" scheme="https://tth37.cn/tags/%E6%A0%91%E5%BD%A2dp/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>算法学习-动态DP</title>
+    <link href="https://tth37.cn/2019/11/02/algorithm-dynamicdp/"/>
+    <id>https://tth37.cn/2019/11/02/algorithm-dynamicdp/</id>
+    <published>2019-11-02T09:47:16.000Z</published>
+    <updated>2019-11-02T09:50:45.960Z</updated>
+    
+    <content type="html"><![CDATA[<div class="note info"><p><a href>题目链接(Luogu)</a><br><a href>题目链接(LibreOJ)</a></p></div><p>&gt;</p><a id="more"></a>]]></content>
+    
+    <summary type="html">
+    
+      &lt;div class=&quot;note info&quot;&gt;&lt;p&gt;
+&lt;a href&gt;题目链接(Luogu)&lt;/a&gt;&lt;br&gt;
+&lt;a href&gt;题目链接(LibreOJ)&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;
+
+&lt;p&gt;&amp;gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="算法学习" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+      <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+      <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
+  </entry>
   
   <entry>
     <title>算法学习-高斯消元</title>
@@ -48,9 +108,9 @@
     <link href="https://tth37.cn/2019/10/31/solution-loj-3093/"/>
     <id>https://tth37.cn/2019/10/31/solution-loj-3093/</id>
     <published>2019-10-31T13:35:11.000Z</published>
-    <updated>2019-10-31T14:43:18.132Z</updated>
+    <updated>2019-11-01T14:53:09.550Z</updated>
     
-    <content type="html"><![CDATA[<div class="note info"><p><a href="https://loj.ac/problem/3093" target="_blank" rel="noopener">题目链接(LibreOJ)</a></p></div><blockquote><p>题目概括征集中~</p></blockquote><a id="more"></a><p>一开始愣是套高斯消元想了半天……后来发现是普通 DP 之后答案秒出</p><h4 id="Solution-1-O-n-3"><a href="#Solution-1-O-n-3" class="headerlink" title="Solution 1: $O(n^3)$"></a>Solution 1: $O(n^3)$</h4><script type="math/tex; mode=display">f[i]=f[i-1]\times a[i]+f[i-1]\times b[i]\times g[i-1]\times a[i]+...</script><script type="math/tex; mode=display">f[i]=f[i-1]\times a[i]\times\sum_{j=0}^{+\infty}(b[i]\times g[i-1])^j\\f[i]=f[i-1]\times a[i]\times</script><script type="math/tex; mode=display">g[i]=b[i]+a[i]\times g[i-1]\times a[i]+a[i]\times g[i-1]\times b[i]\times g[i-1]\times a[i]</script><script type="math/tex; mode=display">g[i]=b[i]+a[i]^2\times g[i-1]\times\sum_{j=0}^{+\infty}(b[i]\times g[i-1])^j</script><script type="math/tex; mode=display">\{a_n\}\\a_n=a_{n-1}\times q\ \   (0<q<1)\\\sum_{j=0}^{+\infty}=a_1/(1-q)</script>]]></content>
+    <content type="html"><![CDATA[<div class="note info"><p><a href="https://loj.ac/problem/3093" target="_blank" rel="noopener">题目链接(LibreOJ)</a></p></div><blockquote><p>题目概括征集中~</p></blockquote><a id="more"></a><p>一开始愣是套高斯消元想了半天……后来发现是普通 DP 秒出</p><h4 id="Solution-1-高斯消元-O-n-3"><a href="#Solution-1-高斯消元-O-n-3" class="headerlink" title="Solution 1: 高斯消元 $O(n^3)$"></a>Solution 1: 高斯消元 $O(n^3)$</h4><p>记 $f[i]$ 表示第 $i$ 片玻璃向下的光线总数，$g[i]$ 表示第 $i$ 片玻璃向上的光线总数。</p><p>显然地：</p><script type="math/tex; mode=display">f[i]=f[i-1]\times a[i]+g[i+1]\times b[i]\\g[i]=f[i-1]\times b[i]+g[i+1]\times a[i]</script><script type="math/tex; mode=display">f[i]=f[i-1]\times a[i]+g[i+1]\times b[i]\\g[i]=f[i-1]\times b[i]+g[i+1]\times a[i]\\x_i=x_{i-1}\times a[i] + x_{n+i+1}\times b[i]\\x_{n+i}=x_{i-1}\times b[i]+x_{n+i+1}\times a[i]</script><p>共有 $2n$  个未知数和 $2n$ 个等式，暴力求解方程即可。</p><p>期望得分：50 pts</p><script type="math/tex; mode=display">f[i]=f[i-1]\times a[i]+f[i-1]\times b[i]\times g[i-1]\times a[i]+...</script><script type="math/tex; mode=display">f[i]=f[i-1]\times a[i]\times\sum_{j=0}^{+\infty}(b[i]\times g[i-1])^j\\f[i]=f[i-1]\times a[i]\times</script><script type="math/tex; mode=display">g[i]=b[i]+a[i]\times g[i-1]\times a[i]+a[i]\times g[i-1]\times b[i]\times g[i-1]\times a[i]</script><script type="math/tex; mode=display">g[i]=b[i]+a[i]^2\times g[i-1]\times\sum_{j=0}^{+\infty}(b[i]\times g[i-1])^j</script><script type="math/tex; mode=display">\{a_n\}\\a_n=a_{n-1}\times q\ \   (0<q<1)\\\sum_{j=0}^{+\infty}=a_1/(1-q)</script>]]></content>
     
     <summary type="html">
     
@@ -91,9 +151,9 @@
       <category term="雅礼集训" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/%E9%9B%85%E7%A4%BC%E9%9B%86%E8%AE%AD/"/>
     
     
-      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="动态规划" scheme="https://tth37.cn/tags/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/"/>
+    
+      <category term="数学" scheme="https://tth37.cn/tags/%E6%95%B0%E5%AD%A6/"/>
     
   </entry>
   
@@ -420,9 +480,9 @@
       <category term="雅礼集训" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/%E9%9B%85%E7%A4%BC%E9%9B%86%E8%AE%AD/"/>
     
     
-      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
       <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
+      <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
     
   </entry>
   
@@ -1349,11 +1409,11 @@
       <category term="题解" scheme="https://tth37.cn/categories/%E9%A2%98%E8%A7%A3/"/>
     
     
+      <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
       <category term="主席树" scheme="https://tth37.cn/tags/%E4%B8%BB%E5%B8%AD%E6%A0%91/"/>
     
       <category term="树状数组" scheme="https://tth37.cn/tags/%E6%A0%91%E7%8A%B6%E6%95%B0%E7%BB%84/"/>
-    
-      <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
       <category term="树套树" scheme="https://tth37.cn/tags/%E6%A0%91%E5%A5%97%E6%A0%91/"/>
     
@@ -1555,11 +1615,11 @@
       <category term="算法学习" scheme="https://tth37.cn/categories/%E7%AE%97%E6%B3%95%E5%AD%A6%E4%B9%A0/"/>
     
     
+      <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
+    
       <category term="数据结构" scheme="https://tth37.cn/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
       <category term="线段树" scheme="https://tth37.cn/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
-      <category term="树链剖分" scheme="https://tth37.cn/tags/%E6%A0%91%E9%93%BE%E5%89%96%E5%88%86/"/>
     
       <category term="dfs序" scheme="https://tth37.cn/tags/dfs%E5%BA%8F/"/>
     
