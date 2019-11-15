@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[题解-LibreOJ-「雅礼集训 2017 Day7」蛐蛐国的修墙方案]]></title>
+    <title><![CDATA[题解-LibreOJ-6043「雅礼集训 2017 Day7」蛐蛐国的修墙方案]]></title>
     <url>%2F2019%2F11%2F14%2Fsolution-loj-6043%2F</url>
     <content type="text"><![CDATA[题目链接(LibreOJ) 题目概括征集中~ CSP-S RP++! 赛前再做几个搜索 / 模拟，为暴力骗分做准备，顺便填一下雅礼集训的坑。 Solution1: 暴搜观察题意得出，第 $i$ 个位置和第 $P_i$ 个位置上，必须填一个左括号和一个右括号。从左向右填写，每次判断是否可以填左 / 右括号即可。 得分 81 pts 。 代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243#include&lt;bits/stdc++.h&gt;using namespace std;int n;int ans[105];int p[105];bool force_right[105];void dfs(int dep, int cnt) &#123; if (dep == n + 1) &#123; for (int i = 1; i &lt;= n; ++i) putchar('(' + ans[i]); exit(0); &#125; if (cnt &lt; n / 2) &#123; if (force_right[dep] == 0) &#123; if (p[dep] &lt; dep) &#123; if (ans[p[dep]] == 1) &#123; ans[dep] = 0; dfs(dep + 1, cnt + 1); ans[dep] = 0; &#125; &#125; else &#123; force_right[p[dep]] = 1; dfs(dep + 1, cnt + 1); force_right[p[dep]] = 0; &#125; &#125; &#125; if (dep - cnt &lt;= cnt) &#123; ans[dep] = 1; dfs(dep + 1, cnt); ans[dep] = 0; &#125;&#125;int main() &#123; scanf("%d", &amp;n); for (int i = 1; i &lt;= n; ++i) scanf("%d", &amp;p[i]); dfs(1, 0); return 0;&#125; Solution2: 观察性质将排列 $P$ 视作置换函数，则 $P$ 必定可以分解为若干个长度为偶数的循环。（若不然，必定无解）对于每个循环都只有 2 种填法，即 0,1,0,1… 或 1,0,1,0…。特判长度为 2 的循环，则剩余的循环最多有 $100 / 4 = 25$ 个。复杂度约为 $2^{25}$ 级别。 得分 100 pts。 代码如下： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758#pragma GCC optimize(3)#include &lt;bits/stdc++.h&gt;using namespace std;int n, p[105];vector&lt;int&gt; circ[105];bool vis[105], ans[105];int cnt = 0;bool check() &#123; int cnt1 = 0, cnt2 = 0; for (int i = 1; i &lt;= n; ++i) &#123; cnt1 += (ans[i] == 0), cnt2 += ans[i]; if (cnt1 &lt; cnt2) return 0; &#125; return 1;&#125;void dfs(int u) &#123; if (u == cnt + 1) &#123; if (check()) &#123; for (int i = 1; i &lt;= n; ++i) putchar('(' + ans[i]); exit(0); &#125; return; &#125; int len = circ[u].size(); if (!(len ^ 2)) &#123; ans[circ[u][0]] = 0, ans[circ[u][1]] = 1; dfs(u + 1); &#125; else &#123; for (int i = 0; i ^ len; ++i) ans[circ[u][i]] = i &amp; 1; dfs(u + 1); for (int i = 0; i ^ len; ++i) ans[circ[u][i]] = !(i &amp; 1); dfs(u + 1); &#125;&#125;int main() &#123; scanf("%d", &amp;n); for (int i = 1; i &lt;= n; ++i) scanf("%d", &amp;p[i]); for (int i = 1; i &lt;= n; ++i) &#123; if (vis[i] == 0) &#123; cnt += 1; int cur = i; do &#123; circ[cnt].push_back(cur); vis[cur] = 1; cur = p[cur]; &#125; while (cur != i); &#125; &#125; dfs(1); return 0;&#125;]]></content>
       <categories>
@@ -75,8 +75,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>最近公共祖先</tag>
         <tag>二分图匹配</tag>
+        <tag>最近公共祖先</tag>
       </tags>
   </entry>
   <entry>
@@ -930,8 +930,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
