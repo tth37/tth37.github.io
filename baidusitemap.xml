@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tth37.cn/2019/11/22/solution-loj-3106/</loc>
+    <lastmod>2019-11-22</lastmod>
+  </url>  <url>
+    <loc>https://tth37.cn/2019/11/20/algorithm-fftntt/</loc>
+    <lastmod>2019-11-21</lastmod>
+  </url>  <url>
+    <loc>https://tth37.cn/2019/10/21/schedule-2019-CSP/</loc>
+    <lastmod>2019-11-20</lastmod>
+  </url>  <url>
     <loc>https://tth37.cn/2019/11/14/solution-loj-6043/</loc>
     <lastmod>2019-11-15</lastmod>
-  </url>  <url>
-    <loc>https://tth37.cn/2019/10/21/templates/</loc>
-    <lastmod>2019-11-14</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2019/10/28/solution-jsk-4594C/</loc>
     <lastmod>2019-11-14</lastmod>
@@ -57,9 +63,6 @@
   </url>  <url>
     <loc>https://tth37.cn/2019/10/27/solution-jsk-4593C/</loc>
     <lastmod>2019-10-26</lastmod>
-  </url>  <url>
-    <loc>https://tth37.cn/2019/10/21/schedule-2019-CSP/</loc>
-    <lastmod>2019-10-22</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2019/09/18/solution-luogu-p1979/</loc>
     <lastmod>2019-10-22</lastmod>
