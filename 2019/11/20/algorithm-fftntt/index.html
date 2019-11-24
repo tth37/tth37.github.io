@@ -7,22 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>算法学习-快速傅里叶变换（FFT）快速数论变换（NTT） - tth37&#39;s Blog</title>
+<title>快速傅里叶变换（FFT）快速数论变换（NTT） - tth37&#39;s Blog</title>
 
 
-    <meta name="description" content="计算多项式乘法">
+    <meta name="description" content="离散傅里叶变换（Discrete Fourier Transform，缩写为 DFT），是傅里叶变换在时域和频域上都呈离散的形式，将信号的时域采样变换为其 DTFT 的频域采样。 FFT 是一种 DFT 的高效算法，称为快速傅立叶变换（Fast Fourier transform）。  快速数论变换 (NTT) 是快速傅里叶变换（FFT）在数论基础上的实现。">
 <meta name="keywords" content="FFT&#x2F;NTT">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法学习-快速傅里叶变换（FFT）快速数论变换（NTT）">
+<meta property="og:title" content="快速傅里叶变换（FFT）快速数论变换（NTT）">
 <meta property="og:url" content="https://tth37.cn/2019/11/20/algorithm-fftntt/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="计算多项式乘法">
+<meta property="og:description" content="离散傅里叶变换（Discrete Fourier Transform，缩写为 DFT），是傅里叶变换在时域和频域上都呈离散的形式，将信号的时域采样变换为其 DTFT 的频域采样。 FFT 是一种 DFT 的高效算法，称为快速傅立叶变换（Fast Fourier transform）。  快速数论变换 (NTT) 是快速傅里叶变换（FFT）在数论基础上的实现。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://tth37.cn/images/og_image.png">
-<meta property="og:updated_time" content="2019-11-21T16:08:50.000Z">
+<meta property="og:updated_time" content="2019-11-24T15:37:42.474Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法学习-快速傅里叶变换（FFT）快速数论变换（NTT）">
-<meta name="twitter:description" content="计算多项式乘法">
+<meta name="twitter:title" content="快速傅里叶变换（FFT）快速数论变换（NTT）">
+<meta name="twitter:description" content="离散傅里叶变换（Discrete Fourier Transform，缩写为 DFT），是傅里叶变换在时域和频域上都呈离散的形式，将信号的时域采样变换为其 DTFT 的频域采样。 FFT 是一种 DFT 的高效算法，称为快速傅立叶变换（Fast Fourier transform）。  快速数论变换 (NTT) 是快速傅里叶变换（FFT）在数论基础上的实现。">
 <meta name="twitter:image" content="https://tth37.cn/images/og_image.png">
 
 
@@ -82,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="算法学习-快速傅里叶变换（FFT）快速数论变换（NTT）" height="28">
+                <img src="/images/logo.png" alt="快速傅里叶变换（FFT）快速数论变换（NTT）" height="28">
             
             </a>
         </div>
@@ -145,7 +145,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    a minute read (About 185 words)
+                    2 minutes read (About 290 words)
                 </span>
                 
                 
@@ -154,13 +154,13 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                算法学习-快速傅里叶变换（FFT）快速数论变换（NTT）
+                快速傅里叶变换（FFT）快速数论变换（NTT）
             
         </h1>
         <div class="content">
-            <blockquote>
-<p>计算多项式乘法</p>
-</blockquote>
+            <p>离散傅里叶变换（Discrete Fourier Transform，缩写为 DFT），是傅里叶变换在时域和频域上都呈离散的形式，将信号的时域采样变换为其 DTFT 的频域采样。</p>
+<p>FFT 是一种 DFT 的高效算法，称为快速傅立叶变换（Fast Fourier transform）。</p>
+<p> 快速数论变换 (NTT) 是快速傅里叶变换（FFT）在数论基础上的实现。 </p>
 <a id="more"></a>
 
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">5000005</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> ll MOD = <span class="hljs-number">998244353</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> ll G = <span class="hljs-number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">qpow</span><span class="hljs-params">(ll a, ll k)</span> </span>&#123;</span><br><span class="line">    ll ret = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (k) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (k &amp; <span class="hljs-number">1</span>) ret = ret * a % MOD;</span><br><span class="line">        a = a * a % MOD;</span><br><span class="line">        k &gt;&gt;= <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">inv</span><span class="hljs-params">(ll a)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> qpow(a, MOD - <span class="hljs-number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">namespace</span> FFT &#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> n, r[MAXN];</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">NTT</span><span class="hljs-params">(ll *a, <span class="hljs-keyword">int</span> op)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (; (<span class="hljs-number">1</span> &lt;&lt; k) &lt; n; ++k);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            r[i] = r[i &gt;&gt; <span class="hljs-number">1</span>] &gt;&gt; <span class="hljs-number">1</span> | (i &amp; <span class="hljs-number">1</span>) &lt;&lt; (k - <span class="hljs-number">1</span>);</span><br><span class="line">            <span class="hljs-keyword">if</span> (i &lt; r[i]) swap(a[i], a[r[i]]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> l = <span class="hljs-number">2</span>; l &lt;= n; l &lt;&lt;= <span class="hljs-number">1</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> m = l &gt;&gt; <span class="hljs-number">1</span>;</span><br><span class="line">            ll w = qpow(G, (MOD - <span class="hljs-number">1</span>) / l);</span><br><span class="line">            <span class="hljs-keyword">if</span> (op == <span class="hljs-number">-1</span>) w = inv(w);</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i += l) &#123;</span><br><span class="line">                ll wk = <span class="hljs-number">1</span>;</span><br><span class="line">                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; m; ++j, wk = wk * w % MOD) &#123;</span><br><span class="line">                    ll p = a[i + j], q = wk * a[i + j + m] % MOD;</span><br><span class="line">                    a[i + j] = (p + q) % MOD;</span><br><span class="line">                    a[i + j + m] = (p - q + MOD) % MOD;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DFT</span><span class="hljs-params">(ll *a)</span> </span>&#123;</span><br><span class="line">        NTT(a, <span class="hljs-number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">IDFT</span><span class="hljs-params">(ll *a)</span> </span>&#123;</span><br><span class="line">        NTT(a, <span class="hljs-number">-1</span>);</span><br><span class="line">        ll inv = qpow(n, MOD - <span class="hljs-number">2</span>);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i)</span><br><span class="line">            a[i] = a[i] * inv % MOD;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
@@ -196,14 +196,14 @@
         <div class="level-start">
             <a class="level level-item has-link-grey  article-nav-prev" href="/2019/11/22/solution-loj-3106/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">题解-LibreOJ-3106「TJOI2019」唱、跳、rap 和篮球</span>
+                <span class="level-item">「TJOI2019」唱、跳、rap 和篮球</span>
             </a>
         </div>
         
         
         <div class="level-end">
             <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/14/solution-loj-6043/">
-                <span class="level-item">题解-LibreOJ-6043「雅礼集训 2017 Day7」蛐蛐国的修墙方案</span>
+                <span class="level-item">「雅礼集训 2017 Day7」蛐蛐国的修墙方案</span>
                 <i class="level-item fas fa-chevron-right"></i>
             </a>
         </div>
@@ -292,7 +292,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            10
+                            12
                         </p>
                     </a>
                 </div>
@@ -304,7 +304,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            62
+                            61
                         </p>
                     </a>
                 </div>
@@ -366,9 +366,9 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-23T14:52:04.000Z">2019-11-23</time></div>
-                    <a href="/2019/11/23/solution-loj-3182/" class="title has-link-black-ter is-size-6 has-text-weight-normal">题解-LibreOJ-3182「CEOI2018」云计算</a>
+                    <a href="/2019/11/23/solution-loj-3182/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「CEOI2018」云计算</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a>
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
                     </p>
                 </div>
             </div>
@@ -379,9 +379,9 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-22T17:43:34.000Z">2019-11-23</time></div>
-                    <a href="/2019/11/23/solution-loj-6503/" class="title has-link-black-ter is-size-6 has-text-weight-normal">题解-LibreOJ6503-「雅礼集训 2018 Day4」Magic</a>
+                    <a href="/2019/11/23/solution-loj-6503/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「雅礼集训 2018 Day4」Magic</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/雅礼集训/">雅礼集训</a>
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
                     </p>
                 </div>
             </div>
@@ -392,9 +392,9 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-21T16:21:51.000Z">2019-11-22</time></div>
-                    <a href="/2019/11/22/solution-loj-3106/" class="title has-link-black-ter is-size-6 has-text-weight-normal">题解-LibreOJ-3106「TJOI2019」唱、跳、rap 和篮球</a>
+                    <a href="/2019/11/22/solution-loj-3106/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「TJOI2019」唱、跳、rap 和篮球</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a>
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
                     </p>
                 </div>
             </div>
@@ -405,7 +405,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-20T15:38:26.000Z">2019-11-20</time></div>
-                    <a href="/2019/11/20/algorithm-fftntt/" class="title has-link-black-ter is-size-6 has-text-weight-normal">算法学习-快速傅里叶变换（FFT）快速数论变换（NTT）</a>
+                    <a href="/2019/11/20/algorithm-fftntt/" class="title has-link-black-ter is-size-6 has-text-weight-normal">快速傅里叶变换（FFT）快速数论变换（NTT）</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/算法学习/">算法学习</a>
                     </p>
@@ -418,9 +418,9 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-14T14:46:15.000Z">2019-11-14</time></div>
-                    <a href="/2019/11/14/solution-loj-6043/" class="title has-link-black-ter is-size-6 has-text-weight-normal">题解-LibreOJ-6043「雅礼集训 2017 Day7」蛐蛐国的修墙方案</a>
+                    <a href="/2019/11/14/solution-loj-6043/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「雅礼集训 2017 Day7」蛐蛐国的修墙方案</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/雅礼集训/">雅礼集训</a>
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
                     </p>
                 </div>
             </div>
@@ -434,7 +434,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/FFT-NTT/" style="font-size: 11px;">FFT/NTT</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 11px;">ST算法</a> <a href="/tags/dfs序/" style="font-size: 12px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/不知道/" style="font-size: 10px;">不知道</a> <a href="/tags/主席树/" style="font-size: 16px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10px;">乘法逆元</a> <a href="/tags/二分图匹配/" style="font-size: 11px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 12px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 12px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 11px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 11px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 11px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 11px;">可持久化trie</a> <a href="/tags/启发式合并/" style="font-size: 11px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 11px;">堆</a> <a href="/tags/字符串/" style="font-size: 11px;">字符串</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 19px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/最短路/" style="font-size: 11px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 14px;">最近公共祖先</a> <a href="/tags/栈/" style="font-size: 11px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 18px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 11px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 13px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 11px;">概率</a> <a href="/tags/点分治/" style="font-size: 11px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 10px;">生成函数</a> <a href="/tags/矩阵/" style="font-size: 10px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线段树/" style="font-size: 18px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 10px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 10px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 17px;">背包</a> <a href="/tags/虚树/" style="font-size: 12px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10px;">计数dp</a> <a href="/tags/贪心/" style="font-size: 12px;">贪心</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 10px;">高斯消元</a>
+        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/FFT-NTT/" style="font-size: 11px;">FFT/NTT</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 11px;">ST算法</a> <a href="/tags/dfs序/" style="font-size: 12px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 16px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10px;">乘法逆元</a> <a href="/tags/二分图匹配/" style="font-size: 11px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 12px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 12px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 11px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 11px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 11px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 11px;">可持久化trie</a> <a href="/tags/启发式合并/" style="font-size: 11px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 11px;">堆</a> <a href="/tags/字符串/" style="font-size: 11px;">字符串</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 19px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/最短路/" style="font-size: 11px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 14px;">最近公共祖先</a> <a href="/tags/栈/" style="font-size: 11px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 18px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 11px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 13px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 11px;">概率</a> <a href="/tags/点分治/" style="font-size: 11px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 10px;">生成函数</a> <a href="/tags/矩阵/" style="font-size: 10px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线段树/" style="font-size: 18px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 10px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 10px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 17px;">背包</a> <a href="/tags/虚树/" style="font-size: 12px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10px;">计数dp</a> <a href="/tags/贪心/" style="font-size: 12px;">贪心</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 10px;">高斯消元</a>
     </div>
 </div>
     
@@ -522,12 +522,20 @@
                 <span class="level-item tag">56</span>
             </span>
         </a><ul><li>
+        <a class="level is-marginless" href="/categories/题解/LibreOJ/">
+            <span class="level-start">
+                <span class="level-item">LibreOJ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/题解/雅礼集训/">
             <span class="level-start">
                 <span class="level-item">雅礼集训</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">11</span>
+                <span class="level-item tag">9</span>
             </span>
         </a></li></ul></li>
             </ul>
@@ -687,7 +695,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="算法学习-快速傅里叶变换（FFT）快速数论变换（NTT）" height="28">
+                    <img src="/images/logo.png" alt="快速傅里叶变换（FFT）快速数论变换（NTT）" height="28">
                 
                 </a>
                 <p class="is-size-7">
