@@ -11,7 +11,6 @@
 
 
     <meta name="description" content="CSP-S rp++!">
-<meta name="keywords" content="OI">
 <meta property="og:type" content="website">
 <meta property="og:title" content="tth37&#39;s Blog">
 <meta property="og:url" content="https://tth37.cn/categories/题解/page/6/index.html">
@@ -146,7 +145,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-09T15:41:48.000Z">2019-04-09</time>
+                <time class="level-item has-text-grey" datetime="2019-08-30T13:58:48.000Z">2019-08-30</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/题解/">题解</a>
@@ -156,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes read (About 721 words)
+                    12 minutes read (About 1771 words)
                 </span>
                 
                 
@@ -165,14 +164,14 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/04/09/solution-luogu-p5283/">题解-luogu-p5283异或粽子</a>
+                <a class="has-link-black-ter" href="/2019/08/30/solution-luogu-p2495/">题解-luogu-p2495消耗战</a>
             
         </h1>
         <div class="content">
             <blockquote>
-<p><a href="https://www.luogu.org/problemnew/show/P5283" target="_blank" rel="noopener">题目链接</a></p>
-<p>给定一个长度为$n$的数组$a$，取$k$个各不相同的连续区间$[l,r]$ 使得这些区间所有元素的异或和的和最大，求这个最大值<br>（$ 1 \le n \le 5 \times 10^5,1\le k \le min(\frac{n(n-1)}{2},2\times 10^5),0\le  a_i \le 4294967295$）</p>
-<p>感谢@oy的贡献</p>
+<p><a href="https://www.luogu.org/problem/P2495" target="_blank" rel="noopener">题目链接</a></p>
+<p>现在我随机@一个人 这个人必须帮我写题目概括</p>
+<p>@xj</p>
 </blockquote>
         </div>
         
@@ -180,7 +179,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/04/09/solution-luogu-p5283/#more">Read More</a>
+                <a class="button is-size-7 is-light" href="/2019/08/30/solution-luogu-p2495/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -203,7 +202,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-27T17:11:44.000Z">2019-03-28</time>
+                <time class="level-item has-text-grey" datetime="2019-08-30T12:54:26.000Z">2019-08-30</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/题解/">题解</a>
@@ -213,7 +212,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes read (About 684 words)
+                    6 minutes read (About 875 words)
                 </span>
                 
                 
@@ -222,27 +221,23 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/03/28/solution-luogu-p4516/">题解-luogu-p4516潜入行动</a>
+                <a class="has-link-black-ter" href="/2019/08/30/solution-luogu-p4103/">题解-luogu-p4103大工程</a>
             
         </h1>
         <div class="content">
-            <p>这是一个并不简单的背包类树形dp……</p>
-<p><del>很自然地</del>想到状态定义：$f[u][k][0/1][0/1]$表示以$u$为根的子树中，总共选择$k$个结点，其中除了$u$以外的所有结点均被监听到，$u$结点选或不选，$u$结点是否被覆盖的情况下，一共有多少种方案。</p>
-<p>状态转移看似十分麻烦。每个结点$u$都有许多子结点，很难统计出每个子结点的所有情况（似乎在组合数学的范畴）。但是我们可以用十分巧妙的树形背包来进行状态转移。树上背包的转移套路是：</p>
-<p>$$<br>f[u][i+j]=combine(f[u][i],f[v][j])<br>$$</p>
-<p>相当于每递归访问完一个子结点，就把子节点上的状态与当前已经处理的状态一一配对，保证不重不漏且兼顾效率。具体的转移方程为：</p>
-<p>$$<br>f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]<br>$$</p>
-<p>$$<br>f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])<br>$$</p>
-<p>$$<br>f[u][i+j][0][1]=\sum (f[u][i][0][1]*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]*f[v][j][1][1]<br>$$</p>
-<p>$$<br>f[u][i+j][1][1]=\sum (f[u][i][1][0]*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))<br>$$</p>
-<p>具体实现时还应注意：因为阶段（即扫描子结点个数）的划分，在每次转移前都要先记录原始的$u$结点上的数据，否则会导致混乱。</p>
+            <blockquote>
+<p><a href="https://www.luogu.org/problem/P4103" target="_blank" rel="noopener">题目链接</a></p>
+<p>给定一棵有 $n$ 个节点的树，边权为 $1$ 。共有 $q$ 次询问，每次给出 $k$ 个节点，求： $k$ 个节点间两两距离之总和；最短距离；最长距离。</p>
+<p>$1\le n \le 1000000,1 \le q \le 1000000, \Sigma{k}\le 2 * n$</p>
+<p>感谢@tth37 的贡献</p>
+</blockquote>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/03/28/solution-luogu-p4516/#more">Read More</a>
+                <a class="button is-size-7 is-light" href="/2019/08/30/solution-luogu-p4103/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -265,7 +260,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-24T14:16:21.000Z">2019-03-24</time>
+                <time class="level-item has-text-grey" datetime="2019-08-27T07:49:57.000Z">2019-08-27</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/题解/">题解</a>
@@ -275,7 +270,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes read (About 709 words)
+                    2 minutes read (About 323 words)
                 </span>
                 
                 
@@ -284,27 +279,21 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/03/24/solution-luogu-p2774/">题解-luogu-p2774方格取数问题</a>
+                <a class="has-link-black-ter" href="/2019/08/27/solution-luogu-p1314/">题解-luogu-p1314聪明的质监员</a>
             
         </h1>
         <div class="content">
             <blockquote>
-<p><a href="https://www.luogu.org/problemnew/show/P2774" target="_blank" rel="noopener">题目链接</a></p>
+<p><a href="https://www.luogu.org/problem/P1314" target="_blank" rel="noopener">题目链接</a></p>
+<p>咕咕咕</p>
 </blockquote>
-<p>不难发现，每个方格会与其上下左右四个方格产生矛盾。编程的任务即找到一种不产生矛盾的选择方案，并且使得取出的数总和最大。</p>
-<p>首先对图进行黑白染色，目的是使产生矛盾的两个位置分别位于不同的色块中，方便建图。</p>
-<p><img src="https://i.loli.net/2019/03/24/5c979a716191f.png" alt></p>
-<p>源点与所有白色位置相连，权值为该位置上的数字；所有黑色位置与汇点相连，权值也为该位置上的数字；所有白色位置与其上下左右（注意边界情况）的黑色位置相连，权值为无穷大。</p>
-<p><img src="https://i.loli.net/2019/03/24/5c979a7163abf.png" alt></p>
-<p>如此建图后，可以发现存在源点到汇点的增广路，这也意味着原图中存在产生矛盾的两个位置。假设一开始选取M*N网格中的所有方块，我们的任务是割掉网络中的一些边（即删去一些方块），使得割去的边权最小。割去网络中的边就相当于删掉两个矛盾位置中的其中一个，因此当网络中不再有源点到汇点的增广路，就意味着矛盾全部消除。</p>
-<p>问题便转化为求解最小割（最大流）的问题。输出答案为全局和减去最小割。</p>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/03/24/solution-luogu-p2774/#more">Read More</a>
+                <a class="button is-size-7 is-light" href="/2019/08/27/solution-luogu-p1314/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -327,7 +316,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-01-26T02:58:39.000Z">2019-01-26</time>
+                <time class="level-item has-text-grey" datetime="2019-08-26T15:29:57.000Z">2019-08-26</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/题解/">题解</a>
@@ -337,7 +326,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    a minute read (About 114 words)
+                    3 minutes read (About 504 words)
                 </span>
                 
                 
@@ -346,22 +335,21 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2019/01/26/solution-luogu-p1080/">题解-luogu-p1080国王游戏</a>
+                <a class="has-link-black-ter" href="/2019/08/26/solution-luogu-p5503/">题解-luogu-p5503灯塔</a>
             
         </h1>
         <div class="content">
             <blockquote>
-<p><a href="https://www.luogu.org/problemnew/show/P1080" target="_blank" rel="noopener">题目链接</a></p>
+<p><a href="https://www.luogu.org/problem/P5503" target="_blank" rel="noopener">题目链接</a></p>
+<p>咕咕咕</p>
 </blockquote>
-<p>高精度怎能少了Python3题解。。。</p>
-<p>贪心策略一楼dalao已经讲得很清楚了，上一发超短代码（学Python就是为了水高精）</p>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/01/26/solution-luogu-p1080/#more">Read More</a>
+                <a class="button is-size-7 is-light" href="/2019/08/26/solution-luogu-p5503/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -384,7 +372,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-12-19T06:14:46.000Z">2018-12-19</time>
+                <time class="level-item has-text-grey" datetime="2019-08-23T15:21:35.000Z">2019-08-23</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/题解/">题解</a>
@@ -394,7 +382,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes read (About 774 words)
+                    3 minutes read (About 510 words)
                 </span>
                 
                 
@@ -403,32 +391,21 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/12/19/solution-luogu-p1022/">题解-luogu-p1022计算器的改良</a>
+                <a class="has-link-black-ter" href="/2019/08/23/solution-luogu-p5502/">题解-luogu-p5502最大公约数</a>
             
         </h1>
         <div class="content">
             <blockquote>
-<p><a href="https://www.luogu.org/problemnew/show/P1022" target="_blank" rel="noopener">题目链接</a></p>
+<p><a href="https://www.luogu.org/problem/P5502" target="_blank" rel="noopener">题目链接</a></p>
+<p>咕咕咕</p>
 </blockquote>
-<p>本题是一道非常漂亮的模拟。只要能理清思路，代码并不会特别复杂。</p>
-<p>首先分析题目。解一元一次方程最简单的方法就是移项，把常数移到等号右侧，把一次项系数移到等号左侧，用常数除以系数即为答案。那么在读入字符串的过程中，便可以进行操作。</p>
-<p>对于字符串中的数据，我们可以用类似快读的方法读入。然而，要判断这些数据从哪里来，到哪里去，便是本题的关键所在。</p>
-<p>对于每个数据，要想清楚地辨别它的身份，我们只需解决<strong>三个问题</strong>：</p>
-<p><strong>1.该数据是正数还是负数？</strong></p>
-<p><strong>3.该数据在等号左侧还是在等号右侧？</strong></p>
-<p><strong>2.该数据是常数还是系数？</strong></p>
-<p>第一个问题看似十分无脑，用一个变量f1来存储符号即可（将f1赋值为1或-1，在读入数据结束时将得到的数据乘以f1）。但需<strong>特别注意</strong>，在一个表达式的开头（等号左侧和等号右侧的表达式）不会有‘+’、‘-’符号，所以在程序的开头和读入‘=’号是，要将f1赋值为1。</p>
-<p>第二个问题也非常简单，可以用变量f2来存储。因为这个问题与移项运算的符号有关，因此也可以将f2赋值为1或-1，并约定在等号左侧时f2为1，在等号右侧时f2为-1。（当然你也可以反着约定）</p>
-<p>第三个问题同样不难解决。在读入数据结束后（<strong>即读入了一个符号</strong>），判断这个符号是运算符还是字母即可。如果是字母，则将得到的数据移到等号右侧，否则将数据移到等号左侧。但是还有一个<strong>注意点</strong>：如果一个未知数的系数为1，我们会将系数省略。因此在读入数据为0时，我们要将其更改为1。</p>
-<p>经过分析，你会发现本题一点也不难实现。其关键在于对数据状态的准确描述。用清晰、简洁的变量描述状态，根据不同的状态采取不同的措施，这便是编程学习的一大基本素养。</p>
-<p>代码如下：</p>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/12/19/solution-luogu-p1022/#more">Read More</a>
+                <a class="button is-size-7 is-light" href="/2019/08/23/solution-luogu-p5502/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -451,7 +428,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-12-15T06:51:52.000Z">2018-12-15</time>
+                <time class="level-item has-text-grey" datetime="2019-08-23T14:11:12.000Z">2019-08-23</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/categories/题解/">题解</a>
@@ -461,7 +438,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    4 minutes read (About 525 words)
+                    2 minutes read (About 297 words)
                 </span>
                 
                 
@@ -470,27 +447,22 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                <a class="has-link-black-ter" href="/2018/12/15/solution-luogu-p1204/">题解-luogu-p1204挤牛奶</a>
+                <a class="has-link-black-ter" href="/2019/08/23/solution-luogu-uva11021/">题解-luogu-uva11021麻球繁衍</a>
             
         </h1>
         <div class="content">
             <blockquote>
-<p><a href>题目链接</a></p>
+<p><a href="https://www.luogu.org/problem/UVA11021" target="_blank" rel="noopener">题目链接</a></p>
+<p>有 $k$ 只麻球，每只活一天就会死亡，临死前可能会生出一些新的麻球。具体来说，生 $i$ 只麻球的概率为 $P_i$ 。给定 $m$ ，求 $m$ 天后所有麻球均死亡的概率。</p>
+<p>我感谢我自己</p>
 </blockquote>
-<p>介绍一种本题的贪心解法。</p>
-<p>本题要求读入一些挤牛奶的时间段，求最长至少有一人在挤牛奶的时间段和最长没有人在挤牛奶的时间段。把读入的区间视作线段，则题意转变为<strong>求至少有一条线段覆盖的最大区间和没有线段覆盖的区间</strong>。</p>
-<p>假设读入数据如下：<br><img src="https://cdn.luogu.org/upload/pic/46260.png" alt="fig"></p>
-<p>首先按照4条线段的起点位置排序（具体原因后面解释）。将begin设置为第一条线段的起点，将end设置为第一条线段的终点。</p>
-<p>然后从第二条线段开始判断。如果该线段的起点小于end，则说明这两条线段有重合部分，将end更新为max{end,该线段的终点位置}。如果该线段的起点大于end，则说明该线段及以后的线段再也不会与前面的线段产生任何重合部分（这也就是排序的作用），那么可以更新ans1和ans2的值：ans1更新为max{ans1,end-begin},ans2更新为max{ans2,该线段的起点位置-end}。具体参见图中第4条线段，ans1被更新为1200-0，ans2被更新为1400-1200。</p>
-<p>程序已经基本成型，但要注意在输出答案前更新一遍ans1的值，这是为了避免所有线段均有重合部分而无法判断的情况。另外，ans1和ans2要初始化为0。</p>
-<p>程序如下：</p>
         </div>
         
         
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2018/12/15/solution-luogu-p1204/#more">Read More</a>
+                <a class="button is-size-7 is-light" href="/2019/08/23/solution-luogu-uva11021/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -513,7 +485,7 @@
         <div class="pagination-previous">
             <a class="is-flex-grow has-text-black-ter" href="/categories/题解/page/5/">Previous</a>
         </div>
-        <div class="pagination-next is-invisible is-hidden-mobile">
+        <div class="pagination-next">
             <a class="is-flex-grow has-text-black-ter" href="/categories/题解/page/7/">Next</a>
         </div>
         <ul class="pagination-list is-hidden-mobile">
@@ -525,6 +497,12 @@
             <li><a class="pagination-link has-text-black-ter" href="/categories/题解/page/5/">5</a></li>
             
             <li><a class="pagination-link is-current" href="/categories/题解/page/6/">6</a></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/categories/题解/page/7/">7</a></li>
+            
+            <li><span class="pagination-ellipsis has-text-black-ter">&hellip;</span></li>
+            
+            <li><a class="pagination-link has-text-black-ter" href="/categories/题解/page/10/">10</a></li>
             
         </ul>
     </nav>
