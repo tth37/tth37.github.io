@@ -16,7 +16,7 @@
   <entry>
     <title><![CDATA[「雅礼集训 2018 Day4」Magic]]></title>
     <url>%2F2019%2F11%2F23%2Fsolution-loj-6503%2F</url>
-    <content type="text"><![CDATA[#6503. 「雅礼集训 2018 Day4」Magic Summarize题目概括征集中~ Solution由于题意中本质不同的方案不是特别好处理，我们可以在每张卡片上标号，将计算出的答案乘上 $\prod_{i=1}^m\frac{1}{a_i!}$ 即可。 考虑容斥。记 $f[i]$ 为至少有 $i$ 个魔法对的方案数，则答案为 $\sum_{i=k}^n(-1)^{i-k}\times{i\choose k}\times f[i]$。 注意：「TJOI2019」唱、跳、rap 和篮球 即为本题 $k=0$ 的特例。 考虑如何计算 $f[i]$。设第一种颜色至少有 $i_1$ 个魔法对，第二种颜色至少有 $i_2$ 个魔法对……以此类推。考虑以下构造序列的方法：第 $j$ 种颜色保留 $i_j$ 张卡片作为预留卡片，将剩余的卡片任意排列，然后依次将所有预留的卡片插入到原序列中与之颜色相同的卡片的后面。不难发现，按照该方法构造序列的方案数为 $(n-k)!\times\prod_{j=1}^m{a_j\choose i_j}\times \frac{(a_j-1)!}{(a_j-i_j-1)!}$，并且该序列中至少有 $\sum_{j=1}^mi_j$ 个魔法对。 因此，得到 $f[i]$ 的计算方法： f[i]=\sum_{i_1=0}^{a_1-1}\sum_{i_2=0}^{a_2-1}...\sum_{i_m=0}^{a_m-1}\[i_1+i_2+...+i_m=i](n-i)!\times\prod_{j=1}^m{a_j\choose i_j}\times \frac{(a_j-1)!}{(a_j-i_j-1)!}注意到这是一个 $m$ 维卷积的形式，但是如果用暴力生成函数 + NTT 计算，复杂度为 $O(mn\log n)$，不能通过本题。我们可以用类似启发式合并的策略，交换多项式乘法运算顺序，每次将两个阶数最小的多项式相乘，即可将复杂度控制在 $O(m\log^2 n)$。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int MAXN = 100005, MAXM = 20005;const ll MOD = 998244353, G = 3;inline ll qpow(ll a, ll k) &#123; ll ret = 1; while (k) &#123; if (k &amp; 1) ret = ret * a % MOD; a = a * a % MOD; k &gt;&gt;= 1; &#125; return ret;&#125;namespace FFT &#123; int n, r[MAXN &lt;&lt; 1]; void NTT(ll *a, int op) &#123; int k = 0; for (; (1 &lt;&lt; k) &lt; n; ++k); for (int i = 0; i &lt; n; ++i) &#123; r[i] = r[i &gt;&gt; 1] &gt;&gt; 1 | (i &amp; 1) &lt;&lt; (k - 1); if (i &lt; r[i]) swap(a[i], a[r[i]]); &#125; for (int l = 2; l &lt;= n; l &lt;&lt;= 1) &#123; int m = l &gt;&gt; 1; ll w = qpow(G, (MOD - 1) / l); if (op == -1) w = qpow(w, MOD - 2); for (int i = 0; i &lt; n; i += l) &#123; ll wk = 1; for (int j = 0; j &lt; m; ++j, wk = wk * w % MOD) &#123; ll p = a[i + j], q = wk * a[i + j + m] % MOD; a[i + j] = (p + q) % MOD; a[i + j + m] = (p - q + MOD) % MOD; &#125; &#125; &#125; &#125; void DFT(ll *a) &#123; NTT(a, 1); &#125; void IDFT(ll *a) &#123; NTT(a, -1); ll inv = qpow(n, MOD - 2); for (int i = 0; i &lt; n; ++i) a[i] = a[i] * inv % MOD; &#125;&#125;int m, n, k;int a[MAXM];vector&lt;ll&gt; b[MAXM &lt;&lt; 1];priority_queue&lt;pair&lt;int, int&gt; &gt; q;ll x[MAXN &lt;&lt; 1], y[MAXN &lt;&lt; 1], ans;ll fac[MAXN], inv[MAXN], facinv[MAXN];inline ll C(int n, int k) &#123; return fac[n] * facinv[k] % MOD * facinv[n - k] % MOD;&#125;int main() &#123; scanf("%d%d%d", &amp;m, &amp;n, &amp;k); fac[0] = facinv[0] = 1; fac[1] = inv[1] = facinv[1] = 1; for (int i = 2; i &lt;= n; ++i) &#123; fac[i] = fac[i - 1] * i % MOD; inv[i] = (MOD - MOD / i) * inv[MOD % i] % MOD; facinv[i] = facinv[i - 1] * inv[i] % MOD; &#125; for (int i = 1; i &lt;= m; ++i) &#123; scanf("%d", &amp;a[i]); for (int j = 0; j &lt; a[i]; ++j) b[i].push_back(C(a[i], j) * fac[a[i] - 1] % MOD * facinv[a[i] - j - 1] % MOD); q.push(make_pair(-b[i].size(), i)); &#125; int cnt = m; while (q.size() &gt; 1) &#123; int id1 = q.top().second, sz1 = -q.top().first; q.pop(); int id2 = q.top().second, sz2 = -q.top().first; q.pop(); FFT::n = 1; while (FFT::n &lt;= sz1 + sz2) FFT::n &lt;&lt;= 1; for (int i = 0; i &lt;= FFT::n; ++i) x[i] = y[i] = 0; for (int i = 0; i &lt; sz1; ++i) x[i] = b[id1][i]; for (int i = 0; i &lt; sz2; ++i) y[i] = b[id2][i]; FFT::DFT(x), FFT::DFT(y); for (int i = 0; i &lt;= FFT::n; ++i) x[i] = x[i] * y[i] % MOD; FFT::IDFT(x); cnt++; for (int i = 0; i &lt;= sz1 + sz2 - 2; ++i) b[cnt].push_back(x[i]); q.push(make_pair(-b[cnt].size(), cnt)); &#125; int id = q.top().second, sz = -q.top().first; for (int i = k; i &lt; sz; ++i) &#123; ll tmp = C(i, k) * fac[n - i] % MOD * b[id][i] % MOD; if ((i - k) &amp; 1) ans = (ans - tmp + MOD) % MOD; else ans = (ans + tmp) % MOD; &#125; for (int i = 1; i &lt;= m; ++i) ans = ans * qpow(fac[a[i]], MOD - 2) % MOD; printf("%lld", ans); return 0;&#125;]]></content>
+    <content type="text"><![CDATA[#6503. 「雅礼集训 2018 Day4」Magic Summarize题目概括征集中~ Solution由于题意中本质不同的方案不是特别好处理，我们可以在每张卡片上标号，将计算出的答案乘上 $\prod_{i=1}^m\frac{1}{a_i!}$ 即可。 考虑容斥。记 $f[i]$ 为至少有 $i$ 个魔法对的方案数，则答案为 $\sum_{i=k}^n(-1)^{i-k}\times{i\choose k}\times f[i]$。 注意：「TJOI2019」唱、跳、rap 和篮球 即为本题 $k=0$ 的特例。 考虑如何计算 $f[i]$。设第一种颜色至少有 $i_1$ 个魔法对，第二种颜色至少有 $i_2$ 个魔法对……以此类推。考虑以下构造序列的方法：第 $j$ 种颜色保留 $i_j$ 张卡片作为预留卡片，将剩余的卡片任意排列，然后依次将所有预留的卡片插入到原序列中与之颜色相同的卡片的后面。不难发现，按照该方法构造序列的方案数为 $(n-k)!\times\prod_{j=1}^m{a_j\choose i_j}\times \frac{(a_j-1)!}{(a_j-i_j-1)!}$，并且该序列中至少有 $\sum_{j=1}^mi_j$ 个魔法对。 因此，得到 $f[i]$ 的计算方法： f[i]=\sum_{i_1=0}^{a_1-1}\sum_{i_2=0}^{a_2-1}...\sum_{i_m=0}^{a_m-1}[i_1+i_2+...+i_m=i] (n-i)!\times\prod_{j=1}^m{a_j\choose i_j}\times \frac{(a_j-1)!}{(a_j-i_j-1)!}注意到这是一个 $m$ 维卷积的形式，但是如果用暴力生成函数 + NTT 计算，复杂度为 $O(mn\log n)$，不能通过本题。我们可以用类似启发式合并的策略，交换多项式乘法运算顺序，每次将两个阶数最小的多项式相乘，即可将复杂度控制在 $O(m\log^2 n)$。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int MAXN = 100005, MAXM = 20005;const ll MOD = 998244353, G = 3;inline ll qpow(ll a, ll k) &#123; ll ret = 1; while (k) &#123; if (k &amp; 1) ret = ret * a % MOD; a = a * a % MOD; k &gt;&gt;= 1; &#125; return ret;&#125;namespace FFT &#123; int n, r[MAXN &lt;&lt; 1]; void NTT(ll *a, int op) &#123; int k = 0; for (; (1 &lt;&lt; k) &lt; n; ++k); for (int i = 0; i &lt; n; ++i) &#123; r[i] = r[i &gt;&gt; 1] &gt;&gt; 1 | (i &amp; 1) &lt;&lt; (k - 1); if (i &lt; r[i]) swap(a[i], a[r[i]]); &#125; for (int l = 2; l &lt;= n; l &lt;&lt;= 1) &#123; int m = l &gt;&gt; 1; ll w = qpow(G, (MOD - 1) / l); if (op == -1) w = qpow(w, MOD - 2); for (int i = 0; i &lt; n; i += l) &#123; ll wk = 1; for (int j = 0; j &lt; m; ++j, wk = wk * w % MOD) &#123; ll p = a[i + j], q = wk * a[i + j + m] % MOD; a[i + j] = (p + q) % MOD; a[i + j + m] = (p - q + MOD) % MOD; &#125; &#125; &#125; &#125; void DFT(ll *a) &#123; NTT(a, 1); &#125; void IDFT(ll *a) &#123; NTT(a, -1); ll inv = qpow(n, MOD - 2); for (int i = 0; i &lt; n; ++i) a[i] = a[i] * inv % MOD; &#125;&#125;int m, n, k;int a[MAXM];vector&lt;ll&gt; b[MAXM &lt;&lt; 1];priority_queue&lt;pair&lt;int, int&gt; &gt; q;ll x[MAXN &lt;&lt; 1], y[MAXN &lt;&lt; 1], ans;ll fac[MAXN], inv[MAXN], facinv[MAXN];inline ll C(int n, int k) &#123; return fac[n] * facinv[k] % MOD * facinv[n - k] % MOD;&#125;int main() &#123; scanf("%d%d%d", &amp;m, &amp;n, &amp;k); fac[0] = facinv[0] = 1; fac[1] = inv[1] = facinv[1] = 1; for (int i = 2; i &lt;= n; ++i) &#123; fac[i] = fac[i - 1] * i % MOD; inv[i] = (MOD - MOD / i) * inv[MOD % i] % MOD; facinv[i] = facinv[i - 1] * inv[i] % MOD; &#125; for (int i = 1; i &lt;= m; ++i) &#123; scanf("%d", &amp;a[i]); for (int j = 0; j &lt; a[i]; ++j) b[i].push_back(C(a[i], j) * fac[a[i] - 1] % MOD * facinv[a[i] - j - 1] % MOD); q.push(make_pair(-b[i].size(), i)); &#125; int cnt = m; while (q.size() &gt; 1) &#123; int id1 = q.top().second, sz1 = -q.top().first; q.pop(); int id2 = q.top().second, sz2 = -q.top().first; q.pop(); FFT::n = 1; while (FFT::n &lt;= sz1 + sz2) FFT::n &lt;&lt;= 1; for (int i = 0; i &lt;= FFT::n; ++i) x[i] = y[i] = 0; for (int i = 0; i &lt; sz1; ++i) x[i] = b[id1][i]; for (int i = 0; i &lt; sz2; ++i) y[i] = b[id2][i]; FFT::DFT(x), FFT::DFT(y); for (int i = 0; i &lt;= FFT::n; ++i) x[i] = x[i] * y[i] % MOD; FFT::IDFT(x); cnt++; for (int i = 0; i &lt;= sz1 + sz2 - 2; ++i) b[cnt].push_back(x[i]); q.push(make_pair(-b[cnt].size(), cnt)); &#125; int id = q.top().second, sz = -q.top().first; for (int i = k; i &lt; sz; ++i) &#123; ll tmp = C(i, k) * fac[n - i] % MOD * b[id][i] % MOD; if ((i - k) &amp; 1) ans = (ans - tmp + MOD) % MOD; else ans = (ans + tmp) % MOD; &#125; for (int i = 1; i &lt;= m; ++i) ans = ans * qpow(fac[a[i]], MOD - 2) % MOD; printf("%lld", ans); return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
         <category>LibreOJ</category>
@@ -24,9 +24,9 @@
       </categories>
       <tags>
         <tag>FFT/NTT</tag>
-        <tag>启发式合并</tag>
         <tag>生成函数</tag>
         <tag>组合计数</tag>
+        <tag>启发式合并</tag>
         <tag>容斥原理</tag>
       </tags>
   </entry>
@@ -103,8 +103,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>高斯消元</tag>
+        <tag>动态规划</tag>
         <tag>概率</tag>
       </tags>
   </entry>
@@ -117,8 +117,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -680,8 +680,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
       </tags>
   </entry>
   <entry>
@@ -692,8 +692,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -977,8 +977,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
