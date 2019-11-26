@@ -7,22 +7,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>题解-计蒜客-4594C Sometimes Naive - tth37&#39;s Blog</title>
+<title>Sometimes Naive - tth37&#39;s Blog</title>
 
 
-    <meta name="description" content="题目链接   题目概括征集中~">
+    <meta name="description" content="4594C Sometimes Naive Summarize题目概括征集中~">
 <meta name="keywords" content="最近公共祖先,二分图匹配">
 <meta property="og:type" content="article">
-<meta property="og:title" content="题解-计蒜客-4594C Sometimes Naive">
+<meta property="og:title" content="Sometimes Naive">
 <meta property="og:url" content="https://tth37.cn/2019/10/28/solution-jsk-4594C/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="题目链接   题目概括征集中~">
+<meta property="og:description" content="4594C Sometimes Naive Summarize题目概括征集中~">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://tth37.cn/images/og_image.png">
-<meta property="og:updated_time" content="2019-11-14T15:18:25.784Z">
+<meta property="og:updated_time" content="2019-11-25T16:00:22.685Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="题解-计蒜客-4594C Sometimes Naive">
-<meta name="twitter:description" content="题目链接   题目概括征集中~">
+<meta name="twitter:title" content="Sometimes Naive">
+<meta name="twitter:description" content="4594C Sometimes Naive Summarize题目概括征集中~">
 <meta name="twitter:image" content="https://tth37.cn/images/og_image.png">
 
 
@@ -82,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="题解-计蒜客-4594C Sometimes Naive" height="28">
+                <img src="/images/logo.png" alt="Sometimes Naive" height="28">
             
             </a>
         </div>
@@ -138,14 +138,14 @@
                 <time class="level-item has-text-grey" datetime="2019-10-28T14:33:25.000Z">2019-10-28</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/题解/">题解</a>
+                <a class="has-link-grey -link" href="/categories/题解/">题解</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes read (About 795 words)
+                    5 minutes read (About 797 words)
                 </span>
                 
                 
@@ -154,19 +154,14 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                题解-计蒜客-4594C Sometimes Naive
+                Sometimes Naive
             
         </h1>
         <div class="content">
-            <div class="note info"><p>
-<a href="https://nanti.jisuanke.com/t/41979" target="_blank" rel="noopener">题目链接</a></p></div>
-
-<blockquote>
-<p>题目概括征集中~</p>
-</blockquote>
+            <p><a href="https://nanti.jisuanke.com/t/41979" target="_blank" rel="noopener">4594C Sometimes Naive</a></p>
+<h3 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h3><p>题目概括征集中~</p>
 <a id="more"></a>
-
-<p>神 仙 题</p>
+<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>神 仙 题</p>
 <p>虽然做完后想想不是很难……但哪道题不是如此呢TAT</p>
 <p>易得每次询问中 $c$ 个人的集合点为 $\text{lca}(v_1,v_2,..,v_c)$ 。每个人到集合点的路径上所经过的特产看作一个集合。可以采用倍增和 <code>bitset</code> 优化求出所有的集合，由于本题卡空间，倍增需要使用滚动数组。代码实现非常致郁。</p>
 <p>在预处理出集合信息后，考虑如何回答询问。不妨二分答案 $ans$，构造二分图 $G$：二分图左侧有 $c\times ans$ 个节点，表示共 $c$ 个人，每人购买 $ans$ 个物品；右侧有 $m$ 个节点，表示所有特产。如果某个人可以购买特产 $k$ （即 $k$ 在此人到集合点的路径上），则在对应节点间连边。不难发现，如果存在使左侧节点全部匹配的<strong>完备匹配</strong>，则 $ans$ 合法。</p>
@@ -179,9 +174,7 @@
 <p>因此我们只需枚举二分图点集中的所有子集，即可判断 $ans$ 是否合法。</p>
 <p>进一步观察可以发现，$M(U)$ 与二分出的 $ans$ 无关，而 $|X|=|U|\times ans$。也就是说，我们需要找到一个最大的 $ans$，使得 $|U|\times ans\le |M(U)|$ 恒成立。因此不必二分答案，直接求解 $ans=\min\lbrace|M(U)|/|U|\rbrace$ 即可。</p>
 <p>代码虽不长却极端致郁。</p>
-<p>代码如下：</p>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">300005</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXQ = <span class="hljs-number">50005</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF = <span class="hljs-number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> n, m, q;</span><br><span class="line"><span class="hljs-keyword">int</span> f[MAXN][<span class="hljs-number">21</span>], dep[MAXN];</span><br><span class="line"><span class="hljs-keyword">int</span> h[MAXQ][<span class="hljs-number">6</span>], c[MAXN], a[MAXQ][<span class="hljs-number">6</span>], t[MAXN][<span class="hljs-number">21</span>];</span><br><span class="line"><span class="hljs-built_in">bitset</span>&lt;1005&gt; g[MAXN]; </span><br><span class="line"><span class="hljs-built_in">bitset</span>&lt;1005&gt; s[MAXQ][<span class="hljs-number">6</span>]; </span><br><span class="line"><span class="hljs-built_in">bitset</span>&lt;1005&gt; x[<span class="hljs-number">35</span>]; </span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">Lca</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (dep[u] &lt; dep[v]) swap(u, v);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">19</span>; i &gt;= <span class="hljs-number">0</span>; --i)</span><br><span class="line">        <span class="hljs-keyword">if</span> (dep[f[u][i]] &gt;= dep[v]) u = f[u][i];</span><br><span class="line">    <span class="hljs-keyword">if</span> (u == v) <span class="hljs-keyword">return</span> u;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">19</span>; i &gt;= <span class="hljs-number">0</span>; --i)</span><br><span class="line">        <span class="hljs-keyword">if</span> (f[u][i] != f[v][i]) u = f[u][i], v = f[v][i];</span><br><span class="line">    <span class="hljs-keyword">return</span> f[u][<span class="hljs-number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;n, &amp;m, &amp;q);</span><br><span class="line">    dep[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;f[i][<span class="hljs-number">0</span>]), dep[i] = dep[f[i][<span class="hljs-number">0</span>]] + <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= <span class="hljs-number">19</span>; ++j)</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            f[i][j] = f[f[i][j - <span class="hljs-number">1</span>]][j - <span class="hljs-number">1</span>];</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> tmp;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;tmp);</span><br><span class="line">        g[i][tmp] = <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= q; ++i) &#123;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;c[i]);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= c[i]; ++j) <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;a[i][j]), s[i][j] = g[a[i][j]];</span><br><span class="line">        <span class="hljs-keyword">int</span> lca = a[i][<span class="hljs-number">1</span>];</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">2</span>; j &lt;= c[i]; ++j) lca = Lca(lca, a[i][j]);</span><br><span class="line">    	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= c[i]; ++j) h[i][j] = dep[a[i][j]] - dep[lca];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n; i &gt;= <span class="hljs-number">1</span>; --i) g[i] |= g[f[i][<span class="hljs-number">0</span>]];</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt;= <span class="hljs-number">19</span>; ++j) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= q; ++i) </span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span>; k &lt;= c[i]; ++k)</span><br><span class="line">                <span class="hljs-keyword">if</span> (h[i][k] &amp; (<span class="hljs-number">1</span> &lt;&lt; j)) s[i][k] |= g[a[i][k]], a[i][k] = f[a[i][k]][j];</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n; i &gt;= <span class="hljs-number">1</span>; --i) g[i] = (g[i] | g[f[i][j]]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= q; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> ans = INF;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span>; k &lt; (<span class="hljs-number">1</span> &lt;&lt; c[i]); ++k) &#123;</span><br><span class="line">            x[k].reset();</span><br><span class="line">            <span class="hljs-keyword">int</span> tmp = <span class="hljs-number">0</span>;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= c[i]; ++j) </span><br><span class="line">                <span class="hljs-keyword">if</span> (k &amp; (<span class="hljs-number">1</span> &lt;&lt; (j - <span class="hljs-number">1</span>))) </span><br><span class="line">                    tmp++, x[k] |= s[i][j];</span><br><span class="line">            ans = min(ans, (<span class="hljs-keyword">int</span>)x[k].count() / tmp);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, ans * c[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">300005</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXQ = <span class="hljs-number">50005</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF = <span class="hljs-number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> n, m, q;</span><br><span class="line"><span class="hljs-keyword">int</span> f[MAXN][<span class="hljs-number">21</span>], dep[MAXN];</span><br><span class="line"><span class="hljs-keyword">int</span> h[MAXQ][<span class="hljs-number">6</span>], c[MAXN], a[MAXQ][<span class="hljs-number">6</span>], t[MAXN][<span class="hljs-number">21</span>];</span><br><span class="line"><span class="hljs-built_in">bitset</span>&lt;1005&gt; g[MAXN]; </span><br><span class="line"><span class="hljs-built_in">bitset</span>&lt;1005&gt; s[MAXQ][<span class="hljs-number">6</span>]; </span><br><span class="line"><span class="hljs-built_in">bitset</span>&lt;1005&gt; x[<span class="hljs-number">35</span>]; </span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">Lca</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (dep[u] &lt; dep[v]) swap(u, v);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">19</span>; i &gt;= <span class="hljs-number">0</span>; --i)</span><br><span class="line">        <span class="hljs-keyword">if</span> (dep[f[u][i]] &gt;= dep[v]) u = f[u][i];</span><br><span class="line">    <span class="hljs-keyword">if</span> (u == v) <span class="hljs-keyword">return</span> u;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">19</span>; i &gt;= <span class="hljs-number">0</span>; --i)</span><br><span class="line">        <span class="hljs-keyword">if</span> (f[u][i] != f[v][i]) u = f[u][i], v = f[v][i];</span><br><span class="line">    <span class="hljs-keyword">return</span> f[u][<span class="hljs-number">0</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;n, &amp;m, &amp;q);</span><br><span class="line">    dep[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;f[i][<span class="hljs-number">0</span>]), dep[i] = dep[f[i][<span class="hljs-number">0</span>]] + <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= <span class="hljs-number">19</span>; ++j)</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            f[i][j] = f[f[i][j - <span class="hljs-number">1</span>]][j - <span class="hljs-number">1</span>];</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> tmp;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;tmp);</span><br><span class="line">        g[i][tmp] = <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= q; ++i) &#123;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;c[i]);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= c[i]; ++j) <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;a[i][j]), s[i][j] = g[a[i][j]];</span><br><span class="line">        <span class="hljs-keyword">int</span> lca = a[i][<span class="hljs-number">1</span>];</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">2</span>; j &lt;= c[i]; ++j) lca = Lca(lca, a[i][j]);</span><br><span class="line">    	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= c[i]; ++j) h[i][j] = dep[a[i][j]] - dep[lca];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n; i &gt;= <span class="hljs-number">1</span>; --i) g[i] |= g[f[i][<span class="hljs-number">0</span>]];</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt;= <span class="hljs-number">19</span>; ++j) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= q; ++i) </span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span>; k &lt;= c[i]; ++k)</span><br><span class="line">                <span class="hljs-keyword">if</span> (h[i][k] &amp; (<span class="hljs-number">1</span> &lt;&lt; j)) s[i][k] |= g[a[i][k]], a[i][k] = f[a[i][k]][j];</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n; i &gt;= <span class="hljs-number">1</span>; --i) g[i] = (g[i] | g[f[i][j]]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= q; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> ans = INF;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span>; k &lt; (<span class="hljs-number">1</span> &lt;&lt; c[i]); ++k) &#123;</span><br><span class="line">            x[k].reset();</span><br><span class="line">            <span class="hljs-keyword">int</span> tmp = <span class="hljs-number">0</span>;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= c[i]; ++j) </span><br><span class="line">                <span class="hljs-keyword">if</span> (k &amp; (<span class="hljs-number">1</span> &lt;&lt; (j - <span class="hljs-number">1</span>))) </span><br><span class="line">                    tmp++, x[k] |= s[i][j];</span><br><span class="line">            ans = min(ans, (<span class="hljs-keyword">int</span>)x[k].count() / tmp);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, ans * c[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -213,7 +206,7 @@
         <div class="level-start">
             <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/30/solution-loj-6497/">
                 <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">题解-LibreOJ-6497「雅礼集训 2018 Day1」图</span>
+                <span class="level-item">「雅礼集训 2018 Day1」图</span>
             </a>
         </div>
         
@@ -295,7 +288,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            85
+                            84
                         </p>
                     </a>
                 </div>
@@ -307,7 +300,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            11
+                            12
                         </p>
                     </a>
                 </div>
@@ -319,7 +312,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            61
+                            62
                         </p>
                     </a>
                 </div>
@@ -449,7 +442,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/FFT-NTT/" style="font-size: 11px;">FFT/NTT</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 11px;">ST算法</a> <a href="/tags/dfs序/" style="font-size: 12px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 16px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10px;">乘法逆元</a> <a href="/tags/二分图匹配/" style="font-size: 11px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 12px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 12px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 11px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 11px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 11px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 11px;">可持久化trie</a> <a href="/tags/启发式合并/" style="font-size: 11px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 11px;">堆</a> <a href="/tags/字符串/" style="font-size: 11px;">字符串</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 19px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/最短路/" style="font-size: 11px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 14px;">最近公共祖先</a> <a href="/tags/栈/" style="font-size: 11px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 18px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 11px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 13px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 11px;">概率</a> <a href="/tags/点分治/" style="font-size: 11px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 10px;">生成函数</a> <a href="/tags/矩阵/" style="font-size: 10px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线段树/" style="font-size: 18px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 10px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 10px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 17px;">背包</a> <a href="/tags/虚树/" style="font-size: 12px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10px;">计数dp</a> <a href="/tags/贪心/" style="font-size: 12px;">贪心</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 10px;">高斯消元</a>
+        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/FFT-NTT/" style="font-size: 12.22px;">FFT/NTT</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 11.11px;">ST算法</a> <a href="/tags/dfs序/" style="font-size: 12.22px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 15.56px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10px;">乘法逆元</a> <a href="/tags/二分图匹配/" style="font-size: 11.11px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 12.22px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 12.22px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 11.11px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 11.11px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 11.11px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 11.11px;">可持久化trie</a> <a href="/tags/启发式合并/" style="font-size: 12.22px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 11.11px;">堆</a> <a href="/tags/字符串/" style="font-size: 11.11px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10px;">容斥原理</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11.11px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.89px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 14.44px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/最短路/" style="font-size: 11.11px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 13.33px;">最近公共祖先</a> <a href="/tags/栈/" style="font-size: 11.11px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 17.78px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 11.11px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 12.22px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 12.22px;">概率</a> <a href="/tags/点分治/" style="font-size: 11.11px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11.11px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 11.11px;">生成函数</a> <a href="/tags/矩阵/" style="font-size: 10px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线段树/" style="font-size: 17.78px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 11.11px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 10px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 16.67px;">背包</a> <a href="/tags/虚树/" style="font-size: 12.22px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10px;">计数dp</a> <a href="/tags/贪心/" style="font-size: 12.22px;">贪心</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 11.11px;">高斯消元</a>
     </div>
 </div>
     
@@ -495,7 +488,7 @@
                 <span class="level-item">算法学习</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">14</span>
+                <span class="level-item tag">13</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/算法学习/数论专题/">
@@ -535,7 +528,7 @@
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">56</span>
+                <span class="level-item tag">57</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/题解/LibreOJ/">
@@ -543,7 +536,15 @@
                 <span class="level-item">LibreOJ</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">13</span>
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/题解/计蒜客/">
+            <span class="level-start">
+                <span class="level-item">计蒜客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
             </span>
         </a></li></ul></li>
             </ul>
@@ -567,7 +568,7 @@
                     <span class="level-item">November 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">7</span>
+                    <span class="level-item tag">6</span>
                 </span>
             </a>
         </li>
@@ -704,7 +705,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="题解-计蒜客-4594C Sometimes Naive" height="28">
+                    <img src="/images/logo.png" alt="Sometimes Naive" height="28">
                 
                 </a>
                 <p class="is-size-7">
