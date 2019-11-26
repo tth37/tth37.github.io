@@ -165,23 +165,19 @@
 <p>弱弱的征集题目概括</p>
 </blockquote>
 <a id="more"></a>
-
 <p>二分图博弈。首先是个人都能看出来将棋盘黑白染色、建二分图。</p>
 <p>假设二分图存在完美匹配，则无论起点在哪，Bob 必胜。显然 Bob 可以一直沿匹配边走，Alice 只能走非匹配边直到无路可走。</p>
 <p>假设二分图不存在完美匹配，则如果起点为<strong>二分图最大匹配的必配点</strong>，则 Bob 必胜；反之 Alice 必胜。</p>
-<div class="note danger"><p> 证明？</p>
-
+<p><div class="note danger"><p> 证明？</p></div></p>
 <p>如何求解某个点是否为二分图最大匹配的必配点？</p>
 <p>考虑找到二分图上所有<strong>非必配点</strong>。先求解出一个二分图最大匹配。显然，不在该最大匹配中的点均为非必配点。</p>
 <p>对于该最大匹配中的点，考虑如果能以之为起点、找到以非匹配点为终点的交错轨，则该点为非必配点。</p>
 <p>根据 <a href="https://www.cnblogs.com/zwfymqz/p/10538538.html" target="_blank" rel="noopener">这篇博客</a> 中的思路，可以将不在最大匹配中的点作为起点，找到的所有交错轨上的点均为非必配点。</p>
 <p>将非必配点输出即可。</p>
-<div class="note warning"><p> 建图很关键，不要犯傻；否则调都调不出来</p>
-
+<p><div class="note warning"><p> 建图很关键，不要犯傻；否则调都调不出来</p></div></p>
 <p>代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> nx[] = &#123;<span class="hljs-number">-1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;;</span><br><span class="line"><span class="hljs-keyword">int</span> ny[] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">-1</span>&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> N, M;</span><br><span class="line"><span class="hljs-keyword">int</span> a[<span class="hljs-number">105</span>][<span class="hljs-number">105</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> c[<span class="hljs-number">105</span>][<span class="hljs-number">105</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> cnt1, cnt2;</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; G[<span class="hljs-number">20005</span>];</span><br><span class="line"><span class="hljs-keyword">bool</span> vis[<span class="hljs-number">20005</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> m[<span class="hljs-number">20005</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">bool</span> tag[<span class="hljs-number">20005</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; &gt; Out;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">find</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (vis[u]) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">    vis[u] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v = *it;</span><br><span class="line">        <span class="hljs-keyword">if</span> (m[v] == <span class="hljs-number">0</span> || find(m[v])) &#123;</span><br><span class="line">            m[u] = v, m[v] = u;</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (vis[u]) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">    vis[u] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">if</span> (m[u] == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it = G[m[u]].begin(); it != G[m[u]].end(); it++) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v = *it;</span><br><span class="line">        <span class="hljs-keyword">if</span> (dfs(v)) <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">cin</span> &gt;&gt; N &gt;&gt; M;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= M; ++j) &#123;</span><br><span class="line">            <span class="hljs-keyword">char</span> ch;</span><br><span class="line">            <span class="hljs-built_in">cin</span> &gt;&gt; ch;</span><br><span class="line">            <span class="hljs-keyword">if</span> (ch == <span class="hljs-string">'#'</span>) <span class="hljs-keyword">continue</span>;</span><br><span class="line">            <span class="hljs-keyword">if</span> ((i + j) &amp; <span class="hljs-number">1</span>) c[i][j] = ++cnt1;</span><br><span class="line">            <span class="hljs-keyword">else</span> c[i][j] = ++cnt2 + <span class="hljs-number">10000</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= M; ++j) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (c[i][j] == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; <span class="hljs-number">4</span>; ++k) &#123;</span><br><span class="line">                <span class="hljs-keyword">int</span> ti = i + nx[k], tj = j + ny[k];</span><br><span class="line">                <span class="hljs-keyword">if</span> (ti &gt;= <span class="hljs-number">1</span> &amp;&amp; ti &lt;= N &amp;&amp; tj &gt;= <span class="hljs-number">1</span> &amp;&amp; tj &lt;= M) &#123;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (c[ti][tj]) G[c[i][j]].push_back(c[ti][tj]);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= cnt1; ++i) &#123;</span><br><span class="line">        <span class="hljs-built_in">memset</span>(vis, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(vis));</span><br><span class="line">        find(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= M; ++j) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (c[i][j] == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;</span><br><span class="line">            <span class="hljs-built_in">memset</span>(vis, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(vis));</span><br><span class="line">            <span class="hljs-keyword">if</span> (dfs(c[i][j])) &#123;</span><br><span class="line">                Out.push_back(make_pair(i, j));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, Out.size());</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; (<span class="hljs-keyword">int</span>)Out.size(); ++i)</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d %d\n"</span>, Out[i].first, Out[i].second);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-</div></div>
         </div>
         
         <div class="level is-size-7 is-uppercase">
@@ -560,140 +556,6 @@
 
         
             
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Archives
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">22</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">September 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">August 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">14</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">March 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
 
         
         </div>
