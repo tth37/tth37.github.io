@@ -166,29 +166,17 @@
 <p>题目概括大力征集中~</p>
 </blockquote>
 <a id="more"></a>
+
 <p>一道神仙题。对矩阵初学者极不友好。</p>
-<p>$f$ 函数的计算非常简单，递推公式如下：</p>
-<script type="math/tex; mode=display">
-f(i)=f(i-1)+f(i-2)+..+f(i-m)</script><p>容易看出， $f(i)$ 可以使用矩阵加速递推。以 $m=3$ 为例，构造矩阵</p>
-<script type="math/tex; mode=display">
-A=\left[ \begin{matrix}   1 & 1 & 1 \\   1 & 0 & 0 \\   0 & 1 & 0  \end{matrix}  \right]</script><p>那么 $f(n)$ 即为 $(A^n)_{1,1}$ 。</p>
+<p>$f$ 函数的计算非常简单，递推公式如下：<br>$$<br>f(i)=f(i-1)+f(i-2)+..+f(i-m)<br>$$<br>容易看出， $f(i)$ 可以使用矩阵加速递推。以 $m=3$ 为例，构造矩阵<br>$$<br>A=\left[ \begin{matrix}   1 &amp; 1 &amp; 1 \   1 &amp; 0 &amp; 0 \   0 &amp; 1 &amp; 0  \end{matrix}  \right]<br>$$<br>那么 $f(n)$ 即为 $(A^n)_{1,1}$ 。</p>
 <p>但我们要求的是 $g(S)$ 。考虑将 $g(S)$ 表示为矩阵的形式，最终答案为矩阵的第 $[1,1]$ 项。</p>
-<p>考虑 $g(123)$ 的推导。 </p>
-<script type="math/tex; mode=display">
-\begin{align*}
-g(123) &= f(1+2+3)+f(12+3)+f(1+23)+f(123) \\
-&= A^{1+2+3}+A^{12+3}+A^{1+23}+A^{123} \\
-&= A^1\times A^2\times A^3+A^{12}\times A^3+A^1\times A^{23}+A^{123}
-\end{align*}</script><p>转化为以上形式后，记 $g’(n)$ 为将数字 $S$ 的前 $n$ 项分解后得到的矩阵；在本例中，$g’(3)=g(123)$ 。</p>
-<p>可以得到 $g’(i)$ 的递推公式：</p>
-<script type="math/tex; mode=display">
-g'(i)=g'(i-1)\times A^{\text{num[i,i]}}+g'(i-2)\times A^{\text{num[i-1,i]}}+..+g'(0)\times A^{\text{num[1,i]}}</script><p>其中 $\text{num[l,r]}$ 表示字符串中 $[l,r]$ 区间所对应的数字。例如当 $S=”12345”$ ，$\text{num[2,4]}=234$ 。</p>
-<p>考虑 $A^{\text{num[l,r]}}$ 的计算。可以通过预处理加速计算。记</p>
-<script type="math/tex; mode=display">
-P[i][j]=A^{i*10^j}</script><p>使用该数组，可以在 $O(n)$ 时间复杂度内计算 $A^{\text{num[l,r]}}$ 。</p>
+<p>考虑 $g(123)$ 的推导。<br>$$<br>\begin{align<em>}<br>g(123) &amp;= f(1+2+3)+f(12+3)+f(1+23)+f(123) \<br>&amp;= A^{1+2+3}+A^{12+3}+A^{1+23}+A^{123} \<br>&amp;= A^1\times A^2\times A^3+A^{12}\times A^3+A^1\times A^{23}+A^{123}<br>\end{align</em>}<br>$$<br>转化为以上形式后，记 $g’(n)$ 为将数字 $S$ 的前 $n$ 项分解后得到的矩阵；在本例中，$g’(3)=g(123)$ 。</p>
+<p>可以得到 $g’(i)$ 的递推公式：<br>$$<br>g’(i)=g’(i-1)\times A^{\text{num[i,i]}}+g’(i-2)\times A^{\text{num[i-1,i]}}+..+g’(0)\times A^{\text{num[1,i]}}<br>$$<br>其中 $\text{num[l,r]}$ 表示字符串中 $[l,r]$ 区间所对应的数字。例如当 $S=”12345”$ ，$\text{num[2,4]}=234$ 。</p>
+<p>考虑 $A^{\text{num[l,r]}}$ 的计算。可以通过预处理加速计算。记<br>$$<br>P[i][j]=A^{i*10^j}<br>$$<br>使用该数组，可以在 $O(n)$ 时间复杂度内计算 $A^{\text{num[l,r]}}$ 。</p>
 <p>至此，算法骨架已经成型；时间复杂度为 $O(n*m^3+n^2*m^3)$ 。实现时需要注意细节优化（如计算 $g’$ 时使用恰当的循环顺序）。</p>
 <p>代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> mod = <span class="hljs-number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Matrix</span> &#123;</span></span><br><span class="line">    <span class="hljs-keyword">int</span> m, n;</span><br><span class="line">    ll g[<span class="hljs-number">6</span>][<span class="hljs-number">6</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Matrix <span class="hljs-title">mul</span><span class="hljs-params">(Matrix a, Matrix b)</span> </span>&#123;</span><br><span class="line">    Matrix ret;</span><br><span class="line">    ret.m = a.m, ret.n = b.n;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= ret.n; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= ret.m; ++j) &#123;</span><br><span class="line">            ret.g[i][j] = <span class="hljs-number">0</span>;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span>; k &lt;= a.n; ++k)</span><br><span class="line">            ret.g[i][j] = (ret.g[i][j] + a.g[i][k] * b.g[k][j]) % mod;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Matrix <span class="hljs-title">add</span><span class="hljs-params">(Matrix a, Matrix b)</span> </span>&#123;</span><br><span class="line">    Matrix ret;</span><br><span class="line">    ret.m = a.m, ret.n = a.n;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= a.n; ++i)</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= a.m; ++j)</span><br><span class="line">            ret.g[i][j] = (a.g[i][j] + b.g[i][j]) % mod;</span><br><span class="line">    <span class="hljs-keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Matrix <span class="hljs-title">power10</span><span class="hljs-params">(Matrix a)</span> </span>&#123;</span><br><span class="line">    Matrix ret = a;</span><br><span class="line">    ret = mul(ret, ret);</span><br><span class="line">    ret = mul(ret, ret);</span><br><span class="line">    ret = mul(ret, a);</span><br><span class="line">    ret = mul(ret, ret);</span><br><span class="line">    <span class="hljs-keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init_Unit_Matrix</span><span class="hljs-params">(Matrix&amp; a, <span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    a.m = a.n = n;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; ++j)</span><br><span class="line">            a.g[i][j] = (i == j) ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init_Empty_Matrix</span><span class="hljs-params">(Matrix&amp; a, <span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    a.m = a.n = n;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; ++j)</span><br><span class="line">            a.g[i][j] = <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">char</span> s[<span class="hljs-number">505</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> N, M;</span><br><span class="line">Matrix A;</span><br><span class="line">Matrix P[<span class="hljs-number">10</span>][<span class="hljs-number">505</span>];</span><br><span class="line">Matrix Q[<span class="hljs-number">505</span>];</span><br><span class="line">Matrix f[<span class="hljs-number">505</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">cin</span> &gt;&gt; (s + <span class="hljs-number">1</span>);</span><br><span class="line">    N = <span class="hljs-built_in">strlen</span>(s + <span class="hljs-number">1</span>);</span><br><span class="line">    <span class="hljs-built_in">cin</span> &gt;&gt; M;</span><br><span class="line">    Init_Unit_Matrix(P[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>], M);</span><br><span class="line">    A.n = A.m = M;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= M; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= M; ++j) &#123;</span><br><span class="line">            A.g[i][j] = <span class="hljs-number">0</span>;</span><br><span class="line">            <span class="hljs-keyword">if</span> (i == <span class="hljs-number">1</span>) A.g[i][j] = <span class="hljs-number">1</span>;</span><br><span class="line">            <span class="hljs-keyword">if</span> (i - <span class="hljs-number">1</span> == j) A.g[i][j] = <span class="hljs-number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">9</span>; ++i) &#123;</span><br><span class="line">        P[i][<span class="hljs-number">0</span>] = mul(P[i - <span class="hljs-number">1</span>][<span class="hljs-number">0</span>], A);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= N; ++j) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= <span class="hljs-number">9</span>; ++i) &#123;</span><br><span class="line">            P[i][j] = power10(P[i][j - <span class="hljs-number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    Init_Unit_Matrix(f[<span class="hljs-number">0</span>], M);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        Init_Empty_Matrix(f[i], M);</span><br><span class="line">        Matrix t;</span><br><span class="line">        Init_Unit_Matrix(t, M);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i, c = <span class="hljs-number">0</span>; j &gt;= <span class="hljs-number">1</span>; --j, ++c) &#123;</span><br><span class="line">            t = mul(t, P[s[j] - <span class="hljs-string">'0'</span>][c]);</span><br><span class="line">            f[i] = add(f[i], mul(f[j - <span class="hljs-number">1</span>], t));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">cout</span> &lt;&lt; f[N].g[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>];</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
         
@@ -576,6 +564,151 @@ P[i][j]=A^{i*10^j}</script><p>使用该数组，可以在 $O(n)$ 时间复杂度
 
         
             
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
 
         
         </div>
