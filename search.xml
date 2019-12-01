@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[「NOI2014」动物园]]></title>
+    <url>%2F2019%2F12%2F02%2Fsolution-loj-2246%2F</url>
+    <content type="text"><![CDATA[#2246. 「NOI2014」动物园 Summarize题目概括征集中~ Solution回顾一下我们在 扩展 KMP 算法中求出的 $\text{next}$ 函数：$\text{next}[i]$ 表示后缀 $i$ 即 $T[i..|T|]$ 与 $T$ 的最长公共前缀。 如果我们对读入的字符串已经求出了 $\text{next}$ 数组，那么这题就迎刃而解了。 首先，我们不考虑 前后缀不可重叠 的限制，尝试计算 $\text{num}$ 数组。观察字符串 $S$ 的每一个后缀 $i$，不难发现这些后缀将对 $\text{num}[i..i+\text{next}[i]-1]$ 产生贡献。 1234560 1 2 3 4a b a b aa a b a b a| | | | | |a a b a b a 如果考虑 前后缀不可重叠 的限制条件，可以发现后缀 $i$ 不会对 $i\times 2$ 及以后的 $\text{num}$ 产生贡献。 1234560 1 2 3 4a b a b aa a b a b a| | | X X Xa a b a b a 只需对 $\text{num}$ 数组进行差分即可。 Code1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556#include &lt;bits/stdc++.h&gt;using namespace std;#define next next233const int MAXN = 1e6 + 5;const int MOD = 1e9 + 7;int next[MAXN], num[MAXN];void exKMP_pre(char *T) &#123; int n = strlen(T); next[0] = n; int p = 0; while (p + 1 &lt; n &amp;&amp; T[p] == T[p + 1]) p++; next[1] = p; int k = 1; for (int x = 2; x &lt; n; ++x) &#123; p = k + next[k] - 1; int l = next[x - k]; if (x + l &lt;= p) next[x] = l; else &#123; int j = p - x + 1; if (j &lt; 0) j = 0; while (x + j &lt; n &amp;&amp; T[x + j] == T[j]) j++; next[x] = j; k = x; &#125; &#125;&#125;int T, ans;char a[MAXN];int main() &#123; scanf("%d", &amp;T); while (T--) &#123; memset(next, 0, sizeof(next)); memset(num, 0, sizeof(num)); cin &gt;&gt; a; exKMP_pre(a); int n = strlen(a); for (int i = 1; i &lt; n; ++i) &#123; if (next[i]) &#123; num[i] ++; num[min(i + next[i], i &lt;&lt; 1)]--; &#125; &#125; ans = 1; for (int i = 1; i &lt; n; ++i) &#123; num[i] += num[i - 1]; ans = 1ll * ans * (num[i] + 1) % MOD; &#125; printf("%d\n", ans); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>LibreOJ</category>
+      </categories>
+      <tags>
+        <tag>KMP</tag>
+        <tag>差分</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[扩展 KMP]]></title>
     <url>%2F2019%2F12%2F01%2Falgorithm-exkmp%2F</url>
     <content type="text"><![CDATA[本文源自计蒜客课件，切勿外传！ 扩展 KMP 能在 $O(|S|+|T|)$ 时间复杂度内处理出字符串 $S$ 的所有后缀与字符串 $T$ 的最长公共前缀。 之所以称为扩展 KMP，是因为其思想和 KMP 算法很类似。 $\text{next}$ 函数记 $\text{next}[i]$ 表示后缀 $i$ 即 $T[i..|T|]$ 与 $T$ 的最长公共前缀。 例如： 数组索引 0 1 2 3 4 5 6 7 8 字符串数组 a a a b a a a a b $\text{next}$ 数组 9 2 1 0 3 4 2 1 0 注意 $\text{next}$ 数组是对于 模式串 $T$ 构建的。 如何获取 $\text{next}$ 函数假设 $\text{next}[i](0\le i&lt;x)$ 的值都已经求出，现在要求 $\text{next}[x]$。 假设 $p=\max\lbrace i+\text{next}[i]-1\rbrace$ 对于所有 $0&lt; i &lt; x$，我们找到 $i+next[i]-1$ 的最大值，令 $k$ 为这个最大值对应的 $i$，令 $p$ 为 $k+\text{next}[k]-1$，$p$ 就是我们目前已知的匹配到的最远位置。 根据定义我们可以得到： $T[k..p]=T[0..\text{next}[k]-1]$，如下图所示蓝色部分： 现在我们要求 $T[x..n-1]$ 与 $T[0..n-1]$ 的最长公共前缀。 由 $T[k..p]=T[0..\text{next}[k]-1]$ 得： $T[x..p]=T[x-k..\text{next}[k]-1]$，如下图所示红色部分： 设 $l=\text{next}[x-k]$，根据下图，可以得到： $T[0..l-1]=T[x-k..x-k+l-1]=T[x..x+l-1]$，如下图所示黄色部分： 也就是说，如果图中黄色部分小于红色部分，也就是 $l&lt;p-x+1$ 即 $x+l\le p$，那么我们可以确定 $\text{next}[x]=l$。否则，我们从 $p-x+1$ 和 $p+1$ 位置开始逐一比较，求出 $\text{next}[x]$ 的值。 由于在这个过程中， $p$ 满足不下降性质，因此总体时间复杂度为 $O(n)$。 获取 $\text{next}$ 函数的代码实现1234567891011121314151617181920void exKMP_pre(char *T) &#123; int n = strlen(T); next[0] = n; int p = 0; while (p + 1 &lt; n &amp;&amp; T[p] == T[p + 1]) p++; next[1] = p; int k = 1; for (int x = 2; x &lt; n; ++x) &#123; p = k + next[k] - 1; int l = next[x - k]; if (x + l &lt;= p) next[x] = l; else &#123; int j = p - x + 1; if (j &lt; 0) j = 0; while (x + j &lt; n &amp;&amp; T[x + j] == T[j]) j++; next[x] = j; k = x; &#125; &#125;&#125; 解决原问题记 $\text{extend}[i]$ 表示字符串 $S$ 的第 $i$ 个后缀和 $T$ 的最长公共前缀。假设 $\text{extend}[i](0\le i&lt;x)$ 已经求出，现在需要计算 $\text{extend}[x]$。 已知：$S[k..p]=T[0..\text{extend}[k]]$，求 $S[x..n]$ 与 $T[0..m]$ 的最长公共前缀。解法与计算 $\text{next}$ 的方法类似，记录 $p=i+\text{extend[i]}-1$ 的最大值。 根据红色部分的等价，我们可以利用 $\text{next}[x-k]$ 得到黄色部分等价性，剩下的分析就和求 $\text{next}$ 的过程一样了。 获取 $\text{extend}$ 函数的代码实现12345678910111213141516171819void exKMP(char *S, char *T) &#123; int n = strlen(T), m = strlen(S); int p = 0; while (p &lt; m &amp;&amp; p &lt; n &amp;&amp; S[p] == T[p]) p++; extend[0] = p; int k = 0; for (int x = 1; x &lt; m; ++x) &#123; p = k + extend[k] - 1; int l = next[x - k]; if (x + l &lt;= p) extend[x] = l; else &#123; int j = p - x + 1; if (j &lt; 0) j = 0; while (x + j &lt; m &amp;&amp; j &lt; n &amp;&amp; S[x + j] == T[j]) j++; extend[x] = j; k = x; &#125; &#125;&#125;]]></content>
@@ -129,8 +142,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>动态规划</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -524,8 +537,8 @@
       </categories>
       <tags>
         <tag>二分答案</tag>
-        <tag>倍增</tag>
         <tag>前缀和</tag>
+        <tag>倍增</tag>
       </tags>
   </entry>
   <entry>
@@ -977,8 +990,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>贪心</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -989,8 +1002,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>字符串</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
