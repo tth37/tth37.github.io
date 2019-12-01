@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[扩展 KMP]]></title>
+    <url>%2F2019%2F12%2F01%2Falgorithm-exkmp%2F</url>
+    <content type="text"><![CDATA[本文源自计蒜客课件，切勿外传！ 扩展 KMP 能在 $O(|S|+|T|)$ 时间复杂度内处理出字符串 $S$ 的所有后缀与字符串 $T$ 的最长公共前缀。 之所以称为扩展 KMP，是因为其思想和 KMP 算法很类似。 $\text{next}$ 函数记 $\text{next}[i]$ 表示后缀 $i$ 即 $T[i..|T|]$ 与 $T$ 的最长公共前缀。 例如： 数组索引 0 1 2 3 4 5 6 7 8 字符串数组 a a a b a a a a b $\text{next}$ 数组 9 2 1 0 3 4 2 1 0 注意 $\text{next}$ 数组是对于 模式串 $T$ 构建的。 如何获取 $\text{next}$ 函数假设 $\text{next}i$ 的值都已经求出，现在要求 $\text{next}[x]$。 假设 $p=\max\lbrace i+\text{next}[i]-1\rbrace$ 对于所有 $0\&lt; i &lt; x$，我们找到 $i+next[i]-1$ 的最大值，令 $k$ 为这个最大值对应的 $i$，令 $p$ 为 $k+\text{next}[k]-1$，$p$ 就是我们目前已知的匹配到的最远位置。 根据定义我们可以得到： $T[k..p]=T[0..\text{next}[k]-1]$，如下图所示蓝色部分： 现在我们要求 $T[x..n-1]$ 与 $T[0..n-1]$ 的最长公共前缀。 由 $T[k..p]=T[0..\text{next}[k]-1]$ 得： $T[x..p]=T[x-k..\text{next}[k]-1]$，如下图所示红色部分： 设 $l=\text{next}[x-k]$，根据下图，可以得到： $T[0..l-1]=T[x-k..x-k+l-1]=T[x..x+l-1]$，如下图所示黄色部分： 也就是说，如果图中黄色部分小于红色部分，也就是 $l&lt;p-x+1$ 即 $x+l\le p$，那么我们可以确定 $\text{next}[x]=l$。否则，我们从 $p-x+1$ 和 $p+1$ 位置开始逐一比较，求出 $\text{next}[x]$ 的值。 由于在这个过程中， $p$ 满足不下降性质，因此总体时间复杂度为 $O(n)$。 获取 $\text{next}$ 函数的代码实现1234567891011121314151617181920void exKMP_pre(char *T) &#123; int n = strlen(T); next[0] = n; int p = 0; while (p + 1 &lt; n &amp;&amp; T[p] == T[p + 1]) p++; next[1] = p; int k = 1; for (int x = 2; x &lt; n; ++x) &#123; p = k + next[k] - 1; int l = next[x - k]; if (i + l &lt;= p) next[x] = l; else &#123; int j = p - i + 1; if (j &lt; 0) j = 0; while (i + j &lt; n &amp;&amp; T[i + j] == T[j]) j++; next[x] = j; k = x; &#125; &#125;&#125; 解决原问题记 $\text{extend}[i]$ 表示字符串 $S$ 的第 $i$ 个后缀和 $T$ 的最长公共前缀。假设 $\text{extend}i$ 已经求出，现在需要计算 $\text{extend}[x]$。 已知：$S[k..p]=T[0..\text{extend}[k]]$，求 $S[x..n]$ 与 $T[0..m]$ 的最长公共前缀。解法与计算 $\text{next}$ 的方法类似，记录 $p=i+\text{extend[i]}-1$ 的最大值。 根据红色部分的等价，我们可以利用 $\text{next}[x-k]$ 得到黄色部分等价性，剩下的分析就和求 $\text{next}$ 的过程一样了。 获取 $\text{extend}$ 函数的代码实现12345678910111213141516171819void exKMP(char *S, char *T) &#123; int n = strlen(T), m = strlen(S); int p = 0; while (p &lt; m &amp;&amp; p &lt; n &amp;&amp; S[p] == T[p]) p++; extend[0] = p; int k = 0; for (int x = 1; x &lt; m; ++x) &#123; p = k + extend[k] - 1; int l = next[x - k]; if (i + l &lt;= p) extend[x] = l; else &#123; int j = p - x + 1; if (j &lt; 0) j = 0; while (i + j &lt; m &amp;&amp; j &lt; n &amp;&amp; S[i + j] == T[j]) j++; extend[x] = j; k = x; &#125; &#125;&#125;]]></content>
+      <categories>
+        <category>算法学习</category>
+        <category>字符串</category>
+      </categories>
+      <tags>
+        <tag>KMP</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[「CEOI2018」云计算]]></title>
     <url>%2F2019%2F11%2F23%2Fsolution-loj-3182%2F</url>
     <content type="text"><![CDATA[#3182. 「CEOI2018」云计算 Summarize题目概括征集中~ 球球你再帮我写几篇吧 TAT @oykz2333 Solution 这题也太巧妙了叭！ ——tth37 考虑类似背包的动态规划。记 $f[i]$ 表示满足订单后恰好剩余 $i$ 个核心的最大利润。 先不考虑时钟频率的限制条件，则问题可以转化为普通背包问题：将计算机的价格视为负数，将订单的核心数视为负数，采用背包问题的状态转移即可。 如果考虑到时钟频率的限制，则需要满足：在将每个订单放入背包之前，必须将所有时钟频率大于等于该订单的计算机放入背包中。 将计算机和订单按照时钟频率排序后，依次加入背包即可。 Code1234567891011121314151617181920212223242526272829303132333435363738394041424344#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int MAXN = 2005;struct Node &#123; int c, f, v; bool type;&#125;a[MAXN * 2];bool cmp(Node a, Node b) &#123; if (a.f != b.f) return a.f &gt; b.f; return a.type &lt; b.type;&#125;int n, m, tot;ll f[MAXN * 50];int main() &#123; scanf("%d", &amp;n); for (int i = 1; i &lt;= n; ++i) scanf("%d%d%d", &amp;a[i].c, &amp;a[i].f, &amp;a[i].v), a[i].type = 0, tot += a[i].c; scanf("%d", &amp;m); for (int i = 1; i &lt;= m; ++i) scanf("%d%d%d", &amp;a[n + i].c, &amp;a[n + i].f, &amp;a[n + i].v), a[n + i].type = 1; sort(a + 1, a + n + m + 1, cmp); memset(f, 0xcf, sizeof(f)); f[0] = 0; for (int i = 1; i &lt;= n + m; ++i) &#123; if (a[i].type == 0) &#123; for (int j = tot; j &gt;= a[i].c; --j) f[j] = max(f[j], f[j - a[i].c] - a[i].v); &#125; else &#123; for (int j = 0; j &lt;= tot - a[i].c; ++j) f[j] = max(f[j], f[j + a[i].c] + a[i].v); &#125; &#125; ll ans = 0; for (int i = 0; i &lt;= tot; ++i) ans = max(ans, f[i]); printf("%lld", ans); return 0;&#125;]]></content>
@@ -33,7 +45,7 @@
   <entry>
     <title><![CDATA[「TJOI2019」唱、跳、rap 和篮球]]></title>
     <url>%2F2019%2F11%2F22%2Fsolution-loj-3106%2F</url>
-    <content type="text"><![CDATA[#3106. 「TJOI2019」唱、跳、rap 和篮球 Summarize题目概括征集中~ Solution记连续的 4 个学生分别喜欢唱、跳、rap 和篮球为一组。考虑容斥，记 $f[i]$ 为保证至少存在 $i$ 组的序列方案数。根据题意，在此序列中最多只会存在 $m=\min\lbrace a,b,c,\lfloor\frac{n}{4}\rfloor\rbrace$ 组。最终答案即为 $\sum_{i=0}^{m}(-1)^{i}\times f[i]$。 考虑 $f[i]$ 的计算。由于保证至少存在 $i$ 组，可以将 $i$ 组随机插入到序列中，然后在剩下的位置插入任意学生并统计答案。 将 $i$ 个长度为 4 的组插入到长度为 $n$ 的序列中，共有 ${n-3i\choose i}$ 种方案。 将 $i_1$ 个喜欢唱、$i_2$ 个喜欢跳、$i_3$ 个喜欢 rap、$i_4$ 个喜欢篮球的学生放置在长度为 $n-4i$ 的序列中，如果保证 $i_1+i_2+i_3+i_4=n-4i$，则方案数为 $\frac{(n-4i)!}{i_1!\times i_2!\times i_3\times i_4!}$。 然而题目不保证剩余的 $a-i$、$b-i$、$c-i$、$d-i$ 个学生之和恰好为 $n-4i$，因此该部分的答案为： \sum_{i_1=0}^{a-i}\sum_{i_2=0}^{b-i}\sum_{i_3=0}^{c-i}\sum_{i_4=0}^{d-i}[i_1+i_2+i_3+i_4=n-4i]\frac{(n-4i)!}{i_1!\times i_2!\times i_3\times i_4!}注意到这是一个四元卷积的形式，可以用生成函数 + NTT 暴力求解。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const ll MOD = 998244353, G = 3;inline ll qpow(ll a, ll k) &#123; ll ret = 1; while (k) &#123; if (k &amp; 1) ret = ret * a % MOD; a = a * a % MOD; k &gt;&gt;= 1; &#125; return ret;&#125;namespace FFT &#123; int n, r[10005]; void NTT(ll *a, int op) &#123; int k = 0; for (; (1 &lt;&lt; k) &lt; n; ++k); for (int i = 0; i &lt; n; ++i) &#123; r[i] = r[i &gt;&gt; 1] &gt;&gt; 1 | (i &amp; 1) &lt;&lt; (k - 1); if (i &lt; r[i]) swap(a[i], a[r[i]]); &#125; for (int l = 2; l &lt;= n; l &lt;&lt;= 1) &#123; int m = l &gt;&gt; 1; ll w = qpow(G, (MOD - 1) / l); if (op == -1) w = qpow(w, MOD - 2); for (int i = 0; i &lt; n; i += l) &#123; ll wk = 1; for (int j = 0; j &lt; m; ++j, wk = wk * w % MOD) &#123; ll p = a[i + j], q = wk * a[i + j + m] % MOD; a[i + j] = (p + q) % MOD; a[i + j + m] = (p - q + MOD) % MOD; &#125; &#125; &#125; &#125; void DFT(ll *a) &#123; NTT(a, 1); &#125; void IDFT(ll *a) &#123; NTT(a, -1); ll inv = qpow(n, MOD - 2); for (int i = 0; i &lt; n; ++i) a[i] = a[i] * inv % MOD; &#125;&#125;;ll f[1005];ll fac[4005], inv[4005], facinv[4005];ll x[4005], y[4005], z[4005], w[4005];ll C(int n, int k) &#123; return fac[n] * facinv[k] % MOD * facinv[n - k] % MOD;&#125;int n, a, b, c, d, m;ll ans = 0;int main() &#123; fac[0] = facinv[0] = 1; fac[1] = inv[1] = facinv[1] = 1; for (int i = 2; i &lt;= 4000; ++i) &#123; fac[i] = fac[i - 1] * 1ll * i % MOD; inv[i] = (MOD - MOD / i) * inv[MOD % i] % MOD; facinv[i] = facinv[i - 1] * inv[i] % MOD; &#125; scanf("%d%d%d%d%d", &amp;n, &amp;a, &amp;b, &amp;c, &amp;d); m = min(min(min(min(n / 4, a), b), c), d); for (int i = 0; i &lt;= m; ++i) &#123; memset(x, 0, sizeof(x)); memset(y, 0, sizeof(y)); memset(z, 0, sizeof(z)); memset(w, 0, sizeof(w)); for (int j = 0; j &lt;= a - i; ++j) x[j] = facinv[j]; for (int j = 0; j &lt;= b - i; ++j) y[j] = facinv[j]; for (int j = 0; j &lt;= c - i; ++j) z[j] = facinv[j]; for (int j = 0; j &lt;= d - i; ++j) w[j] = facinv[j]; FFT::n = 1; while (FFT::n &lt;= a + b + c + d - 4 * i) FFT::n &lt;&lt;= 1; FFT::DFT(x), FFT::DFT(y), FFT::DFT(z), FFT::DFT(w); for (int j = 0; j &lt; FFT::n; ++j) x[j] = x[j] * y[j] % MOD * z[j] % MOD * w[j] % MOD; FFT::IDFT(x); f[i] = C(n - 3 * i, i) * fac[n - 4 * i] % MOD * x[n - 4 * i] % MOD; if (i &amp; 1) ans = (ans - f[i] + MOD) % MOD; else ans = (ans + f[i]) % MOD; &#125; printf("%lld", ans); return 0;&#125;]]></content>
+    <content type="text"><![CDATA[#3106. 「TJOI2019」唱、跳、rap 和篮球 Summarize有 $n$ 个蔡徐坤，有 $m$ 个世界上最帅的欧阳，求总共有多少人。 $n,m\le1000000$ Solution记连续的 4 个学生分别喜欢唱、跳、rap 和篮球为一组。考虑容斥，记 $f[i]$ 为保证至少存在 $i$ 组的序列方案数。根据题意，在此序列中最多只会存在 $m=\min\lbrace a,b,c,\lfloor\frac{n}{4}\rfloor\rbrace$ 组。最终答案即为 $\sum_{i=0}^{m}(-1)^{i}\times f[i]$。 考虑 $f[i]$ 的计算。由于保证至少存在 $i$ 组，可以将 $i$ 组随机插入到序列中，然后在剩下的位置插入任意学生并统计答案。 将 $i$ 个长度为 4 的组插入到长度为 $n$ 的序列中，共有 ${n-3i\choose i}$ 种方案。 将 $i_1$ 个喜欢唱、$i_2$ 个喜欢跳、$i_3$ 个喜欢 rap、$i_4$ 个喜欢篮球的学生放置在长度为 $n-4i$ 的序列中，如果保证 $i_1+i_2+i_3+i_4=n-4i$，则方案数为 $\frac{(n-4i)!}{i_1!\times i_2!\times i_3\times i_4!}$。 然而题目不保证剩余的 $a-i$、$b-i$、$c-i$、$d-i$ 个学生之和恰好为 $n-4i$，因此该部分的答案为： \sum_{i_1=0}^{a-i}\sum_{i_2=0}^{b-i}\sum_{i_3=0}^{c-i}\sum_{i_4=0}^{d-i}[i_1+i_2+i_3+i_4=n-4i]\frac{(n-4i)!}{i_1!\times i_2!\times i_3\times i_4!}注意到这是一个四元卷积的形式，可以用生成函数 + NTT 暴力求解。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const ll MOD = 998244353, G = 3;inline ll qpow(ll a, ll k) &#123; ll ret = 1; while (k) &#123; if (k &amp; 1) ret = ret * a % MOD; a = a * a % MOD; k &gt;&gt;= 1; &#125; return ret;&#125;namespace FFT &#123; int n, r[10005]; void NTT(ll *a, int op) &#123; int k = 0; for (; (1 &lt;&lt; k) &lt; n; ++k); for (int i = 0; i &lt; n; ++i) &#123; r[i] = r[i &gt;&gt; 1] &gt;&gt; 1 | (i &amp; 1) &lt;&lt; (k - 1); if (i &lt; r[i]) swap(a[i], a[r[i]]); &#125; for (int l = 2; l &lt;= n; l &lt;&lt;= 1) &#123; int m = l &gt;&gt; 1; ll w = qpow(G, (MOD - 1) / l); if (op == -1) w = qpow(w, MOD - 2); for (int i = 0; i &lt; n; i += l) &#123; ll wk = 1; for (int j = 0; j &lt; m; ++j, wk = wk * w % MOD) &#123; ll p = a[i + j], q = wk * a[i + j + m] % MOD; a[i + j] = (p + q) % MOD; a[i + j + m] = (p - q + MOD) % MOD; &#125; &#125; &#125; &#125; void DFT(ll *a) &#123; NTT(a, 1); &#125; void IDFT(ll *a) &#123; NTT(a, -1); ll inv = qpow(n, MOD - 2); for (int i = 0; i &lt; n; ++i) a[i] = a[i] * inv % MOD; &#125;&#125;;ll f[1005];ll fac[4005], inv[4005], facinv[4005];ll x[4005], y[4005], z[4005], w[4005];ll C(int n, int k) &#123; return fac[n] * facinv[k] % MOD * facinv[n - k] % MOD;&#125;int n, a, b, c, d, m;ll ans = 0;int main() &#123; fac[0] = facinv[0] = 1; fac[1] = inv[1] = facinv[1] = 1; for (int i = 2; i &lt;= 4000; ++i) &#123; fac[i] = fac[i - 1] * 1ll * i % MOD; inv[i] = (MOD - MOD / i) * inv[MOD % i] % MOD; facinv[i] = facinv[i - 1] * inv[i] % MOD; &#125; scanf("%d%d%d%d%d", &amp;n, &amp;a, &amp;b, &amp;c, &amp;d); m = min(min(min(min(n / 4, a), b), c), d); for (int i = 0; i &lt;= m; ++i) &#123; memset(x, 0, sizeof(x)); memset(y, 0, sizeof(y)); memset(z, 0, sizeof(z)); memset(w, 0, sizeof(w)); for (int j = 0; j &lt;= a - i; ++j) x[j] = facinv[j]; for (int j = 0; j &lt;= b - i; ++j) y[j] = facinv[j]; for (int j = 0; j &lt;= c - i; ++j) z[j] = facinv[j]; for (int j = 0; j &lt;= d - i; ++j) w[j] = facinv[j]; FFT::n = 1; while (FFT::n &lt;= a + b + c + d - 4 * i) FFT::n &lt;&lt;= 1; FFT::DFT(x), FFT::DFT(y), FFT::DFT(z), FFT::DFT(w); for (int j = 0; j &lt; FFT::n; ++j) x[j] = x[j] * y[j] % MOD * z[j] % MOD * w[j] % MOD; FFT::IDFT(x); f[i] = C(n - 3 * i, i) * fac[n - 4 * i] % MOD * x[n - 4 * i] % MOD; if (i &amp; 1) ans = (ans - f[i] + MOD) % MOD; else ans = (ans + f[i]) % MOD; &#125; printf("%lld", ans); return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
         <category>LibreOJ</category>
@@ -117,8 +129,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>动态规划</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -512,8 +524,8 @@
       </categories>
       <tags>
         <tag>二分答案</tag>
-        <tag>前缀和</tag>
         <tag>倍增</tag>
+        <tag>前缀和</tag>
       </tags>
   </entry>
   <entry>
@@ -641,8 +653,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树链剖分</tag>
         <tag>树状数组</tag>
+        <tag>树链剖分</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
@@ -977,8 +989,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>字符串</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>

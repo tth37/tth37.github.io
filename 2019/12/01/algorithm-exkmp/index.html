@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>扩展 KMP - tth37&#39;s Blog</title>
+
+
+    <meta name="description" content="本文源自计蒜客课件，切勿外传！  扩展 KMP 能在 $O(|S|+|T|)$ 时间复杂度内处理出字符串 $S$ 的所有后缀与字符串 $T$ 的最长公共前缀。 之所以称为扩展 KMP，是因为其思想和 KMP 算法很类似。">
+<meta name="keywords" content="KMP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="扩展 KMP">
+<meta property="og:url" content="https://tth37.cn/2019/12/01/algorithm-exkmp/index.html">
+<meta property="og:site_name" content="tth37&#39;s Blog">
+<meta property="og:description" content="本文源自计蒜客课件，切勿外传！  扩展 KMP 能在 $O(|S|+|T|)$ 时间复杂度内处理出字符串 $S$ 的所有后缀与字符串 $T$ 的最长公共前缀。 之所以称为扩展 KMP，是因为其思想和 KMP 算法很类似。">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://tth37.cn/images/og_image.png">
+<meta property="og:updated_time" content="2019-12-01T16:34:24.174Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="扩展 KMP">
+<meta name="twitter:description" content="本文源自计蒜客课件，切勿外传！  扩展 KMP 能在 $O(|S|+|T|)$ 时间复杂度内处理出字符串 $S$ 的所有后缀与字符串 $T$ 的最长公共前缀。 之所以称为扩展 KMP，是因为其思想和 KMP 算法很类似。">
+<meta name="twitter:image" content="https://tth37.cn/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/chess-rook.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="is-3-column">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="扩展 KMP" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-01T15:43:05.000Z">2019-12-01</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/算法学习/">算法学习</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/算法学习/字符串/">字符串</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 minutes read (About 858 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                扩展 KMP
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p>本文源自计蒜客课件，<strong>切勿外传！</strong></p>
+</blockquote>
+<p>扩展 KMP 能在 $O(|S|+|T|)$ 时间复杂度内处理出字符串 $S$ 的所有后缀与字符串 $T$ 的最长公共前缀。</p>
+<p>之所以称为扩展 KMP，是因为其思想和 KMP 算法很类似。</p>
+<a id="more"></a>
+<h3 id="text-next-函数"><a href="#text-next-函数" class="headerlink" title="$\text{next}$ 函数"></a>$\text{next}$ 函数</h3><p>记 $\text{next}[i]$ 表示后缀 $i$ 即 $T[i..|T|]$ 与 $T$ 的最长公共前缀。 </p>
+<p>例如：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数组索引</th>
+<th style="text-align:center">0</th>
+<th style="text-align:center">1</th>
+<th style="text-align:center">2</th>
+<th style="text-align:center">3</th>
+<th style="text-align:center">4</th>
+<th style="text-align:center">5</th>
+<th style="text-align:center">6</th>
+<th style="text-align:center">7</th>
+<th style="text-align:center">8</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">字符串数组</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">b</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">a</td>
+<td style="text-align:center">b</td>
+</tr>
+<tr>
+<td style="text-align:center">$\text{next}$ 数组</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">3</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">2</td>
+<td style="text-align:center">1</td>
+<td style="text-align:center">0</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>注意 $\text{next}$ 数组是对于 <strong>模式串 $T$</strong> 构建的。</p>
+<h3 id="如何获取-text-next-函数"><a href="#如何获取-text-next-函数" class="headerlink" title="如何获取 $\text{next}$ 函数"></a>如何获取 $\text{next}$ 函数</h3><p>假设 $\text{next}<a href="0\le i&lt;x">i</a>$ 的值都已经求出，现在要求 $\text{next}[x]$。</p>
+<p>假设 $p=\max\lbrace i+\text{next}[i]-1\rbrace$ 对于所有 $0\&lt; i &lt; x$，我们找到 $i+next[i]-1$ 的最大值，令 $k$ 为这个最大值对应的 $i$，令 $p$ 为 $k+\text{next}[k]-1$，$p$ 就是我们目前已知的匹配到的最远位置。</p>
+<p>根据定义我们可以得到： $T[k..p]=T[0..\text{next}[k]-1]$，如下图所示蓝色部分：</p>
+<p><img src="https://res.jisuanke.com/img/upload/20180516/6cb6bc2387e42ba0a7ee4dcfe9332b9eb0b58f37.png" alt></p>
+<p>现在我们要求 $T[x..n-1]$ 与 $T[0..n-1]$ 的最长公共前缀。</p>
+<p>由 $T[k..p]=T[0..\text{next}[k]-1]$ 得：</p>
+<p>$T[x..p]=T[x-k..\text{next}[k]-1]$，如下图所示红色部分：</p>
+<p><img src="https://res.jisuanke.com/img/upload/20180516/0dd52d39385ff16ee85cc915742fc3d1c62ae173.png" alt></p>
+<p>设 $l=\text{next}[x-k]$，根据下图，可以得到：</p>
+<p>$T[0..l-1]=T[x-k..x-k+l-1]=T[x..x+l-1]$，如下图所示黄色部分：</p>
+<p><img src="https://res.jisuanke.com/img/upload/20180516/d9cb7344732ed21100f545c2b38119074d6bf7d2.png" alt></p>
+<p>也就是说，如果图中黄色部分小于红色部分，也就是 $l&lt;p-x+1$ 即 $x+l\le p$，那么我们可以确定 $\text{next}[x]=l$。否则，我们从 $p-x+1$ 和 $p+1$ 位置开始逐一比较，求出 $\text{next}[x]$ 的值。</p>
+<p>由于在这个过程中， $p$ 满足不下降性质，因此总体时间复杂度为 $O(n)$。</p>
+<h3 id="获取-text-next-函数的代码实现"><a href="#获取-text-next-函数的代码实现" class="headerlink" title="获取 $\text{next}$ 函数的代码实现"></a>获取 $\text{next}$ 函数的代码实现</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">exKMP_pre</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *T)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> n = <span class="hljs-built_in">strlen</span>(T);</span><br><span class="line">    next[<span class="hljs-number">0</span>] = n;</span><br><span class="line">    <span class="hljs-keyword">int</span> p = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (p + <span class="hljs-number">1</span> &lt; n &amp;&amp; T[p] == T[p + <span class="hljs-number">1</span>]) p++;</span><br><span class="line">    next[<span class="hljs-number">1</span>] = p;</span><br><span class="line">    <span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = <span class="hljs-number">2</span>; x &lt; n; ++x) &#123;</span><br><span class="line">        p = k + next[k] - <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> l = next[x - k];</span><br><span class="line">        <span class="hljs-keyword">if</span> (i + l &lt;= p) next[x] = l;</span><br><span class="line">        <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> j = p - i + <span class="hljs-number">1</span>;</span><br><span class="line">            <span class="hljs-keyword">if</span> (j &lt; <span class="hljs-number">0</span>) j = <span class="hljs-number">0</span>;</span><br><span class="line">            <span class="hljs-keyword">while</span> (i + j &lt; n &amp;&amp; T[i + j] == T[j]) j++;</span><br><span class="line">            next[x] = j;</span><br><span class="line">            k = x;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="解决原问题"><a href="#解决原问题" class="headerlink" title="解决原问题"></a>解决原问题</h3><p>记 $\text{extend}[i]$ 表示字符串 $S$ 的第 $i$ 个后缀和 $T$ 的最长公共前缀。假设 $\text{extend}<a href="0\le i&lt;x">i</a>$ 已经求出，现在需要计算 $\text{extend}[x]$。</p>
+<p>已知：$S[k..p]=T[0..\text{extend}[k]]$，求 $S[x..n]$ 与 $T[0..m]$ 的最长公共前缀。解法与计算 $\text{next}$ 的方法类似，记录 $p=i+\text{extend[i]}-1$ 的最大值。</p>
+<p><img src="https://res.jisuanke.com/img/upload/20180516/761b7f45f24395bab2e469d658b7353672480a4e.png" alt></p>
+<p>根据红色部分的等价，我们可以利用 $\text{next}[x-k]$ 得到黄色部分等价性，剩下的分析就和求 $\text{next}$ 的过程一样了。</p>
+<h3 id="获取-text-extend-函数的代码实现"><a href="#获取-text-extend-函数的代码实现" class="headerlink" title="获取 $\text{extend}$ 函数的代码实现"></a>获取 $\text{extend}$ 函数的代码实现</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">exKMP</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *S, <span class="hljs-keyword">char</span> *T)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> n = <span class="hljs-built_in">strlen</span>(T), m = <span class="hljs-built_in">strlen</span>(S);</span><br><span class="line">    <span class="hljs-keyword">int</span> p = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (p &lt; m &amp;&amp; p &lt; n &amp;&amp; S[p] == T[p]) p++;</span><br><span class="line">    extend[<span class="hljs-number">0</span>] = p;</span><br><span class="line">    <span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = <span class="hljs-number">1</span>; x &lt; m; ++x) &#123;</span><br><span class="line">        p = k + extend[k] - <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> l = next[x - k];</span><br><span class="line">        <span class="hljs-keyword">if</span> (i + l &lt;= p) extend[x] = l;</span><br><span class="line">        <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> j = p - x + <span class="hljs-number">1</span>;</span><br><span class="line">            <span class="hljs-keyword">if</span> (j &lt; <span class="hljs-number">0</span>) j = <span class="hljs-number">0</span>;</span><br><span class="line">            <span class="hljs-keyword">while</span> (i + j &lt; m &amp;&amp; j &lt; n &amp;&amp; S[i + j] == T[j]) j++;</span><br><span class="line">            extend[x] = j;</span><br><span class="line">            k = x;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/KMP/">KMP</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/11/23/solution-loj-3182/">
+                <span class="level-item">「CEOI2018」云计算</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: false,
+        verify: true,
+        app_id: '3gjqC8wA7kbYSN6UwAWhl4qc-gzGzoHsz',
+        app_key: 'SqboaQjM5xxfQ7sxqsR9JAyW',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-3-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.jpg" alt="tth37">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        tth37
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Think twice, Code once.
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Jiangsu, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            85
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            13
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            63
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/tth37" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/tth37">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-01T15:43:05.000Z">2019-12-01</time></div>
+                    <a href="/2019/12/01/algorithm-exkmp/" class="title has-link-black-ter is-size-6 has-text-weight-normal">扩展 KMP</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/算法学习/">算法学习</a> / <a class="has-link-grey -link" href="/categories/算法学习/字符串/">字符串</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-23T14:52:04.000Z">2019-11-23</time></div>
+                    <a href="/2019/11/23/solution-loj-3182/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「CEOI2018」云计算</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-22T17:43:34.000Z">2019-11-23</time></div>
+                    <a href="/2019/11/23/solution-loj-6503/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「雅礼集训 2018 Day4」Magic</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-21T16:21:51.000Z">2019-11-22</time></div>
+                    <a href="/2019/11/22/solution-loj-3106/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「TJOI2019」唱、跳、rap 和篮球</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-20T15:38:26.000Z">2019-11-20</time></div>
+                    <a href="/2019/11/20/algorithm-fftntt/" class="title has-link-black-ter is-size-6 has-text-weight-normal">快速傅里叶变换（FFT）快速数论变换（NTT）</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/算法学习/">算法学习</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/FFT-NTT/" style="font-size: 12.22px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 10px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 11.11px;">ST算法</a> <a href="/tags/dfs序/" style="font-size: 12.22px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 15.56px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10px;">乘法逆元</a> <a href="/tags/二分图匹配/" style="font-size: 11.11px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 12.22px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 12.22px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 11.11px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 11.11px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 11.11px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 11.11px;">可持久化trie</a> <a href="/tags/启发式合并/" style="font-size: 12.22px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 11.11px;">堆</a> <a href="/tags/字符串/" style="font-size: 11.11px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10px;">容斥原理</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11.11px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.89px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 14.44px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/最短路/" style="font-size: 11.11px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 13.33px;">最近公共祖先</a> <a href="/tags/栈/" style="font-size: 11.11px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 17.78px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 11.11px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 12.22px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 12.22px;">概率</a> <a href="/tags/点分治/" style="font-size: 11.11px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11.11px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 11.11px;">生成函数</a> <a href="/tags/矩阵/" style="font-size: 10px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线段树/" style="font-size: 17.78px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 11.11px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 10px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 16.67px;">背包</a> <a href="/tags/虚树/" style="font-size: 12.22px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10px;">计数dp</a> <a href="/tags/贪心/" style="font-size: 12.22px;">贪心</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 11.11px;">高斯消元</a>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow  ">
+        
+            
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/CF游记/">
+            <span class="level-start">
+                <span class="level-item">CF游记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/公告/">
+            <span class="level-start">
+                <span class="level-item">公告</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/模板/">
+            <span class="level-start">
+                <span class="level-item">模板</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/">
+            <span class="level-start">
+                <span class="level-item">算法学习</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/算法学习/字符串/">
+            <span class="level-start">
+                <span class="level-item">字符串</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/数论专题/">
+            <span class="level-start">
+                <span class="level-item">数论专题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/解题报告/">
+            <span class="level-start">
+                <span class="level-item">解题报告</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/计划/">
+            <span class="level-start">
+                <span class="level-item">计划</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/题目列表/">
+            <span class="level-start">
+                <span class="level-item">题目列表</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/题解/">
+            <span class="level-start">
+                <span class="level-item">题解</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">57</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/题解/LibreOJ/">
+            <span class="level-start">
+                <span class="level-item">LibreOJ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">14</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/题解/计蒜客/">
+            <span class="level-start">
+                <span class="level-item">计蒜客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        
+            
+
+        
+        </div>
+    
+</div>
+
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="扩展 KMP" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 tth37&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+</body>
+</html>
