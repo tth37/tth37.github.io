@@ -166,12 +166,16 @@
 <p>$n \le 10000000$</p>
 </blockquote>
 <a id="more"></a>
-
-<p>记 $f(i,j)$ 表示 $n$ 秒种后，主队进 $i$ 个球，客队进 $j$ 个球的概率。则有：<br>$$<br>f(i,j)={n \choose i}\times p^i\times (1-p)^{n-i} \times {n\choose j}\times q^j \times (1-q)^{n-j}<br>$$<br>要使得 $i&gt;j$ ，即求：<br>$$<br>\sum_{i=1}^n\sum_{j=0}^{i-1}{n\choose i}\times p^i\times (1-p)^{n-i}\times {n\choose j}\times q^j \times (1-q)^{n-j}<br>$$<br>化简，得：<br>$$<br>\sum_{i=1}^n {n\choose i}\times p^i\times (1-p)^{n-i}\times(\sum_{j=0}^{i-1}{n\choose j}\times q^j \times (1-q)^{n-j})<br>$$<br>$O(n)$ 预处理逆元与 $p$、$q$ 的 $n$ 次方即可。组合数可以递推计算以卡常。</p>
+<p>记 $f(i,j)$ 表示 $n$ 秒种后，主队进 $i$ 个球，客队进 $j$ 个球的概率。则有：</p>
+<script type="math/tex; mode=display">
+f(i,j)={n \choose i}\times p^i\times (1-p)^{n-i} \times {n\choose j}\times q^j \times (1-q)^{n-j}</script><p>要使得 $i&gt;j$ ，即求：</p>
+<script type="math/tex; mode=display">
+\sum_{i=1}^n\sum_{j=0}^{i-1}{n\choose i}\times p^i\times (1-p)^{n-i}\times {n\choose j}\times q^j \times (1-q)^{n-j}</script><p>化简，得：</p>
+<script type="math/tex; mode=display">
+\sum_{i=1}^n {n\choose i}\times p^i\times (1-p)^{n-i}\times(\sum_{j=0}^{i-1}{n\choose j}\times q^j \times (1-q)^{n-j})</script><p>$O(n)$ 预处理逆元与 $p$、$q$ 的 $n$ 次方即可。组合数可以递推计算以卡常。</p>
 <p>注意实现细节，本题还是挺水的。</p>
 <p>代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">10000005</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> mod = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">qpow</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> ret = <span class="hljs-number">1</span>;</span><br><span class="line">	<span class="hljs-keyword">while</span> (b) &#123;</span><br><span class="line">		<span class="hljs-keyword">if</span> (b &amp; <span class="hljs-number">1</span>) ret = <span class="hljs-number">1l</span>l * ret * a % mod;</span><br><span class="line">		a = <span class="hljs-number">1l</span>l * a * a % mod;</span><br><span class="line">		b &gt;&gt;= <span class="hljs-number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">int</span> inv[maxn];</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> n, ans;</span><br><span class="line"><span class="hljs-keyword">int</span> p, q, p2, q2;</span><br><span class="line"><span class="hljs-keyword">int</span> invp2, invq2;</span><br><span class="line"><span class="hljs-keyword">int</span> pa, pb, qa, qb;</span><br><span class="line"><span class="hljs-keyword">int</span> powp, powq;</span><br><span class="line"><span class="hljs-keyword">int</span> powp2, powq2;</span><br><span class="line"><span class="hljs-keyword">int</span> sq;</span><br><span class="line"><span class="hljs-keyword">int</span> C;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;n);</span><br><span class="line">	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;pa, &amp;pb);</span><br><span class="line">	p = <span class="hljs-number">1l</span>l * pa * qpow(pb, mod - <span class="hljs-number">2</span>) % mod;</span><br><span class="line">	p2 = (<span class="hljs-number">1</span> - p + mod) % mod;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;qa, &amp;qb);</span><br><span class="line">	q = <span class="hljs-number">1l</span>l * qa * qpow(qb, mod - <span class="hljs-number">2</span>) % mod;</span><br><span class="line">	q2 = (<span class="hljs-number">1</span> - q + mod) % mod;</span><br><span class="line">	<span class="hljs-keyword">if</span> (p == <span class="hljs-number">1</span>)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, (<span class="hljs-number">1</span> - qpow(q, n) + mod) % mod), <span class="hljs-number">0</span>;</span><br><span class="line">    inv[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        inv[i] = <span class="hljs-number">1l</span>l * (mod - mod / i) * inv[mod % i] % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    C = <span class="hljs-number">1</span>;</span><br><span class="line">    powp = <span class="hljs-number">1</span>, powq = <span class="hljs-number">1</span>;</span><br><span class="line">    powp2 = qpow(p2, n), powq2 = qpow(q2, n);</span><br><span class="line">    invp2 = qpow(p2, mod - <span class="hljs-number">2</span>), invq2 = qpow(q2, mod - <span class="hljs-number">2</span>);</span><br><span class="line">    <span class="hljs-keyword">int</span> tp = <span class="hljs-number">1l</span>l * powp * powp2 % mod, tq = <span class="hljs-number">1l</span>l * powq * powq2 % mod;</span><br><span class="line">    <span class="hljs-keyword">int</span> mp = <span class="hljs-number">1l</span>l * p * invp2 % mod, mq = <span class="hljs-number">1l</span>l * q * invq2 % mod;</span><br><span class="line">	sq = powq2;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		C = <span class="hljs-number">1l</span>l * C * (n - i + <span class="hljs-number">1</span>) % mod * inv[i] % mod;</span><br><span class="line">        tp = <span class="hljs-number">1l</span>l * tp * mp % mod;</span><br><span class="line">        tq = <span class="hljs-number">1l</span>l * tq * mq % mod;</span><br><span class="line">        ans = (ans + <span class="hljs-number">1l</span>l * tp % mod * sq % mod * C) % mod;</span><br><span class="line">		sq = (sq + <span class="hljs-number">1l</span>l * tq % mod * C) % mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, ans);</span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -285,7 +289,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            86
+                            87
                         </p>
                     </a>
                 </div>
@@ -370,6 +374,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-07T15:39:32.000Z">2019-12-07</time></div>
+                    <a href="/2019/12/07/solution-loj-3103/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「JSOI2019」节日庆典</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-01T17:15:35.000Z">2019-12-02</time></div>
                     <a href="/2019/12/02/solution-loj-2246/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「NOI2014」动物园</a>
                     <p class="is-size-7 is-uppercase">
@@ -418,19 +435,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-21T16:21:51.000Z">2019-11-22</time></div>
-                    <a href="/2019/11/22/solution-loj-3106/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「TJOI2019」唱、跳、rap 和篮球</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -439,7 +443,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/FFT-NTT/" style="font-size: 12.22px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 11.11px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 11.11px;">ST算法</a> <a href="/tags/dfs序/" style="font-size: 12.22px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 15.56px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10px;">乘法逆元</a> <a href="/tags/二分图匹配/" style="font-size: 11.11px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 12.22px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 12.22px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 11.11px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 11.11px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 11.11px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 11.11px;">可持久化trie</a> <a href="/tags/启发式合并/" style="font-size: 12.22px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 11.11px;">堆</a> <a href="/tags/字符串/" style="font-size: 11.11px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10px;">容斥原理</a> <a href="/tags/差分/" style="font-size: 10px;">差分</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11.11px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.89px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 14.44px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/最短路/" style="font-size: 11.11px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 13.33px;">最近公共祖先</a> <a href="/tags/栈/" style="font-size: 11.11px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 17.78px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 11.11px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 12.22px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 12.22px;">概率</a> <a href="/tags/点分治/" style="font-size: 11.11px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11.11px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 11.11px;">生成函数</a> <a href="/tags/矩阵/" style="font-size: 10px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线段树/" style="font-size: 17.78px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 11.11px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 10px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 16.67px;">背包</a> <a href="/tags/虚树/" style="font-size: 12.22px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10px;">计数dp</a> <a href="/tags/贪心/" style="font-size: 12.22px;">贪心</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 11.11px;">高斯消元</a>
+        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/FFT-NTT/" style="font-size: 12.22px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 12.22px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 11.11px;">ST算法</a> <a href="/tags/dfs序/" style="font-size: 12.22px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 15.56px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10px;">乘法逆元</a> <a href="/tags/二分图匹配/" style="font-size: 11.11px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 12.22px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 12.22px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 11.11px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 11.11px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 11.11px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 11.11px;">可持久化trie</a> <a href="/tags/启发式合并/" style="font-size: 12.22px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 11.11px;">堆</a> <a href="/tags/字符串/" style="font-size: 11.11px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10px;">容斥原理</a> <a href="/tags/差分/" style="font-size: 10px;">差分</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11.11px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.89px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 14.44px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/最短路/" style="font-size: 11.11px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 13.33px;">最近公共祖先</a> <a href="/tags/栈/" style="font-size: 11.11px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 17.78px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 11.11px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 12.22px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 12.22px;">概率</a> <a href="/tags/点分治/" style="font-size: 11.11px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11.11px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 11.11px;">生成函数</a> <a href="/tags/矩阵/" style="font-size: 10px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线段树/" style="font-size: 17.78px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 11.11px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 10px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 16.67px;">背包</a> <a href="/tags/虚树/" style="font-size: 12.22px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10px;">计数dp</a> <a href="/tags/贪心/" style="font-size: 12.22px;">贪心</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 11.11px;">高斯消元</a>
     </div>
 </div>
     
@@ -533,7 +537,7 @@
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">58</span>
+                <span class="level-item tag">59</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/题解/LibreOJ/">
@@ -541,7 +545,7 @@
                 <span class="level-item">LibreOJ</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">15</span>
+                <span class="level-item tag">16</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/题解/计蒜客/">
@@ -559,151 +563,6 @@
 
         
             
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Archives
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">22</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">September 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">August 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">14</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">March 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
 
         
         </div>
