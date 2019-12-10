@@ -172,9 +172,7 @@
 </blockquote>
 <p>背包类树形dp。本题需要运用分组背包模型。</p>
 <p>首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。</p>
-<p>可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：</p>
-<script type="math/tex; mode=display">
-f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$的子节点，$w$为这条边的权值。在$u$每个子节点上有许多“物品”，“物品”总数即为以$v$为根的子树上用户的个数；每个“物品”所具有的价值即为其最大利润，即$f[v][j]$。同时不应忽略边权对利润带来的影响。</p>
+<p>可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：<br>$$<br>f[u][i]=\max_{v\in son(u)}{f[u][i-j]+f[v][j]-w}<br>$$<br>其中，$v$为$u$的子节点，$w$为这条边的权值。在$u$每个子节点上有许多“物品”，“物品”总数即为以$v$为根的子树上用户的个数；每个“物品”所具有的价值即为其最大利润，即$f[v][j]$。同时不应忽略边权对利润带来的影响。</p>
 <p>注意细节处理及边界。代码如下：</p>
         </div>
         
@@ -231,13 +229,13 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$�
             <p>这是一个并不简单的背包类树形dp……</p>
 <p><del>很自然地</del>想到状态定义：$f[u][k][0/1][0/1]$表示以$u$为根的子树中，总共选择$k$个结点，其中除了$u$以外的所有结点均被监听到，$u$结点选或不选，$u$结点是否被覆盖的情况下，一共有多少种方案。</p>
 <p>状态转移看似十分麻烦。每个结点$u$都有许多子结点，很难统计出每个子结点的所有情况（似乎在组合数学的范畴）。但是我们可以用十分巧妙的树形背包来进行状态转移。树上背包的转移套路是：</p>
-<script type="math/tex; mode=display">
-f[u][i+j]=combine(f[u][i],f[v][j])</script><p>相当于每递归访问完一个子结点，就把子节点上的状态与当前已经处理的状态一一配对，保证不重不漏且兼顾效率。具体的转移方程为：</p>
-<script type="math/tex; mode=display">
-f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]</script><script type="math/tex; mode=display">
-f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])</script><script type="math/tex; mode=display">
-f[u][i+j][0][1]=\sum (f[u][i][0][1]\*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]\*f[v][j][1][1]</script><script type="math/tex; mode=display">
-f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]\*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))</script><p>具体实现时还应注意：因为阶段（即扫描子结点个数）的划分，在每次转移前都要先记录原始的$u$结点上的数据，否则会导致混乱。</p>
+<p>$$<br>f[u][i+j]=combine(f[u][i],f[v][j])<br>$$</p>
+<p>相当于每递归访问完一个子结点，就把子节点上的状态与当前已经处理的状态一一配对，保证不重不漏且兼顾效率。具体的转移方程为：</p>
+<p>$$<br>f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]<br>$$</p>
+<p>$$<br>f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])<br>$$</p>
+<p>$$<br>f[u][i+j][0][1]=\sum (f[u][i][0][1]*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]*f[v][j][1][1]<br>$$</p>
+<p>$$<br>f[u][i+j][1][1]=\sum (f[u][i][1][0]*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))<br>$$</p>
+<p>具体实现时还应注意：因为阶段（即扫描子结点个数）的划分，在每次转移前都要先记录原始的$u$结点上的数据，否则会导致混乱。</p>
         </div>
         
         
@@ -290,28 +288,31 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
             
         </h1>
         <div class="content">
-            <h2 id="树形分组背包"><a href="#树形分组背包" class="headerlink" title="树形分组背包"></a>树形分组背包</h2><h3 id="【例题】-选课-luogu-p2014"><a href="#【例题】-选课-luogu-p2014" class="headerlink" title="【例题】 选课 luogu-p2014 "></a>【例题】 <a href="https://www.luogu.org/problemnew/show/P2014" target="_blank" rel="noopener"><strong>选课</strong></a> <strong>luogu-p2014 </strong></h3><p>在大学里每个学生，为了达到一定的学分，必须从很多课程里选择一些课程来学习，在课程里有些课程必须在某些课程之前学习，如高等数学总是在其它课程之前学习。现在有N门功课，每门课有个学分，每门课有一门或没有直接先修课（若课程a是课程b的先修课即只有学完了课程a，才能学习课程b）。一个学生要从这些课程里选择M门课程学习，问他能获得的最大学分是多少？</p>
+            <h2 id="树形分组背包"><a href="#树形分组背包" class="headerlink" title="树形分组背包"></a>树形分组背包</h2><h3 id="【例题】-选课-luogu-p2014"><a href="#【例题】-选课-luogu-p2014" class="headerlink" title="【例题】 选课 *luogu-p2014 *"></a>【例题】 <a href="https://www.luogu.org/problemnew/show/P2014" target="_blank" rel="noopener"><strong>选课</strong></a> *<em>luogu-p2014 *</em></h3><p>在大学里每个学生，为了达到一定的学分，必须从很多课程里选择一些课程来学习，在课程里有些课程必须在某些课程之前学习，如高等数学总是在其它课程之前学习。现在有N门功课，每门课有个学分，每门课有一门或没有直接先修课（若课程a是课程b的先修课即只有学完了课程a，才能学习课程b）。一个学生要从这些课程里选择M门课程学习，问他能获得的最大学分是多少？</p>
 <h3 id="【分析】"><a href="#【分析】" class="headerlink" title="【分析】"></a>【分析】</h3><p>记录状态：$f[u][i]$为以$u$为根的子树上，选择$i$门课所能获得的最大学分。</p>
 <p>记$u$为当前正在处理的结点，$v$为刚刚递归访问结束的结点。那么在$u$上相当于有一个容量为$M$的背包，每个子树中不同的状态相当于不同的物品，例如$f[v][j]$为体积为$j$，价值为$f[v][j]$中存储的数值。</p>
 <p>在本题中，由于所有关系构成森林结构，因此可以设$0$号结点为“没有先修课”的课的先修课。然后以$0$为根，进行状态转移即可。</p>
 <h3 id="【代码】"><a href="#【代码】" class="headerlink" title="【代码】"></a>【代码】</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> Pb push_back</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN=<span class="hljs-number">305</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXM=<span class="hljs-number">305</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> N,M;</span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; son[MAXN];</span><br><span class="line"><span class="hljs-keyword">int</span> a[MAXN],f[MAXN][MAXM];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dp</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it=son[u].begin();it!=son[u].end();it++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v=*it;</span><br><span class="line">        dp(v);</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=M;i&gt;=<span class="hljs-number">0</span>;--i)</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;=i;++j)</span><br><span class="line">                f[u][i]=max(f[u][i],f[u][i-j]+f[v][j]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span>(u)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=M;i&gt;=<span class="hljs-number">1</span>;--i)</span><br><span class="line">            f[u][i]=f[u][i<span class="hljs-number">-1</span>]+a[u];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;N,&amp;M);</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=N;++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> k,s;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;k,&amp;s);</span><br><span class="line">        son[k].Pb(i);a[i]=s;</span><br><span class="line">    &#125;</span><br><span class="line">    dp(<span class="hljs-number">0</span>);</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>,f[<span class="hljs-number">0</span>][M]);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h3 id="【例题】有线电视网-luogu-p1273"><a href="#【例题】有线电视网-luogu-p1273" class="headerlink" title="【例题】有线电视网 luogu-p1273"></a>【例题】<a href="https://www.luogu.org/fe/problem/P1273" target="_blank" rel="noopener">有线电视网</a> luogu-p1273</h3><p>某收费有线电视网计划转播一场重要的足球比赛。他们的转播网和用户终端构成一棵树状结构，这棵树的根结点位于足球比赛的现场，树叶为各个用户终端，其他中转站为该树的内部节点。</p>
 <p>从转播站到转播站以及从转播站到所有用户终端的信号传输费用都是已知的，一场转播的总费用等于传输信号的费用总和。</p>
 <p>现在每个用户都准备了一笔费用想观看这场精彩的足球比赛，有线电视网有权决定给哪些用户提供信号而不给哪些用户提供信号。</p>
 <p>写一个程序找出一个方案使得有线电视网在不亏本的情况下使观看转播的用户尽可能多。</p>
 <h3 id="【分析】-1"><a href="#【分析】-1" class="headerlink" title="【分析】"></a>【分析】</h3><p>记录状态：$f[i][j]$为以$i$为根，选择$j$个用户最多有多少收入。状态转移时如果无法从正面入手（如本题不知道价格的最值，且价值分布更为稀疏），可以从反面设计状态，在输出答案时进行判断即可。转移时可以记录$size$数组进行优化。</p>
 <h3 id="【代码】-1"><a href="#【代码】-1" class="headerlink" title="【代码】"></a>【代码】</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Edge</span>&#123;</span></span><br><span class="line">    <span class="hljs-keyword">int</span> v,w,nxt;</span><br><span class="line">&#125;mem[<span class="hljs-number">3005</span>*<span class="hljs-number">2</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> head[<span class="hljs-number">3005</span>],cnt;</span><br><span class="line"><span class="hljs-keyword">int</span> size[<span class="hljs-number">3005</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddEdge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u,<span class="hljs-keyword">int</span> v,<span class="hljs-keyword">int</span> w)</span></span>&#123;</span><br><span class="line">    mem[++cnt].v=v;</span><br><span class="line">    mem[cnt].w=w;</span><br><span class="line">    mem[cnt].nxt=head[u];</span><br><span class="line">    head[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> N,M;</span><br><span class="line"><span class="hljs-keyword">int</span> leaf[<span class="hljs-number">3005</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> f[<span class="hljs-number">3005</span>][<span class="hljs-number">3005</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span>(leaf[u])&#123;</span><br><span class="line">        f[u][<span class="hljs-number">1</span>]=leaf[u];</span><br><span class="line">        size[u]=<span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=head[u];i;i=mem[i].nxt)&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v=mem[i].v,w=mem[i].w;</span><br><span class="line">        dfs(v);</span><br><span class="line">        size[u]+=size[v];</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j=M;j&gt;=<span class="hljs-number">1</span>;--j)</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>;k&lt;=min(size[v],j);++k)</span><br><span class="line">                f[u][j]=max(f[u][j],f[u][j-k]+f[v][k]-w);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">    <span class="hljs-built_in">memset</span>(f,<span class="hljs-number">0xcf</span>,<span class="hljs-keyword">sizeof</span>(f));</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;N,&amp;M);</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=N-M;++i)&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> k;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;k);</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=k;++j)&#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> a,c;</span><br><span class="line">            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;a,&amp;c);</span><br><span class="line">            AddEdge(i,a,c);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=M;++i) <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;leaf[N-M+i]);</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=N;++i) f[i][<span class="hljs-number">0</span>]=<span class="hljs-number">0</span>;</span><br><span class="line">    dfs(<span class="hljs-number">1</span>);</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=M;i&gt;=<span class="hljs-number">1</span>;--i)&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(f[<span class="hljs-number">1</span>][i]&gt;=<span class="hljs-number">0</span>)&#123;</span><br><span class="line">            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>,i);</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="组合计数类树形背包"><a href="#组合计数类树形背包" class="headerlink" title="组合计数类树形背包"></a>组合计数类树形背包</h2><h3 id="【例题】树的独立集-（原创）"><a href="#【例题】树的独立集-（原创）" class="headerlink" title="【例题】树的独立集 （原创）"></a>【例题】树的独立集 （原创）</h3><p>给定一棵有$N$个结点的树，输出这棵树中包含$K$个结点的独立集个数。</p>
 <h3 id="【分析】-2"><a href="#【分析】-2" class="headerlink" title="【分析】"></a>【分析】</h3><p>有关组合计数的背包类树形dp问题，一般均可用以下方式解决。</p>
 <p>记录状态：$f[u][k][0/1]$ 为以$u$为根的子树，$u$的状态为选或不选，共选择$k$个结点时独立集的个数。</p>
 <p>记$u$为当前正在处理的结点，$v$为刚刚递归访问结束的结点。每递归访问结束一个子结点，就考虑把该子结点的状态与已经处理一部分的当前结点状态相匹配。每访问完一个结点，就把配对后产生的状态归为已处理的状态。由于需要根据之前的状态推导后续状态，因此不难看出利用到背包的思想。</p>
 <p><img src="/images/2.png" alt></p>
 <p>状态转移方程的基本思想如下：</p>
-<script type="math/tex; mode=display">
-f[u][i+j][(state)]=combine(f[u][i][(state)]*f[u][j][(state)])</script><p>本题的状态转移方程也不难推出：</p>
-<script type="math/tex; mode=display">
-f[u][0][i+j]=\sum f[u][0][i]*(f[v][0][j]+f[v][1][j])</script><script type="math/tex; mode=display">
-f[u][1][i+j]=\sum f[u][1][i]*f[v][0][j]</script><h3 id="【代码】-2"><a href="#【代码】-2" class="headerlink" title="【代码】"></a>【代码】</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN=<span class="hljs-number">10005</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> N,K;</span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; G[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> f[MAXN][<span class="hljs-number">105</span>][<span class="hljs-number">2</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> g[<span class="hljs-number">105</span>][<span class="hljs-number">2</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> size[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dp</span><span class="hljs-params">(<span class="hljs-keyword">int</span> fa,<span class="hljs-keyword">int</span> u)</span></span>&#123;</span><br><span class="line">    size[u]=<span class="hljs-number">1</span>;</span><br><span class="line">    f[u][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>,f[u][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it=G[u].begin();it!=G[u].end();it++)&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v=*it;</span><br><span class="line">        <span class="hljs-keyword">if</span>(v==fa) <span class="hljs-keyword">continue</span>;</span><br><span class="line">        dp(u,v);</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=min(K,size[u]);++i)&#123;</span><br><span class="line">            g[i][<span class="hljs-number">0</span>]=f[u][i][<span class="hljs-number">0</span>],f[u][i][<span class="hljs-number">0</span>]=<span class="hljs-number">0</span>;</span><br><span class="line">            g[i][<span class="hljs-number">1</span>]=f[u][i][<span class="hljs-number">1</span>],f[u][i][<span class="hljs-number">1</span>]=<span class="hljs-number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=min(K,size[u]);++i)&#123;</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;=min(K-i,size[v]);++j)&#123;</span><br><span class="line">                f[u][i+j][<span class="hljs-number">0</span>]+=g[i][<span class="hljs-number">0</span>]*(f[v][j][<span class="hljs-number">0</span>]+f[v][j][<span class="hljs-number">1</span>]);</span><br><span class="line">                f[u][i+j][<span class="hljs-number">1</span>]+=g[i][<span class="hljs-number">1</span>]*f[v][j][<span class="hljs-number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        size[u]+=size[v];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;N,&amp;K);</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;N;++i)&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> u,v;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;u,&amp;v);</span><br><span class="line">        G[u].push_back(v);</span><br><span class="line">        G[v].push_back(u);</span><br><span class="line">    &#125;</span><br><span class="line">    dp(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>,f[<span class="hljs-number">1</span>][K][<span class="hljs-number">0</span>]+f[<span class="hljs-number">1</span>][K][<span class="hljs-number">1</span>]);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>$$<br>f[u][i+j][(state)]=combine(f[u][i][(state)]*f[u][j][(state)])<br>$$</p>
+<p>本题的状态转移方程也不难推出：</p>
+<p>$$<br>f[u][0][i+j]=\sum f[u][0][i]*(f[v][0][j]+f[v][1][j])<br>$$</p>
+<p>$$<br>f[u][1][i+j]=\sum f[u][1][i]*f[v][0][j]<br>$$</p>
+<h3 id="【代码】-2"><a href="#【代码】-2" class="headerlink" title="【代码】"></a>【代码】</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN=<span class="hljs-number">10005</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> N,K;</span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; G[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> f[MAXN][<span class="hljs-number">105</span>][<span class="hljs-number">2</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> g[<span class="hljs-number">105</span>][<span class="hljs-number">2</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> size[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dp</span><span class="hljs-params">(<span class="hljs-keyword">int</span> fa,<span class="hljs-keyword">int</span> u)</span></span>&#123;</span><br><span class="line">    size[u]=<span class="hljs-number">1</span>;</span><br><span class="line">    f[u][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>,f[u][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]=<span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it=G[u].begin();it!=G[u].end();it++)&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v=*it;</span><br><span class="line">        <span class="hljs-keyword">if</span>(v==fa) <span class="hljs-keyword">continue</span>;</span><br><span class="line">        dp(u,v);</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=min(K,size[u]);++i)&#123;</span><br><span class="line">            g[i][<span class="hljs-number">0</span>]=f[u][i][<span class="hljs-number">0</span>],f[u][i][<span class="hljs-number">0</span>]=<span class="hljs-number">0</span>;</span><br><span class="line">            g[i][<span class="hljs-number">1</span>]=f[u][i][<span class="hljs-number">1</span>],f[u][i][<span class="hljs-number">1</span>]=<span class="hljs-number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=min(K,size[u]);++i)&#123;</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;=min(K-i,size[v]);++j)&#123;</span><br><span class="line">                f[u][i+j][<span class="hljs-number">0</span>]+=g[i][<span class="hljs-number">0</span>]*(f[v][j][<span class="hljs-number">0</span>]+f[v][j][<span class="hljs-number">1</span>]);</span><br><span class="line">                f[u][i+j][<span class="hljs-number">1</span>]+=g[i][<span class="hljs-number">1</span>]*f[v][j][<span class="hljs-number">0</span>];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        size[u]+=size[v];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;N,&amp;K);</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;N;++i)&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> u,v;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;u,&amp;v);</span><br><span class="line">        G[u].push_back(v);</span><br><span class="line">        G[v].push_back(u);</span><br><span class="line">    &#125;</span><br><span class="line">    dp(<span class="hljs-number">0</span>,<span class="hljs-number">1</span>);</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>,f[<span class="hljs-number">1</span>][K][<span class="hljs-number">0</span>]+f[<span class="hljs-number">1</span>][K][<span class="hljs-number">1</span>]);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="习题"><a href="#习题" class="headerlink" title="习题"></a>习题</h2><p><a href="https://www.luogu.org/problemnew/show/P4516" target="_blank" rel="noopener">潜入行动</a></p>
 <p>未完待续~</p>
 
@@ -667,6 +668,151 @@ f[u][1][i+j]=\sum f[u][1][i]*f[v][0][j]</script><h3 id="【代码】-2"><a href=
 
         
             
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
 
         
         </div>
@@ -795,6 +941,151 @@ f[u][1][i+j]=\sum f[u][1][i]*f[v][0][j]</script><h3 id="【代码】-2"><a href=
 
     
         
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
 
     
     
