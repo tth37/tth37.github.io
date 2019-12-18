@@ -75,9 +75,9 @@
       </categories>
       <tags>
         <tag>FFT/NTT</tag>
-        <tag>启发式合并</tag>
         <tag>生成函数</tag>
         <tag>组合计数</tag>
+        <tag>启发式合并</tag>
         <tag>容斥原理</tag>
       </tags>
   </entry>
@@ -168,8 +168,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>动态规划</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -216,8 +216,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>dfs序</tag>
         <tag>主席树</tag>
+        <tag>dfs序</tag>
         <tag>最近公共祖先</tag>
         <tag>栈</tag>
       </tags>
@@ -303,8 +303,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>树链剖分</tag>
         <tag>线段树</tag>
+        <tag>树链剖分</tag>
       </tags>
   </entry>
   <entry>
@@ -439,8 +439,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -534,8 +534,8 @@
       </categories>
       <tags>
         <tag>树形dp</tag>
-        <tag>虚树</tag>
         <tag>点分治</tag>
+        <tag>虚树</tag>
       </tags>
   </entry>
   <entry>
@@ -691,8 +691,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>树链剖分</tag>
         <tag>主席树</tag>
+        <tag>树链剖分</tag>
         <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
@@ -706,8 +706,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -783,8 +783,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>树链剖分</tag>
         <tag>线段树</tag>
+        <tag>树链剖分</tag>
         <tag>dfs序</tag>
       </tags>
   </entry>
@@ -942,9 +942,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>可持久化trie</tag>
         <tag>主席树</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -1029,8 +1029,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
