@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[solution-loj-3102]]></title>
+    <url>%2F2019%2F12%2F18%2Fsolution-loj-3102%2F</url>
+    <content type="text"><![CDATA[Summarize题目概括征集中~ SolutionCode12]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[「JSOI2019」精准预测]]></title>
+    <url>%2F2019%2F12%2F18%2Fsolution-loj-3101%2F</url>
+    <content type="text"><![CDATA[#3101. 「JSOI2019」精准预测 Summarize题目概括征集中~ Solution记 $(t,x,0)$ 表示 $t$ 时刻 $x$ 死亡的状态， $(t,x,1)$ 表示 $t$ 时刻 $x$ 活着的状态。 $\text{2-SAT}$ 建图：对于限制条件 $0$，连边 $(t,x,1)\rightarrow(t+1,y,0)$ 和 $(t+1,y,1)\rightarrow(t,x,0)$；对于限制条件 $2$，连边 $(t,x,1)\rightarrow(t,y,0)$ 和 $(t,y,1)\rightarrow(t,x,0)$。此外还需要连边 $(t,x,0)\rightarrow(t+1,x,0)$ 和 $(t+1,x,1)\rightarrow(t,x,1)$。 建完图后即可求出每一个人在 $T+1$ 时刻活着时，有多少人在同一时刻必然死亡。其中有部分人自己产生矛盾，即可以从 $(x,T+1,1)$ 推导出 $(x,T+1,0)$，那么这部分人也必然死亡。 不难发现建出的图为 $\text{DAG}$。考虑只保留需要的 $O(m+n)$ 个点即可。 在求解时只能做到 $\text{bitset}$ 复杂度，可以考虑将 $\text{bitset}$ 值域分段操作。 Note不要看错题！ Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105#include &lt;bits/stdc++.h&gt;using namespace std;const int MAXN = 5e4 + 10;const int MAXM = 1e5 + 10;const int MAXT = MAXN * 4 + MAXM * 4;struct Type &#123; int t, p; Type(int x = 0, int y = 0) &#123;t = x, p = y;&#125; bool operator &lt; (const Type&amp; rhs) const &#123; if (p != rhs.p) return p &lt; rhs.p; return t &lt; rhs.t; &#125;&#125;;int T, n, m;map&lt;Type, int&gt; mp;int cnt;vector&lt;int&gt; G[MAXT];bitset&lt;16668&gt; s[MAXT], delta;bool vis[MAXT];int ans[MAXN], delt;bool noans[MAXN];inline void AddEdge(int u, int v) &#123; G[u].push_back(v);&#125;int l, r;void dfs(int u) &#123; if (vis[u]) return; vis[u] = 1; if (u &lt;= 2 * n &amp;&amp; (u &amp; 1)) &#123; int p = (u + 1) &gt;&gt; 1; if (l &lt;= p &amp;&amp; p &lt;= r) s[u][p - l + 1] = 1; return; &#125; for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; dfs(v); s[u] |= s[v]; &#125; return;&#125;int main() &#123; scanf("%d%d%d", &amp;T, &amp;n, &amp;m); for (int i = 1; i &lt;= n; ++i) &#123; mp[Type(T + 1, i)] = ++cnt, ++cnt; &#125; for (int i = 1; i &lt;= m; ++i) &#123; int c, t, x, y; scanf("%d%d%d%d", &amp;c, &amp;t, &amp;x, &amp;y); if (c == 0) &#123; if (mp[Type(t, x)] == 0) mp[Type(t, x)] = ++cnt, ++cnt; if (mp[Type(t + 1, y)] == 0) mp[Type(t + 1, y)] = ++cnt, ++cnt; AddEdge(mp[Type(t, x)], mp[Type(t + 1, y)]), AddEdge(mp[Type(t + 1, y)] + 1, mp[Type(t, x)] + 1); &#125; else &#123; if (mp[Type(t, x)] == 0) mp[Type(t, x)] = ++cnt, ++cnt; if (mp[Type(t, y)] == 0) mp[Type(t, y)] = ++cnt, ++cnt; AddEdge(mp[Type(t, x)] + 1, mp[Type(t, y)]), AddEdge(mp[Type(t, y)] + 1, mp[Type(t, x)]); &#125; &#125; int lt = 0, lp = 0, lc = 0; for (auto it : mp) &#123; int t = it.first.t, p = it.first.p, c = it.second; if (lt) &#123; if (lp == p) &#123; AddEdge(lc, c), AddEdge(c + 1, lc + 1); &#125; &#125; lt = t, lp = p, lc = c; &#125; for (l = 1; l &lt;= n; l += 16667) &#123; r = min(n, l + 16666); for (int i = 1; i &lt;= cnt; ++i) s[i].reset(); delta.reset(); memset(vis, 0, sizeof(vis)); for (int i = 1; i &lt;= n; ++i) dfs(i &lt;&lt; 1); for (int i = l; i &lt;= r; ++i) &#123; if (s[i &lt;&lt; 1][i - l + 1]) &#123; noans[i] = 1; delta[i - l + 1] = 1; &#125; &#125; for (int i = 1; i &lt;= n; ++i) &#123; s[i &lt;&lt; 1] |= delta; ans[i] += r - l + 1 - s[i &lt;&lt; 1].count(); &#125; &#125; for (int i = 1; i &lt;= n; ++i) printf("%d ", noans[i] ? 0 : ans[i] - 1); return 0;&#125;]]></content>
+      <tags>
+        <tag>2-SAT</tag>
+        <tag>bitset</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[「JSOI2019」节日庆典]]></title>
     <url>%2F2019%2F12%2F07%2Fsolution-loj-3103%2F</url>
     <content type="text"><![CDATA[#3103. 「JSOI2019」节日庆典 Summarize对于给定字符串 $S$，求 $S$ 的每个前缀的最小循环后缀。 $|S|\le 3000000$ Solution考虑对 $S$ 的每个前缀维护一个集合 $T$，包含该前缀的最小后缀位置。将这些最小后缀位置称为“候选点”。 记正在处理的前缀为 $k$，那么这个集合具有以下性质： 若 $i,j\in T(i&lt;j)$，那么 $S[j..k]=S[i..i+k-j]$，即后缀 $j$ 为后缀 $i$ 的前缀。 若 $i,j\in T(i&lt;j)$，且 $S[j..k]=S[i..i+k-j]$，若 $i+k-j\ge j$，则 $j$ 不会成为最优位置。 简单说明一下性质 2。容易发现后缀 $i$ 的形式为 $ABABA$，后缀 $j$ 为 $ABA$。若循环后缀的下一位较小，则 $A$ 为最优后缀；反之，则 $ABABA$ 为最优位置；$ABA$ 不会成为最优位置。 维护出这个集合后，发现对于 $S$ 的每个前缀，集合 $T$ 的大小不超过 $\log k$。暴力枚举集合中所有候选点并比较即可。 具体比较方法可以利用性质 1，转化为后缀与原串的比较。在进行后缀与原串的比较时可以利用 扩展 KMP 算法中求出的 $\text{next}$ 数组进行 $O(1)$ 复杂度比较。 细节处理比较麻烦。 Code12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879#include &lt;bits/stdc++.h&gt;using namespace std;#define next next233const int MAXN = 3e6 + 5;char s[MAXN];int next[MAXN];int st1[MAXN], st2[MAXN], cnt1, cnt2;int *x = st1, *y = st2;void exKMP_pre(char *T) &#123; int n = strlen(T); next[0] = n; int p = 0; while (p + 1 &lt; n &amp;&amp; T[p] == T[p + 1]) p++; next[1] = p; int k = 1; for (int x = 2; x &lt; n; ++x) &#123; p = k + next[k] - 1; int l = next[x - k]; if (x + l &lt;= p) next[x] = l; else &#123; int j = p - x + 1; if (j &lt; 0) j = 0; while (x + j &lt; n &amp;&amp; T[x + j] == T[j]) j++; next[x] = j; k = x; &#125; &#125;&#125;int cmp(int p, int q, int k) &#123; int t = p + k - q + 1; if (next[t] &lt; k - t + 1) &#123; if (s[next[t]] &lt; s[t + next[t]]) return 1; else return -1; &#125; t = q - p; if (next[t] &lt; p) &#123; if (s[next[t]] &lt; s[t + next[t]]) return -1; else return 1; &#125; return 0;&#125;int main() &#123; scanf("%s", s); exKMP_pre(s); int n = strlen(s); for (int i = 0; i &lt; n; ++i) &#123; x[++cnt1] = i; for (int k = 1; k &lt;= cnt1; ++k) &#123; int q = x[k]; if (cnt2 == 0) &#123; y[++cnt2] = q; continue; &#125; int p = y[cnt2]; if (s[i] &gt; s[p + i - q]) continue; if (s[i] &lt; s[p + i - q]) &#123; y[cnt2 = 1] = q; continue; &#125; if (s[i] == s[p + i - q]) &#123; if (p + i - q &lt; q) y[++cnt2] = q; continue; &#125; &#125; swap(x, y); cnt1 = cnt2, cnt2 = 0; int ans = x[1]; for (int k = 2; k &lt;= cnt1; ++k) &#123; if (cmp(ans, x[k], i) == 1) ans = x[k]; &#125; printf("%d ", ans + 1); &#125; return 0;&#125;]]></content>
@@ -140,8 +154,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>高斯消元</tag>
+        <tag>动态规划</tag>
         <tag>概率</tag>
       </tags>
   </entry>
@@ -202,8 +216,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>主席树</tag>
         <tag>dfs序</tag>
+        <tag>主席树</tag>
         <tag>最近公共祖先</tag>
         <tag>栈</tag>
       </tags>
@@ -289,8 +303,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>树链剖分</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -425,8 +439,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>主席树</tag>
         <tag>线段树</tag>
+        <tag>主席树</tag>
       </tags>
   </entry>
   <entry>
@@ -677,8 +691,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>主席树</tag>
         <tag>树链剖分</tag>
+        <tag>主席树</tag>
         <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
@@ -692,8 +706,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>主席树</tag>
         <tag>线段树</tag>
+        <tag>主席树</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -769,8 +783,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>树链剖分</tag>
+        <tag>线段树</tag>
         <tag>dfs序</tag>
       </tags>
   </entry>
@@ -928,9 +942,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
+        <tag>线段树</tag>
         <tag>可持久化trie</tag>
         <tag>主席树</tag>
-        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -947,11 +961,12 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[算法学习-背包类树形dp]]></title>
+    <title><![CDATA[背包类树形 DP]]></title>
     <url>%2F2019%2F03%2F25%2Falgorithm-knapsacktreedp%2F</url>
-    <content type="text"><![CDATA[树形分组背包【例题】 选课 *luogu-p2014 *在大学里每个学生，为了达到一定的学分，必须从很多课程里选择一些课程来学习，在课程里有些课程必须在某些课程之前学习，如高等数学总是在其它课程之前学习。现在有N门功课，每门课有个学分，每门课有一门或没有直接先修课（若课程a是课程b的先修课即只有学完了课程a，才能学习课程b）。一个学生要从这些课程里选择M门课程学习，问他能获得的最大学分是多少？ 【分析】记录状态：$f[u][i]$为以$u$为根的子树上，选择$i$门课所能获得的最大学分。 记$u$为当前正在处理的结点，$v$为刚刚递归访问结束的结点。那么在$u$上相当于有一个容量为$M$的背包，每个子树中不同的状态相当于不同的物品，例如$f[v][j]$为体积为$j$，价值为$f[v][j]$中存储的数值。 在本题中，由于所有关系构成森林结构，因此可以设$0$号结点为“没有先修课”的课的先修课。然后以$0$为根，进行状态转移即可。 【代码】1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;bits/stdc++.h&gt;using namespace std;#define Pb push_backconst int MAXN=305;const int MAXM=305;int N,M;vector&lt;int&gt; son[MAXN];int a[MAXN],f[MAXN][MAXM];inline void dp(int u)&#123; for(vector&lt;int&gt;::iterator it=son[u].begin();it!=son[u].end();it++) &#123; int v=*it; dp(v); for(register int i=M;i&gt;=0;--i) for(register int j=0;j&lt;=i;++j) f[u][i]=max(f[u][i],f[u][i-j]+f[v][j]); &#125; if(u) &#123; for(register int i=M;i&gt;=1;--i) f[u][i]=f[u][i-1]+a[u]; &#125;&#125;int main()&#123; scanf("%d%d",&amp;N,&amp;M); for(register int i=1;i&lt;=N;++i) &#123; int k,s; scanf("%d%d",&amp;k,&amp;s); son[k].Pb(i);a[i]=s; &#125; dp(0); printf("%d",f[0][M]); return 0;&#125; 【例题】有线电视网 luogu-p1273某收费有线电视网计划转播一场重要的足球比赛。他们的转播网和用户终端构成一棵树状结构，这棵树的根结点位于足球比赛的现场，树叶为各个用户终端，其他中转站为该树的内部节点。 从转播站到转播站以及从转播站到所有用户终端的信号传输费用都是已知的，一场转播的总费用等于传输信号的费用总和。 现在每个用户都准备了一笔费用想观看这场精彩的足球比赛，有线电视网有权决定给哪些用户提供信号而不给哪些用户提供信号。 写一个程序找出一个方案使得有线电视网在不亏本的情况下使观看转播的用户尽可能多。 【分析】记录状态：$f[i][j]$为以$i$为根，选择$j$个用户最多有多少收入。状态转移时如果无法从正面入手（如本题不知道价格的最值，且价值分布更为稀疏），可以从反面设计状态，在输出答案时进行判断即可。转移时可以记录$size$数组进行优化。 【代码】1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#include&lt;bits/stdc++.h&gt;using namespace std;struct Edge&#123; int v,w,nxt;&#125;mem[3005*2];int head[3005],cnt;int size[3005];inline void AddEdge(int u,int v,int w)&#123; mem[++cnt].v=v; mem[cnt].w=w; mem[cnt].nxt=head[u]; head[u]=cnt;&#125;int N,M;int leaf[3005];int f[3005][3005];inline void dfs(int u)&#123; if(leaf[u])&#123; f[u][1]=leaf[u]; size[u]=1; return; &#125; for(register int i=head[u];i;i=mem[i].nxt)&#123; int v=mem[i].v,w=mem[i].w; dfs(v); size[u]+=size[v]; for(register int j=M;j&gt;=1;--j) for(register int k=0;k&lt;=min(size[v],j);++k) f[u][j]=max(f[u][j],f[u][j-k]+f[v][k]-w); &#125;&#125;int main()&#123; memset(f,0xcf,sizeof(f)); scanf("%d%d",&amp;N,&amp;M); for(register int i=1;i&lt;=N-M;++i)&#123; int k; scanf("%d",&amp;k); for(register int j=1;j&lt;=k;++j)&#123; int a,c; scanf("%d%d",&amp;a,&amp;c); AddEdge(i,a,c); &#125; &#125; for(register int i=1;i&lt;=M;++i) scanf("%d",&amp;leaf[N-M+i]); for(register int i=1;i&lt;=N;++i) f[i][0]=0; dfs(1); for(register int i=M;i&gt;=1;--i)&#123; if(f[1][i]&gt;=0)&#123; printf("%d",i); return 0; &#125; &#125; return 0;&#125; 组合计数类树形背包【例题】树的独立集 （原创）给定一棵有$N$个结点的树，输出这棵树中包含$K$个结点的独立集个数。 【分析】有关组合计数的背包类树形dp问题，一般均可用以下方式解决。 记录状态：$f[u][k][0/1]$ 为以$u$为根的子树，$u$的状态为选或不选，共选择$k$个结点时独立集的个数。 记$u$为当前正在处理的结点，$v$为刚刚递归访问结束的结点。每递归访问结束一个子结点，就考虑把该子结点的状态与已经处理一部分的当前结点状态相匹配。每访问完一个结点，就把配对后产生的状态归为已处理的状态。由于需要根据之前的状态推导后续状态，因此不难看出利用到背包的思想。 状态转移方程的基本思想如下： $$f[u][i+j][(state)]=combine(f[u][i][(state)]*f[u][j][(state)])$$ 本题的状态转移方程也不难推出： $$f[u][0][i+j]=\sum f[u][0][i]*(f[v][0][j]+f[v][1][j])$$ $$f[u][1][i+j]=\sum f[u][1][i]*f[v][0][j]$$ 【代码】123456789101112131415161718192021222324252627282930313233343536373839404142434445#include&lt;bits/stdc++.h&gt;using namespace std;const int MAXN=10005;int N,K;vector&lt;int&gt; G[MAXN];int f[MAXN][105][2];int g[105][2];int size[MAXN];void dp(int fa,int u)&#123; size[u]=1; f[u][0][0]=1,f[u][1][1]=1; for(vector&lt;int&gt;::iterator it=G[u].begin();it!=G[u].end();it++)&#123; int v=*it; if(v==fa) continue; dp(u,v); for(register int i=0;i&lt;=min(K,size[u]);++i)&#123; g[i][0]=f[u][i][0],f[u][i][0]=0; g[i][1]=f[u][i][1],f[u][i][1]=0; &#125; for(register int i=0;i&lt;=min(K,size[u]);++i)&#123; for(register int j=0;j&lt;=min(K-i,size[v]);++j)&#123; f[u][i+j][0]+=g[i][0]*(f[v][j][0]+f[v][j][1]); f[u][i+j][1]+=g[i][1]*f[v][j][0]; &#125; &#125; size[u]+=size[v]; &#125;&#125;int main()&#123; scanf("%d%d",&amp;N,&amp;K); for(register int i=1;i&lt;N;++i)&#123; int u,v; scanf("%d%d",&amp;u,&amp;v); G[u].push_back(v); G[v].push_back(u); &#125; dp(0,1); printf("%d",f[1][K][0]+f[1][K][1]); return 0;&#125; 习题潜入行动 未完待续~]]></content>
+    <content type="text"><![CDATA[写的不好！计划重写一篇。 树形背包博大精深！ 绝对不咕！ 树形分组背包【例题】 选课 *luogu-p2014 *在大学里每个学生，为了达到一定的学分，必须从很多课程里选择一些课程来学习，在课程里有些课程必须在某些课程之前学习，如高等数学总是在其它课程之前学习。现在有N门功课，每门课有个学分，每门课有一门或没有直接先修课（若课程a是课程b的先修课即只有学完了课程a，才能学习课程b）。一个学生要从这些课程里选择M门课程学习，问他能获得的最大学分是多少？ 【分析】记录状态：$f[u][i]$为以$u$为根的子树上，选择$i$门课所能获得的最大学分。 记$u$为当前正在处理的结点，$v$为刚刚递归访问结束的结点。那么在$u$上相当于有一个容量为$M$的背包，每个子树中不同的状态相当于不同的物品，例如$f[v][j]$为体积为$j$，价值为$f[v][j]$中存储的数值。 在本题中，由于所有关系构成森林结构，因此可以设$0$号结点为“没有先修课”的课的先修课。然后以$0$为根，进行状态转移即可。 【代码】1234567891011121314151617181920212223242526272829303132333435363738394041#include&lt;bits/stdc++.h&gt;using namespace std;#define Pb push_backconst int MAXN=305;const int MAXM=305;int N,M;vector&lt;int&gt; son[MAXN];int a[MAXN],f[MAXN][MAXM];inline void dp(int u)&#123; for(vector&lt;int&gt;::iterator it=son[u].begin();it!=son[u].end();it++) &#123; int v=*it; dp(v); for(register int i=M;i&gt;=0;--i) for(register int j=0;j&lt;=i;++j) f[u][i]=max(f[u][i],f[u][i-j]+f[v][j]); &#125; if(u) &#123; for(register int i=M;i&gt;=1;--i) f[u][i]=f[u][i-1]+a[u]; &#125;&#125;int main()&#123; scanf("%d%d",&amp;N,&amp;M); for(register int i=1;i&lt;=N;++i) &#123; int k,s; scanf("%d%d",&amp;k,&amp;s); son[k].Pb(i);a[i]=s; &#125; dp(0); printf("%d",f[0][M]); return 0;&#125; 【例题】有线电视网 luogu-p1273某收费有线电视网计划转播一场重要的足球比赛。他们的转播网和用户终端构成一棵树状结构，这棵树的根结点位于足球比赛的现场，树叶为各个用户终端，其他中转站为该树的内部节点。 从转播站到转播站以及从转播站到所有用户终端的信号传输费用都是已知的，一场转播的总费用等于传输信号的费用总和。 现在每个用户都准备了一笔费用想观看这场精彩的足球比赛，有线电视网有权决定给哪些用户提供信号而不给哪些用户提供信号。 写一个程序找出一个方案使得有线电视网在不亏本的情况下使观看转播的用户尽可能多。 【分析】记录状态：$f[i][j]$为以$i$为根，选择$j$个用户最多有多少收入。状态转移时如果无法从正面入手（如本题不知道价格的最值，且价值分布更为稀疏），可以从反面设计状态，在输出答案时进行判断即可。转移时可以记录$size$数组进行优化。 【代码】1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#include&lt;bits/stdc++.h&gt;using namespace std;struct Edge&#123; int v,w,nxt;&#125;mem[3005*2];int head[3005],cnt;int size[3005];inline void AddEdge(int u,int v,int w)&#123; mem[++cnt].v=v; mem[cnt].w=w; mem[cnt].nxt=head[u]; head[u]=cnt;&#125;int N,M;int leaf[3005];int f[3005][3005];inline void dfs(int u)&#123; if(leaf[u])&#123; f[u][1]=leaf[u]; size[u]=1; return; &#125; for(register int i=head[u];i;i=mem[i].nxt)&#123; int v=mem[i].v,w=mem[i].w; dfs(v); size[u]+=size[v]; for(register int j=M;j&gt;=1;--j) for(register int k=0;k&lt;=min(size[v],j);++k) f[u][j]=max(f[u][j],f[u][j-k]+f[v][k]-w); &#125;&#125;int main()&#123; memset(f,0xcf,sizeof(f)); scanf("%d%d",&amp;N,&amp;M); for(register int i=1;i&lt;=N-M;++i)&#123; int k; scanf("%d",&amp;k); for(register int j=1;j&lt;=k;++j)&#123; int a,c; scanf("%d%d",&amp;a,&amp;c); AddEdge(i,a,c); &#125; &#125; for(register int i=1;i&lt;=M;++i) scanf("%d",&amp;leaf[N-M+i]); for(register int i=1;i&lt;=N;++i) f[i][0]=0; dfs(1); for(register int i=M;i&gt;=1;--i)&#123; if(f[1][i]&gt;=0)&#123; printf("%d",i); return 0; &#125; &#125; return 0;&#125; 组合计数类树形背包【例题】树的独立集 （原创）给定一棵有$N$个结点的树，输出这棵树中包含$K$个结点的独立集个数。 【分析】有关组合计数的背包类树形dp问题，一般均可用以下方式解决。 记录状态：$f[u][k][0/1]$ 为以$u$为根的子树，$u$的状态为选或不选，共选择$k$个结点时独立集的个数。 记$u$为当前正在处理的结点，$v$为刚刚递归访问结束的结点。每递归访问结束一个子结点，就考虑把该子结点的状态与已经处理一部分的当前结点状态相匹配。每访问完一个结点，就把配对后产生的状态归为已处理的状态。由于需要根据之前的状态推导后续状态，因此不难看出利用到背包的思想。 状态转移方程的基本思想如下： $$f[u][i+j][(state)]=combine(f[u][i][(state)]*f[u][j][(state)])$$ 本题的状态转移方程也不难推出： $$f[u][0][i+j]=\sum f[u][0][i]*(f[v][0][j]+f[v][1][j])$$ $$f[u][1][i+j]=\sum f[u][1][i]*f[v][0][j]$$ 【代码】123456789101112131415161718192021222324252627282930313233343536373839404142434445#include&lt;bits/stdc++.h&gt;using namespace std;const int MAXN=10005;int N,K;vector&lt;int&gt; G[MAXN];int f[MAXN][105][2];int g[105][2];int size[MAXN];void dp(int fa,int u)&#123; size[u]=1; f[u][0][0]=1,f[u][1][1]=1; for(vector&lt;int&gt;::iterator it=G[u].begin();it!=G[u].end();it++)&#123; int v=*it; if(v==fa) continue; dp(u,v); for(register int i=0;i&lt;=min(K,size[u]);++i)&#123; g[i][0]=f[u][i][0],f[u][i][0]=0; g[i][1]=f[u][i][1],f[u][i][1]=0; &#125; for(register int i=0;i&lt;=min(K,size[u]);++i)&#123; for(register int j=0;j&lt;=min(K-i,size[v]);++j)&#123; f[u][i+j][0]+=g[i][0]*(f[v][j][0]+f[v][j][1]); f[u][i+j][1]+=g[i][1]*f[v][j][0]; &#125; &#125; size[u]+=size[v]; &#125;&#125;int main()&#123; scanf("%d%d",&amp;N,&amp;K); for(register int i=1;i&lt;N;++i)&#123; int u,v; scanf("%d%d",&amp;u,&amp;v); G[u].push_back(v); G[v].push_back(u); &#125; dp(0,1); printf("%d",f[1][K][0]+f[1][K][1]); return 0;&#125; 习题潜入行动 未完待续~]]></content>
       <categories>
         <category>算法学习</category>
+        <category>动态规划</category>
       </categories>
       <tags>
         <tag>动态规划</tag>
