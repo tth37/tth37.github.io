@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[solution-loj-3226]]></title>
+    <url>%2F2019%2F12%2F24%2Fsolution-loj-3226%2F</url>
+    <content type="text"><![CDATA[Summarize题目概括征集中~ SolutionNoteCode12]]></content>
+  </entry>
+  <entry>
     <title><![CDATA[「JSOI2019」神经网络]]></title>
     <url>%2F2019%2F12%2F18%2Fsolution-loj-3102%2F</url>
     <content type="text"><![CDATA[#3102. 「JSOI2019」神经网络 Summarize题目概括征集中~ Solution根据题意，合法的哈密顿回路只能从一个点走到同一棵树上相邻的点，或是其他树上的任意点。因此在每一棵树上经过的路径必定是几条不相交的链。可以先计算将树拆分成链的方案数，再将它们合并起来。 将树拆分成链可以用背包类树形 DP 解决。记 $f[u][i][0/1/2]$ 表示将以 $u$ 为根的子树拆分成 $i$ 条有向链的方案数，特殊的，根节点所在的链没有方向。$0$ 表示根节点所在的链长度为 $1$ ，$1$ 表示根节点为所在链的一个端点，$2$ 表示根节点不是其所在链的端点。 大力树形背包转移即可，略显繁琐，详见代码。 接下来考虑将若干条链合并为哈密顿回路。考虑简化后的问题：有若干种颜色的小球，每种颜色的小球个数不定。将所有小球摆成一个环，并且不能有颜色相同的小球位于相邻位置。求方案数。 在本题中，颜色即对应树，小球对应链。构造每一种颜色的生成函数如下：$$\sum_{i=1}^{n}f_i i!\sum_{j=1}^{i}(-1)^{i-j} {i-1\choose j-1}\frac{x^j}{j!}$$其中 $f_i$ 表示将树划分为 $i$ 条链的方案数。对于保证至少有奇数个同色对的方案，需要乘系数 $-1$。将所有生成函数卷起来，每种系数前做一个环排统计方案即可。 至此 JSOI2019 就全部做完了，还是非常吃力的。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106#include&lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int MAXN = 5005;const int MAXM = 305;const ll MOD = 998244353;struct Edge &#123; int v, nxt;&#125;edge[MAXN &lt;&lt; 1];int head[MAXN], cnt;inline void AddEdge(int u, int v) &#123; edge[++cnt].v = v; edge[cnt].nxt = head[u]; head[u] = cnt;&#125;int n, m;ll f[MAXN][MAXN][3], t[MAXN][MAXN][3];int size[MAXN];void dp(int u, int fa) &#123; size[u] = 1; f[u][1][0] = 1; for (int i = head[u]; i; i = edge[i].nxt) &#123; int v = edge[i].v; if (v == fa) continue; dp(v, u); for (int i = 1; i &lt;= size[u]; ++i) &#123; for (int j = 1; j &lt;= size[v]; ++j) &#123; ll tmp1 = (f[v][j][0] + f[v][j][1] * 2 + f[v][j][2] * 2) % MOD; ll tmp2 = (f[v][j][0] + f[v][j][1]) % MOD; t[u][i + j][0] = (t[u][i + j][0] + tmp1 * f[u][i][0]) % MOD; t[u][i + j][1] = (t[u][i + j][1] + tmp1 * f[u][i][1]) % MOD; t[u][i + j][2] = (t[u][i + j][2] + tmp1 * f[u][i][2]) % MOD; t[u][i + j - 1][1] = (t[u][i + j - 1][1] + tmp2 * f[u][i][0]) % MOD; t[u][i + j - 1][2] = (t[u][i + j - 1][2] + tmp2 * f[u][i][1]) % MOD; &#125; &#125; size[u] += size[v]; for (int i = 1; i &lt;= size[u]; ++i) &#123; f[u][i][0] = t[u][i][0], f[u][i][1] = t[u][i][1], f[u][i][2] = t[u][i][2], t[u][i][0] = t[u][i][1] = t[u][i][2] = 0; &#125; &#125;&#125;ll inv[MAXN], fac[MAXN], facinv[MAXN];inline ll C(int n, int m) &#123; return fac[n] * facinv[m] % MOD * facinv[n - m] % MOD;&#125;ll a[MAXN * MAXM], c[MAXN * MAXM], b[MAXN];int len;int main() &#123; fac[0] = facinv[0] = 1; inv[1] = fac[1] = facinv[1] = 1; for (int i = 2; i &lt;= 5000; ++i) &#123; inv[i] = (MOD - MOD / i) * inv[MOD % i] % MOD; fac[i] = fac[i - 1] * 1ll * i % MOD; facinv[i] = facinv[i - 1] * inv[i] % MOD; &#125; a[0] = 1; scanf("%d", &amp;m); for (int cas = 1; cas &lt;= m; ++cas) &#123; cnt = 0; scanf("%d", &amp;n); for (int i = 1; i &lt; n; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); AddEdge(u, v), AddEdge(v, u); &#125; dp(1, 0); for (int i = 1; i &lt;= n; ++i) &#123; ll tmp = (f[1][i][0] + f[1][i][1] * 2 + f[1][i][2] * 2) * fac[i] % MOD; for (int j = 1; j &lt;= i; ++j) &#123; b[j] = (b[j] + ((i - j) &amp; 1 ? -1 : 1) * tmp * C(i - 1, j - 1) % MOD * facinv[j] % MOD) % MOD; &#125; &#125; for (int i = 0; i &lt;= len; ++i) c[i] = 0; for (int i = 0; i &lt;= len; ++i) for (int j = 1; j &lt;= n; ++j) c[i + j] = (c[i + j] + a[i] * b[j] % MOD) % MOD; len += n; for (int i = 0; i &lt;= len; ++i) a[i] = c[i]; for (int i = 0; i &lt;= n; ++i) &#123; head[i] = 0; b[i] = 0; for (int j = 0; j &lt;= n; ++j) &#123; f[i][j][0] = f[i][j][1] = f[i][j][2] = 0; t[i][j][0] = t[i][j][1] = t[i][j][2] = 0; &#125; &#125; &#125; ll ans = 0; for (int i = 0; i &lt;= len; ++i) ans = (ans + a[i] * fac[i] % MOD * inv[i] % MOD + MOD) % MOD; printf("%lld", ans); return 0;&#125;]]></content>
@@ -86,9 +91,9 @@
       </categories>
       <tags>
         <tag>FFT/NTT</tag>
-        <tag>启发式合并</tag>
         <tag>生成函数</tag>
         <tag>组合计数</tag>
+        <tag>启发式合并</tag>
         <tag>容斥原理</tag>
       </tags>
   </entry>
@@ -165,8 +170,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>高斯消元</tag>
+        <tag>动态规划</tag>
         <tag>概率</tag>
       </tags>
   </entry>
@@ -179,8 +184,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -742,8 +747,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -754,8 +759,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -1028,8 +1033,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>贪心</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -1040,8 +1045,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
