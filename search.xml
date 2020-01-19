@@ -1,8 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[solution-loj-3226]]></title>
-    <url>%2F2019%2F12%2F24%2Fsolution-loj-3226%2F</url>
+    <title><![CDATA[「SNOI2019」字符串]]></title>
+    <url>%2F2020%2F01%2F20%2Fsolution-loj-3095%2F</url>
+    <content type="text"><![CDATA[#3095. 「SNOI2019」字符串 Summarize题目概括征集中~ Solution考虑字符串 $s_i$ 与 $s_j$ 的比较。根据等效分析，可知比较这两个字符串的大小只需知道任意两个相邻后缀的 $\text{LCP}$ 即可。可以通过 $O(n)$ 预处理后，手写排序 $\text{cmp}$ 函数，$O(n\log n)$ 排序得到答案。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748#include &lt;bits/stdc++.h&gt;using namespace std;const int MAXN = 1e6 + 5;int n;char s[MAXN];int lcp[MAXN]; // lcp(i, i+1)int ans[MAXN];bool cmp(int x, int y) &#123; int i = x, j = y; if (i &gt; j) swap(i, j); int t = lcp[i]; if (t &gt;= j - i) &#123; if (x &lt; y) return 1; else return 0; &#125; if (s[i + t + 1] &lt; s[i + t]) &#123; if (i == x) return 1; else return 0; &#125; if (i == x) return 0; else return 1;&#125;int main() &#123; scanf("%d", &amp;n); scanf("%s", s + 1); lcp[n] = 0; for (int i = n - 1; i &gt;= 1; --i) &#123; if (s[i] == s[i + 1]) lcp[i] = lcp[i + 1] + 1; else lcp[i] = 0; &#125; for (int i = 1; i &lt;= n; ++i) ans[i] = i; sort(ans + 1, ans + n + 1, cmp); for (int i = 1; i &lt;= n; ++i) printf("%d ", ans[i]); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>LibreOJ</category>
+      </categories>
+      <tags>
+        <tag>字符串</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「USACO 2019.12 Platinum」Bessie's Snow Cow]]></title>
+    <url>%2F2020%2F01%2F20%2Fsolution-loj-3227%2F</url>
+    <content type="text"><![CDATA[#3227. 「USACO 2019.12 Platinum」Bessie’s Snow Cow SummarizeQwQwQ Solution考虑维护 $C$ 个数据结构，存储每种颜色所对应的 $\text{dfs}$ 序的区间。根据 势能分析 可证明复杂度。剩余部分用线段树模拟即可。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int MAXN = 1e5 + 5;vector&lt;int&gt; G[MAXN];set&lt;pair&lt;int, int&gt; &gt; S[MAXN];struct Segment_Tree &#123;#define lson(u) node[u].l#define rson(u) node[u].r#define val(u) node[u].val#define tag(u) node[u].tag struct Node &#123; int l, r; ll val, tag; &#125;node[MAXN &lt;&lt; 1]; int R, cnt; void pushup(int u) &#123; val(u) = val(lson(u)) + val(rson(u)); &#125; void pushdown(int u, int l, int r) &#123; if (tag(u) == 0) return; int mid = (l + r) &gt;&gt; 1; int llen = mid - l + 1, rlen = r - mid; val(lson(u)) += 1ll * llen * tag(u), val(rson(u)) += 1ll * rlen * tag(u); tag(lson(u)) += tag(u), tag(rson(u)) += tag(u); tag(u) = 0; &#125; void build(int&amp; u, int l, int r) &#123; u = ++cnt; if (l == r) return; int mid = (l + r) &gt;&gt; 1; build(lson(u), l, mid), build(rson(u), mid + 1, r); pushup(u); &#125; void modify_range(int u, int l, int r, int ql, int qr, ll val) &#123; if (ql &lt;= l &amp;&amp; r &lt;= qr) &#123; val(u) += 1ll * (r - l + 1) * val; tag(u) += val; return; &#125; pushdown(u, l, r); int mid = (l + r) &gt;&gt; 1; if (ql &lt;= mid) modify_range(lson(u), l, mid, ql, qr, val); if (mid &lt; qr) modify_range(rson(u), mid + 1, r, ql, qr, val); pushup(u); &#125; ll query_range(int u, int l, int r, int ql, int qr) &#123; if (ql &lt;= l &amp;&amp; r &lt;= qr) return val(u); pushdown(u, l, r); int mid = (l + r) &gt;&gt; 1; ll ret = 0; if (ql &lt;= mid) ret += query_range(lson(u), l, mid, ql, qr); if (mid &lt; qr) ret += query_range(rson(u), mid + 1, r, ql, qr); return ret; &#125;&#125;T;int n, q;int dfn[MAXN], size[MAXN], dfn_idx;void dfs(int u, int fa) &#123; dfn[u] = ++dfn_idx; size[u] = 1; for (auto v : G[u]) &#123; if (v == fa) continue; dfs(v, u); size[u] += size[v]; &#125;&#125;int main() &#123; scanf("%d%d", &amp;n, &amp;q); for (int i = 1; i &lt; n; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); G[u].push_back(v), G[v].push_back(u); &#125; dfs(1, 0); T.build(T.R, 1, n); while (q--) &#123; int op, x, c; scanf("%d%d", &amp;op, &amp;x); int l = dfn[x], r = dfn[x] + size[x] - 1; if (op == 2) &#123; printf("%lld\n", T.query_range(T.R, 1, n, l, r)); &#125; else &#123; scanf("%d", &amp;c); set&lt;pair&lt;int, int&gt; &gt;::iterator it = S[c].lower_bound(make_pair(l, r)); int nl = l, nr = r; if (it != S[c].begin()) &#123; it--; if (it-&gt;second &gt;= l) &#123; nl = it-&gt;first; nr = max(r, it-&gt;second); T.modify_range(T.R, 1, n, it-&gt;first, it-&gt;second, -1); S[c].erase(it++); &#125; else it++; &#125; while (it != S[c].end() &amp;&amp; it-&gt;first &lt;= r + 1) &#123; nr = max(r, it-&gt;second); T.modify_range(T.R, 1, n, it-&gt;first, it-&gt;second, -1); S[c].erase(it++); &#125; T.modify_range(T.R, 1, n, nl, nr, 1); S[c].insert(make_pair(nl, nr)); &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>LibreOJ</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+        <tag>set</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「USACO 2019.12 Platinum」Greedy Pie Eaters]]></title>
+    <url>%2F2020%2F01%2F20%2Fsolution-loj-3226%2F</url>
+    <content type="text"><![CDATA[#3226. 「USACO 2019.12 Platinum」Greedy Pie Eaters SummarizeQwQwQ Solution区间 DP。考虑对于每个区间，最后一个奶牛一定至少吃掉了一个派。枚举这个派，并进行状态转移即可。 Code12345678910111213141516171819202122232425#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;int n, m;ll a[305][305], f[305][305], g[305][305][305];int main() &#123; scanf("%d%d", &amp;n, &amp;m); for (int i = 1; i &lt;= m; ++i) &#123; int w, l, r; scanf("%d%d%d", &amp;w, &amp;l, &amp;r); a[l][r] = 1ll * w; &#125; for (int l = 1; l &lt;= n; ++l) &#123; for (int i = 1, j = i + l - 1; j &lt;= n; ++i, ++j) &#123; for (int k = i; k &lt;= j; ++k) &#123; g[i][j][k] = max(&#123; a[i][j], g[i + 1][j][k], g[i][j - 1][k] &#125;); f[i][j] = max(f[i][j], f[i][k - 1] + f[k + 1][j] + g[i][j][k]); &#125; &#125; &#125; printf("%lld", f[1][n]); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>LibreOJ</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[形式幂级数与生成函数]]></title>
+    <url>%2F2020%2F01%2F19%2Falgorithm-genfunc%2F</url>
+    <content type="text"><![CDATA[这里好像得写点什么…… 常用形式幂级数$\sum_{n\ge 0}x^n=\frac{1}{1-x}$ $\sum_{n\ge 1}x^n=\frac{x}{1-x}$ $\sum_{n\ge 1}nx^n=\frac{x}{(1-x)^2}$ $\sum_{n\ge 0}\frac{1}{n!}x^n=e^x$]]></content>
+      <categories>
+        <category>算法学习</category>
+        <category>组合计数</category>
+      </categories>
+      <tags>
+        <tag>生成函数</tag>
+        <tag>多项式</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[拆分数]]></title>
+    <url>%2F2020%2F01%2F19%2Falgorithm-numdivide%2F</url>
+    <content type="text"><![CDATA[拆分数问题：将大小为 $n$ 的正整数拆分为若干无序的正整数的和的方案数。 感谢 @oy 对本文做出的巨大贡献（即吊锤 tth37） 动态规划一 $O(n^2)$记 $f[i][j]$ 为将 $i$ 拆分为若干个大小不超过 $j$ 的整数的和的方案数。 分类讨论：第一种情况为 最大的拆分数恰好为 $j$，第二种为 最大的拆分数小于等于 $j-1$。对于第一种情况，可以强制拆分出一个 $j$，也可以考虑为将 $i-j$ 拆分，再强制插入一个 $j$ 所得到的方案数；对于第二种情况，直接套用定义 $f[i][j-1]$ 即可。 状态转移方程如下： $$f[i][j]=f[i-j][j]+f[i][j-1]$$ 动态规划二 $O(n^2)$记 $g[i][j]$ 为将 $i$ 拆分为 $j$ 个整数的和的方案数。 分类讨论：第一种情况为 最小的拆分数恰好为 $1$，第二种为 最小的拆分数大于 $1$。对于第一种情况，可以强制拆分出一个 $1$，也可以考虑为将 $i-1$ 拆分，再强制插入一个 $1$ 所得到的方案数；对于第二种情况，不难发现在 $g[i-j][j]$ 的方案中 所有的拆分数都加上 $1$ 后，满足最小的拆分数大于 $1$ 并且所有拆分数之和恰好为 $i$，即为所求。 状态转移方程如下： $$g[i][j]=g[i-1][j-1]+g[i-j][j]$$ 动态规划三 $O(n\sqrt n)$ 性质：在 $n$ 以下且大小超过 $\sqrt n$ 的数不超过 $\sqrt n$ 个。 考虑将 动态规划一 和 动态规划二 中的思想合并。 记 $f’[i][j]$ 仍为将 $i$ 拆分为若干个大小不超过 $j$ 的整数的和的方案数。唯一的区别是，我们只需将 $f’$ 数组的第二维循环到 $\sqrt n$ 即可。 记 $g’[i][j]$ 为将 $i$ 拆分为若干个整数的和的方案数，其中 大于等于 $\sqrt n$ 的数有 $j$ 个，对于这类数我们称之为 大数。 对 $g’$ 数组分类讨论：第一种情况为划分出 最小的大数恰好为 $\sqrt n$，另一种情况为 最小的大数大于 $\sqrt n$。对于第一种情况，可以强制拆分出一个 $\sqrt n$，也可以考虑为将 $i-\sqrt n$ 拆分，再强制插入一个 $\sqrt n$ 所得到的方案数；对于第二种情况，不难发现再 $g’[i][j]$ 的方案中 所有的大数都加上 $1$ 后，满足最小的 大数 大于 $\sqrt n$ 并且所有拆分数之和恰好为 $i$。 对于初值，$g[i][0]$ 显然为 $f[i][\sqrt n -1]$。 状态转移方程如下： $$g[i][0]=f[i][\sqrt n-1] \g[i][j]=g[i-\sqrt n][j-1]+g[i-j][j]$$]]></content>
+      <categories>
+        <category>算法学习</category>
+        <category>组合计数</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>组合计数</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[solution-bzoj-3032]]></title>
+    <url>%2F2020%2F01%2F19%2Fsolution-bzoj-3032%2F</url>
     <content type="text"><![CDATA[Summarize题目概括征集中~ SolutionNoteCode12]]></content>
   </entry>
   <entry>
@@ -14,10 +77,10 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
+        <tag>生成函数</tag>
         <tag>动态规划</tag>
         <tag>背包</tag>
         <tag>树形dp</tag>
-        <tag>生成函数</tag>
         <tag>组合计数</tag>
       </tags>
   </entry>
@@ -184,8 +247,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>动态规划</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -579,8 +642,8 @@
       </categories>
       <tags>
         <tag>二分答案</tag>
-        <tag>前缀和</tag>
         <tag>倍增</tag>
+        <tag>前缀和</tag>
       </tags>
   </entry>
   <entry>
@@ -1033,8 +1096,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>贪心</tag>
         <tag>python</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
@@ -1045,8 +1108,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>字符串</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
