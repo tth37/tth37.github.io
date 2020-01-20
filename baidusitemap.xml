@@ -1,6 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tth37.cn/2020/01/20/algorithm-gentree/</loc>
+    <lastmod>2020-01-20</lastmod>
+  </url>  <url>
+    <loc>https://tth37.cn/2020/01/19/algorithm-genfunc/</loc>
+    <lastmod>2020-01-20</lastmod>
+  </url>  <url>
+    <loc>https://tth37.cn/2019/08/13/algorithm-polya/</loc>
+    <lastmod>2020-01-20</lastmod>
+  </url>  <url>
     <loc>https://tth37.cn/2020/01/20/solution-loj-3095/</loc>
     <lastmod>2020-01-19</lastmod>
   </url>  <url>
@@ -8,9 +17,6 @@
     <lastmod>2020-01-19</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2020/01/20/solution-loj-3226/</loc>
-    <lastmod>2020-01-19</lastmod>
-  </url>  <url>
-    <loc>https://tth37.cn/2020/01/19/algorithm-genfunc/</loc>
     <lastmod>2020-01-19</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2020/01/19/algorithm-numdivide/</loc>
@@ -195,9 +201,6 @@
   </url>  <url>
     <loc>https://tth37.cn/2019/08/23/solution-luogu-uva11021/</loc>
     <lastmod>2019-08-23</lastmod>
-  </url>  <url>
-    <loc>https://tth37.cn/2019/08/13/algorithm-polya/</loc>
-    <lastmod>2019-08-12</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2019/08/01/codeforces-1199/</loc>
     <lastmod>2019-08-01</lastmod>
