@@ -7,21 +7,21 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>算法学习-Pólya计数与Burnside引理 - tth37&#39;s Blog</title>
+<title>Pólya计数与Burnside引理 - tth37&#39;s Blog</title>
 
 
     <meta name="description" content="概述如果题目中定义一种等价关系，满足等价关系的元素被看成同一类，只统计一次；这样的问题称为等价类计数问题。一般的等价类计数问题可以用 Burnside 引理或 Pólya定理解决。 刚复习了一遍 qwq 我当时写得真好">
 <meta name="keywords" content="数论,群论,Pólya计数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="算法学习-Pólya计数与Burnside引理">
+<meta property="og:title" content="Pólya计数与Burnside引理">
 <meta property="og:url" content="https://tth37.cn/2019/08/13/algorithm-polya/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
 <meta property="og:description" content="概述如果题目中定义一种等价关系，满足等价关系的元素被看成同一类，只统计一次；这样的问题称为等价类计数问题。一般的等价类计数问题可以用 Burnside 引理或 Pólya定理解决。 刚复习了一遍 qwq 我当时写得真好">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://tth37.cn/images/og_image.png">
-<meta property="og:updated_time" content="2020-01-20T09:15:42.271Z">
+<meta property="og:updated_time" content="2020-01-21T09:41:41.927Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="算法学习-Pólya计数与Burnside引理">
+<meta name="twitter:title" content="Pólya计数与Burnside引理">
 <meta name="twitter:description" content="概述如果题目中定义一种等价关系，满足等价关系的元素被看成同一类，只统计一次；这样的问题称为等价类计数问题。一般的等价类计数问题可以用 Burnside 引理或 Pólya定理解决。 刚复习了一遍 qwq 我当时写得真好">
 <meta name="twitter:image" content="https://tth37.cn/images/og_image.png">
 
@@ -82,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="算法学习-Pólya计数与Burnside引理" height="28">
+                <img src="/images/logo.png" alt="Pólya计数与Burnside引理" height="28">
             
             </a>
         </div>
@@ -137,6 +137,10 @@
             <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-08-12T17:00:09.000Z">2019-08-13</time>
                 
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/算法学习/">算法学习</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/算法学习/组合计数/">组合计数</a>
+                </div>
+                
                 
                 <span class="level-item has-text-grey">
                     
@@ -150,41 +154,19 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                算法学习-Pólya计数与Burnside引理
+                Pólya计数与Burnside引理
             
         </h1>
         <div class="content">
             <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>如果题目中定义一种等价关系，满足等价关系的元素被看成同一类，只统计一次；这样的问题称为<strong>等价类计数问题</strong>。一般的等价类计数问题可以用 Burnside 引理或 Pólya定理解决。</p>
 <p>刚复习了一遍 qwq 我当时写得真好</p>
 <a id="more"></a>
-<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><h4 id="置换"><a href="#置换" class="headerlink" title="置换"></a>置换</h4><p>置换实际上就是一一映射，$f$ 可以看成定义域和值域为 $\lbrace 1,2,3,…,n\rbrace$ 的函数，其中 $f(1)=a_1$， $f(2)=a_2$ 等等。</p>
-<script type="math/tex; mode=display">
-f=
-\left(\begin{array}{cccc} 
-    1&2&...&n \\ 
-    a_1&a_2&...&a_n \\ 
-\end{array}\right)</script><h4 id="函数复合"><a href="#函数复合" class="headerlink" title="函数复合"></a>函数复合</h4><p>如果</p>
-<script type="math/tex; mode=display">
-f=
-\left(\begin{array}{cccc} 
-    1&2&...&n \\ 
-    a_1&a_2&...&a_n \\ 
-\end{array}\right)</script><p>且</p>
-<script type="math/tex; mode=display">
-g=\left(\begin{array}{cccc}     1&2&...&n \\     b_1&b_2&...&b_n \\ \end{array}\right)</script><p>是 $\lbrace 1,2,3,…,n\rbrace$  的两个置换，则他们的<strong>复合</strong>按照先 $f$ 后 $g$ 的顺序放置得到一个新置换：</p>
-<script type="math/tex; mode=display">
-g\circ f=
-\left(\begin{array}{cccc} 
-    1&2&...&n \\\
 
-    a_1&a_2&...&a_n \\
-
-\end{array}\right)
-\circ
-\left(\begin{array}{cccc} 
-    1&2&...&n \\ 
-    b_1&b_2&...&b_n \\ 
-\end{array}\right)</script><h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><p>为了处理方便，常常把置换分解成<strong>循环</strong>的乘积，其中每个循环代表一些元素“循环移位”。比如 $(1,4,3)$ 这个循环表示 $1\rightarrow 4$，$4\rightarrow 3$，$3\rightarrow 1$。</p>
+<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><h4 id="置换"><a href="#置换" class="headerlink" title="置换"></a>置换</h4><p>置换实际上就是一一映射，$f$ 可以看成定义域和值域为 $\lbrace 1,2,3,…,n\rbrace$ 的函数，其中 $f(1)=a_1$， $f(2)=a_2$ 等等。<br>$$<br>f=<br>\left(\begin{array}{cccc}<br>    1&amp;2&amp;…&amp;n \<br>    a_1&amp;a_2&amp;…&amp;a_n \<br>\end{array}\right)<br>$$</p>
+<h4 id="函数复合"><a href="#函数复合" class="headerlink" title="函数复合"></a>函数复合</h4><p>如果<br>$$<br>f=<br>\left(\begin{array}{cccc}<br>    1&amp;2&amp;…&amp;n \<br>    a_1&amp;a_2&amp;…&amp;a_n \<br>\end{array}\right)<br>$$<br>且<br>$$<br>g=\left(\begin{array}{cccc}     1&amp;2&amp;…&amp;n \     b_1&amp;b_2&amp;…&amp;b_n \ \end{array}\right)<br>$$<br>是 $\lbrace 1,2,3,…,n\rbrace$  的两个置换，则他们的<strong>复合</strong>按照先 $f$ 后 $g$ 的顺序放置得到一个新置换：<br>$$<br>g\circ f=<br>\left(\begin{array}{cccc}<br>    1&amp;2&amp;…&amp;n \\</p>
+<pre><code>a_1&amp;a_2&amp;...&amp;a_n \\</code></pre><p>\end{array}\right)<br>\circ<br>\left(\begin{array}{cccc}<br>    1&amp;2&amp;…&amp;n \<br>    b_1&amp;b_2&amp;…&amp;b_n \<br>\end{array}\right)</p>
+<p>$$</p>
+<h4 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h4><p>为了处理方便，常常把置换分解成<strong>循环</strong>的乘积，其中每个循环代表一些元素“循环移位”。比如 $(1,4,3)$ 这个循环表示 $1\rightarrow 4$，$4\rightarrow 3$，$3\rightarrow 1$。</p>
 <p>易证任意置换都可以分解为循环乘积的形式。</p>
 <h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><blockquote>
 <p>在 2*2 方格中涂黑白两色，方格允许旋转，有几种方法？</p>
@@ -197,13 +179,7 @@ g\circ f=
 </blockquote>
 <p>首先考虑旋转置换。记置换 $f_i$ 为将环形顺时针旋转 $i$ 个单位长度。显然，$m(f_i)=gcd(i,n)$ 。</p>
 <p>其次考虑翻转置换。当 $n$ 为奇数时，$|G|=n$，且 $m(f)=(n-1)/2+1$；当 $n$ 为偶数时，$|G|=n$，且 $m(f)=n/2+1$。</p>
-<p>记：</p>
-<script type="math/tex; mode=display">
-a=\Sigma_{i=0}^{n-1} t^{gcd(i,n)}\\
-b=\begin{cases}
-t^{(n-1)/2+1} , n=2k+1\\
-t^{n/2+1},n=2k
-\end{cases}</script><p>最终答案 $ans=(a+b)/2n$。</p>
+<p>记：<br>$$<br>a=\Sigma_{i=0}^{n-1} t^{gcd(i,n)}\<br>b=\begin{cases}<br>t^{(n-1)/2+1} , n=2k+1\<br>t^{n/2+1},n=2k<br>\end{cases}<br>$$<br>最终答案 $ans=(a+b)/2n$。</p>
 
         </div>
         
@@ -317,7 +293,7 @@ t^{n/2+1},n=2k
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            96
+                            98
                         </p>
                     </a>
                 </div>
@@ -341,7 +317,7 @@ t^{n/2+1},n=2k
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            69
+                            70
                         </p>
                     </a>
                 </div>
@@ -402,6 +378,32 @@ t^{n/2+1},n=2k
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-21T15:12:20.000Z">2020-01-21</time></div>
+                    <a href="/2020/01/21/solution-loj-3098/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SNOI2019」纸牌</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-21T09:33:56.000Z">2020-01-21</time></div>
+                    <a href="/2020/01/21/solution-loj-3057/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「HNOI2019」校园旅行</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-20T09:16:31.000Z">2020-01-20</time></div>
                     <a href="/2020/01/20/algorithm-gentree/" class="title has-link-black-ter is-size-6 has-text-weight-normal">生成树计数</a>
                     <p class="is-size-7 is-uppercase">
@@ -437,32 +439,6 @@ t^{n/2+1},n=2k
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T16:02:46.000Z">2020-01-20</time></div>
-                    <a href="/2020/01/20/solution-loj-3226/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「USACO 2019.12 Platinum」Greedy Pie Eaters</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T12:56:59.000Z">2020-01-19</time></div>
-                    <a href="/2020/01/19/algorithm-genfunc/" class="title has-link-black-ter is-size-6 has-text-weight-normal">形式幂级数与生成函数</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/算法学习/">算法学习</a> / <a class="has-link-grey -link" href="/categories/算法学习/组合计数/">组合计数</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -471,7 +447,7 @@ t^{n/2+1},n=2k
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/2-SAT/" style="font-size: 10px;">2-SAT</a> <a href="/tags/FFT-NTT/" style="font-size: 12.22px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 12.22px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 11.11px;">ST算法</a> <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dfs序/" style="font-size: 12.22px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 16.67px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10px;">乘法逆元</a> <a href="/tags/二分图匹配/" style="font-size: 11.11px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 12.22px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 12.22px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 11.11px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 11.11px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 11.11px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 11.11px;">可持久化trie</a> <a href="/tags/启发式合并/" style="font-size: 12.22px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 11.11px;">堆</a> <a href="/tags/多项式/" style="font-size: 10px;">多项式</a> <a href="/tags/字符串/" style="font-size: 12.22px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10px;">容斥原理</a> <a href="/tags/差分/" style="font-size: 10px;">差分</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11.11px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.89px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 15.56px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/最短路/" style="font-size: 11.11px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 14.44px;">最近公共祖先</a> <a href="/tags/栈/" style="font-size: 11.11px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 18.89px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 11.11px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 12.22px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 12.22px;">概率</a> <a href="/tags/点分治/" style="font-size: 11.11px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11.11px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 13.33px;">生成函数</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/矩阵/" style="font-size: 10px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线段树/" style="font-size: 18.89px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 14.44px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 10px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 17.78px;">背包</a> <a href="/tags/虚树/" style="font-size: 12.22px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10px;">计数dp</a> <a href="/tags/贪心/" style="font-size: 12.22px;">贪心</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 11.11px;">高斯消元</a>
+        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/2-SAT/" style="font-size: 10px;">2-SAT</a> <a href="/tags/FFT-NTT/" style="font-size: 12.22px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 12.22px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 11.11px;">ST算法</a> <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dfs序/" style="font-size: 12.22px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 16.67px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10px;">乘法逆元</a> <a href="/tags/二分图/" style="font-size: 10px;">二分图</a> <a href="/tags/二分图匹配/" style="font-size: 11.11px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 12.22px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 12.22px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 11.11px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 11.11px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 11.11px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 11.11px;">可持久化trie</a> <a href="/tags/启发式合并/" style="font-size: 12.22px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 11.11px;">堆</a> <a href="/tags/多项式/" style="font-size: 10px;">多项式</a> <a href="/tags/字符串/" style="font-size: 12.22px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10px;">容斥原理</a> <a href="/tags/差分/" style="font-size: 10px;">差分</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11.11px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.89px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 15.56px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/最短路/" style="font-size: 11.11px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 14.44px;">最近公共祖先</a> <a href="/tags/栈/" style="font-size: 11.11px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 18.89px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 11.11px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 12.22px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 12.22px;">概率</a> <a href="/tags/点分治/" style="font-size: 11.11px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11.11px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 13.33px;">生成函数</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/矩阵/" style="font-size: 11.11px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线段树/" style="font-size: 18.89px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 14.44px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 10px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 17.78px;">背包</a> <a href="/tags/虚树/" style="font-size: 12.22px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10px;">计数dp</a> <a href="/tags/贪心/" style="font-size: 12.22px;">贪心</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 11.11px;">高斯消元</a>
     </div>
 </div>
     
@@ -517,7 +493,7 @@ t^{n/2+1},n=2k
                 <span class="level-item">算法学习</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">17</span>
+                <span class="level-item tag">18</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/算法学习/动态规划/">
@@ -549,7 +525,7 @@ t^{n/2+1},n=2k
                 <span class="level-item">组合计数</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">3</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li></ul></li><li>
         <a class="level is-marginless" href="/categories/解题报告/">
@@ -581,7 +557,7 @@ t^{n/2+1},n=2k
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">63</span>
+                <span class="level-item tag">65</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/题解/LibreOJ/">
@@ -589,7 +565,7 @@ t^{n/2+1},n=2k
                 <span class="level-item">LibreOJ</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">20</span>
+                <span class="level-item tag">22</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/题解/计蒜客/">
@@ -624,7 +600,7 @@ t^{n/2+1},n=2k
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="算法学习-Pólya计数与Burnside引理" height="28">
+                    <img src="/images/logo.png" alt="Pólya计数与Burnside引理" height="28">
                 
                 </a>
                 <p class="is-size-7">
