@@ -165,7 +165,6 @@
 <p>感谢@oy的贡献</p>
 </blockquote>
 <a id="more"></a>
-
 <p>一道非常有意思的题。</p>
 <p>假设我们有一个神奇的数据结构，它可以动态地维护一个长度为 $n$ 的队列，其初始元素为 $1,2,…,n$ 。该队列可以支持两种操作，第一种为删除队列的第 $k$ 项元素，执行“向前看齐”操作，并在队列的末尾补充 $n+1$ （以此类推）。第二种为查询队列的第 $k$ 项元素的数值。</p>
 <p>拥有这样一个数据结构，本题就简单多了；观察到“向前看齐”命令只对最后一列产生影响，我们可以在每一行维护一个动态队列，最后一列用另一个动态队列单独处理。</p>
@@ -174,7 +173,6 @@
 <p>初始状态，权值线段树下标为 $1,2,…,n$ 的节点大小均为 $1$ 。对于删除操作，我们只需将对应的权值大小减一，并在权值 $n+1$ 的大小加一即可。对于查询操作，只需在权值线段树中查询第 $k$ 小元素即为对应数值。实现细节同样不再赘述。</p>
 <p>记得开 long long 。代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> lson(u) (node[u].l)</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rson(u) (node[u].r)</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> sum(u) (node[u].sum)</span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">300005</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> &#123;</span></span><br><span class="line">    <span class="hljs-keyword">int</span> l, r, sum;</span><br><span class="line">&#125;node[MAXN * <span class="hljs-number">42</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> cnt;</span><br><span class="line"><span class="hljs-keyword">int</span> root[MAXN], size[MAXN];</span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;ll&gt; ins[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> N, M, Q, T;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">modify</span><span class="hljs-params">(<span class="hljs-keyword">int</span>&amp; u, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> p, <span class="hljs-keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (u == <span class="hljs-number">0</span>) u = ++cnt;</span><br><span class="line">    <span class="hljs-keyword">if</span> (l == r) &#123;</span><br><span class="line">        sum(u) += val;</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">if</span> (p &lt;= mid) modify(lson(u), l, mid, p, val);</span><br><span class="line">    <span class="hljs-keyword">else</span> modify(rson(u), mid + <span class="hljs-number">1</span>, r, p, val);</span><br><span class="line">    sum(u) = sum(lson(u)) + sum(rson(u));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (l == r) <span class="hljs-keyword">return</span> l;</span><br><span class="line">    <span class="hljs-keyword">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">int</span> lsum = sum(lson(u));</span><br><span class="line">    <span class="hljs-keyword">if</span> (l &lt;= T) &#123;</span><br><span class="line">        lsum += (mid &gt; T) ? T - l + <span class="hljs-number">1</span> : mid - l + <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (k &lt;= lsum) <span class="hljs-keyword">return</span> query(lson(u), l, mid, k);</span><br><span class="line">    <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> query(rson(u), mid + <span class="hljs-number">1</span>, r, k - lsum);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;N, &amp;M, &amp;Q);</span><br><span class="line">    <span class="hljs-keyword">int</span> Case = Q;</span><br><span class="line">    <span class="hljs-keyword">while</span> (Case--) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> x, y;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">        ll ans = <span class="hljs-number">0</span>, tmp = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (y == M) &#123;</span><br><span class="line">            T = N;</span><br><span class="line">            ans = query(root[N + <span class="hljs-number">1</span>], <span class="hljs-number">1</span>, N + Q, x);</span><br><span class="line">            modify(root[N + <span class="hljs-number">1</span>], <span class="hljs-number">1</span>, N + Q, ans, <span class="hljs-number">-1</span>);</span><br><span class="line">            modify(root[N + <span class="hljs-number">1</span>], <span class="hljs-number">1</span>, N + Q, N + (++size[N + <span class="hljs-number">1</span>]), <span class="hljs-number">1</span>);</span><br><span class="line">            <span class="hljs-keyword">if</span> (ans &lt;= N) ans = ans * (ll)M;</span><br><span class="line">            <span class="hljs-keyword">else</span> ans = ins[N + <span class="hljs-number">1</span>][ans - N - <span class="hljs-number">1</span>];</span><br><span class="line">            ins[N + <span class="hljs-number">1</span>].push_back(ans);</span><br><span class="line">            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>, ans);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            T = M - <span class="hljs-number">1</span>;</span><br><span class="line">            ans = query(root[x], <span class="hljs-number">1</span>, M + Q, y);</span><br><span class="line">            modify(root[x], <span class="hljs-number">1</span>, M + Q, ans, <span class="hljs-number">-1</span>);</span><br><span class="line">            modify(root[x], <span class="hljs-number">1</span>, M + Q, M - <span class="hljs-number">1</span> + (++size[x]), <span class="hljs-number">1</span>);</span><br><span class="line">            <span class="hljs-keyword">if</span> (ans &lt;= M - <span class="hljs-number">1</span>) ans += (ll)(x - <span class="hljs-number">1</span>) * M;</span><br><span class="line">            <span class="hljs-keyword">else</span> ans = ins[x][ans - M];</span><br><span class="line">            T = N;</span><br><span class="line">            tmp = query(root[N + <span class="hljs-number">1</span>], <span class="hljs-number">1</span>, N + Q, x);</span><br><span class="line">            modify(root[N + <span class="hljs-number">1</span>], <span class="hljs-number">1</span>, N + Q, tmp, <span class="hljs-number">-1</span>);</span><br><span class="line">            modify(root[N + <span class="hljs-number">1</span>], <span class="hljs-number">1</span>, N + Q, N + (++size[N + <span class="hljs-number">1</span>]), <span class="hljs-number">1</span>);</span><br><span class="line">            <span class="hljs-keyword">if</span> (tmp &lt;= N) tmp = tmp * (ll)M;</span><br><span class="line">            <span class="hljs-keyword">else</span> tmp = ins[N + <span class="hljs-number">1</span>][tmp - N - <span class="hljs-number">1</span>];</span><br><span class="line">            ins[N + <span class="hljs-number">1</span>].push_back(ans);</span><br><span class="line">            ins[x].push_back(tmp);</span><br><span class="line">            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>, ans);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -578,6 +576,162 @@
 
         
             
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
 
         
         </div>

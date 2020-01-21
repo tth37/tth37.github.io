@@ -172,7 +172,9 @@
 </blockquote>
 <p>背包类树形dp。本题需要运用分组背包模型。</p>
 <p>首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。</p>
-<p>可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：<br>$$<br>f[u][i]=\max_{v\in son(u)}{f[u][i-j]+f[v][j]-w}<br>$$<br>其中，$v$为$u$的子节点，$w$为这条边的权值。在$u$每个子节点上有许多“物品”，“物品”总数即为以$v$为根的子树上用户的个数；每个“物品”所具有的价值即为其最大利润，即$f[v][j]$。同时不应忽略边权对利润带来的影响。</p>
+<p>可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：</p>
+<script type="math/tex; mode=display">
+f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$的子节点，$w$为这条边的权值。在$u$每个子节点上有许多“物品”，“物品”总数即为以$v$为根的子树上用户的个数；每个“物品”所具有的价值即为其最大利润，即$f[v][j]$。同时不应忽略边权对利润带来的影响。</p>
 <p>注意细节处理及边界。代码如下：</p>
         </div>
         
@@ -229,13 +231,13 @@
             <p>这是一个并不简单的背包类树形dp……</p>
 <p><del>很自然地</del>想到状态定义：$f[u][k][0/1][0/1]$表示以$u$为根的子树中，总共选择$k$个结点，其中除了$u$以外的所有结点均被监听到，$u$结点选或不选，$u$结点是否被覆盖的情况下，一共有多少种方案。</p>
 <p>状态转移看似十分麻烦。每个结点$u$都有许多子结点，很难统计出每个子结点的所有情况（似乎在组合数学的范畴）。但是我们可以用十分巧妙的树形背包来进行状态转移。树上背包的转移套路是：</p>
-<p>$$<br>f[u][i+j]=combine(f[u][i],f[v][j])<br>$$</p>
-<p>相当于每递归访问完一个子结点，就把子节点上的状态与当前已经处理的状态一一配对，保证不重不漏且兼顾效率。具体的转移方程为：</p>
-<p>$$<br>f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]<br>$$</p>
-<p>$$<br>f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])<br>$$</p>
-<p>$$<br>f[u][i+j][0][1]=\sum (f[u][i][0][1]*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]*f[v][j][1][1]<br>$$</p>
-<p>$$<br>f[u][i+j][1][1]=\sum (f[u][i][1][0]*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))<br>$$</p>
-<p>具体实现时还应注意：因为阶段（即扫描子结点个数）的划分，在每次转移前都要先记录原始的$u$结点上的数据，否则会导致混乱。</p>
+<script type="math/tex; mode=display">
+f[u][i+j]=combine(f[u][i],f[v][j])</script><p>相当于每递归访问完一个子结点，就把子节点上的状态与当前已经处理的状态一一配对，保证不重不漏且兼顾效率。具体的转移方程为：</p>
+<script type="math/tex; mode=display">
+f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]</script><script type="math/tex; mode=display">
+f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])</script><script type="math/tex; mode=display">
+f[u][i+j][0][1]=\sum (f[u][i][0][1]\*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]\*f[v][j][1][1]</script><script type="math/tex; mode=display">
+f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]\*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))</script><p>具体实现时还应注意：因为阶段（即扫描子结点个数）的划分，在每次转移前都要先记录原始的$u$结点上的数据，否则会导致混乱。</p>
         </div>
         
         
@@ -667,6 +669,162 @@
 
         
             
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
 
         
         </div>
@@ -811,6 +969,162 @@
 
     
         
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
 
     
     

@@ -10,18 +10,18 @@
 <title>题目列表-动态规划 - tth37&#39;s Blog</title>
 
 
-    <meta name="description" content="任务安排（斜率优化+费用提前计算）$$f[i]=min_{0\le j&amp;lt;i}{f[j]-(S+T[i])*C[i]+T[i]*C[i]+S*C[N]}$$     特别行动队（斜率优化）$$f[i]=max_{0\le j&amp;lt;i}{f[j]+A*(S[i]-S[j])^2+B*(S[i]-S[j])+C}$$     玩具装箱（斜率优化）$$f[i]=min_{0\le j&amp;lt;i}">
+    <meta name="description" content="任务安排（斜率优化+费用提前计算） f[i]=min_{0\le j">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题目列表-动态规划">
 <meta property="og:url" content="https://tth37.cn/2019/03/20/list-dp/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="任务安排（斜率优化+费用提前计算）$$f[i]=min_{0\le j&amp;lt;i}{f[j]-(S+T[i])*C[i]+T[i]*C[i]+S*C[N]}$$     特别行动队（斜率优化）$$f[i]=max_{0\le j&amp;lt;i}{f[j]+A*(S[i]-S[j])^2+B*(S[i]-S[j])+C}$$     玩具装箱（斜率优化）$$f[i]=min_{0\le j&amp;lt;i}">
+<meta property="og:description" content="任务安排（斜率优化+费用提前计算） f[i]=min_{0\le j">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://tth37.cn/images/og_image.png">
 <meta property="og:updated_time" content="2019-05-12T11:10:50.859Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="题目列表-动态规划">
-<meta name="twitter:description" content="任务安排（斜率优化+费用提前计算）$$f[i]=min_{0\le j&amp;lt;i}{f[j]-(S+T[i])*C[i]+T[i]*C[i]+S*C[N]}$$     特别行动队（斜率优化）$$f[i]=max_{0\le j&amp;lt;i}{f[j]+A*(S[i]-S[j])^2+B*(S[i]-S[j])+C}$$     玩具装箱（斜率优化）$$f[i]=min_{0\le j&amp;lt;i}">
+<meta name="twitter:description" content="任务安排（斜率优化+费用提前计算） f[i]=min_{0\le j">
 <meta name="twitter:image" content="https://tth37.cn/images/og_image.png">
 
 
@@ -158,68 +158,74 @@
         </h1>
         <div class="content">
             <ol>
-<li><h5 id="任务安排（斜率优化-费用提前计算）"><a href="#任务安排（斜率优化-费用提前计算）" class="headerlink" title="任务安排（斜率优化+费用提前计算）"></a><a href="https://loj.ac/problem/10185" target="_blank" rel="noopener">任务安排</a>（斜率优化+费用提前计算）</h5><p>$$<br>f[i]=min_{0\le j&lt;i}{f[j]-(S+T[i])*C[i]+T[i]*C[i]+S*C[N]}<br>$$</p>
+<li><h5 id="任务安排（斜率优化-费用提前计算）"><a href="#任务安排（斜率优化-费用提前计算）" class="headerlink" title="任务安排（斜率优化+费用提前计算）"></a><a href="https://loj.ac/problem/10185" target="_blank" rel="noopener">任务安排</a>（斜率优化+费用提前计算）</h5><script type="math/tex; mode=display">
+f[i]=min_{0\le j<i}\{f[j]-(S+T[i])\*C[i]+T[i]\*C[i]+S\*C[N]\}</script></li>
+</ol>
+<hr>
+<ol>
+<li><h5 id="特别行动队（斜率优化）"><a href="#特别行动队（斜率优化）" class="headerlink" title="特别行动队（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3628" target="_blank" rel="noopener">特别行动队</a>（斜率优化）</h5><script type="math/tex; mode=display">
+f[i]=max_{0\le j<i}\{f[j]+A\*(S[i]-S[j])^2+B\*(S[i]-S[j])+C\}</script></li>
+</ol>
+<hr>
+<ol>
+<li><h5 id="玩具装箱（斜率优化）"><a href="#玩具装箱（斜率优化）" class="headerlink" title="玩具装箱（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3195" target="_blank" rel="noopener">玩具装箱</a>（斜率优化）</h5><script type="math/tex; mode=display">
+f[i]=min_{0\le j<i}\{f[j]+(A[i]-A[j]-L-1)^2\}</script><p>斜率优化的适用范围是只有一个自变量。</p>
+<p>形如这样的转移方程：</p>
+<script type="math/tex; mode=display">
+f[i]=min_{0\le j<i}\{f[j]+(i-j+S[i]-S[j]-L-1)^2\}</script><p>操作难度较大，可以将$S[i]+i$存在$A$数组中，即可全部化为一个自变量。</p>
 </li>
 </ol>
 <hr>
-<ol start="2">
-<li><h5 id="特别行动队（斜率优化）"><a href="#特别行动队（斜率优化）" class="headerlink" title="特别行动队（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3628" target="_blank" rel="noopener">特别行动队</a>（斜率优化）</h5><p>$$<br>f[i]=max_{0\le j&lt;i}{f[j]+A*(S[i]-S[j])^2+B*(S[i]-S[j])+C}<br>$$</p>
-</li>
+<ol>
+<li><h5 id="锯木厂选址（斜率优化）"><a href="#锯木厂选址（斜率优化）" class="headerlink" title="锯木厂选址（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P4360" target="_blank" rel="noopener">锯木厂选址</a>（斜率优化）</h5><script type="math/tex; mode=display">
+f[i]=min_{1\le j<i}\{C[i-1]-W[j]*(D[i]-D[j])\}</script></li>
 </ol>
 <hr>
-<ol start="3">
-<li><h5 id="玩具装箱（斜率优化）"><a href="#玩具装箱（斜率优化）" class="headerlink" title="玩具装箱（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3195" target="_blank" rel="noopener">玩具装箱</a>（斜率优化）</h5><p>$$<br>f[i]=min_{0\le j&lt;i}{f[j]+(A[i]-A[j]-L-1)^2}<br>$$<br>斜率优化的适用范围是只有一个自变量。</p>
-<p>形如这样的转移方程：<br>$$<br>f[i]=min_{0\le j&lt;i}{f[j]+(i-j+S[i]-S[j]-L-1)^2}<br>$$</p>
-<p>操作难度较大，可以将$S[i]+i$存在$A$数组中，即可全部化为一个自变量。</p>
-</li>
+<ol>
+<li><h5 id="打印文章（斜率优化）"><a href="#打印文章（斜率优化）" class="headerlink" title="打印文章（斜率优化）"></a><a href="https://loj.ac/problem/10191" target="_blank" rel="noopener">打印文章</a>（斜率优化）</h5><script type="math/tex; mode=display">
+f[i]=min_{0\le j<i}\{f[j]+(S[i]-S[j])^2+M\}</script>调到心态爆炸……getK函数中如果除数为0则要返回1e100</li>
 </ol>
 <hr>
-<ol start="4">
-<li><h5 id="锯木厂选址（斜率优化）"><a href="#锯木厂选址（斜率优化）" class="headerlink" title="锯木厂选址（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P4360" target="_blank" rel="noopener">锯木厂选址</a>（斜率优化）</h5>$$<br>f[i]=min_{1\le j&lt;i}{C[i-1]-W[j]*(D[i]-D[j])}<br>$$</li>
-</ol>
-<hr>
-<ol start="5">
-<li><h5 id="打印文章（斜率优化）"><a href="#打印文章（斜率优化）" class="headerlink" title="打印文章（斜率优化）"></a><a href="https://loj.ac/problem/10191" target="_blank" rel="noopener">打印文章</a>（斜率优化）</h5>$$<br>f[i]=min_{0\le j&lt;i}{f[j]+(S[i]-S[j])^2+M}<br>$$<br>调到心态爆炸……getK函数中如果除数为0则要返回1e100</li>
-</ol>
-<hr>
-<ol start="6">
-<li><h5 id="序列分割（斜率优化）"><a href="#序列分割（斜率优化）" class="headerlink" title="序列分割（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3648" target="_blank" rel="noopener">序列分割</a>（斜率优化）</h5><p>$$<br>f[i][j]=max_{0 \le k&lt;j}{f[i-1][k]+S[k]*(S[j]-S[k])}<br>$$<br>不开long long见祖宗。题目中如果说“非负整数”一定记得判断除数是否为0。</p>
+<ol>
+<li><h5 id="序列分割（斜率优化）"><a href="#序列分割（斜率优化）" class="headerlink" title="序列分割（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3648" target="_blank" rel="noopener">序列分割</a>（斜率优化）</h5><script type="math/tex; mode=display">
+f[i][j]=max_{0 \le k<j}\{f[i-1][k]+S[k]*(S[j]-S[k])\}</script><p>不开long long见祖宗。题目中如果说“非负整数”一定记得判断除数是否为0。</p>
 <p>对于转移方程中的第一维，稍加观察就会发现可以使用滚动数组。（虽然也需要一些额外的数组记录状态）</p>
 </li>
 </ol>
 <hr>
-<ol start="7">
-<li><h5 id="绿色通道（二分答案-单调队列）"><a href="#绿色通道（二分答案-单调队列）" class="headerlink" title="绿色通道（二分答案+单调队列）"></a><a href="https://loj.ac/problem/10181" target="_blank" rel="noopener">绿色通道</a>（二分答案+单调队列）</h5>$$<br>f[i]=min_{i-M-1 \le j &lt;i}{f[j]+a[i]}<br>$$</li>
+<ol>
+<li><h5 id="绿色通道（二分答案-单调队列）"><a href="#绿色通道（二分答案-单调队列）" class="headerlink" title="绿色通道（二分答案+单调队列）"></a><a href="https://loj.ac/problem/10181" target="_blank" rel="noopener">绿色通道</a>（二分答案+单调队列）</h5><script type="math/tex; mode=display">
+f[i]=min_{i-M-1 \le j <i}\{f[j]+a[i]\}</script></li>
 </ol>
 <p>   二分发怒程度$M$，$f$数组中存储选择当前题目最少多少体力。统计最终答案只需检验最后$M$个状态即可。</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> ans=INF;</span><br><span class="line"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=N-M;i&lt;=N;++i) ans=min(ans,f[i]);</span><br></pre></td></tr></table></figure>
-
 <hr>
-<ol start="8">
-<li><h5 id="股票交易（单调队列-很多条件）"><a href="#股票交易（单调队列-很多条件）" class="headerlink" title="股票交易（单调队列+很多条件）"></a><a href="https://www.luogu.org/problemnew/show/P2569" target="_blank" rel="noopener">股票交易</a>（单调队列+很多条件）</h5><p>$$<br>f[i][j]=-AP[i]*j(0 \le j \le AS[i])<br>$$</p>
-<p>$$<br>f[i][j]=max{f[i][j],f[i-1][j]}(0 \le j \le M)<br>$$</p>
-<p>$$<br>f[i][j]=max_{j-AS[i] \le k&lt;j}{f[i-W-1][k]-(j-k)*AP[i]}(0 \le j \le M)<br>$$</p>
-<p>$$<br>f[i][j]=max_{j&lt;k \le j+BS[i]}{f[i-W-1][k]+(k-j)*BP[i]}(0 \le j \le M)<br>$$<br>条件特别多，需要仔细分析题意并且列出状态转移方程。先进行较简单的转移，再利用单调队列进行复杂转移。注意第四种状态转移要使用逆序循环。</p>
+<ol>
+<li><h5 id="股票交易（单调队列-很多条件）"><a href="#股票交易（单调队列-很多条件）" class="headerlink" title="股票交易（单调队列+很多条件）"></a><a href="https://www.luogu.org/problemnew/show/P2569" target="_blank" rel="noopener">股票交易</a>（单调队列+很多条件）</h5><script type="math/tex; mode=display">
+f[i][j]=-AP[i]*j(0 \le j \le AS[i])</script><script type="math/tex; mode=display">
+f[i][j]=max\{f[i][j],f[i-1][j]\}(0 \le j \le M)</script><script type="math/tex; mode=display">
+f[i][j]=max_{j-AS[i] \le k<j}\{f[i-W-1][k]-(j-k)*AP[i]\}(0 \le j \le M)</script><script type="math/tex; mode=display">
+f[i][j]=max_{j<k \le j+BS[i]}\{f[i-W-1][k]+(k-j)*BP[i]\}(0 \le j \le M)</script><p>条件特别多，需要仔细分析题意并且列出状态转移方程。先进行较简单的转移，再利用单调队列进行复杂转移。注意第四种状态转移要使用逆序循环。</p>
 <p><del>如此恶心的状态转移让我不禁想起<a href="https://www.luogu.org/problemnew/show/P1941" target="_blank" rel="noopener">飞扬的小鸟</a></del></p>
 </li>
 </ol>
 <hr>
-<ol start="9">
-<li><h5 id="潜入行动（背包类树形dp）"><a href="#潜入行动（背包类树形dp）" class="headerlink" title="潜入行动（背包类树形dp）"></a><a href="https://www.luogu.org/problemnew/show/P4516" target="_blank" rel="noopener">潜入行动</a>（背包类树形dp）</h5><p>$$<br>f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]<br>$$</p>
-<p>$$<br>f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])<br>$$</p>
-<p>$$<br>f[u][i+j][0][1]=\sum (f[u][i][0][1]*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]*f[v][j][1][1]<br>$$</p>
-<p>$$<br>f[u][i+j][1][1]=\sum (f[u][i][1][0]*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))<br>$$</p>
-<p><a href="https://tth37.cn/2019/03/28/solution-luogu-p4516/">题解链接</a></p>
+<ol>
+<li><h5 id="潜入行动（背包类树形dp）"><a href="#潜入行动（背包类树形dp）" class="headerlink" title="潜入行动（背包类树形dp）"></a><a href="https://www.luogu.org/problemnew/show/P4516" target="_blank" rel="noopener">潜入行动</a>（背包类树形dp）</h5><script type="math/tex; mode=display">
+f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]</script><script type="math/tex; mode=display">
+f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])</script><script type="math/tex; mode=display">
+f[u][i+j][0][1]=\sum (f[u][i][0][1]\*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]\*f[v][j][1][1]</script><script type="math/tex; mode=display">
+f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]\*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))</script><p><a href="https://tth37.cn/2019/03/28/solution-luogu-p4516/">题解链接</a></p>
 <p>特别注意空间问题，中间运算转<code>long long</code>，保存时再转<code>int</code></p>
 </li>
 </ol>
 <hr>
-<ol start="10">
-<li><h5 id="子串（线性dp-滚动数组）"><a href="#子串（线性dp-滚动数组）" class="headerlink" title="子串（线性dp+滚动数组）"></a><a href="https://www.luogu.org/fe/problem/P2679" target="_blank" rel="noopener">子串</a>（线性dp+滚动数组）</h5><p>$$<br>f[i][0][0][0]=1<br>$$</p>
-<p>$$<br>f[i][j][k][0]=f[i-1][j][k][0]+f[i-1][j][k][1]<br>$$</p>
-<p>$$<br>a[i]=b[j]:f[i][j][k][1]=f[i-1][j-1][k][1]+f[i-1][j-1][k-1][0]+f[i-1][j-1][k-1][1]<br>$$</p>
-<p>$$<br>a[i] \ne b[j]:f[i][j][k][1]=0<br>$$</p>
-<p>滚动数组注意点：</p>
+<ol>
+<li><h5 id="子串（线性dp-滚动数组）"><a href="#子串（线性dp-滚动数组）" class="headerlink" title="子串（线性dp+滚动数组）"></a><a href="https://www.luogu.org/fe/problem/P2679" target="_blank" rel="noopener">子串</a>（线性dp+滚动数组）</h5><script type="math/tex; mode=display">
+f[i][0][0][0]=1</script><script type="math/tex; mode=display">
+f[i][j][k][0]=f[i-1][j][k][0]+f[i-1][j][k][1]</script><script type="math/tex; mode=display">
+a[i]=b[j]:f[i][j][k][1]=f[i-1][j-1][k][1]+f[i-1][j-1][k-1][0]+f[i-1][j-1][k-1][1]</script><script type="math/tex; mode=display">
+a[i] \ne b[j]:f[i][j][k][1]=0</script><p>滚动数组注意点：</p>
 <ul>
 <li>状态转移方程只依赖前一维或前两维状态</li>
 <li>状态数组要被滚动的一维只开1或2</li>
@@ -228,38 +234,38 @@
 </li>
 </ol>
 <hr>
-<ol start="11">
-<li><h5 id="换教室（期望dp）"><a href="#换教室（期望dp）" class="headerlink" title="换教室（期望dp）"></a><a href="https://www.luogu.org/fe/problem/P1850" target="_blank" rel="noopener">换教室</a>（期望dp）</h5><p>$$<br>f[i][j][0]=min{f[i-1][j][0]+dis[C[i-1]][C[i]],f[i-1][j][1]+K[i-1]*dis[D[i-1]][C[i]]+(1-K[i-1])*dis[C[i-1]][C[i]]}<br>$$</p>
-<p>$$<br>f[i][j][1]=min{f[i-1][j-1][0]+K[i]*dis[C[i-1]][D[i]]+(1-K[i])*dis[C[i-1]][C[i]],f[i-1][j-1][1]+K[i-1]*K[i]*dis[D[i-1]][D[i]]+K[i-1]*(1-K[i])*dis[D[i-1]][C[i]]+(1-K[i-1])*K[i]*dis[C[i-1]][D[i]]+(1-K[i-1])*(1-K[i])*dis[C[i-1]][C[i]]}<br>$$</p>
-<p>期望dp可以单独开一维表示状态，以便于列举出所有情况。本题的转移方程是一个很好的例子。<del>如果tth37开心的话，Ta可能会写一篇数学期望专题具体讲解此类题目。</del></p>
+<ol>
+<li><h5 id="换教室（期望dp）"><a href="#换教室（期望dp）" class="headerlink" title="换教室（期望dp）"></a><a href="https://www.luogu.org/fe/problem/P1850" target="_blank" rel="noopener">换教室</a>（期望dp）</h5><script type="math/tex; mode=display">
+f[i][j][0]=min\{f[i-1][j][0]+dis[C[i-1]][C[i]],f[i-1][j][1]+K[i-1]\*dis[D[i-1]][C[i]]+(1-K[i-1])\*dis[C[i-1]][C[i]]\}</script><script type="math/tex; mode=display">
+f[i][j][1]=min\{f[i-1][j-1][0]+K[i]\*dis[C[i-1]][D[i]]+(1-K[i])\*dis[C[i-1]][C[i]],f[i-1][j-1][1]+K[i-1]\*K[i]\*dis[D[i-1]][D[i]]+K[i-1]\*(1-K[i])\*dis[D[i-1]][C[i]]+(1-K[i-1])\*K[i]\*dis[C[i-1]][D[i]]+(1-K[i-1])\*(1-K[i])\*dis[C[i-1]][C[i]]\}</script><p>期望dp可以单独开一维表示状态，以便于列举出所有情况。本题的转移方程是一个很好的例子。<del>如果tth37开心的话，Ta可能会写一篇数学期望专题具体讲解此类题目。</del></p>
 </li>
 </ol>
 <hr>
-<ol start="12">
-<li><h5 id="过河（线性dp-玄学离散化）"><a href="#过河（线性dp-玄学离散化）" class="headerlink" title="过河（线性dp+玄学离散化）"></a><a href="https://www.luogu.org/problemnew/show/P1052" target="_blank" rel="noopener">过河</a>（线性dp+玄学离散化）</h5><p>$$<br>f[i]=min_{S \le j \le T}{f[i-j]+flag[i]}<br>$$</p>
-<p>由于m非常小，因此采用2520缩点，即两点之间距离超过2520的，可以将距离改为$dis % 2520$，从而离散化。</p>
+<ol>
+<li><h5 id="过河（线性dp-玄学离散化）"><a href="#过河（线性dp-玄学离散化）" class="headerlink" title="过河（线性dp+玄学离散化）"></a><a href="https://www.luogu.org/problemnew/show/P1052" target="_blank" rel="noopener">过河</a>（线性dp+玄学离散化）</h5><script type="math/tex; mode=display">
+f[i]=min_{S \le j \le T}\{f[i-j]+flag[i]\}</script><p>由于m非常小，因此采用2520缩点，即两点之间距离超过2520的，可以将距离改为$dis % 2520$，从而离散化。</p>
 </li>
 </ol>
 <hr>
-<ol start="13">
-<li><h5 id="统计单词个数（线性dp-字符串）"><a href="#统计单词个数（线性dp-字符串）" class="headerlink" title="统计单词个数（线性dp+字符串）"></a><a href="https://www.luogu.org/problemnew/show/P1026" target="_blank" rel="noopener">统计单词个数</a>（线性dp+字符串）</h5><p>$$<br>f[i][j]=max{f[i][j],f[r][j-1]+g[r+1][i]}<br>$$</p>
-<p>字符串处理使用string类find函数。</p>
+<ol>
+<li><h5 id="统计单词个数（线性dp-字符串）"><a href="#统计单词个数（线性dp-字符串）" class="headerlink" title="统计单词个数（线性dp+字符串）"></a><a href="https://www.luogu.org/problemnew/show/P1026" target="_blank" rel="noopener">统计单词个数</a>（线性dp+字符串）</h5><script type="math/tex; mode=display">
+f[i][j]=max\{f[i][j],f[r][j-1]+g[r+1][i]\}</script><p>字符串处理使用string类find函数。</p>
 <p>线性dp时再次强调，需要分清阶段、状态和决策变量；阶段在最外层循环，决策在最内层。在寻找关系时可以从推导或定义角度辨析，也可以根据转移方程进行识别。</p>
 </li>
 </ol>
 <hr>
-<ol start="14">
-<li><h5 id="有线电视网（背包类树形dp）"><a href="#有线电视网（背包类树形dp）" class="headerlink" title="有线电视网（背包类树形dp）"></a><a href="https://www.luogu.org/fe/problem/P1273" target="_blank" rel="noopener">有线电视网</a>（背包类树形dp）</h5><p>$$<br>f[u][i]=max_{v\in son(u)}{f[u][i-j]+f[v][j]-w}<br>$$<br><a href="https://tth37.cn/2019/04/25/solution-luogu-p1273/">题解链接</a></p>
+<ol>
+<li><h5 id="有线电视网（背包类树形dp）"><a href="#有线电视网（背包类树形dp）" class="headerlink" title="有线电视网（背包类树形dp）"></a><a href="https://www.luogu.org/fe/problem/P1273" target="_blank" rel="noopener">有线电视网</a>（背包类树形dp）</h5><script type="math/tex; mode=display">
+f[u][i]=max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p><a href="https://tth37.cn/2019/04/25/solution-luogu-p1273/">题解链接</a></p>
 </li>
 </ol>
 <hr>
-<ol start="15">
+<ol>
 <li><h5 id="棋盘制作（单调栈）"><a href="#棋盘制作（单调栈）" class="headerlink" title="棋盘制作（单调栈）"></a><a href="https://www.luogu.org/problemnew/show/P1169" target="_blank" rel="noopener">棋盘制作</a>（单调栈）</h5><p>似乎没有转移方程</p>
 <p>注意单调栈的处理方式（玄学方法或通用方法），在退栈时务必退干净。</p>
 </li>
 </ol>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//玄学方法：</span></span><br><span class="line"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=N+<span class="hljs-number">1</span>;++i)&#123;</span><br><span class="line">    <span class="hljs-keyword">while</span>(cnt&gt;<span class="hljs-number">0</span>&amp;&amp;a[s[cnt]]&gt;=a[i])&#123;</span><br><span class="line">        ans=max(ans,(i-s[cnt<span class="hljs-number">-1</span>]<span class="hljs-number">-1</span>)*a[s[cnt]]);</span><br><span class="line">        cnt--;</span><br><span class="line">    &#125;</span><br><span class="line">    s[++cnt]=i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">//通用方法：</span></span><br><span class="line">先处理出每个位置左边第一个比它小的，再处理出右边第一个比它小的，最后枚举</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -654,6 +660,162 @@
 
         
             
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
 
         
         </div>

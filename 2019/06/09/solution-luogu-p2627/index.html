@@ -165,17 +165,17 @@
 <p>感谢@oy 的贡献</p>
 </blockquote>
 <a id="more"></a>
-
 <p>一道单调队列入门题。</p>
 <p>面对动规题，首先设计状态转移方程。令$f[i]$表示$1-i$中连取不超过$K$个数，且<strong>第$i$个数不取</strong>所能累加的最大和。</p>
 <p>因为第$i$个数不取，所以在$i$之前一定连取了一段数。这段数的长度可能为$0-K$（注意是$0-K$而不是$1-K$，可以通过手推样例发现最优解中可能存在连着两个数不取的情况）。连取的一段数所能累加的和可以用前缀和计算。考虑边界条件后，状态转移方程如下：</p>
-<p>$$<br>f[i]=\max_{i-K-1\le j \le i-1} \lbrace f[j]+s[i-1]-s[j] \rbrace<br>$$</p>
-<p>由于$max$函数的循环变量是$j$，所以<strong>只与$i$相关的变量</strong>$s[i-1]$可以作为常数提出到$max$函数之外，即：</p>
-<p>$$<br>f[i]=\max_{i-K-1\le j \le i-1}\lbrace f[j]-s[j]\rbrace +s[i-1]<br>$$</p>
-<p>将状态转移方程化简到这样，就已经可以用单调队列进行优化了。我们可以用单调队列维护$f[j]-s[j]$的最值，在循环时将其最大值取出再加上$s[i-1]$即为$f[i]$。</p>
+<script type="math/tex; mode=display">
+f[i]=\max_{i-K-1\le j \le i-1} \lbrace f[j]+s[i-1]-s[j] \rbrace</script><p>由于$max$函数的循环变量是$j$，所以<strong>只与$i$相关的变量</strong>$s[i-1]$可以作为常数提出到$max$函数之外，即：</p>
+<script type="math/tex; mode=display">
+f[i]=\max_{i-K-1\le j \le i-1}\lbrace f[j]-s[j]\rbrace +s[i-1]</script><p>将状态转移方程化简到这样，就已经可以用单调队列进行优化了。我们可以用单调队列维护$f[j]-s[j]$的最值，在循环时将其最大值取出再加上$s[i-1]$即为$f[i]$。</p>
 <p>如果想不到该如何操作，也可以这样理解：</p>
-<p>$$<br>g[i]=f[i]-s[i]<br>$$<br>$$<br>f[i]=\max_{i-K-1\le j \le i-1}\lbrace g[j]\rbrace+s[i-1]<br>$$</p>
-<p>由于我们定义$f[i]$是第$i$个数不取的最优解，可以强行求解$f[N+1]$（虽然它似乎没有实际意义）作为本题的最终答案。</p>
+<script type="math/tex; mode=display">
+g[i]=f[i]-s[i]</script><script type="math/tex; mode=display">
+f[i]=\max_{i-K-1\le j \le i-1}\lbrace g[j]\rbrace+s[i-1]</script><p>由于我们定义$f[i]$是第$i$个数不取的最优解，可以强行求解$f[N+1]$（虽然它似乎没有实际意义）作为本题的最终答案。</p>
 <p>代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> N, K;</span><br><span class="line">ll s[<span class="hljs-number">100005</span>], f[<span class="hljs-number">100005</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> q[<span class="hljs-number">100005</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;N, &amp;K);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld"</span>, &amp;s[i]);</span><br><span class="line">        s[i] += s[i<span class="hljs-number">-1</span>];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">int</span> l = <span class="hljs-number">0</span>, r = <span class="hljs-number">1</span>;</span><br><span class="line">    q[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>, f[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N + <span class="hljs-number">1</span>; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; q[l] &lt; i - K - <span class="hljs-number">1</span>) l++;</span><br><span class="line">        f[i] = f[q[l]] - s[q[l]] + s[i<span class="hljs-number">-1</span>];</span><br><span class="line">        <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; f[q[r - <span class="hljs-number">1</span>]] - s[q[r - <span class="hljs-number">1</span>]] &lt; f[i] - s[i]) r--;</span><br><span class="line">        q[r++] = i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld"</span>, f[N + <span class="hljs-number">1</span>]);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
@@ -580,6 +580,162 @@
 
         
             
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
 
         
         </div>

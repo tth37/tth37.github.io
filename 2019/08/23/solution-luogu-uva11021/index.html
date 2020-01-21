@@ -164,11 +164,11 @@
 <p>我感谢我自己</p>
 </blockquote>
 <a id="more"></a>
-
-<p>每只麻球均可视为一个独立的问题。设 $f[i]$ 表示第一天只有 $1$ 只麻球，在第 $i$ 天它及它的后代全部死亡的概率。由全概率公式，有<br>$$<br>f[i]=P_0+P_1f[i-1]+P_2f[i-1]^2+P_3f[i-1]^3+…+P_{n-1}f[i-1]^{n-1}<br>$$<br>其中 $P_jf[i-j]^j$ 的含义是这个麻球生了 $j$ 个后代，并且它们在 $i-1$ 天后全部死亡的概率。由于一开始有 $k$ 只麻球，最终答案为 $f[m]^k$ 。</p>
+<p>每只麻球均可视为一个独立的问题。设 $f[i]$ 表示第一天只有 $1$ 只麻球，在第 $i$ 天它及它的后代全部死亡的概率。由全概率公式，有</p>
+<script type="math/tex; mode=display">
+f[i]=P_0+P_1f[i-1]+P_2f[i-1]^2+P_3f[i-1]^3+...+P_{n-1}f[i-1]^{n-1}</script><p>其中 $P_jf[i-j]^j$ 的含义是这个麻球生了 $j$ 个后代，并且它们在 $i-1$ 天后全部死亡的概率。由于一开始有 $k$ 只麻球，最终答案为 $f[m]^k$ 。</p>
 <p>代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> T;</span><br><span class="line"><span class="hljs-keyword">int</span> N, K, M;</span><br><span class="line"><span class="hljs-keyword">double</span> P[<span class="hljs-number">1005</span>];</span><br><span class="line"><span class="hljs-keyword">double</span> f[<span class="hljs-number">1005</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">	<span class="hljs-built_in">cin</span> &gt;&gt; T;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> Case = <span class="hljs-number">1</span>; Case &lt;= T; ++Case) &#123;</span><br><span class="line">		<span class="hljs-built_in">cin</span> &gt;&gt; N &gt;&gt; K &gt;&gt; M;</span><br><span class="line">		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; N; ++i)</span><br><span class="line">			<span class="hljs-built_in">cin</span> &gt;&gt; P[i];</span><br><span class="line">		f[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;</span><br><span class="line">		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= M; ++i) &#123;</span><br><span class="line">			f[i] = <span class="hljs-number">0</span>;</span><br><span class="line">			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; N; ++j)</span><br><span class="line">				f[i] += P[j] * <span class="hljs-built_in">pow</span>(f[i - <span class="hljs-number">1</span>], j);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">"Case #"</span> &lt;&lt; Case &lt;&lt; <span class="hljs-string">": "</span>;</span><br><span class="line">		<span class="hljs-built_in">cout</span> &lt;&lt; fixed &lt;&lt; setprecision(<span class="hljs-number">8</span>) &lt;&lt; <span class="hljs-built_in">pow</span>(f[M], K) &lt;&lt; <span class="hljs-built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -572,6 +572,162 @@
 
         
             
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
 
         
         </div>

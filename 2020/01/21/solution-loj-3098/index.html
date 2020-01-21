@@ -162,16 +162,14 @@
 <h3 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h3><p>有一副纸牌，牌一共有 $n$ 种，每种有 $C$ 张。三张连号的牌或三张相同的牌可以组成一叠，如果一组拍可以分成若干叠，就称其为一组王牌。现已从牌堆摸了一些初始牌，需要再挑出一些牌组成一组王牌，求有多少种可能组成的王牌。</p>
 <p>$1\le n \le 1e18,0\le C \le 1000$</p>
 <a id="more"></a>
-
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>麻将题这种套路我真不明白是怎么想出来的…… 总之能用就行了。</p>
 <p>记 $f[i][a][b]$ 表示仅考虑前 $i$ 种牌，选了 $a$ 叠 $(i-1,i,i+1)$ 和 $b$ 叠 $(i,i+1,i+2)$ 的方案数。不难发现 $a$ 和 $b$ 均不超过 $3$，否则会有重复。</p>
 <p>状态转移方程如下：</p>
-<p>$$<br>f[i][b][c] = f[i - 1][a][b]\times (\lfloor\frac{C-s-\lceil d[i]-s\rceil}{3}\rfloor+1)<br>$$</p>
-<p>将状态的后两维压至一维，即可矩阵大力转移。对于特殊点构造转移矩阵即可。</p>
+<script type="math/tex; mode=display">
+f[i][b][c] = f[i - 1][a][b]\times (\lfloor\frac{C-s-\lceil d[i]-s\rceil}{3}\rfloor+1)</script><p>将状态的后两维压至一维，即可矩阵大力转移。对于特殊点构造转移矩阵即可。</p>
 <h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><p>动态规划转移前的可行性判断。</p>
 <p>矩阵操作前（乘法、初始化单位矩阵）不要忘记清零！</p>
 <h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MOD = <span class="hljs-number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Matrix</span> &#123;</span></span><br><span class="line">    <span class="hljs-keyword">int</span> m, n;</span><br><span class="line">    <span class="hljs-keyword">int</span> g[<span class="hljs-number">9</span>][<span class="hljs-number">9</span>];</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Matrix <span class="hljs-title">mul</span><span class="hljs-params">(Matrix a, Matrix b)</span> </span>&#123;</span><br><span class="line">    Matrix c;</span><br><span class="line">    c.m = a.m, c.n = b.n;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; c.m; ++i)</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; c.n; ++j) &#123;</span><br><span class="line">            c.g[i][j] = <span class="hljs-number">0</span>;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt; a.n; ++k)</span><br><span class="line">                c.g[i][j] = (c.g[i][j] + <span class="hljs-number">1l</span>l * a.g[i][k] * b.g[k][j] % MOD) % MOD;</span><br><span class="line">        &#125;</span><br><span class="line">            </span><br><span class="line">    <span class="hljs-keyword">return</span> c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ll n;</span><br><span class="line"><span class="hljs-keyword">int</span> C, x;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">mk</span><span class="hljs-params">(Matrix&amp; a)</span> </span>&#123;</span><br><span class="line">    a.m = a.n = <span class="hljs-number">9</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">9</span>; ++i) </span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">9</span>; ++j)</span><br><span class="line">            a.g[i][j] = i == j ? <span class="hljs-number">1</span> : <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Matrix <span class="hljs-title">qpow</span><span class="hljs-params">(Matrix a, ll n)</span> </span>&#123;</span><br><span class="line">    Matrix ret;</span><br><span class="line">    mk(ret);</span><br><span class="line">    <span class="hljs-keyword">while</span> (n) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (n &amp; <span class="hljs-number">1</span>) ret = mul(ret, a);</span><br><span class="line">        a = mul(a, a);</span><br><span class="line">        n &gt;&gt;= <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld%d"</span>, &amp;n, &amp;C);</span><br><span class="line">    Matrix X;</span><br><span class="line">    X.m = <span class="hljs-number">9</span>, X.n = <span class="hljs-number">1</span>;</span><br><span class="line">    X.g[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; <span class="hljs-number">9</span>; ++i)</span><br><span class="line">        X.g[i][<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;</span><br><span class="line">    Matrix F;</span><br><span class="line">    F.m = F.n = <span class="hljs-number">9</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">9</span>; ++i)</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">9</span>; ++j)</span><br><span class="line">            F.g[i][j] = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> b = <span class="hljs-number">0</span>; b &lt;= <span class="hljs-number">2</span>; ++b)</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> c = <span class="hljs-number">0</span>; c &lt;= <span class="hljs-number">2</span>; ++c)</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> a = <span class="hljs-number">0</span>; a &lt;= <span class="hljs-number">2</span>; ++a) &#123;</span><br><span class="line">                    <span class="hljs-keyword">int</span> s = a + b + c;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (C &lt; s) <span class="hljs-keyword">continue</span>;</span><br><span class="line">                    F.g[a * <span class="hljs-number">3</span> + b][b * <span class="hljs-number">3</span> + c] = (C - s) / <span class="hljs-number">3</span> + <span class="hljs-number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;x);</span><br><span class="line">    ll cur = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> t = <span class="hljs-number">1</span>; t &lt;= x; ++t) &#123;</span><br><span class="line">        ll p;</span><br><span class="line">        <span class="hljs-keyword">int</span> d;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld%d"</span>, &amp;p, &amp;d);</span><br><span class="line">        X = mul(qpow(F, p - cur - <span class="hljs-number">1</span>), X);</span><br><span class="line">        Matrix G;</span><br><span class="line">        G.m = G.n = <span class="hljs-number">9</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">9</span>; ++i)</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">9</span>; ++j)</span><br><span class="line">                G.g[i][j] = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> b = <span class="hljs-number">0</span>; b &lt;= <span class="hljs-number">2</span>; ++b)</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> c = <span class="hljs-number">0</span>; c &lt;= <span class="hljs-number">2</span>; ++c) </span><br><span class="line">                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> a = <span class="hljs-number">0</span>; a &lt;= <span class="hljs-number">2</span>; ++a) &#123;</span><br><span class="line">                    <span class="hljs-keyword">int</span> s = a + b + c;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (C &lt; s) <span class="hljs-keyword">continue</span>;</span><br><span class="line">                    <span class="hljs-keyword">int</span> cer = <span class="hljs-number">0</span>;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (d &lt;= s) cer = s;</span><br><span class="line">                    <span class="hljs-keyword">else</span> cer = s + <span class="hljs-number">3</span> * ((d - s + <span class="hljs-number">2</span>) / <span class="hljs-number">3</span>);</span><br><span class="line">                    <span class="hljs-keyword">if</span> (C &lt; cer) <span class="hljs-keyword">continue</span>;</span><br><span class="line">                    G.g[a * <span class="hljs-number">3</span> + b][b * <span class="hljs-number">3</span> + c] = (C - cer) / <span class="hljs-number">3</span> + <span class="hljs-number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">        X = mul(G, X);</span><br><span class="line">        cur = p;</span><br><span class="line">    &#125;</span><br><span class="line">    X = mul(qpow(F, n - cur), X);</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, X.g[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -568,6 +566,162 @@
 
         
             
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            Archives
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">November 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">6</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">October 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">22</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/09/">
+                <span class="level-start">
+                    <span class="level-item">September 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">9</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/08/">
+                <span class="level-start">
+                    <span class="level-item">August 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">14</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/07/">
+                <span class="level-start">
+                    <span class="level-item">July 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">11</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/06/">
+                <span class="level-start">
+                    <span class="level-item">June 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">May 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/04/">
+                <span class="level-start">
+                    <span class="level-item">April 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">5</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/03/">
+                <span class="level-start">
+                    <span class="level-item">March 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">7</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2019/01/">
+                <span class="level-start">
+                    <span class="level-item">January 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/archives/2018/12/">
+                <span class="level-start">
+                    <span class="level-item">December 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
 
         
         </div>
