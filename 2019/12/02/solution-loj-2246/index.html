@@ -161,14 +161,18 @@
             <p><a href="https://loj.ac/problem/2246" target="_blank" rel="noopener">#2246. 「NOI2014」动物园</a></p>
 <h3 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h3><p>题目概括征集中~</p>
 <a id="more"></a>
+
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>回顾一下我们在 <a href="https://tth37.cn/2019/12/01/algorithm-exkmp/">扩展 KMP</a> 算法中求出的 $\text{next}$ 函数：$\text{next}[i]$ 表示后缀 $i$ 即 $T[i..|T|]$ 与 $T$ 的最长公共前缀。 </p>
 <p>如果我们对读入的字符串已经求出了 $\text{next}$ 数组，那么这题就迎刃而解了。</p>
 <p>首先，我们不考虑 <em>前后缀不可重叠</em> 的限制，尝试计算 $\text{num}$ 数组。观察字符串 $S$ 的每一个后缀 $i$，不难发现这些后缀将对 $\text{num}[i..i+\text{next}[i]-1]$ 产生贡献。</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0 1 2 3 4</span><br><span class="line">a b a b a</span><br><span class="line"></span><br><span class="line">a    a b    a b a</span><br><span class="line">|    | |    | | |</span><br><span class="line">a    a b    a b a</span><br></pre></td></tr></table></figure>
+
 <p>如果考虑 <em>前后缀不可重叠</em> 的限制条件，可以发现后缀 $i$ 不会对 $i\times 2$ 及以后的 $\text{num}$ 产生贡献。</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">0 1 2 3 4</span><br><span class="line">a b a b a</span><br><span class="line"></span><br><span class="line">a    a b    a b a</span><br><span class="line">|    | |    X X X</span><br><span class="line">a    a b    a b a</span><br></pre></td></tr></table></figure>
+
 <p>只需对 $\text{num}$ 数组进行差分即可。</p>
 <h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> next next233</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">1e6</span> + <span class="hljs-number">5</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MOD = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> next[MAXN], num[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">exKMP_pre</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *T)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> n = <span class="hljs-built_in">strlen</span>(T);</span><br><span class="line">    next[<span class="hljs-number">0</span>] = n;</span><br><span class="line">    <span class="hljs-keyword">int</span> p = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (p + <span class="hljs-number">1</span> &lt; n &amp;&amp; T[p] == T[p + <span class="hljs-number">1</span>]) p++;</span><br><span class="line">    next[<span class="hljs-number">1</span>] = p;</span><br><span class="line">    <span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = <span class="hljs-number">2</span>; x &lt; n; ++x) &#123;</span><br><span class="line">        p = k + next[k] - <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> l = next[x - k];</span><br><span class="line">        <span class="hljs-keyword">if</span> (x + l &lt;= p) next[x] = l;</span><br><span class="line">        <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> j = p - x + <span class="hljs-number">1</span>;</span><br><span class="line">            <span class="hljs-keyword">if</span> (j &lt; <span class="hljs-number">0</span>) j = <span class="hljs-number">0</span>;</span><br><span class="line">            <span class="hljs-keyword">while</span> (x + j &lt; n &amp;&amp; T[x + j] == T[j]) j++;</span><br><span class="line">            next[x] = j;</span><br><span class="line">            k = x;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> T, ans;</span><br><span class="line"><span class="hljs-keyword">char</span> a[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="hljs-keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="hljs-built_in">memset</span>(next, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(next));</span><br><span class="line">        <span class="hljs-built_in">memset</span>(num, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(num));</span><br><span class="line">        <span class="hljs-built_in">cin</span> &gt;&gt; a;</span><br><span class="line">        exKMP_pre(a);</span><br><span class="line">        <span class="hljs-keyword">int</span> n = <span class="hljs-built_in">strlen</span>(a);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (next[i]) &#123;</span><br><span class="line">                num[i] ++;</span><br><span class="line">                num[min(i + next[i], i &lt;&lt; <span class="hljs-number">1</span>)]--;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        ans = <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            num[i] += num[i - <span class="hljs-number">1</span>];</span><br><span class="line">            ans = <span class="hljs-number">1l</span>l * ans * (num[i] + <span class="hljs-number">1</span>) % MOD;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, ans);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
         
@@ -282,7 +286,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            98
+                            99
                         </p>
                     </a>
                 </div>
@@ -367,6 +371,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-22T12:18:18.000Z">2020-01-22</time></div>
+                    <a href="/2020/01/22/solution-loj-3110/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SDOI2019」快速查询</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-21T15:12:20.000Z">2020-01-21</time></div>
                     <a href="/2020/01/21/solution-loj-3098/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SNOI2019」纸牌</a>
                     <p class="is-size-7 is-uppercase">
@@ -408,19 +425,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T16:10:55.000Z">2020-01-20</time></div>
                     <a href="/2020/01/20/solution-loj-3095/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SNOI2019」字符串</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T16:06:20.000Z">2020-01-20</time></div>
-                    <a href="/2020/01/20/solution-loj-3227/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「USACO 2019.12 Platinum」Bessie&#39;s Snow Cow</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
                     </p>
@@ -546,7 +550,7 @@
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">65</span>
+                <span class="level-item tag">66</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/题解/LibreOJ/">
@@ -554,7 +558,7 @@
                 <span class="level-item">LibreOJ</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">22</span>
+                <span class="level-item tag">23</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/题解/计蒜客/">
@@ -586,7 +590,7 @@
                     <span class="level-item">January 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>

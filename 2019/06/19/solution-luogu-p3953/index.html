@@ -165,20 +165,14 @@
 <p>感谢@oy 的贡献</p>
 </blockquote>
 <a id="more"></a>
+
 <p>一道看似图论实则可以用动态规划解决的题目。</p>
-<p>朴素的状态定义：$f[u][k]$表示从$1$号节点走到$u$号节点，路径长度为$k$的方案总数。状态转移方程：</p>
-<script type="math/tex; mode=display">
-f[u][k]=\sum_{(u,v)\in E}f[v][k-w(u,v)]</script><p>但是这样的状态定义有一个严重的问题：空间消耗过大。考虑到题目中给出的$K$值并不大，我们可以利用题目所要求的信息来优化状态设计。</p>
+<p>朴素的状态定义：$f[u][k]$表示从$1$号节点走到$u$号节点，路径长度为$k$的方案总数。状态转移方程：<br>$$<br>f[u][k]=\sum_{(u,v)\in E}f[v][k-w(u,v)]<br>$$<br>但是这样的状态定义有一个严重的问题：空间消耗过大。考虑到题目中给出的$K$值并不大，我们可以利用题目所要求的信息来优化状态设计。</p>
 <p>优化后的状态定义：$d[u]$表示从$1$号节点走到$u$号节点的最短路长度，$f[u][k]$表示从$1$号节点走到$u$号节点，<strong>路径长度为$d[u]+k$的方案总数</strong>。</p>
-<p>如此一来，状态所需的空间大大减少，但相应的状态转移略显复杂。不妨设$f[u][k]$状态可以由$f[v][x]$转移得到，则：</p>
-<script type="math/tex; mode=display">
-d[v]+x+w(u,v)=d[u]+k</script><p>移项，得到：</p>
-<script type="math/tex; mode=display">
-x=d[u]-d[v]+k-w(u,v)</script><p>因此，完整的状态转移方程如下：</p>
-<script type="math/tex; mode=display">
-f[u][k]=\sum_{(u,v)\in E}f[v][d[u]-d[v]+k-w(u,v)]</script><p>我们最终要求的答案即为$\sum_{i=0}^Kf[N][i]$，用记忆化搜索实现即可。</p>
+<p>如此一来，状态所需的空间大大减少，但相应的状态转移略显复杂。不妨设$f[u][k]$状态可以由$f[v][x]$转移得到，则：<br>$$<br>d[v]+x+w(u,v)=d[u]+k<br>$$<br>移项，得到：<br>$$<br>x=d[u]-d[v]+k-w(u,v)<br>$$<br>因此，完整的状态转移方程如下：<br>$$<br>f[u][k]=\sum_{(u,v)\in E}f[v][d[u]-d[v]+k-w(u,v)]<br>$$<br>我们最终要求的答案即为$\sum_{i=0}^Kf[N][i]$，用记忆化搜索实现即可。</p>
 <p>代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// luogu-judger-enable-o2</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">100001</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Edge</span> &#123;</span><span class="hljs-keyword">int</span> v, w;&#125;;</span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;Edge&gt; G1[MAXN], G2[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> T, N, M, K, P;</span><br><span class="line"><span class="hljs-keyword">bool</span> fail;</span><br><span class="line"><span class="hljs-keyword">int</span> f[MAXN][<span class="hljs-number">51</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> d[MAXN];</span><br><span class="line"><span class="hljs-keyword">bool</span> vis[MAXN];</span><br><span class="line"><span class="hljs-keyword">bool</span> ins[MAXN][<span class="hljs-number">51</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Dijkstra</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">memset</span>(vis, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(vis));</span><br><span class="line">    <span class="hljs-built_in">memset</span>(d, <span class="hljs-number">0x3f</span>, <span class="hljs-keyword">sizeof</span>(d));</span><br><span class="line">    priority_queue&lt;pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; &gt; q;</span><br><span class="line">    q.push(make_pair(<span class="hljs-number">0</span>, <span class="hljs-number">1</span>));</span><br><span class="line">    d[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (q.size()) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> u = q.top().second;</span><br><span class="line">        q.pop();</span><br><span class="line">        <span class="hljs-keyword">if</span> (vis[u]) <span class="hljs-keyword">continue</span>;</span><br><span class="line">        vis[u] = <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">vector</span>&lt;Edge&gt;::iterator it = G1[u].begin(); it != G1[u].end(); it++) &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> v = it-&gt;v, w = it-&gt;w;</span><br><span class="line">            <span class="hljs-keyword">if</span> (d[u] + w &lt; d[v]) &#123;</span><br><span class="line">                d[v] = d[u] + w;</span><br><span class="line">                q.push(make_pair(-d[v], v));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">dp</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (k &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">if</span> (ins[u][k])&#123;</span><br><span class="line">        fail = <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (f[u][k]) <span class="hljs-keyword">return</span> f[u][k];</span><br><span class="line">    ins[u][k] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">vector</span>&lt;Edge&gt;::iterator it = G2[u].begin(); it != G2[u].end(); it++) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> p = it-&gt;v, w = it-&gt;w;</span><br><span class="line">        ans = (ans + dp(p, d[u] - d[p] + k - w))%P;</span><br><span class="line">        <span class="hljs-keyword">if</span> (fail == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    ins[u][k] = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> f[u][k] = ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="hljs-keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d%d"</span>, &amp;N, &amp;M, &amp;K, &amp;P);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= M; ++i) &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> u, v, w;</span><br><span class="line">            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;u, &amp;v, &amp;w);</span><br><span class="line">            G1[u].push_back((Edge)&#123;v, w&#125;);</span><br><span class="line">            G2[v].push_back((Edge)&#123;u, w&#125;);</span><br><span class="line">        &#125;</span><br><span class="line">        Dijkstra();</span><br><span class="line">        dp(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);</span><br><span class="line">        f[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= K; ++i) &#123;</span><br><span class="line">            ans = (ans + dp(N, i))%P;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span>(fail == <span class="hljs-number">1</span>) <span class="hljs-built_in">puts</span>(<span class="hljs-string">"-1"</span>);</span><br><span class="line">        <span class="hljs-keyword">else</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, ans);</span><br><span class="line">        fail = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-built_in">memset</span>(f, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(f));</span><br><span class="line">        <span class="hljs-built_in">memset</span>(ins, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(ins));</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">            G1[i].clear(), G2[i].clear();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
         
@@ -292,7 +286,7 @@ f[u][k]=\sum_{(u,v)\in E}f[v][d[u]-d[v]+k-w(u,v)]</script><p>我们最终要求�
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            98
+                            99
                         </p>
                     </a>
                 </div>
@@ -377,6 +371,19 @@ f[u][k]=\sum_{(u,v)\in E}f[v][d[u]-d[v]+k-w(u,v)]</script><p>我们最终要求�
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-22T12:18:18.000Z">2020-01-22</time></div>
+                    <a href="/2020/01/22/solution-loj-3110/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SDOI2019」快速查询</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-21T15:12:20.000Z">2020-01-21</time></div>
                     <a href="/2020/01/21/solution-loj-3098/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SNOI2019」纸牌</a>
                     <p class="is-size-7 is-uppercase">
@@ -418,19 +425,6 @@ f[u][k]=\sum_{(u,v)\in E}f[v][d[u]-d[v]+k-w(u,v)]</script><p>我们最终要求�
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T16:10:55.000Z">2020-01-20</time></div>
                     <a href="/2020/01/20/solution-loj-3095/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SNOI2019」字符串</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T16:06:20.000Z">2020-01-20</time></div>
-                    <a href="/2020/01/20/solution-loj-3227/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「USACO 2019.12 Platinum」Bessie&#39;s Snow Cow</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
                     </p>
@@ -556,7 +550,7 @@ f[u][k]=\sum_{(u,v)\in E}f[v][d[u]-d[v]+k-w(u,v)]</script><p>我们最终要求�
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">65</span>
+                <span class="level-item tag">66</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/题解/LibreOJ/">
@@ -564,7 +558,7 @@ f[u][k]=\sum_{(u,v)\in E}f[v][d[u]-d[v]+k-w(u,v)]</script><p>我们最终要求�
                 <span class="level-item">LibreOJ</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">22</span>
+                <span class="level-item tag">23</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/题解/计蒜客/">
@@ -596,7 +590,7 @@ f[u][k]=\sum_{(u,v)\in E}f[v][d[u]-d[v]+k-w(u,v)]</script><p>我们最终要求�
                     <span class="level-item">January 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>

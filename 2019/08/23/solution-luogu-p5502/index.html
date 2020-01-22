@@ -163,6 +163,7 @@
 <p>咕咕咕</p>
 </blockquote>
 <a id="more"></a>
+
 <p>对于求解区间权值 $=value *length$ 的最值问题时，我们通常可以枚举区间左端点，然后高效地找出右端点更新答案。</p>
 <p>朴素的想法是枚举右端点 $r\in [l,n]$ 。根据显然的贪心策略，如果右端点在某一区间移动时，$\gcd(a_l,a_{l+1},…,a_r)$ 保持不变，则右端点越大越好。</p>
 <p>因此可以用倍增优化右端点的确定。但是在倍增的过程中，需要多次查询区间最大公约数；我们可以用ST表的思路对序列预处理，做到 $O(1)$ 复杂度查询。</p>
@@ -282,7 +283,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            98
+                            99
                         </p>
                     </a>
                 </div>
@@ -367,6 +368,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-22T12:18:18.000Z">2020-01-22</time></div>
+                    <a href="/2020/01/22/solution-loj-3110/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SDOI2019」快速查询</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-21T15:12:20.000Z">2020-01-21</time></div>
                     <a href="/2020/01/21/solution-loj-3098/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SNOI2019」纸牌</a>
                     <p class="is-size-7 is-uppercase">
@@ -408,19 +422,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T16:10:55.000Z">2020-01-20</time></div>
                     <a href="/2020/01/20/solution-loj-3095/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SNOI2019」字符串</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T16:06:20.000Z">2020-01-20</time></div>
-                    <a href="/2020/01/20/solution-loj-3227/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「USACO 2019.12 Platinum」Bessie&#39;s Snow Cow</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
                     </p>
@@ -546,7 +547,7 @@
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">65</span>
+                <span class="level-item tag">66</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/题解/LibreOJ/">
@@ -554,7 +555,7 @@
                 <span class="level-item">LibreOJ</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">22</span>
+                <span class="level-item tag">23</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/题解/计蒜客/">
@@ -586,7 +587,7 @@
                     <span class="level-item">January 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>

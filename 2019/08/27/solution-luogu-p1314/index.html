@@ -163,6 +163,7 @@
 <p>咕咕咕</p>
 </blockquote>
 <a id="more"></a>
+
 <p>本题难度不大，第一眼就能看出需要用二分答案或<strong>倍增答案</strong>解决。</p>
 <p>需要解决的第一个问题是如何根据一个猜测的参数 $W$ ，快速计算出检验结果 $Y$ 。由于只有 $w_j \ge W$ 的矿石才会对检验结果做出贡献，因此我们可以将 $w_j &lt; W$ 的矿石忽略并预处理前缀和，并且回答 $M$ 个询问即可。</p>
 <p>接下来应该考虑如何计算猜测值 $W$ 。观察到 $Y(W)$ 是单调不增的，我们可以用<strong>倍增</strong>求出满足 $Y \ge S$  的最大 $W$ 值，那么满足 $Y&lt;S$ 的最小 $W$ 值一定为 $W+1$ 。</p>
@@ -281,7 +282,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            98
+                            99
                         </p>
                     </a>
                 </div>
@@ -366,6 +367,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-22T12:18:18.000Z">2020-01-22</time></div>
+                    <a href="/2020/01/22/solution-loj-3110/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SDOI2019」快速查询</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-21T15:12:20.000Z">2020-01-21</time></div>
                     <a href="/2020/01/21/solution-loj-3098/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SNOI2019」纸牌</a>
                     <p class="is-size-7 is-uppercase">
@@ -407,19 +421,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T16:10:55.000Z">2020-01-20</time></div>
                     <a href="/2020/01/20/solution-loj-3095/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SNOI2019」字符串</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T16:06:20.000Z">2020-01-20</time></div>
-                    <a href="/2020/01/20/solution-loj-3227/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「USACO 2019.12 Platinum」Bessie&#39;s Snow Cow</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
                     </p>
@@ -545,7 +546,7 @@
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">65</span>
+                <span class="level-item tag">66</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/题解/LibreOJ/">
@@ -553,7 +554,7 @@
                 <span class="level-item">LibreOJ</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">22</span>
+                <span class="level-item tag">23</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/题解/计蒜客/">
@@ -585,7 +586,7 @@
                     <span class="level-item">January 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>

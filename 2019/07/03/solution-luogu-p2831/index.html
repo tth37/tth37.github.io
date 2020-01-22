@@ -165,14 +165,14 @@
 <p>感谢@oy的贡献</p>
 </blockquote>
 <a id="more"></a>
+
 <p>一道并不是特别难的状压dp。</p>
 <p>状态定义：$f[s]$表示将所有剩余的猪消灭至少需要多少只小鸟，其中$s$表示已经消灭的猪的集合。</p>
 <p>考虑状态转移，发射一个小鸟可以消灭尚未被消灭的猪。记$curve[i][j]$为一个二进制集合，表示经过第$i$、$j$号猪的抛物线能消灭哪些猪。</p>
-<p>即：</p>
-<script type="math/tex; mode=display">
-f[s]=min\lbrace f[s|curve[i][j]]+1\rbrace</script><p>可以用记忆化搜索实现，注意精度控制和触摸状态。</p>
+<p>即：<br>$$<br>f[s]=min\lbrace f[s|curve[i][j]]+1\rbrace<br>$$<br>可以用记忆化搜索实现，注意精度控制和触摸状态。</p>
 <p>代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF = <span class="hljs-number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">double</span> EPS = <span class="hljs-number">1e-7</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> T;</span><br><span class="line"><span class="hljs-keyword">int</span> N, M;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">double</span> x[<span class="hljs-number">19</span>], y[<span class="hljs-number">19</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> curve[<span class="hljs-number">19</span>][<span class="hljs-number">19</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> f[<span class="hljs-number">524289</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">equals</span><span class="hljs-params">(<span class="hljs-keyword">double</span>&amp; a, <span class="hljs-keyword">double</span>&amp; b, <span class="hljs-keyword">double</span> x1, <span class="hljs-keyword">double</span> y1, <span class="hljs-keyword">double</span> x2, <span class="hljs-keyword">double</span> y2)</span> </span>&#123;</span><br><span class="line">    a = (y1 * x2 - x1 * y2) / (x1 * x1 * x2 - x2 * x2 * x1);</span><br><span class="line">    b = (y1 - x1 * x1 * a) / x1;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">dp</span><span class="hljs-params">(<span class="hljs-keyword">int</span> s)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (f[s] != <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> f[s];</span><br><span class="line">    <span class="hljs-keyword">if</span> (s == (<span class="hljs-number">1</span> &lt;&lt; N) - <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> f[s] = <span class="hljs-number">0</span>;</span><br><span class="line">    f[s] = INF;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j = i; j &lt;= N; ++j) &#123;</span><br><span class="line">            f[s] = min(f[s], dp(s | curve[i][j]) + <span class="hljs-number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> f[s];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;T);</span><br><span class="line">    <span class="hljs-keyword">while</span> (T--) &#123;</span><br><span class="line">        <span class="hljs-built_in">memset</span>(curve, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(curve));</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;N, &amp;M);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i)</span><br><span class="line">            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lf%lf"</span>, &amp;x[i], &amp;y[i]);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> p1 = <span class="hljs-number">1</span>; p1 &lt;= N; ++p1) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> p2 = p1 + <span class="hljs-number">1</span>; p2 &lt;= N; ++p2) &#123;</span><br><span class="line">                <span class="hljs-keyword">double</span> a, b;</span><br><span class="line">                equals(a, b, x[p1], y[p1], x[p2], y[p2]);</span><br><span class="line">                <span class="hljs-keyword">if</span> (a &gt;= <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;</span><br><span class="line">                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (x[i] * x[i] * a + x[i] * b &gt;= y[i] - EPS &amp;&amp; x[i] * x[i] * a + x[i] * b &lt;= y[i] + EPS) &#123;</span><br><span class="line">                        curve[p1][p2] |= (<span class="hljs-number">1</span> &lt;&lt; (i - <span class="hljs-number">1</span>));</span><br><span class="line">                        curve[p2][p1] |= (<span class="hljs-number">1</span> &lt;&lt; (i - <span class="hljs-number">1</span>));</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> p = <span class="hljs-number">1</span>; p &lt;= N; ++p)</span><br><span class="line">            curve[p][p] = (<span class="hljs-number">1</span> &lt;&lt; (p - <span class="hljs-number">1</span>));</span><br><span class="line">        <span class="hljs-built_in">memset</span>(f, <span class="hljs-number">-1</span>, <span class="hljs-keyword">sizeof</span>(f));</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, dp(<span class="hljs-number">0</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
         
@@ -286,7 +286,7 @@ f[s]=min\lbrace f[s|curve[i][j]]+1\rbrace</script><p>可以用记忆化搜索实
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            98
+                            99
                         </p>
                     </a>
                 </div>
@@ -371,6 +371,19 @@ f[s]=min\lbrace f[s|curve[i][j]]+1\rbrace</script><p>可以用记忆化搜索实
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-22T12:18:18.000Z">2020-01-22</time></div>
+                    <a href="/2020/01/22/solution-loj-3110/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SDOI2019」快速查询</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-21T15:12:20.000Z">2020-01-21</time></div>
                     <a href="/2020/01/21/solution-loj-3098/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SNOI2019」纸牌</a>
                     <p class="is-size-7 is-uppercase">
@@ -412,19 +425,6 @@ f[s]=min\lbrace f[s|curve[i][j]]+1\rbrace</script><p>可以用记忆化搜索实
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T16:10:55.000Z">2020-01-20</time></div>
                     <a href="/2020/01/20/solution-loj-3095/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SNOI2019」字符串</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T16:06:20.000Z">2020-01-20</time></div>
-                    <a href="/2020/01/20/solution-loj-3227/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「USACO 2019.12 Platinum」Bessie&#39;s Snow Cow</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
                     </p>
@@ -550,7 +550,7 @@ f[s]=min\lbrace f[s|curve[i][j]]+1\rbrace</script><p>可以用记忆化搜索实
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">65</span>
+                <span class="level-item tag">66</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/题解/LibreOJ/">
@@ -558,7 +558,7 @@ f[s]=min\lbrace f[s|curve[i][j]]+1\rbrace</script><p>可以用记忆化搜索实
                 <span class="level-item">LibreOJ</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">22</span>
+                <span class="level-item tag">23</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/题解/计蒜客/">
@@ -590,7 +590,7 @@ f[s]=min\lbrace f[s|curve[i][j]]+1\rbrace</script><p>可以用记忆化搜索实
                     <span class="level-item">January 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>

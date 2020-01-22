@@ -165,38 +165,35 @@
 <p>感谢@oy 的贡献</p>
 </blockquote>
 <a id="more"></a>
+
 <p>差分约束系统的模板题。</p>
 <p>记 $d$ 数组为以 $S$ 为源点到各个节点的最长路。根据最长路的性质，如果存在一条边 $(u,v,w)$ ，则一定满足以下不等式：</p>
-<script type="math/tex; mode=display">
-d[u]+w(u,v)\le d[v]</script><p>我们可以将题目中给出的不等关系转化为图中的有向边，然后通过单源最长路求出的一组 $\lbrace d_n\rbrace$ 即为差分约束系统的一组解。</p>
+<p>$$<br>d[u]+w(u,v)\le d[v]<br>$$</p>
+<p>我们可以将题目中给出的不等关系转化为图中的有向边，然后通过单源最长路求出的一组 $\lbrace d_n\rbrace$ 即为差分约束系统的一组解。</p>
 <p>因此，在图中连一条边 $(u,v,w)$ 相当于对 $d[u]$ 和 $d[v]$ 的取值作出限制，我们只需在构造出一张有向图，并求出其单源最长路即为答案。</p>
 <p>有向边的构造方式如下：</p>
 <ol>
 <li>限制 $d[A]=d[B]$</li>
 </ol>
-<script type="math/tex; mode=display">
-d[A]=d[B] \Leftrightarrow (d[B]\le d[A])\wedge(d[A]\le d[B])</script><script type="math/tex; mode=display">
-\Leftrightarrow (d[B]+0\le d[A])\wedge(d[A]+0\le d[B])</script><p>连边：$(A,B,0)$，$(B,A,0)$</p>
-<ol>
-<li>限制 $d[A]&lt;d[B]$<script type="math/tex; mode=display">
-d[A]<d[B]\Leftrightarrow d[A]+1\le d[B]</script></li>
+<p>$$<br>d[A]=d[B] \Leftrightarrow (d[B]\le d[A])\wedge(d[A]\le d[B])<br>$$<br>$$<br>\Leftrightarrow (d[B]+0\le d[A])\wedge(d[A]+0\le d[B])<br>$$</p>
+<p>连边：$(A,B,0)$，$(B,A,0)$</p>
+<ol start="2">
+<li>限制 $d[A]&lt;d[B]$<br>$$<br>d[A]&lt;d[B]\Leftrightarrow d[A]+1\le d[B]<br>$$</li>
 </ol>
 <p>连边：$(A,B,1)$</p>
-<ol>
-<li>限制 $d[A]\geq d[B]$<script type="math/tex; mode=display">
-d[A]\ge d[B]\Leftrightarrow d[B]+0\le d[A]</script></li>
+<ol start="3">
+<li>限制 $d[A]\geq d[B]$<br>$$<br>d[A]\ge d[B]\Leftrightarrow d[B]+0\le d[A]<br>$$</li>
 </ol>
 <p>连边：$(B,A,0)$</p>
-<ol>
-<li>限制 $d[A]&gt;d[B]$<script type="math/tex; mode=display">
-d[A]>d[B]\Leftrightarrow d[B]+1\le d[A]</script></li>
+<ol start="4">
+<li>限制 $d[A]&gt;d[B]$<br>$$<br>d[A]&gt;d[B]\Leftrightarrow d[B]+1\le d[A]<br>$$</li>
 </ol>
 <p>连边：$(B,A,1)$</p>
-<ol>
+<ol start="5">
 <li>限制 $d[A]\le d[B]$</li>
 </ol>
 <p>连边：$(A,B,0)$</p>
-<ol>
+<ol start="6">
 <li>限制 $d[i]&gt;0$</li>
 </ol>
 <p>连边：$(S,i,1)$</p>
@@ -316,7 +313,7 @@ d[A]>d[B]\Leftrightarrow d[B]+1\le d[A]</script></li>
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            98
+                            99
                         </p>
                     </a>
                 </div>
@@ -401,6 +398,19 @@ d[A]>d[B]\Leftrightarrow d[B]+1\le d[A]</script></li>
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-22T12:18:18.000Z">2020-01-22</time></div>
+                    <a href="/2020/01/22/solution-loj-3110/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SDOI2019」快速查询</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-21T15:12:20.000Z">2020-01-21</time></div>
                     <a href="/2020/01/21/solution-loj-3098/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SNOI2019」纸牌</a>
                     <p class="is-size-7 is-uppercase">
@@ -442,19 +452,6 @@ d[A]>d[B]\Leftrightarrow d[B]+1\le d[A]</script></li>
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T16:10:55.000Z">2020-01-20</time></div>
                     <a href="/2020/01/20/solution-loj-3095/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SNOI2019」字符串</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T16:06:20.000Z">2020-01-20</time></div>
-                    <a href="/2020/01/20/solution-loj-3227/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「USACO 2019.12 Platinum」Bessie&#39;s Snow Cow</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
                     </p>
@@ -580,7 +577,7 @@ d[A]>d[B]\Leftrightarrow d[B]+1\le d[A]</script></li>
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">65</span>
+                <span class="level-item tag">66</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/题解/LibreOJ/">
@@ -588,7 +585,7 @@ d[A]>d[B]\Leftrightarrow d[B]+1\le d[A]</script></li>
                 <span class="level-item">LibreOJ</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">22</span>
+                <span class="level-item tag">23</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/题解/计蒜客/">
@@ -620,7 +617,7 @@ d[A]>d[B]\Leftrightarrow d[B]+1\le d[A]</script></li>
                     <span class="level-item">January 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">9</span>
+                    <span class="level-item tag">10</span>
                 </span>
             </a>
         </li>
