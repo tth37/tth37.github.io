@@ -10,19 +10,19 @@
 <title>题解-luogu-p1273有线电视网 - tth37&#39;s Blog</title>
 
 
-    <meta name="description" content="题目链接  背包类树形dp。本题需要运用分组背包模型。 首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。 可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：  f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}其">
+    <meta name="description" content="题目链接  背包类树形dp。本题需要运用分组背包模型。 首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。 可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：$$f[u][i]=\max_{v\in son(u)}{f[u][i-j]+f[v][j]-w}$$其">
 <meta name="keywords" content="背包,树形dp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题解-luogu-p1273有线电视网">
 <meta property="og:url" content="https://tth37.cn/2019/04/25/solution-luogu-p1273/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
-<meta property="og:description" content="题目链接  背包类树形dp。本题需要运用分组背包模型。 首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。 可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：  f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}其">
+<meta property="og:description" content="题目链接  背包类树形dp。本题需要运用分组背包模型。 首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。 可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：$$f[u][i]=\max_{v\in son(u)}{f[u][i-j]+f[v][j]-w}$$其">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://tth37.cn/images/og_image.png">
 <meta property="og:updated_time" content="2019-08-27T08:10:26.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="题解-luogu-p1273有线电视网">
-<meta name="twitter:description" content="题目链接  背包类树形dp。本题需要运用分组背包模型。 首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。 可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：  f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}其">
+<meta name="twitter:description" content="题目链接  背包类树形dp。本题需要运用分组背包模型。 首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。 可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：$$f[u][i]=\max_{v\in son(u)}{f[u][i-j]+f[v][j]-w}$$其">
 <meta name="twitter:image" content="https://tth37.cn/images/og_image.png">
 
 
@@ -163,12 +163,12 @@
 </blockquote>
 <p>背包类树形dp。本题需要运用分组背包模型。</p>
 <p>首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。</p>
-<p>可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：</p>
-<script type="math/tex; mode=display">
-f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$的子节点，$w$为这条边的权值。在$u$每个子节点上有许多“物品”，“物品”总数即为以$v$为根的子树上用户的个数；每个“物品”所具有的价值即为其最大利润，即$f[v][j]$。同时不应忽略边权对利润带来的影响。</p>
+<p>可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：<br>$$<br>f[u][i]=\max_{v\in son(u)}{f[u][i-j]+f[v][j]-w}<br>$$<br>其中，$v$为$u$的子节点，$w$为这条边的权值。在$u$每个子节点上有许多“物品”，“物品”总数即为以$v$为根的子树上用户的个数；每个“物品”所具有的价值即为其最大利润，即$f[v][j]$。同时不应忽略边权对利润带来的影响。</p>
 <p>注意细节处理及边界。代码如下：</p>
 <a id="more"></a>
+
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Edge</span>&#123;</span></span><br><span class="line">    <span class="hljs-keyword">int</span> v,w,nxt;</span><br><span class="line">&#125;mem[<span class="hljs-number">3005</span>*<span class="hljs-number">2</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> head[<span class="hljs-number">3005</span>],cnt;</span><br><span class="line"><span class="hljs-keyword">int</span> size[<span class="hljs-number">3005</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddEdge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u,<span class="hljs-keyword">int</span> v,<span class="hljs-keyword">int</span> w)</span></span>&#123;</span><br><span class="line">    mem[++cnt].v=v;</span><br><span class="line">    mem[cnt].w=w;</span><br><span class="line">    mem[cnt].nxt=head[u];</span><br><span class="line">    head[u]=cnt;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> N,M;</span><br><span class="line"><span class="hljs-keyword">int</span> leaf[<span class="hljs-number">3005</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> f[<span class="hljs-number">3005</span>][<span class="hljs-number">3005</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span>(leaf[u])&#123;</span><br><span class="line">        f[u][<span class="hljs-number">1</span>]=leaf[u];</span><br><span class="line">        size[u]=<span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=head[u];i;i=mem[i].nxt)&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v=mem[i].v,w=mem[i].w;</span><br><span class="line">        dfs(v);</span><br><span class="line">        size[u]+=size[v];</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j=M;j&gt;=<span class="hljs-number">1</span>;--j)</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>;k&lt;=min(size[v],j);++k)</span><br><span class="line">                f[u][j]=max(f[u][j],f[u][j-k]+f[v][k]-w);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">    <span class="hljs-built_in">memset</span>(f,<span class="hljs-number">0xcf</span>,<span class="hljs-keyword">sizeof</span>(f));</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;N,&amp;M);</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=N-M;++i)&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> k;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;k);</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=k;++j)&#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> a,c;</span><br><span class="line">            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;a,&amp;c);</span><br><span class="line">            AddEdge(i,a,c);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=M;++i) <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;leaf[N-M+i]);</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=N;++i) f[i][<span class="hljs-number">0</span>]=<span class="hljs-number">0</span>;</span><br><span class="line">    dfs(<span class="hljs-number">1</span>);</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=M;i&gt;=<span class="hljs-number">1</span>;--i)&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(f[<span class="hljs-number">1</span>][i]&gt;=<span class="hljs-number">0</span>)&#123;</span><br><span class="line">            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>,i);</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
         
@@ -580,162 +580,6 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$�
 
         
             
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Archives
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">13</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">22</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">September 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">August 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">14</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">March 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
 
         
         </div>

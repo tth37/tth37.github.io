@@ -168,6 +168,7 @@
 <p>我感谢我自己</p>
 </blockquote>
 <a id="more"></a>
+
 <p>很巧妙的建模方法，是作者在学校 yy 出来的。</p>
 <p>考虑朴素做法。将每个炸弹向其能引爆的炸弹连边，求出强连通分量后缩点，在 DAG 上乱搞得到答案。</p>
 <p>然而这种解法的边数在 $n^2$ 级别。考虑优化。</p>
@@ -175,12 +176,16 @@
 <p>在原炸弹序列上建一棵<strong>线段树</strong>，线段树上的所有父节点向儿子连边。对于一个节点向一段区间内节点的连边操作，我们可以将这些边连到区间的父节点上（好比线段树的区间操作）。边数被控制在 $n\log n$ 级别。</p>
 <p>缩点并得到 DAG 后，发现不能简单地进行答案统计；因为会产生<strong>重复</strong>的状态转移。</p>
 <p>观察到本题的一个特殊性质：被连锁反应引爆的范围一定仍然是一段<strong>连续区间</strong>。我们只需维护区间的<strong>最小值和最大值</strong>，并以此进行状态转移即可。</p>
-<p><div class="note danger"><p> 是否存在此类问题通解？</p></div></p>
-<p><div class="note danger"><p> 是否存在不用建图的解法？</p></div></p>
-<p><div class="note warning"><p> ge(x) 表示大于等于 x 的最小坐标，le(x) 表示小于等于 x 的最大坐标</p></div></p>
+<div class="note danger"><p> 是否存在此类问题通解？</p>
+
+<div class="note danger"><p> 是否存在不用建图的解法？</p>
+
+<div class="note warning"><p> ge(x) 表示大于等于 x 的最小坐标，le(x) 表示小于等于 x 的最大坐标</p>
+
 <p>实现极为简单。代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> lson(u) node[u].l</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> rson(u) node[u].r</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ge(x) (lower_bound(a + 1, a + N + 1, x) - a)</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> le(x) (upper_bound(a + 1, a + N + 1, x) - a - 1)</span></span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">1000005</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> mod = <span class="hljs-number">1000000007</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> inf = <span class="hljs-number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> &#123;</span></span><br><span class="line">    <span class="hljs-keyword">int</span> l, r;</span><br><span class="line">&#125;node[maxn &lt;&lt; <span class="hljs-number">1</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> cnt;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> N, R, ans;</span><br><span class="line">ll a[maxn], r[maxn];</span><br><span class="line"><span class="hljs-keyword">int</span> num[maxn], range[maxn][<span class="hljs-number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; G[maxn], SCC[maxn];</span><br><span class="line"><span class="hljs-keyword">int</span> w[maxn], dfn[maxn], low[maxn], dfn_idx;</span><br><span class="line"><span class="hljs-keyword">int</span> scc[maxn], scc_cnt;</span><br><span class="line"><span class="hljs-keyword">bool</span> ins[maxn];</span><br><span class="line"><span class="hljs-built_in">stack</span>&lt;<span class="hljs-keyword">int</span>&gt; s;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> f[maxn][<span class="hljs-number">2</span>];</span><br><span class="line"><span class="hljs-keyword">bool</span> vis[maxn];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">build</span><span class="hljs-params">(<span class="hljs-keyword">int</span>&amp; u, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    u = ++cnt;</span><br><span class="line">    range[u][<span class="hljs-number">0</span>] = l, range[u][<span class="hljs-number">1</span>] = r;</span><br><span class="line">    <span class="hljs-keyword">if</span> (l == r) &#123;</span><br><span class="line">        num[l] = u;</span><br><span class="line">        w[u] = <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;</span><br><span class="line">    build(lson(u), l, mid), build(rson(u), mid + <span class="hljs-number">1</span>, r);</span><br><span class="line">    G[u].push_back(lson(u)), G[u].push_back(rson(u));</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">add_edge_range</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> qu, <span class="hljs-keyword">int</span> ql, <span class="hljs-keyword">int</span> qr)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (ql &lt;= l &amp;&amp; r &lt;= qr) &#123;</span><br><span class="line">        G[qu].push_back(u);</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">if</span> (ql &lt;= mid) add_edge_range(lson(u), l, mid, qu, ql, qr);</span><br><span class="line">    <span class="hljs-keyword">if</span> (mid &lt; qr) add_edge_range(rson(u), mid + <span class="hljs-number">1</span>, r, qu, ql, qr);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">tarjan</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    low[u] = dfn[u] = ++dfn_idx;</span><br><span class="line">    ins[u] = <span class="hljs-number">1</span>;</span><br><span class="line">    s.push(u);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v = *it;</span><br><span class="line">        <span class="hljs-keyword">if</span> (dfn[v] == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            tarjan(v);</span><br><span class="line">            low[u] = min(low[u], low[v]);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ins[v]) &#123;</span><br><span class="line">            low[u] = min(low[u], dfn[v]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (low[u] == dfn[u]) &#123;</span><br><span class="line">        scc_cnt++;</span><br><span class="line">        f[scc_cnt][<span class="hljs-number">0</span>] = inf, f[scc_cnt][<span class="hljs-number">1</span>] = -inf;</span><br><span class="line">        <span class="hljs-keyword">while</span> (ins[u]) &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> t = s.top();</span><br><span class="line">            s.pop();</span><br><span class="line">            ins[t] = <span class="hljs-number">0</span>;</span><br><span class="line">            scc[t] = scc_cnt;</span><br><span class="line">            f[scc_cnt][<span class="hljs-number">0</span>] = min(f[scc_cnt][<span class="hljs-number">0</span>], range[t][<span class="hljs-number">0</span>]);</span><br><span class="line">            f[scc_cnt][<span class="hljs-number">1</span>] = max(f[scc_cnt][<span class="hljs-number">1</span>], range[t][<span class="hljs-number">1</span>]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dp</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (vis[u]) <span class="hljs-keyword">return</span>;</span><br><span class="line">    vis[u] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it = SCC[u].begin(); it != SCC[u].end(); it++) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v = *it;</span><br><span class="line">        dp(v);</span><br><span class="line">        f[u][<span class="hljs-number">0</span>] = min(f[u][<span class="hljs-number">0</span>], f[v][<span class="hljs-number">0</span>]);</span><br><span class="line">        f[u][<span class="hljs-number">1</span>] = max(f[u][<span class="hljs-number">1</span>], f[v][<span class="hljs-number">1</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;N);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%lld%lld"</span>, &amp;a[i], &amp;r[i]);</span><br><span class="line">    build(R, <span class="hljs-number">1</span>, N);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        add_edge_range(R, <span class="hljs-number">1</span>, N, num[i], ge(a[i] - r[i]), le(a[i] + r[i]));</span><br><span class="line">    tarjan(<span class="hljs-number">1</span>);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> u = <span class="hljs-number">1</span>; u &lt;= N; ++u) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> v = *it;</span><br><span class="line">            <span class="hljs-keyword">if</span> (scc[u] != scc[v])</span><br><span class="line">                SCC[scc[u]].push_back(scc[v]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= scc_cnt; ++i)</span><br><span class="line">        dp(i);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        ans = (ans + <span class="hljs-number">1l</span>l * i * (f[scc[num[i]]][<span class="hljs-number">1</span>] - f[scc[num[i]]][<span class="hljs-number">0</span>] + <span class="hljs-number">1</span>)) % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, ans);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+</div></div></div>
         </div>
         
         <div class="level is-size-7 is-uppercase">
@@ -591,162 +596,6 @@
 
         
             
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Archives
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">13</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">22</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">September 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">August 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">14</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">March 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
 
         
         </div>

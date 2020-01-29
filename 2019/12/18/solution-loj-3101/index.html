@@ -159,6 +159,7 @@
 <p>$1 \le T \le 10^6,1 \le n \le 5 \times 10^4 ,1 \le m \le 10^5$</p>
 <p>感谢@oy的贡献</p>
 <a id="more"></a>
+
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>记 $(t,x,0)$ 表示 $t$ 时刻 $x$ 死亡的状态， $(t,x,1)$ 表示 $t$ 时刻 $x$ 活着的状态。</p>
 <p>$\text{2-SAT}$ 建图：对于限制条件 $0$，连边 $(t,x,1)\rightarrow(t+1,y,0)$ 和 $(t+1,y,1)\rightarrow(t,x,0)$；对于限制条件 $2$，连边 $(t,x,1)\rightarrow(t,y,0)$ 和 $(t,y,1)\rightarrow(t,x,0)$。此外还需要连边 $(t,x,0)\rightarrow(t+1,x,0)$ 和 $(t+1,x,1)\rightarrow(t,x,1)$。</p>
 <p>建完图后即可求出每一个人在 $T+1$ 时刻活着时，有多少人在同一时刻必然死亡。其中有部分人自己产生矛盾，即可以从 $(x,T+1,1)$ 推导出 $(x,T+1,0)$，那么这部分人也必然死亡。</p>
@@ -166,6 +167,7 @@
 <p>在求解时只能做到 $\text{bitset}$ 复杂度，可以考虑将 $\text{bitset}$ 值域分段操作。</p>
 <h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><p>不要看错题！</p>
 <h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">5e4</span> + <span class="hljs-number">10</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXM = <span class="hljs-number">1e5</span> + <span class="hljs-number">10</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXT = MAXN * <span class="hljs-number">4</span> + MAXM * <span class="hljs-number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Type</span> &#123;</span></span><br><span class="line">    <span class="hljs-keyword">int</span> t, p;</span><br><span class="line">    Type(<span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>, <span class="hljs-keyword">int</span> y = <span class="hljs-number">0</span>) &#123;t = x, p = y;&#125;</span><br><span class="line">    <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span> &lt; (<span class="hljs-keyword">const</span> Type&amp; rhs) <span class="hljs-keyword">const</span> &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (p != rhs.p) <span class="hljs-keyword">return</span> p &lt; rhs.p;</span><br><span class="line">        <span class="hljs-keyword">return</span> t &lt; rhs.t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> T, n, m;</span><br><span class="line"><span class="hljs-built_in">map</span>&lt;Type, <span class="hljs-keyword">int</span>&gt; mp;</span><br><span class="line"><span class="hljs-keyword">int</span> cnt;</span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; G[MAXT];</span><br><span class="line"><span class="hljs-built_in">bitset</span>&lt;16668&gt; s[MAXT], delta;</span><br><span class="line"><span class="hljs-keyword">bool</span> vis[MAXT];</span><br><span class="line"><span class="hljs-keyword">int</span> ans[MAXN], delt;</span><br><span class="line"><span class="hljs-keyword">bool</span> noans[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddEdge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    G[u].push_back(v);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> l, r;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (vis[u]) <span class="hljs-keyword">return</span>;</span><br><span class="line">    vis[u] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">if</span> (u &lt;= <span class="hljs-number">2</span> * n &amp;&amp; (u &amp; <span class="hljs-number">1</span>)) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> p = (u + <span class="hljs-number">1</span>) &gt;&gt; <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (l &lt;= p &amp;&amp; p &lt;= r)</span><br><span class="line">            s[u][p - l + <span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v = *it;</span><br><span class="line">        dfs(v);</span><br><span class="line">        s[u] |= s[v];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;T, &amp;n, &amp;m);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        mp[Type(T + <span class="hljs-number">1</span>, i)] = ++cnt, ++cnt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> c, t, x, y;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d%d"</span>, &amp;c, &amp;t, &amp;x, &amp;y);</span><br><span class="line">        <span class="hljs-keyword">if</span> (c == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (mp[Type(t, x)] == <span class="hljs-number">0</span>)</span><br><span class="line">                mp[Type(t, x)] = ++cnt, ++cnt;</span><br><span class="line">            <span class="hljs-keyword">if</span> (mp[Type(t + <span class="hljs-number">1</span>, y)] == <span class="hljs-number">0</span>)</span><br><span class="line">                mp[Type(t + <span class="hljs-number">1</span>, y)] = ++cnt, ++cnt;</span><br><span class="line">            AddEdge(mp[Type(t, x)], mp[Type(t + <span class="hljs-number">1</span>, y)]),</span><br><span class="line">            AddEdge(mp[Type(t + <span class="hljs-number">1</span>, y)] + <span class="hljs-number">1</span>, mp[Type(t, x)] + <span class="hljs-number">1</span>);    </span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (mp[Type(t, x)] == <span class="hljs-number">0</span>)</span><br><span class="line">                mp[Type(t, x)] = ++cnt, ++cnt;</span><br><span class="line">            <span class="hljs-keyword">if</span> (mp[Type(t, y)] == <span class="hljs-number">0</span>)</span><br><span class="line">                mp[Type(t, y)] = ++cnt, ++cnt;</span><br><span class="line">            AddEdge(mp[Type(t, x)] + <span class="hljs-number">1</span>, mp[Type(t, y)]),</span><br><span class="line">            AddEdge(mp[Type(t, y)] + <span class="hljs-number">1</span>, mp[Type(t, x)]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">int</span> lt = <span class="hljs-number">0</span>, lp = <span class="hljs-number">0</span>, lc = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> it : mp) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> t = it.first.t, p = it.first.p, c = it.second;</span><br><span class="line">        <span class="hljs-keyword">if</span> (lt) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (lp == p) &#123;</span><br><span class="line">            	AddEdge(lc, c), AddEdge(c + <span class="hljs-number">1</span>, lc + <span class="hljs-number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        lt = t, lp = p, lc = c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (l = <span class="hljs-number">1</span>; l &lt;= n; l += <span class="hljs-number">16667</span>) &#123;</span><br><span class="line">        r = min(n, l + <span class="hljs-number">16666</span>);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= cnt; ++i)</span><br><span class="line">            s[i].reset();</span><br><span class="line">        delta.reset();</span><br><span class="line">        <span class="hljs-built_in">memset</span>(vis, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(vis));</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            dfs(i &lt;&lt; <span class="hljs-number">1</span>);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = l; i &lt;= r; ++i) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (s[i &lt;&lt; <span class="hljs-number">1</span>][i - l + <span class="hljs-number">1</span>]) &#123;</span><br><span class="line">                noans[i] = <span class="hljs-number">1</span>;</span><br><span class="line">                delta[i - l + <span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            s[i &lt;&lt; <span class="hljs-number">1</span>] |= delta;</span><br><span class="line">            ans[i] += r - l + <span class="hljs-number">1</span> - s[i &lt;&lt; <span class="hljs-number">1</span>].count();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, noans[i] ? <span class="hljs-number">0</span> : ans[i] - <span class="hljs-number">1</span>);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
         
@@ -577,162 +579,6 @@
 
         
             
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Archives
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">13</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">22</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">September 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">August 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">14</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">March 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
 
         
         </div>

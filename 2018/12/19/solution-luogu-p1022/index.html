@@ -11,7 +11,7 @@
 
 
     <meta name="description" content="题目链接  本题是一道非常漂亮的模拟。只要能理清思路，代码并不会特别复杂。 首先分析题目。解一元一次方程最简单的方法就是移项，把常数移到等号右侧，把一次项系数移到等号左侧，用常数除以系数即为答案。那么在读入字符串的过程中，便可以进行操作。 对于字符串中的数据，我们可以用类似快读的方法读入。然而，要判断这些数据从哪里来，到哪里去，便是本题的关键所在。 对于每个数据，要想清楚地辨别它的身份，我们只需">
-<meta name="keywords" content="字符串,数学">
+<meta name="keywords" content="数学,字符串">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题解-luogu-p1022计算器的改良">
 <meta property="og:url" content="https://tth37.cn/2018/12/19/solution-luogu-p1022/index.html">
@@ -174,6 +174,7 @@
 <p>经过分析，你会发现本题一点也不难实现。其关键在于对数据状态的准确描述。用清晰、简洁的变量描述状态，根据不同的状态采取不同的措施，这便是编程学习的一大基本素养。</p>
 <p>代码如下：</p>
 <a id="more"></a>
+
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> l,r;<span class="hljs-comment">//l代表系数，r代表常数 </span></span><br><span class="line"><span class="hljs-keyword">char</span> x; <span class="hljs-comment">//用x存储字母 </span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">solve</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">char</span> c;</span><br><span class="line">    <span class="hljs-keyword">int</span> f1=<span class="hljs-number">1</span>,f2=<span class="hljs-number">1</span>,tmp=<span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span>(~<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%c"</span>,&amp;c))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span>(c&gt;=<span class="hljs-string">'0'</span>&amp;&amp;c&lt;=<span class="hljs-string">'9'</span>)<span class="hljs-comment">//类似快读的读入方式 </span></span><br><span class="line">        &#123;</span><br><span class="line">            tmp*=<span class="hljs-number">10</span>;</span><br><span class="line">            tmp+=c-<span class="hljs-string">'0'</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span>(c&gt;=<span class="hljs-string">'a'</span>&amp;&amp;c&lt;=<span class="hljs-string">'z'</span>) l+=(tmp==<span class="hljs-number">0</span>)?f2*f1:tmp*f2*f1,x=c;<span class="hljs-comment">//判断系数是否为1 </span></span><br><span class="line">            <span class="hljs-keyword">else</span> r+=tmp*(-f2)*f1;</span><br><span class="line">            tmp=<span class="hljs-number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span>(c==<span class="hljs-string">'+'</span>) &#123;f1=<span class="hljs-number">1</span>;<span class="hljs-keyword">continue</span>;&#125;</span><br><span class="line">        <span class="hljs-keyword">if</span>(c==<span class="hljs-string">'-'</span>) &#123;f1=<span class="hljs-number">-1</span>;<span class="hljs-keyword">continue</span>;&#125;</span><br><span class="line">        <span class="hljs-keyword">if</span>(c==<span class="hljs-string">'='</span>) &#123;f2=<span class="hljs-number">-1</span>;f1=<span class="hljs-number">1</span>;<span class="hljs-keyword">continue</span>;&#125; </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    solve(); </span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%c=%0.3f"</span>,x,(<span class="hljs-keyword">float</span>)r/l==<span class="hljs-number">0</span>?<span class="hljs-built_in">abs</span>((<span class="hljs-keyword">float</span>)r/l):(<span class="hljs-keyword">float</span>)r/l);</span><br><span class="line"> 	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
         </div>
         
@@ -585,162 +586,6 @@
 
         
             
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Archives
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">13</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">22</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">September 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">August 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">14</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">March 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
 
         
         </div>

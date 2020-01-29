@@ -163,15 +163,17 @@
 <p> $1\len\le 10^5$</p>
 <p> 感谢@oy的贡献</p>
 <a id="more"></a>
+
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>由于根号的存在，本题并没有什么明显的单调性，不能通过二分或单调队列实现。</p>
 <p>本题的关键在于问题转化。记 $l_i$ 表示在山峰 $i$ 上建灯塔，并使得山峰 $1…i$ 全部被照亮的最小高度。</p>
-<script type="math/tex; mode=display">
-h_j\le h_i+l_i - \sqrt{i-j} (1\le j\le i)</script><script type="math/tex; mode=display">
-h_j+\sqrt{i-j}-h_i\le l_i(1\le j\le i)</script><script type="math/tex; mode=display">
-l_i=\max_{1\le j\le i}\lbrace  h_j+\lceil  (\sqrt{i-j})  \rceil \rbrace-h_i</script><p>这样 ${l}$ 数组的求解即转化为区间求解最值问题，然而 $\max$ 函数中的 $\lceil  (\sqrt{i-j})  \rceil$ 似乎有些棘手。然而观察到当 $\lceil  (\sqrt{i-j})  \rceil$ 相等时，只有该区间内最大的 $h_j$ 才会对答案产生贡献。因此我们可以枚举 $\lceil  (\sqrt{i-j})  \rceil$ 的值，求出对应的 $j$ 区间内 $h_j$ 的最值作为 $l_i$ 的候选答案。</p>
+<p>$$<br>h_j\le h_i+l_i - \sqrt{i-j} (1\le j\le i)<br>$$</p>
+<p>$$<br>h_j+\sqrt{i-j}-h_i\le l_i(1\le j\le i)<br>$$</p>
+<p>$$<br>l_i=\max_{1\le j\le i}\lbrace  h_j+\lceil  (\sqrt{i-j})  \rceil \rbrace-h_i<br>$$</p>
+<p>这样 ${l}$ 数组的求解即转化为区间求解最值问题，然而 $\max$ 函数中的 $\lceil  (\sqrt{i-j})  \rceil$ 似乎有些棘手。然而观察到当 $\lceil  (\sqrt{i-j})  \rceil$ 相等时，只有该区间内最大的 $h_j$ 才会对答案产生贡献。因此我们可以枚举 $\lceil  (\sqrt{i-j})  \rceil$ 的值，求出对应的 $j$ 区间内 $h_j$ 的最值作为 $l_i$ 的候选答案。</p>
 <p>$r_i$ 的定义与 $l_i$ 类似，最终的 $p_i$ 即为 $\max \lbrace l_i,r_i\rbrace$ 。</p>
 <p>求解区间最值可以用 ST 表实现。</p>
 <h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> st[<span class="hljs-number">100005</span>][<span class="hljs-number">18</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> lg[<span class="hljs-number">100005</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> power[<span class="hljs-number">320</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> p[<span class="hljs-number">100005</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> N;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">query</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> s = lg[r - l + <span class="hljs-number">1</span>];</span><br><span class="line">    <span class="hljs-keyword">return</span> max(st[l][s], st[r - (<span class="hljs-number">1</span> &lt;&lt; s) + <span class="hljs-number">1</span>][s]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    lg[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= <span class="hljs-number">100000</span>; ++i)</span><br><span class="line">        lg[i] = lg[i &gt;&gt; <span class="hljs-number">1</span>] + <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">319</span>; ++i) &#123;</span><br><span class="line">        power[i] = i * i;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;N);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;st[i][<span class="hljs-number">0</span>]);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= lg[N]; ++j)</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i + (<span class="hljs-number">1</span> &lt;&lt; j) - <span class="hljs-number">1</span> &lt;= N; ++i)</span><br><span class="line">            st[i][j] = max(st[i][j - <span class="hljs-number">1</span>], st[i + (<span class="hljs-number">1</span> &lt;&lt; (j - <span class="hljs-number">1</span>))][j - <span class="hljs-number">1</span>]);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> delta = <span class="hljs-number">0</span>, l = i, r = i;</span><br><span class="line">        <span class="hljs-keyword">while</span> (l &gt;= <span class="hljs-number">1</span>) &#123;</span><br><span class="line">            p[i] = max(p[i], query(l, r) + delta - st[i][<span class="hljs-number">0</span>]);</span><br><span class="line">            r = l - <span class="hljs-number">1</span>, l = i - power[++delta];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (r &gt;= <span class="hljs-number">1</span>) p[i] = max(p[i], query(<span class="hljs-number">1</span>, r) + delta - st[i][<span class="hljs-number">0</span>]);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = N; i &gt;= <span class="hljs-number">1</span>; --i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> delta = <span class="hljs-number">0</span>, l = i, r = i;</span><br><span class="line">        <span class="hljs-keyword">while</span> (r &lt;= N) &#123;</span><br><span class="line">            p[i] = max(p[i], query(l, r) + delta - st[i][<span class="hljs-number">0</span>]);</span><br><span class="line">            l = r + <span class="hljs-number">1</span>, r = i + power[++delta];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (l &lt;= N) p[i] = max(p[i], query(l, N) + delta - st[i][<span class="hljs-number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, p[i]);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
         
@@ -583,162 +585,6 @@ l_i=\max_{1\le j\le i}\lbrace  h_j+\lceil  (\sqrt{i-j})  \rceil \rbrace-h_i</scr
 
         
             
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Archives
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">13</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">22</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">September 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">August 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">14</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">March 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
 
         
         </div>

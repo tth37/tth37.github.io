@@ -161,15 +161,17 @@
             <p>这是一个并不简单的背包类树形dp……</p>
 <p><del>很自然地</del>想到状态定义：$f[u][k][0/1][0/1]$表示以$u$为根的子树中，总共选择$k$个结点，其中除了$u$以外的所有结点均被监听到，$u$结点选或不选，$u$结点是否被覆盖的情况下，一共有多少种方案。</p>
 <p>状态转移看似十分麻烦。每个结点$u$都有许多子结点，很难统计出每个子结点的所有情况（似乎在组合数学的范畴）。但是我们可以用十分巧妙的树形背包来进行状态转移。树上背包的转移套路是：</p>
-<script type="math/tex; mode=display">
-f[u][i+j]=combine(f[u][i],f[v][j])</script><p>相当于每递归访问完一个子结点，就把子节点上的状态与当前已经处理的状态一一配对，保证不重不漏且兼顾效率。具体的转移方程为：</p>
-<script type="math/tex; mode=display">
-f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]</script><script type="math/tex; mode=display">
-f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])</script><script type="math/tex; mode=display">
-f[u][i+j][0][1]=\sum (f[u][i][0][1]\*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]\*f[v][j][1][1]</script><script type="math/tex; mode=display">
-f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]\*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))</script><p>具体实现时还应注意：因为阶段（即扫描子结点个数）的划分，在每次转移前都要先记录原始的$u$结点上的数据，否则会导致混乱。</p>
+<p>$$<br>f[u][i+j]=combine(f[u][i],f[v][j])<br>$$</p>
+<p>相当于每递归访问完一个子结点，就把子节点上的状态与当前已经处理的状态一一配对，保证不重不漏且兼顾效率。具体的转移方程为：</p>
+<p>$$<br>f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]<br>$$</p>
+<p>$$<br>f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])<br>$$</p>
+<p>$$<br>f[u][i+j][0][1]=\sum (f[u][i][0][1]*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]*f[v][j][1][1]<br>$$</p>
+<p>$$<br>f[u][i+j][1][1]=\sum (f[u][i][1][0]*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))<br>$$</p>
+<p>具体实现时还应注意：因为阶段（即扫描子结点个数）的划分，在每次转移前都要先记录原始的$u$结点上的数据，否则会导致混乱。</p>
 <a id="more"></a>
+
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN=<span class="hljs-number">100005</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> mod=<span class="hljs-number">1000000007</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> N,K;</span><br><span class="line"><span class="hljs-keyword">int</span> f[MAXN][<span class="hljs-number">105</span>][<span class="hljs-number">2</span>][<span class="hljs-number">2</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> g[<span class="hljs-number">105</span>][<span class="hljs-number">2</span>][<span class="hljs-number">2</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> size[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; G[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">Mod</span><span class="hljs-params">(ll x,ll y)</span></span>&#123;</span><br><span class="line">    x%=mod,y%=mod;</span><br><span class="line">    <span class="hljs-keyword">return</span> (<span class="hljs-keyword">int</span>)(x+y)%mod;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dp</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u,<span class="hljs-keyword">int</span> fa)</span></span>&#123;</span><br><span class="line">    size[u]=<span class="hljs-number">1</span>;</span><br><span class="line">    f[u][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]=f[u][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it=G[u].begin();it!=G[u].end();it++)&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v=*it;</span><br><span class="line">        <span class="hljs-keyword">if</span>(v==fa) <span class="hljs-keyword">continue</span>;</span><br><span class="line">        dp(v,u);</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=min(size[u],K);++i)&#123;</span><br><span class="line">            g[i][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]=f[u][i][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>],f[u][i][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]=<span class="hljs-number">0</span>;</span><br><span class="line">            g[i][<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]=f[u][i][<span class="hljs-number">0</span>][<span class="hljs-number">1</span>],f[u][i][<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]=<span class="hljs-number">0</span>;</span><br><span class="line">            g[i][<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]=f[u][i][<span class="hljs-number">1</span>][<span class="hljs-number">0</span>],f[u][i][<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]=<span class="hljs-number">0</span>;</span><br><span class="line">            g[i][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]=f[u][i][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>],f[u][i][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]=<span class="hljs-number">0</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>;i&lt;=min(size[u],K);++i)&#123;</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>;j&lt;=min(size[v],K-i);++j)&#123;</span><br><span class="line">                f[u][i+j][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]=Mod((ll)f[u][i+j][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>],(ll)g[i][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]*(ll)f[v][j][<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]);</span><br><span class="line">                f[u][i+j][<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]=Mod((ll)f[u][i+j][<span class="hljs-number">0</span>][<span class="hljs-number">1</span>],(ll)g[i][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]*(ll)f[v][j][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]+(ll)g[i][<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]*((ll)f[v][j][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]+(ll)f[v][j][<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]));</span><br><span class="line">                f[u][i+j][<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]=Mod((ll)f[u][i+j][<span class="hljs-number">1</span>][<span class="hljs-number">0</span>],(ll)g[i][<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]*((ll)f[v][j][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]+(ll)f[v][j][<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]));</span><br><span class="line">                f[u][i+j][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]=Mod((ll)f[u][i+j][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>],(ll)g[i][<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]*((ll)f[v][j][<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]+(ll)f[v][j][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>])+(ll)g[i][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]*((ll)f[v][j][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]+(ll)f[v][j][<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]+(ll)f[v][j][<span class="hljs-number">1</span>][<span class="hljs-number">0</span>]+(ll)f[v][j][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        size[u]+=size[v];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;N,&amp;K);</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;N;++i)&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> u,v;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>,&amp;u,&amp;v);</span><br><span class="line">        G[u].push_back(v);</span><br><span class="line">        G[v].push_back(u);</span><br><span class="line">    &#125;</span><br><span class="line">    dp(<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>,(<span class="hljs-keyword">int</span>)(f[<span class="hljs-number">1</span>][K][<span class="hljs-number">0</span>][<span class="hljs-number">1</span>]+f[<span class="hljs-number">1</span>][K][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>])%mod);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
         
@@ -581,162 +583,6 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
 
         
             
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Archives
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">13</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">22</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">September 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">August 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">14</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">March 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
 
         
         </div>

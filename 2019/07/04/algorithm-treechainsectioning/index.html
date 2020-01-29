@@ -161,6 +161,7 @@
             <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>树链剖分用于将树分割成若干条链的形式，以维护树上路径的信息。</p>
 <p>具体来说，将整棵树剖分为若干条链，使它组合成线性结构，然后用其他的数据结构维护信息。</p>
 <a id="more"></a>
+
 <h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><h3 id="【实现过程】"><a href="#【实现过程】" class="headerlink" title="【实现过程】"></a>【实现过程】</h3><ol>
 <li><p>第一个 DFS 记录每个结点的深度（deep）、子树大小（size）。</p>
 </li>
@@ -176,6 +177,7 @@
 </ol>
 <p><img src="https://oi-wiki.org/graph/images/hld.png" alt></p>
 <h3 id="【代码】"><a href="#【代码】" class="headerlink" title="【代码】"></a>【代码】</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">100005</span>;</span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; G[MAXN];</span><br><span class="line"><span class="hljs-keyword">int</span> N, M, R, P;</span><br><span class="line"><span class="hljs-keyword">int</span> w[MAXN], fa[MAXN], size[MAXN], son[MAXN], top[MAXN], dep[MAXN];</span><br><span class="line"><span class="hljs-keyword">int</span> dfn[MAXN], dfn_index;</span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> &#123;</span></span><br><span class="line">    <span class="hljs-keyword">int</span> l, r, sum, tag;</span><br><span class="line">&#125;node[MAXN * <span class="hljs-number">2</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> cnt;</span><br><span class="line"><span class="hljs-keyword">int</span> a[MAXN];</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">build</span><span class="hljs-params">(Node&amp; u, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    u.tag = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">if</span> (l == r) &#123;</span><br><span class="line">        u.sum = a[l];</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;</span><br><span class="line">    build(node[u.l = ++cnt], l, mid);</span><br><span class="line">    build(node[u.r = ++cnt], mid + <span class="hljs-number">1</span>, r);</span><br><span class="line">    u.sum = (node[u.l].sum + node[u.r].sum);</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">pushdown</span><span class="hljs-params">(Node&amp; u, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (u.tag) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;</span><br><span class="line">        node[u.l].sum = (node[u.l].sum + u.tag * (mid - l + <span class="hljs-number">1</span>));</span><br><span class="line">        node[u.r].sum = (node[u.r].sum + u.tag * (r - mid));</span><br><span class="line">        node[u.l].tag = (node[u.l].tag + u.tag);</span><br><span class="line">        node[u.r].tag = (node[u.r].tag + u.tag);</span><br><span class="line">        u.tag = <span class="hljs-number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">modify</span><span class="hljs-params">(Node&amp; u, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> ql, <span class="hljs-keyword">int</span> qr, <span class="hljs-keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (ql &lt;= l &amp;&amp; r &lt;= qr) &#123;</span><br><span class="line">        u.tag = (u.tag + val) % P;</span><br><span class="line">        u.sum = (u.sum + val * (r - l + <span class="hljs-number">1</span>)) % P;</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    pushdown(u, l, r);</span><br><span class="line">    <span class="hljs-keyword">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">if</span> (ql &lt;= mid) modify(node[u.l], l, mid, ql, qr, val);</span><br><span class="line">    <span class="hljs-keyword">if</span> (mid &lt; qr) modify(node[u.r], mid + <span class="hljs-number">1</span>, r, ql, qr, val);</span><br><span class="line">    u.sum = (node[u.l].sum + node[u.r].sum) % P;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">query</span><span class="hljs-params">(Node&amp; u, <span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r, <span class="hljs-keyword">int</span> ql, <span class="hljs-keyword">int</span> qr)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (ql &lt;= l &amp;&amp; r &lt;= qr) &#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> u.sum;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">int</span> mid = (l + r) &gt;&gt; <span class="hljs-number">1</span>, ans = <span class="hljs-number">0</span>;</span><br><span class="line">    pushdown(u, l, r);</span><br><span class="line">    <span class="hljs-keyword">if</span> (ql &lt;= mid) ans = (ans + query(node[u.l], l, mid, ql, qr)) % P;</span><br><span class="line">    <span class="hljs-keyword">if</span> (mid &lt; qr) ans = (ans + query(node[u.r], mid + <span class="hljs-number">1</span>, r, ql, qr)) % P;</span><br><span class="line">    <span class="hljs-keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs1</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> fath)</span> </span>&#123;</span><br><span class="line">    size[u] = <span class="hljs-number">1</span>;</span><br><span class="line">    fa[u] = fath;</span><br><span class="line">    dep[u] = dep[fath] + <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v = *it;</span><br><span class="line">        <span class="hljs-keyword">if</span> (v == fath) <span class="hljs-keyword">continue</span>;</span><br><span class="line">        dfs1(v, u);</span><br><span class="line">        size[u] += size[v];</span><br><span class="line">        <span class="hljs-keyword">if</span> (size[v] &gt; size[son[u]]) son[u] = v;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">dfs2</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> topc)</span> </span>&#123;</span><br><span class="line">    top[u] = topc;</span><br><span class="line">    dfn[u] = ++dfn_index;</span><br><span class="line">    a[dfn[u]] = w[u];</span><br><span class="line">    <span class="hljs-keyword">if</span> (son[u] == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span>;</span><br><span class="line">    dfs2(son[u], topc);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v = *it;</span><br><span class="line">        <span class="hljs-keyword">if</span> (v == fa[u] || v == son[u]) <span class="hljs-keyword">continue</span>;</span><br><span class="line">        dfs2(v, v);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ModifySubtree</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    modify(node[<span class="hljs-number">0</span>], <span class="hljs-number">1</span>, N, dfn[u], dfn[u] + size[u] - <span class="hljs-number">1</span>, val);</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">QuerySubtree</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> query(node[<span class="hljs-number">0</span>], <span class="hljs-number">1</span>, N, dfn[u], dfn[u] + size[u] - <span class="hljs-number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ModifyChain</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> v, <span class="hljs-keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">    val %= P;</span><br><span class="line">    <span class="hljs-keyword">while</span> (top[u] != top[v]) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (dep[top[u]] &lt; dep[top[v]]) swap(u, v);</span><br><span class="line">        modify(node[<span class="hljs-number">0</span>], <span class="hljs-number">1</span>, N, dfn[top[u]], dfn[u], val);</span><br><span class="line">        u = fa[top[u]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (dep[u] &lt; dep[v]) swap(u, v);</span><br><span class="line">    modify(node[<span class="hljs-number">0</span>], <span class="hljs-number">1</span>, N, dfn[v], dfn[u], val);</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">QueryChain</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (top[u] != top[v]) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (dep[top[u]] &lt; dep[top[v]]) swap(u, v);</span><br><span class="line">        ans = (ans + query(node[<span class="hljs-number">0</span>], <span class="hljs-number">1</span>, N, dfn[top[u]], dfn[u])) % P;</span><br><span class="line">        u = fa[top[u]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (dep[u] &lt; dep[v]) swap(u, v);</span><br><span class="line">    ans = (ans + query(node[<span class="hljs-number">0</span>], <span class="hljs-number">1</span>, N, dfn[v], dfn[u])) % P;</span><br><span class="line">    <span class="hljs-keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d%d"</span>, &amp;N, &amp;M, &amp;R, &amp;P);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;w[i]);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt; N; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> u, v;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;u, &amp;v);</span><br><span class="line">        G[u].push_back(v);</span><br><span class="line">        G[v].push_back(u);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs1(R, <span class="hljs-number">0</span>);</span><br><span class="line">    dfs2(R, R);</span><br><span class="line">    build(node[<span class="hljs-number">0</span>], <span class="hljs-number">1</span>, N);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= M; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> opt, x, y, z;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;opt);</span><br><span class="line">        <span class="hljs-keyword">if</span> (opt == <span class="hljs-number">1</span>) &#123;</span><br><span class="line">            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;x, &amp;y, &amp;z);</span><br><span class="line">            ModifyChain(x, y, z);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (opt == <span class="hljs-number">2</span>) &#123;</span><br><span class="line">            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;x, &amp;y);</span><br><span class="line">            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, QueryChain(x, y));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (opt == <span class="hljs-number">3</span>) &#123;</span><br><span class="line">            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;x, &amp;z);</span><br><span class="line">            ModifySubtree(x, z);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (opt == <span class="hljs-number">4</span>) &#123;</span><br><span class="line">            <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;x);</span><br><span class="line">            <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d\n"</span>, QuerySubtree(x));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
         
@@ -587,162 +589,6 @@
 
         
             
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Archives
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">13</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">22</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">September 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">August 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">14</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">March 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
 
         
         </div>

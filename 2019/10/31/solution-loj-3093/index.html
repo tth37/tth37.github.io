@@ -161,27 +161,19 @@
             <p><a href="https://loj.ac/problem/3093" target="_blank" rel="noopener">#3093. 「BJOI2019」光线</a></p>
 <h3 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h3><p>题目概括征集中~</p>
 <a id="more"></a>
+
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>一开始愣是套高斯消元想了半天……后来发现是普通 DP 秒出</p>
 <h4 id="Part1-高斯消元-O-n-3"><a href="#Part1-高斯消元-O-n-3" class="headerlink" title="Part1: 高斯消元 $O(n^3)$"></a>Part1: 高斯消元 $O(n^3)$</h4><p>记 $f[i]$ 表示第 $i$ 片玻璃向下的光线总数，$g[i]$ 表示第 $i$ 片玻璃向上的光线总数。</p>
-<p>显然地：</p>
-<script type="math/tex; mode=display">
-f[i]=f[i-1]\times a[i]+g[i+1]\times b[i]\\
-g[i]=f[i-1]\times b[i]+g[i+1]\times a[i]</script><script type="math/tex; mode=display">
-f[i]=f[i-1]\times a[i]+g[i+1]\times b[i]\\
-g[i]=f[i-1]\times b[i]+g[i+1]\times a[i]
-\\
-x_i=x_{i-1}\times a[i] + x_{n+i+1}\times b[i]\\
-x_{n+i}=x_{i-1}\times b[i]+x_{n+i+1}\times a[i]</script><p>共有 $2n$  个未知数和 $2n$ 个等式，暴力求解方程即可。</p>
+<p>显然地：<br>$$<br>f[i]=f[i-1]\times a[i]+g[i+1]\times b[i]\<br>g[i]=f[i-1]\times b[i]+g[i+1]\times a[i]<br>$$</p>
+<p>$$<br>f[i]=f[i-1]\times a[i]+g[i+1]\times b[i]\<br>g[i]=f[i-1]\times b[i]+g[i+1]\times a[i]<br>\<br>x_i=x_{i-1}\times a[i] + x_{n+i+1}\times b[i]\<br>x_{n+i}=x_{i-1}\times b[i]+x_{n+i+1}\times a[i]<br>$$</p>
+<p>共有 $2n$  个未知数和 $2n$ 个等式，暴力求解方程即可。</p>
 <p>期望得分：50 pts</p>
-<script type="math/tex; mode=display">
-f[i]=f[i-1]\times a[i]+f[i-1]\times b[i]\times g[i-1]\times a[i]+...</script><script type="math/tex; mode=display">
-f[i]=f[i-1]\times a[i]\times\sum_{j=0}^{+\infty}(b[i]\times g[i-1])^j\\
-f[i]=f[i-1]\times a[i]\times</script><script type="math/tex; mode=display">
-g[i]=b[i]+a[i]\times g[i-1]\times a[i]+a[i]\times g[i-1]\times b[i]\times g[i-1]\times a[i]</script><script type="math/tex; mode=display">
-g[i]=b[i]+a[i]^2\times g[i-1]\times\sum_{j=0}^{+\infty}(b[i]\times g[i-1])^j</script><script type="math/tex; mode=display">
-\{a_n\}\\
-a_n=a_{n-1}\times q\ \   (0<q<1)\\
-\sum_{j=0}^{+\infty}=a_1/(1-q)</script>
+<p>$$<br>f[i]=f[i-1]\times a[i]+f[i-1]\times b[i]\times g[i-1]\times a[i]+…<br>$$</p>
+<p>$$<br>f[i]=f[i-1]\times a[i]\times\sum_{j=0}^{+\infty}(b[i]\times g[i-1])^j\<br>f[i]=f[i-1]\times a[i]\times<br>$$</p>
+<p>$$<br>g[i]=b[i]+a[i]\times g[i-1]\times a[i]+a[i]\times g[i-1]\times b[i]\times g[i-1]\times a[i]<br>$$</p>
+<p>$$<br>g[i]=b[i]+a[i]^2\times g[i-1]\times\sum_{j=0}^{+\infty}(b[i]\times g[i-1])^j<br>$$</p>
+<p>$$<br>{a_n}\<br>a_n=a_{n-1}\times q\ \   (0&lt;q&lt;1)\<br>\sum_{j=0}^{+\infty}=a_1/(1-q)<br>$$</p>
+
         </div>
         
         <div class="level is-size-7 is-uppercase">
@@ -592,162 +584,6 @@ a_n=a_{n-1}\times q\ \   (0<q<1)\\
 
         
             
-<div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            Archives
-        </h3>
-        <ul class="menu-list">
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2020/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2020</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">13</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/11/">
-                <span class="level-start">
-                    <span class="level-item">November 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">6</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/10/">
-                <span class="level-start">
-                    <span class="level-item">October 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">22</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/09/">
-                <span class="level-start">
-                    <span class="level-item">September 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">9</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/08/">
-                <span class="level-start">
-                    <span class="level-item">August 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">14</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/07/">
-                <span class="level-start">
-                    <span class="level-item">July 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">11</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/06/">
-                <span class="level-start">
-                    <span class="level-item">June 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/05/">
-                <span class="level-start">
-                    <span class="level-item">May 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/04/">
-                <span class="level-start">
-                    <span class="level-item">April 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">5</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/03/">
-                <span class="level-start">
-                    <span class="level-item">March 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">7</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2019/01/">
-                <span class="level-start">
-                    <span class="level-item">January 2019</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">1</span>
-                </span>
-            </a>
-        </li>
-        
-        <li>
-            <a class="level is-marginless" href="/archives/2018/12/">
-                <span class="level-start">
-                    <span class="level-item">December 2018</span>
-                </span>
-                <span class="level-end">
-                    <span class="level-item tag">2</span>
-                </span>
-            </a>
-        </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
 
         
         </div>
