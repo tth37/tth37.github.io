@@ -159,7 +159,6 @@
 <p>$1 \le T \le 10^6,1 \le n \le 5 \times 10^4 ,1 \le m \le 10^5$</p>
 <p>感谢@oy的贡献</p>
 <a id="more"></a>
-
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>记 $(t,x,0)$ 表示 $t$ 时刻 $x$ 死亡的状态， $(t,x,1)$ 表示 $t$ 时刻 $x$ 活着的状态。</p>
 <p>$\text{2-SAT}$ 建图：对于限制条件 $0$，连边 $(t,x,1)\rightarrow(t+1,y,0)$ 和 $(t+1,y,1)\rightarrow(t,x,0)$；对于限制条件 $2$，连边 $(t,x,1)\rightarrow(t,y,0)$ 和 $(t,y,1)\rightarrow(t,x,0)$。此外还需要连边 $(t,x,0)\rightarrow(t+1,x,0)$ 和 $(t+1,x,1)\rightarrow(t,x,1)$。</p>
 <p>建完图后即可求出每一个人在 $T+1$ 时刻活着时，有多少人在同一时刻必然死亡。其中有部分人自己产生矛盾，即可以从 $(x,T+1,1)$ 推导出 $(x,T+1,0)$，那么这部分人也必然死亡。</p>
@@ -167,7 +166,6 @@
 <p>在求解时只能做到 $\text{bitset}$ 复杂度，可以考虑将 $\text{bitset}$ 值域分段操作。</p>
 <h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><p>不要看错题！</p>
 <h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">5e4</span> + <span class="hljs-number">10</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXM = <span class="hljs-number">1e5</span> + <span class="hljs-number">10</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXT = MAXN * <span class="hljs-number">4</span> + MAXM * <span class="hljs-number">4</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Type</span> &#123;</span></span><br><span class="line">    <span class="hljs-keyword">int</span> t, p;</span><br><span class="line">    Type(<span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>, <span class="hljs-keyword">int</span> y = <span class="hljs-number">0</span>) &#123;t = x, p = y;&#125;</span><br><span class="line">    <span class="hljs-keyword">bool</span> <span class="hljs-keyword">operator</span> &lt; (<span class="hljs-keyword">const</span> Type&amp; rhs) <span class="hljs-keyword">const</span> &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (p != rhs.p) <span class="hljs-keyword">return</span> p &lt; rhs.p;</span><br><span class="line">        <span class="hljs-keyword">return</span> t &lt; rhs.t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> T, n, m;</span><br><span class="line"><span class="hljs-built_in">map</span>&lt;Type, <span class="hljs-keyword">int</span>&gt; mp;</span><br><span class="line"><span class="hljs-keyword">int</span> cnt;</span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; G[MAXT];</span><br><span class="line"><span class="hljs-built_in">bitset</span>&lt;16668&gt; s[MAXT], delta;</span><br><span class="line"><span class="hljs-keyword">bool</span> vis[MAXT];</span><br><span class="line"><span class="hljs-keyword">int</span> ans[MAXN], delt;</span><br><span class="line"><span class="hljs-keyword">bool</span> noans[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">AddEdge</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    G[u].push_back(v);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> l, r;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (vis[u]) <span class="hljs-keyword">return</span>;</span><br><span class="line">    vis[u] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">if</span> (u &lt;= <span class="hljs-number">2</span> * n &amp;&amp; (u &amp; <span class="hljs-number">1</span>)) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> p = (u + <span class="hljs-number">1</span>) &gt;&gt; <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (l &lt;= p &amp;&amp; p &lt;= r)</span><br><span class="line">            s[u][p - l + <span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v = *it;</span><br><span class="line">        dfs(v);</span><br><span class="line">        s[u] |= s[v];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;T, &amp;n, &amp;m);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        mp[Type(T + <span class="hljs-number">1</span>, i)] = ++cnt, ++cnt;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> c, t, x, y;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d%d"</span>, &amp;c, &amp;t, &amp;x, &amp;y);</span><br><span class="line">        <span class="hljs-keyword">if</span> (c == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (mp[Type(t, x)] == <span class="hljs-number">0</span>)</span><br><span class="line">                mp[Type(t, x)] = ++cnt, ++cnt;</span><br><span class="line">            <span class="hljs-keyword">if</span> (mp[Type(t + <span class="hljs-number">1</span>, y)] == <span class="hljs-number">0</span>)</span><br><span class="line">                mp[Type(t + <span class="hljs-number">1</span>, y)] = ++cnt, ++cnt;</span><br><span class="line">            AddEdge(mp[Type(t, x)], mp[Type(t + <span class="hljs-number">1</span>, y)]),</span><br><span class="line">            AddEdge(mp[Type(t + <span class="hljs-number">1</span>, y)] + <span class="hljs-number">1</span>, mp[Type(t, x)] + <span class="hljs-number">1</span>);    </span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (mp[Type(t, x)] == <span class="hljs-number">0</span>)</span><br><span class="line">                mp[Type(t, x)] = ++cnt, ++cnt;</span><br><span class="line">            <span class="hljs-keyword">if</span> (mp[Type(t, y)] == <span class="hljs-number">0</span>)</span><br><span class="line">                mp[Type(t, y)] = ++cnt, ++cnt;</span><br><span class="line">            AddEdge(mp[Type(t, x)] + <span class="hljs-number">1</span>, mp[Type(t, y)]),</span><br><span class="line">            AddEdge(mp[Type(t, y)] + <span class="hljs-number">1</span>, mp[Type(t, x)]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">int</span> lt = <span class="hljs-number">0</span>, lp = <span class="hljs-number">0</span>, lc = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> it : mp) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> t = it.first.t, p = it.first.p, c = it.second;</span><br><span class="line">        <span class="hljs-keyword">if</span> (lt) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (lp == p) &#123;</span><br><span class="line">            	AddEdge(lc, c), AddEdge(c + <span class="hljs-number">1</span>, lc + <span class="hljs-number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        lt = t, lp = p, lc = c;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (l = <span class="hljs-number">1</span>; l &lt;= n; l += <span class="hljs-number">16667</span>) &#123;</span><br><span class="line">        r = min(n, l + <span class="hljs-number">16666</span>);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= cnt; ++i)</span><br><span class="line">            s[i].reset();</span><br><span class="line">        delta.reset();</span><br><span class="line">        <span class="hljs-built_in">memset</span>(vis, <span class="hljs-number">0</span>, <span class="hljs-keyword">sizeof</span>(vis));</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">            dfs(i &lt;&lt; <span class="hljs-number">1</span>);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = l; i &lt;= r; ++i) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (s[i &lt;&lt; <span class="hljs-number">1</span>][i - l + <span class="hljs-number">1</span>]) &#123;</span><br><span class="line">                noans[i] = <span class="hljs-number">1</span>;</span><br><span class="line">                delta[i - l + <span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">            s[i &lt;&lt; <span class="hljs-number">1</span>] |= delta;</span><br><span class="line">            ans[i] += r - l + <span class="hljs-number">1</span> - s[i &lt;&lt; <span class="hljs-number">1</span>].count();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d "</span>, noans[i] ? <span class="hljs-number">0</span> : ans[i] - <span class="hljs-number">1</span>);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -281,7 +279,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            99
+                            102
                         </p>
                     </a>
                 </div>
@@ -305,7 +303,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            70
+                            72
                         </p>
                     </a>
                 </div>
@@ -366,6 +364,45 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-29T03:12:21.000Z">2020-01-29</time></div>
+                    <a href="/2020/01/29/solution-loj-3113/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SDOI2019」热闹的聚会与尴尬的聚会</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-23T13:28:56.000Z">2020-01-23</time></div>
+                    <a href="/2020/01/23/solution-jsk-6010B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">创造</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-23T13:28:16.000Z">2020-01-23</time></div>
+                    <a href="/2020/01/23/solution-jsk-6010A/" class="title has-link-black-ter is-size-6 has-text-weight-normal">灭绝</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-22T12:18:18.000Z">2020-01-22</time></div>
                     <a href="/2020/01/22/solution-loj-3110/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SDOI2019」快速查询</a>
                     <p class="is-size-7 is-uppercase">
@@ -388,45 +425,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-21T09:33:56.000Z">2020-01-21</time></div>
-                    <a href="/2020/01/21/solution-loj-3057/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「HNOI2019」校园旅行</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-20T09:16:31.000Z">2020-01-20</time></div>
-                    <a href="/2020/01/20/algorithm-gentree/" class="title has-link-black-ter is-size-6 has-text-weight-normal">生成树计数</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/算法学习/">算法学习</a> / <a class="has-link-grey -link" href="/categories/算法学习/组合计数/">组合计数</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-19T16:10:55.000Z">2020-01-20</time></div>
-                    <a href="/2020/01/20/solution-loj-3095/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「SNOI2019」字符串</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -435,7 +433,7 @@
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/2-SAT/" style="font-size: 10px;">2-SAT</a> <a href="/tags/FFT-NTT/" style="font-size: 12.22px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 12.22px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 11.11px;">ST算法</a> <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dfs序/" style="font-size: 12.22px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 16.67px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10px;">乘法逆元</a> <a href="/tags/二分图/" style="font-size: 10px;">二分图</a> <a href="/tags/二分图匹配/" style="font-size: 11.11px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 12.22px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 12.22px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 11.11px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 11.11px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 11.11px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 11.11px;">可持久化trie</a> <a href="/tags/启发式合并/" style="font-size: 12.22px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 11.11px;">堆</a> <a href="/tags/多项式/" style="font-size: 10px;">多项式</a> <a href="/tags/字符串/" style="font-size: 12.22px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10px;">容斥原理</a> <a href="/tags/差分/" style="font-size: 10px;">差分</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11.11px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.89px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 15.56px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/最短路/" style="font-size: 11.11px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 14.44px;">最近公共祖先</a> <a href="/tags/栈/" style="font-size: 11.11px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 18.89px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 11.11px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 12.22px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 12.22px;">概率</a> <a href="/tags/点分治/" style="font-size: 11.11px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11.11px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 13.33px;">生成函数</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/矩阵/" style="font-size: 11.11px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线段树/" style="font-size: 18.89px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 14.44px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 10px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 17.78px;">背包</a> <a href="/tags/虚树/" style="font-size: 12.22px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10px;">计数dp</a> <a href="/tags/贪心/" style="font-size: 12.22px;">贪心</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 11.11px;">高斯消元</a>
+        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/2-SAT/" style="font-size: 10px;">2-SAT</a> <a href="/tags/FFT-NTT/" style="font-size: 12px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 12px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 11px;">ST算法</a> <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dfs序/" style="font-size: 12px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 16px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10px;">乘法逆元</a> <a href="/tags/二分图/" style="font-size: 10px;">二分图</a> <a href="/tags/二分图匹配/" style="font-size: 11px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 12px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 12px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 11px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 11px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 11px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 11px;">可持久化trie</a> <a href="/tags/启发式合并/" style="font-size: 12px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 11px;">堆</a> <a href="/tags/多项式/" style="font-size: 10px;">多项式</a> <a href="/tags/字符串/" style="font-size: 12px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10px;">容斥原理</a> <a href="/tags/差分/" style="font-size: 10px;">差分</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10px;">数论</a> <a href="/tags/最短路/" style="font-size: 11px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 14px;">最近公共祖先</a> <a href="/tags/构造/" style="font-size: 10px;">构造</a> <a href="/tags/栈/" style="font-size: 11px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 18px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 11px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 12px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 13px;">概率</a> <a href="/tags/欧拉路/" style="font-size: 10px;">欧拉路</a> <a href="/tags/点分治/" style="font-size: 11px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 13px;">生成函数</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/矩阵/" style="font-size: 11px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线段树/" style="font-size: 19px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 14px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 10px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 17px;">背包</a> <a href="/tags/虚树/" style="font-size: 12px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10px;">计数dp</a> <a href="/tags/贪心/" style="font-size: 12px;">贪心</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 11px;">高斯消元</a>
     </div>
 </div>
     
@@ -553,7 +551,7 @@
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">66</span>
+                <span class="level-item tag">69</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/题解/LibreOJ/">
@@ -561,7 +559,7 @@
                 <span class="level-item">LibreOJ</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">23</span>
+                <span class="level-item tag">24</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/题解/计蒜客/">
@@ -569,7 +567,7 @@
                 <span class="level-item">计蒜客</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">2</span>
+                <span class="level-item tag">4</span>
             </span>
         </a></li></ul></li>
             </ul>
@@ -593,7 +591,7 @@
                     <span class="level-item">January 2020</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">10</span>
+                    <span class="level-item tag">13</span>
                 </span>
             </a>
         </li>
