@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  lang="en">
 <head>
-    <!-- hexo-inject:begin --><!-- 你可真是个小机灵鬼！竟然找到这儿来了QwQ --> <script data-ad-client="ca-pub-4278647453884747" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- hexo-inject:end --><meta charset="utf-8" />
+    <!-- hexo-inject:begin --><!-- 你可真是个小机灵鬼！竟然找到这儿来了QwQ --> <!-- hexo-inject:end --><meta charset="utf-8" />
 
 <meta name="generator" content="Hexo 3.9.0" />
 
@@ -160,10 +160,8 @@
         <div class="content">
             <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>在处理某些树上问题时，并非树上的所有节点都起作用；这时可以借助虚树，将树上重要的点构造成一棵树，在虚树上处理问题，优化时间复杂度。</p>
 <a id="more"></a>
-
 <h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>用栈来维护虚树上的一条从根到 $u$ 的链。如果 $u$ 是栈顶节点的儿子，则入栈；否则将栈中 dfn 值大于 $\text{lca}(u,s.top())$ 的元素出栈。</p>
 <h5 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">将树上所有关键点按照 dfs 序排序</span><br><span class="line">stack.push(1)</span><br><span class="line">for u = 1 ~ n: //假设当前正在处理节点 u</span><br><span class="line">	lca = Lca(u, stack.top())</span><br><span class="line">	while stack.top() != lca:</span><br><span class="line">		tmp = stack.top()</span><br><span class="line">		stack.pop()</span><br><span class="line">		if (dfn[stack.top()] &lt; dfn[lca]):</span><br><span class="line">			stack.push(lca)</span><br><span class="line">		AddEdge(stack.top(), tmp)</span><br><span class="line">	stack.push(u)</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -939,7 +937,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 <script src="/js/insight.js" defer></script>
 <link rel="stylesheet" href="/css/search.css">
-<link rel="stylesheet" href="/css/insight.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<link rel="stylesheet" href="/css/insight.css"><!-- hexo-inject:begin --><script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script><!-- bottom2 --><ins class="adsbygoogle" style="display:inline-block;width:1200px;height:90px" data-ad-client="ca-pub-4278647453884747" data-ad-slot="9531405669"></ins><script> (adsbygoogle = window.adsbygoogle || []).push({});</script><!-- hexo-inject:end -->
     
 </body>
 </html>
