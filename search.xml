@@ -190,10 +190,10 @@
       </categories>
       <tags>
         <tag>组合计数</tag>
+        <tag>生成函数</tag>
         <tag>动态规划</tag>
         <tag>背包</tag>
         <tag>树形dp</tag>
-        <tag>生成函数</tag>
       </tags>
   </entry>
   <entry>
@@ -359,8 +359,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -755,8 +755,8 @@
       </categories>
       <tags>
         <tag>二分答案</tag>
-        <tag>前缀和</tag>
         <tag>倍增</tag>
+        <tag>前缀和</tag>
       </tags>
   </entry>
   <entry>
@@ -888,8 +888,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树链剖分</tag>
         <tag>树状数组</tag>
+        <tag>树链剖分</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
