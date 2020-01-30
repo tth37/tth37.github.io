@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[「CF1295」Same GCDs]]></title>
     <url>%2F2020%2F01%2F30%2Fsolution-cf-1295d%2F</url>
-    <content type="text"><![CDATA[#1295D. Same GCDs Summarize给定正整数 $a$，$m$。计算符合条件的 $x\in[0,m)$ 使得 $\text{gcd}(a,m)=\text{gcd}(a+x,m)$。 $a\le 1e10,m\le 1e10$ Solution记 $a+x=y$。题目即为求复合条件的 $y\in[a,a+m)$ 使得 $\text{gcd}(a,m)=\text{gcd}(y,m)$。记 $\text{gcd}(a,m)=g$。可以发现，$y$ 可以表示为 $kg$，其中 $k$ 的取值范围为 $[l,r]$。观察到 $\text{gcd}(kg,m)=g$，即 $\text{gcd}(k,m/g)=1$，$k$ 与 $m/g$ 互质。记 $\texttt{solve(n,m)}$ 函数为 $1-n$ 的整数中与 $m$ 互质的数的个数，则本题答案为 $\texttt{solve(r,m/g)-solve(l-1,m/g)}$。 接下来考虑 $\texttt{solve()}$ 函数的设计。注意到一个 $1e10$ 级别的数最多只有 10 个质因子，因此可以使用状态压缩和容斥原理计算出 $1-n$ 中与 $m$ 不互质的数的个数。 Note不能感性理解！要把式子推出来 Code1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#pragma GCC optimize(3)#include &lt;bits/stdc++.h&gt;#define max(a, b) (a &gt; b ? a : b)#define min(a, b) (a &gt; b ? b : a)typedef long long ll;void readint() &#123;&#125;template &lt;class T1, class... T2&gt;void readint(T1 &amp;i, T2 &amp;... rest) &#123; i = 0; char c; bool f = false; while (!isdigit(c = getchar())) f = c == '-'; do i = (i &lt;&lt; 3) + (i &lt;&lt; 1) + c - '0'; while (isdigit(c = getchar())); if (f) i = -i; readint(rest...);&#125;using namespace std;ll solve(ll n, ll m) &#123; vector&lt;ll&gt; p; for (ll i = 2; i * i &lt;= m; ++i) &#123; if (m % i == 0) &#123; p.push_back(i); while (m % i == 0) m /= i; &#125; &#125; if (m &gt; 1) p.push_back(m); ll ret = 0; for (ll s = 1; s &lt; (1 &lt;&lt; p.size()); ++s) &#123; ll mult = 1, bits = 0; for (int i = 0; i &lt; p.size(); ++i) &#123; if (s &amp; (1ll &lt;&lt; i)) &#123; bits++; mult *= p[i]; &#125; &#125; ll cur = n / mult; if (bits &amp; 1) ret += cur; else ret -= cur; &#125; return n - ret;&#125;int T;int main() &#123; readint(T); while (T--) &#123; ll a, m; readint(a, m); ll g = __gcd(a, m); ll l = a / g + (a % g == 0), r = (a + m) / g - ((a + m) % g == 0); printf("%I64d\n", solve(r, m / g) - solve(l - 1, m / g)); &#125; return 0;&#125;]]></content>
+    <content type="text"><![CDATA[#1295D. Same GCDs Summarize给定正整数 $a$，$m$。计算符合条件的 $x\in[0,m)$ 使得 $\text{gcd}(a,m)=\text{gcd}(a+x,m)$。 $a\le 1e10,m\le 1e10$ Solution记 $a+x=y$。题目即为求复合条件的 $y\in[a,a+m)$ 使得 $\text{gcd}(a,m)=\text{gcd}(y,m)$。记 $\text{gcd}(a,m)=g$。可以发现，$y$ 可以表示为 $kg$，其中 $k$ 的取值范围为 $[l,r],l=\lceil\frac{a}{g}\rceil,r=\lceil\frac{a+m}{g}\rceil-1$。观察到 $\text{gcd}(kg,m)=g$，即 $\text{gcd}(k,m/g)=1$，$k$ 与 $m/g$ 互质。记 $\texttt{solve(n,m)}$ 函数为 $1-n$ 的整数中与 $m$ 互质的数的个数，则本题答案为 $\texttt{solve(r,m/g)-solve(l-1,m/g)}$。 接下来考虑 $\texttt{solve()}$ 函数的设计。注意到一个 $1e10$ 级别的数最多只有 10 个质因子，因此可以使用状态压缩和容斥原理计算出 $1-n$ 中与 $m$ 不互质的数的个数。 Note不能感性理解！要把式子推出来 Code1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#pragma GCC optimize(3)#include &lt;bits/stdc++.h&gt;#define max(a, b) (a &gt; b ? a : b)#define min(a, b) (a &gt; b ? b : a)typedef long long ll;void readint() &#123;&#125;template &lt;class T1, class... T2&gt;void readint(T1 &amp;i, T2 &amp;... rest) &#123; i = 0; char c; bool f = false; while (!isdigit(c = getchar())) f = c == '-'; do i = (i &lt;&lt; 3) + (i &lt;&lt; 1) + c - '0'; while (isdigit(c = getchar())); if (f) i = -i; readint(rest...);&#125;using namespace std;ll solve(ll n, ll m) &#123; vector&lt;ll&gt; p; for (ll i = 2; i * i &lt;= m; ++i) &#123; if (m % i == 0) &#123; p.push_back(i); while (m % i == 0) m /= i; &#125; &#125; if (m &gt; 1) p.push_back(m); ll ret = 0; for (ll s = 1; s &lt; (1 &lt;&lt; p.size()); ++s) &#123; ll mult = 1, bits = 0; for (int i = 0; i &lt; p.size(); ++i) &#123; if (s &amp; (1ll &lt;&lt; i)) &#123; bits++; mult *= p[i]; &#125; &#125; ll cur = n / mult; if (bits &amp; 1) ret += cur; else ret -= cur; &#125; return n - ret;&#125;int T;int main() &#123; readint(T); while (T--) &#123; ll a, m; readint(a, m); ll g = __gcd(a, m); ll l = a / g + (a % g != 0), r = (a + m) / g - ((a + m) % g == 0); printf("%I64d\n", solve(r, m / g) - solve(l - 1, m / g)); &#125; return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
         <category>Codeforces</category>
@@ -177,8 +177,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>组合计数</tag>
         <tag>生成函数</tag>
+        <tag>组合计数</tag>
         <tag>动态规划</tag>
         <tag>背包</tag>
         <tag>树形dp</tag>
@@ -253,9 +253,9 @@
         <category>雅礼集训</category>
       </categories>
       <tags>
+        <tag>生成函数</tag>
         <tag>FFT/NTT</tag>
         <tag>组合计数</tag>
-        <tag>生成函数</tag>
         <tag>容斥原理</tag>
         <tag>启发式合并</tag>
       </tags>
@@ -269,9 +269,9 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
+        <tag>生成函数</tag>
         <tag>FFT/NTT</tag>
         <tag>组合计数</tag>
-        <tag>生成函数</tag>
       </tags>
   </entry>
   <entry>
@@ -347,8 +347,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>动态规划</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -915,8 +915,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -927,8 +927,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
