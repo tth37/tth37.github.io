@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[「CF1295」Same GCDs]]></title>
+    <url>%2F2020%2F01%2F30%2Fsolution-cf-1295d%2F</url>
+    <content type="text"><![CDATA[#1295D. Same GCDs Summarize给定正整数 $a$，$m$。计算符合条件的 $x\in[0,m)$ 使得 $\text{gcd}(a,m)=\text{gcd}(a+x,m)$。 $a\le 1e10,m\le 1e10$ Solution记 $a+x=y$。题目即为求复合条件的 $y\in[a,a+m)$ 使得 $\text{gcd}(a,m)=\text{gcd}(y,m)$。记 $\text{gcd}(a,m)=g$。可以发现，$y$ 可以表示为 $kg$，其中 $k$ 的取值范围为 $[l,r]$。观察到 $\text{gcd}(kg,m)=g$，即 $\text{gcd}(k,m/g)=1$，$k$ 与 $m/g$ 互质。记 $\texttt{solve(n,m)}$ 函数为 $1-n$ 的整数中与 $m$ 互质的数的个数，则本题答案为 $\texttt{solve(r,m/g)-solve(l-1,m/g)}$。 接下来考虑 $\texttt{solve()}$ 函数的设计。注意到一个 $1e10$ 级别的数最多只有 10 个质因子，因此可以使用状态压缩和容斥原理计算出 $1-n$ 中与 $m$ 不互质的数的个数。 Note不能感性理解！要把式子推出来 Code1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859#pragma GCC optimize(3)#include &lt;bits/stdc++.h&gt;#define max(a, b) (a &gt; b ? a : b)#define min(a, b) (a &gt; b ? b : a)typedef long long ll;void readint() &#123;&#125;template &lt;class T1, class... T2&gt;void readint(T1 &amp;i, T2 &amp;... rest) &#123; i = 0; char c; bool f = false; while (!isdigit(c = getchar())) f = c == '-'; do i = (i &lt;&lt; 3) + (i &lt;&lt; 1) + c - '0'; while (isdigit(c = getchar())); if (f) i = -i; readint(rest...);&#125;using namespace std;ll solve(ll n, ll m) &#123; vector&lt;ll&gt; p; for (ll i = 2; i * i &lt;= m; ++i) &#123; if (m % i == 0) &#123; p.push_back(i); while (m % i == 0) m /= i; &#125; &#125; if (m &gt; 1) p.push_back(m); ll ret = 0; for (ll s = 1; s &lt; (1 &lt;&lt; p.size()); ++s) &#123; ll mult = 1, bits = 0; for (int i = 0; i &lt; p.size(); ++i) &#123; if (s &amp; (1ll &lt;&lt; i)) &#123; bits++; mult *= p[i]; &#125; &#125; ll cur = n / mult; if (bits &amp; 1) ret += cur; else ret -= cur; &#125; return n - ret;&#125;int T;int main() &#123; readint(T); while (T--) &#123; ll a, m; readint(a, m); ll g = __gcd(a, m); ll l = a / g + (a % g == 0), r = (a + m) / g - ((a + m) % g == 0); printf("%I64d\n", solve(r, m / g) - solve(l - 1, m / g)); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>Codeforces</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>数论</tag>
+        <tag>容斥原理</tag>
+        <tag>状态压缩</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[「SDOI2019」热闹的聚会与尴尬的聚会]]></title>
     <url>%2F2020%2F01%2F29%2Fsolution-loj-3113%2F</url>
     <content type="text"><![CDATA[#3113. 「SDOI2019」热闹的聚会与尴尬的聚会 Summarize震惊！tth37居然…… 给定一个图 $G$， 要求在图中选出一些点组成两个互不相关的子图 $P$，$Q$，其中子图 $Q$ 为原图的一个独立集。记 $P$ 中的节点最小度数为 $p$，$q=|Q|$。要求 $\lfloor\frac{n}{p+1}\rfloor\le q$ 且 $\lfloor\frac{n}{q+1}\rfloor\le p$，输出一种可行方案。 $n\le 1e5,m\le 1e5$ Solution对题意进行转化，$\frac{n}{p+1}&lt;\lfloor\frac{n}{p+1}\rfloor+1\le q+1$，$n&lt;(p+1)(q+1)$。 考虑如下构造方法：第 $i$ 次操作中选取当前剩余图中度数最小的节点，记其度数为 $d_i$、节点编号为 $a_i$，将该节点及其相邻的节点删去。重复上述操作，直至图中没有剩余节点，设该操作重复 $q$ 次。 不难发现 $\lbrace a_i\rbrace$ 为独立集，可以将 $\lbrace a_i\rbrace$ 加入集合 $Q$。取 $d_m=\max\lbrace d_i\rbrace$，换言之剩余图中最小节点度数的最大值为 $d_m$。将第 $m$ 次及以后删除的点加入集合 $P$，则 $p=d_m$。此时 $q\times (d_m+1)\ge n$，原式显然成立。 用线段树维护度数最小的节点。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109#include &lt;bits/stdc++.h&gt;void readint() &#123;&#125;template&lt;class T1, class ...T2&gt;void readint(T1 &amp;i, T2&amp;... rest)&#123; i=0;char c;bool f=false; while (!isdigit(c=getchar())) f=c=='-'; do i=(i&lt;&lt;3)+(i&lt;&lt;1)+c-'0'; while (isdigit(c=getchar())); if (f) i=-i; readint(rest...);&#125;using namespace std;const int MAXN = 10005;const int INF = 0x3f3f3f3f;int t, n, m, d[MAXN], sum;bool del[MAXN];vector&lt;int&gt; G[MAXN], P[MAXN], Q;struct Segment_Tree &#123;#define lson(u) node[u].l#define rson(u) node[u].r#define val(u) node[u].val#define pos(u) node[u].pos struct Node &#123; int l, r, val, pos; &#125; node[MAXN &lt;&lt; 2]; int R, cnt; void pushup(int u) &#123; val(u) = min(val(lson(u)), val(rson(u))); if (val(lson(u)) == val(u)) pos(u) = pos(lson(u)); else pos(u) = pos(rson(u)); &#125; void build(int&amp; u, int l, int r) &#123; u = ++cnt; if (l == r) &#123; val(u) = d[l]; pos(u) = l; return; &#125; int mid = (l + r) &gt;&gt; 1; build(lson(u), l, mid), build(rson(u), mid + 1, r); pushup(u); &#125; void modify(int u, int l, int r, int p, int val) &#123; if (l == r) &#123; val(u) += val; return; &#125; int mid = (l + r) &gt;&gt; 1; if (p &lt;= mid) modify(lson(u), l, mid, p, val); else modify(rson(u), mid + 1, r, p, val); pushup(u); &#125;&#125; T;int main() &#123; readint(t); while (t--) &#123; readint(n, m); for (int i = 1; i &lt;= m; ++i) &#123; int u, v; readint(u, v); G[u].push_back(v), G[v].push_back(u); d[u]++, d[v]++; &#125; T.build(T.R, 1, n); int max_val = 0, max_pos = 0, cur_pos = 0; while (sum ^ n) &#123; cur_pos++; int u = T.pos(T.R); if (T.val(T.R) &gt; max_val) &#123; max_val = T.val(T.R), max_pos = cur_pos; &#125; Q.push_back(u), P[cur_pos].push_back(u); del[u] = 1, T.modify(T.R, 1, n, u, INF), sum++; for (auto v : G[u]) &#123; if (del[v]) continue; P[cur_pos].push_back(v); del[v] = 1, T.modify(T.R, 1, n, v, INF), sum++; for (auto w : G[v]) &#123; if (del[w]) continue; T.modify(T.R, 1, n, w, -1); &#125; &#125; &#125; int p_cnt = 0; for (int i = max_pos; i &lt;= cur_pos; ++i) p_cnt += P[i].size(); printf("%d ", p_cnt); for (int i = max_pos; i &lt;= cur_pos; ++i) &#123; for (auto u : P[i]) printf("%d ", u); &#125; puts(""); printf("%d ", cur_pos); for (auto u : Q) printf("%d ", u); puts(""); T.cnt = 0; for (int i = 1; i &lt;= n; ++i) G[i].clear(), P[i].clear(); Q.clear(); memset(del, 0, sizeof(del)); memset(d, 0, sizeof(d)); sum = 0; &#125; return 0;&#125;]]></content>
@@ -238,11 +253,11 @@
         <category>雅礼集训</category>
       </categories>
       <tags>
-        <tag>组合计数</tag>
         <tag>FFT/NTT</tag>
+        <tag>组合计数</tag>
         <tag>生成函数</tag>
-        <tag>启发式合并</tag>
         <tag>容斥原理</tag>
+        <tag>启发式合并</tag>
       </tags>
   </entry>
   <entry>
@@ -254,8 +269,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>组合计数</tag>
         <tag>FFT/NTT</tag>
+        <tag>组合计数</tag>
         <tag>生成函数</tag>
       </tags>
   </entry>
@@ -728,8 +743,8 @@
       </categories>
       <tags>
         <tag>二分答案</tag>
-        <tag>前缀和</tag>
         <tag>倍增</tag>
+        <tag>前缀和</tag>
       </tags>
   </entry>
   <entry>
@@ -861,8 +876,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树状数组</tag>
         <tag>树链剖分</tag>
+        <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
@@ -900,8 +915,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
       </tags>
   </entry>
   <entry>
@@ -912,8 +927,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -1198,8 +1213,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>字符串</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
