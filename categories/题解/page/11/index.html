@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  lang="en">
 <head>
-    <!-- hexo-inject:begin --><!-- 你可真是个小机灵鬼！竟然找到这儿来了QwQ --><script data-ad-client="ca-pub-4278647453884747" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- hexo-inject:end --><meta charset="utf-8" />
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
 
 <meta name="generator" content="Hexo 3.9.0" />
 
@@ -405,9 +405,7 @@
 </blockquote>
 <p>背包类树形dp。本题需要运用分组背包模型。</p>
 <p>首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。</p>
-<p>可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：</p>
-<script type="math/tex; mode=display">
-f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$的子节点，$w$为这条边的权值。在$u$每个子节点上有许多“物品”，“物品”总数即为以$v$为根的子树上用户的个数；每个“物品”所具有的价值即为其最大利润，即$f[v][j]$。同时不应忽略边权对利润带来的影响。</p>
+<p>可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：<br>$$<br>f[u][i]=\max_{v\in son(u)}{f[u][i-j]+f[v][j]-w}<br>$$<br>其中，$v$为$u$的子节点，$w$为这条边的权值。在$u$每个子节点上有许多“物品”，“物品”总数即为以$v$为根的子树上用户的个数；每个“物品”所具有的价值即为其最大利润，即$f[v][j]$。同时不应忽略边权对利润带来的影响。</p>
 <p>注意细节处理及边界。代码如下：</p>
         </div>
         

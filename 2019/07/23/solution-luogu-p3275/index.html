@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  lang="en">
 <head>
-    <!-- hexo-inject:begin --><!-- 你可真是个小机灵鬼！竟然找到这儿来了QwQ --><script data-ad-client="ca-pub-4278647453884747" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- hexo-inject:end --><meta charset="utf-8" />
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
 
 <meta name="generator" content="Hexo 3.9.0" />
 
@@ -165,38 +165,35 @@
 <p>感谢@oy 的贡献</p>
 </blockquote>
 <a id="more"></a>
+
 <p>差分约束系统的模板题。</p>
 <p>记 $d$ 数组为以 $S$ 为源点到各个节点的最长路。根据最长路的性质，如果存在一条边 $(u,v,w)$ ，则一定满足以下不等式：</p>
-<script type="math/tex; mode=display">
-d[u]+w(u,v)\le d[v]</script><p>我们可以将题目中给出的不等关系转化为图中的有向边，然后通过单源最长路求出的一组 $\lbrace d_n\rbrace$ 即为差分约束系统的一组解。</p>
+<p>$$<br>d[u]+w(u,v)\le d[v]<br>$$</p>
+<p>我们可以将题目中给出的不等关系转化为图中的有向边，然后通过单源最长路求出的一组 $\lbrace d_n\rbrace$ 即为差分约束系统的一组解。</p>
 <p>因此，在图中连一条边 $(u,v,w)$ 相当于对 $d[u]$ 和 $d[v]$ 的取值作出限制，我们只需在构造出一张有向图，并求出其单源最长路即为答案。</p>
 <p>有向边的构造方式如下：</p>
 <ol>
 <li>限制 $d[A]=d[B]$</li>
 </ol>
-<script type="math/tex; mode=display">
-d[A]=d[B] \Leftrightarrow (d[B]\le d[A])\wedge(d[A]\le d[B])</script><script type="math/tex; mode=display">
-\Leftrightarrow (d[B]+0\le d[A])\wedge(d[A]+0\le d[B])</script><p>连边：$(A,B,0)$，$(B,A,0)$</p>
-<ol>
-<li>限制 $d[A]&lt;d[B]$<script type="math/tex; mode=display">
-d[A]<d[B]\Leftrightarrow d[A]+1\le d[B]</script></li>
+<p>$$<br>d[A]=d[B] \Leftrightarrow (d[B]\le d[A])\wedge(d[A]\le d[B])<br>$$<br>$$<br>\Leftrightarrow (d[B]+0\le d[A])\wedge(d[A]+0\le d[B])<br>$$</p>
+<p>连边：$(A,B,0)$，$(B,A,0)$</p>
+<ol start="2">
+<li>限制 $d[A]&lt;d[B]$<br>$$<br>d[A]&lt;d[B]\Leftrightarrow d[A]+1\le d[B]<br>$$</li>
 </ol>
 <p>连边：$(A,B,1)$</p>
-<ol>
-<li>限制 $d[A]\geq d[B]$<script type="math/tex; mode=display">
-d[A]\ge d[B]\Leftrightarrow d[B]+0\le d[A]</script></li>
+<ol start="3">
+<li>限制 $d[A]\geq d[B]$<br>$$<br>d[A]\ge d[B]\Leftrightarrow d[B]+0\le d[A]<br>$$</li>
 </ol>
 <p>连边：$(B,A,0)$</p>
-<ol>
-<li>限制 $d[A]&gt;d[B]$<script type="math/tex; mode=display">
-d[A]>d[B]\Leftrightarrow d[B]+1\le d[A]</script></li>
+<ol start="4">
+<li>限制 $d[A]&gt;d[B]$<br>$$<br>d[A]&gt;d[B]\Leftrightarrow d[B]+1\le d[A]<br>$$</li>
 </ol>
 <p>连边：$(B,A,1)$</p>
-<ol>
+<ol start="5">
 <li>限制 $d[A]\le d[B]$</li>
 </ol>
 <p>连边：$(A,B,0)$</p>
-<ol>
+<ol start="6">
 <li>限制 $d[i]&gt;0$</li>
 </ol>
 <p>连边：$(S,i,1)$</p>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  lang="en">
 <head>
-    <!-- hexo-inject:begin --><!-- 你可真是个小机灵鬼！竟然找到这儿来了QwQ --><script data-ad-client="ca-pub-4278647453884747" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- hexo-inject:end --><meta charset="utf-8" />
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
 
 <meta name="generator" content="Hexo 3.9.0" />
 
@@ -11,7 +11,7 @@
 
 
     <meta name="description" content="题目链接 将$n$个$1$和$m$个$0$组成字符串，使得在任意的前$k$个字符中，$1$的个数不能少于$0$的个数。求满足条件的字符串共有多少个。 $1\le m \le n \le 1000000$">
-<meta name="keywords" content="卡特兰数,数学,逆元,组合数">
+<meta name="keywords" content="数学,卡特兰数,逆元,组合数">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题解-luogu-p1641生成字符串">
 <meta property="og:url" content="https://tth37.cn/2019/07/13/solution-luogu-p1641/index.html">
@@ -164,10 +164,12 @@
 <p>$1\le m \le n \le 1000000$</p>
 </blockquote>
 <a id="more"></a>
+
 <p>本题是卡特兰数的一个简单变式。</p>
 <p>回忆卡特兰数的推导过程，可以生成的所有字符串共有$C_{n+m}^n$个，其中不合法的字符串有$C_{n+m}^{n+1}$个。最终答案即为$C_{n+m}^{n}-C_{n+m}^{n+1}$。计算组合数前须预处理出阶乘逆元。</p>
 <p>代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> p = <span class="hljs-number">20100403</span>;</span><br><span class="line"><span class="hljs-keyword">int</span> N, M;</span><br><span class="line"><span class="hljs-keyword">int</span> inv[<span class="hljs-number">2000005</span>], fac[<span class="hljs-number">2000005</span>], facinv[<span class="hljs-number">2000005</span>];</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">C</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> (ll) fac[n] * facinv[m] % p * facinv[n - m] % p;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">cin</span> &gt;&gt; N &gt;&gt; M;</span><br><span class="line">    inv[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>; fac[<span class="hljs-number">0</span>] = fac[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>; facinv[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= N + M; ++i) &#123;</span><br><span class="line">        inv[i] = (ll) (p - p / i) * inv[p % i] % p;</span><br><span class="line">        fac[i] = (ll) i * fac[i - <span class="hljs-number">1</span>] % p;</span><br><span class="line">        facinv[i] = (ll) facinv[i - <span class="hljs-number">1</span>] * inv[i] % p;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">cout</span> &lt;&lt; (C(N + M, N) - C(N + M, N + <span class="hljs-number">1</span>) + p) % p;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
         

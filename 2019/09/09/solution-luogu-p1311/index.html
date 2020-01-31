@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html  lang="en">
 <head>
-    <!-- hexo-inject:begin --><!-- 你可真是个小机灵鬼！竟然找到这儿来了QwQ --><script data-ad-client="ca-pub-4278647453884747" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> <!-- hexo-inject:end --><meta charset="utf-8" />
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8" />
 
 <meta name="generator" content="Hexo 3.9.0" />
 
@@ -164,6 +164,7 @@
 <p>@gzn7264</p>
 </blockquote>
 <a id="more"></a>
+
 <p>这篇题解就不在洛谷博客上发布了。</p>
 <p>首先枚举点对的右端点。显而易见，合法的左端点必须满足：</p>
 <ol>
@@ -175,6 +176,7 @@
 <p>在示例代码中，可选的左端点包括其本身，因此当 $money\le P$ 时存在重复计算，答案减一。</p>
 <p>代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ans;</span><br><span class="line"><span class="hljs-keyword">int</span> N, K, P;</span><br><span class="line"><span class="hljs-keyword">int</span> c[<span class="hljs-number">50</span>], s[<span class="hljs-number">50</span>];</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;N, &amp;K, &amp;P);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> color, money;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;color, &amp;money);</span><br><span class="line">        s[color]++;</span><br><span class="line">        <span class="hljs-keyword">if</span> (money &lt;= P)</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; K; ++j)</span><br><span class="line">                c[j] = s[j];</span><br><span class="line">        ans += c[color] - (money &lt;= P);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%I64d"</span>, ans);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
         
