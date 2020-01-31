@@ -160,10 +160,8 @@
         <div class="content">
             <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>在处理某些树上问题时，并非树上的所有节点都起作用；这时可以借助虚树，将树上重要的点构造成一棵树，在虚树上处理问题，优化时间复杂度。</p>
 <a id="more"></a>
-
 <h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>用栈来维护虚树上的一条从根到 $u$ 的链。如果 $u$ 是栈顶节点的儿子，则入栈；否则将栈中 dfn 值大于 $\text{lca}(u,s.top())$ 的元素出栈。</p>
 <h5 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">将树上所有关键点按照 dfs 序排序</span><br><span class="line">stack.push(1)</span><br><span class="line">for u = 1 ~ n: //假设当前正在处理节点 u</span><br><span class="line">	lca = Lca(u, stack.top())</span><br><span class="line">	while stack.top() != lca:</span><br><span class="line">		tmp = stack.top()</span><br><span class="line">		stack.pop()</span><br><span class="line">		if (dfn[stack.top()] &lt; dfn[lca]):</span><br><span class="line">			stack.push(lca)</span><br><span class="line">		AddEdge(stack.top(), tmp)</span><br><span class="line">	stack.push(u)</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -648,23 +646,19 @@
       <h3 class="menu-label">
           GOOGLE ADS
       </h3>
-      <ul class="menu-list">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- widget -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:250px;height:235px"
-             data-ad-client="ca-pub-4278647453884747"
-             data-ad-slot="3173116539"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- widget -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:263px;height:263px"
+     data-ad-client="ca-pub-4278647453884747"
+     data-ad-slot="3173116539"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
       </ul>
       </div>
   </div>
 </div>
-
-        
-            
 
         
         </div>

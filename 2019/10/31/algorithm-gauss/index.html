@@ -165,7 +165,6 @@
 <p>本文绝大部分内容转载自 <a href="https://oi-wiki.org/math/gauss/#_6" target="_blank" rel="noopener">OI-WIKI</a></p>
 </blockquote>
 <a id="more"></a>
-
 <h4 id="高斯消元五步骤法"><a href="#高斯消元五步骤法" class="headerlink" title="高斯消元五步骤法"></a>高斯消元五步骤法</h4><p>高斯消元法在将增广矩阵化为最简形后对于自由未知量的赋值，需要掌握线性相关知识，且赋值存在人工经验的因素，使得在学习过程中有一定的困难，将高斯消元法划分为五步骤，从而提出五步骤法，内容如下：</p>
 <ol>
 <li><p>增广矩阵行初等行变换为行最简形；</p>
@@ -181,38 +180,99 @@
 </ol>
 <p>利用实例进一步说明该算法的运作情况。</p>
 <p>例二：利用高斯消元法五步骤法求解线性方程组：</p>
-<p>$$<br>\left{\begin{aligned}<br>2x_1+5x_3+6x_4&amp;=9 \notag \<br>x_3+x_4&amp;=-4 \notag \<br>2x_3+2x_4&amp;=-8 \notag<br>\end{aligned}\right.<br>$$</p>
-<h4 id="增广矩阵行（初等）变换为行最简形"><a href="#增广矩阵行（初等）变换为行最简形" class="headerlink" title="增广矩阵行（初等）变换为行最简形"></a>增广矩阵行（初等）变换为行最简形</h4><p>所谓增广矩阵，即为方程组系数矩阵 $A$ 与常数列 $b$ 的并生成的新矩阵，即 $(A | b)$ ，增广矩阵行初等变换化为行最简形，即是利用了高斯消元法的思想理念，省略了变量而用变量的系数位置表示变量，增广矩阵中用竖线隔开了系数矩阵和常数列，代表了等于符号。</p>
-<p>$$<br>\left(\begin{matrix}<br>2 &amp; 0 &amp; 5 &amp; 6 \<br>0 &amp; 0 &amp; 1 &amp; 1 \<br>0 &amp; 0 &amp; 2 &amp; 2<br>\end{matrix} \middle|<br>\begin{matrix}<br>9 \<br>-4 \<br>-8<br>\end{matrix} \right)<br>$$</p>
-<p>$$<br>\xrightarrow{r_3-2r_2}<br>\left(\begin{matrix}<br>2 &amp; 0 &amp; 5 &amp; 6 \<br>0 &amp; 0 &amp; 1 &amp; 1 \<br>0 &amp; 0 &amp; 0 &amp; 0<br>\end{matrix} \middle|<br>\begin{matrix}<br>9 \<br>-4 \<br>0<br>\end{matrix} \right)<br>$$</p>
-<p>化为行阶梯形</p>
-<p>$$<br>\xrightarrow{\frac{r_1}{2}}<br>\left(\begin{matrix}<br>1 &amp; 0 &amp; 2.5 &amp; 3 \<br>0 &amp; 0 &amp; 1 &amp; 1 \<br>0 &amp; 0 &amp; 0 &amp; 0<br>\end{matrix} \middle|<br>\begin{matrix}<br>4.5 \<br>-4 \<br>0<br>\end{matrix} \right)<br>$$</p>
-<p>$$<br>\xrightarrow{r_1-r_2 \times 2.5}<br>\left(\begin{matrix}<br>1 &amp; 0 &amp; 0 &amp; 0.5 \<br>0 &amp; 0 &amp; 1 &amp; 1 \<br>0 &amp; 0 &amp; 0 &amp; 0<br>\end{matrix} \middle|<br>\begin{matrix}<br>14.5 \<br>-4 \<br>0<br>\end{matrix} \right)<br>$$</p>
-<p>化为最简形</p>
-<h4 id="还原线性方程组"><a href="#还原线性方程组" class="headerlink" title="还原线性方程组"></a>还原线性方程组</h4><p>$$<br>\left{\begin{aligned}<br>x_1+0.5x_4 &amp;= 14.5 \notag\<br>x_3+x_4 &amp;= -4 \notag \<br>\end{aligned}\right.<br>$$</p>
-<p>解释</p>
+<script type="math/tex; mode=display">
+\left\{\begin{aligned}
+2x_1+5x_3+6x_4&=9 \notag \\
+x_3+x_4&=-4 \notag \\
+2x_3+2x_4&=-8 \notag
+\end{aligned}\right.</script><h4 id="增广矩阵行（初等）变换为行最简形"><a href="#增广矩阵行（初等）变换为行最简形" class="headerlink" title="增广矩阵行（初等）变换为行最简形"></a>增广矩阵行（初等）变换为行最简形</h4><p>所谓增广矩阵，即为方程组系数矩阵 $A$ 与常数列 $b$ 的并生成的新矩阵，即 $(A | b)$ ，增广矩阵行初等变换化为行最简形，即是利用了高斯消元法的思想理念，省略了变量而用变量的系数位置表示变量，增广矩阵中用竖线隔开了系数矩阵和常数列，代表了等于符号。</p>
+<script type="math/tex; mode=display">
+\left(\begin{matrix}
+2 & 0 & 5 & 6 \\
+0 & 0 & 1 & 1 \\
+0 & 0 & 2 & 2
+\end{matrix} \middle|
+\begin{matrix}
+9 \\
+-4 \\
+-8
+\end{matrix} \right)</script><script type="math/tex; mode=display">
+\xrightarrow{r_3-2r_2}
+\left(\begin{matrix}
+2 & 0 & 5 & 6 \\
+0 & 0 & 1 & 1 \\
+0 & 0 & 0 & 0
+\end{matrix} \middle|
+\begin{matrix}
+9 \\
+-4 \\
+0
+\end{matrix} \right)</script><p>化为行阶梯形</p>
+<script type="math/tex; mode=display">
+\xrightarrow{\frac{r_1}{2}}
+\left(\begin{matrix}
+1 & 0 & 2.5 & 3 \\
+0 & 0 & 1 & 1 \\
+0 & 0 & 0 & 0
+\end{matrix} \middle|
+\begin{matrix}
+4.5 \\
+-4 \\
+0
+\end{matrix} \right)</script><script type="math/tex; mode=display">
+\xrightarrow{r_1-r_2 \times 2.5}
+\left(\begin{matrix}
+1 & 0 & 0 & 0.5 \\
+0 & 0 & 1 & 1 \\
+0 & 0 & 0 & 0
+\end{matrix} \middle|
+\begin{matrix}
+14.5 \\
+-4 \\
+0
+\end{matrix} \right)</script><p>化为最简形</p>
+<h4 id="还原线性方程组"><a href="#还原线性方程组" class="headerlink" title="还原线性方程组"></a>还原线性方程组</h4><script type="math/tex; mode=display">
+\left\{\begin{aligned}
+x_1+0.5x_4 &= 14.5 \notag\\
+x_3+x_4 &= -4 \notag \\
+\end{aligned}\right.</script><p>解释</p>
 <blockquote>
 <p>所谓的还原线性方程组，即是在行最简形的基础上，将之重新书写为线性方程组的形式，即将行最简形中各位置的系数重新赋予变量，中间的竖线还原为等号。</p>
 </blockquote>
-<h4 id="求解第一个变量"><a href="#求解第一个变量" class="headerlink" title="求解第一个变量"></a>求解第一个变量</h4><p>$$<br>\left{\begin{aligned}<br>x_1 &amp;= -0.5x_4+14.5\notag \<br>x_3 &amp;= -x_4-4\notag<br>\end{aligned}\right.<br>$$</p>
-<p>解释</p>
+<h4 id="求解第一个变量"><a href="#求解第一个变量" class="headerlink" title="求解第一个变量"></a>求解第一个变量</h4><script type="math/tex; mode=display">
+\left\{\begin{aligned}
+x_1 &= -0.5x_4+14.5\notag \\
+x_3 &= -x_4-4\notag
+\end{aligned}\right.</script><p>解释</p>
 <blockquote>
 <p>即是对于所还原的线性方程组而言，将方程组中每个方程的第一个变量，用其他量表达出来。如方程组两方程中的第一个变量 $x_1$ 和 $x_3$ </p>
 </blockquote>
-<h4 id="补充自由未知量"><a href="#补充自由未知量" class="headerlink" title="补充自由未知量"></a>补充自由未知量</h4><p>$$<br>\left{\begin{aligned}<br>x_1 &amp;= -0.5x_4+14.5 \notag \<br>x_2 &amp;= x_2 \notag \<br>x_3 &amp;= -x_4-4 \notag \<br>x_4 &amp;= x_4 \notag<br>\end{aligned}\right.<br>$$</p>
-<p>解释</p>
+<h4 id="补充自由未知量"><a href="#补充自由未知量" class="headerlink" title="补充自由未知量"></a>补充自由未知量</h4><script type="math/tex; mode=display">
+\left\{\begin{aligned}
+x_1 &= -0.5x_4+14.5 \notag \\
+x_2 &= x_2 \notag \\
+x_3 &= -x_4-4 \notag \\
+x_4 &= x_4 \notag
+\end{aligned}\right.</script><p>解释</p>
 <blockquote>
 <p>第 3 步中，求解出变量 $x_1$ 和 $x_3$ ，从而说明了方程剩余的变量 $x_2$ 和 $x_4$ 不受方程组的约束，是自由未知量，可以取任意值，所以需要在第 3 步骤解得基础上进行解得补充，补充的方法为 $x_2 = x_2,x_4 = x_4$ ，这种解得补充方式符合自由未知量定义，并易于理解，因为是自由未知量而不受约束，所以只能自己等于自己。</p>
 </blockquote>
-<h4 id="列表示方程组的通解"><a href="#列表示方程组的通解" class="headerlink" title="列表示方程组的通解"></a>列表示方程组的通解</h4><p>$$<br>\begin{aligned}<br>\begin{pmatrix} x_1 \ x_2 \ x_3 \ x_4 \end{pmatrix} &amp;=<br>\begin{pmatrix} 0 \ 1 \ 0 \ 0 \end{pmatrix} x_2+<br>\begin{pmatrix} -0.5 \ 0 \ -1 \ 1 \end{pmatrix} x_4 +<br>\begin{pmatrix} 14.5 \ 0 \ -4 \ 0 \end{pmatrix} \notag \<br>&amp;= \begin{pmatrix} 0 \ 1 \ 0 \ 0 \end{pmatrix} C_1+<br>\begin{pmatrix} -0.5 \ 0 \ -1 \ 1 \end{pmatrix} C_2 +<br>\begin{pmatrix} 14.5 \ 0 \ -4 \ 0 \end{pmatrix} \notag<br>\end{aligned}<br>$$</p>
-<p>其中 $C_1$ 和 $C_2$ 为任意常数。</p>
+<h4 id="列表示方程组的通解"><a href="#列表示方程组的通解" class="headerlink" title="列表示方程组的通解"></a>列表示方程组的通解</h4><script type="math/tex; mode=display">
+\begin{aligned}
+\begin{pmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{pmatrix} &=
+\begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix} x_2+
+\begin{pmatrix} -0.5 \\ 0 \\ -1 \\ 1 \end{pmatrix} x_4 +
+\begin{pmatrix} 14.5 \\ 0 \\ -4 \\ 0 \end{pmatrix} \notag \\
+&= \begin{pmatrix} 0 \\ 1 \\ 0 \\ 0 \end{pmatrix} C_1+
+\begin{pmatrix} -0.5 \\ 0 \\ -1 \\ 1 \end{pmatrix} C_2 +
+\begin{pmatrix} 14.5 \\ 0 \\ -4 \\ 0 \end{pmatrix} \notag
+\end{aligned}</script><p>其中 $C_1$ 和 $C_2$ 为任意常数。</p>
 <p>解释</p>
 <blockquote>
 <p>即在第 4 步的基础上，将解表达为列向量组合的表示形式，同时由于 $x_2$ 和 $x_4$ 是自由未知量，可以取任意值，所以在解得右边，令二者分别为任意常数 $C_1$ 和 $C_2$ ，即实现了对方程组的求解。</p>
 </blockquote>
 <h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><p>其实可以根据自己解方程的习惯写代码……实现非常简单，基本不需要理论知识</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Gauss</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">bool</span> flag = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &lt;= n; ++j) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (a[j][i] != <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = i; k &lt;= n + <span class="hljs-number">1</span>; ++k)</span><br><span class="line">                    swap(a[i][k], a[j][k]);</span><br><span class="line">                flag = <span class="hljs-number">1</span>;</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (flag == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            <span class="hljs-built_in">puts</span>(<span class="hljs-string">"No Solution"</span>);</span><br><span class="line">            <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">double</span> tmp = a[i][i];</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = i; k &lt;= n + <span class="hljs-number">1</span>; ++k)</span><br><span class="line">            a[i][k] /= tmp;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">            tmp = a[j][i];</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = i; k &lt;= n + <span class="hljs-number">1</span>; ++k)</span><br><span class="line">                a[j][k] -= tmp * a[i][k];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n; i &gt;= <span class="hljs-number">1</span>; --i) &#123;</span><br><span class="line">        <span class="hljs-keyword">double</span> x = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt;= n; ++j)</span><br><span class="line">            x += ans[j] * a[i][j];</span><br><span class="line">        ans[i] = a[i][n + <span class="hljs-number">1</span>] - x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -697,23 +757,19 @@
       <h3 class="menu-label">
           GOOGLE ADS
       </h3>
-      <ul class="menu-list">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- widget -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:250px;height:235px"
-             data-ad-client="ca-pub-4278647453884747"
-             data-ad-slot="3173116539"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- widget -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:263px;height:263px"
+     data-ad-client="ca-pub-4278647453884747"
+     data-ad-slot="3173116539"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
       </ul>
       </div>
   </div>
 </div>
-
-        
-            
 
         
         </div>

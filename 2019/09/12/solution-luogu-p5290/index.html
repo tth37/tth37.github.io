@@ -165,7 +165,6 @@
 <p>我感谢我自己</p>
 </blockquote>
 <a id="more"></a>
-
 <p>首先考虑树退化为链的情况。树根最多有两棵子树，树根需要被单独分为一段，其余段中不能出现同一棵子树内的两个点。</p>
 <p>这时我们需要将左子树中的节点与右子树中的节点配对。可以证明，将左子树中的最大值与右子树中的最大值、左子树中的次大值与右子树中的次大值以此类推两两配对，可以使所有段的权值总和最小。</p>
 <p>如此一来，两条链实则被合并成为一条链。同理，多条链也可以使用类似的方式合并为一条链。</p>
@@ -177,7 +176,6 @@
 <p>不难看出，将大堆合并进入小堆，时间复杂度在 $O(max(q1.size(),q2.size()))$ 级别。但如果换一种思路，将小堆合并进入大堆，时间复杂度就降到 $O(min(q1.size(),q2.size()))$ 级别。此方法与并查集的按秩合并有异曲同工之妙，被成为<strong>启发式合并</strong>。</p>
 <p>代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> N;</span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; G[<span class="hljs-number">200005</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> M[<span class="hljs-number">200005</span>];</span><br><span class="line">priority_queue&lt;<span class="hljs-keyword">int</span>&gt; q[<span class="hljs-number">200005</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> tmp[<span class="hljs-number">200005</span>], cnt;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> u)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> v = *it;</span><br><span class="line">        dfs(v);</span><br><span class="line">        cnt = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (q[u].size() &lt; q[v].size()) swap(q[u], q[v]);</span><br><span class="line">        <span class="hljs-keyword">while</span>(q[v].size()) &#123;</span><br><span class="line">            tmp[++cnt] = max(q[u].top(), q[v].top());</span><br><span class="line">            q[u].pop(), q[v].pop();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= cnt; ++i)</span><br><span class="line">            q[u].push(tmp[i]);</span><br><span class="line">    &#125;</span><br><span class="line">    q[u].push(M[u]);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;N);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;M[i]);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> f;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;f);</span><br><span class="line">        G[f].push_back(i);</span><br><span class="line">    &#125;</span><br><span class="line">    dfs(<span class="hljs-number">1</span>);</span><br><span class="line">    ll ans = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (q[<span class="hljs-number">1</span>].size()) ans += q[<span class="hljs-number">1</span>].top(), q[<span class="hljs-number">1</span>].pop();</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld"</span>, ans);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -662,23 +660,19 @@
       <h3 class="menu-label">
           GOOGLE ADS
       </h3>
-      <ul class="menu-list">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- widget -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:250px;height:235px"
-             data-ad-client="ca-pub-4278647453884747"
-             data-ad-slot="3173116539"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- widget -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:263px;height:263px"
+     data-ad-client="ca-pub-4278647453884747"
+     data-ad-slot="3173116539"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
       </ul>
       </div>
   </div>
 </div>
-
-        
-            
 
         
         </div>

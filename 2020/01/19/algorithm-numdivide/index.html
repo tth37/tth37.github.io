@@ -161,16 +161,15 @@
             <p>拆分数问题：将大小为 $n$ 的正整数拆分为若干无序的正整数的和的方案数。</p>
 <p>感谢 @oy 对本文做出的巨大贡献（即吊锤 tth37）</p>
 <a id="more"></a>
-
 <h3 id="动态规划一-O-n-2"><a href="#动态规划一-O-n-2" class="headerlink" title="动态规划一 $O(n^2)$"></a>动态规划一 $O(n^2)$</h3><p>记 $f[i][j]$ 为将 $i$ 拆分为若干个大小不超过 $j$ 的整数的和的方案数。</p>
 <p>分类讨论：第一种情况为 <strong>最大的拆分数恰好为 $j$</strong>，第二种为 <strong>最大的拆分数小于等于 $j-1$</strong>。对于第一种情况，可以强制拆分出一个 $j$，也可以考虑为将 $i-j$ 拆分，再强制插入一个 $j$ 所得到的方案数；对于第二种情况，直接套用定义 $f[i][j-1]$ 即可。</p>
 <p>状态转移方程如下：</p>
-<p>$$<br>f[i][j]=f[i-j][j]+f[i][j-1]<br>$$</p>
-<h3 id="动态规划二-O-n-2"><a href="#动态规划二-O-n-2" class="headerlink" title="动态规划二 $O(n^2)$"></a>动态规划二 $O(n^2)$</h3><p>记 $g[i][j]$ 为将 $i$ 拆分为 $j$ 个整数的和的方案数。</p>
+<script type="math/tex; mode=display">
+f[i][j]=f[i-j][j]+f[i][j-1]</script><h3 id="动态规划二-O-n-2"><a href="#动态规划二-O-n-2" class="headerlink" title="动态规划二 $O(n^2)$"></a>动态规划二 $O(n^2)$</h3><p>记 $g[i][j]$ 为将 $i$ 拆分为 $j$ 个整数的和的方案数。</p>
 <p>分类讨论：第一种情况为 <strong>最小的拆分数恰好为 $1$</strong>，第二种为 <strong>最小的拆分数大于 $1$</strong>。对于第一种情况，可以强制拆分出一个 $1$，也可以考虑为将 $i-1$ 拆分，再强制插入一个 $1$ 所得到的方案数；对于第二种情况，不难发现在 $g[i-j][j]$ 的方案中 <strong>所有的拆分数都加上 $1$</strong> 后，满足最小的拆分数大于 $1$ 并且所有拆分数之和恰好为 $i$，即为所求。</p>
 <p>状态转移方程如下：</p>
-<p>$$<br>g[i][j]=g[i-1][j-1]+g[i-j][j]<br>$$</p>
-<h3 id="动态规划三-O-n-sqrt-n"><a href="#动态规划三-O-n-sqrt-n" class="headerlink" title="动态规划三 $O(n\sqrt n)$"></a>动态规划三 $O(n\sqrt n)$</h3><blockquote>
+<script type="math/tex; mode=display">
+g[i][j]=g[i-1][j-1]+g[i-j][j]</script><h3 id="动态规划三-O-n-sqrt-n"><a href="#动态规划三-O-n-sqrt-n" class="headerlink" title="动态规划三 $O(n\sqrt n)$"></a>动态规划三 $O(n\sqrt n)$</h3><blockquote>
 <p>性质：在 $n$ 以下且大小超过 $\sqrt n$ 的数不超过 $\sqrt n$ 个。</p>
 </blockquote>
 <p>考虑将 <em>动态规划一</em> 和 <em>动态规划二</em> 中的思想合并。</p>
@@ -179,8 +178,9 @@
 <p>对 $g’$ 数组分类讨论：第一种情况为划分出 <strong>最小的大数恰好为 $\sqrt n$</strong>，另一种情况为 <strong>最小的大数大于 $\sqrt n$</strong>。对于第一种情况，可以强制拆分出一个 $\sqrt n$，也可以考虑为将 $i-\sqrt n$ 拆分，再强制插入一个 $\sqrt n$ 所得到的方案数；对于第二种情况，不难发现再 $g’[i][j]$ 的方案中 <strong>所有的大数都加上 $1$</strong> 后，满足最小的 <strong>大数</strong> 大于 $\sqrt n$ 并且所有拆分数之和恰好为 $i$。 </p>
 <p>对于初值，$g[i][0]$ 显然为 $f[i][\sqrt n -1]$。</p>
 <p>状态转移方程如下：</p>
-<p>$$<br>g[i][0]=f[i][\sqrt n-1] \<br>g[i][j]=g[i-\sqrt n][j-1]+g[i-j][j]<br>$$</p>
-
+<script type="math/tex; mode=display">
+g[i][0]=f[i][\sqrt n-1] \\
+g[i][j]=g[i-\sqrt n][j-1]+g[i-j][j]</script>
         </div>
         
         <div class="level is-size-7 is-uppercase">
@@ -664,23 +664,19 @@
       <h3 class="menu-label">
           GOOGLE ADS
       </h3>
-      <ul class="menu-list">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- widget -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:250px;height:235px"
-             data-ad-client="ca-pub-4278647453884747"
-             data-ad-slot="3173116539"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- widget -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:263px;height:263px"
+     data-ad-client="ca-pub-4278647453884747"
+     data-ad-slot="3173116539"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
       </ul>
       </div>
   </div>
 </div>
-
-        
-            
 
         
         </div>

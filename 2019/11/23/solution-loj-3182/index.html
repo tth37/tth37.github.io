@@ -161,7 +161,6 @@
             <p><a href="https://loj.ac/problem/3182" target="_blank" rel="noopener">#3182. 「CEOI2018」云计算</a></p>
 <h3 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h3><p>题目概括征集中~ 球球你再帮我写几篇吧 TAT @oykz2333</p>
 <a id="more"></a>
-
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><blockquote>
 <p>这题也太巧妙了叭！ ——tth37</p>
 </blockquote>
@@ -170,7 +169,6 @@
 <p>如果考虑到时钟频率的限制，则需要满足：在将每个订单放入背包之前，必须将所有时钟频率大于等于该订单的计算机放入背包中。</p>
 <p>将计算机和订单按照时钟频率排序后，依次加入背包即可。</p>
 <h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">2005</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span> &#123;</span></span><br><span class="line">    <span class="hljs-keyword">int</span> c, f, v;</span><br><span class="line">    <span class="hljs-keyword">bool</span> type;</span><br><span class="line">&#125;a[MAXN * <span class="hljs-number">2</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp</span><span class="hljs-params">(Node a, Node b)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (a.f != b.f) <span class="hljs-keyword">return</span> a.f &gt; b.f;</span><br><span class="line">    <span class="hljs-keyword">return</span> a.type &lt; b.type;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> n, m, tot;</span><br><span class="line">ll f[MAXN * <span class="hljs-number">50</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;n);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;a[i].c, &amp;a[i].f, &amp;a[i].v), a[i].type = <span class="hljs-number">0</span>, tot += a[i].c;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;m);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; ++i)</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;a[n + i].c, &amp;a[n + i].f, &amp;a[n + i].v), a[n + i].type = <span class="hljs-number">1</span>;</span><br><span class="line">    sort(a + <span class="hljs-number">1</span>, a + n + m + <span class="hljs-number">1</span>, cmp);</span><br><span class="line">    <span class="hljs-built_in">memset</span>(f, <span class="hljs-number">0xcf</span>, <span class="hljs-keyword">sizeof</span>(f));</span><br><span class="line">    f[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n + m; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (a[i].type == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = tot; j &gt;= a[i].c; --j)</span><br><span class="line">                f[j] = max(f[j], f[j - a[i].c] - a[i].v);</span><br><span class="line">        &#125; <span class="hljs-keyword">else</span> &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt;= tot - a[i].c; ++j)</span><br><span class="line">                f[j] = max(f[j], f[j + a[i].c] + a[i].v);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ll ans = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt;= tot; ++i)</span><br><span class="line">        ans = max(ans, f[i]);</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld"</span>, ans);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -655,23 +653,19 @@
       <h3 class="menu-label">
           GOOGLE ADS
       </h3>
-      <ul class="menu-list">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- widget -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:250px;height:235px"
-             data-ad-client="ca-pub-4278647453884747"
-             data-ad-slot="3173116539"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- widget -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:263px;height:263px"
+     data-ad-client="ca-pub-4278647453884747"
+     data-ad-slot="3173116539"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
       </ul>
       </div>
   </div>
 </div>
-
-        
-            
 
         
         </div>

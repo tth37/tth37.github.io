@@ -161,14 +161,12 @@
             <p><a href="https://nanti.jisuanke.com/t/43128" target="_blank" rel="noopener">#43128. 灭绝</a></p>
 <h3 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h3><p>题目概括征集中~</p>
 <a id="more"></a>
-
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>自 <a href="http://localhost:4000/2019/08/23/solution-luogu-uva11021/" target="_blank" rel="noopener">麻球繁衍</a> 改编而来。</p>
 <p>状态转移方程：</p>
-<p>$$<br>f[i]=\sum_{j=1}^mp_i\times f[i-t_i]^{s_i}<br>$$</p>
-<p>需要注意灭绝的边界情况讨论。</p>
+<script type="math/tex; mode=display">
+f[i]=\sum_{j=1}^mp_i\times f[i-t_i]^{s_i}</script><p>需要注意灭绝的边界情况讨论。</p>
 <h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><p>取模要取干净！</p>
 <h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> ll MOD = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">ll <span class="hljs-title">qpow</span><span class="hljs-params">(ll x, <span class="hljs-keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    ll ret = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (n) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (n &amp; <span class="hljs-number">1</span>) ret = ret * x % MOD;</span><br><span class="line">        x = x * x % MOD;</span><br><span class="line">        n &gt;&gt;= <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> n, l, m;</span><br><span class="line"><span class="hljs-keyword">int</span> q[<span class="hljs-number">2005</span>], t[<span class="hljs-number">2005</span>], s[<span class="hljs-number">2005</span>];</span><br><span class="line">ll sum_q = <span class="hljs-number">0</span>;</span><br><span class="line">ll inv_sum_q = <span class="hljs-number">0</span>;</span><br><span class="line">ll p[<span class="hljs-number">2005</span>];</span><br><span class="line">ll f[<span class="hljs-number">2005</span>];</span><br><span class="line">ll ans = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;n, &amp;l, &amp;m);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; ++i) &#123;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;q[i], &amp;t[i], &amp;s[i]);</span><br><span class="line">        sum_q += q[i];</span><br><span class="line">    &#125;</span><br><span class="line">    inv_sum_q = qpow(sum_q, MOD - <span class="hljs-number">2</span>);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= m; ++i)</span><br><span class="line">        p[i] = <span class="hljs-number">1l</span>l * q[i] * inv_sum_q % MOD; <span class="hljs-comment">// 取模！</span></span><br><span class="line">    f[<span class="hljs-number">0</span>] = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= l; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= m; ++j) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (i - t[j] &lt; <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;</span><br><span class="line">            <span class="hljs-keyword">if</span> (i - t[j] == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                <span class="hljs-keyword">if</span> (s[j] == <span class="hljs-number">0</span>)</span><br><span class="line">                    f[i] = (f[i] + p[j]) % MOD;</span><br><span class="line">                <span class="hljs-keyword">continue</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            f[i] = (f[i] + p[j] * qpow(f[i - t[j]], s[j]) % MOD) % MOD;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    ans = qpow(f[l], n);</span><br><span class="line">    ans = (<span class="hljs-number">1l</span>l - ans + MOD) % MOD;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%lld\n"</span>, ans);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -653,23 +651,19 @@
       <h3 class="menu-label">
           GOOGLE ADS
       </h3>
-      <ul class="menu-list">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- widget -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:250px;height:235px"
-             data-ad-client="ca-pub-4278647453884747"
-             data-ad-slot="3173116539"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- widget -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:263px;height:263px"
+     data-ad-client="ca-pub-4278647453884747"
+     data-ad-slot="3173116539"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
       </ul>
       </div>
   </div>
 </div>
-
-        
-            
 
         
         </div>

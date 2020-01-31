@@ -165,14 +165,16 @@
 <p>感谢@oy的贡献</p>
 </blockquote>
 <a id="more"></a>
-
 <p>这道题做了很长时间，从一开始推出错误的状态转移方程，到埋头优化正确的状态转移，前后花了一个多星期……</p>
 <p>本题题解可以保证正确性（当然欢迎Hack），却在速度上略有欠缺。</p>
 <p>状态定义：$f[s][u][d]$ $s$表示当前已联通的点集，$u$表示当前点集生成树的树根，$d$表示$u$到起点的距离。（注意：$u$不是起点）</p>
-<p>状态转移：状态肯定是通过挖通道来转移的。如果将$u$和$v$之间挖通，则$u$所在的连通块和$v$所在的连通块将会合并。如果以$u$作为根，$u$到起点的距离为$d$，则$v$到起点的距离为$(d+1)$。方程如下：<br>$$<br>f[s][u][d]=min\lbrace f[s1][u][d]+f[s2][v][d+1]+w(u,v)*d\rbrace<br>$$<br>其中：<br>$$<br>s1 \cup s2=s,u\in s1,v\in s2,w(u,v)\not= \inf<br>$$<br>最终要求的答案即为$\min_{1\le i \le n}f[(1&lt;&lt;n)-1][i][1]$，采用记忆化搜索实现。</p>
+<p>状态转移：状态肯定是通过挖通道来转移的。如果将$u$和$v$之间挖通，则$u$所在的连通块和$v$所在的连通块将会合并。如果以$u$作为根，$u$到起点的距离为$d$，则$v$到起点的距离为$(d+1)$。方程如下：</p>
+<script type="math/tex; mode=display">
+f[s][u][d]=min\lbrace f[s1][u][d]+f[s2][v][d+1]+w(u,v)*d\rbrace</script><p>其中：</p>
+<script type="math/tex; mode=display">
+s1 \cup s2=s,u\in s1,v\in s2,w(u,v)\not= \inf</script><p>最终要求的答案即为$\min_{1\le i \le n}f[(1&lt;&lt;n)-1][i][1]$，采用记忆化搜索实现。</p>
 <p>代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">pragma</span> GCC optimize(3)</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> INF = <span class="hljs-number">0x3f3f3f3f</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> N, M;</span><br><span class="line"><span class="hljs-keyword">int</span> w[<span class="hljs-number">13</span>][<span class="hljs-number">13</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> f[<span class="hljs-number">1</span>&lt;&lt;<span class="hljs-number">13</span>][<span class="hljs-number">13</span>][<span class="hljs-number">13</span>];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">dp</span><span class="hljs-params">(<span class="hljs-keyword">int</span> s, <span class="hljs-keyword">int</span> u, <span class="hljs-keyword">int</span> d)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (f[s][u][d] != <span class="hljs-number">-1</span>) <span class="hljs-keyword">return</span> f[s][u][d];</span><br><span class="line">    <span class="hljs-keyword">if</span> (s == (<span class="hljs-number">1</span> &lt;&lt; (u - <span class="hljs-number">1</span>))) <span class="hljs-keyword">return</span> f[s][u][d] = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">int</span>&amp; ans = f[s][u][d] = INF;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> s1 = s; s1; s1 = (s1 - <span class="hljs-number">1</span>) &amp; s) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (!(s1 &amp; (<span class="hljs-number">1</span> &lt;&lt; (u - <span class="hljs-number">1</span>)))) <span class="hljs-keyword">continue</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> v = <span class="hljs-number">1</span>; v &lt;= N; ++v) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (!(s &amp; (<span class="hljs-number">1</span> &lt;&lt; (v - <span class="hljs-number">1</span>)))) <span class="hljs-keyword">continue</span>;</span><br><span class="line">            <span class="hljs-keyword">if</span> (w[u][v] == INF) <span class="hljs-keyword">continue</span>;</span><br><span class="line">            <span class="hljs-keyword">int</span> s2 = s ^ s1;</span><br><span class="line">            ans = min(ans, dp(s1, u, d) + dp(s2, v, d + <span class="hljs-number">1</span>) + w[u][v] * d);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">memset</span>(w, <span class="hljs-number">0x3f</span>, <span class="hljs-keyword">sizeof</span>(w));</span><br><span class="line">    <span class="hljs-built_in">memset</span>(f, <span class="hljs-number">-1</span>, <span class="hljs-keyword">sizeof</span>(f));</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;N, &amp;M);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= M; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> u, v, t;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d%d"</span>, &amp;u, &amp;v, &amp;t);</span><br><span class="line">        w[u][v] = w[v][u] = min(w[u][v], t);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">int</span> ans = INF;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> u = <span class="hljs-number">1</span>; u &lt;= N; ++u) &#123;</span><br><span class="line">        ans = min(ans, dp((<span class="hljs-number">1</span> &lt;&lt; N) - <span class="hljs-number">1</span>, u, <span class="hljs-number">1</span>));</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, ans);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -657,23 +659,19 @@
       <h3 class="menu-label">
           GOOGLE ADS
       </h3>
-      <ul class="menu-list">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- widget -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:250px;height:235px"
-             data-ad-client="ca-pub-4278647453884747"
-             data-ad-slot="3173116539"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- widget -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:263px;height:263px"
+     data-ad-client="ca-pub-4278647453884747"
+     data-ad-slot="3173116539"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
       </ul>
       </div>
   </div>
 </div>
-
-        
-            
 
         
         </div>

@@ -162,9 +162,7 @@
 <p>FFT 是一种 DFT 的高效算法，称为快速傅立叶变换（Fast Fourier transform）。</p>
 <p> 快速数论变换 (NTT) 是快速傅里叶变换（FFT）在数论基础上的实现。 </p>
 <a id="more"></a>
-
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">5000005</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> ll MOD = <span class="hljs-number">998244353</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> ll G = <span class="hljs-number">3</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">qpow</span><span class="hljs-params">(ll a, ll k)</span> </span>&#123;</span><br><span class="line">    ll ret = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (k) &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (k &amp; <span class="hljs-number">1</span>) ret = ret * a % MOD;</span><br><span class="line">        a = a * a % MOD;</span><br><span class="line">        k &gt;&gt;= <span class="hljs-number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">inv</span><span class="hljs-params">(ll a)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> qpow(a, MOD - <span class="hljs-number">2</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">namespace</span> FFT &#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> n, r[MAXN];</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">NTT</span><span class="hljs-params">(ll *a, <span class="hljs-keyword">int</span> op)</span> </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (; (<span class="hljs-number">1</span> &lt;&lt; k) &lt; n; ++k);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">            r[i] = r[i &gt;&gt; <span class="hljs-number">1</span>] &gt;&gt; <span class="hljs-number">1</span> | (i &amp; <span class="hljs-number">1</span>) &lt;&lt; (k - <span class="hljs-number">1</span>);</span><br><span class="line">            <span class="hljs-keyword">if</span> (i &lt; r[i]) swap(a[i], a[r[i]]);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> l = <span class="hljs-number">2</span>; l &lt;= n; l &lt;&lt;= <span class="hljs-number">1</span>) &#123;</span><br><span class="line">            <span class="hljs-keyword">int</span> m = l &gt;&gt; <span class="hljs-number">1</span>;</span><br><span class="line">            ll w = qpow(G, (MOD - <span class="hljs-number">1</span>) / l);</span><br><span class="line">            <span class="hljs-keyword">if</span> (op == <span class="hljs-number">-1</span>) w = inv(w);</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; i += l) &#123;</span><br><span class="line">                ll wk = <span class="hljs-number">1</span>;</span><br><span class="line">                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; m; ++j, wk = wk * w % MOD) &#123;</span><br><span class="line">                    ll p = a[i + j], q = wk * a[i + j + m] % MOD;</span><br><span class="line">                    a[i + j] = (p + q) % MOD;</span><br><span class="line">                    a[i + j + m] = (p - q + MOD) % MOD;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">DFT</span><span class="hljs-params">(ll *a)</span> </span>&#123;</span><br><span class="line">        NTT(a, <span class="hljs-number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">IDFT</span><span class="hljs-params">(ll *a)</span> </span>&#123;</span><br><span class="line">        NTT(a, <span class="hljs-number">-1</span>);</span><br><span class="line">        ll inv = qpow(n, MOD - <span class="hljs-number">2</span>);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i)</span><br><span class="line">            a[i] = a[i] * inv % MOD;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -649,23 +647,19 @@
       <h3 class="menu-label">
           GOOGLE ADS
       </h3>
-      <ul class="menu-list">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-        <!-- widget -->
-        <ins class="adsbygoogle"
-             style="display:inline-block;width:250px;height:235px"
-             data-ad-client="ca-pub-4278647453884747"
-             data-ad-slot="3173116539"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+      <!-- widget -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:263px;height:263px"
+     data-ad-client="ca-pub-4278647453884747"
+     data-ad-slot="3173116539"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
       </ul>
       </div>
   </div>
 </div>
-
-        
-            
 
         
         </div>
