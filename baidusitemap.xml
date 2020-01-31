@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tth37.cn/2020/01/30/algorithm-flow/</loc>
+    <lastmod>2020-01-31</lastmod>
+  </url>  <url>
+    <loc>https://tth37.cn/2019/08/13/algorithm-polya/</loc>
+    <lastmod>2020-01-31</lastmod>
+  </url>  <url>
     <loc>https://tth37.cn/2020/01/31/solution-cf-1295e/</loc>
     <lastmod>2020-01-31</lastmod>
   </url>  <url>
@@ -11,9 +17,6 @@
     <lastmod>2020-01-30</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2019/12/18/solution-loj-3102/</loc>
-    <lastmod>2020-01-30</lastmod>
-  </url>  <url>
-    <loc>https://tth37.cn/2020/01/30/algorithm-flow/</loc>
     <lastmod>2020-01-30</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2020/01/29/solution-loj-3113/</loc>
@@ -56,9 +59,6 @@
     <lastmod>2020-01-21</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2019/10/28/solution-jsk-4594C/</loc>
-    <lastmod>2020-01-21</lastmod>
-  </url>  <url>
-    <loc>https://tth37.cn/2019/08/13/algorithm-polya/</loc>
     <lastmod>2020-01-21</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2020/01/20/algorithm-gentree/</loc>

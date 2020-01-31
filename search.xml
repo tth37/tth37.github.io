@@ -23,7 +23,7 @@
   <entry>
     <title><![CDATA[网络流]]></title>
     <url>%2F2020%2F01%2F30%2Falgorithm-flow%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[玩一玩 details 标签！ 内容在这里！ 本文部分内容来自 OI-Wiki 相关章节 模板Dinic 最大流（多路增广）12345678910111213141516171819202122232425262728293031323334353637383940414243444546474849505152535455565758596061626364656667686970717273747576777879#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int INF = 0x3f3f3f3f;const int MAXN = 105;const int MAXM = 5005;int n, m, s, t;struct Edge &#123; int v, nxt; ll w;&#125; edge[MAXM &lt;&lt; 1];int head[MAXN], cnt = 1;void AddEdge(int u, int v, ll w) &#123; edge[++cnt].w = w; edge[cnt].v = v; edge[cnt].nxt = head[u]; head[u] = cnt;&#125;int d[MAXN];bool vis[MAXN];bool bfs() &#123; memset(vis, 0, sizeof(vis)); vis[s] = 1, d[s] = 0; queue&lt;int&gt; q; q.push(s); while (q.size()) &#123; int u = q.front(); q.pop(); for (int i = head[u]; i; i = edge[i].nxt) &#123; int v = edge[i].v; ll w = edge[i].w; if (vis[v] || (w == 0)) continue; vis[v] = 1; d[v] = d[u] + 1; q.push(v); &#125; &#125; return vis[t];&#125;ll dfs(int u, ll flow) &#123; if (u == t) return flow; ll rest = flow; for (int i = head[u]; i &amp;&amp; rest; i = edge[i].nxt) &#123; int v = edge[i].v; ll w = edge[i].w; if (w == 0 || d[v] != d[u] + 1) continue; ll tmp = dfs(v, min(rest, w)); if (tmp == 0) d[v] = 0; edge[i].w -= tmp; edge[i ^ 1].w += tmp; rest -= tmp; &#125; return flow - rest;&#125;ll dinic() &#123; ll ret = 0, tmp = 0; while (bfs()) while (tmp = dfs(s, INF)) ret += tmp; return ret;&#125;int main() &#123; scanf("%d%d%d%d", &amp;n, &amp;m, &amp;s, &amp;t); for (int i = 1; i &lt;= m; ++i) &#123; int u, v, c; scanf("%d%d%d", &amp;u, &amp;v, &amp;c); AddEdge(u, v, c), AddEdge(v, u, 0); &#125; printf("%lld", dinic()); return 0;&#125; Dinic 最大流（多路增广+当前弧优化）注意 head 数组被改变 12345678910111213141516ll dfs(int u, ll flow) &#123; if (u == t) return flow; ll rest = flow; for (int i = head[u]; i; i = edge[i].nxt) &#123; // qwq int v = edge[i].v; ll w = edge[i].w; if (w == 0 || d[v] != d[u] + 1) continue; ll tmp = dfs(v, min(rest, w)); if (tmp == 0) d[v] = 0; edge[i].w -= tmp; edge[i ^ 1].w += tmp; rest -= tmp; if (rest == 0) return head[u] = i, flow; // qwq &#125; return flow - rest;&#125; 类 Dinic 费用流1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465666768697071727374757677787980818283848586#include &lt;bits/stdc++.h&gt;using namespace std; const int INF = 0x3f3f3f3f;const int MAXN = 5005;const int MAXM = 50005;int n, m, s, t, ans;struct Edge &#123; int v, nxt, w, c;&#125; edge[MAXM &lt;&lt; 1];int head[MAXN], cnt = 1;void AddEdge(int u, int v, int w, int c) &#123; edge[++cnt].w = w; edge[cnt].v = v; edge[cnt].c = c; edge[cnt].nxt = head[u]; head[u] = cnt;&#125;int d[MAXN];bool vis[MAXN];bool spfa() &#123; memset(vis, 0, sizeof(vis)); memset(d, 0x3f, sizeof(d)); vis[s] = 1, d[s] = 0; queue&lt;int&gt; q; q.push(s); while (q.size()) &#123; int u = q.front(); q.pop(); vis[u] = 0; for (int i = head[u]; i; i = edge[i].nxt) &#123; int v = edge[i].v; int w = edge[i].w, c = edge[i].c; if (w != 0 &amp;&amp; d[u] + c &lt; d[v]) &#123; d[v] = d[u] + c; if (vis[v] == 0) q.push(v), vis[v] = 1; &#125; &#125; &#125; return d[t] != INF;&#125;int dfs(int u, int flow) &#123; vis[u] = 1; if (u == t) return flow; int rest = flow; for (int i = head[u]; i &amp;&amp; rest; i = edge[i].nxt) &#123; int v = edge[i].v; int w = edge[i].w, c = edge[i].c; if (vis[v] || w == 0 || d[v] != d[u] + c) continue; int tmp = dfs(v, min(rest, w)); if (tmp == 0) d[v] = INF; edge[i].w -= tmp; edge[i ^ 1].w += tmp; rest -= tmp; ans += c * tmp; &#125; vis[u] = 0; return flow - rest;&#125;int dinic() &#123; int ret = 0, tmp = 0; while (spfa()) &#123; while (tmp = dfs(s, INF)) ret += tmp; &#125; return ret;&#125;int main() &#123; scanf("%d%d", &amp;n, &amp;m); s = 1, t = n; for (int i = 1; i &lt;= m; ++i) &#123; int u, v, w, c; scanf("%d%d%d%d", &amp;u, &amp;v, &amp;w, &amp;c); AddEdge(u, v, w, c), AddEdge(v, u, 0, -c); &#125; int maxflow = dinic(); printf("%d %d", maxflow, ans); return 0;&#125; 建模方法无源汇上下界可行流给定无源汇流量网络 G。询问是否存在一种标定每条边流量的方式，使得每条边流量满足上下界同时每一个点流量平衡。 不妨假设每条边已经流了 $b(u,v)$ 的流量，设其为初始流。同时我们在新图中加入 u 连向 v 的流量为 $c(u,v) - b(u,v)$ 的边。考虑在新图上进行调整。 由于最大流需要满足初始流量平衡条件（最大流可以看成是下界为 0 的上下界最大流），但是构造出来的初始流很有可能不满足初始流量平衡。假设一个点初始流出流量 - 初始流入流量为 M。 若 M=0，此时流量平衡，不需要额外边。 若 M&gt;0，此时出流量过大，需要新建附加源点 SS，SS 向其连流量为 M 的附加边。 若 M&lt;0，此时入流量过大，需要新建附加汇点 TT，其向 TT 连流量为 -M 的附加边。 如果附加边满流，说明这一个点的流量平衡条件可以满足，否则这个点的流量平衡条件不满足。（因为附加流满足流量平衡） 在建图完毕之后跑 S 到 T 的最大流，若 S 连出去的边全部满流，则存在可行流，否则不存在。 有源汇上下界可行流给定有源汇流量网络 G。询问是否存在一种标定每条边流量的方式，使得每条边流量满足上下界同时除了源点和汇点每一个点流量平衡。 假设源点为 S，汇点为 T。 则我们可以加入一条 T 到 S 的上界 $\inf$ 下界为 0 的边转化为无源汇上下界可行流问题。 若有解，则 S 到 T 的可行流流量等于 T 到 S 的附加边的流量。 有源汇上下界最大流给定有源汇流量网络 G。询问是否存在一种标定每条边流量的方式，使得每条边流量满足上下界同时除了源点和汇点每一个点流量平衡。如果存在，询问满足标定的最大流量。 我们找到网络上的任意一个可行流。如果找不到解就可以直接结束。 否则我们考虑删去所有额外边之后的残量网络并且在网络上进行调整。 我们在残量网络上再跑一次 S 到 T 的最大流，将可行流流量和最大流流量相加即为答案。 有源汇上下界最小流给定有源汇流量网络 G。询问是否存在一种标定每条边流量的方式，使得每条边流量满足上下界同时除了源点和汇点每一个点流量平衡。如果存在，询问满足标定的最小流量。 类似的，我们考虑将残量网络中不需要的流退掉。 我们找到网络上的任意一个可行流。如果找不到解就可以直接结束。 否则我们考虑删去所有额外边之后的残量网络。 我们在残量网络上再跑一次 T 到 S 的最大流，将可行流流量减去最大流流量即为答案。]]></content>
       <categories>
         <category>算法学习</category>
         <category>图论</category>
@@ -380,8 +380,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -948,8 +948,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -960,8 +960,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -1234,8 +1234,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>贪心</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
@@ -1246,8 +1246,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>字符串</tag>
         <tag>数学</tag>
+        <tag>字符串</tag>
       </tags>
   </entry>
   <entry>
