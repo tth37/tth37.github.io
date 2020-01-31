@@ -162,11 +162,13 @@
 </blockquote>
 <p>人生第二次觉得CF的题还是可做的。目前只弄了5道，剩下一题咕着。</p>
 <a id="more"></a>
-
 <h5 id="A-City-Day"><a href="#A-City-Day" class="headerlink" title="#A City Day"></a>#A <a href="https://codeforces.com/contest/1199/problem/A" target="_blank" rel="noopener">City Day</a></h5><p>简单模拟，开心的话可以写个单调队列。</p>
-<h5 id="B-Water-Lily"><a href="#B-Water-Lily" class="headerlink" title="#B Water Lily"></a>#B <a href="https://codeforces.com/contest/1199/problem/B" target="_blank" rel="noopener">Water Lily</a></h5><p>初中数学题，勾股定理。<br>$$<br>(x+H)^2=x^2+L^2 \ x=(L^2-H^2)/2H<br>$$</p>
-<h5 id="C-MP3"><a href="#C-MP3" class="headerlink" title="#C MP3"></a>#C <a href="https://codeforces.com/contest/1199/problem/C" target="_blank" rel="noopener">MP3</a></h5><p>既然硬盘的大小是固定的，那么 $K$ 应该尽可能大。为了让 $K$ 尽可能大， $k$ 也要尽可能大。</p>
-<p>所以：<br>$$<br>k=\lfloor(I*8)/n\rfloor \ K=2^k<br>$$<br>把 $K$ 求出来之后，我们实际上只需保留 $K$ 种不同的数字，并使删除的数字最少。</p>
+<h5 id="B-Water-Lily"><a href="#B-Water-Lily" class="headerlink" title="#B Water Lily"></a>#B <a href="https://codeforces.com/contest/1199/problem/B" target="_blank" rel="noopener">Water Lily</a></h5><p>初中数学题，勾股定理。</p>
+<script type="math/tex; mode=display">
+(x+H)^2=x^2+L^2 \\ x=(L^2-H^2)/2H</script><h5 id="C-MP3"><a href="#C-MP3" class="headerlink" title="#C MP3"></a>#C <a href="https://codeforces.com/contest/1199/problem/C" target="_blank" rel="noopener">MP3</a></h5><p>既然硬盘的大小是固定的，那么 $K$ 应该尽可能大。为了让 $K$ 尽可能大， $k$ 也要尽可能大。</p>
+<p>所以：</p>
+<script type="math/tex; mode=display">
+k=\lfloor(I*8)/n\rfloor \\ K=2^k</script><p>把 $K$ 求出来之后，我们实际上只需保留 $K$ 种不同的数字，并使删除的数字最少。</p>
 <p>根据题意，我们只能删除最大的或最小的数。考虑对 $a$ 数组离散化，并用 $b$ 数组记录每个数值出现的次数。保留下来的数值一定是<strong>连续的$K$个</strong>，只需在 $b$数组上进行前缀和预处理，枚举保留的 $K$ 个数值位置即可。</p>
 <h5 id="D-Welfare-State"><a href="#D-Welfare-State" class="headerlink" title="#D Welfare State"></a>#D <a href="https://codeforces.com/contest/1199/problem/D" target="_blank" rel="noopener">Welfare State</a></h5><p>非主流警告⚠</p>
 <p>观察到只有一次查询，所以我们可以针对每个位置，求出当前位置在经过 $q$ 次操作后的值并输出。</p>
@@ -227,7 +229,7 @@
         
 <div id="valine-thread" class="content"></div>
 <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
 <script>
     new Valine({
         el: '#valine-thread' ,
