@@ -134,6 +134,59 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-03-29T11:19:42.000Z">2019-03-29</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/算法学习/">算法学习</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 minutes read (About 1420 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/03/29/algorithm-persistentdatastructure/">算法学习-可持久化数据结构</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>可持久化数据结构可以存储数据集在任意时间的历史状态。“可持久化”的基本思想是在每项操作结束后，仅创建数据结构中发生改变的部分的副本，不拷贝其他部分。这样一来，维护数据结构的时间复杂度没有增加，空间复杂度仅增长为与时间同级的规模。换言之，可持久化数据结构能够高效地记录一个数据结构的所有历史状态。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/03/29/algorithm-persistentdatastructure/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-03-27T17:11:44.000Z">2019-03-28</time>
                 
                 <div class="level-item">
@@ -160,13 +213,13 @@
             <p>这是一个并不简单的背包类树形dp……</p>
 <p><del>很自然地</del>想到状态定义：$f[u][k][0/1][0/1]$表示以$u$为根的子树中，总共选择$k$个结点，其中除了$u$以外的所有结点均被监听到，$u$结点选或不选，$u$结点是否被覆盖的情况下，一共有多少种方案。</p>
 <p>状态转移看似十分麻烦。每个结点$u$都有许多子结点，很难统计出每个子结点的所有情况（似乎在组合数学的范畴）。但是我们可以用十分巧妙的树形背包来进行状态转移。树上背包的转移套路是：</p>
-<script type="math/tex; mode=display">
-f[u][i+j]=combine(f[u][i],f[v][j])</script><p>相当于每递归访问完一个子结点，就把子节点上的状态与当前已经处理的状态一一配对，保证不重不漏且兼顾效率。具体的转移方程为：</p>
-<script type="math/tex; mode=display">
-f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]</script><script type="math/tex; mode=display">
-f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])</script><script type="math/tex; mode=display">
-f[u][i+j][0][1]=\sum (f[u][i][0][1]\*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]\*f[v][j][1][1]</script><script type="math/tex; mode=display">
-f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]\*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))</script><p>具体实现时还应注意：因为阶段（即扫描子结点个数）的划分，在每次转移前都要先记录原始的$u$结点上的数据，否则会导致混乱。</p>
+<p>$$<br>f[u][i+j]=combine(f[u][i],f[v][j])<br>$$</p>
+<p>相当于每递归访问完一个子结点，就把子节点上的状态与当前已经处理的状态一一配对，保证不重不漏且兼顾效率。具体的转移方程为：</p>
+<p>$$<br>f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]<br>$$</p>
+<p>$$<br>f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])<br>$$</p>
+<p>$$<br>f[u][i+j][0][1]=\sum (f[u][i][0][1]*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]*f[v][j][1][1]<br>$$</p>
+<p>$$<br>f[u][i+j][1][1]=\sum (f[u][i][1][0]*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))<br>$$</p>
+<p>具体实现时还应注意：因为阶段（即扫描子结点个数）的划分，在每次转移前都要先记录原始的$u$结点上的数据，否则会导致混乱。</p>
         </div>
         
         
@@ -339,6 +392,9 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
             <ol>
 <li><h5 id="方格取数问题（二分图-建模技巧）"><a href="#方格取数问题（二分图-建模技巧）" class="headerlink" title="方格取数问题（二分图+建模技巧）"></a><a href="https://www.luogu.org/problemnew/show/P2774" target="_blank" rel="noopener">方格取数问题</a>（二分图+建模技巧）</h5><p>将原图黑白染色，并保证产生矛盾的两个位置颜色不同。源点连接黑点，白点连接汇点，黑点连接与之产生矛盾的白点。通过 最大和=全局和-最小割，在建立的网络上跑最小割（最大流）即可。</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=M;++i)&#123;</span><br><span class="line">       <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=N;++j)&#123;</span><br><span class="line">           <span class="hljs-keyword">int</span> w;</span><br><span class="line">           <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;w);</span><br><span class="line">           sum+=w;</span><br><span class="line">           <span class="hljs-keyword">if</span>((i+j)&amp;<span class="hljs-number">1</span>)&#123;</span><br><span class="line">               AddEdge(S,(i<span class="hljs-number">-1</span>)*N+j,w);</span><br><span class="line">               AddEdge((i<span class="hljs-number">-1</span>)*N+j,S,INF);</span><br><span class="line">               <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>;k&lt;=<span class="hljs-number">3</span>;++k)&#123;</span><br><span class="line">                   <span class="hljs-keyword">int</span> tx=i+nx[k],ty=j+ny[k];</span><br><span class="line">                   <span class="hljs-keyword">if</span>(tx&lt;<span class="hljs-number">1</span>||tx&gt;M||ty&lt;<span class="hljs-number">1</span>||ty&gt;N) <span class="hljs-keyword">continue</span>;</span><br><span class="line">                   AddEdge((i<span class="hljs-number">-1</span>)*N+j,(tx<span class="hljs-number">-1</span>)*N+ty,INF);</span><br><span class="line">                   AddEdge((tx<span class="hljs-number">-1</span>)*N+ty,(i<span class="hljs-number">-1</span>)*N+j,<span class="hljs-number">0</span>);</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="hljs-keyword">else</span>&#123;</span><br><span class="line">               AddEdge((i<span class="hljs-number">-1</span>)*N+j,T,w);</span><br><span class="line">               AddEdge(T,(i<span class="hljs-number">-1</span>)*N+j,INF);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+
+
 </li>
 </ol>
 
@@ -394,160 +450,6 @@ f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]
 <p>任何一个伟大的思想，都有一个微不足道的开始。</p>
 </blockquote>
 <p>p.s. 可能会将洛谷博客上的文章搬运过来，所以有些文章的发布时间可能在此之前，请别见怪。</p>
-
-        </div>
-        
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-03-20T11:24:57.000Z">2019-03-20</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/题目列表/">题目列表</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    a few seconds read (About 84 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/03/20/list-dp/">题目列表-动态规划</a>
-            
-        </h1>
-        <div class="content">
-            <ol>
-<li><h5 id="任务安排（斜率优化-费用提前计算）"><a href="#任务安排（斜率优化-费用提前计算）" class="headerlink" title="任务安排（斜率优化+费用提前计算）"></a><a href="https://loj.ac/problem/10185" target="_blank" rel="noopener">任务安排</a>（斜率优化+费用提前计算）</h5><script type="math/tex; mode=display">
-f[i]=min_{0\le j<i}\{f[j]-(S+T[i])\*C[i]+T[i]\*C[i]+S\*C[N]\}</script></li>
-</ol>
-<hr>
-<ol>
-<li><h5 id="特别行动队（斜率优化）"><a href="#特别行动队（斜率优化）" class="headerlink" title="特别行动队（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3628" target="_blank" rel="noopener">特别行动队</a>（斜率优化）</h5><script type="math/tex; mode=display">
-f[i]=max_{0\le j<i}\{f[j]+A\*(S[i]-S[j])^2+B\*(S[i]-S[j])+C\}</script></li>
-</ol>
-<hr>
-<ol>
-<li><h5 id="玩具装箱（斜率优化）"><a href="#玩具装箱（斜率优化）" class="headerlink" title="玩具装箱（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3195" target="_blank" rel="noopener">玩具装箱</a>（斜率优化）</h5><script type="math/tex; mode=display">
-f[i]=min_{0\le j<i}\{f[j]+(A[i]-A[j]-L-1)^2\}</script><p>斜率优化的适用范围是只有一个自变量。</p>
-<p>形如这样的转移方程：</p>
-<script type="math/tex; mode=display">
-f[i]=min_{0\le j<i}\{f[j]+(i-j+S[i]-S[j]-L-1)^2\}</script><p>操作难度较大，可以将$S[i]+i$存在$A$数组中，即可全部化为一个自变量。</p>
-</li>
-</ol>
-<hr>
-<ol>
-<li><h5 id="锯木厂选址（斜率优化）"><a href="#锯木厂选址（斜率优化）" class="headerlink" title="锯木厂选址（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P4360" target="_blank" rel="noopener">锯木厂选址</a>（斜率优化）</h5><script type="math/tex; mode=display">
-f[i]=min_{1\le j<i}\{C[i-1]-W[j]*(D[i]-D[j])\}</script></li>
-</ol>
-<hr>
-<ol>
-<li><h5 id="打印文章（斜率优化）"><a href="#打印文章（斜率优化）" class="headerlink" title="打印文章（斜率优化）"></a><a href="https://loj.ac/problem/10191" target="_blank" rel="noopener">打印文章</a>（斜率优化）</h5><script type="math/tex; mode=display">
-f[i]=min_{0\le j<i}\{f[j]+(S[i]-S[j])^2+M\}</script>调到心态爆炸……getK函数中如果除数为0则要返回1e100</li>
-</ol>
-<hr>
-<ol>
-<li><h5 id="序列分割（斜率优化）"><a href="#序列分割（斜率优化）" class="headerlink" title="序列分割（斜率优化）"></a><a href="https://www.luogu.org/problemnew/show/P3648" target="_blank" rel="noopener">序列分割</a>（斜率优化）</h5><script type="math/tex; mode=display">
-f[i][j]=max_{0 \le k<j}\{f[i-1][k]+S[k]*(S[j]-S[k])\}</script><p>不开long long见祖宗。题目中如果说“非负整数”一定记得判断除数是否为0。</p>
-<p>对于转移方程中的第一维，稍加观察就会发现可以使用滚动数组。（虽然也需要一些额外的数组记录状态）</p>
-</li>
-</ol>
-<hr>
-<ol>
-<li><h5 id="绿色通道（二分答案-单调队列）"><a href="#绿色通道（二分答案-单调队列）" class="headerlink" title="绿色通道（二分答案+单调队列）"></a><a href="https://loj.ac/problem/10181" target="_blank" rel="noopener">绿色通道</a>（二分答案+单调队列）</h5><script type="math/tex; mode=display">
-f[i]=min_{i-M-1 \le j <i}\{f[j]+a[i]\}</script></li>
-</ol>
-<p>   二分发怒程度$M$，$f$数组中存储选择当前题目最少多少体力。统计最终答案只需检验最后$M$个状态即可。</p>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> ans=INF;</span><br><span class="line"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=N-M;i&lt;=N;++i) ans=min(ans,f[i]);</span><br></pre></td></tr></table></figure>
-<hr>
-<ol>
-<li><h5 id="股票交易（单调队列-很多条件）"><a href="#股票交易（单调队列-很多条件）" class="headerlink" title="股票交易（单调队列+很多条件）"></a><a href="https://www.luogu.org/problemnew/show/P2569" target="_blank" rel="noopener">股票交易</a>（单调队列+很多条件）</h5><script type="math/tex; mode=display">
-f[i][j]=-AP[i]*j(0 \le j \le AS[i])</script><script type="math/tex; mode=display">
-f[i][j]=max\{f[i][j],f[i-1][j]\}(0 \le j \le M)</script><script type="math/tex; mode=display">
-f[i][j]=max_{j-AS[i] \le k<j}\{f[i-W-1][k]-(j-k)*AP[i]\}(0 \le j \le M)</script><script type="math/tex; mode=display">
-f[i][j]=max_{j<k \le j+BS[i]}\{f[i-W-1][k]+(k-j)*BP[i]\}(0 \le j \le M)</script><p>条件特别多，需要仔细分析题意并且列出状态转移方程。先进行较简单的转移，再利用单调队列进行复杂转移。注意第四种状态转移要使用逆序循环。</p>
-<p><del>如此恶心的状态转移让我不禁想起<a href="https://www.luogu.org/problemnew/show/P1941" target="_blank" rel="noopener">飞扬的小鸟</a></del></p>
-</li>
-</ol>
-<hr>
-<ol>
-<li><h5 id="潜入行动（背包类树形dp）"><a href="#潜入行动（背包类树形dp）" class="headerlink" title="潜入行动（背包类树形dp）"></a><a href="https://www.luogu.org/problemnew/show/P4516" target="_blank" rel="noopener">潜入行动</a>（背包类树形dp）</h5><script type="math/tex; mode=display">
-f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]</script><script type="math/tex; mode=display">
-f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])</script><script type="math/tex; mode=display">
-f[u][i+j][0][1]=\sum (f[u][i][0][1]\*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]\*f[v][j][1][1]</script><script type="math/tex; mode=display">
-f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]\*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))</script><p><a href="https://tth37.cn/2019/03/28/solution-luogu-p4516/">题解链接</a></p>
-<p>特别注意空间问题，中间运算转<code>long long</code>，保存时再转<code>int</code></p>
-</li>
-</ol>
-<hr>
-<ol>
-<li><h5 id="子串（线性dp-滚动数组）"><a href="#子串（线性dp-滚动数组）" class="headerlink" title="子串（线性dp+滚动数组）"></a><a href="https://www.luogu.org/fe/problem/P2679" target="_blank" rel="noopener">子串</a>（线性dp+滚动数组）</h5><script type="math/tex; mode=display">
-f[i][0][0][0]=1</script><script type="math/tex; mode=display">
-f[i][j][k][0]=f[i-1][j][k][0]+f[i-1][j][k][1]</script><script type="math/tex; mode=display">
-a[i]=b[j]:f[i][j][k][1]=f[i-1][j-1][k][1]+f[i-1][j-1][k-1][0]+f[i-1][j-1][k-1][1]</script><script type="math/tex; mode=display">
-a[i] \ne b[j]:f[i][j][k][1]=0</script><p>滚动数组注意点：</p>
-<ul>
-<li>状态转移方程只依赖前一维或前两维状态</li>
-<li>状态数组要被滚动的一维只开1或2</li>
-<li>对于0/1滚动数组，可以结合位运算<code>&amp;</code>和<code>^</code>进行判断奇偶性和减一操作</li>
-</ul>
-</li>
-</ol>
-<hr>
-<ol>
-<li><h5 id="换教室（期望dp）"><a href="#换教室（期望dp）" class="headerlink" title="换教室（期望dp）"></a><a href="https://www.luogu.org/fe/problem/P1850" target="_blank" rel="noopener">换教室</a>（期望dp）</h5><script type="math/tex; mode=display">
-f[i][j][0]=min\{f[i-1][j][0]+dis[C[i-1]][C[i]],f[i-1][j][1]+K[i-1]\*dis[D[i-1]][C[i]]+(1-K[i-1])\*dis[C[i-1]][C[i]]\}</script><script type="math/tex; mode=display">
-f[i][j][1]=min\{f[i-1][j-1][0]+K[i]\*dis[C[i-1]][D[i]]+(1-K[i])\*dis[C[i-1]][C[i]],f[i-1][j-1][1]+K[i-1]\*K[i]\*dis[D[i-1]][D[i]]+K[i-1]\*(1-K[i])\*dis[D[i-1]][C[i]]+(1-K[i-1])\*K[i]\*dis[C[i-1]][D[i]]+(1-K[i-1])\*(1-K[i])\*dis[C[i-1]][C[i]]\}</script><p>期望dp可以单独开一维表示状态，以便于列举出所有情况。本题的转移方程是一个很好的例子。<del>如果tth37开心的话，Ta可能会写一篇数学期望专题具体讲解此类题目。</del></p>
-</li>
-</ol>
-<hr>
-<ol>
-<li><h5 id="过河（线性dp-玄学离散化）"><a href="#过河（线性dp-玄学离散化）" class="headerlink" title="过河（线性dp+玄学离散化）"></a><a href="https://www.luogu.org/problemnew/show/P1052" target="_blank" rel="noopener">过河</a>（线性dp+玄学离散化）</h5><script type="math/tex; mode=display">
-f[i]=min_{S \le j \le T}\{f[i-j]+flag[i]\}</script><p>由于m非常小，因此采用2520缩点，即两点之间距离超过2520的，可以将距离改为$dis % 2520$，从而离散化。</p>
-</li>
-</ol>
-<hr>
-<ol>
-<li><h5 id="统计单词个数（线性dp-字符串）"><a href="#统计单词个数（线性dp-字符串）" class="headerlink" title="统计单词个数（线性dp+字符串）"></a><a href="https://www.luogu.org/problemnew/show/P1026" target="_blank" rel="noopener">统计单词个数</a>（线性dp+字符串）</h5><script type="math/tex; mode=display">
-f[i][j]=max\{f[i][j],f[r][j-1]+g[r+1][i]\}</script><p>字符串处理使用string类find函数。</p>
-<p>线性dp时再次强调，需要分清阶段、状态和决策变量；阶段在最外层循环，决策在最内层。在寻找关系时可以从推导或定义角度辨析，也可以根据转移方程进行识别。</p>
-</li>
-</ol>
-<hr>
-<ol>
-<li><h5 id="有线电视网（背包类树形dp）"><a href="#有线电视网（背包类树形dp）" class="headerlink" title="有线电视网（背包类树形dp）"></a><a href="https://www.luogu.org/fe/problem/P1273" target="_blank" rel="noopener">有线电视网</a>（背包类树形dp）</h5><script type="math/tex; mode=display">
-f[u][i]=max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p><a href="https://tth37.cn/2019/04/25/solution-luogu-p1273/">题解链接</a></p>
-</li>
-</ol>
-<hr>
-<ol>
-<li><h5 id="棋盘制作（单调栈）"><a href="#棋盘制作（单调栈）" class="headerlink" title="棋盘制作（单调栈）"></a><a href="https://www.luogu.org/problemnew/show/P1169" target="_blank" rel="noopener">棋盘制作</a>（单调栈）</h5><p>似乎没有转移方程</p>
-<p>注意单调栈的处理方式（玄学方法或通用方法），在退栈时务必退干净。</p>
-</li>
-</ol>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//玄学方法：</span></span><br><span class="line"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=N+<span class="hljs-number">1</span>;++i)&#123;</span><br><span class="line">    <span class="hljs-keyword">while</span>(cnt&gt;<span class="hljs-number">0</span>&amp;&amp;a[s[cnt]]&gt;=a[i])&#123;</span><br><span class="line">        ans=max(ans,(i-s[cnt<span class="hljs-number">-1</span>]<span class="hljs-number">-1</span>)*a[s[cnt]]);</span><br><span class="line">        cnt--;</span><br><span class="line">    &#125;</span><br><span class="line">    s[++cnt]=i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-comment">//通用方法：</span></span><br><span class="line">先处理出每个位置左边第一个比它小的，再处理出右边第一个比它小的，最后枚举</span><br></pre></td></tr></table></figure>
 
         </div>
         
@@ -633,7 +535,7 @@ f[u][i]=max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p><a href="https://tth
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            105
+                            106
                         </p>
                     </a>
                 </div>
@@ -718,6 +620,19 @@ f[u][i]=max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p><a href="https://tth
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-31T02:01:59.000Z">2020-01-31</time></div>
+                    <a href="/2020/01/31/solution-cf-1295e/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「CF1295」Permutation Separation</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/Codeforces/">Codeforces</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-30T10:35:47.000Z">2020-01-30</time></div>
                     <a href="/2020/01/30/diary-inject/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「随记」hexo-inject 插件的使用</a>
                     <p class="is-size-7 is-uppercase">
@@ -766,19 +681,6 @@ f[u][i]=max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p><a href="https://tth
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-23T13:28:56.000Z">2020-01-23</time></div>
-                    <a href="/2020/01/23/solution-jsk-6010B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">创造</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -787,7 +689,7 @@ f[u][i]=max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p><a href="https://tth
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/2-SAT/" style="font-size: 10px;">2-SAT</a> <a href="/tags/FFT-NTT/" style="font-size: 12px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 12px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 11px;">ST算法</a> <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dfs序/" style="font-size: 12px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 16px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10px;">乘法逆元</a> <a href="/tags/二分图/" style="font-size: 10px;">二分图</a> <a href="/tags/二分图匹配/" style="font-size: 11px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 12px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 12px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 11px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 11px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 11px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 11px;">可持久化trie</a> <a href="/tags/启发式合并/" style="font-size: 12px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 11px;">堆</a> <a href="/tags/多项式/" style="font-size: 10px;">多项式</a> <a href="/tags/字符串/" style="font-size: 12px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 11px;">容斥原理</a> <a href="/tags/差分/" style="font-size: 10px;">差分</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 19px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 15px;">数据结构</a> <a href="/tags/数论/" style="font-size: 11px;">数论</a> <a href="/tags/最短路/" style="font-size: 11px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 14px;">最近公共祖先</a> <a href="/tags/构造/" style="font-size: 10px;">构造</a> <a href="/tags/栈/" style="font-size: 11px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 18px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 11px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 12px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 13px;">概率</a> <a href="/tags/欧拉函数/" style="font-size: 10px;">欧拉函数</a> <a href="/tags/欧拉路/" style="font-size: 10px;">欧拉路</a> <a href="/tags/点分治/" style="font-size: 11px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 12px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 13px;">生成函数</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/矩阵/" style="font-size: 11px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线段树/" style="font-size: 19px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 14px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 11px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 17px;">背包</a> <a href="/tags/虚树/" style="font-size: 12px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10px;">计数dp</a> <a href="/tags/贪心/" style="font-size: 12px;">贪心</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 11px;">高斯消元</a>
+        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/2-SAT/" style="font-size: 10px;">2-SAT</a> <a href="/tags/FFT-NTT/" style="font-size: 11.82px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 11.82px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 10.91px;">ST算法</a> <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dfs序/" style="font-size: 11.82px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 15.45px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10px;">乘法逆元</a> <a href="/tags/二分图/" style="font-size: 10px;">二分图</a> <a href="/tags/二分图匹配/" style="font-size: 10.91px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 11.82px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 11.82px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 10.91px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 10.91px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 10.91px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 10.91px;">可持久化trie</a> <a href="/tags/启发式合并/" style="font-size: 11.82px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 10.91px;">堆</a> <a href="/tags/多项式/" style="font-size: 10px;">多项式</a> <a href="/tags/字符串/" style="font-size: 11.82px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10.91px;">容斥原理</a> <a href="/tags/差分/" style="font-size: 10px;">差分</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 10.91px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.18px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 14.55px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10.91px;">数论</a> <a href="/tags/最短路/" style="font-size: 10.91px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 13.64px;">最近公共祖先</a> <a href="/tags/构造/" style="font-size: 10px;">构造</a> <a href="/tags/栈/" style="font-size: 10.91px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 17.27px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 10.91px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 11.82px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 12.73px;">概率</a> <a href="/tags/欧拉函数/" style="font-size: 10px;">欧拉函数</a> <a href="/tags/欧拉路/" style="font-size: 10px;">欧拉路</a> <a href="/tags/点分治/" style="font-size: 10.91px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11.82px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 12.73px;">生成函数</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/矩阵/" style="font-size: 10.91px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线段树/" style="font-size: 19.09px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 13.64px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 10.91px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 16.36px;">背包</a> <a href="/tags/虚树/" style="font-size: 11.82px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10px;">计数dp</a> <a href="/tags/贪心/" style="font-size: 11.82px;">贪心</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 10.91px;">高斯消元</a>
     </div>
 </div>
     
@@ -921,7 +823,7 @@ f[u][i]=max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p><a href="https://tth
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">70</span>
+                <span class="level-item tag">71</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/题解/Codeforces/">
@@ -929,7 +831,7 @@ f[u][i]=max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p><a href="https://tth
                 <span class="level-item">Codeforces</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/题解/LibreOJ/">
@@ -1097,7 +999,7 @@ f[u][i]=max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p><a href="https://tth
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">70</span>
+                <span class="level-item tag">71</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/题解/Codeforces/">
@@ -1105,7 +1007,7 @@ f[u][i]=max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p><a href="https://tth
                 <span class="level-item">Codeforces</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">1</span>
+                <span class="level-item tag">2</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/题解/LibreOJ/">
