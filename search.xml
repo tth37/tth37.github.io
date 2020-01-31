@@ -225,8 +225,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>生成函数</tag>
         <tag>组合计数</tag>
+        <tag>生成函数</tag>
         <tag>动态规划</tag>
         <tag>背包</tag>
         <tag>树形dp</tag>
@@ -301,9 +301,9 @@
         <category>雅礼集训</category>
       </categories>
       <tags>
-        <tag>生成函数</tag>
         <tag>FFT/NTT</tag>
         <tag>组合计数</tag>
+        <tag>生成函数</tag>
         <tag>容斥原理</tag>
         <tag>启发式合并</tag>
       </tags>
@@ -317,9 +317,9 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>生成函数</tag>
         <tag>FFT/NTT</tag>
         <tag>组合计数</tag>
+        <tag>生成函数</tag>
       </tags>
   </entry>
   <entry>
@@ -408,8 +408,8 @@
         <category>计蒜客</category>
       </categories>
       <tags>
-        <tag>二分图匹配</tag>
         <tag>最近公共祖先</tag>
+        <tag>二分图匹配</tag>
       </tags>
   </entry>
   <entry>
@@ -1249,8 +1249,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>贪心</tag>
         <tag>python</tag>
+        <tag>贪心</tag>
       </tags>
   </entry>
   <entry>
