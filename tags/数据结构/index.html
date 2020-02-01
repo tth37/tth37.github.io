@@ -601,22 +601,27 @@
                     font-size: 13px;
                 }
             </style>
-            <mycss>新组件 “一言（ヒトコト）”上线啦！<br><br></mycss>
-            <link href="https://fonts.googleapis.com/css?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+            <mycss><br></mycss>
+            <style>
+                @font-face{
+                    font-family: shoushu;
+                    src: url("/fonts/shoushu.ttf");
+                }
+            </style>
             <style>
                 hitokoto {
                     color: black;
                     text-align: left;
-                    font-size: 18px;
-                    font-family: 'ZCOOL XiaoWei', serif;
+                    font-size: 22px;
+                    font-family: 'shoushu', serif;
                 }
             </style>
             <hitokoto id='demo'></hitokoto>
-            <p><br></p>
+            <p align='right'><br></p>
             <div align='right' id='from'></div>
             <script>
                 var xhr = new XMLHttpRequest();
-                xhr.open('get', 'https://v1.hitokoto.cn?c=g');
+                xhr.open('get', 'https://v1.hitokoto.cn');
                 xhr.onreadystatechange = function () {
                   if (xhr.readyState === 4) {
                     var data = JSON.parse(xhr.responseText);

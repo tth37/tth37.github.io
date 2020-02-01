@@ -11,7 +11,7 @@
 
 
     <meta name="description" content="CSP-S rp++!">
-<meta name="keywords" content="KMP,FFT&#x2F;NTT,网络流,高斯消元,生成函数,多项式,生成树,组合计数,字符串,卡特兰数,数学,动态规划,背包,树形dp,乘法逆元,素数,数据结构,可持久化trie,主席树,线段树,平衡树,数论,群论,Pólya计数,树链剖分,dfs序,点分治,动态点分治,树状数组,虚树,容斥原理,状态压缩,欧拉函数,最近公共祖先,栈,二分图匹配,概率,欧拉路,0&#x2F;1分数规划,二分答案,哈希(hash),异或,矩阵,差分,强连通分量,二分图,2-SAT,bitset,费用流,启发式合并,std::map,构造,set,离散化,博弈论,搜索,计数dp,数学期望,单调队列,python,贪心,排序,前缀和,倍增,树上差分,逆元,组合数,堆,最短路,树上前缀和,差分约束系统,树套树,二叉堆,ST算法">
+<meta name="keywords" content="FFT&#x2F;NTT,KMP,网络流,生成函数,多项式,高斯消元,生成树,组合计数,字符串,动态规划,背包,树形dp,卡特兰数,数学,乘法逆元,素数,数据结构,可持久化trie,主席树,线段树,数论,群论,Pólya计数,平衡树,树链剖分,dfs序,点分治,动态点分治,虚树,树状数组,容斥原理,状态压缩,欧拉函数,最近公共祖先,栈,二分图匹配,概率,欧拉路,0&#x2F;1分数规划,二分答案,哈希(hash),异或,矩阵,差分,强连通分量,二分图,费用流,2-SAT,bitset,构造,启发式合并,std::map,set,离散化,博弈论,搜索,计数dp,数学期望,单调队列,python,贪心,排序,前缀和,倍增,树上差分,逆元,组合数,堆,最短路,树上前缀和,差分约束系统,树套树,二叉堆,ST算法">
 <meta property="og:type" content="website">
 <meta property="og:title" content="tth37&#39;s Blog">
 <meta property="og:url" content="https://tth37.cn/tags/index.html">
@@ -787,22 +787,27 @@
                     font-size: 13px;
                 }
             </style>
-            <mycss>新组件 “一言（ヒトコト）”上线啦！<br><br></mycss>
-            <link href="https://fonts.googleapis.com/css?family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+            <mycss><br></mycss>
+            <style>
+                @font-face{
+                    font-family: shoushu;
+                    src: url("/fonts/shoushu.ttf");
+                }
+            </style>
             <style>
                 hitokoto {
                     color: black;
                     text-align: left;
-                    font-size: 18px;
-                    font-family: 'ZCOOL XiaoWei', serif;
+                    font-size: 22px;
+                    font-family: 'shoushu', serif;
                 }
             </style>
             <hitokoto id='demo'></hitokoto>
-            <p><br></p>
+            <p align='right'><br></p>
             <div align='right' id='from'></div>
             <script>
                 var xhr = new XMLHttpRequest();
-                xhr.open('get', 'https://v1.hitokoto.cn?c=g');
+                xhr.open('get', 'https://v1.hitokoto.cn');
                 xhr.onreadystatechange = function () {
                   if (xhr.readyState === 4) {
                     var data = JSON.parse(xhr.responseText);
