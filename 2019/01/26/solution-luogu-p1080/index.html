@@ -164,7 +164,6 @@
 <p>高精度怎能少了Python3题解。。。</p>
 <p>贪心策略一楼dalao已经讲得很清楚了，上一发超短代码（学Python就是为了水高精）</p>
 <a id="more"></a>
-
 <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">N=int(input())</span><br><span class="line">s=input().split()</span><br><span class="line">S=int(s[<span class="hljs-number">0</span>])</span><br><span class="line">T=int(s[<span class="hljs-number">1</span>])</span><br><span class="line">a=[]</span><br><span class="line"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>,N+<span class="hljs-number">1</span>):</span><br><span class="line">    k=input().split()</span><br><span class="line">    a.append((int(k[<span class="hljs-number">0</span>]),int(k[<span class="hljs-number">1</span>])))</span><br><span class="line">a.sort(key=<span class="hljs-keyword">lambda</span> x:x[<span class="hljs-number">0</span>]*x[<span class="hljs-number">1</span>])</span><br><span class="line">ans=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,N):</span><br><span class="line">    <span class="hljs-keyword">if</span>(S//(a[i])[<span class="hljs-number">1</span>]&gt;ans):</span><br><span class="line">        ans=S//(a[i])[<span class="hljs-number">1</span>]</span><br><span class="line">    S*=(a[i])[<span class="hljs-number">0</span>]</span><br><span class="line">print(ans)</span><br></pre></td></tr></table></figure>
         </div>
         
@@ -366,17 +365,13 @@
             </style>
             <mycss><br></mycss>
             <style>
-                @font-face{
-                    font-family: shoushu;
-                    src: url("/fonts/shoushu.ttf");
-                }
             </style>
             <style>
                 hitokoto {
                     color: black;
                     text-align: left;
-                    font-size: 22px;
-                    font-family: 'shoushu', serif;
+                    font-size: 16px;
+                    line-height: 25px;
                 }
             </style>
             <hitokoto id='demo'></hitokoto>
@@ -407,7 +402,7 @@
                     border: 2px solid rgb(255, 103, 166);
                     color: white;
                     box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.075), 0 3px 5px 0 rgba(0,0,0,0.19);
-                    transition-duration: 0.2s;
+                    transition-duration: 0.3s;
                     cursor: pointer;
                 }
                 .button1:hover {

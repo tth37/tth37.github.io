@@ -263,13 +263,13 @@
             <p>这是一个并不简单的背包类树形dp……</p>
 <p><del>很自然地</del>想到状态定义：$f[u][k][0/1][0/1]$表示以$u$为根的子树中，总共选择$k$个结点，其中除了$u$以外的所有结点均被监听到，$u$结点选或不选，$u$结点是否被覆盖的情况下，一共有多少种方案。</p>
 <p>状态转移看似十分麻烦。每个结点$u$都有许多子结点，很难统计出每个子结点的所有情况（似乎在组合数学的范畴）。但是我们可以用十分巧妙的树形背包来进行状态转移。树上背包的转移套路是：</p>
-<p>$$<br>f[u][i+j]=combine(f[u][i],f[v][j])<br>$$</p>
-<p>相当于每递归访问完一个子结点，就把子节点上的状态与当前已经处理的状态一一配对，保证不重不漏且兼顾效率。具体的转移方程为：</p>
-<p>$$<br>f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]<br>$$</p>
-<p>$$<br>f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])<br>$$</p>
-<p>$$<br>f[u][i+j][0][1]=\sum (f[u][i][0][1]*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]*f[v][j][1][1]<br>$$</p>
-<p>$$<br>f[u][i+j][1][1]=\sum (f[u][i][1][0]*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))<br>$$</p>
-<p>具体实现时还应注意：因为阶段（即扫描子结点个数）的划分，在每次转移前都要先记录原始的$u$结点上的数据，否则会导致混乱。</p>
+<script type="math/tex; mode=display">
+f[u][i+j]=combine(f[u][i],f[v][j])</script><p>相当于每递归访问完一个子结点，就把子节点上的状态与当前已经处理的状态一一配对，保证不重不漏且兼顾效率。具体的转移方程为：</p>
+<script type="math/tex; mode=display">
+f[u][i+j][0][0]=\sum f[u][i][0][0]*f[v][j][0][1]</script><script type="math/tex; mode=display">
+f[u][i+j][1][0]=\sum f[u][i][1][0]*(f[v][j][0][0]+f[v][j][0][1])</script><script type="math/tex; mode=display">
+f[u][i+j][0][1]=\sum (f[u][i][0][1]\*(f[v][j][0][1]+f[v][j][1][1])+f[u][i][0][0]\*f[v][j][1][1]</script><script type="math/tex; mode=display">
+f[u][i+j][1][1]=\sum (f[u][i][1][0]\*(f[v][j][1][0]+f[v][j][1][1])+f[u][i][1][1]\*(f[v][j][0][0]+f[v][j][0][1]+f[v][j][1][0]+f[v][j][1][1]))</script><p>具体实现时还应注意：因为阶段（即扫描子结点个数）的划分，在每次转移前都要先记录原始的$u$结点上的数据，否则会导致混乱。</p>
         </div>
         
         
@@ -442,9 +442,6 @@
             <ol>
 <li><h5 id="方格取数问题（二分图-建模技巧）"><a href="#方格取数问题（二分图-建模技巧）" class="headerlink" title="方格取数问题（二分图+建模技巧）"></a><a href="https://www.luogu.org/problemnew/show/P2774" target="_blank" rel="noopener">方格取数问题</a>（二分图+建模技巧）</h5><p>将原图黑白染色，并保证产生矛盾的两个位置颜色不同。源点连接黑点，白点连接汇点，黑点连接与之产生矛盾的白点。通过 最大和=全局和-最小割，在建立的网络上跑最小割（最大流）即可。</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=M;++i)&#123;</span><br><span class="line">       <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=N;++j)&#123;</span><br><span class="line">           <span class="hljs-keyword">int</span> w;</span><br><span class="line">           <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>,&amp;w);</span><br><span class="line">           sum+=w;</span><br><span class="line">           <span class="hljs-keyword">if</span>((i+j)&amp;<span class="hljs-number">1</span>)&#123;</span><br><span class="line">               AddEdge(S,(i<span class="hljs-number">-1</span>)*N+j,w);</span><br><span class="line">               AddEdge((i<span class="hljs-number">-1</span>)*N+j,S,INF);</span><br><span class="line">               <span class="hljs-keyword">for</span>(<span class="hljs-keyword">register</span> <span class="hljs-keyword">int</span> k=<span class="hljs-number">0</span>;k&lt;=<span class="hljs-number">3</span>;++k)&#123;</span><br><span class="line">                   <span class="hljs-keyword">int</span> tx=i+nx[k],ty=j+ny[k];</span><br><span class="line">                   <span class="hljs-keyword">if</span>(tx&lt;<span class="hljs-number">1</span>||tx&gt;M||ty&lt;<span class="hljs-number">1</span>||ty&gt;N) <span class="hljs-keyword">continue</span>;</span><br><span class="line">                   AddEdge((i<span class="hljs-number">-1</span>)*N+j,(tx<span class="hljs-number">-1</span>)*N+ty,INF);</span><br><span class="line">                   AddEdge((tx<span class="hljs-number">-1</span>)*N+ty,(i<span class="hljs-number">-1</span>)*N+j,<span class="hljs-number">0</span>);</span><br><span class="line">               &#125;</span><br><span class="line">           &#125;</span><br><span class="line">           <span class="hljs-keyword">else</span>&#123;</span><br><span class="line">               AddEdge((i<span class="hljs-number">-1</span>)*N+j,T,w);</span><br><span class="line">               AddEdge(T,(i<span class="hljs-number">-1</span>)*N+j,INF);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
-
-
-
 </li>
 </ol>
 
@@ -620,17 +617,13 @@
             </style>
             <mycss><br></mycss>
             <style>
-                @font-face{
-                    font-family: shoushu;
-                    src: url("/fonts/shoushu.ttf");
-                }
             </style>
             <style>
                 hitokoto {
                     color: black;
                     text-align: left;
-                    font-size: 22px;
-                    font-family: 'shoushu', serif;
+                    font-size: 16px;
+                    line-height: 25px;
                 }
             </style>
             <hitokoto id='demo'></hitokoto>
@@ -661,7 +654,7 @@
                     border: 2px solid rgb(255, 103, 166);
                     color: white;
                     box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.075), 0 3px 5px 0 rgba(0,0,0,0.19);
-                    transition-duration: 0.2s;
+                    transition-duration: 0.3s;
                     cursor: pointer;
                 }
                 .button1:hover {

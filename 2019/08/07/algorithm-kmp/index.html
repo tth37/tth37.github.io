@@ -160,7 +160,6 @@
         <div class="content">
             <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>给定一个文本 $A$ 和一个字符串 $B$ ，我们可以利用 KMP 算法尝试找到并展示 $B$ 在 $A$ 中的所有出现（occurrence）。</p>
 <a id="more"></a>
-
 <h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><h4 id="预处理前缀函数"><a href="#预处理前缀函数" class="headerlink" title="预处理前缀函数"></a>预处理前缀函数</h4><p>预处理出字符串 $B$ 的前缀函数 $next$ 数组，其中 $next[i]$ 为<strong>既是子串 $B[1…i]$ 的前缀同时也是该子串的后缀的最长真前缀</strong>长度。一个字符串的真前缀是其前缀但不等于该字符串本身。根据定义， $next[1]=0$ 。</p>
 <h5 id="算法流程"><a href="#算法流程" class="headerlink" title="算法流程"></a>算法流程</h5><blockquote>
 <ol>
@@ -177,7 +176,6 @@
 <p><img src="http://tth37.cn/images/kmp.jpg" alt></p>
 <p>结合上图不难看出，要使得 $B[1…j’]=B[i-j’…i-1]$，即保证 $B[1…j’]=B[j-j’+1…j]$ 。而 $j’$ 的确定也十分简单，再次结合前缀函数的定义可得， $j’$ 的取值应为 $next[j]$ 。</p>
 <h5 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h5><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">next[<span class="hljs-number">1</span>] = <span class="hljs-number">0</span>;</span><br><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>, j = <span class="hljs-number">0</span>; i &lt;= M; ++i) &#123;</span><br><span class="line">    <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; B[i] != B[j + <span class="hljs-number">1</span>]) j = next[j];</span><br><span class="line">    <span class="hljs-keyword">if</span> (B[i] == B[j + <span class="hljs-number">1</span>]) j++;</span><br><span class="line">    next[i] = j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h4 id="在目标串中查找子串"><a href="#在目标串中查找子串" class="headerlink" title="在目标串中查找子串"></a>在目标串中查找子串</h4><p>计算出 $f$ 数组，其中 $f[i]$ 为<strong>既是子串 $B[1…i]$ 的前缀同时也是子串 $A[1…i]$ 的后缀的最长前缀</strong>长度。<strong>（注意这里不一定是真前缀）</strong>在预处理前缀函数的过程中，相当于 $B$ 串与自己本身做了一次模式匹配，因此此处的算法流程与上一个操作十分类似。</p>
 <h5 id="算法流程-1"><a href="#算法流程-1" class="headerlink" title="算法流程"></a>算法流程</h5><blockquote>
 <ol>
@@ -189,7 +187,6 @@
 </ol>
 </blockquote>
 <h5 id="代码实现-1"><a href="#代码实现-1" class="headerlink" title="代码实现"></a>代码实现</h5><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>, j = <span class="hljs-number">0</span>; i &lt;= N; ++i) &#123;</span><br><span class="line">    <span class="hljs-keyword">while</span> (j &gt; <span class="hljs-number">0</span> &amp;&amp; A[i] != B[j + <span class="hljs-number">1</span>]) j = next[j];</span><br><span class="line">    <span class="hljs-keyword">if</span> (A[i] == B[j + <span class="hljs-number">1</span>]) j++;</span><br><span class="line">    f[i] = p;</span><br><span class="line">    <span class="hljs-comment">// if (f[i] == M) do something... </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -391,17 +388,13 @@
             </style>
             <mycss><br></mycss>
             <style>
-                @font-face{
-                    font-family: shoushu;
-                    src: url("/fonts/shoushu.ttf");
-                }
             </style>
             <style>
                 hitokoto {
                     color: black;
                     text-align: left;
-                    font-size: 22px;
-                    font-family: 'shoushu', serif;
+                    font-size: 16px;
+                    line-height: 25px;
                 }
             </style>
             <hitokoto id='demo'></hitokoto>
@@ -432,7 +425,7 @@
                     border: 2px solid rgb(255, 103, 166);
                     color: white;
                     box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.075), 0 3px 5px 0 rgba(0,0,0,0.19);
-                    transition-duration: 0.2s;
+                    transition-duration: 0.3s;
                     cursor: pointer;
                 }
                 .button1:hover {
