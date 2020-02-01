@@ -225,8 +225,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>组合计数</tag>
         <tag>生成函数</tag>
+        <tag>组合计数</tag>
         <tag>动态规划</tag>
         <tag>背包</tag>
         <tag>树形dp</tag>
@@ -302,8 +302,8 @@
       </categories>
       <tags>
         <tag>FFT/NTT</tag>
-        <tag>组合计数</tag>
         <tag>生成函数</tag>
+        <tag>组合计数</tag>
         <tag>容斥原理</tag>
         <tag>启发式合并</tag>
       </tags>
@@ -318,8 +318,8 @@
       </categories>
       <tags>
         <tag>FFT/NTT</tag>
-        <tag>组合计数</tag>
         <tag>生成函数</tag>
+        <tag>组合计数</tag>
       </tags>
   </entry>
   <entry>
@@ -924,8 +924,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树链剖分</tag>
         <tag>树状数组</tag>
+        <tag>树链剖分</tag>
         <tag>树套树</tag>
       </tags>
   </entry>

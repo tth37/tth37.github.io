@@ -647,7 +647,7 @@
 </div>
     
         <div class="card widget">
-    <div class="card-content">
+    <div class="card-content" id='test1wid'>
         <div class="menu">
         <h3 class="menu-label">
             一言（ヒトコト）
@@ -686,6 +686,46 @@
                 }
                 xhr.send();
               </script>
+            <style>
+                .button1 {
+                    width: 88px;
+                    height: 30px;
+                    background-color:rgb(255, 103, 166);
+                    font-size: 15px;
+                    border-radius: 15px;
+                    font-family: 'Ubuntu', serif;
+                    border: 2px solid rgb(255, 103, 166);
+                    color: white;
+                    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.075), 0 3px 5px 0 rgba(0,0,0,0.19);
+                    transition-duration: 0.2s;
+                    cursor: pointer;
+                }
+                .button1:hover {
+                    background-color:rgb(255, 47, 134);
+                    border: 2px solid rgb(255, 47, 134);
+                   
+                }
+                .button1:disabled {
+                    opacity: 0.6;
+                    cursor: not-allowed;
+                }
+            </style>
+            <script>
+                var a = Math.round(Math.random()*38);
+            </script>
+            <p align='center'>
+                <br/>
+                <button onclick='PressLikeBtn()' id='test1' type="button" class="btn button1"></button>
+            </p>
+            <script>
+                document.getElementById('test1').innerText = 'Like ' + a;
+                document.getElementById('test1').disabled = false;
+                function PressLikeBtn() {
+                    document.getElementById('test1').innerText = 'Liked ' + (a + 1);
+                    document.getElementById('test1').disabled = true;
+                    document.getElementById('test1wid').style = "background-color:rgb(230, 255, 247, 0.726)";
+                }
+            </script>
         </ul>
         </div>
     </div>
