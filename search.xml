@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[计算几何基础]]></title>
+    <url>%2F2020%2F02%2F07%2Falgorithm-geometry%2F</url>
+    <content type="text"><![CDATA[计算几何是什么呢？ 模板1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253545556575859606162636465struct Point &#123; double x, y; Point(double x = 0, double y = 0):x(x), y(y) &#123; &#125; &#125;;typedef Point Vector;Vector operator + (Vector A, Vector B) &#123; return Vector(A.x + B.x, A.y + B.y);&#125;Vector operator - (Vector A, Vector B) &#123; return Vector(A.x - B.x, A.y - B.y);&#125;Vector operator * (Vector A, double p) &#123; return Vector(A.x * p, A.y * p);&#125;Vector operator / (Vector A, double p) &#123; return Vector(A.x / p, A.y / p);&#125;const double EPS = 1e-10;int dcmp(double x) &#123; if (fabs(x) &lt; EPS) return 0; else return x &lt; 0 ? -1 : 1;&#125;bool operator == (Vector A, Vector B) &#123; return dcmp(A.x - B.x) == 0 &amp;&amp; dcmp(A.y - B.y) == 0;&#125;double Cross(Vector A, Vector B) &#123; return A.x * B.y - A.y * B.x;&#125;double Dot(Vector A, Vector B) &#123; return A.x * B.x + A.y * B.y;&#125;double Length(Vector A) &#123; return sqrt(Dot(A, A));&#125;Point GetLineIntersection(Point P, Vector v, Point Q, Vector w) &#123; Vector u = P - Q; double t = Cross(w, u) / Cross(v, w); return P + v * t;&#125;double Angle(Vector A, Vector B) &#123; return acos(Dot(A, B) / Length(A) / Length(B));&#125;Vector Rotate(Vector A, double rad) &#123; return Vector(A.x * cos(rad) - A.y * sin(rad), A.x * sin(rad) + A.y * cos(rad));&#125;double DistanceToSegment(Point P, Point A, Point B) &#123; if (A == B) return Length(P - A); Vector v1 = B - A, v2 = P - A, v3 = P - B; if (dcmp(Dot(v1, v2)) &lt; 0) return length(v2); else if (demp(Dot(v1, v3)) &lt; 0) return length(v3); else return fabs(Cross(v1, v2)) / Length(v1);&#125;]]></content>
+      <categories>
+        <category>算法学习</category>
+        <category>计算几何</category>
+      </categories>
+      <tags>
+        <tag>计算几何</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[「SNOI2019」通信]]></title>
     <url>%2F2020%2F02%2F01%2Fsolution-loj-3097%2F</url>
     <content type="text"><![CDATA[#3097. 「SNOI2019」通信 Summarize题目概括咕咕咕（这个好写！） Solution可以参考 「SNOI2017」炸弹 的解法，线段树优化建图。 本题只需扩展一个维度，用类似可持久化线段树的东西优化建图即可。 网络流建模最小权路径覆盖。 代码极端毒瘤且致郁。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123124125126127128129130131132133134135136137138139140141142143144145146147148149150151152153154155156157158159160161162#include &lt;bits/stdc++.h&gt;using namespace std;#define ri register#define id(x) (lower_bound(b + 1, b + L + 1, x) - b)#define rid(x) b[x]#define lson(x) node[x].l#define rson(x) node[x].r#define node_id(x) node[x].node_id#define sum(x) node[x].sumtypedef long long ll;typedef pair&lt;int, ll&gt; pii;const int INF = 0x3f3f3f3f;const int MAXN = 50005;const int MAXM = 50005;int cnt_node = 0;namespace MCMF &#123;struct Edge &#123; int u, v, val, cos, next;&#125; e[MAXM * 2];int n, m, t = 1, Head[MAXN], v[MAXN], S, T;deque&lt;int&gt; q;ll d[MAXN], Delta;inline void AddEdge(int x, int y, int v, int c) &#123; e[++t] = (Edge)&#123; x, y, v, c, Head[x] &#125;, Head[x] = t; e[++t] = (Edge)&#123; y, x, 0, -c, Head[y] &#125;, Head[y] = t;&#125;inline bool Relabel(void) &#123; memset(d, 0x3f, sizeof d); memset(v, 0, sizeof v); d[T] = 0, v[T] = 1, q.push_front(T); while (!q.empty()) &#123; int x = q.front(); q.pop_front(), v[x] = 0; if (q.size() &gt; 1 &amp;&amp; d[q.front()] &gt; d[q.back()]) swap(q.front(), q.back()); for (int i = Head[x], y; i; i = e[i].next) if (e[i ^ 1].val &amp;&amp; d[y = e[i].v] &gt; d[x] + e[i ^ 1].cos) &#123; d[y] = d[x] + e[i ^ 1].cos; if (v[y]) continue; v[y] = true, q.push_back(y); if (q.size() &gt; 1 &amp;&amp; d[q.front()] &gt; d[q.back()]) swap(q.front(), q.back()); &#125; &#125; return d[S] != d[0];&#125;inline int Dinic(int x, int flow) &#123; if (!flow || x == T) return flow; int residue = flow; v[x] = true; for (int i = Head[x], y; i; i = e[i].next) if (e[i].val &amp;&amp; !v[y = e[i].v] &amp;&amp; !e[i].cos) &#123; int k = Dinic(y, min(e[i].val, residue)); e[i].val -= k, e[i ^ 1].val += k; if ((residue -= k) == 0) break; &#125; return flow - residue;&#125;inline pii PrimalDual(void) &#123; int Maxflow = 0; ll Mincost = 0; while (Relabel()) &#123; for (int i = 2; i &lt;= t; i++) e[i].cos += d[e[i].v] - d[e[i].u]; Delta += d[S]; int Flow = 0; while (memset(v, 0x00, sizeof v), (Flow = Dinic(S, INF))) Maxflow += Flow, Mincost += 1ll * Flow * Delta; &#125; return pii(Maxflow, Mincost);&#125;&#125; // namespace MCMFint n, w;pair&lt;ll, int&gt; a[MAXN];ll b[MAXN], c[MAXN];int L;int root0[MAXN], root1[MAXN];int pos0[MAXN], pos1[MAXN];struct Node &#123; int l, r, node_id, sum;&#125; node[MAXN * 22];int cnt = 0;void AddEdge(int u, int l, int r, int p, bool t) &#123; int mid = (l + r) &gt;&gt; 1; int llen = mid - l + 1, rlen = r - mid; int lsum = sum(lson(u)), rsum = sum(rson(u)); if (lson(u)) MCMF ::AddEdge(node_id(u), node_id(lson(u)), lsum, llen == 1 ? (t == 0 ? -c[l] : c[l]) : 0); if (rson(u)) MCMF ::AddEdge(node_id(u), node_id(rson(u)), rsum, rlen == 1 ? (t == 0 ? -c[r] : c[r]) : 0);&#125;void insert(int v, int&amp; u, int l, int r, int p, bool t) &#123; u = ++cnt; if (l == r) &#123; sum(u) = 1; node_id(u) = l; return; &#125; node_id(u) = ++cnt_node; int mid = (l + r) &gt;&gt; 1; if (p &lt;= mid) insert(lson(v), lson(u), l, mid, p, t), rson(u) = rson(v); else insert(rson(v), rson(u), mid + 1, r, p, t), lson(u) = lson(v); sum(u) = sum(lson(u)) + sum(rson(u)); AddEdge(u, l, r, p, t);&#125;void query(int u, int l, int r, int ql, int qr, int cur, int num, bool t) &#123; if (u == 0) return; if (ql &lt;= l &amp;&amp; r &lt;= qr) &#123; MCMF ::AddEdge(cur, node_id(u), sum(u), l == r ? abs(c[num] - c[l]) : (t == 0 ? c[num] : -c[num])); return; &#125; int mid = (l + r) &gt;&gt; 1; if (ql &lt;= mid) query(lson(u), l, mid, ql, qr, cur, num, t); if (mid &lt; r) query(rson(u), mid + 1, r, ql, qr, cur, num, t);&#125;int main() &#123; scanf("%d%d", &amp;n, &amp;w); for (int i = 1; i &lt;= n; ++i) scanf("%lld", &amp;a[i].first), b[i] = c[i] = a[i].first, a[i].second = i; sort(b + 1, b + n + 1); L = unique(b + 1, b + n + 1) - b - 1; sort(a + 1, a + n + 1); cnt_node = n; root0[0] = ++cnt, node_id(root0[0]) = ++cnt_node; for (int i = 1; i &lt;= n; ++i) &#123; pos0[id(a[i].first)] = i; insert(root0[i - 1], root0[i], 1, n, a[i].second, 0); &#125; reverse(a + 1, a + n + 1); root1[0] = ++cnt, node_id(root1[0]) = ++cnt_node; for (int i = 1; i &lt;= n; ++i) &#123; pos1[id(a[i].first)] = i; insert(root1[i - 1], root1[i], 1, n, a[i].second, 1); &#125; MCMF ::S = ++cnt_node, MCMF ::T = ++cnt_node; for (int i = 1; i &lt; n; ++i) &#123; query(root0[pos0[id(c[i])]], 1, n, i + 1, n, ++cnt_node, i, 0); query(root1[pos1[id(c[i])]], 1, n, i + 1, n, cnt_node, i, 1); MCMF ::AddEdge(MCMF ::S, cnt_node, 1, 0); MCMF ::AddEdge(i, MCMF ::T, 1, 0); MCMF ::AddEdge(MCMF ::S, i, 1, w); &#125; MCMF ::AddEdge(MCMF ::S, ++cnt_node, 1, 0); MCMF ::AddEdge(n, MCMF ::T, 1, 0); MCMF ::AddEdge(MCMF ::S, n, 1, w); pii ans = MCMF ::PrimalDual(); printf("%lld\n", ans.second); return 0;&#125;]]></content>
@@ -963,8 +975,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
       </tags>
   </entry>
   <entry>
@@ -975,8 +987,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
         <tag>逆元</tag>
         <tag>组合数</tag>
       </tags>
@@ -1261,8 +1273,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>字符串</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
