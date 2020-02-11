@@ -170,12 +170,14 @@
 </ul>
 <p>$1\le n \le 1e9,1\le q \le 1e7$</p>
 <a id="more"></a>
+
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>还是比较好想的。</p>
 <p>将所有元素表示为 $kx+b$，便于实现整体乘法、加法操作。</p>
 <p>维护以下信息：大众元素的值、大众元素的数量、特殊元素 $i$ 的值、特殊元素 $i$ 上一次被单独赋值的时间、所有元素的和、上一次整体赋值的时间。</p>
 <p>在区间赋值操作时将原始值 $val$ 转化为 $(val-b)\times k^{-1}$，以维护 $kx+b$ 的性质。</p>
 <h3 id="Note"><a href="#Note" class="headerlink" title="Note"></a>Note</h3><p>特殊读入方法在计算测试数据时不要下标越界！</p>
 <h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 
         </div>
         
