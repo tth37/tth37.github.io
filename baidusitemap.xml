@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tth37.cn/2020/01/30/algorithm-flow/</loc>
+    <lastmod>2020-02-28</lastmod>
+  </url>  <url>
+    <loc>https://tth37.cn/2020/02/28/solution-loj-6045/</loc>
+    <lastmod>2020-02-28</lastmod>
+  </url>  <url>
     <loc>https://tth37.cn/2020/02/07/algorithm-geometry/</loc>
     <lastmod>2020-02-07</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2020/02/01/solution-loj-3097/</loc>
-    <lastmod>2020-01-31</lastmod>
-  </url>  <url>
-    <loc>https://tth37.cn/2020/01/30/algorithm-flow/</loc>
     <lastmod>2020-01-31</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2019/08/13/algorithm-polya/</loc>
