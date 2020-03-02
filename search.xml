@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title><![CDATA[solution-jsk-6012C]]></title>
+    <title><![CDATA[「计蒜客 2020.2 提高组」最强之剑]]></title>
     <url>%2F2020%2F03%2F01%2Fsolution-jsk-6012C%2F</url>
-    <content type="text"><![CDATA[Summarize题目概括征集中~ SolutionNoteCode12]]></content>
+    <content type="text"><![CDATA[Summarize给定 $n$ 种原材料，每种材料有一个特征值 $a_i$ 和强度 $b_i$。有 $q$ 次查询或修改，询问是给出一段区间 $[l,r]$，要求在 $l,l+1..r-1,r$ 的原材料中选出一个特征值线性无关的子集，是强度值之和最大；修改是修改某种原材料的特征值和强度。 $n\le 100000,q\le 10000,1\le a_i,b_i\le 1000000000$ Solution将原材料按强度值递减排序，将原材料依次插入线性基中，所得方案为最优方案。贪心证明略。 对于单次询问，可以建立线段树维护区间信息，写一个合并函数，用相同的贪心策略暴力合并两个线性基。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116117118119120121122123#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int MAXN = 1e5 + 5;struct L_B &#123; ll a[35], w[35]; void clear() &#123; for (int i = 0; i &lt;= 31; ++i) a[i] = w[i] = 0; &#125; bool insert(ll val, ll k) &#123; for (int i = 31; i &gt;= 0; --i) if (val &amp; (1ll &lt;&lt; i)) &#123; if (a[i] == 0) &#123; a[i] = val; w[i] = k; break; &#125; val ^= a[i]; &#125; return val &gt; 0; &#125; ll sum() &#123; ll ret = 0; for (int i = 0; i &lt;= 31; ++i) if (a[i]) ret += w[i]; return ret; &#125; void print() &#123; for (int i = 0; i &lt;= 31; ++i) if (a[i]) printf("%lld ", a[i]); printf("\n"); &#125;&#125;;L_B merge(L_B A, L_B B) &#123; pair&lt;ll, ll&gt; tmp[71]; int cnt = 0; for (int i = 0; i &lt;= 31; ++i) &#123; if (A.a[i]) tmp[++cnt].first = A.w[i], tmp[cnt].second = A.a[i]; if (B.a[i]) tmp[++cnt].first = B.w[i], tmp[cnt].second = B.a[i]; &#125; sort(tmp + 1, tmp + cnt + 1); L_B ret; ret.clear(); for (int i = cnt; i &gt;= 1; --i) ret.insert(tmp[i].second, tmp[i].first); return ret;&#125;int n, q;pair&lt;ll, ll&gt; a[MAXN];struct Segment_Tree &#123; struct Node &#123; int l, r; L_B b; &#125; node[MAXN * 3];#define b(u) node[u].b#define lson(u) node[u].l#define rson(u) node[u].r int cnt = 0, R = 0; void build(int&amp; u, int l, int r) &#123; u = ++cnt; b(u).clear(); if (l == r) &#123; b(u).insert(a[l].second, a[l].first); return; &#125; int mid = (l + r) &gt;&gt; 1; build(lson(u), l, mid), build(rson(u), mid + 1, r); b(u) = merge(b(lson(u)), b(rson(u))); &#125; L_B query(int u, int l, int r, int ql, int qr) &#123; if (ql &lt;= l &amp;&amp; r &lt;= qr) return b(u); if (r &lt; ql || l &gt; qr) &#123; L_B ret; ret.clear(); return ret; &#125; int mid = (l + r) &gt;&gt; 1; return merge(query(lson(u), l, mid, ql, qr), query(rson(u), mid + 1, r, ql, qr)); &#125; void modify(int u, int l, int r, int p, ll val, ll k) &#123; if (l == r) &#123; b(u).clear(); b(u).insert(val, k); return; &#125; int mid = (l + r) &gt;&gt; 1; if (p &lt;= mid) modify(lson(u), l, mid, p, val, k); else modify(rson(u), mid + 1, r, p, val, k); b(u) = merge(b(lson(u)), b(rson(u))); &#125; &#125; T;int main() &#123; scanf("%d", &amp;n); for (int i = 1; i &lt;= n; ++i) scanf("%lld%lld", &amp;a[i].second, &amp;a[i].first); T.build(T.R, 1, n); scanf("%d", &amp;q); while (q--) &#123; int op; scanf("%d", &amp;op); if (op == 0) &#123; int l, r; scanf("%d%d", &amp;l, &amp;r); L_B ans = T.query(T.R, 1, n, l, r); printf("%lld\n", T.query(T.R, 1, n, l, r).sum()); &#125; else &#123; int x, a, b; scanf("%d%d%d", &amp;x, &amp;a, &amp;b); T.modify(T.R, 1, n, x, a, b); &#125; &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>计蒜客</category>
+      </categories>
+      <tags>
+        <tag>线段树</tag>
+        <tag>异或</tag>
+        <tag>线性基</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[「计蒜客 2020.2 提高组」保卫水库]]></title>
     <url>%2F2020%2F03%2F01%2Fsolution-jsk-6012B%2F</url>
-    <content type="text"><![CDATA[#43463. 「计蒜客 2020.2 提高组」保卫水库 Summarize题目概括咕咕咕 Solution观察到图为 DAG，并且 $n,n-1..2,1$ 为合法拓扑序。因此可以在图中 $O(n+m)$ 动态规划求出每个城市流入的水量。 由于在某个城市中增加水量之后，流入下游各个城市的比例是固定的。因此可以预处理这些比值。 用一个容器存放所有修改改操作，对于查询，计算容器中所有修改操作对其的影响；当容器大小达到某个值 $s$ 时，执行 $O(n+m)$ 的动态规划下放更新。 复杂度为 $O(sk+\frac{k}{s}(n+m))$ Note均摊复杂度分析 「雅礼集训 2018 Day10」贪玩蓝月 「USACO 2019.12 Platinum」Bessie’s Snow Cow Code12]]></content>
+    <content type="text"><![CDATA[#43463. 「计蒜客 2020.2 提高组」保卫水库 Summarize给定有 $n$ 个节点和 $m$ 条边的有向无环图。每个节点有一定的水量，每个结点的水在水库被破坏后会均等地沿着出边流向其他节点。给出 $k$ 个操作，要求查询某个节点流入的水量，以及修改某个节点的初始水量。 $n\le 5000,m\le 10000,k\le 500000$ 测试点的查询和修改次数比例接近 $1:1$ Solution观察到图为 DAG，并且 $n,n-1..2,1$ 为合法拓扑序。因此可以在图中 $O(n+m)$ 动态规划求出每个城市流入的水量。 由于在某个城市中增加水量之后，流入下游各个城市的比例是固定的。因此可以预处理这些比值。 用一个容器存放所有修改改操作，对于查询，计算容器中所有修改操作对其的影响；当容器大小达到某个值 $s$ 时，执行 $O(n+m)$ 的动态规划下放更新。 复杂度为 $O(sk+\frac{k}{s}(n+m))$，当 $s$ 取 $\sqrt{n+m}$ 时，复杂度取最小值。 Note均摊复杂度分析 「雅礼集训 2018 Day10」贪玩蓝月 「USACO 2019.12 Platinum」Bessie’s Snow Cow 循环时尽量采用 $n\times(n+m)$ 而不是 $(n+m)\times n$ Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const ll MOD = 998244353;const int MAXN = 5005;ll qpow(ll n, ll k) &#123; ll ret = 1; while (k) &#123; if (k &amp; 1) ret = ret * n % MOD; n = n * n % MOD; k &gt;&gt;= 1; &#125; return ret;&#125;int n, m, k;int pre[MAXN][MAXN];int c[MAXN];ll a[MAXN], b[MAXN], d[MAXN], a1[MAXN];ll f[MAXN][MAXN];pair&lt;int, ll&gt; s[MAXN];int mx = 0, cnt = 0;void upd() &#123; for (int u = n; u &gt;= 1; --u) &#123; b[u] = 0; for (int i = 1; i &lt;= c[u]; ++i) &#123; int v = pre[u][i]; b[u] = (b[u] + (a[v] + b[v]) % MOD * d[v] % MOD) % MOD; &#125; &#125;&#125;int main() &#123; scanf("%d%d%d", &amp;n, &amp;m, &amp;k); mx = sqrt(n + m); for (int i = 1; i &lt;= n; ++i) scanf("%lld", &amp;a1[i]); for (int i = 1; i &lt;= m; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); if (u &gt; v) &#123; pre[v][++c[v]] = u; d[u]++; &#125; else &#123; pre[u][++c[u]] = v; d[v]++; &#125; &#125; for (int i = 1; i &lt;= n; ++i) d[i] = qpow(d[i], MOD - 2); for (int u = 1; u &lt;= n; ++u) &#123; a[u] = 1; upd(); for (int i = 1; i &lt;= n; ++i) f[u][i] = b[i]; a[u] = 0; &#125; memcpy(a, a1, sizeof(a)); upd(); while (k--) &#123; int op; scanf("%d", &amp;op); if (op == 1) &#123; int x, y; scanf("%d%d", &amp;x, &amp;y); s[++cnt] = make_pair(x, y); if (cnt == mx) &#123; for (int i = 1; i &lt;= cnt; ++i) a[s[i].first] += s[i].second; cnt = 0; upd(); &#125; &#125; else &#123; int x; scanf("%d", &amp;x); ll ans = 0; for (int i = 1; i &lt;= cnt; ++i) ans = (ans + f[s[i].first][x] * s[i].second % MOD) % MOD; printf("%lld\n", (ans + b[x]) % MOD); &#125; &#125; return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
         <category>计蒜客</category>
@@ -69,8 +78,8 @@
       </categories>
       <tags>
         <tag>网络流</tag>
-        <tag>主席树</tag>
         <tag>线段树</tag>
+        <tag>主席树</tag>
         <tag>费用流</tag>
       </tags>
   </entry>
@@ -360,8 +369,8 @@
         <category>雅礼集训</category>
       </categories>
       <tags>
-        <tag>FFT/NTT</tag>
         <tag>生成函数</tag>
+        <tag>FFT/NTT</tag>
         <tag>组合计数</tag>
         <tag>容斥原理</tag>
         <tag>启发式合并</tag>
@@ -376,8 +385,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>FFT/NTT</tag>
         <tag>生成函数</tag>
+        <tag>FFT/NTT</tag>
         <tag>组合计数</tag>
       </tags>
   </entry>
@@ -454,8 +463,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>动态规划</tag>
         <tag>数学</tag>
+        <tag>动态规划</tag>
       </tags>
   </entry>
   <entry>
@@ -502,8 +511,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>主席树</tag>
         <tag>dfs序</tag>
+        <tag>主席树</tag>
         <tag>最近公共祖先</tag>
         <tag>栈</tag>
       </tags>
@@ -589,8 +598,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>线段树</tag>
         <tag>树链剖分</tag>
+        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -652,8 +661,8 @@
       <tags>
         <tag>动态规划</tag>
         <tag>树形dp</tag>
-        <tag>哈希(hash)</tag>
         <tag>异或</tag>
+        <tag>哈希(hash)</tag>
       </tags>
   </entry>
   <entry>
@@ -725,8 +734,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>主席树</tag>
         <tag>线段树</tag>
+        <tag>主席树</tag>
       </tags>
   </entry>
   <entry>
@@ -850,8 +859,8 @@
       </categories>
       <tags>
         <tag>二分答案</tag>
-        <tag>倍增</tag>
         <tag>前缀和</tag>
+        <tag>倍增</tag>
       </tags>
   </entry>
   <entry>
@@ -982,8 +991,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>主席树</tag>
         <tag>树链剖分</tag>
+        <tag>主席树</tag>
         <tag>树状数组</tag>
         <tag>树套树</tag>
       </tags>
@@ -997,8 +1006,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>主席树</tag>
         <tag>线段树</tag>
+        <tag>主席树</tag>
         <tag>树状数组</tag>
       </tags>
   </entry>
@@ -1074,8 +1083,8 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
-        <tag>线段树</tag>
         <tag>树链剖分</tag>
+        <tag>线段树</tag>
         <tag>dfs序</tag>
       </tags>
   </entry>
@@ -1233,9 +1242,9 @@
       </categories>
       <tags>
         <tag>数据结构</tag>
+        <tag>线段树</tag>
         <tag>可持久化trie</tag>
         <tag>主席树</tag>
-        <tag>线段树</tag>
       </tags>
   </entry>
   <entry>
@@ -1308,8 +1317,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>贪心</tag>
+        <tag>python</tag>
       </tags>
   </entry>
   <entry>
