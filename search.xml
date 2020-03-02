@@ -1,6 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[solution-jsk-6012C]]></title>
+    <url>%2F2020%2F03%2F01%2Fsolution-jsk-6012C%2F</url>
+    <content type="text"><![CDATA[Summarize题目概括征集中~ SolutionNoteCode12]]></content>
+  </entry>
+  <entry>
+    <title><![CDATA[「计蒜客 2020.2 提高组」保卫水库]]></title>
+    <url>%2F2020%2F03%2F01%2Fsolution-jsk-6012B%2F</url>
+    <content type="text"><![CDATA[#43463. 「计蒜客 2020.2 提高组」保卫水库 Summarize题目概括咕咕咕 Solution观察到图为 DAG，并且 $n,n-1..2,1$ 为合法拓扑序。因此可以在图中 $O(n+m)$ 动态规划求出每个城市流入的水量。 由于在某个城市中增加水量之后，流入下游各个城市的比例是固定的。因此可以预处理这些比值。 用一个容器存放所有修改改操作，对于查询，计算容器中所有修改操作对其的影响；当容器大小达到某个值 $s$ 时，执行 $O(n+m)$ 的动态规划下放更新。 复杂度为 $O(sk+\frac{k}{s}(n+m))$ Note均摊复杂度分析 「雅礼集训 2018 Day10」贪玩蓝月 「USACO 2019.12 Platinum」Bessie’s Snow Cow Code12]]></content>
+      <categories>
+        <category>题解</category>
+        <category>计蒜客</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>乘法逆元</tag>
+        <tag>复杂度分析</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[「计蒜客 2020.2 提高组」受力平衡]]></title>
+    <url>%2F2020%2F03%2F01%2Fsolution-jsk-6012A%2F</url>
+    <content type="text"><![CDATA[#43462. 「计蒜客 2020.2 提高组」受力平衡 Summarize题目概括咕咕中~ Solution60pts显然答案为 $\sum_{i=1}^{\min(n,m)}{n\choose i}{m\choose i}$ 100pts假设取 $i$ 个气球与 $i$ 个重物。考虑取 $i$ 个气球与 $m-i$ 个重物的方案数，与其是一一对应的。因此将题目转化为 在 $n+m$ 个物品中取 $m$ 个物品 的方案数，再排除一个气球都不选的方案数即为答案 ${n+m\choose m} -1$ Code123456789101112131415161718192021222324252627282930313233343536373839404142#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const ll MOD = 1e9 + 7;const int MAXN = 3e6 + 5;int n, m;ll fac[MAXN], inv[MAXN], facinv[MAXN];ll C(int n, int m) &#123; return fac[n] * facinv[m] % MOD * facinv[n - m] % MOD;&#125;ll solve(int n, int m) &#123; int k = min(n, m); ll ret = 0; for (int i = 1; i &lt;= k; ++i) ret = (ret + C(n, i) * C(m, i) % MOD) % MOD; return ret;&#125;int t;int main() &#123; fac[0] = facinv[0] = 1; inv[1] = fac[1] = facinv[1] = 1; for (int i = 2; i &lt;= 3e6; ++i) &#123; fac[i] = fac[i - 1] * i % MOD; inv[i] = (MOD - MOD / i) * inv[MOD % i] % MOD; facinv[i] = facinv[i - 1] * inv[i] % MOD; &#125; scanf("%d", &amp;t); while (t--) &#123; scanf("%d%d", &amp;n, &amp;m); int x = n + 1, y = m + 1; printf("%lld\n", C(x + y - 2, y - 1) - 1); &#125; return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>计蒜客</category>
+      </categories>
+      <tags>
+        <tag>组合计数</tag>
+        <tag>数学</tag>
+        <tag>组合数</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[「雅礼集训 2017 Day8」价]]></title>
     <url>%2F2020%2F02%2F28%2Fsolution-loj-6045%2F</url>
     <content type="text"><![CDATA[#6045. 「雅礼集训 2017 Day8」价 Summarize有 $n$ 种药，每种药由若干药材组成，恰好有 $n$ 种不同的药材。要求选出 $k$ 种药，并且使用的药材并集大小也为 $k$，使得药材的权值和最小。 $n \le 300$ Solution二分图建模，不同的药向对应的药材连边，边权为无穷大；源点向药连边，边权为 $-p_i$；药材向汇点连边，边权为 $0$。在原图上求最小闭合子图即可。由于存在负权，可以将边权加上 $1e9$ 后再进行操作。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const ll INF = 1e9;const int MAXN = 605;const int MAXM = 605 * 305;int n, m, s, t;struct Edge &#123; int v, nxt; ll w;&#125; edge[MAXM &lt;&lt; 1];int head[MAXN], cnt = 1;int head_or[MAXN];void AddEdge(int u, int v, ll w) &#123; edge[++cnt].w = w; edge[cnt].v = v; edge[cnt].nxt = head[u]; head[u] = cnt;&#125;int d[MAXN];bool vis[MAXN];bool bfs() &#123; memset(vis, 0, sizeof(vis)); memcpy(head, head_or, sizeof(head)); vis[s] = 1, d[s] = 0; queue&lt;int&gt; q; q.push(s); while (q.size()) &#123; int u = q.front(); q.pop(); for (int i = head[u]; i; i = edge[i].nxt) &#123; int v = edge[i].v; ll w = edge[i].w; if (vis[v] || (w == 0)) continue; vis[v] = 1; d[v] = d[u] + 1; q.push(v); &#125; &#125; return vis[t];&#125;ll dfs(int u, ll flow) &#123; if (u == t) return flow; ll rest = flow; for (int i = head[u]; i &amp;&amp; rest; i = edge[i].nxt) &#123; head[u] = i; int v = edge[i].v; ll w = edge[i].w; if (w == 0 || d[v] != d[u] + 1) continue; ll tmp = dfs(v, min(rest, w)); if (tmp == 0) d[v] = 0; edge[i].w -= tmp; edge[i ^ 1].w += tmp; rest -= tmp; &#125; return flow - rest;&#125;ll dinic() &#123; ll ret = 0, tmp = 0; while (bfs()) while (tmp = dfs(s, INF)) ret += tmp; return ret;&#125;int main() &#123; scanf("%d", &amp;n); s = 2 * n + 1, t = 2 * n + 2; for (int i = 1; i &lt;= n; ++i) &#123; int k = 0; scanf("%d", &amp;k); for (int j = 1; j &lt;= k; ++j) &#123; int x; scanf("%d", &amp;x); AddEdge(i, n + x, INF); AddEdge(n + x, i, 0); &#125; &#125; ll ans2 = 0; for (int i = 1; i &lt;= n; ++i) &#123; int p; scanf("%d", &amp;p); ans2 += INF - p; AddEdge(s, i, INF - p); AddEdge(i, s, 0); AddEdge(n + i, t, INF); AddEdge(t, n + i, 0); &#125; memcpy(head_or, head, sizeof(head_or)); ll ans = dinic(); cout &lt;&lt; ans - ans2 &lt;&lt; endl; return 0;&#125;]]></content>
@@ -817,8 +850,8 @@
       </categories>
       <tags>
         <tag>二分答案</tag>
-        <tag>前缀和</tag>
         <tag>倍增</tag>
+        <tag>前缀和</tag>
       </tags>
   </entry>
   <entry>
@@ -989,8 +1022,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -1001,10 +1034,10 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>卡特兰数</tag>
-        <tag>逆元</tag>
+        <tag>数学</tag>
         <tag>组合数</tag>
+        <tag>逆元</tag>
       </tags>
   </entry>
   <entry>
