@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://tth37.cn/2020/03/04/algorithm-sam/</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
+    <loc>https://tth37.cn/2019/10/31/algorithm-gauss/</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
+    <loc>https://tth37.cn/2020/03/08/solution-loj-3108/</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
+    <loc>https://tth37.cn/2019/10/12/solution-loj-2128/</loc>
+    <lastmod>2020-03-08</lastmod>
+  </url>  <url>
     <loc>https://tth37.cn/2020/03/01/solution-jsk-6012C/</loc>
     <lastmod>2020-03-02</lastmod>
   </url>  <url>
@@ -112,9 +124,6 @@
     <loc>https://tth37.cn/2019/10/30/solution-loj-6497/</loc>
     <lastmod>2019-11-25</lastmod>
   </url>  <url>
-    <loc>https://tth37.cn/2019/10/31/algorithm-gauss/</loc>
-    <lastmod>2019-11-25</lastmod>
-  </url>  <url>
     <loc>https://tth37.cn/2019/10/31/solution-loj-3093/</loc>
     <lastmod>2019-11-25</lastmod>
   </url>  <url>
@@ -173,9 +182,6 @@
     <lastmod>2019-10-20</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2019/09/29/solution-noip2017pre/</loc>
-    <lastmod>2019-10-14</lastmod>
-  </url>  <url>
-    <loc>https://tth37.cn/2019/10/12/solution-loj-2128/</loc>
     <lastmod>2019-10-14</lastmod>
   </url>  <url>
     <loc>https://tth37.cn/2019/10/10/solution-loj-2072/</loc>
