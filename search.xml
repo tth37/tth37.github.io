@@ -490,8 +490,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>动态规划</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -887,8 +887,8 @@
       </categories>
       <tags>
         <tag>二分答案</tag>
-        <tag>倍增</tag>
         <tag>前缀和</tag>
+        <tag>倍增</tag>
       </tags>
   </entry>
   <entry>
@@ -1059,8 +1059,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
       </tags>
   </entry>
   <entry>
@@ -1071,8 +1071,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
         <tag>组合数</tag>
         <tag>逆元</tag>
       </tags>
