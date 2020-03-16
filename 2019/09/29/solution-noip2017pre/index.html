@@ -161,6 +161,7 @@
 <p>NOIP 2017 提高组初赛试题 完全解读！</p>
 </blockquote>
 <a id="more"></a>
+
 <p><strong>第 1 题</strong></p>
 <p>从（ ）年开始，NOIP 竞赛将不再支持 Pascal 语言。</p>
 <p> A. 2020 B. 2021 C. 2022 D. 2023</p>
@@ -171,7 +172,6 @@
 <p>在 8 位二进制补码中，10101011 表示的数是十进制下的（ ）。</p>
 <p> A. 43 B. -85 C. -43 D. -84</p>
 <blockquote>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -181,8 +181,7 @@
 <th>反码</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>正数</td>
 <td>符号(0)+数值表示法</td>
 <td>原码</td>
@@ -194,23 +193,18 @@
 <td>符号位之外各位取反</td>
 <td>符号位之外各位取反，最低位加1</td>
 </tr>
-</tbody>
-</table>
-</div>
-<script type="math/tex; mode=display">
-[x]_{补}=10101011</script><script type="math/tex; mode=display">
-[x]_{反}=10101010</script><script type="math/tex; mode=display">
-[x]_{原}=11010101</script><script type="math/tex; mode=display">
-x=-85</script></blockquote>
+</tbody></table>
+<p>$$<br>[x]_{补}=10101011<br>$$</p>
+<p>$$<br>[x]_{反}=10101010<br>$$</p>
+<p>$$<br>[x]_{原}=11010101<br>$$</p>
+<p>$$<br>x=-85<br>$$</p>
+</blockquote>
 <p><strong>第 3 题</strong></p>
 <p>分辨率为 1600x900、16 位色的位图，存储图像信息所需的空间为（ ）。 </p>
 <p>A. 2812.5KB B. 4218.75KB C. 4320KB D. 2880KB</p>
 <blockquote>
-<script type="math/tex; mode=display">
-8 \ \text{bit}= 1\ \text{byte(B)}\\
-1024\ \text{B}=1\  \text{KB}\\
-1024\ \text{KB}=1\ \text{MB}\\
-1024\ \text{MB}=1\ \text{GB}</script></blockquote>
+<p>$$<br>8 \ \text{bit}= 1\ \text{byte(B)}\<br>1024\ \text{B}=1\  \text{KB}\<br>1024\ \text{KB}=1\ \text{MB}\<br>1024\ \text{MB}=1\ \text{GB}<br>$$</p>
+</blockquote>
 <p><strong>第 4 题</strong></p>
 <p>2017 年 10 月 1 日是星期日，1949 年 10 月 1 日是（ ）。 </p>
 <p>A. 星期三 B. 星期日 C. 星期六 D. 星期二</p>
@@ -272,9 +266,8 @@ x=-85</script></blockquote>
 <p>A. 60 B. 84 C. 96 D. 120</p>
 <blockquote>
 <p>| 0 | 0 | 0 | 0 | 0 | 0 | 0 |</p>
-<p>插板法。考虑在七个名额间插入 3 个板子，将它们隔成 4 份。插板的方案数即为分配方案数。</p>
-<script type="math/tex; mode=display">
-C_{8+3-1}^{3}=120</script></blockquote>
+<p>插板法。考虑在七个名额间插入 3 个板子，将它们隔成 4 份。插板的方案数即为分配方案数。<br>$$<br>C_{8+3-1}^{3}=120<br>$$</p>
+</blockquote>
 <p><strong><font color="#dd0000">第 10 题</font></strong></p>
 <p>若 f[0] = 0, f[1] = 1, f[n + 1] = (f[n] + f[n - 1]) / 2，则随着 i 的增大，f[i]将接近于( )。 </p>
 <p>A. 1/2 B. 2/3 C. (√5 − 1)/2 D. 1</p>
@@ -290,6 +283,7 @@ C_{8+3-1}^{3}=120</script></blockquote>
 <p><strong>第 12 题</strong></p>
 <p>在 n（n ≥ 3）枚硬币中有一枚质量不合格的硬币（质量过轻或质量过重）,如果只有一架天平可以用来称重且称重的硬币数没有限制，下面是找出这枚不合格的硬币的算法。请把 a-c 三行代码补全到算法中。<br>a. <code>A ← X ∪ Y</code><br>b. <code>A ← Z</code><br>c. <code>n ← |A|</code></p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">算法 Coin(A, n)</span><br><span class="line">k ← ⌊n/3⌋</span><br><span class="line">将 A 中硬币分成 X，Y，Z 三个集合，使得|X| = |Y| = k,|Z| = n - 2k</span><br><span class="line">if W(X) ≠ W(Y)       //W(X), W(Y)分别为 X 或 Y 的重量</span><br><span class="line">then _____</span><br><span class="line">else _____</span><br><span class="line">_____</span><br><span class="line">if n&gt;2 then goto 1</span><br><span class="line">if n=2 then 任取 A 中1枚硬币与拿走硬币比较，若不等，则它不合格； 若相等，则 A 中剩下的硬币不合格</span><br><span class="line">if n=1 then A 中硬币不合格</span><br></pre></td></tr></table></figure>
+
 <p>正确的填空顺序是（ ）。 </p>
 <p>A. b, c, a B. c, b, a C. c, a, b D. a, b, c</p>
 <blockquote>
@@ -310,32 +304,28 @@ C_{8+3-1}^{3}=120</script></blockquote>
 <p>小明要去南美洲旅游，一共乘坐三趟航班才能到达目的地，其中第 1 个航班 准点的概率是 0.9，第 2 个航班准点的概率为 0.8, 第 3 个航班准点的概率为 0.9。如果存在第 i 个（i=1,2）航班晚点，第 i+1 个航班准点，则小明将赶不 上第 i+1 个航班，旅行失败；除了这种情况，其他情况下旅行都能成功。请 问小明此次旅行成功的概率是（ ）。 </p>
 <p>A. 0.5  B. 0.648  C. 0.72  D. 0.74</p>
 <blockquote>
-<div class="table-container">
 <table>
 <thead>
 <tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">航班1</th>
-<th style="text-align:center">航班2</th>
-<th style="text-align:center">航班3</th>
+<th align="center"></th>
+<th align="center">航班1</th>
+<th align="center">航班2</th>
+<th align="center">航班3</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">准点</td>
-<td style="text-align:center">0.9</td>
-<td style="text-align:center">0.8</td>
-<td style="text-align:center">0.9</td>
+<tbody><tr>
+<td align="center">准点</td>
+<td align="center">0.9</td>
+<td align="center">0.8</td>
+<td align="center">0.9</td>
 </tr>
 <tr>
-<td style="text-align:center">晚点</td>
-<td style="text-align:center">0.1</td>
-<td style="text-align:center">0.2</td>
-<td style="text-align:center">0.1</td>
+<td align="center">晚点</td>
+<td align="center">0.1</td>
+<td align="center">0.2</td>
+<td align="center">0.1</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <p>枚举。共 8 种情况。</p>
 </blockquote>
 <p><strong>第 15 题</strong></p>
@@ -343,83 +333,79 @@ C_{8+3-1}^{3}=120</script></blockquote>
 <p><img src="http://luogu-ipic.oss-cn-shanghai.aliyuncs.com/youti/48.png" alt></p>
 <p> A. 60  B. 108  C. 18  D. 20</p>
 <blockquote>
-<script type="math/tex; mode=display">
-2*3*60/20=18</script></blockquote>
+<p>$$<br>2<em>3</em>60/20=18<br>$$</p>
+</blockquote>
 <p><strong>第 16 题</strong></p>
 <p>以下排序算法在最坏情况下时间复杂度最优的有（ ）。 </p>
 <p>A. 冒泡排序  B. 快速排序  C. 归并排序  D. 堆排</p>
 <blockquote>
-<div class="table-container">
 <table>
 <thead>
 <tr>
-<th style="text-align:center"></th>
-<th style="text-align:center">期望复杂度</th>
-<th style="text-align:center">最劣复杂度</th>
-<th style="text-align:center">最优复杂度</th>
-<th style="text-align:center">是否稳定</th>
+<th align="center"></th>
+<th align="center">期望复杂度</th>
+<th align="center">最劣复杂度</th>
+<th align="center">最优复杂度</th>
+<th align="center">是否稳定</th>
 </tr>
 </thead>
-<tbody>
-<tr>
-<td style="text-align:center">冒泡排序</td>
-<td style="text-align:center">/</td>
-<td style="text-align:center">$O(n^2)$</td>
-<td style="text-align:center">$O(n^2)$</td>
-<td style="text-align:center">稳定</td>
+<tbody><tr>
+<td align="center">冒泡排序</td>
+<td align="center">/</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">稳定</td>
 </tr>
 <tr>
-<td style="text-align:center">插入排序</td>
-<td style="text-align:center">/</td>
-<td style="text-align:center">$O(n^2)$</td>
-<td style="text-align:center">$O(n)$</td>
-<td style="text-align:center">稳定</td>
+<td align="center">插入排序</td>
+<td align="center">/</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">$O(n)$</td>
+<td align="center">稳定</td>
 </tr>
 <tr>
-<td style="text-align:center">选择排序</td>
-<td style="text-align:center">/</td>
-<td style="text-align:center">$O(n^2)$</td>
-<td style="text-align:center">$O(n^2)$</td>
-<td style="text-align:center">不稳定</td>
+<td align="center">选择排序</td>
+<td align="center">/</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">不稳定</td>
 </tr>
 <tr>
-<td style="text-align:center">快速排序</td>
-<td style="text-align:center">$O(n\log n)$</td>
-<td style="text-align:center">$O(n^2)$</td>
-<td style="text-align:center">/</td>
-<td style="text-align:center">不稳定</td>
+<td align="center">快速排序</td>
+<td align="center">$O(n\log n)$</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">/</td>
+<td align="center">不稳定</td>
 </tr>
 <tr>
-<td style="text-align:center">归并排序</td>
-<td style="text-align:center">/</td>
-<td style="text-align:center">$O(n\log n)$</td>
-<td style="text-align:center">$O(n\log n)$</td>
-<td style="text-align:center">稳定</td>
+<td align="center">归并排序</td>
+<td align="center">/</td>
+<td align="center">$O(n\log n)$</td>
+<td align="center">$O(n\log n)$</td>
+<td align="center">稳定</td>
 </tr>
 <tr>
-<td style="text-align:center">堆排序</td>
-<td style="text-align:center">/</td>
-<td style="text-align:center">$O(n\log n)$</td>
-<td style="text-align:center">$O(n\log n)$</td>
-<td style="text-align:center">不稳定</td>
+<td align="center">堆排序</td>
+<td align="center">/</td>
+<td align="center">$O(n\log n)$</td>
+<td align="center">$O(n\log n)$</td>
+<td align="center">不稳定</td>
 </tr>
 <tr>
-<td style="text-align:center">基数排序</td>
-<td style="text-align:center">/</td>
-<td style="text-align:center">$O(nd)$</td>
-<td style="text-align:center">$O(nd)$</td>
-<td style="text-align:center">稳定</td>
+<td align="center">基数排序</td>
+<td align="center">/</td>
+<td align="center">$O(nd)$</td>
+<td align="center">$O(nd)$</td>
+<td align="center">稳定</td>
 </tr>
 <tr>
-<td style="text-align:center">希尔排序</td>
-<td style="text-align:center">/</td>
-<td style="text-align:center">$O(n\log^2 n)$</td>
-<td style="text-align:center">$O(n^{3/2})$</td>
-<td style="text-align:center">不稳定</td>
+<td align="center">希尔排序</td>
+<td align="center">/</td>
+<td align="center">$O(n\log^2 n)$</td>
+<td align="center">$O(n^{3/2})$</td>
+<td align="center">不稳定</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 </blockquote>
 <p><strong>第 17 题</strong></p>
 <p>对于入栈顺序为 a, b, c, d, e, f, g 的序列，下列（ ）不可能是合法的出栈序 列。 </p>
@@ -450,7 +436,7 @@ C_{8+3-1}^{3}=120</script></blockquote>
 <p><strong>中国计算机学会王选奖</strong> 是<a href="https://zh.wikipedia.org/wiki/中国计算机学会" target="_blank" rel="noopener">中国计算机学会</a>于2005年起设立的奖项。该奖项最初名为<strong>中国计算机学会创新奖</strong>，2006年起更为现名，以纪念著名计算机科学家<a href="https://zh.wikipedia.org/wiki/王选" target="_blank" rel="noopener">王选</a>。——<a href="https://zh.wikipedia.org/zh-hans/中国计算机学会王选奖" target="_blank" rel="noopener">中文维基百科</a></p>
 </blockquote>
 <p><strong>第 21 题</strong></p>
-<p>如右图所示，共有 13 个格子。对任何一个格子进行一 次操作，会使得它自己以及与它上下左右相邻的格子中 的数字改变（由 1 变 0，或由 0 变 1）。现在要使得所 有的格子中的数字都变为 0，至少需要<strong><strong>_</strong></strong>次操作。</p>
+<p>如右图所示，共有 13 个格子。对任何一个格子进行一 次操作，会使得它自己以及与它上下左右相邻的格子中 的数字改变（由 1 变 0，或由 0 变 1）。现在要使得所 有的格子中的数字都变为 0，至少需要<strong>_____</strong>次操作。</p>
 <p><img src="http://luogu-ipic.oss-cn-shanghai.aliyuncs.com/youti/49.png" alt></p>
 <blockquote>
 <p>模拟即可。略</p>
@@ -464,25 +450,29 @@ C_{8+3-1}^{3}=120</script></blockquote>
 </blockquote>
 <p><strong>第 23 题</strong></p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt; </span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;   </span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">g</span><span class="hljs-params">(<span class="hljs-keyword">int</span> m, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> x)</span>   </span></span><br><span class="line"><span class="hljs-function"></span>&#123;     </span><br><span class="line">    <span class="hljs-keyword">int</span> ans = <span class="hljs-number">0</span>;   </span><br><span class="line">    <span class="hljs-keyword">int</span> i;   </span><br><span class="line">    <span class="hljs-keyword">if</span> (n == <span class="hljs-number">1</span>)  </span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;     </span><br><span class="line">    <span class="hljs-keyword">for</span> (i = x; i &lt;= m / n; i++)         </span><br><span class="line">        ans += g(m - i, n - <span class="hljs-number">1</span>, i);     </span><br><span class="line">    <span class="hljs-keyword">return</span> ans; </span><br><span class="line">&#125; </span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span></span><br><span class="line"><span class="hljs-function"></span>&#123;     </span><br><span class="line">    <span class="hljs-keyword">int</span> t, m, n;     </span><br><span class="line">    <span class="hljs-built_in">cin</span> &gt;&gt; m &gt;&gt; n;    </span><br><span class="line">    <span class="hljs-built_in">cout</span> &lt;&lt; g(m, n, <span class="hljs-number">0</span>) &lt;&lt; <span class="hljs-built_in">endl</span>;     </span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输入：8 4<br>输出：<strong><strong>_</strong></strong></p>
+
+<p>输入：8 4<br>输出：<strong>_____</strong></p>
 <blockquote>
 <p>大 模 拟</p>
 <p>推出来 15</p>
 </blockquote>
 <p><strong>第 24 题</strong></p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt; </span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>; </span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span></span><br><span class="line"><span class="hljs-function"></span>&#123;     </span><br><span class="line">    <span class="hljs-keyword">int</span> n, i, j, x, y, nx, ny;     </span><br><span class="line">    <span class="hljs-keyword">int</span> a[<span class="hljs-number">40</span>][<span class="hljs-number">40</span>];     </span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">40</span>; i++)         </span><br><span class="line">        <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">40</span>; j++)             </span><br><span class="line">            a[i][j] = <span class="hljs-number">0</span>;     </span><br><span class="line">    <span class="hljs-built_in">cin</span> &gt;&gt; n; </span><br><span class="line">    y = <span class="hljs-number">0</span>; </span><br><span class="line">    x = n - <span class="hljs-number">1</span>; </span><br><span class="line">    n = <span class="hljs-number">2</span> * n - <span class="hljs-number">1</span>;     </span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt;= n * n; i++) </span><br><span class="line">    &#123;         </span><br><span class="line">        a[y][x] = i;         </span><br><span class="line">        ny = (y - <span class="hljs-number">1</span> + n) % n;         </span><br><span class="line">        nx = (x + <span class="hljs-number">1</span>) % n;         </span><br><span class="line">        <span class="hljs-keyword">if</span> ((y == <span class="hljs-number">0</span> &amp;&amp; x == n - <span class="hljs-number">1</span>) || a[ny][nx] != <span class="hljs-number">0</span>)             </span><br><span class="line">            y = y + <span class="hljs-number">1</span>;         </span><br><span class="line">        <span class="hljs-keyword">else</span> &#123; y = ny; x = nx; </span><br><span class="line">        &#125;     </span><br><span class="line">    &#125;     </span><br><span class="line">    <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; n; j++)         </span><br><span class="line">        <span class="hljs-built_in">cout</span> &lt;&lt; a[<span class="hljs-number">0</span>][j] &lt;&lt; <span class="hljs-string">" "</span>;     </span><br><span class="line">    <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;     </span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>输入：3<br>输出：<strong>____</strong></p>
 <blockquote>
 <p>小套路题。构造数字幻方，并输出最上方一行。</p>
 </blockquote>
 <p><strong>第 25 题</strong></p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">int</span> n, s, a[<span class="hljs-number">100005</span>], t[<span class="hljs-number">100005</span>], i;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">mergesort</span><span class="hljs-params">(<span class="hljs-keyword">int</span> l, <span class="hljs-keyword">int</span> r)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">if</span> (l == r)</span><br><span class="line">        <span class="hljs-keyword">return</span>;</span><br><span class="line">    <span class="hljs-keyword">int</span> mid = (l + r) / <span class="hljs-number">2</span>;</span><br><span class="line">    <span class="hljs-keyword">int</span> p = l;</span><br><span class="line">    <span class="hljs-keyword">int</span> i = l;</span><br><span class="line">    <span class="hljs-keyword">int</span> j = mid + <span class="hljs-number">1</span>;</span><br><span class="line">    mergesort(l, mid);</span><br><span class="line">    mergesort(mid + <span class="hljs-number">1</span>, r);</span><br><span class="line">    <span class="hljs-keyword">while</span> (i &lt;= mid &amp;&amp; j &lt;= r)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (a[j] &lt; a[i])</span><br><span class="line">        &#123;</span><br><span class="line">            s += mid - i + <span class="hljs-number">1</span>;</span><br><span class="line">            t[p] = a[j];</span><br><span class="line">            p++;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            t[p] = a[i];</span><br><span class="line">            p++;</span><br><span class="line">            i++;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">while</span> (i &lt;= mid)</span><br><span class="line">    &#123;</span><br><span class="line">        t[p] = a[i];</span><br><span class="line">        p++;</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">while</span> (j &lt;= r)</span><br><span class="line">    &#123;</span><br><span class="line">        t[p] = a[j];</span><br><span class="line">        p++;</span><br><span class="line">        j++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = l; i &lt;= r; i++)</span><br><span class="line">        a[i] = t[i];</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">1</span>; i &lt;= n; i++)</span><br><span class="line">        <span class="hljs-built_in">cin</span> &gt;&gt; a[i];</span><br><span class="line">    mergesort(<span class="hljs-number">1</span>, n);</span><br><span class="line">    <span class="hljs-built_in">cout</span> &lt;&lt; s &lt;&lt; <span class="hljs-built_in">endl</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输入：6<br>2 6 3 4 5 1<br>输出：<strong><strong>_</strong></strong></p>
+
+<p>输入：6<br>2 6 3 4 5 1<br>输出：<strong>_____</strong></p>
 <blockquote>
 <p>小套路题。归并排序求逆序对。</p>
 </blockquote>
 <p><strong>第 26 题</strong></p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">int</span> n, m;</span><br><span class="line">    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="hljs-keyword">int</span> x = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">int</span> y = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">int</span> dx = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">int</span> dy = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">int</span> cnt = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (cnt != <span class="hljs-number">2</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        cnt = <span class="hljs-number">0</span>;</span><br><span class="line">        x = x + dx;</span><br><span class="line">        y = y + dy;</span><br><span class="line">        <span class="hljs-keyword">if</span> (x == <span class="hljs-number">1</span> || x == n)</span><br><span class="line">        &#123;</span><br><span class="line">            ++cnt;</span><br><span class="line">            dx = -dx;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (y == <span class="hljs-number">1</span> || y == m)</span><br><span class="line">        &#123;</span><br><span class="line">            ++cnt;</span><br><span class="line">            dy = -dy;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">cout</span> &lt;&lt; x &lt;&lt; <span class="hljs-string">" "</span> &lt;&lt; y &lt;&lt; <span class="hljs-built_in">endl</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <p>输入 1：4 3<br>输出 1：<strong><strong>（2 分）<br>输入 2：2017 1014<br>输出 2：</strong></strong>（3 分）<br>输入 3：987 321<br>输出 3：____（3 分）</p>
 <blockquote>
 <p>样例 1：构造两个数列 [1,2,3,4,3,2,1,2,3,4,3,2,1,…], [1,2,3,2,1,2,3,2,1,…]。求这两个数列最靠前的位置，使得 $a_i=1,b_i=1$或$a_i=x,b_i=1$或$a_i=1,b_i=x$或$a_i=x,b_i=y$。</p>
@@ -490,16 +480,17 @@ C_{8+3-1}^{3}=120</script></blockquote>
 <p><strong>第 27 题</strong></p>
 <p>（大整数除法）给定两个正整数p和q，其中p不超过10100， q不超过100000， 求 p 除以 q 的商和余数。（第一空 2 分，其余 3 分） 输入：第一行是 p 的位数 n，第二行是正整数 p，第三行是正整数 q。 输出：两行，分别是 p 除以 q 的商和余数。</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">int</span> p[<span class="hljs-number">100</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> n, i, q, rest;</span><br><span class="line"><span class="hljs-keyword">char</span> c;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-built_in">cin</span> &gt;&gt; n;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>;</span><br><span class="line">         i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-built_in">cin</span> &gt;&gt; c;</span><br><span class="line">        p[i] = c - <span class="hljs-string">'0'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">cin</span> &gt;&gt; q;</span><br><span class="line">    rest = (<span class="hljs-number">1</span>);</span><br><span class="line">    i = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> ((<span class="hljs-number">2</span>) &amp;&amp; i &lt; n)</span><br><span class="line">    &#123;</span><br><span class="line">        rest = rest * <span class="hljs-number">10</span> + p[i];</span><br><span class="line">        i++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">if</span> (rest &lt; q)</span><br><span class="line">        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-number">0</span> &lt;&lt; <span class="hljs-built_in">endl</span>;</span><br><span class="line">    <span class="hljs-keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-built_in">cout</span> &lt;&lt; (<span class="hljs-number">3</span>);</span><br><span class="line">        <span class="hljs-keyword">while</span> (i &lt; n)</span><br><span class="line">        &#123;</span><br><span class="line">            rest = (<span class="hljs-number">4</span>);</span><br><span class="line">            i++;</span><br><span class="line">            <span class="hljs-built_in">cout</span> &lt;&lt; rest / q;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">cout</span> &lt;&lt; (<span class="hljs-number">5</span>) &lt;&lt; <span class="hljs-built_in">endl</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p>​    </p>
 </blockquote>
 <p><strong>第 28 题</strong></p>
 <p>（最长路径）给定一个有向无环图，每条边长度为 1，求图中的最长路径长度。（第五空 2 分，其余 3 分） 输入：第一行是结点数 n（不超过 100）和边数 m，接下来 m 行，每行两个整数 a， b，表示从结点 a 到结点 b 有一条有向边。结点标号从 0 到(n-1)。 输出：最长路径长度。 提示：先进行拓扑排序，然后按照拓扑序计算最长路径。</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">int</span> n, m, i, j, a, b, head, tail, ans;</span><br><span class="line"><span class="hljs-keyword">int</span> graph[<span class="hljs-number">100</span>][<span class="hljs-number">100</span>]; <span class="hljs-comment">// 用邻接矩阵存储图</span></span><br><span class="line"><span class="hljs-keyword">int</span> degree[<span class="hljs-number">100</span>];     <span class="hljs-comment">// 记录每个结点的入度</span></span><br><span class="line"><span class="hljs-keyword">int</span> len[<span class="hljs-number">100</span>];        <span class="hljs-comment">// 记录以各结点为终点的最长路径长度</span></span><br><span class="line"><span class="hljs-keyword">int</span> <span class="hljs-built_in">queue</span>[<span class="hljs-number">100</span>];      <span class="hljs-comment">// 存放拓扑排序结果</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; n; j++)</span><br><span class="line">            graph[i][j] = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; i++)</span><br><span class="line">        degree[i] = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; m; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-built_in">cin</span> &gt;&gt; a &gt;&gt; b;</span><br><span class="line">        graph[a][b] = <span class="hljs-number">1</span>;</span><br><span class="line">        (<span class="hljs-number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    tail = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; i++)</span><br><span class="line">        <span class="hljs-keyword">if</span> ((<span class="hljs-number">2</span>))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="hljs-built_in">queue</span>[tail] = i;</span><br><span class="line">            tail++;</span><br><span class="line">        &#125;</span><br><span class="line">    head = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">while</span> (tail &lt; n - <span class="hljs-number">1</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; i++)</span><br><span class="line">            <span class="hljs-keyword">if</span> (graph[<span class="hljs-built_in">queue</span>[head]][i] == <span class="hljs-number">1</span>)</span><br><span class="line">            &#123;</span><br><span class="line">                (<span class="hljs-number">3</span>);</span><br><span class="line">                <span class="hljs-keyword">if</span> (degree[i] == <span class="hljs-number">0</span>)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="hljs-built_in">queue</span>[tail] = i;</span><br><span class="line">                    tail++;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        (<span class="hljs-number">4</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    ans = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; n; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        a = <span class="hljs-built_in">queue</span>[i];</span><br><span class="line">        len[a] = <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; n; j++)</span><br><span class="line">            <span class="hljs-keyword">if</span> (graph[j][a] == <span class="hljs-number">1</span> &amp;&amp; len[j] + <span class="hljs-number">1</span> &gt; len[a])</span><br><span class="line">                len[a] = len[j] + <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> ((<span class="hljs-number">5</span>))</span><br><span class="line">            ans = len[a];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-built_in">cout</span> &lt;&lt; ans &lt;&lt; <span class="hljs-built_in">endl</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <blockquote>
-<p>DAG 上的动态规划。</p>
-<script type="math/tex; mode=display">
-\text{len[u]}=\max\{\text{len[v]}+1\},(v,u)\in E</script></blockquote>
+<p>DAG 上的动态规划。<br>$$<br>\text{len[u]}=\max{\text{len[v]}+1},(v,u)\in E<br>$$</p>
+</blockquote>
 
         </div>
         
@@ -604,7 +595,7 @@ C_{8+3-1}^{3}=120</script></blockquote>
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            114
+                            115
                         </p>
                     </a>
                 </div>
@@ -774,6 +765,19 @@ C_{8+3-1}^{3}=120</script></blockquote>
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-13T15:22:20.000Z">2020-03-13</time></div>
+                    <a href="/2020/03/13/solution-loj-3211/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「CSP-S 2019」Emiya 家今天的饭</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-08T15:05:35.000Z">2020-03-08</time></div>
                     <a href="/2020/03/08/solution-loj-3108/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「TJOI2019」甲苯先生和大中锋的字符串</a>
                     <p class="is-size-7 is-uppercase">
@@ -822,19 +826,6 @@ C_{8+3-1}^{3}=120</script></blockquote>
             </div>
         </article>
         
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T15:23:50.000Z">2020-03-01</time></div>
-                    <a href="/2020/03/01/solution-jsk-6012A/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客 2020.2 提高组」受力平衡</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -843,7 +834,7 @@ C_{8+3-1}^{3}=120</script></blockquote>
         <h3 class="menu-label">
             Tag Cloud
         </h3>
-        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/2-SAT/" style="font-size: 10px;">2-SAT</a> <a href="/tags/FFT-NTT/" style="font-size: 11.82px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 11.82px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 10.91px;">ST算法</a> <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dfs序/" style="font-size: 11.82px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 15.45px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10.91px;">乘法逆元</a> <a href="/tags/二分图/" style="font-size: 10px;">二分图</a> <a href="/tags/二分图匹配/" style="font-size: 10.91px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 11.82px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 11.82px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 10.91px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 10.91px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 10.91px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 10.91px;">可持久化trie</a> <a href="/tags/后缀自动机/" style="font-size: 10.91px;">后缀自动机</a> <a href="/tags/启发式合并/" style="font-size: 11.82px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 10.91px;">堆</a> <a href="/tags/复杂度分析/" style="font-size: 10px;">复杂度分析</a> <a href="/tags/多项式/" style="font-size: 10px;">多项式</a> <a href="/tags/字符串/" style="font-size: 13.64px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10.91px;">容斥原理</a> <a href="/tags/差分/" style="font-size: 10.91px;">差分</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11.82px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.18px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 14.55px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10.91px;">数论</a> <a href="/tags/最小割/" style="font-size: 10px;">最小割</a> <a href="/tags/最短路/" style="font-size: 10.91px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 13.64px;">最近公共祖先</a> <a href="/tags/构造/" style="font-size: 10px;">构造</a> <a href="/tags/栈/" style="font-size: 10.91px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 17.27px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 10.91px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 11.82px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 12.73px;">概率</a> <a href="/tags/欧拉函数/" style="font-size: 10px;">欧拉函数</a> <a href="/tags/欧拉路/" style="font-size: 10px;">欧拉路</a> <a href="/tags/点分治/" style="font-size: 10.91px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11.82px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 12.73px;">生成函数</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/矩阵/" style="font-size: 10.91px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线性基/" style="font-size: 10px;">线性基</a> <a href="/tags/线段树/" style="font-size: 19.09px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10.91px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 14.55px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 12.73px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 16.36px;">背包</a> <a href="/tags/虚树/" style="font-size: 11.82px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10px;">计数dp</a> <a href="/tags/计算几何/" style="font-size: 10px;">计算几何</a> <a href="/tags/贪心/" style="font-size: 11.82px;">贪心</a> <a href="/tags/费用流/" style="font-size: 10px;">费用流</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 10.91px;">高斯消元</a>
+        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/2-SAT/" style="font-size: 10px;">2-SAT</a> <a href="/tags/FFT-NTT/" style="font-size: 11.67px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 11.67px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 10.83px;">ST算法</a> <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dfs序/" style="font-size: 11.67px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 15.83px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10.83px;">乘法逆元</a> <a href="/tags/二分图/" style="font-size: 10px;">二分图</a> <a href="/tags/二分图匹配/" style="font-size: 10.83px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 11.67px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 11.67px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 10.83px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 10.83px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 10.83px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 10.83px;">可持久化trie</a> <a href="/tags/后缀自动机/" style="font-size: 10.83px;">后缀自动机</a> <a href="/tags/启发式合并/" style="font-size: 11.67px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 10.83px;">堆</a> <a href="/tags/复杂度分析/" style="font-size: 10px;">复杂度分析</a> <a href="/tags/多项式/" style="font-size: 10px;">多项式</a> <a href="/tags/字符串/" style="font-size: 13.33px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10.83px;">容斥原理</a> <a href="/tags/差分/" style="font-size: 10.83px;">差分</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11.67px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.33px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 14.17px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10.83px;">数论</a> <a href="/tags/最小割/" style="font-size: 10px;">最小割</a> <a href="/tags/最短路/" style="font-size: 10.83px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 13.33px;">最近公共祖先</a> <a href="/tags/构造/" style="font-size: 10px;">构造</a> <a href="/tags/栈/" style="font-size: 10.83px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 17.5px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 10.83px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 11.67px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 12.5px;">概率</a> <a href="/tags/欧拉函数/" style="font-size: 10px;">欧拉函数</a> <a href="/tags/欧拉路/" style="font-size: 10px;">欧拉路</a> <a href="/tags/点分治/" style="font-size: 10.83px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11.67px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 12.5px;">生成函数</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/矩阵/" style="font-size: 10.83px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线性基/" style="font-size: 10px;">线性基</a> <a href="/tags/线段树/" style="font-size: 19.17px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10.83px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 15px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 12.5px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 16.67px;">背包</a> <a href="/tags/虚树/" style="font-size: 11.67px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10.83px;">计数dp</a> <a href="/tags/计算几何/" style="font-size: 10px;">计算几何</a> <a href="/tags/贪心/" style="font-size: 11.67px;">贪心</a> <a href="/tags/费用流/" style="font-size: 10px;">费用流</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 10.83px;">高斯消元</a>
     </div>
 </div>
     
@@ -985,7 +976,7 @@ C_{8+3-1}^{3}=120</script></blockquote>
                 <span class="level-item">题解</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">77</span>
+                <span class="level-item tag">78</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/categories/题解/Codeforces/">
@@ -1001,7 +992,7 @@ C_{8+3-1}^{3}=120</script></blockquote>
                 <span class="level-item">LibreOJ</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">28</span>
+                <span class="level-item tag">29</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/题解/计蒜客/">
