@@ -7,21 +7,21 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
-<title>高斯消元 - tth37&#39;s Blog</title>
+<title>矩阵和行列式 - tth37&#39;s Blog</title>
 
 
     <meta name="description" content="重新学习了高斯消元，当然也要重写一篇啦。 占坑，先咕。">
-<meta name="keywords" content="高斯消元">
+<meta name="keywords" content="高斯消元,矩阵,行列式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="高斯消元">
+<meta property="og:title" content="矩阵和行列式">
 <meta property="og:url" content="https://tth37.cn/2019/10/31/algorithm-gauss/index.html">
 <meta property="og:site_name" content="tth37&#39;s Blog">
 <meta property="og:description" content="重新学习了高斯消元，当然也要重写一篇啦。 占坑，先咕。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://tth37.cn/images/og_image.png">
-<meta property="og:updated_time" content="2020-03-08T15:17:49.259Z">
+<meta property="og:updated_time" content="2020-03-22T14:48:49.587Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="高斯消元">
+<meta name="twitter:title" content="矩阵和行列式">
 <meta name="twitter:description" content="重新学习了高斯消元，当然也要重写一篇啦。 占坑，先咕。">
 <meta name="twitter:image" content="https://tth37.cn/images/og_image.png">
 
@@ -82,7 +82,7 @@
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/">
             
-                <img src="/images/logo.png" alt="高斯消元" height="28">
+                <img src="/images/logo.png" alt="矩阵和行列式" height="28">
             
             </a>
         </div>
@@ -138,14 +138,14 @@
                 <time class="level-item has-text-grey" datetime="2019-10-31T13:44:46.000Z">2019-10-31</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/算法学习/">算法学习</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/算法学习/数论专题/">数论专题</a>
+                <a class="has-link-grey -link" href="/categories/算法学习/">算法学习</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/算法学习/数学/">数学</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    7 minutes read (About 1052 words)
+                    a minute read (About 130 words)
                 </span>
                 
                 
@@ -154,7 +154,7 @@
         
         <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
             
-                高斯消元
+                矩阵和行列式
             
         </h1>
         <div class="content">
@@ -162,52 +162,9 @@
 <p>占坑，先咕。</p>
 <a id="more"></a>
 
-<h4 id="高斯消元五步骤法"><a href="#高斯消元五步骤法" class="headerlink" title="高斯消元五步骤法"></a>高斯消元五步骤法</h4><p>高斯消元法在将增广矩阵化为最简形后对于自由未知量的赋值，需要掌握线性相关知识，且赋值存在人工经验的因素，使得在学习过程中有一定的困难，将高斯消元法划分为五步骤，从而提出五步骤法，内容如下：</p>
-<ol>
-<li><p>增广矩阵行初等行变换为行最简形；</p>
-</li>
-<li><p>还原线性方程组；</p>
-</li>
-<li><p>求解第一个变量；</p>
-</li>
-<li><p>补充自由未知量；</p>
-</li>
-<li><p>列表示方程组通解。</p>
-</li>
-</ol>
-<p>利用实例进一步说明该算法的运作情况。</p>
-<p>例二：利用高斯消元法五步骤法求解线性方程组：</p>
-<p>$$<br>\left{\begin{aligned}<br>2x_1+5x_3+6x_4&amp;=9 \notag \<br>x_3+x_4&amp;=-4 \notag \<br>2x_3+2x_4&amp;=-8 \notag<br>\end{aligned}\right.<br>$$</p>
-<h4 id="增广矩阵行（初等）变换为行最简形"><a href="#增广矩阵行（初等）变换为行最简形" class="headerlink" title="增广矩阵行（初等）变换为行最简形"></a>增广矩阵行（初等）变换为行最简形</h4><p>所谓增广矩阵，即为方程组系数矩阵 $A$ 与常数列 $b$ 的并生成的新矩阵，即 $(A | b)$ ，增广矩阵行初等变换化为行最简形，即是利用了高斯消元法的思想理念，省略了变量而用变量的系数位置表示变量，增广矩阵中用竖线隔开了系数矩阵和常数列，代表了等于符号。</p>
-<p>$$<br>\left(\begin{matrix}<br>2 &amp; 0 &amp; 5 &amp; 6 \<br>0 &amp; 0 &amp; 1 &amp; 1 \<br>0 &amp; 0 &amp; 2 &amp; 2<br>\end{matrix} \middle|<br>\begin{matrix}<br>9 \<br>-4 \<br>-8<br>\end{matrix} \right)<br>$$</p>
-<p>$$<br>\xrightarrow{r_3-2r_2}<br>\left(\begin{matrix}<br>2 &amp; 0 &amp; 5 &amp; 6 \<br>0 &amp; 0 &amp; 1 &amp; 1 \<br>0 &amp; 0 &amp; 0 &amp; 0<br>\end{matrix} \middle|<br>\begin{matrix}<br>9 \<br>-4 \<br>0<br>\end{matrix} \right)<br>$$</p>
-<p>化为行阶梯形</p>
-<p>$$<br>\xrightarrow{\frac{r_1}{2}}<br>\left(\begin{matrix}<br>1 &amp; 0 &amp; 2.5 &amp; 3 \<br>0 &amp; 0 &amp; 1 &amp; 1 \<br>0 &amp; 0 &amp; 0 &amp; 0<br>\end{matrix} \middle|<br>\begin{matrix}<br>4.5 \<br>-4 \<br>0<br>\end{matrix} \right)<br>$$</p>
-<p>$$<br>\xrightarrow{r_1-r_2 \times 2.5}<br>\left(\begin{matrix}<br>1 &amp; 0 &amp; 0 &amp; 0.5 \<br>0 &amp; 0 &amp; 1 &amp; 1 \<br>0 &amp; 0 &amp; 0 &amp; 0<br>\end{matrix} \middle|<br>\begin{matrix}<br>14.5 \<br>-4 \<br>0<br>\end{matrix} \right)<br>$$</p>
-<p>化为最简形</p>
-<h4 id="还原线性方程组"><a href="#还原线性方程组" class="headerlink" title="还原线性方程组"></a>还原线性方程组</h4><p>$$<br>\left{\begin{aligned}<br>x_1+0.5x_4 &amp;= 14.5 \notag\<br>x_3+x_4 &amp;= -4 \notag \<br>\end{aligned}\right.<br>$$</p>
-<p>解释</p>
-<blockquote>
-<p>所谓的还原线性方程组，即是在行最简形的基础上，将之重新书写为线性方程组的形式，即将行最简形中各位置的系数重新赋予变量，中间的竖线还原为等号。</p>
-</blockquote>
-<h4 id="求解第一个变量"><a href="#求解第一个变量" class="headerlink" title="求解第一个变量"></a>求解第一个变量</h4><p>$$<br>\left{\begin{aligned}<br>x_1 &amp;= -0.5x_4+14.5\notag \<br>x_3 &amp;= -x_4-4\notag<br>\end{aligned}\right.<br>$$</p>
-<p>解释</p>
-<blockquote>
-<p>即是对于所还原的线性方程组而言，将方程组中每个方程的第一个变量，用其他量表达出来。如方程组两方程中的第一个变量 $x_1$ 和 $x_3$ </p>
-</blockquote>
-<h4 id="补充自由未知量"><a href="#补充自由未知量" class="headerlink" title="补充自由未知量"></a>补充自由未知量</h4><p>$$<br>\left{\begin{aligned}<br>x_1 &amp;= -0.5x_4+14.5 \notag \<br>x_2 &amp;= x_2 \notag \<br>x_3 &amp;= -x_4-4 \notag \<br>x_4 &amp;= x_4 \notag<br>\end{aligned}\right.<br>$$</p>
-<p>解释</p>
-<blockquote>
-<p>第 3 步中，求解出变量 $x_1$ 和 $x_3$ ，从而说明了方程剩余的变量 $x_2$ 和 $x_4$ 不受方程组的约束，是自由未知量，可以取任意值，所以需要在第 3 步骤解得基础上进行解得补充，补充的方法为 $x_2 = x_2,x_4 = x_4$ ，这种解得补充方式符合自由未知量定义，并易于理解，因为是自由未知量而不受约束，所以只能自己等于自己。</p>
-</blockquote>
-<h4 id="列表示方程组的通解"><a href="#列表示方程组的通解" class="headerlink" title="列表示方程组的通解"></a>列表示方程组的通解</h4><p>$$<br>\begin{aligned}<br>\begin{pmatrix} x_1 \ x_2 \ x_3 \ x_4 \end{pmatrix} &amp;=<br>\begin{pmatrix} 0 \ 1 \ 0 \ 0 \end{pmatrix} x_2+<br>\begin{pmatrix} -0.5 \ 0 \ -1 \ 1 \end{pmatrix} x_4 +<br>\begin{pmatrix} 14.5 \ 0 \ -4 \ 0 \end{pmatrix} \notag \<br>&amp;= \begin{pmatrix} 0 \ 1 \ 0 \ 0 \end{pmatrix} C_1+<br>\begin{pmatrix} -0.5 \ 0 \ -1 \ 1 \end{pmatrix} C_2 +<br>\begin{pmatrix} 14.5 \ 0 \ -4 \ 0 \end{pmatrix} \notag<br>\end{aligned}<br>$$</p>
-<p>其中 $C_1$ 和 $C_2$ 为任意常数。</p>
-<p>解释</p>
-<blockquote>
-<p>即在第 4 步的基础上，将解表达为列向量组合的表示形式，同时由于 $x_2$ 和 $x_4$ 是自由未知量，可以取任意值，所以在解得右边，令二者分别为任意常数 $C_1$ 和 $C_2$ ，即实现了对方程组的求解。</p>
-</blockquote>
-<h4 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h4><p>其实可以根据自己解方程的习惯写代码……实现非常简单，基本不需要理论知识</p>
-<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Gauss</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">bool</span> flag = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i; j &lt;= n; ++j) &#123;</span><br><span class="line">            <span class="hljs-keyword">if</span> (a[j][i] != <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = i; k &lt;= n + <span class="hljs-number">1</span>; ++k)</span><br><span class="line">                    swap(a[i][k], a[j][k]);</span><br><span class="line">                flag = <span class="hljs-number">1</span>;</span><br><span class="line">                <span class="hljs-keyword">break</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">if</span> (flag == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">            <span class="hljs-built_in">puts</span>(<span class="hljs-string">"No Solution"</span>);</span><br><span class="line">            <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">double</span> tmp = a[i][i];</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = i; k &lt;= n + <span class="hljs-number">1</span>; ++k)</span><br><span class="line">            a[i][k] /= tmp;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">            tmp = a[j][i];</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = i; k &lt;= n + <span class="hljs-number">1</span>; ++k)</span><br><span class="line">                a[j][k] -= tmp * a[i][k];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = n; i &gt;= <span class="hljs-number">1</span>; --i) &#123;</span><br><span class="line">        <span class="hljs-keyword">double</span> x = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = i + <span class="hljs-number">1</span>; j &lt;= n; ++j)</span><br><span class="line">            x += ans[j] * a[i][j];</span><br><span class="line">        ans[i] = a[i][n + <span class="hljs-number">1</span>] - x;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h3><h4 id="声明结构体"><a href="#声明结构体" class="headerlink" title="声明结构体"></a>声明结构体</h4><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Determinant</span> &#123;</span></span><br><span class="line">    <span class="hljs-keyword">double</span> <span class="hljs-comment">/* ll */</span> z[<span class="hljs-number">110</span>][<span class="hljs-number">110</span>];</span><br><span class="line">    <span class="hljs-keyword">int</span> n;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="高斯消元求值"><a href="#高斯消元求值" class="headerlink" title="高斯消元求值"></a>高斯消元求值</h4><h5 id="辗转相消法"><a href="#辗转相消法" class="headerlink" title="辗转相消法"></a>辗转相消法</h5><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Determinant</span> &#123;</span></span><br><span class="line">    <span class="hljs-function">ll <span class="hljs-title">gauss</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        ll ret = <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> a = <span class="hljs-number">1</span>; a &lt;= n; ++a) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> b = a + <span class="hljs-number">1</span>; b &lt;= n; ++b) &#123;</span><br><span class="line">                <span class="hljs-keyword">while</span> (z[b][a] != <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                    ll k = z[a][a] / z[b][a];</span><br><span class="line">                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> c = <span class="hljs-number">1</span>; c &lt;= n; ++c)</span><br><span class="line">                        z[a][c] = z[a][c] - z[b][c] * k;</span><br><span class="line">                    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> c = <span class="hljs-number">1</span>; c &lt;= n; ++c)</span><br><span class="line">                        swap(z[a][c], z[b][c]);</span><br><span class="line">                    x = -x;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> a = <span class="hljs-number">1</span>; a &lt;= n; ++a)</span><br><span class="line">            ret = ret * z[a][a];</span><br><span class="line">        <span class="hljs-keyword">return</span> ret;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
 
         </div>
@@ -216,7 +173,7 @@
             <div class="level-start">
                 <div class="level-item">
                     <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/tags/高斯消元/">高斯消元</a>
+                    <a class="has-link-grey -link" href="/tags/矩阵/">矩阵</a>, <a class="has-link-grey -link" href="/tags/行列式/">行列式</a>, <a class="has-link-grey -link" href="/tags/高斯消元/">高斯消元</a>
                 </div>
             </div>
         </div>
@@ -334,7 +291,7 @@
                     </p>
                     <a href="/categories">
                         <p class="title has-text-weight-normal">
-                            20
+                            21
                         </p>
                     </a>
                 </div>
@@ -346,7 +303,7 @@
                     </p>
                     <a href="/tags">
                         <p class="title has-text-weight-normal">
-                            79
+                            80
                         </p>
                     </a>
                 </div>
@@ -419,7 +376,7 @@
                     line-height: 25px;
                 }
             </style>
-            <hitokoto id='demo'></hitokoto>
+            <hitokoto id='demo'>2333</hitokoto>
             <p align='right'><br></p>
             <div align='right' id='from'></div>
             <script>
@@ -465,7 +422,7 @@
             </script>
             <p align='center'>
                 <br/>
-                <button onclick='PressLikeBtn()' id='test1' type="button" class="btn button1"></button>
+                <button onclick='PressLikeBtn()' id='test1' type="button" class="btn button1">WTF</button>
             </p>
             <script>
                 document.getElementById('test1').innerText = 'Like ' + a;
@@ -556,15 +513,6 @@
     </div>
 </div>
     
-        <div class="card widget">
-    <div class="card-content">
-        <h3 class="menu-label">
-            Tag Cloud
-        </h3>
-        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/2-SAT/" style="font-size: 10px;">2-SAT</a> <a href="/tags/FFT-NTT/" style="font-size: 11.67px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 11.67px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 10.83px;">ST算法</a> <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dfs序/" style="font-size: 11.67px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 15.83px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10.83px;">乘法逆元</a> <a href="/tags/二分图/" style="font-size: 10px;">二分图</a> <a href="/tags/二分图匹配/" style="font-size: 10.83px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 11.67px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 11.67px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 10.83px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 10.83px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 10.83px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 10.83px;">可持久化trie</a> <a href="/tags/后缀自动机/" style="font-size: 10.83px;">后缀自动机</a> <a href="/tags/启发式合并/" style="font-size: 11.67px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 10.83px;">堆</a> <a href="/tags/复杂度分析/" style="font-size: 10px;">复杂度分析</a> <a href="/tags/多项式/" style="font-size: 10px;">多项式</a> <a href="/tags/字符串/" style="font-size: 13.33px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10.83px;">容斥原理</a> <a href="/tags/差分/" style="font-size: 10.83px;">差分</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11.67px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.33px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 14.17px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10.83px;">数论</a> <a href="/tags/最小割/" style="font-size: 10px;">最小割</a> <a href="/tags/最短路/" style="font-size: 10.83px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 13.33px;">最近公共祖先</a> <a href="/tags/构造/" style="font-size: 10px;">构造</a> <a href="/tags/栈/" style="font-size: 10.83px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 17.5px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 10.83px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 11.67px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 12.5px;">概率</a> <a href="/tags/欧拉函数/" style="font-size: 10px;">欧拉函数</a> <a href="/tags/欧拉路/" style="font-size: 10px;">欧拉路</a> <a href="/tags/点分治/" style="font-size: 10.83px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11.67px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 12.5px;">生成函数</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/矩阵/" style="font-size: 10.83px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线性基/" style="font-size: 10px;">线性基</a> <a href="/tags/线段树/" style="font-size: 19.17px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10.83px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 15px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 12.5px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 16.67px;">背包</a> <a href="/tags/虚树/" style="font-size: 11.67px;">虚树</a> <a href="/tags/计数dp/" style="font-size: 10.83px;">计数dp</a> <a href="/tags/计算几何/" style="font-size: 10px;">计算几何</a> <a href="/tags/贪心/" style="font-size: 11.67px;">贪心</a> <a href="/tags/费用流/" style="font-size: 10px;">费用流</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 10.83px;">高斯消元</a>
-    </div>
-</div>
-    
     
         <div class="column-right-shadow  ">
         
@@ -634,12 +582,20 @@
                 <span class="level-item tag">2</span>
             </span>
         </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/数学/">
+            <span class="level-start">
+                <span class="level-item">数学</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
         <a class="level is-marginless" href="/categories/算法学习/数论专题/">
             <span class="level-start">
                 <span class="level-item">数论专题</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">4</span>
+                <span class="level-item tag">3</span>
             </span>
         </a></li><li>
         <a class="level is-marginless" href="/categories/算法学习/树上问题/">
@@ -737,26 +693,13 @@
 
         
             <div class="card widget">
-  <div class="card-content">
-      <div class="menu">
-      <h3 class="menu-label">
-          GOOGLE ADS
-      </h3>
-      广告被杀了。
-      <!--<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>-->
-<!-- widget -->
-<ins class="adsbygoogle"
-     style="display:inline-block;width:268px;height:263px"
-     data-ad-client="ca-pub-4278647453884747"
-     data-ad-slot="3173116539"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-      </ul>
-      </div>
-  </div>
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/2-SAT/" style="font-size: 10px;">2-SAT</a> <a href="/tags/FFT-NTT/" style="font-size: 11.67px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 11.67px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 10.83px;">ST算法</a> <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dfs序/" style="font-size: 11.67px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 15.83px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 10.83px;">乘法逆元</a> <a href="/tags/二分图/" style="font-size: 10px;">二分图</a> <a href="/tags/二分图匹配/" style="font-size: 10.83px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 11.67px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/倍增/" style="font-size: 11.67px;">倍增</a> <a href="/tags/前缀和/" style="font-size: 10.83px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 10.83px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 10.83px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 10.83px;">可持久化trie</a> <a href="/tags/后缀自动机/" style="font-size: 10.83px;">后缀自动机</a> <a href="/tags/启发式合并/" style="font-size: 11.67px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 10.83px;">堆</a> <a href="/tags/复杂度分析/" style="font-size: 10px;">复杂度分析</a> <a href="/tags/多项式/" style="font-size: 10px;">多项式</a> <a href="/tags/字符串/" style="font-size: 13.33px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10.83px;">容斥原理</a> <a href="/tags/差分/" style="font-size: 10.83px;">差分</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11.67px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.33px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 14.17px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10.83px;">数论</a> <a href="/tags/最小割/" style="font-size: 10px;">最小割</a> <a href="/tags/最短路/" style="font-size: 10.83px;">最短路</a> <a href="/tags/最近公共祖先/" style="font-size: 13.33px;">最近公共祖先</a> <a href="/tags/构造/" style="font-size: 10px;">构造</a> <a href="/tags/栈/" style="font-size: 10.83px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 17.5px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 10.83px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 11.67px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 12.5px;">概率</a> <a href="/tags/欧拉函数/" style="font-size: 10px;">欧拉函数</a> <a href="/tags/欧拉路/" style="font-size: 10px;">欧拉路</a> <a href="/tags/点分治/" style="font-size: 10.83px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11.67px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 12.5px;">生成函数</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/矩阵/" style="font-size: 11.67px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线性基/" style="font-size: 10px;">线性基</a> <a href="/tags/线段树/" style="font-size: 19.17px;">线段树</a> <a href="/tags/组合数/" style="font-size: 10.83px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 15px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 12.5px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 16.67px;">背包</a> <a href="/tags/虚树/" style="font-size: 11.67px;">虚树</a> <a href="/tags/行列式/" style="font-size: 10px;">行列式</a> <a href="/tags/计数dp/" style="font-size: 10.83px;">计数dp</a> <a href="/tags/计算几何/" style="font-size: 10px;">计算几何</a> <a href="/tags/贪心/" style="font-size: 11.67px;">贪心</a> <a href="/tags/费用流/" style="font-size: 10px;">费用流</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 10.83px;">高斯消元</a>
+    </div>
 </div>
-
         
         </div>
     
@@ -773,7 +716,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/">
                 
-                    <img src="/images/logo.png" alt="高斯消元" height="28">
+                    <img src="/images/logo.png" alt="矩阵和行列式" height="28">
                 
                 </a>
                 <p class="is-size-7">
