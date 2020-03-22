@@ -19,7 +19,7 @@
 <meta property="og:description" content="Summarize#2128. 「HAOI2015」数字串拆分">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://tth37.cn/images/og_image.png">
-<meta property="og:updated_time" content="2020-03-22T14:49:17.132Z">
+<meta property="og:updated_time" content="2020-03-22T15:05:55.003Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="「HAOI2015」数字串拆分">
 <meta name="twitter:description" content="Summarize#2128. 「HAOI2015」数字串拆分">
@@ -145,7 +145,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    5 minutes read (About 740 words)
+                    5 minutes read (About 744 words)
                 </span>
                 
                 
@@ -163,7 +163,7 @@
 
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>一道神仙题。对矩阵初学者极不友好。</p>
 <p>$f$ 函数的计算非常简单，递推公式如下：<br>$$<br>f(i)=f(i-1)+f(i-2)+..+f(i-m)<br>$$<br>容易看出， $f(i)$ 可以使用矩阵加速递推。以 $m=3$ 为例，构造矩阵</p>
-<p>$$<br>A=\left[ \begin{matrix}   1 &amp; 1 &amp; 1 \<br>  1 &amp; 0 &amp; 0 \<br>    0 &amp; 1 &amp; 0  \end{matrix}  \right]<br>$$<br>那么 $f(n)$ 即为 $(A^n)_{1,1}$ 。</p>
+<p>$$<br>\begin{aligned}<br>A=\left[ \begin{matrix}   1 &amp; 1 &amp; 1 \<br>  1 &amp; 0 &amp; 0 \<br>    0 &amp; 1 &amp; 0  \end{matrix}  \right]<br>\end{aligned}<br>$$<br>那么 $f(n)$ 即为 $(A^n)_{1,1}$ 。</p>
 <p>但我们要求的是 $g(S)$ 。考虑将 $g(S)$ 表示为矩阵的形式，最终答案为矩阵的第 $[1,1]$ 项。</p>
 <p>考虑 $g(123)$ 的推导。<br>$$<br>\begin{equation}<br>\begin{aligned}<br>g(123) &amp;= f(1+2+3)+f(12+3)+f(1+23)+f(123) \<br>&amp;= A^{1+2+3}+A^{12+3}+A^{1+23}+A^{123} \<br>&amp;= A^1\times A^2\times A^3+A^{12}\times A^3+A^1\times A^{23}+A^{123}<br>\end{aligned}<br>\end{equation}<br>$$</p>
 <p>转化为以上形式后，记 $g’(n)$ 为将数字 $S$ 的前 $n$ 项分解后得到的矩阵；在本例中，$g’(3)=g(123)$ 。</p>
