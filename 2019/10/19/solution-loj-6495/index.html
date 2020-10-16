@@ -165,19 +165,19 @@
 <p>题目概括征集中~</p>
 <p><strong>重金（5 RMB）征集状压 dp 解法~</strong> <a href>@所有人</a></p>
 </blockquote>
-<div class="note default"><p>这题也太巧妙了叭！ ——Mr.G</p>
-
+<p><div class="note default"><p>这题也太巧妙了叭！ ——Mr.G</p></div></p>
 <a id="more"></a>
-
 <h4 id="Solution-1-O-n-4"><a href="#Solution-1-O-n-4" class="headerlink" title="Solution 1 : $O(n^4)$"></a>Solution 1 : $O(n^4)$</h4><p>注意到节点 2 的父节点一定为 1；因此可以将以 2 为根的子树与剩余部分分开讨论。</p>
 <p>定义状态 $f[i][j]$ 表示有 $i$ 个节点，深度为 $j$ 的方案数。</p>
 <p>设以 2 为根的子树中共有 $x$ 个节点。情况一：子树 2 的深度恰好为 $j-1$，剩余部分的深度任意；情况二：子树 2 的深度任意，剩余部分的深度恰好为 $j$。</p>
-<p>由于两棵子树的节点编号为 $3…i$ 间的任意整数，所以求出方案数之后需乘上标号的方案数。<br>$$<br>f[i][j]=\sum_{x=1}^{i-1}[\sum_{k=1}^{j}f[x][j-1]\times f[i-x][k]\times {i-2\choose x-1}+\sum_{k=1}^{j-2}f[x][k]\times f[i-x][j]\times{i-2\choose x-1}]<br>$$<br>对于期望，只需将 $\sum_{i=1}^n f[n][i]\times i$ 除以 $(n-1)!$ 即可。</p>
+<p>由于两棵子树的节点编号为 $3…i$ 间的任意整数，所以求出方案数之后需乘上标号的方案数。</p>
+<script type="math/tex; mode=display">
+f[i][j]=\sum_{x=1}^{i-1}[\sum_{k=1}^{j}f[x][j-1]\times f[i-x][k]\times {i-2\choose x-1}+\sum_{k=1}^{j-2}f[x][k]\times f[i-x][j]\times{i-2\choose x-1}]</script><p>对于期望，只需将 $\sum_{i=1}^n f[n][i]\times i$ 除以 $(n-1)!$ 即可。</p>
 <p>对于四舍五入，可打表。（正经）</p>
 <p>代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">30</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> tb[] = &#123;<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>, <span class="hljs-number">6</span>&#125;;</span><br><span class="line"></span><br><span class="line">ll n, p;</span><br><span class="line">ll fac[maxn], inv[maxn], facinv[maxn];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">C</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> fac[n] * facinv[n - m] % p * facinv[m] % p;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ll f[maxn][maxn];</span><br><span class="line">ll ans = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">cin</span> &gt;&gt; n &gt;&gt; p;</span><br><span class="line">    fac[<span class="hljs-number">0</span>] = fac[<span class="hljs-number">1</span>] = inv[<span class="hljs-number">1</span>] = facinv[<span class="hljs-number">0</span>] = facinv[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        inv[i] = (p - p / i) * inv[p % i] % p;</span><br><span class="line">        fac[i] = fac[i - <span class="hljs-number">1</span>] * i % p;</span><br><span class="line">        facinv[i] = facinv[i - <span class="hljs-number">1</span>] * inv[i] % p;</span><br><span class="line">    &#125;</span><br><span class="line">    f[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>, f[<span class="hljs-number">2</span>][<span class="hljs-number">2</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">3</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">1</span>; j &lt;= n; ++j) &#123;</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = <span class="hljs-number">1</span>; x &lt;= i - <span class="hljs-number">1</span>; ++x) &#123;</span><br><span class="line">                <span class="hljs-keyword">int</span> t1 = <span class="hljs-number">0</span>, t2 = <span class="hljs-number">0</span>;</span><br><span class="line">                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span>; k &lt;= j; ++k)</span><br><span class="line">                    t1 = (t1 + f[x][j - <span class="hljs-number">1</span>] * f[i - x][k] % p * C(i - <span class="hljs-number">2</span>, x - <span class="hljs-number">1</span>) % p) % p;</span><br><span class="line">                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">1</span>; k &lt;= j - <span class="hljs-number">2</span>; ++k)</span><br><span class="line">                    t2 = (t2 + f[x][k] * f[i - x][j] % p * C(i - <span class="hljs-number">2</span>, x - <span class="hljs-number">1</span>) % p) % p;</span><br><span class="line">                f[i][j] = (f[i][j] + t1 + t2) % p;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        ans = (ans + f[n][i] * i) % p;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n - <span class="hljs-number">1</span>; ++i)</span><br><span class="line">        ans = (ans * inv[i]) % p;</span><br><span class="line">    <span class="hljs-built_in">cout</span> &lt;&lt; tb[n] &lt;&lt; <span class="hljs-built_in">endl</span> &lt;&lt; ans;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Solution-2-O-2-n-n-2"><a href="#Solution-2-O-2-n-n-2" class="headerlink" title="Solution 2 : $O(2^n*n^2)$"></a>Solution 2 : $O(2^n*n^2)$</h4><p><div class="note primary"><p>状压 dp 解法 </p></div></p>
 
-<h4 id="Solution-2-O-2-n-n-2"><a href="#Solution-2-O-2-n-n-2" class="headerlink" title="Solution 2 : $O(2^n*n^2)$"></a>Solution 2 : $O(2^n*n^2)$</h4><div class="note primary"><p>状压 dp 解法 </p></div></div>
         </div>
         
         <div class="level is-size-7 is-uppercase">
@@ -290,7 +290,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            115
+                            116
                         </p>
                     </a>
                 </div>
@@ -460,6 +460,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-02T05:59:19.000Z">2020-05-02</time></div>
+                    <a href="/2020/05/02/solution-qbxt-173/" class="title has-link-black-ter is-size-6 has-text-weight-normal">solution-qbxt-173</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-13T15:22:20.000Z">2020-03-13</time></div>
                     <a href="/2020/03/13/solution-loj-3211/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「CSP-S 2019」Emiya 家今天的饭</a>
                     <p class="is-size-7 is-uppercase">
@@ -501,19 +514,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T15:24:08.000Z">2020-03-01</time></div>
                     <a href="/2020/03/01/solution-jsk-6012C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客 2020.2 提高组」最强之剑</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T15:23:59.000Z">2020-03-01</time></div>
-                    <a href="/2020/03/01/solution-jsk-6012B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客 2020.2 提高组」保卫水库</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
                     </p>

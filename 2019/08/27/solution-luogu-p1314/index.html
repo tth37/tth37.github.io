@@ -11,7 +11,7 @@
 
 
     <meta name="description" content="题目链接 咕咕咕">
-<meta name="keywords" content="二分答案,前缀和,倍增">
+<meta name="keywords" content="二分答案,倍增,前缀和">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题解-luogu-p1314聪明的质监员">
 <meta property="og:url" content="https://tth37.cn/2019/08/27/solution-luogu-p1314/index.html">
@@ -163,7 +163,6 @@
 <p>咕咕咕</p>
 </blockquote>
 <a id="more"></a>
-
 <p>本题难度不大，第一眼就能看出需要用二分答案或<strong>倍增答案</strong>解决。</p>
 <p>需要解决的第一个问题是如何根据一个猜测的参数 $W$ ，快速计算出检验结果 $Y$ 。由于只有 $w_j \ge W$ 的矿石才会对检验结果做出贡献，因此我们可以将 $w_j &lt; W$ 的矿石忽略并预处理前缀和，并且回答 $M$ 个询问即可。</p>
 <p>接下来应该考虑如何计算猜测值 $W$ 。观察到 $Y(W)$ 是单调不增的，我们可以用<strong>倍增</strong>求出满足 $Y \ge S$  的最大 $W$ 值，那么满足 $Y&lt;S$ 的最小 $W$ 值一定为 $W+1$ 。</p>
@@ -282,7 +281,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            115
+                            116
                         </p>
                     </a>
                 </div>
@@ -452,6 +451,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-02T05:59:19.000Z">2020-05-02</time></div>
+                    <a href="/2020/05/02/solution-qbxt-173/" class="title has-link-black-ter is-size-6 has-text-weight-normal">solution-qbxt-173</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-13T15:22:20.000Z">2020-03-13</time></div>
                     <a href="/2020/03/13/solution-loj-3211/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「CSP-S 2019」Emiya 家今天的饭</a>
                     <p class="is-size-7 is-uppercase">
@@ -493,19 +505,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T15:24:08.000Z">2020-03-01</time></div>
                     <a href="/2020/03/01/solution-jsk-6012C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客 2020.2 提高组」最强之剑</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T15:23:59.000Z">2020-03-01</time></div>
-                    <a href="/2020/03/01/solution-jsk-6012B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客 2020.2 提高组」保卫水库</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
                     </p>

@@ -11,7 +11,7 @@
 
 
     <meta name="description" content="题目链接  高精度怎能少了Python3题解。。。 贪心策略一楼dalao已经讲得很清楚了，上一发超短代码（学Python就是为了水高精）">
-<meta name="keywords" content="python,贪心">
+<meta name="keywords" content="贪心,python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="题解-luogu-p1080国王游戏">
 <meta property="og:url" content="https://tth37.cn/2019/01/26/solution-luogu-p1080/index.html">
@@ -164,7 +164,6 @@
 <p>高精度怎能少了Python3题解。。。</p>
 <p>贪心策略一楼dalao已经讲得很清楚了，上一发超短代码（学Python就是为了水高精）</p>
 <a id="more"></a>
-
 <figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">N=int(input())</span><br><span class="line">s=input().split()</span><br><span class="line">S=int(s[<span class="hljs-number">0</span>])</span><br><span class="line">T=int(s[<span class="hljs-number">1</span>])</span><br><span class="line">a=[]</span><br><span class="line"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>,N+<span class="hljs-number">1</span>):</span><br><span class="line">    k=input().split()</span><br><span class="line">    a.append((int(k[<span class="hljs-number">0</span>]),int(k[<span class="hljs-number">1</span>])))</span><br><span class="line">a.sort(key=<span class="hljs-keyword">lambda</span> x:x[<span class="hljs-number">0</span>]*x[<span class="hljs-number">1</span>])</span><br><span class="line">ans=<span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">0</span>,N):</span><br><span class="line">    <span class="hljs-keyword">if</span>(S//(a[i])[<span class="hljs-number">1</span>]&gt;ans):</span><br><span class="line">        ans=S//(a[i])[<span class="hljs-number">1</span>]</span><br><span class="line">    S*=(a[i])[<span class="hljs-number">0</span>]</span><br><span class="line">print(ans)</span><br></pre></td></tr></table></figure>
         </div>
         
@@ -278,7 +277,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            115
+                            116
                         </p>
                     </a>
                 </div>
@@ -448,6 +447,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-02T05:59:19.000Z">2020-05-02</time></div>
+                    <a href="/2020/05/02/solution-qbxt-173/" class="title has-link-black-ter is-size-6 has-text-weight-normal">solution-qbxt-173</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-13T15:22:20.000Z">2020-03-13</time></div>
                     <a href="/2020/03/13/solution-loj-3211/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「CSP-S 2019」Emiya 家今天的饭</a>
                     <p class="is-size-7 is-uppercase">
@@ -489,19 +501,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T15:24:08.000Z">2020-03-01</time></div>
                     <a href="/2020/03/01/solution-jsk-6012C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客 2020.2 提高组」最强之剑</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T15:23:59.000Z">2020-03-01</time></div>
-                    <a href="/2020/03/01/solution-jsk-6012B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客 2020.2 提高组」保卫水库</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
                     </p>

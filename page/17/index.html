@@ -134,6 +134,64 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-19T15:39:55.000Z">2019-06-19</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/题解/">题解</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    5 minutes read (About 706 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/06/19/solution-luogu-p3953/">题解-luogu-p3953逛公园</a>
+            
+        </h1>
+        <div class="content">
+            <blockquote>
+<p><a href="https://www.luogu.org/problemnew/show/P3953" target="_blank" rel="noopener">题目链接</a></p>
+<p>给定一个$n$个点$m$条边的有向带权图，设起点到终点的最短路为$d$，求起点到终点满足权值总和小于等于$(d+k)$的路径数量</p>
+<p>$1 \le p\le 10^9 $ , $1 \le n\le 10^5$ , $1 \le m\le 2 \times 10^5$ , $1 \le k\le 50$</p>
+<p>感谢@oy 的贡献</p>
+</blockquote>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/06/19/solution-luogu-p3953/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-06-08T17:42:17.000Z">2019-06-09</time>
                 
                 <div class="level-item">
@@ -386,7 +444,9 @@
 </blockquote>
 <p>背包类树形dp。本题需要运用分组背包模型。</p>
 <p>首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。</p>
-<p>可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：<br>$$<br>f[u][i]=\max_{v\in son(u)}{f[u][i-j]+f[v][j]-w}<br>$$<br>其中，$v$为$u$的子节点，$w$为这条边的权值。在$u$每个子节点上有许多“物品”，“物品”总数即为以$v$为根的子树上用户的个数；每个“物品”所具有的价值即为其最大利润，即$f[v][j]$。同时不应忽略边权对利润带来的影响。</p>
+<p>可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：</p>
+<script type="math/tex; mode=display">
+f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$的子节点，$w$为这条边的权值。在$u$每个子节点上有许多“物品”，“物品”总数即为以$v$为根的子树上用户的个数；每个“物品”所具有的价值即为其最大利润，即$f[v][j]$。同时不应忽略边权对利润带来的影响。</p>
 <p>注意细节处理及边界。代码如下：</p>
         </div>
         
@@ -395,65 +455,6 @@
             <div class="level-start">
                 <div class="level-item">
                 <a class="button is-size-7 is-light" href="/2019/04/25/solution-luogu-p1273/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-13T13:58:41.000Z">2019-04-13</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/算法学习/">算法学习</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/categories/算法学习/数论专题/">数论专题</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    2 minutes read (About 333 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/13/algorithm-maths-primecheck/">算法学习-数论专题-素数的判定</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p>版权声明：本篇文章由特邀讲师胡家睿撰写，tth37只负责搬运、整理和发布；版权归胡家睿所有。</p>
-</blockquote>
-<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><blockquote>
-<p>素数定义：除1和本身以外没有其他因数的数</p>
-</blockquote>
-<p>素数在信息学竞赛中有较多的应用，素数判定是解决复杂数论问题的基础。本篇文章介绍了一些素数判定的方法。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/04/13/algorithm-maths-primecheck/#more">Read More</a>
                 </div>
             </div>
         </div>
@@ -543,7 +544,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            115
+                            116
                         </p>
                     </a>
                 </div>
@@ -713,6 +714,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-02T05:59:19.000Z">2020-05-02</time></div>
+                    <a href="/2020/05/02/solution-qbxt-173/" class="title has-link-black-ter is-size-6 has-text-weight-normal">solution-qbxt-173</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-13T15:22:20.000Z">2020-03-13</time></div>
                     <a href="/2020/03/13/solution-loj-3211/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「CSP-S 2019」Emiya 家今天的饭</a>
                     <p class="is-size-7 is-uppercase">
@@ -754,19 +768,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T15:24:08.000Z">2020-03-01</time></div>
                     <a href="/2020/03/01/solution-jsk-6012C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客 2020.2 提高组」最强之剑</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T15:23:59.000Z">2020-03-01</time></div>
-                    <a href="/2020/03/01/solution-jsk-6012B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客 2020.2 提高组」保卫水库</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
                     </p>

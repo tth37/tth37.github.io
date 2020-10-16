@@ -166,12 +166,16 @@
 <p>$n \le 10000000$</p>
 </blockquote>
 <a id="more"></a>
-
-<p>记 $f(i,j)$ 表示 $n$ 秒种后，主队进 $i$ 个球，客队进 $j$ 个球的概率。则有：<br>$$<br>f(i,j)={n \choose i}\times p^i\times (1-p)^{n-i} \times {n\choose j}\times q^j \times (1-q)^{n-j}<br>$$<br>要使得 $i&gt;j$ ，即求：<br>$$<br>\sum_{i=1}^n\sum_{j=0}^{i-1}{n\choose i}\times p^i\times (1-p)^{n-i}\times {n\choose j}\times q^j \times (1-q)^{n-j}<br>$$<br>化简，得：<br>$$<br>\sum_{i=1}^n {n\choose i}\times p^i\times (1-p)^{n-i}\times(\sum_{j=0}^{i-1}{n\choose j}\times q^j \times (1-q)^{n-j})<br>$$<br>$O(n)$ 预处理逆元与 $p$、$q$ 的 $n$ 次方即可。组合数可以递推计算以卡常。</p>
+<p>记 $f(i,j)$ 表示 $n$ 秒种后，主队进 $i$ 个球，客队进 $j$ 个球的概率。则有：</p>
+<script type="math/tex; mode=display">
+f(i,j)={n \choose i}\times p^i\times (1-p)^{n-i} \times {n\choose j}\times q^j \times (1-q)^{n-j}</script><p>要使得 $i&gt;j$ ，即求：</p>
+<script type="math/tex; mode=display">
+\sum_{i=1}^n\sum_{j=0}^{i-1}{n\choose i}\times p^i\times (1-p)^{n-i}\times {n\choose j}\times q^j \times (1-q)^{n-j}</script><p>化简，得：</p>
+<script type="math/tex; mode=display">
+\sum_{i=1}^n {n\choose i}\times p^i\times (1-p)^{n-i}\times(\sum_{j=0}^{i-1}{n\choose j}\times q^j \times (1-q)^{n-j})</script><p>$O(n)$ 预处理逆元与 $p$、$q$ 的 $n$ 次方即可。组合数可以递推计算以卡常。</p>
 <p>注意实现细节，本题还是挺水的。</p>
 <p>代码如下：</p>
 <figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">10000005</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> mod = <span class="hljs-number">1e9</span> + <span class="hljs-number">7</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">int</span> <span class="hljs-title">qpow</span><span class="hljs-params">(<span class="hljs-keyword">int</span> a, <span class="hljs-keyword">int</span> b)</span> </span>&#123;</span><br><span class="line">	<span class="hljs-keyword">int</span> ret = <span class="hljs-number">1</span>;</span><br><span class="line">	<span class="hljs-keyword">while</span> (b) &#123;</span><br><span class="line">		<span class="hljs-keyword">if</span> (b &amp; <span class="hljs-number">1</span>) ret = <span class="hljs-number">1l</span>l * ret * a % mod;</span><br><span class="line">		a = <span class="hljs-number">1l</span>l * a * a % mod;</span><br><span class="line">		b &gt;&gt;= <span class="hljs-number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-keyword">return</span> ret;</span><br><span class="line">&#125;</span><br><span class="line"><span class="hljs-keyword">int</span> inv[maxn];</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> n, ans;</span><br><span class="line"><span class="hljs-keyword">int</span> p, q, p2, q2;</span><br><span class="line"><span class="hljs-keyword">int</span> invp2, invq2;</span><br><span class="line"><span class="hljs-keyword">int</span> pa, pb, qa, qb;</span><br><span class="line"><span class="hljs-keyword">int</span> powp, powq;</span><br><span class="line"><span class="hljs-keyword">int</span> powp2, powq2;</span><br><span class="line"><span class="hljs-keyword">int</span> sq;</span><br><span class="line"><span class="hljs-keyword">int</span> C;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;n);</span><br><span class="line">	<span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;pa, &amp;pb);</span><br><span class="line">	p = <span class="hljs-number">1l</span>l * pa * qpow(pb, mod - <span class="hljs-number">2</span>) % mod;</span><br><span class="line">	p2 = (<span class="hljs-number">1</span> - p + mod) % mod;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;qa, &amp;qb);</span><br><span class="line">	q = <span class="hljs-number">1l</span>l * qa * qpow(qb, mod - <span class="hljs-number">2</span>) % mod;</span><br><span class="line">	q2 = (<span class="hljs-number">1</span> - q + mod) % mod;</span><br><span class="line">	<span class="hljs-keyword">if</span> (p == <span class="hljs-number">1</span>)</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, (<span class="hljs-number">1</span> - qpow(q, n) + mod) % mod), <span class="hljs-number">0</span>;</span><br><span class="line">    inv[<span class="hljs-number">1</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">2</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        inv[i] = <span class="hljs-number">1l</span>l * (mod - mod / i) * inv[mod % i] % mod;</span><br><span class="line">    &#125;</span><br><span class="line">    C = <span class="hljs-number">1</span>;</span><br><span class="line">    powp = <span class="hljs-number">1</span>, powq = <span class="hljs-number">1</span>;</span><br><span class="line">    powp2 = qpow(p2, n), powq2 = qpow(q2, n);</span><br><span class="line">    invp2 = qpow(p2, mod - <span class="hljs-number">2</span>), invq2 = qpow(q2, mod - <span class="hljs-number">2</span>);</span><br><span class="line">    <span class="hljs-keyword">int</span> tp = <span class="hljs-number">1l</span>l * powp * powp2 % mod, tq = <span class="hljs-number">1l</span>l * powq * powq2 % mod;</span><br><span class="line">    <span class="hljs-keyword">int</span> mp = <span class="hljs-number">1l</span>l * p * invp2 % mod, mq = <span class="hljs-number">1l</span>l * q * invq2 % mod;</span><br><span class="line">	sq = powq2;</span><br><span class="line">	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">		C = <span class="hljs-number">1l</span>l * C * (n - i + <span class="hljs-number">1</span>) % mod * inv[i] % mod;</span><br><span class="line">        tp = <span class="hljs-number">1l</span>l * tp * mp % mod;</span><br><span class="line">        tq = <span class="hljs-number">1l</span>l * tq * mq % mod;</span><br><span class="line">        ans = (ans + <span class="hljs-number">1l</span>l * tp % mod * sq % mod * C) % mod;</span><br><span class="line">		sq = (sq + <span class="hljs-number">1l</span>l * tq % mod * C) % mod;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, ans);</span><br><span class="line">	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 
         </div>
         
@@ -285,7 +289,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            115
+                            116
                         </p>
                     </a>
                 </div>
@@ -455,6 +459,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-02T05:59:19.000Z">2020-05-02</time></div>
+                    <a href="/2020/05/02/solution-qbxt-173/" class="title has-link-black-ter is-size-6 has-text-weight-normal">solution-qbxt-173</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-13T15:22:20.000Z">2020-03-13</time></div>
                     <a href="/2020/03/13/solution-loj-3211/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「CSP-S 2019」Emiya 家今天的饭</a>
                     <p class="is-size-7 is-uppercase">
@@ -496,19 +513,6 @@
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T15:24:08.000Z">2020-03-01</time></div>
                     <a href="/2020/03/01/solution-jsk-6012C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客 2020.2 提高组」最强之剑</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T15:23:59.000Z">2020-03-01</time></div>
-                    <a href="/2020/03/01/solution-jsk-6012B/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客 2020.2 提高组」保卫水库</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
                     </p>
