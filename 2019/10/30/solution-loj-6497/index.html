@@ -161,25 +161,21 @@
             <p><a href="https://loj.ac/problem/6497" target="_blank" rel="noopener">#6497. 「雅礼集训 2018 Day1」图</a></p>
 <h3 id="Summarize"><a href="#Summarize" class="headerlink" title="Summarize"></a>Summarize</h3><p>题目概括征集中~</p>
 <a id="more"></a>
+
 <h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>特别屌的一个计数 DP。</p>
 <p>记 $g(i)$ 表示以 $i$ 节点结尾的交错路径条数。</p>
 <p>定义状态：$f[i][k][x][y]$ 表示考虑前 $i$ 个节点，奇偶性为 $k=0/1$； $x=0/1$ 表示是否存在 $g()$ 为奇数的黑色节点， $y=0/1$ 表示是否存在 $g()$ 为奇数的白色节点。</p>
 <p>考虑转移：假设已经求出 $f[i][k][x][y]$。枚举第 $i+1$ 个节点的颜色。</p>
 <p>当第 $i+1$ 个节点为白色时：</p>
 <p>如果 $x=0$，即不存在 $g()$ 为奇数的黑色节点，那么无论如何连边，总的原方案的奇偶性一定会发生改变。考虑如果有黑色节点向 $i+1$ 连边，则交错路径会增加偶数条（即增加 $g()$）；如果有白色节点向其连边，则交错路径数不变；第 $i+1$ 个节点单独作为一条路径，因此交错路径增加了奇数条，奇偶性发生改变。</p>
-<p>转移方程：</p>
-<script type="math/tex; mode=display">
-f[i+1][k\oplus1][x][1]=f[i+1][k\oplus1][x][1]+2^i\times f[i][k][x][y]</script><p>如果 $x=1$，那么情况会略微复杂；注意到如果有偶数个 $g()$ 为奇数的黑色节点向 $i+1$ 连边，则奇偶性一定改变；如果有奇数个 $g()$ 为奇数的黑色节点向 $i+1$ 连边，则奇偶性不会改变。假设 $g()$ 为奇数的黑色节点共有 $t$ 个。那么转移方程如下：</p>
-<script type="math/tex; mode=display">
-f[i+1][k\oplus1][x][1]=f[i+1][k\oplus1][x][1]+({t\choose0}+{t\choose2}+..+{t\choose 2m})\times 2^{i-t}\times f[i][k][x][y]</script><script type="math/tex; mode=display">
-f[i+1][k][x][y]=f[i+1][k][x][y]+({t\choose1}+{t\choose3}+..+{t\choose 2m+1})\times 2^{i-t}\times f[i][k][x][y]</script><p>可以证明：</p>
-<script type="math/tex; mode=display">
-{t\choose0}+{t\choose2}+..+{t\choose 2m}={t\choose1}+{t\choose3}+..+{t\choose 2m+1}=2^{t-1}</script><p>因此转移方程可以简化为：</p>
-<script type="math/tex; mode=display">
-f[i+1][k\oplus1][x][1]=f[i+1][k\oplus1][x][1]+2^{i-1}\times f[i][k][x][y]</script><script type="math/tex; mode=display">
-f[i+1][k][x][y]=f[i+1][k][x][y]+2^{i-1}\times f[i][k][x][y]</script><p>当第 $i+1$ 个节点为黑色时，情况类似。</p>
+<p>转移方程：<br>$$<br>f[i+1][k\oplus1][x][1]=f[i+1][k\oplus1][x][1]+2^i\times f[i][k][x][y]<br>$$<br>如果 $x=1$，那么情况会略微复杂；注意到如果有偶数个 $g()$ 为奇数的黑色节点向 $i+1$ 连边，则奇偶性一定改变；如果有奇数个 $g()$ 为奇数的黑色节点向 $i+1$ 连边，则奇偶性不会改变。假设 $g()$ 为奇数的黑色节点共有 $t$ 个。那么转移方程如下：<br>$$<br>f[i+1][k\oplus1][x][1]=f[i+1][k\oplus1][x][1]+({t\choose0}+{t\choose2}+..+{t\choose 2m})\times 2^{i-t}\times f[i][k][x][y]<br>$$</p>
+<p>$$<br>f[i+1][k][x][y]=f[i+1][k][x][y]+({t\choose1}+{t\choose3}+..+{t\choose 2m+1})\times 2^{i-t}\times f[i][k][x][y]<br>$$</p>
+<p>可以证明：<br>$$<br>{t\choose0}+{t\choose2}+..+{t\choose 2m}={t\choose1}+{t\choose3}+..+{t\choose 2m+1}=2^{t-1}<br>$$<br>因此转移方程可以简化为：<br>$$<br>f[i+1][k\oplus1][x][1]=f[i+1][k\oplus1][x][1]+2^{i-1}\times f[i][k][x][y]<br>$$</p>
+<p>$$<br>f[i+1][k][x][y]=f[i+1][k][x][y]+2^{i-1}\times f[i][k][x][y]<br>$$</p>
+<p>当第 $i+1$ 个节点为黑色时，情况类似。</p>
 <p>代码实现非常简单，不再赘述。</p>
 <h3 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h3><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAXN = <span class="hljs-number">200005</span>;</span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MOD = <span class="hljs-number">998244353</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span> n, p;</span><br><span class="line"><span class="hljs-keyword">int</span> f[MAXN][<span class="hljs-number">2</span>][<span class="hljs-number">2</span>][<span class="hljs-number">2</span>];</span><br><span class="line"><span class="hljs-keyword">int</span> c[MAXN];</span><br><span class="line"><span class="hljs-keyword">int</span> pow2[MAXN];</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d%d"</span>, &amp;n, &amp;p);</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i)</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">"%d"</span>, &amp;c[i]);</span><br><span class="line">    pow2[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; ++i) &#123;</span><br><span class="line">        pow2[i] = pow2[i - <span class="hljs-number">1</span>] &lt;&lt; <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">if</span> (pow2[i] &gt; MOD) pow2[i] -= MOD;</span><br><span class="line">    &#125;</span><br><span class="line">    f[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; n; ++i)</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k = <span class="hljs-number">0</span>; k &lt;= <span class="hljs-number">1</span>; ++k)</span><br><span class="line">            <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>; x &lt;= <span class="hljs-number">1</span>; ++x)</span><br><span class="line">                <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> y = <span class="hljs-number">0</span>; y &lt;= <span class="hljs-number">1</span>; ++y) &#123;</span><br><span class="line">                    <span class="hljs-keyword">int</span> cur = f[i][k][x][y];</span><br><span class="line">                    <span class="hljs-keyword">if</span> (c[i + <span class="hljs-number">1</span>] == <span class="hljs-number">-1</span> || c[i + <span class="hljs-number">1</span>] == <span class="hljs-number">0</span>) &#123;</span><br><span class="line">                        <span class="hljs-keyword">if</span> (x == <span class="hljs-number">0</span>)</span><br><span class="line">                            f[i + <span class="hljs-number">1</span>][k ^ <span class="hljs-number">1</span>][x][<span class="hljs-number">1</span>] =</span><br><span class="line">                                (f[i + <span class="hljs-number">1</span>][k ^ <span class="hljs-number">1</span>][x][<span class="hljs-number">1</span>] + <span class="hljs-number">1l</span>l * pow2[i] * cur) % MOD;</span><br><span class="line">                        <span class="hljs-keyword">else</span></span><br><span class="line">                            f[i + <span class="hljs-number">1</span>][k ^ <span class="hljs-number">1</span>][x][<span class="hljs-number">1</span>] =</span><br><span class="line">                                (f[i + <span class="hljs-number">1</span>][k ^ <span class="hljs-number">1</span>][x][<span class="hljs-number">1</span>] + <span class="hljs-number">1l</span>l * pow2[i - <span class="hljs-number">1</span>] * cur) % MOD,</span><br><span class="line">                            f[i + <span class="hljs-number">1</span>][k][x][y] =</span><br><span class="line">                                (f[i + <span class="hljs-number">1</span>][k][x][y] + <span class="hljs-number">1l</span>l * pow2[i - <span class="hljs-number">1</span>] * cur) % MOD;</span><br><span class="line">                    &#125;</span><br><span class="line">                    <span class="hljs-keyword">if</span> (c[i + <span class="hljs-number">1</span>] == <span class="hljs-number">-1</span> || c[i + <span class="hljs-number">1</span>] == <span class="hljs-number">1</span>) &#123;</span><br><span class="line">                        <span class="hljs-keyword">if</span> (y == <span class="hljs-number">0</span>)</span><br><span class="line">                            f[i + <span class="hljs-number">1</span>][k ^ <span class="hljs-number">1</span>][<span class="hljs-number">1</span>][y] =</span><br><span class="line">                                (f[i + <span class="hljs-number">1</span>][k ^ <span class="hljs-number">1</span>][<span class="hljs-number">1</span>][y] + <span class="hljs-number">1l</span>l * pow2[i] * cur) % MOD;</span><br><span class="line">                        <span class="hljs-keyword">else</span></span><br><span class="line">                            f[i + <span class="hljs-number">1</span>][k ^ <span class="hljs-number">1</span>][<span class="hljs-number">1</span>][y] =</span><br><span class="line">                                (f[i + <span class="hljs-number">1</span>][k ^ <span class="hljs-number">1</span>][<span class="hljs-number">1</span>][y] + <span class="hljs-number">1l</span>l * pow2[i - <span class="hljs-number">1</span>] * cur) % MOD,</span><br><span class="line">                            f[i + <span class="hljs-number">1</span>][k][x][y] =</span><br><span class="line">                                (f[i + <span class="hljs-number">1</span>][k][x][y] + <span class="hljs-number">1l</span>l * pow2[i - <span class="hljs-number">1</span>] * cur) % MOD;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"%d"</span>, (f[n][p][<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] + f[n][p][<span class="hljs-number">0</span>][<span class="hljs-number">1</span>] + f[n][p][<span class="hljs-number">1</span>][<span class="hljs-number">0</span>] + f[n][p][<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]) % MOD);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
         </div>
         
@@ -293,7 +289,7 @@ f[i+1][k][x][y]=f[i+1][k][x][y]+2^{i-1}\times f[i][k][x][y]</script><p>当第 $i
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            116
+                            117
                         </p>
                     </a>
                 </div>
@@ -463,6 +459,19 @@ f[i+1][k][x][y]=f[i+1][k][x][y]+2^{i-1}\times f[i][k][x][y]</script><p>当第 $i
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-18T15:47:38.000Z">2020-10-18</time></div>
+                    <a href="/2020/10/18/solution-jsk-t3244/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客模拟赛」自适应平衡多叉处理数据结构</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-02T05:59:19.000Z">2020-05-02</time></div>
                     <a href="/2020/05/02/solution-qbxt-173/" class="title has-link-black-ter is-size-6 has-text-weight-normal">solution-qbxt-173</a>
                     <p class="is-size-7 is-uppercase">
@@ -506,19 +515,6 @@ f[i+1][k][x][y]=f[i+1][k][x][y]+2^{i-1}\times f[i][k][x][y]</script><p>当第 $i
                     <a href="/2020/03/04/algorithm-sam/" class="title has-link-black-ter is-size-6 has-text-weight-normal">后缀自动机</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/算法学习/">算法学习</a> / <a class="has-link-grey -link" href="/categories/算法学习/字符串/">字符串</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T15:24:08.000Z">2020-03-01</time></div>
-                    <a href="/2020/03/01/solution-jsk-6012C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客 2020.2 提高组」最强之剑</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
                     </p>
                 </div>
             </div>

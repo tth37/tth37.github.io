@@ -134,6 +134,63 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-06-19T16:16:06.000Z">2019-06-20</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/公告/">公告</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 277 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/2019/06/20/bulletin-2019-6-20/">公告 2019-6-20</a>
+            
+        </h1>
+        <div class="content">
+            <h2 id="招募启事"><a href="#招募启事" class="headerlink" title="招募启事"></a>招募启事</h2><p>tth37最近发现，他写了<del>好多好多</del>题解啦。但是这些题解全都被展示在Homepage里，导致Homepage不够简洁，题目检索不太方便。</p>
+<p>于是，tth37决定在每篇题解最前面，写一段<strong>题目内容的一句话总结</strong>。但是tth37比较忙，实在不想做这件事，因此他决定<del>招募</del>跪求巨佬来帮他完成这项工作。</p>
+<p>一份完整的一句话总结必须<strong>清楚地概括题面（拒绝花里胡哨）</strong>，并且给出<strong>数据范围</strong>。一切字母必须采用$L^AT_EX$公式。（百度一下？）</p>
+<p>写好一句话总结后，请将其上传至<strong>洛谷剪贴板</strong>，并将剪贴板链接发给tth37。tth37会根据其质量，酌情发送<strong>0.01~0.66元红包</strong>作为报酬。</p>
+<p>如果在座的各位对本活动反响不够热烈，tth37可能会<strong>强迫</strong>你们当中的一些人完成这项任务。当然，<strong>没有报酬</strong>。</p>
+        </div>
+        
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/2019/06/20/bulletin-2019-6-20/#more">Read More</a>
+                </div>
+            </div>
+        </div>
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
                 <time class="level-item has-text-grey" datetime="2019-06-19T15:39:55.000Z">2019-06-19</time>
                 
                 <div class="level-item">
@@ -409,67 +466,6 @@
 
 
 
-    
-<div class="card">
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-04-25T09:25:50.000Z">2019-04-25</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/categories/题解/">题解</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    3 minutes read (About 473 words)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                <a class="has-link-black-ter" href="/2019/04/25/solution-luogu-p1273/">题解-luogu-p1273有线电视网</a>
-            
-        </h1>
-        <div class="content">
-            <blockquote>
-<p><a href="https://www.luogu.org/fe/problem/P1273" target="_blank" rel="noopener">题目链接</a></p>
-</blockquote>
-<p>背包类树形dp。本题需要运用分组背包模型。</p>
-<p>首先定义状态：$f[u][i]$表示以$u$为根的子树上，选择$i$个用户时的最大利润。由于电视公司可能亏本，因此$f$数组应赋极小初值。</p>
-<p>可以将选择的用户个数看作背包的容量维度，将获得的利润看作背包的价值维度。可以设计出如下的状态转移：</p>
-<script type="math/tex; mode=display">
-f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$的子节点，$w$为这条边的权值。在$u$每个子节点上有许多“物品”，“物品”总数即为以$v$为根的子树上用户的个数；每个“物品”所具有的价值即为其最大利润，即$f[v][j]$。同时不应忽略边权对利润带来的影响。</p>
-<p>注意细节处理及边界。代码如下：</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/2019/04/25/solution-luogu-p1273/#more">Read More</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
-</div>
-
-
-
-
-
-
-
-
 
     
 <div class="card card-transparent">
@@ -544,7 +540,7 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$�
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            116
+                            117
                         </p>
                     </a>
                 </div>
@@ -714,6 +710,19 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$�
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-18T15:47:38.000Z">2020-10-18</time></div>
+                    <a href="/2020/10/18/solution-jsk-t3244/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客模拟赛」自适应平衡多叉处理数据结构</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-02T05:59:19.000Z">2020-05-02</time></div>
                     <a href="/2020/05/02/solution-qbxt-173/" class="title has-link-black-ter is-size-6 has-text-weight-normal">solution-qbxt-173</a>
                     <p class="is-size-7 is-uppercase">
@@ -757,19 +766,6 @@ f[u][i]=\max_{v\in son(u)}\{f[u][i-j]+f[v][j]-w\}</script><p>其中，$v$为$u$�
                     <a href="/2020/03/04/algorithm-sam/" class="title has-link-black-ter is-size-6 has-text-weight-normal">后缀自动机</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/算法学习/">算法学习</a> / <a class="has-link-grey -link" href="/categories/算法学习/字符串/">字符串</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T15:24:08.000Z">2020-03-01</time></div>
-                    <a href="/2020/03/01/solution-jsk-6012C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客 2020.2 提高组」最强之剑</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
                     </p>
                 </div>
             </div>

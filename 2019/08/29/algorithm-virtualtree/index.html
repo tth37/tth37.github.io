@@ -160,8 +160,10 @@
         <div class="content">
             <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><p>在处理某些树上问题时，并非树上的所有节点都起作用；这时可以借助虚树，将树上重要的点构造成一棵树，在虚树上处理问题，优化时间复杂度。</p>
 <a id="more"></a>
+
 <h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>用栈来维护虚树上的一条从根到 $u$ 的链。如果 $u$ 是栈顶节点的儿子，则入栈；否则将栈中 dfn 值大于 $\text{lca}(u,s.top())$ 的元素出栈。</p>
 <h5 id="伪代码"><a href="#伪代码" class="headerlink" title="伪代码"></a>伪代码</h5><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">将树上所有关键点按照 dfs 序排序</span><br><span class="line">stack.push(1)</span><br><span class="line">for u = 1 ~ n: //假设当前正在处理节点 u</span><br><span class="line">	lca = Lca(u, stack.top())</span><br><span class="line">	while stack.top() != lca:</span><br><span class="line">		tmp = stack.top()</span><br><span class="line">		stack.pop()</span><br><span class="line">		if (dfn[stack.top()] &lt; dfn[lca]):</span><br><span class="line">			stack.push(lca)</span><br><span class="line">		AddEdge(stack.top(), tmp)</span><br><span class="line">	stack.push(u)</span><br></pre></td></tr></table></figure>
+
 
         </div>
         
@@ -275,7 +277,7 @@
                     </p>
                     <a href="/archives">
                         <p class="title has-text-weight-normal">
-                            116
+                            117
                         </p>
                     </a>
                 </div>
@@ -445,6 +447,19 @@
             
             <div class="media-content">
                 <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-18T15:47:38.000Z">2020-10-18</time></div>
+                    <a href="/2020/10/18/solution-jsk-t3244/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客模拟赛」自适应平衡多叉处理数据结构</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-05-02T05:59:19.000Z">2020-05-02</time></div>
                     <a href="/2020/05/02/solution-qbxt-173/" class="title has-link-black-ter is-size-6 has-text-weight-normal">solution-qbxt-173</a>
                     <p class="is-size-7 is-uppercase">
@@ -488,19 +503,6 @@
                     <a href="/2020/03/04/algorithm-sam/" class="title has-link-black-ter is-size-6 has-text-weight-normal">后缀自动机</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/categories/算法学习/">算法学习</a> / <a class="has-link-grey -link" href="/categories/算法学习/字符串/">字符串</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
-        <article class="media">
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-01T15:24:08.000Z">2020-03-01</time></div>
-                    <a href="/2020/03/01/solution-jsk-6012C/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客 2020.2 提高组」最强之剑</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
                     </p>
                 </div>
             </div>
