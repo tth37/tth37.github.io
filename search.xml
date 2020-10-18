@@ -3,12 +3,7 @@
   <entry>
     <title><![CDATA[「计蒜客模拟赛」自适应平衡多叉处理数据结构]]></title>
     <url>%2F2020%2F10%2F18%2Fsolution-jsk-t3244%2F</url>
-    <content type="text"><![CDATA[#T3244. 「计蒜客模拟赛」自适应平衡多叉处理数据结构 Summarize维护数据结构，每次询问时执行 $O(\sqrt n)$ 次查询操作，每次修改执行一次修改操作。 $n\le 300000$ Solution50pts观察到每次前移 $i$ 步时，下一步停止或前移 $i+1$ 步。因此前移次数不超过 $\sqrt t$ 次。 维护树状数组，$O(\log n)$ 修改，$O(\log n)$ 查询。时间复杂度 $O(n\log n\sqrt n)$。 100pts使用 根号平衡 优化数据结构，$O(\sqrt n)$ 修改，$O(1)$ 查询。时间复杂度 $O(n\sqrt n)$ Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &lt;bits/stdc++.h&gt;using namespace std;const int MAXN = 3e5 + 5;int t, q, l; //tqlint c[MAXN], d[MAXN];// s[i] = c[i] + d[i / l]inline void modify(int p) &#123; int t1 = (p / l + 1) * l - 1; t1 = min(t1, t); for (int i = p; i &lt;= t1; ++i) c[i]++; int t2 = t / l; for (int i = p / l + 1; i &lt;= t2; ++i) d[i]++;&#125;inline int query(int p) &#123; return c[p] + d[p / l];&#125;int main() &#123; freopen("task.in", "r", stdin); freopen("task.out", "w", stdout); scanf("%d%d", &amp;t, &amp;q); l = sqrt(t); while (q--) &#123; int tp, cur; scanf("%d%d", &amp;tp, &amp;cur); if (tp == 0) &#123; modify(cur); &#125; else &#123; int stp = 0, lst = 0; while (1) &#123; int t1 = query(cur), t2 = query(lst); stp = t1 - t2; if (!stp) break; lst = cur, cur += t1; if (cur &gt; t) &#123; cur = -1; break; &#125; &#125; printf("%d\n", cur); &#125; &#125; return 0;&#125;]]></content>
-  </entry>
-  <entry>
-    <title><![CDATA[solution-qbxt-173]]></title>
-    <url>%2F2020%2F05%2F02%2Fsolution-qbxt-173%2F</url>
-    <content type="text"><![CDATA[Summarize题目概括征集中~ Solution对于 1 操作，可以倒序用值域线段树或平衡树维护出每个随从的最终位置。则问题转化为待修改求区间 $\text{mex}$ 。 30 pts我只有 NoteCode12]]></content>
+    <content type="text"><![CDATA[#T3244. 「计蒜客模拟赛」自适应平衡多叉处理数据结构 Summarize维护数据结构，每次询问时执行 $O(\sqrt n)$ 次查询操作，每次修改执行一次修改操作。 $n\le 300000$ Solution50pts观察到每次前移 $i$ 步时，下一步停止或前移 $i+1$ 步。因此前移次数不超过 $\sqrt t$ 次。 维护树状数组，$O(\log n)$ 修改，$O(\log n)$ 查询。时间复杂度 $O(n\log n\sqrt n)$。 100pts使用 根号平衡 优化数据结构，$O(\sqrt n)$ 修改，$O(1)$ 查询。时间复杂度 $O(n\sqrt n)$ Note使用分块思想处理修改-查询操作序列 均摊复杂度 参考 「计蒜客 2020.2 提高组」保卫水库。 适用条件：修改操作具有可累加性。 对于查询操作，将其之前的所有修改操作单独处理均需 $O(1)$ 复杂度；也可将所有修改操作全局标记，需要 $O(n)$ 复杂度。 考虑维护一个修改操作集合。查询操作将操作集合中的所有修改操作单独处理。当操作集合大小达到 $\sqrt n$ 时，进行一次全局标记并清空集合。 均摊时间复杂度 $O(n\sqrt n)$。 根号平衡 通过降低修改复杂度、提高查询复杂度，或降低查询复杂度、提高修改复杂度，以达到平衡，取得最优全局复杂度。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051#include &lt;bits/stdc++.h&gt;using namespace std;const int MAXN = 3e5 + 5;int t, q, l; //tqlint c[MAXN], d[MAXN];// s[i] = c[i] + d[i / l]inline void modify(int p) &#123; int t1 = (p / l + 1) * l - 1; t1 = min(t1, t); for (int i = p; i &lt;= t1; ++i) c[i]++; int t2 = t / l; for (int i = p / l + 1; i &lt;= t2; ++i) d[i]++;&#125;inline int query(int p) &#123; return c[p] + d[p / l];&#125;int main() &#123; freopen("task.in", "r", stdin); freopen("task.out", "w", stdout); scanf("%d%d", &amp;t, &amp;q); l = sqrt(t); while (q--) &#123; int tp, cur; scanf("%d%d", &amp;tp, &amp;cur); if (tp == 0) &#123; modify(cur); &#125; else &#123; int stp = 0, lst = 0; while (1) &#123; int t1 = query(cur), t2 = query(lst); stp = t1 - t2; if (!stp) break; lst = cur, cur += t1; if (cur &gt; t) &#123; cur = -1; break; &#125; &#125; printf("%d\n", cur); &#125; &#125; return 0;&#125;]]></content>
   </entry>
   <entry>
     <title><![CDATA[「CSP-S 2019」Emiya 家今天的饭]]></title>
@@ -913,8 +908,8 @@
       </categories>
       <tags>
         <tag>二分答案</tag>
-        <tag>前缀和</tag>
         <tag>倍增</tag>
+        <tag>前缀和</tag>
       </tags>
   </entry>
   <entry>
