@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[「计蒜客模拟赛」魔镜啊魔镜]]></title>
+    <url>%2F2020%2F10%2F24%2Fsolution-jsk-t3252%2F</url>
+    <content type="text"><![CDATA[#T3252. 「计蒜客模拟赛」魔镜啊魔镜 Summarize一棵 $n$ 个节点的树，给定 $m$ 个标记链。进行 $q$ 次询问，每次询问 $(u,v)$ 链上有多少条标记链。 $n\le 100000,m\le 100000,q\le 100000$ Solution以 $1$ 为根，预处理 $\text{dfs}$ 序。 对于一条标记链 $(u,v)$，如果 $u$、$v$ 存在祖孙关系，则可以推出，如果查询链 $(x,y)$ 完全包含 $(u,v)$，则 $x$、$y$ 分别属于某个区间中。 如果 $u$、$v$ 不存在祖孙关系，则 $x$、$y$ 同样分属在两个区间中。 二维偏序即可处理。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106107108109110111112113114115116#include &lt;bits/stdc++.h&gt;using namespace std;const int MAXN = 1e5 + 5;struct Node &#123; int x, y, val, op, idx; // 0: modify 1: query&#125; node[MAXN &lt;&lt; 4];int node_idx;bool cmp(Node a, Node b) &#123; if (a.x != b.x) return a.x &lt; b.x; if (a.y != b.y) return a.y &lt; b.y; return a.op &lt; b.op;&#125;int n, m, q;int c[MAXN];void modify(int p, int val) &#123; for (; p &lt;= n; p += p &amp; (-p)) c[p] += val;&#125;int query(int p) &#123; int ret = 0; for (; p; p -= p &amp; (-p)) ret += c[p]; return ret;&#125;vector&lt;int&gt; G[MAXN];int f[MAXN][18], dep[MAXN], dfn[MAXN], siz[MAXN], dfn_idx;void dfs(int u, int fa) &#123; f[u][0] = fa, dep[u] = dep[fa] + 1, dfn[u] = ++dfn_idx, siz[u] = 1; for (int i = 1; i &lt;= 17; ++i) f[u][i] = f[f[u][i - 1]][i - 1]; for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; if (v == fa) continue; dfs(v, u); siz[u] += siz[v]; &#125;&#125;int lca(int u, int v) &#123; if (dep[u] &lt; dep[v]) swap(u, v); for (int i = 17; i &gt;= 0; --i) if (dep[f[u][i]] &gt;= dep[v]) u = f[u][i]; if (u == v) return u; for (int i = 17; i &gt;= 0; --i) if (f[u][i] != f[v][i]) u = f[u][i], v = f[v][i]; return f[u][0];&#125;int jump(int u, int d) &#123; int k = 0; while (d) &#123; if (d &amp; 1) u = f[u][k]; k++; d &gt;&gt;= 1; &#125; return u;&#125;int ans[MAXN];int main() &#123; freopen("mirror.in", "r", stdin); freopen("mirror.out", "w", stdout); scanf("%d%d%d", &amp;n, &amp;m, &amp;q); for (int i = 1; i &lt; n; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); G[u].push_back(v), G[v].push_back(u); &#125; dfs(1, 0); for (int i = 1; i &lt;= m; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); int t = lca(u, v); if (t == u || t == v) &#123; if (dep[u] &lt; dep[v]) swap(u, v); // u is deeper int w = jump(u, dep[u] - dep[v] - 1); // jump to v's son node[++node_idx] = (Node) &#123;dfn[u], 1, 1, 0, 0&#125;; node[++node_idx] = (Node) &#123;dfn[u], dfn[w], -1, 0, 0&#125;; node[++node_idx] = (Node) &#123;dfn[u], dfn[w] + siz[w], 1, 0, 0&#125;; node[++node_idx] = (Node) &#123;dfn[u] + siz[u], 1, -1, 0, 0&#125;; node[++node_idx] = (Node) &#123;dfn[u] + siz[u], dfn[w], 1, 0, 0&#125;; node[++node_idx] = (Node) &#123;dfn[u] + siz[u], dfn[w] + siz[w], -1, 0, 0&#125;; &#125; else &#123; node[++node_idx] = (Node) &#123;dfn[u], dfn[v], 1, 0, 0&#125;; node[++node_idx] = (Node) &#123;dfn[u], dfn[v] + siz[v], -1, 0, 0&#125;; node[++node_idx] = (Node) &#123;dfn[u] + siz[u], dfn[v], -1, 0, 0&#125;; node[++node_idx] = (Node) &#123;dfn[u] + siz[u], dfn[v] + siz[v], 1, 0, 0&#125;; &#125; &#125; for (int i = 1; i &lt;= q; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); node[++node_idx] = (Node) &#123;dfn[u], dfn[v], 0, 1, i&#125;; node[++node_idx] = (Node) &#123;dfn[v], dfn[u], 0, 1, i&#125;; &#125; sort(node + 1, node + node_idx + 1, cmp); for (int i = 1; i &lt;= node_idx; ++i) &#123; if (node[i].op == 1) &#123; ans[node[i].idx] += query(node[i].y); &#125; else &#123; modify(node[i].y, node[i].val); &#125; &#125; for (int i = 1; i &lt;= q; ++i) printf("%d\n", ans[i]); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>计蒜客</category>
+      </categories>
+      <tags>
+        <tag>dfs序</tag>
+        <tag>树状数组</tag>
+        <tag>二维偏序</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[「计蒜客模拟赛」新年炸裂]]></title>
     <url>%2F2020%2F10%2F24%2Fsolution-jsk-t3253%2F</url>
     <content type="text"><![CDATA[#T3253. 「计蒜客模拟赛」新年炸裂 Summarize$n$ 个点、$m$ 条边的带权无向图，求从节点 $1$ 回到节点 $1$ 且不走回头路的最短路。 $n\le 10000,m\le 40000$ Solution50pts枚举第一条路走了哪条边，重新建图并将该边删掉，跑最短路即可。 时间复杂度 $O(n^2\log n)$。 100pts本解法由 swt 提供，爆踩标算。 求出以 $1$ 为根的最短路生成树。容易发现，最短环状路径需要经过至少一条非树边。 枚举所有非树边。可以结合最短路树的性质证明，若非树边的两端点在根节点的同一子树内，则该边一定不在最短环状路径中；若在两个不同子树内，则经过该边的最短环状路径长度一定为 $d_u+d_v+w_{u,v}$。更新答案即可。 时间复杂度 $O(n\log n)$。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657585960616263646566676869707172737475767778798081828384858687888990919293949596979899100101102103104105106#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int MAXN = 10000 + 5;const int MAXM = 40000 + 5;const ll INF = 1e15;struct Edge &#123; int v, nxt; ll w;&#125; edge[MAXM &lt;&lt; 1];struct Edge2 &#123; int v, nxt;&#125; edge2[MAXN &lt;&lt; 1];int head[MAXN], head2[MAXN], cnt, cnt2;inline void AddEdge(int u, int v, ll w) &#123; edge[++cnt].v = v; edge[cnt].w = w; edge[cnt].nxt = head[u]; head[u] = cnt;&#125;inline void AddEdge2(int u, int v) &#123; edge2[++cnt2].v = v; edge2[cnt2].nxt = head2[u]; head2[u] = cnt2;&#125;int t, n, m;ll d[MAXN];int fa[MAXN];bool vis[MAXN];void Dijkstra(int s) &#123; for (int i = 1; i &lt;= n; ++i) &#123; d[i] = INF; vis[i] = 0; &#125; d[s] = 0; priority_queue&lt;pair&lt;ll, int&gt; &gt; q; q.push(make_pair(0, s)); while (q.size()) &#123; int u = q.top().second; q.pop(); if (vis[u]) continue; vis[u] = 1; for (int i = head[u]; i; i = edge[i].nxt) &#123; int v = edge[i].v; ll w = edge[i].w; if (d[v] == INF || d[u] + w &lt; d[v]) &#123; fa[v] = u; d[v] = d[u] + w; q.push(make_pair(-1 * d[v], v)); &#125; &#125; &#125;&#125;int c[MAXN];void dfs(int u) &#123; if (u == 1 || fa[u] == 1) c[u] = u; else c[u] = c[fa[u]]; for (int i = head2[u]; i; i = edge2[i].nxt) &#123; int v = edge2[i].v; dfs(v); &#125;&#125;int main() &#123; freopen("burst.in", "r", stdin); freopen("burst.out", "w", stdout); scanf("%d", &amp;t); while (t--) &#123; scanf("%d%d", &amp;n, &amp;m); for (int i = 1; i &lt;= m; ++i) &#123; int u, v; ll w; scanf("%d%d%lld", &amp;u, &amp;v, &amp;w); AddEdge(u, v, w), AddEdge(v, u, w); &#125; Dijkstra(1); for (int i = 2; i &lt;= n; ++i) AddEdge2(fa[i], i); dfs(1); // Paint ll ans = INF; for (int u = 1; u &lt;= n; ++u) &#123; for (int i = head[u]; i; i = edge[i].nxt) &#123; int v = edge[i].v; ll w = edge[i].w; if (fa[u] == v || fa[v] == u) continue; if (c[u] == c[v]) continue; ans = min(ans, d[u] + d[v] + w); &#125; &#125; if (ans == INF) printf("-1\n"); else printf("%lld\n", ans); cnt = cnt2 = 0; for (int i = 1; i &lt;= n; ++i) head[i] = head2[i] = 0; &#125; return 0;&#125;]]></content>
@@ -359,8 +373,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>组合计数</tag>
         <tag>生成函数</tag>
+        <tag>组合计数</tag>
         <tag>动态规划</tag>
         <tag>背包</tag>
         <tag>树形dp</tag>
@@ -436,8 +450,8 @@
       </categories>
       <tags>
         <tag>FFT/NTT</tag>
-        <tag>组合计数</tag>
         <tag>生成函数</tag>
+        <tag>组合计数</tag>
         <tag>容斥原理</tag>
         <tag>启发式合并</tag>
       </tags>
@@ -452,8 +466,8 @@
       </categories>
       <tags>
         <tag>FFT/NTT</tag>
-        <tag>组合计数</tag>
         <tag>生成函数</tag>
+        <tag>组合计数</tag>
       </tags>
   </entry>
   <entry>
@@ -898,8 +912,8 @@
       </categories>
       <tags>
         <tag>树形dp</tag>
-        <tag>点分治</tag>
         <tag>虚树</tag>
+        <tag>点分治</tag>
       </tags>
   </entry>
   <entry>
@@ -1100,8 +1114,8 @@
         <category>数论专题</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
       </tags>
   </entry>
   <entry>
@@ -1112,8 +1126,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>卡特兰数</tag>
         <tag>数学</tag>
+        <tag>卡特兰数</tag>
         <tag>组合数</tag>
         <tag>逆元</tag>
       </tags>
@@ -1398,8 +1412,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>字符串</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
