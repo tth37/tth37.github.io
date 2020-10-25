@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <!-- hexo-inject:begin --><style>*::-webkit-scrollbar {width:10px;height:8px;}*::-webkit-scrollbar-thumb {border-radius:100px;-webkit-box-shadow:inset 0 0 5px rgba(0,0,0,0.2);background:rgb(155, 155, 155);}*::-webkit-scrollbar-track {-webkit-box-shadow:inset 0 0 5px rgba(0,0,0,0.2);border-radius:0;background:rgb(202, 202, 202);}</style><!-- hexo-inject:end --><meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>题解-计蒜客-4594A Too Young - tth37&#39;s Blog</title>
+
+
+    <meta name="description" content="暂不公开">
+<meta name="keywords" content="动态规划,背包">
+<meta property="og:type" content="article">
+<meta property="og:title" content="题解-计蒜客-4594A Too Young">
+<meta property="og:url" content="https://tth37.cn/2019/10/28/solution-jsk-4594A/index.html">
+<meta property="og:site_name" content="tth37&#39;s Blog">
+<meta property="og:description" content="暂不公开">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://tth37.cn/images/og_image.png">
+<meta property="og:updated_time" content="2019-10-28T14:45:14.828Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="题解-计蒜客-4594A Too Young">
+<meta name="twitter:description" content="暂不公开">
+<meta name="twitter:image" content="https://tth37.cn/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/chess-rook.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.4.1/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="is-3-column">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="题解-计蒜客-4594A Too Young" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-28T14:33:11.000Z">2019-10-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/题解/">题解</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    2 minutes read (About 239 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                题解-计蒜客-4594A Too Young
+            
+        </h1>
+        <div class="content">
+            <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder="Hey, password is required here.">
+    <label for="hbePass">Hey, password is required here.</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="1da9317495994d03310bdd38199f4133a90d78254af77684964a52124fc21fb8">c03f3060c9f1ae8757f4c8372012c368774e30d6fe06dac815065efdcaee0a7aa0a4588fa8d267641961ae1523b6e9a24447a40288df714d1def8bc0029614f91c73da50c019c28980acbe2c606c9bee741dface7794a4f2e9b74ad92591440cef739e0ee856985a0dedbfebd07c4bdaebf77d959a025af221d18d729294b6251438a7572888c58882cce47a97625c3e4330ba068031a30a9ff05ac61e0cf033fb5b9582161cdce3fbb381c80fe5ed8a6a50000d93c75be8760af50a7be158155a2105a68dfb0c19b314cf9aab1e64ad95b2a20aafc9fed0e4cc561866e2516c5f62de9d65048c3961137f22aa72bacd18dc36ab4947299d00906836b230f407eb7a60138526d63cb070e5f9454b2264f47dac8574d5ab13867180ba2883607bbff3caa4d21d4bb4a8bfe69d3a7033b79beb35d45e561a60978e35b9d0b3a3d7274c0d2b2ac14f7966de7b2814e89f47e8f135fff36e0856a34fcba27d15b2d2c80600d1def663071a02279c3f2319c76a599a3ca7e974a20195d5e50b962aff158c541e87d1a99f706fbb037b2acbb487ef60bff782790bd58a0fa69529a409f95e087297ee1b7b92b008c6fbc60fe53eebc7b7756a5b4a7491c3706967c2df17aca849cfdcb77f88e01783f640f0ed2e6d8a691fdb25f94883578c7f9559e2d92cdc65091eb0adaa82f28dcba4ece2bea1cb6e72893eb243e7d9920dce7ab4b7b6b83561dc61b6b9e1e25496d9c9b02460bf07f25169da390518be358afaa7b63ae744e45076e56af017f067848eec006ffce8c13c359efc0e2ded31bcbece6341f4de8a07a14ff3f0740e0853c10db9bb18b566ce053e9dc4938a0ef03b8e2fd6bb375ef06bdc88bf24b3bf79815431b8e01be19b0ce4830082c5821e540ddfd84f9241194de28ead5f0715bb0a084afc886388b841852f3ae69668f0d442b2df05273d91b8422a4083591963506dbc8770db6ad6c0faa59d71ae467ba680a7ee98d79fdade3fc86b284b6b4a2d004619bad96a890f1ea08134af16ee8861f3d335508fa7cb2868ddf6cb7eb345543120bd34a740442aaa197473b3ac977dc0def67ea2d0d868f4756c47de54ae8103089067e9e88b70c9ffc344a602c5f84f80566480f8f404fbc9766fe0af95228473a3d6241739175b15ae4edd3e2ffb071b73743619e1d8743ab9bb40e1868b1cc5556373e570bbd2ed64e47f66c53a584766d55809bf1a55ff998079cdb25242d4f3f58f1d35165690e6c9726779e65444f6a95389f39e053850aa064febac25e727629b3d64122d9b52dfc252f941e53ddb1c061d80fdf2bf46c54abfd5c32c55c92080df67906028f4701eb488b6c81b24eabf87e48d1def3e6c42219359fe316ccbbc175b61d258201cf04982c8e32b3e2c84223d9952434c0e31ba3239c8c434a8ff8dee3c430add6d1385e63246ef4bdd8f0fb4cca99d1faffec26e71c8ceb289caaa1b93a360af896e7f78b1437ac1b6ceef825616057756916b663d935068d6239940a84e10838bb344271b54a8a02e7597baf88ba25a8f72c584e1f3f457c71557ddf7da3f7c6b8e2153f9c258759dac477e084d7975f2f93e440ed388faf776ec837504ae55281b9ca0aec45e31e6e1cdf70ef8fdaa279f2e9205fff3692ba28ccba8b9ba0a0597fe5a7b63399b5fce0851c0c5674a0e0474787262d1b7c7a552eb0753b08c8f034be9e57ea737eb8eef0b03902ae10662eafefe0397650e2c42674994ca5c0a46d12413e2c9a14b649fc4605e4b45925f292710c7a236bd98d92122f1fc9e64d86aaaab203671ec77a2692325c04ca0b3443076f089595dec0b1143ff8f038e543003df140c15db72c2a46a889b15a011468d190aed4351efa9939523d7eeed9a7eaa3b61eafe72ad4187ac37c111f19012692d0dd2f838f66e025bb766f971829ce6ea500130219f857ecaf4d8c1720d04c6efdabce96685af20d9e5fba9daf05ac73087f5b0a5104d80017246340ac45b7d04d0deb1baca046ed8ea38d30b6eeeac8b661b9a814cb09c42d84daf85f09d5106729e044b253a257f35c70abd0263be931c588ca7e4f8dd6b28a7a2e1da76cb01bfda84c80d30e4ca77ba627ff481c141d0067c906835bfe7c2946925ff41108f768e9af0b749f86d75218a65775258c3c4c556445c5dce99bae2e688a59bca1aa79d909fc25415152eade9a283cee32ccf2d66e9fec5c0ab1fb89c63ac43ee6642328c52368ad5f0991aacec4a993d73e72856ebbcdda86537af3831608fa646ffbd0934e657705092febda43eab07ef5854c928440d27b92d523dc57ea8237e60e1352db9a30d8bb5519f121ae55e72dbd6040180c5169aae90958351ca778c4ecf7b20247a68cd08157e69a75e0c004c099088eba95901ba2b2a762343c5f427951ed3e9e09219612010917a48568d239f1e0d16441e9e251cbcd58bad45d514a23a8dcce249ffa484faff72fac1b925d54d2ffa521d22237faa8e085c58c9256ab7cd1948f5c92a699db442f86a9c8804e272cf6ec82b45d3192fe6a1378d228c579a2c316a0682fa145a27c2c270434fd535e5d0305591e20c7c74000d2e4e9c93839c97a6e310569dc3902ecac01b841d1b4f3f8f5b6ed871e844409eae05271737178baf3984826af7ffd1b617ae64721c7cf49113560c70304c7fd1fec431a43528d036e8f7f8bf3cdccf6d9d67040b724ac81598a2f0175290a81e8fa5a0f52704945f5e5d9cf1292757cd537f45e0199e112f24868aa5f85f49c429d334998650661a8dfff4e48b001146a67a4a8afd76ba9bb8362bb2cf070ce7db290887057dd05efd6b58666f6f2f0beace6c9c831fbd46900679cc79d024513a289f93cfad0d111927bc3c0cd900aa852c99e4f5c4e8c9c09fb8afdb18ce857ab40fb033edfcbce7bba6126ba2be710dbb167c314e64cb874d90f95e333d5ac24e0f2130c0fad0d9c2dfaf081770f122aa9b80429c74deeb8516028d1ef2b0556169ed83e0407f52596d33acf39cbcecec0946e6918b50a35c0b9a052daa1d1d61f083bb982f850b9cdf435659718b0791086f1aca331baffdf67fe2d5171fc51c9fbdf509554fbcb095fccd6832250b4f47b2f71c8d293d9dd27b69539636cbb801f0c8dae16fb050a1cf5dfaf3c31bac53aed9a70cdfa2a521b27e6e143dd54c1b31740a547cfdd5a1f0b3120b450c709cc28d70f51d4890abdee88f919d6850fde3c071e34901d6c906481592f3187b3fc69ff1553e6ce06c5becc84b50f0d4b400e3537e68123f70f8c66fa651a50697b53f095d589be1492d43003e70a18d69a8d6d403b29ec53f306e1805fd8e9cd59125b7972123b65a5641e24645f01bec146cf47555f08f6fd51b4508f5b877aa2e3af514bbfba29a8cba958c1a92f9c9ab14d728277680b5b9ed93729112e1b55dcface7cb2e908c0117f085ddbecd30ff9b0c76cdad87545b96916b500b39487018cf02b7940bbb0a6fc77192bda7fab61a03e66a50c33f0628cd5359f16e1c73d7059cb4293afb72dce17f3390f21b97f8bd4f2cc966622d8d567b664c24bf6298418517a651e81d870e043b3235fd754d2d55bd7b9a3f22780be1dd5252e4f13a456d23cd517af3f794584553532c9de80c1e52540d9ddc3b3b4a4f1f0abe1dc30a8897fab9c6a3677e770b0a75b9bbc3550e4af9e28ac3c1d0f1b3813fad18f59f9f712932f8ee713d0bfe5e6542d46a55821e11751081385f601493af8b5ef0bb607173eb95f7c98ba76c74290a6ecdb4131887321504781d05018de2ff92b01b390144b37ebe0b62a4b147337d484170e2100a630f9cbc8a2d7bbc85c56c84a6c029e6603c9de11861dbdb13f35f5016b9628b8de89e5f715072c943028b37b1505aa283ad1c72a7f9929a890e44453ca2129e9cc6c66250c6cc6dbb52d910f553bb13cc9627a83c73554903b2ff4d18cd1014d37f8756034dabce94d0f67bee18433209eca73220e62fa61406d9c47baeb903a34bb18a057105790f63ae4bb465699300f9d8698308263e5ac221b38d3df7cc372e8c5c613f7ce59c3eec349ece3cbdb6a68efc4bbdf48251fa6abe3174ea98b4a533574a55646b4bb00a64f5f7312ca9aeaf6c9caa6849d55219489c3519b5aaa54a392eaf969fd478e7d4ac2705037cf9030bfab7e148f70e1bf5a1a00f497db27d8043053491d356a15dbac354183d333e48a12017ab7c980273681b0d9a949edd9f29502d8bdd63b6bd382200f5d2551c9b632287aba2ef9f806f71972986fba58ac11350333f3c617499a7846f689100bfb9575a5480e585e5ac6198145662d746a68c3f6987d56d76e557881e54126a6337596435701e2cbadf4bee8bbc4dd727ca68d2b0688f30c2d4635b1f8980e139ce04d91fb37df5cf11904ed1e131d5540108228f0c223d84d52a8efd43022f9a4d490047c6b3aa5240edf0b2faace39c9604ac709242ba07e63d5354a27bfa69f7532c83c1097106c882be9cad0378c7fb8f0c30b0d30e80c01c4570a39276111a821624d21bd212e8608f08bde75411d61b77f6502893a1e998adb0b21f04bd3df6e970ecdf7ee0f383b076da0ddc83dd174c8687ee44c0f829e3d7ffd2caea6b0c22bc4dd3afa62c440c5d1c504c09e3da5d1e2712a0c9e1152cfb71850dab60b9c2d909df97b6477b1843850c7f6272897acb9f5c42617925f41d22ff560650f6969c66949715c85b0886179ff4e743edc7243a501579a8f8cc881c211042d586253277dd7d35d9299e57d06256b04ea5e452fee34a01e8df172a88a738b2a1fa369959f38f820334e39fbd92c95b95d330b656404892fa74dd4309afb046f69e01688b74205a36f188db0c7ce699c186a55ef0fdbfb785a231c51d88b525a18ac4c7f3b7d47f4c61035e5f3136aaac51d9d2624a36df7e92bff256e62b9d18fc22daba219fb579a401b607984f45b5086420563ecdf57c015b49dc628d75f1ce8f230f028bea6edb29ac068a1260e291814d6f96ca5064bf73fcb8e5fc87597bcbc54c290a77bec3bf65958fd02819812cb431ce24fca5670c4393d861361e007af5bf2375ba2042c1558435fe6e8b5bf2ba6f8442ec6829a97526606410d49149d299d32669d86757839759ec5c0059cef8434daa1d15b35dd3aad7a7f86c31360b8f6be04706d5f2c120bb93d2472edc45cfed4484b9a715dbaba05a847f81a7d3c3cb3ffc03446e238c4687e777a65c54a33abf5e0478959c8d0a7d96ef85434847a581445b669bf8a6cf6d1e7d7e820ef7335b830182ae7580f7a2af1980d62d03cea92043fbd4d894f7bad38a04eadf68f64da52ae218e944a790e3cff34ead8a80e6122056064e989feeaf37f613efc0075c0d66c8ac3d40e6e851b7b09219a605745d57d219128f9d8757a4fe74354fd1c996f96102b7bfb0d74f969fe61e5d6592a19e7a3f52957574f0fd947d0787f232b646229f033fd8e9588764eaac246268c1aec199def1a343fcefc121c2d298af0f15a7d03f88d602a490a5cae44bd1e048eb9fa263d259eb1622a8b65aaccbd585eb0dfc957b624a18f0e2ee8b07411be931047b6e8ea4cb33acbccbdd75822328eee377de8814126a0d2abbdbecfa86e016fee936acd3005c0be1e7167bc2de89f5cc6463528b02a2d554b324f0718295cc931e0cfe418a393465b5532841292306cf07f2605bf9128400e228706f347fb0953bc9873106d841b4e68a6dec5a9246e3b3ff5b8dd40253fd9d7605e95c34ce0cf0c957d7753d469c785bbb7214d910db2d67514e40d7c55bc1474abcbba03bb2ea27d37f2d95a76d1ae4db9beaa665f5f30e043f12eca32542a6154a9b79ad4b9764ea7812fc516f28984cbd4ee0d8950e8303fdcea5324866254b503fb176e22d982f0b4682ce383be6a2af2797ec7ad193a53145856e6f2844cfd07527ef127d3e7532c1d6a1389b649dff7b5d5d68710d2d85478bcdcc80cccffd9e7bea830c0b6fd501d9d5f3ed59f52b251ca1251f90697ac062d9dccb64d90222fd33961e572c6fe5dc0bd4c4e9e8f75b9d21927a39b81ed9c1c860f14a45ea9b260c26a931fdd8d29ba2aeac5440f8f0506217e41948456d691d98225322005bf33ced5d5d8b8ccf77760eb3d66663bbe74bee4e571dafd4e7c8ac010f00a18b2d92bf59d48b698373f2f3ac83dd680c8a1dafad05682b8eee67988f0a44e82aa4170321f2b95b9eec805e0168054ea4e2b1e422328d967f7795c26996905c958050c91e8218cb8675b17a7aba3237031c1ba4f92e387c981cc2546e7d31991ed137021aab98f89ab35ecddd48e398f89279906cde6856df3520891362c0d2fb5d8c72db0d7e53b6c8a865a21f0a073ff6e4ccf95598f66d9e9f14c6282beeb817b31bea96e18b07dc0e1ece9e5f41db8a5bae612705398ea4582c4e0459f8dfb807e567295d8570901c53c947a8a059a202453c87fb4a340f86c44ad0a5fee48248aa4dca6ee444b65340afbbf5896bfe68b40f6081e614646bc3650ef954d97c2c07b67b30b535566998e670546950c64db491051cdf4d502dd72b5b6db66bca9b709b67b752ac0095ca0d80e3772ae1620e2f1331dd4a7e11e51f73f5bf88cac88a844e48b518bc70823d649e9d361903ba4e1c33f4c8c4d58456458ec1a509b8b737a398b65162db1c3b6859be8c3217853d867e1af38f3cc65149b802b00cb25fceb6c835987cb449dd2b7e0543587749699fb364124d468b9e5dac56b445a4f964584503ce6dc814a73c27a2a600ae17f0d01752ebec6d7a269863179d469606b6545476d81ef62b805621c442f4b42f5938f150a861fa3877a2ae6a3d55bbd1cc6f68593a81d1793f160265c810d7242bb71c1d8f0afe5c8a423c5193879c72067cb4a0228a5658b92c5864faf2ed201737e3d4a94af727f34ce1d9bc1666f2f2daaf0afa81995baff202f59012643e32033efd2587e30261a565d6ee906e80ce0329327894b43a1f0f8712df95ea9e17683fe657cf71e41f8205822e3214e7e046d8e6b17dc470cf84312adaced4d666cf44a2838881966e70f4f6203d7edffcd89ac6f9639373fc00557db30d470309441791be17c10e6dc064bd4515d52f117248cabe608f7cd9951673274623b705d94039754b608a540064976b3a4e0a76232f74dec086e761c783809d10b4e5a85ddebb283347c3cae12255c17cd6ec0c533929562ecf741aeddde203911381c45dfc23967c3ba86d69595f4de4ab2935ad6a7d933ec0197fb50c5d4abf0bd2c09fa1941c4e3fdcfd8b6065891ddbb6a604c74b0bb79ef494c5111e99576180056232fe360e55731b3c2db6866256ccc9dde5a55bbe833cd4654130ace539aac566d3383bc49b915f8bb29dd4d5150d930ebd556533992db75eb5f72f201115301b1254c17a63f377dca8aab30a050f116fa1d68feb5619edfab9745710d21034ad3d34d9ec3b072442dda4c2e12ab65aeaccdeece36cef902097654425f0b929173c41ab7ffd0a9d14630d41646d0ec54e17201eecfc0269e00b61e271e5f77dcace9828d335591dbbf7d3bc34b4b003dcfe485593bbd027b1e09fd3e04eb195759831d4c515785d404bd0e55ee6a19661ba55e53c322edf31b624734c1a9d1c345d7cb0491d41def3d72d83a856136332da062cd5b1f69e1148d6b7eadaad8b2c64d05e1ae2667b9b3acd254e6b8508641099712e46b40d51be15619b4237002aa3aedab22e3b4ba7848276a8c9070e553a48b625c9b2fba11a7846093ac0121c74373cdb7855a522ed41e87a1337ed2a3d04700bbed644e79f90e2b40cce02063d2bac7d2f1a20de9662081d28988605cdc5e7631f18c8a4b8655aa4ee04582860eca7b5c70ab8a57e05632260e7124dabf7f3799cbbc68a5a179970961f28d54118e876466fa50be1563c47a57fe206d238b95ea5a301520e2696b201485bd580065c4cfb543ca542a8bf596349fc093d66b86da38eaf4c</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/动态规划/">动态规划</a>, <a class="has-link-grey -link" href="/tags/背包/">背包</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/28/solution-jsk-4594B/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">题解-计蒜客-4594B Too Simple</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/27/solution-jsk-4593C/">
+                <span class="level-item">题解-计蒜客-4593C会和</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: false,
+        verify: true,
+        app_id: '3gjqC8wA7kbYSN6UwAWhl4qc-gzGzoHsz',
+        app_key: 'SqboaQjM5xxfQ7sxqsR9JAyW',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-3-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.jpg" alt="tth37">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        tth37
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Think twice, Code once.
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Jiangsu, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            119
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            21
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            83
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/tth37" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/tth37">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content" id='test1wid'>
+        <div class="menu">
+        <h3 class="menu-label">
+            一言（ヒトコト）
+        </h3>
+        <ul class="menu-list">
+            <style>
+                mycss {
+                    color: red;
+                    font-size: 13px;
+                }
+            </style>
+            <mycss><br></mycss>
+            <style>
+            </style>
+            <style>
+                hitokoto {
+                    color: black;
+                    text-align: left;
+                    font-size: 16px;
+                    line-height: 25px;
+                }
+            </style>
+            <hitokoto id='demo'>2333</hitokoto>
+            <p align='right'><br></p>
+            <div align='right' id='from'></div>
+            <script>
+                var xhr = new XMLHttpRequest();
+                xhr.open('get', 'https://v1.hitokoto.cn');
+                xhr.onreadystatechange = function () {
+                  if (xhr.readyState === 4) {
+                    var data = JSON.parse(xhr.responseText);
+                    var demo = document.getElementById('demo');
+                    demo.innerText = data.hitokoto;
+                    var from = document.getElementById('from');
+                    from.innerText = '——' + data.from;
+                  }
+                }
+                xhr.send();
+              </script>
+            <style>
+                .button1 {
+                    width: 88px;
+                    height: 30px;
+                    background-color:rgb(255, 103, 166);
+                    font-size: 14px;
+                    border-radius: 15px;
+                    font-family: 'Ubuntu', serif;
+                    border: 2px solid rgb(255, 103, 166);
+                    color: white;
+                    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.075), 0 3px 5px 0 rgba(0,0,0,0.19);
+                    transition-duration: 0.3s;
+                    cursor: pointer;
+                }
+                .button1:hover {
+                    background-color:rgb(255, 47, 134);
+                    border: 2px solid rgb(255, 47, 134);
+                   
+                }
+                .button1:disabled {
+                    opacity: 0.6;
+                    cursor: not-allowed;
+                }
+            </style>
+            <script>
+                var a = Math.round(Math.random()*38);
+            </script>
+            <p align='center'>
+                <br/>
+                <button onclick='PressLikeBtn()' id='test1' type="button" class="btn button1">WTF</button>
+            </p>
+            <script>
+                document.getElementById('test1').innerText = 'Like ' + a;
+                document.getElementById('test1').disabled = false;
+                function PressLikeBtn() {
+                    document.getElementById('test1').innerText = 'Liked ' + (a + 1);
+                    document.getElementById('test1').disabled = true;
+                    document.getElementById('test1wid').style = "background-color:rgb(230, 255, 247, 0.726)";
+                }
+            </script>
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-24T17:48:09.000Z">2020-10-25</time></div>
+                    <a href="/2020/10/25/solution-jsk-48956/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客模拟赛」魔法阵</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-24T14:46:04.000Z">2020-10-24</time></div>
+                    <a href="/2020/10/24/solution-jsk-t3252/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客模拟赛」魔镜啊魔镜</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-23T16:02:03.000Z">2020-10-24</time></div>
+                    <a href="/2020/10/24/solution-jsk-t3253/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客模拟赛」新年炸裂</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-18T15:47:38.000Z">2020-10-18</time></div>
+                    <a href="/2020/10/18/solution-jsk-t3244/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客模拟赛」自适应平衡多叉处理数据结构</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-13T15:22:20.000Z">2020-03-13</time></div>
+                    <a href="/2020/03/13/solution-loj-3211/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「CSP-S 2019」Emiya 家今天的饭</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow  ">
+        
+            
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/CF游记/">
+            <span class="level-start">
+                <span class="level-item">CF游记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/公告/">
+            <span class="level-start">
+                <span class="level-item">公告</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/模板/">
+            <span class="level-start">
+                <span class="level-item">模板</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/">
+            <span class="level-start">
+                <span class="level-item">算法学习</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">21</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/算法学习/动态规划/">
+            <span class="level-start">
+                <span class="level-item">动态规划</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/图论/">
+            <span class="level-start">
+                <span class="level-item">图论</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/字符串/">
+            <span class="level-start">
+                <span class="level-item">字符串</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/数学/">
+            <span class="level-start">
+                <span class="level-item">数学</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/数论专题/">
+            <span class="level-start">
+                <span class="level-item">数论专题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/树上问题/">
+            <span class="level-start">
+                <span class="level-item">树上问题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/组合计数/">
+            <span class="level-start">
+                <span class="level-item">组合计数</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/计算几何/">
+            <span class="level-start">
+                <span class="level-item">计算几何</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/解题报告/">
+            <span class="level-start">
+                <span class="level-item">解题报告</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/计划/">
+            <span class="level-start">
+                <span class="level-item">计划</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/随记/">
+            <span class="level-start">
+                <span class="level-item">随记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/题目列表/">
+            <span class="level-start">
+                <span class="level-item">题目列表</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/题解/">
+            <span class="level-start">
+                <span class="level-item">题解</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">82</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/题解/Codeforces/">
+            <span class="level-start">
+                <span class="level-item">Codeforces</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/题解/LibreOJ/">
+            <span class="level-start">
+                <span class="level-item">LibreOJ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">29</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/题解/计蒜客/">
+            <span class="level-start">
+                <span class="level-item">计蒜客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/2-SAT/" style="font-size: 10px;">2-SAT</a> <a href="/tags/FFT-NTT/" style="font-size: 11.82px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 11.82px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 10.91px;">ST算法</a> <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dfs序/" style="font-size: 12.73px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 15.45px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 11.82px;">乘法逆元</a> <a href="/tags/二分图/" style="font-size: 10px;">二分图</a> <a href="/tags/二分图匹配/" style="font-size: 10.91px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 11.82px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/二维偏序/" style="font-size: 10px;">二维偏序</a> <a href="/tags/倍增/" style="font-size: 11.82px;">倍增</a> <a href="/tags/分块/" style="font-size: 10px;">分块</a> <a href="/tags/前缀和/" style="font-size: 10.91px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 10.91px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 10.91px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 10.91px;">可持久化trie</a> <a href="/tags/后缀自动机/" style="font-size: 10.91px;">后缀自动机</a> <a href="/tags/启发式合并/" style="font-size: 11.82px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 10.91px;">堆</a> <a href="/tags/复杂度分析/" style="font-size: 10px;">复杂度分析</a> <a href="/tags/多项式/" style="font-size: 10px;">多项式</a> <a href="/tags/字符串/" style="font-size: 13.64px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10.91px;">容斥原理</a> <a href="/tags/差分/" style="font-size: 10.91px;">差分</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11.82px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.18px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 14.55px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10.91px;">数论</a> <a href="/tags/最小割/" style="font-size: 10px;">最小割</a> <a href="/tags/最短路/" style="font-size: 11.82px;">最短路</a> <a href="/tags/最短路树/" style="font-size: 10px;">最短路树</a> <a href="/tags/最近公共祖先/" style="font-size: 13.64px;">最近公共祖先</a> <a href="/tags/构造/" style="font-size: 10px;">构造</a> <a href="/tags/栈/" style="font-size: 10.91px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 17.27px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 11.82px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 11.82px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 12.73px;">概率</a> <a href="/tags/欧拉函数/" style="font-size: 10px;">欧拉函数</a> <a href="/tags/欧拉路/" style="font-size: 10px;">欧拉路</a> <a href="/tags/点分治/" style="font-size: 10.91px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11.82px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 12.73px;">生成函数</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/矩阵/" style="font-size: 11.82px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线性基/" style="font-size: 10px;">线性基</a> <a href="/tags/线段树/" style="font-size: 19.09px;">线段树</a> <a href="/tags/组合数/" style="font-size: 11.82px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 15.45px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 12.73px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 16.36px;">背包</a> <a href="/tags/虚树/" style="font-size: 11.82px;">虚树</a> <a href="/tags/行列式/" style="font-size: 10px;">行列式</a> <a href="/tags/计数dp/" style="font-size: 10.91px;">计数dp</a> <a href="/tags/计算几何/" style="font-size: 10px;">计算几何</a> <a href="/tags/贪心/" style="font-size: 11.82px;">贪心</a> <a href="/tags/费用流/" style="font-size: 10px;">费用流</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 10.91px;">高斯消元</a>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="题解-计蒜客-4594A Too Young" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 tth37&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+</body>
+</html>

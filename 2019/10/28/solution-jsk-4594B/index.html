@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html  lang="en">
+<head>
+    <!-- hexo-inject:begin --><style>*::-webkit-scrollbar {width:10px;height:8px;}*::-webkit-scrollbar-thumb {border-radius:100px;-webkit-box-shadow:inset 0 0 5px rgba(0,0,0,0.2);background:rgb(155, 155, 155);}*::-webkit-scrollbar-track {-webkit-box-shadow:inset 0 0 5px rgba(0,0,0,0.2);border-radius:0;background:rgb(202, 202, 202);}</style><!-- hexo-inject:end --><meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 3.9.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>题解-计蒜客-4594B Too Simple - tth37&#39;s Blog</title>
+
+
+    <meta name="description" content="暂不公开">
+<meta name="keywords" content="数学">
+<meta property="og:type" content="article">
+<meta property="og:title" content="题解-计蒜客-4594B Too Simple">
+<meta property="og:url" content="https://tth37.cn/2019/10/28/solution-jsk-4594B/index.html">
+<meta property="og:site_name" content="tth37&#39;s Blog">
+<meta property="og:description" content="暂不公开">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://tth37.cn/images/og_image.png">
+<meta property="og:updated_time" content="2019-10-28T15:08:09.089Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="题解-计蒜客-4594B Too Simple">
+<meta name="twitter:description" content="暂不公开">
+<meta name="twitter:image" content="https://tth37.cn/images/og_image.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/images/chess-rook.png">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://cdnjs.loli.net/ajax/libs/font-awesome/5.4.1/css/all.min.css">
+<link rel="stylesheet" href="https://fonts.loli.net/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/css/style.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+<body class="is-3-column">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/">
+            
+                <img src="/images/logo.png" alt="题解-计蒜客-4594B Too Simple" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/">Home</a>
+                
+                <a class="navbar-item"
+                href="/archives">Archives</a>
+                
+                <a class="navbar-item"
+                href="/categories">Categories</a>
+                
+                <a class="navbar-item"
+                href="/tags">Tags</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                    
+                    <a class="navbar-item" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                    
+                
+                
+                
+                <a class="navbar-item search" title="Search" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-10-28T14:33:19.000Z">2019-10-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/categories/题解/">题解</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    3 minutes read (About 376 words)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                题解-计蒜客-4594B Too Simple
+            
+        </h1>
+        <div class="content">
+            <div id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <div class="hbe-input-container">
+  <input type="password" id="hbePass" placeholder="Hey, password is required here.">
+    <label for="hbePass">Hey, password is required here.</label>
+    <div class="bottom-line"></div>
+  </div>
+  <script id="hbeData" type="hbeData" data-hmacdigest="cb6e03f1f6a09d393f6acf0eded1c65b298a6c4d46cd91290659be8f324324a1">c03f3060c9f1ae8757f4c8372012c368774e30d6fe06dac815065efdcaee0a7aa0a4588fa8d267641961ae1523b6e9a24447a40288df714d1def8bc0029614f97cc352528f082061e01922a0af014d0554ea2c0c1d77bd935c11400f9d7721c7314ee735935fd0bafc40575a0c294ef1e5b59463948084333c5a6598e621c5ab9fe7957ec79acb5a17206081cfa8161f0e1015a22769032993866d7439707fa33d8c0927c4561146950cdedce84358861db382f8ad8d14977a4b9b26ba058a04ea592955c6171fddd66b33bee5ac14f1a5907e954862af358518ae1ccead5ee03bfb2ef23cd592fe0be05aa7a61ea418b444f2ce83500ad25c85eb4180abcdaca943abacdfa251d5c4050377584f81dcece93f3141b1b15bef7ec4661b3fc48800eb3b4fa9d18c327b92693e6b1de6c4e9c72cf82d1ff58e889f2e7f2a78f138c29534220d75a12706b6ede122905007d4738f1a0f29520ebb621662ae907e270b55bc858c8168b775e6ecec7a7ed66be05c64cacd26ba32969334a5cef6beace936c08b6507d97abc3a6f30870ccff781ea86e240cc8dcb8a25208b0c7b84231c2afb963fc81c9cbedb284b16cdf2edafafd020d762e64f497fccac05054efbbdb59b9d1cb4a971aa5d8c1ada0aab5fb74aa936253dabc696439d36633733603984afb7a372071f6a85718fa27d37499c7f7c850df96f5ebbcc98097272705b25240208847bb703b84e5f29a368065b1307db5b04979f7b8ad4104b09d39051b6aa36473f4e882c44afcc2bfb5ca319cb6f4a521560950873e65ca3bbc9c62c4630e9fedf4d99092ac3d67340872a708f5169add5a945948bf92193487f4ba3ec7172941a98398727d48ffb062e4c4369c100245b67469a9478267e4eb65357f809f6599845ccb1369847d11410fcf3093db77802a1da36b0e19635a097f05c647def00f9d906a947a7168953a9ed554689e628b13428107b7c6fd886fad28c9e5c1eef8530efcba09535e5bced01b1b0ad93c4be063fe421a062e14b522cb06903727116f00d9bf87302e140e52e0c87595082aceff156301618fdf145ecc1dbb2597b83005d06e16d1aa3a5f4b1e09b2844fe3e15d58c16201ece8a6434db3003910c6621fc5179f4ade9d71891ad7abd645a158e00b4c9aab732ae18ca2aaa3e50826258ccc7b3692c2d7db0871eb23d36f2157b55e7ee383bc62ec3dbff191a5359f48ca988dd464500dad5035e37b6e86d8269948adb9168fdaf700ae7e0ddab99d41f4d28a3c7d80cbb4006fc16c588d3ea7dac775e4fc316e7f6c6bd4730ca3d35fcecf426995d75bcb6f1ca0de4774af7bdd5ebf140597254f18273313e3f07f68fee17a5ffdd61ce55514980e541892c453f84a7045e1541297293043e1e7f86bc8a01d29d69711f21dda19530e12593b20c3b64aa104613a785102b52aa6b71a0bd591cdc8b7cf48ad6a132c30e011d0ae724f05101af3c41f6d9fbc0a115d0cf0fb502586befdda429251b5630525d8ebcc807cd5cefda0d826592e73286af146586ab37fe94045e5fc65836bb5198e3f39b992ae8caf3730fc31f48679078face28a5701958516c3cce1f6c45c45f6bd362ce8c4ac14c4d655b12c7abe97dca964169f4cb18c8d5112197fbb2731117975e80af262770c699d9d99f319832f2822aefe12b52810652f08116b2db5a62dc54a476e97c73d648df21095d6ea7e10fea546772165d85f87279c60e10b90065e70d08bebd31f965dc75d5355d714c66c7dd0cd2c151154ea366d08607a377c2197bab1a71105ccc3c5bef98f2d9838e539ee3f3ae38f8b313c7575c67ceba503f7fe7b2e1a6fbb51cc40893559ccb14fafcf8d2e4e55a3f32354a98c88fa8c72db2fb7b32d655918a51f73f4f264fb8d15ff4e8fc2b04169b636ee28d222eaa1e511001033d9df7b774b210f368ca25470ffe84ac9a216aff1c9a7f0d611ec33192cce891b4fe6a2a52282b9b2249e4f7b6f1f520afffa88324117d2f42174b10382bd0994c92f43357456747066c50f42b18a40b60251b4d918cd361d771313cdedc1f705f7d01ff454679a701ba75ebb8e554f789b6a1c1bddb00301d54359057a4e94c4aaeaad263cd97e3e309b9348250286773ef89c4c1692b79e98250e8ffd3db648b92a1e4056df235ef861f0bd233c37bd90ff6c7a07e612b6df0853a27294951b824cf2ac8bd6161f0240f1b38d3a5c1de0fd721caa35cd8cc93f5aeb6b02063a86165c44d724a9bab0e623f6d7968973ab7f3a55e5d5ea5f3ce877706a509a3f383e1027e459cd1f5b78409486102fafee10efff3e8ef2dade2688e732cecd00ed1b998dcefca2d6f97029c6c0ff726cdc1ccf732f433d9a46d1823c63c0f0cf490ce6df2005f4ea5e991f9736f1c521405a16f70299cca979f67b5ecb0a722c56f4466e3b2cb465903a6e7bfed7e069d632e9204cee327e5b69344a7e3cee9093606ea21867f39ab64dee73d08dd087eca658a5592d958158260f48992ce29d1da318be4b6a5d596b07a6038979cbf27e58ac8aa991f364149651a7c044cc0dd392dbf6212b0516e3f8601a04bff30846128fdda6620f18ed2d238573301a2b128c3b150e11a5f718f5581eba140159fc4cf2c211580675ade7b4b0a1458eee58683b316c8c91e2e7346f53f6965a5142a4f3c4ab4c63da4385b2e0646a83e6fdded66e178b40c9e084c80b096d9616bc3d539ed7c4440178ac20dcff904935b098137aaf458cbaf08857e5972ac69408ae30151f7087bd8f12d019019ac7add94466e968b6a570beb330fed3c91eabe66c73791aa3f3a1a47bf2d22be31f30ab185bbe3e3e0dc960d2a97171474ac223de744f95f3eac378ad1830b74a32c52964e9d23171fc8ca70321479d9037a10c0223b9131784054b661a2d80cf577b0ceb1deea1ef5ca604d8cf56e223fa7b04d3a8e8b037adddf927f75d5e379226f3cde8f7b8f9567f2ba30feb00f2496536cbf2c98852bb10f9f43340e2f0b57311115e27f9b3bd5add1f20ec5503b06be22a2f7e491c9d1dd810bfafdb398695d70070797330d98bfd0bcd065e68a5fcc56576b50dd0bfbccbc566b01bef1102ad544c28c8f4c859ed80d15db6e83fb12cd6983ddb5d5e58bacecdf4cec906997e2818f092a078424606c1e152e1da3494b1bba17337473edefe59c736a59110242b59ce244e80cc2563e13d15ebec7e10831c6533b958e5efad5aa287df84598b30c1c8d1e5b35924743b7368a9a30a32a7fbe3d9ca068fa4c1600f34a4980d99ac6995cfb459c2a5eab4a2f6a61b691371ce8babf651ffb964f5c56c09add9af5025b40d4ce1be36bb24a7f6c68b3c8d892138095f82a7b4fc013bba6e71900cc4f801d6934edb2a8ee899e61760b61ab2512913a90c47f272a4aa60ad2b632fb456bccc6eb89678e437861cb45f7237f853d939a58de93a5e4a66cb58458b607039068bae27b7a0c241b7bc0dfe2f3a5191c903fedb72d74fbddcc96ce960fc6f0a74d435a34860d89e475c7e38f1bae454b1417be408320b348cd81495eceaf1316967380a95ef4c7296f960c2c50146641aed4b3a8294dbbef4f300723543445ad6344e73d0ff7b04876de827c469be925d16b38285054020f66d9220f9ec3d5b58c9736e2a176cb0cb75e82b50f1b4105ecb19ea62584ae8510663576300f7e0146de756e7eeadd796d2821136f4e0dca354401245ed40e44a069913d55903804821ec24553c810ba3c238484dd324a5dad7c3ce430fe39cc6eaa36e792f07eb27ae5a38b9b5bb8aeeb3f180744872fcd033362a3365bf34f5460932f2c2e4fd705bc82a59f7912b23766d7db60fa5cf5e20ef2253ad525a7f730de147d38335042c45cb7fe4a1add4248ddb19ea01fe62450594a7c6a85ede1a1581a1108af3c1ae4e6d1d9a9bf3a73bb43d2b0e0543f0e9fbad94a4ae178de54cb60e9401dc6fa56cfaab689aef30b1ee926edf668692d584b865cbf9c0f813a89eb1fdec2676fc5ba0ab22e66727e00ffa736ae791ff6a6757edb17251a946c2aa8b85d8a1b7aa581930acfc192e53ff4e1e8febb3cfba81d2e888eaba49ce7c20338ce4e9c3af3082efc2a2a74c71b5aa86eefe826fe0b90c8e96cb94a43a381b967be8818ded63729144e0709f79b0973fd8d6acdff17aabcbf2aff58b665a7495b1a88bc83431ac7c69f410d591257791c3fe28d05ee8e784cbcbeb2d3fa2ae5a3c9d3743d416046c14ac4672997f46cde8b3b357e7f6e2b538bdcad9ae3254147222406b10c81b4bf88c9b51687e38e073fb8401c30b79886b7d5b70de0a228729f16edfce5420c4cbe35df69e3999f7d9951202a24ff9a988a87d6341914078380b023ad5eae3ecedcf51dec11163bf1f87398c8b7ea00b18628e312f667d48c13defdcb931f89531a3fa73694f2452e392bb59cd28bbb806e0d551a5d0512f7c4969c6fdb200e14be112ba93cb3dd5b87d79d9da40c006d95e47d8c955666e79c71aa5e03bcb8a453ed0d2dcb5688aec1c7443eba122ce782674f7cbd6b6860214eb3dc2c56454826a1d1455ad1eec2271be5e1f470c68cc7aadbca77bfcbda09b7abce76b21440aed23c0399b9d018dc4916f6092cd53414d846af1304b0b38342ca1f511144d6b9622527ef891c3dd02e528d56c4fcef28ee8bead70ded07658a1077dbe2eff39bd5f7b86a12cd9ca20badc322ca3686fab7ed9fd722536a08366cb8b9cefa45b13d4faf0beae5a5cba7944a894302b56eea4595cd5b591cd26a51eaa3ca2880f48c9f2c55b377fc6874be4026d56bc5cef5099fe3e0112b44ba2a13a044f0abd31569a8040b0ea5fdb5607871a95c85361729ae672e2db2eecbdfc5277fc1c48f9e5a72584d70787571f65f903604c533e2ca02a349f8e4c1f2c438f68c3c49539c188358876d0e6de5dc284d85bc25de014cd3af7a8f3456cb5c618c56977f0b223cf4cb4b6cd2441fb36aa950a11208c280ccd4c75af1da9f5b581414f02ee0303ac42b236c5981cb48ad6fd1ae0ebf6ed44bd7f7437dc7f6eb799d959ff4cba1ac10dbbd3b376700954a170657cc536353a7c7000a7fee409f0484ac6b8b621a65f9f4befa57bd5ddfa795dda80d91b7d7fe12d47c9d3f0f319cf983ddbcb90d767861d17a327083e6844bb1ddb64053d3b5a217a083ba0bde5c01ef88e65be4a4e524a4534b44f299cfbbab8ffa88f3c69c8840c37e3b3a1d9dc5ad507350f27f8199d80ce664f7d4887e60c09c0b57243849b2521a1358bb4ffb25cdbae12c780722137a4cb5d30fa82d3cf58df598beca3e47b04d82686127166064b86fba8991d32c2eac69e5243b5c5958b7df6e0dbacde27aef549f8f0b1b650ce960cba8ba1bea69fdca9eff56f21dfb64f840a94af5631d02dc033186bc52f89a49a8666e352e60c1ace589c1fe1d3862508dd01d4f69381378a62806a8ed175c32eb96f3843e640dfc213c4c6606e5eeaf5a3ae2565c5a5c0bbf736f043d763bfe9c3df50ca7f6d54118260502458f1309a9b1f68256b708d4e155de1bcc631a0c809c2c20a3d731942942a08b1e67859eb31de67cadb6ef11a8ca97a2125a839eb40c1ba72af930c0ad0c81f7d04961638f46537b735ccba3b478436104989d556095dfa88891d3c31a7de618105f8447c90cb4039fc8e5c20cb7f97beb6a38b73195813d0f49e9d94131d528c4316f84e486c23be9c4d6157824b9f2f746f9bdd36b0d6f92a35fb11526053b67873085d8cda8226c8a224e691f2d3a75257ee28b5a3fdb63aa790f5cc7531329e44a0aff8fbf9c84cf35037bc88b06c47039583d007a0c5d1805ae6085d15d9bd23334bd9535939f7824a59f798ab4eadeb16cb9aef2a8b5aa988d31e87b713cb57bec3bafe33d40c00b096d5b4334e72c52d258d3a054cb56a158c76c80c6635f0b66f477245212df524038e7d87fe8c137d514c025344f0e97fc4b67a412e7e353c3e0c20aa470fe95f6254751c6a4903c2a808d2bcbc5a5aee5c6fa8298b5dcd2c4c95199a029ac4debe8f490a908ef2ee5f81ce9d1f3e8f4427e9cd7f9f8a63d601a6d05dfde29948011850fdf9872e37aab6a65b6acbbc5cb8911340aa184fbdb83d2cc6040700ce296be7e9508e4afb7561d3977a2e3e9d634a1b02a5768da5ca1b3dca9124a2f4ea1841de4caff036741ba894081565107942e7d17ef6a599b327f3cb446c0d16abc79aff491ee14ab1826454d31f66d1fc59c9ce892cbf206913ec8db97ce1eb82c05708b8c04cb017127d8dc92d409b289906f4d6a2b36b51b35c4f7513ec8374796fdce6328887ed3c7d6da15e2c8ee8f00f556bb5c64126980391cf58c2b0c15f8df9a74b8e789084dd1f806546871cfc4436638f02ab806037ef3963af1c9dbead32959ae40b6dd5593e10944f5086066e42bfd74ac98635905ab1468b34cf37a4e1ddc30ad2754b7e736efcac49e01ccb9856ccc2eacb4bd2000b2736bbe3b784862daee79de3ef032668118e31ee2b53ddc1ac241136e092bef9c05d713aa51eafbb48ea2cf327d8ff6c7e7b9e8b99afb365226c899229afdaf0c1923346ccc026f8b78d50e98be2708b8029abf06ccf4a10fe1db742ee704e73e1e15355a66e52f59afbacd76464cc22cb45aef3a68db0271373df1504af2d2a78a95e2ae0f9f06db06fdbda8e789f12d3db89344e4bff4f2464539b81c03fd6f7c0da690442a985a360dd3e0d7fdf662eb8a2c395814dbf93ebdac40285d67c64120dc2b4a1cb0f95d2c99002dd951fece4e7d8c6ecde759b58c0b4bee10d3b4fd604c2e79a511b5c6129a3f6419907dd753301fc389fab20d107be5ae3696ff0a1796a15257c7002c61fb9ca256535aedbd4e087884a36c88348132b05c366d9c09213a14d7d78a4060f2cd2a06800ef49a0ffca95542b2c9936b679f8eac026923e13f5bcbfa502e784adc9e3018ef0bc0f2d3f207e50ff361a07b25bf9f951b7d1473cecd7fc21a12334116c67ef732f92019b3e565d0cd67de21db7b21efe1d5f75a26c13411b20404d889c1073378b08c3667e6e607876865110a7c0205b8ac6077725c9c16f477174ef79fb27c552ca63107cbc415bafae2cfdf1ccb71d773b058829c23fffb9cd8975115eff3eb862607befd4cea59fde6ba1c0e04be81579a630b8fa3d9a0a2f15f5c261adb9dc2f2ecd47f57dc741a57411155003ffa8fbf0afe239d0af56334e3797608c61fbb81e1a775a539b366dcb06f6fb0a4a9fcc0905498c165c507f1c46ac54f813716315ab157a8720f01a487781e285a637f4901ed991fff3c0d6b155f1da7860e9090e53f158d142d4d0cf016c1e2496bb74a9d31a0d2b22862230e89bcb264f0533bd5224906fd51867df9c357a51b262d570dc887fb2ee8dd5655ed249c1eb71951fc0685ccae6ffec45558a235c849253bf766f033759c0be107082fd65a4c7aa792a91c6005c293a213565bcc8f01c1e7896c05d0cae70f7d09494f0efec680b3e8ca6b1d7452f1d8d8eaa3575b571b1f4b65e5f2f325f86dd4b1d35808bc0e3d12334262e0109a34744d75a6e93d1f0f14ce506abd6dca6f722eccc85451aff309fc791fdff04ef66b49a512b9d45b28a92e79d7ce487b1bb40a201a7e37b65681304025360756aa60beaad6b86d14173577a66d6b1c1013648500b102843d5779dcb5ca17c62383ebb1110b9e75e432af2bec516d398041c3564bb3811083c8e879bf5dbce12c830a81ccadded7adf108603e0ac39a160ad6ba7c3bc7f1dbc86c79b93d66b9f33b16beac3ad8737879ce7f037ce2bb7bc23c1177812ecbbe496bd5eb7f55169f3a509a595d79df44e4e43bb0ccdc8517b21e174a10b8b783a67bb68c10c5391cda0e8d76e3c04c86dc97571f5d1110790f77608cf86c778895016f49614d0b7150076babef8673370df7bfd9b660188651979f6866500bed162f9bf6b1b9c135f9c09539f20cfd9f22f7e938cbdacca4efd37db5b95b72211f3e2315e318d3914933591e147d60b8c24c2b4e790aaf312af1831ef678470ac828e701999979e01a7d66f66595333a9a4169205810607977e21f5890dd1c2dfd67043c6e2e3b23bdc4fa96381ed351cae287da931770341d9c4ee4303986ae8344a40faa2cf5527cb3ca6247912e5720e2e9a16e1a926976379455242f984c285cbf635e1100eaab3d2e21c2e38f7d959b3f55fef3688b8a7288c9c7cb124976d30d23f8548f513545a41bbfddf7b60a4c3019b407b9d73236f8d82f729acd37a3c82de157f9a2f211cc044dec041a640942e636c18eff2da88b838262d8d3cb22f96e0fbe5baa8093cc1c44cebb2f9ee5db570c6eab460d32fd3be341d217fa863905eefb48fcf5056949d814193a2aa72be717e72e01f1bb88813e1fd172dfdefb5d9f86c98ba702bb321d97065d71405e7b3f4900fedc7736cb641591f75ca4dc5569bf85f5c16600623b143e06d34f03285cf72523c3c0ef6a20d23a57a0d14b99e1ebeb8555940852dc7b672b9e85f52226f7584c1114bdca6e6be593fa5b1fdc22efaef26bc7380c0a7d102108372909a00bba63ce6037d23f1bbd6cab06d596b6e85f51a5061830d3b58aa43a47a8e45b1782722bbfd23b23269f7e0360a2fa055c13945820ce066adc12abcf269e1501d699bfbc80e36e5cdbe8042ada7340f089deab2315b5298fb9f1faabe1cbd6cd585a06ad14151eb5146743fc3b1999a831a9a9be8d65c4b21d664ddf2782688641923156c0e38848597487297e441e17bcc38f9e334c3de9e08a657995e4df67c6b8570eb65c1fd895c48d9539fee4749f0d61770fa2268e7269124e3182cabae7b1a7e754505b83a2f7d7c36b4d2205559ec524fce31d7571ee758ac454e842c265b60105a0e90a0f4f395cc5d819cdbe2e8e4a89e6a63ba85741bed88468a04e094f02423c131685b2de72972864a3eae0491a6f0649c2921c86c048c54987347451864d33435460badf78e8c368fcd91bc4b4cfa47991f626353e3b35d851701222da040b75465ae27230e09b80d8aa9775d90151de97284b50c477bcfcd241b6cde7a63968d628a7e1b89d604a67e6226c3af0a1fe8c80e854f53d7d744a96fba5e5343ef38bc74eebb0c48f066fd01a20be58c6c263a5fbf2f9fdf9580f49045d93e6712cc96e38bb06e041d736e0190cd176209d16341f2d1779a754e621fb3aac7a34acb3ec060af943c1f68bb90fb78885e2e6e13263f8e2691e3217b3eb05d43271193115cec60249993c3079cba4599320843a6a56effccc1eabadf871c97987f2a54f8026a1055c897428d1fc23043e8c07ad3ade4df19a4ce3b77c9cc29686b4f2fc6714689b1ecd3a2c05c60f633ccfd1cfad66e5053b2155c98dfbe614e892f0b08541f8db8d047cb3022d80a37fa795493d1d8770557e589360d785f2ee630b217a2111af5b312dc75f33c97c48be4467d668e03fe7e2ea81dad92f14ba5cd01cfa683f11695e238941fdad53533f462cd41ef6bfaa35</script>
+</div>
+<script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/tags/数学/">数学</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <div class="social-share"></div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css">
+<script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script>
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/2019/10/28/solution-jsk-4594C/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">Sometimes Naive</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/2019/10/28/solution-jsk-4594A/">
+                <span class="level-item">题解-计蒜客-4594A Too Young</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">Comments</h3>
+        
+<div id="valine-thread" class="content"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script>
+<script>
+    new Valine({
+        el: '#valine-thread' ,
+        notify: false,
+        verify: true,
+        app_id: '3gjqC8wA7kbYSN6UwAWhl4qc-gzGzoHsz',
+        app_key: 'SqboaQjM5xxfQ7sxqsR9JAyW',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!'
+    });
+</script>
+
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-3-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="" src="/images/avatar.jpg" alt="tth37">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        tth37
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        Think twice, Code once.
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Jiangsu, China</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Posts
+                    </p>
+                    <a href="/archives">
+                        <p class="title has-text-weight-normal">
+                            119
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Categories
+                    </p>
+                    <a href="/categories">
+                        <p class="title has-text-weight-normal">
+                            21
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        Tags
+                    </p>
+                    <a href="/tags">
+                        <p class="title has-text-weight-normal">
+                            83
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="https://github.com/tth37" target="_blank">
+                Follow</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/tth37">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Facebook" href="https://facebook.com">
+                
+                <i class="fab fa-facebook"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Twitter" href="https://twitter.com">
+                
+                <i class="fab fa-twitter"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="RSS" href="/">
+                
+                <i class="fas fa-rss"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content" id='test1wid'>
+        <div class="menu">
+        <h3 class="menu-label">
+            一言（ヒトコト）
+        </h3>
+        <ul class="menu-list">
+            <style>
+                mycss {
+                    color: red;
+                    font-size: 13px;
+                }
+            </style>
+            <mycss><br></mycss>
+            <style>
+            </style>
+            <style>
+                hitokoto {
+                    color: black;
+                    text-align: left;
+                    font-size: 16px;
+                    line-height: 25px;
+                }
+            </style>
+            <hitokoto id='demo'>2333</hitokoto>
+            <p align='right'><br></p>
+            <div align='right' id='from'></div>
+            <script>
+                var xhr = new XMLHttpRequest();
+                xhr.open('get', 'https://v1.hitokoto.cn');
+                xhr.onreadystatechange = function () {
+                  if (xhr.readyState === 4) {
+                    var data = JSON.parse(xhr.responseText);
+                    var demo = document.getElementById('demo');
+                    demo.innerText = data.hitokoto;
+                    var from = document.getElementById('from');
+                    from.innerText = '——' + data.from;
+                  }
+                }
+                xhr.send();
+              </script>
+            <style>
+                .button1 {
+                    width: 88px;
+                    height: 30px;
+                    background-color:rgb(255, 103, 166);
+                    font-size: 14px;
+                    border-radius: 15px;
+                    font-family: 'Ubuntu', serif;
+                    border: 2px solid rgb(255, 103, 166);
+                    color: white;
+                    box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.075), 0 3px 5px 0 rgba(0,0,0,0.19);
+                    transition-duration: 0.3s;
+                    cursor: pointer;
+                }
+                .button1:hover {
+                    background-color:rgb(255, 47, 134);
+                    border: 2px solid rgb(255, 47, 134);
+                   
+                }
+                .button1:disabled {
+                    opacity: 0.6;
+                    cursor: not-allowed;
+                }
+            </style>
+            <script>
+                var a = Math.round(Math.random()*38);
+            </script>
+            <p align='center'>
+                <br/>
+                <button onclick='PressLikeBtn()' id='test1' type="button" class="btn button1">WTF</button>
+            </p>
+            <script>
+                document.getElementById('test1').innerText = 'Like ' + a;
+                document.getElementById('test1').disabled = false;
+                function PressLikeBtn() {
+                    document.getElementById('test1').innerText = 'Liked ' + (a + 1);
+                    document.getElementById('test1').disabled = true;
+                    document.getElementById('test1wid').style = "background-color:rgb(230, 255, 247, 0.726)";
+                }
+            </script>
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Recent
+        </h3>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-24T17:48:09.000Z">2020-10-25</time></div>
+                    <a href="/2020/10/25/solution-jsk-48956/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客模拟赛」魔法阵</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-24T14:46:04.000Z">2020-10-24</time></div>
+                    <a href="/2020/10/24/solution-jsk-t3252/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客模拟赛」魔镜啊魔镜</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-23T16:02:03.000Z">2020-10-24</time></div>
+                    <a href="/2020/10/24/solution-jsk-t3253/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客模拟赛」新年炸裂</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-10-18T15:47:38.000Z">2020-10-18</time></div>
+                    <a href="/2020/10/18/solution-jsk-t3244/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「计蒜客模拟赛」自适应平衡多叉处理数据结构</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/计蒜客/">计蒜客</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-03-13T15:22:20.000Z">2020-03-13</time></div>
+                    <a href="/2020/03/13/solution-loj-3211/" class="title has-link-black-ter is-size-6 has-text-weight-normal">「CSP-S 2019」Emiya 家今天的饭</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/categories/题解/">题解</a> / <a class="has-link-grey -link" href="/categories/题解/LibreOJ/">LibreOJ</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow  ">
+        
+            
+
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                Categories
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/categories/CF游记/">
+            <span class="level-start">
+                <span class="level-item">CF游记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/公告/">
+            <span class="level-start">
+                <span class="level-item">公告</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/模板/">
+            <span class="level-start">
+                <span class="level-item">模板</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/">
+            <span class="level-start">
+                <span class="level-item">算法学习</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">21</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/算法学习/动态规划/">
+            <span class="level-start">
+                <span class="level-item">动态规划</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/图论/">
+            <span class="level-start">
+                <span class="level-item">图论</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/字符串/">
+            <span class="level-start">
+                <span class="level-item">字符串</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/数学/">
+            <span class="level-start">
+                <span class="level-item">数学</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/数论专题/">
+            <span class="level-start">
+                <span class="level-item">数论专题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">3</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/树上问题/">
+            <span class="level-start">
+                <span class="level-item">树上问题</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/组合计数/">
+            <span class="level-start">
+                <span class="level-item">组合计数</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">4</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/算法学习/计算几何/">
+            <span class="level-start">
+                <span class="level-item">计算几何</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li><li>
+        <a class="level is-marginless" href="/categories/解题报告/">
+            <span class="level-start">
+                <span class="level-item">解题报告</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/计划/">
+            <span class="level-start">
+                <span class="level-item">计划</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/随记/">
+            <span class="level-start">
+                <span class="level-item">随记</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/题目列表/">
+            <span class="level-start">
+                <span class="level-item">题目列表</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/题解/">
+            <span class="level-start">
+                <span class="level-item">题解</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">82</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/categories/题解/Codeforces/">
+            <span class="level-start">
+                <span class="level-item">Codeforces</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">2</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/题解/LibreOJ/">
+            <span class="level-start">
+                <span class="level-item">LibreOJ</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">29</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/categories/题解/计蒜客/">
+            <span class="level-start">
+                <span class="level-item">计蒜客</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">11</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        
+            <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            Tag Cloud
+        </h3>
+        <a href="/tags/0-1分数规划/" style="font-size: 10px;">0/1分数规划</a> <a href="/tags/2-SAT/" style="font-size: 10px;">2-SAT</a> <a href="/tags/FFT-NTT/" style="font-size: 11.82px;">FFT/NTT</a> <a href="/tags/KMP/" style="font-size: 11.82px;">KMP</a> <a href="/tags/Polya计数/" style="font-size: 10px;">Pólya计数</a> <a href="/tags/ST算法/" style="font-size: 10.91px;">ST算法</a> <a href="/tags/bitset/" style="font-size: 10px;">bitset</a> <a href="/tags/dfs序/" style="font-size: 12.73px;">dfs序</a> <a href="/tags/python/" style="font-size: 10px;">python</a> <a href="/tags/set/" style="font-size: 10px;">set</a> <a href="/tags/std-map/" style="font-size: 10px;">std::map</a> <a href="/tags/主席树/" style="font-size: 15.45px;">主席树</a> <a href="/tags/乘法逆元/" style="font-size: 11.82px;">乘法逆元</a> <a href="/tags/二分图/" style="font-size: 10px;">二分图</a> <a href="/tags/二分图匹配/" style="font-size: 10.91px;">二分图匹配</a> <a href="/tags/二分答案/" style="font-size: 11.82px;">二分答案</a> <a href="/tags/二叉堆/" style="font-size: 10px;">二叉堆</a> <a href="/tags/二维偏序/" style="font-size: 10px;">二维偏序</a> <a href="/tags/倍增/" style="font-size: 11.82px;">倍增</a> <a href="/tags/分块/" style="font-size: 10px;">分块</a> <a href="/tags/前缀和/" style="font-size: 10.91px;">前缀和</a> <a href="/tags/动态点分治/" style="font-size: 10px;">动态点分治</a> <a href="/tags/动态规划/" style="font-size: 20px;">动态规划</a> <a href="/tags/单调队列/" style="font-size: 10.91px;">单调队列</a> <a href="/tags/博弈论/" style="font-size: 10px;">博弈论</a> <a href="/tags/卡特兰数/" style="font-size: 10.91px;">卡特兰数</a> <a href="/tags/可持久化trie/" style="font-size: 10.91px;">可持久化trie</a> <a href="/tags/后缀自动机/" style="font-size: 10.91px;">后缀自动机</a> <a href="/tags/启发式合并/" style="font-size: 11.82px;">启发式合并</a> <a href="/tags/哈希-hash/" style="font-size: 10px;">哈希(hash)</a> <a href="/tags/堆/" style="font-size: 10.91px;">堆</a> <a href="/tags/复杂度分析/" style="font-size: 10px;">复杂度分析</a> <a href="/tags/多项式/" style="font-size: 10px;">多项式</a> <a href="/tags/字符串/" style="font-size: 13.64px;">字符串</a> <a href="/tags/容斥原理/" style="font-size: 10.91px;">容斥原理</a> <a href="/tags/差分/" style="font-size: 10.91px;">差分</a> <a href="/tags/差分约束系统/" style="font-size: 10px;">差分约束系统</a> <a href="/tags/平衡树/" style="font-size: 10px;">平衡树</a> <a href="/tags/异或/" style="font-size: 11.82px;">异或</a> <a href="/tags/强连通分量/" style="font-size: 10px;">强连通分量</a> <a href="/tags/排序/" style="font-size: 10px;">排序</a> <a href="/tags/搜索/" style="font-size: 10px;">搜索</a> <a href="/tags/数学/" style="font-size: 18.18px;">数学</a> <a href="/tags/数学期望/" style="font-size: 10px;">数学期望</a> <a href="/tags/数据结构/" style="font-size: 14.55px;">数据结构</a> <a href="/tags/数论/" style="font-size: 10.91px;">数论</a> <a href="/tags/最小割/" style="font-size: 10px;">最小割</a> <a href="/tags/最短路/" style="font-size: 11.82px;">最短路</a> <a href="/tags/最短路树/" style="font-size: 10px;">最短路树</a> <a href="/tags/最近公共祖先/" style="font-size: 13.64px;">最近公共祖先</a> <a href="/tags/构造/" style="font-size: 10px;">构造</a> <a href="/tags/栈/" style="font-size: 10.91px;">栈</a> <a href="/tags/树上前缀和/" style="font-size: 10px;">树上前缀和</a> <a href="/tags/树上差分/" style="font-size: 10px;">树上差分</a> <a href="/tags/树套树/" style="font-size: 10px;">树套树</a> <a href="/tags/树形dp/" style="font-size: 17.27px;">树形dp</a> <a href="/tags/树状数组/" style="font-size: 11.82px;">树状数组</a> <a href="/tags/树链剖分/" style="font-size: 11.82px;">树链剖分</a> <a href="/tags/概率/" style="font-size: 12.73px;">概率</a> <a href="/tags/欧拉函数/" style="font-size: 10px;">欧拉函数</a> <a href="/tags/欧拉路/" style="font-size: 10px;">欧拉路</a> <a href="/tags/点分治/" style="font-size: 10.91px;">点分治</a> <a href="/tags/状态压缩/" style="font-size: 11.82px;">状态压缩</a> <a href="/tags/生成函数/" style="font-size: 12.73px;">生成函数</a> <a href="/tags/生成树/" style="font-size: 10px;">生成树</a> <a href="/tags/矩阵/" style="font-size: 11.82px;">矩阵</a> <a href="/tags/离散化/" style="font-size: 10px;">离散化</a> <a href="/tags/素数/" style="font-size: 10px;">素数</a> <a href="/tags/线性基/" style="font-size: 10px;">线性基</a> <a href="/tags/线段树/" style="font-size: 19.09px;">线段树</a> <a href="/tags/组合数/" style="font-size: 11.82px;">组合数</a> <a href="/tags/组合计数/" style="font-size: 15.45px;">组合计数</a> <a href="/tags/网络流/" style="font-size: 12.73px;">网络流</a> <a href="/tags/群论/" style="font-size: 10px;">群论</a> <a href="/tags/背包/" style="font-size: 16.36px;">背包</a> <a href="/tags/虚树/" style="font-size: 11.82px;">虚树</a> <a href="/tags/行列式/" style="font-size: 10px;">行列式</a> <a href="/tags/计数dp/" style="font-size: 10.91px;">计数dp</a> <a href="/tags/计算几何/" style="font-size: 10px;">计算几何</a> <a href="/tags/贪心/" style="font-size: 11.82px;">贪心</a> <a href="/tags/费用流/" style="font-size: 10px;">费用流</a> <a href="/tags/逆元/" style="font-size: 10px;">逆元</a> <a href="/tags/高斯消元/" style="font-size: 10.91px;">高斯消元</a>
+    </div>
+</div>
+        
+        </div>
+    
+</div>
+
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/">
+                
+                    <img src="/images/logo.png" alt="题解-计蒜客-4594B Too Simple" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 tth37&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+                <div class="field has-addons is-flex-center-mobile has-mt-5-mobile is-flex-wrap is-flex-middle">
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Creative Commons" href="https://creativecommons.org/">
+                        
+                        <i class="fab fa-creative-commons"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/">
+                        
+                        <i class="fab fa-creative-commons-by"></i>
+                        
+                    </a>
+                </p>
+                
+                <p class="control">
+                    <a class="button is-white is-large" target="_blank" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus">
+                        
+                        <i class="fab fa-github"></i>
+                        
+                    </a>
+                </p>
+                
+                </div>
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("en");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="Back to Top" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js" defer></script>
+<link rel="stylesheet" href="/css/search.css">
+<link rel="stylesheet" href="/css/insight.css"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+    
+</body>
+</html>
