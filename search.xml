@@ -560,8 +560,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>动态规划</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -776,15 +776,16 @@
       </tags>
   </entry>
   <entry>
-    <title><![CDATA[题解-LibreOJ-3166魔法树]]></title>
+    <title><![CDATA[「CEOI2019」魔法树]]></title>
     <url>%2F2019%2F10%2F03%2Fsolution-loj-3166%2F</url>
-    <content type="text"><![CDATA[题目链接 给定$n$个节点的树有，每个时间点$d$可以砍下一些边，可以收获得所有与根不连通且$d_i=d$的点的权值$w_i$，求获得的最大权值和。 $2 \le n \le 10^5$ 感谢@oy的贡献 这是一道非常漂亮的题！ 定义状态： $f[u][i]$ 表示在第 $i$ 天砍掉 $u-&gt;fa[u]$ 的一条边，所能获得的最多果汁数量。 状态转移方程：$$f[u][i]=\sum_{v\in son(u)}{(\max_{j=1}^{i}f[v][j])}$$解法一：用动态开点权值线段树维护 $f[u]$，转移时在线段树上操作即可。码量较大，常数较大。 解法二：不难发现 $f[u][1]$ 到 $f[u][k]$ 是单调不下降的，因此设 $g[u][i]=\max_{j=1}^i f[u][j]$。用差分数组维护 $g[u]$，观察到差分数组中非零元素个数不超过 $size[u]$，可以用集合（stl::map) 记录差分数组中的所有非零元素。 在集合合并时，采取 dsu on tree，复杂度 $O(n\log^2 n)$。本题的关键点在于如果当前位置有果实，那么还需要对差分数组进行一些修改：将差分数组的 $d[u]$ 位置加上 $w[u]$，在 $d[u]$ 之后的部分则需依次减掉此次操作的值。 码量较小，常数较小。 代码如下：（自带大常数） 1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int maxn = 100005;vector&lt;int&gt; G[maxn];map&lt;int, ll&gt; mp[maxn];int d[maxn];ll w[maxn];int N, M, K;void dfs(int u) &#123; for (auto v: G[u]) &#123; dfs(v); if (mp[u].size() &lt; mp[v].size()) swap(mp[u], mp[v]); for (auto it: mp[v]) &#123; mp[u][it.first] += it.second; &#125; &#125; if (d[u]) &#123; mp[u][d[u]] += w[u]; for (auto it = mp[u].upper_bound(d[u]); it != mp[u].end();) &#123; if (it-&gt;second &gt; w[u]) &#123; it-&gt;second -= w[u]; break; &#125; w[u] -= it-&gt;second; it-&gt;second = 0; mp[u].erase(it++); &#125; &#125;&#125;int main() &#123; scanf("%d%d%d", &amp;N, &amp;M, &amp;K); for (register int i = 2; i &lt;= N; ++i) &#123; int p; scanf("%d", &amp;p); G[p].push_back(i); &#125; for (register int i = 1; i &lt;= M; ++i) &#123; int v; scanf("%d", &amp;v); scanf("%d%I64d", &amp;d[v], &amp;w[v]); &#125; dfs(1); ll ans = 0; for (auto it: mp[1]) ans += it.second; printf("%I64d", ans); return 0;&#125;]]></content>
+    <content type="text"><![CDATA[.control { clear: both; font-size: 1rem; position: relative; text-align: left; } .tags { align-items: center; display: flex; flex-wrap: wrap; justify-content: flex-start; } Review - Dsu On Tree #3166.「CEOI2019」魔法树 Summarize给定 $n$ 个节点的树，每个时间点 $d$ 可以砍下一些边，可以收获得所有与根不连通且 $d_i=d$ 的点的权值 $w_i$ ，求获得的最大权值和。 $n \le 100000$ Solution这是一道非常漂亮的题！ 定义状态： $f[u][i]$ 表示在第 $i$ 天砍掉 $u-&gt;fa[u]$ 的一条边，所能获得的最多果汁数量。 状态转移方程：$$f[u][i]=\sum_{v\in son(u)}{(\max_{j=1}^{i}f[v][j])}$$解法一：用动态开点权值线段树维护 $f[u]$，转移时在线段树上操作即可。码量较大，常数较大。 解法二：不难发现 $f[u][1]$ 到 $f[u][k]$ 是单调不下降的，因此设 $g[u][i]=\max_{j=1}^i f[u][j]$。用差分数组维护 $g[u]$，观察到差分数组中非零元素个数不超过 $size[u]$，可以用集合（stl::map) 记录差分数组中的所有非零元素。 在集合合并时，采取 dsu on tree，复杂度 $O(n\log^2 n)$。本题的关键点在于如果当前位置有果实，那么还需要对差分数组进行一些修改：将差分数组的 $d[u]$ 位置加上 $w[u]$，在 $d[u]$ 之后的部分则需依次减掉此次操作的值。 码量较小，常数较小。 Code1234567891011121314151617181920212223242526272829303132333435363738394041424344454647484950515253#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int maxn = 100005;vector&lt;int&gt; G[maxn];map&lt;int, ll&gt; mp[maxn];int d[maxn];ll w[maxn];int N, M, K;void dfs(int u) &#123; for (auto v: G[u]) &#123; dfs(v); if (mp[u].size() &lt; mp[v].size()) swap(mp[u], mp[v]); for (auto it: mp[v]) &#123; mp[u][it.first] += it.second; &#125; &#125; if (d[u]) &#123; mp[u][d[u]] += w[u]; for (auto it = mp[u].upper_bound(d[u]); it != mp[u].end();) &#123; if (it-&gt;second &gt; w[u]) &#123; it-&gt;second -= w[u]; break; &#125; w[u] -= it-&gt;second; it-&gt;second = 0; mp[u].erase(it++); &#125; &#125;&#125;int main() &#123; scanf("%d%d%d", &amp;N, &amp;M, &amp;K); for (register int i = 2; i &lt;= N; ++i) &#123; int p; scanf("%d", &amp;p); G[p].push_back(i); &#125; for (register int i = 1; i &lt;= M; ++i) &#123; int v; scanf("%d", &amp;v); scanf("%d%I64d", &amp;d[v], &amp;w[v]); &#125; dfs(1); ll ans = 0; for (auto it: mp[1]) ans += it.second; printf("%I64d", ans); return 0;&#125;]]></content>
       <categories>
         <category>题解</category>
+        <category>LibreOJ</category>
       </categories>
       <tags>
+        <tag>树形dp</tag>
         <tag>启发式合并</tag>
-        <tag>std::map</tag>
       </tags>
   </entry>
   <entry>
@@ -1427,8 +1428,8 @@
         <category>题解</category>
       </categories>
       <tags>
-        <tag>数学</tag>
         <tag>字符串</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
