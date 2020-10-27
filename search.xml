@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[「计蒜客模拟赛」抉择]]></title>
+    <url>%2F2020%2F10%2F27%2Fsolution-jsk-48957%2F</url>
+    <content type="text"><![CDATA[「计蒜客模拟赛」抉择 Summarize给定有根树，点有权值，要求选出一些点，满足集合中的点的祖先权值比它小，求集合大小的最大值。 $n\le 300000$ Solution利用单调不下降子序列的 $O(n\log n)$ 解法，记 $d_i$ 为子树中集合大小为 $i$ 时，节点权值的最小值。向上利用启发式合并维护即可。 也可使用线段树优化树上 DP 实现。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051525354555657#include &lt;bits/stdc++.h&gt;using namespace std;const int MAXN = 3e5 + 5;int n;int a[MAXN], id[MAXN];vector&lt;int&gt; G[MAXN];set&lt;int&gt; s[MAXN];int ans = 0;void dfs(int u, int fa) &#123; int lst = 0; for (vector&lt;int&gt;::iterator it = G[u].begin(); it != G[u].end(); it++) &#123; int v = *it; if (v == fa) continue; dfs(v, u); if (lst) &#123; if (s[id[lst]].size() &gt; s[id[v]].size()) swap(id[lst], id[v]); int t = s[id[lst]].size(); for (set&lt;int&gt;::iterator it = s[id[lst]].begin(); it != s[id[lst]].end(); it++) s[id[v]].insert(*it); &#125; lst = v; &#125; if (lst) &#123; set&lt;int&gt;::iterator it = s[id[lst]].lower_bound(a[u]); if (it == s[id[lst]].begin()) &#123; s[id[lst]].insert(a[u]); &#125; else &#123; it--; s[id[lst]].erase(it); s[id[lst]].insert(a[u]); &#125; swap(id[lst], id[u]); &#125; else &#123; s[id[u]].insert(a[u]); &#125; int t = s[id[u]].size(); ans = max(ans, (int)s[id[u]].size());&#125;int main() &#123; freopen("choice.in", "r", stdin); freopen("choice.out", "w", stdout); scanf("%d", &amp;n); for (int i = 1; i &lt;= n; ++i) scanf("%d", &amp;a[i]), id[i] = i; for (int i = 1; i &lt; n; ++i) &#123; int u, v; scanf("%d%d", &amp;u, &amp;v); G[u].push_back(v), G[v].push_back(u); &#125; dfs(1, 0); printf("%d", ans); return 0;&#125;]]></content>
+      <categories>
+        <category>题解</category>
+        <category>计蒜客</category>
+      </categories>
+      <tags>
+        <tag>动态规划</tag>
+        <tag>树形dp</tag>
+        <tag>启发式合并</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[「计蒜客模拟赛」魔法阵]]></title>
     <url>%2F2020%2F10%2F25%2Fsolution-jsk-48956%2F</url>
     <content type="text"><![CDATA[#48956. 「计蒜客模拟赛」魔法阵 Summarize$n$ 个有编号的球放到有编号的环上，球分黑白两色，共 $k$ 个白球。要求至少有 $d$ 对黑球相邻，求方案数。 $n\le 1000000$ Solution可以将编号为 $1..k$ 的小球视为相同的白球，将编号为 $k+1..n$ 的小球视为相同的黑球，在统计答案时乘上 $k!(n-k)!$ 即可。 可以将环视为无编号的环，在统计答案时乘上 $n$ 即可。 注意到“断开的边”只会在一段相邻的白球之间产生，将一段相邻的白球称为一个连通块。设有 $p$ 个连通块，则“断开的边”的数量为 $n-k-p$。根据题目条件 $n-k-p\ge d$，得 $p\le n-k-d$。因此从 $1$ 到 $n-k-d$ 枚举连通块数量。 对于枚举到的 $p$，用隔板法将黑球和白球分成 $p$ 段，并将它们摆放在无编号的环上。可以发现，每种方案会被重复统计 $p$ 次，故两次隔板法求得的方案数需要再除以 $p$。 最后将统计得到的答案乘上 $n\times k!(n-k)!$ 即可。 Note需要特殊讨论 $k=1$ 和 $k=n$ 的情形，因为黑/白球个数为零，无法划分为连通块。 Code123456789101112131415161718192021222324252627282930313233343536373839404142434445#include &lt;bits/stdc++.h&gt;using namespace std;typedef long long ll;const int MAXN = 1e6 + 5;const ll MOD = 998244353;ll fac[MAXN], inv[MAXN], facinv[MAXN];inline ll C(int n, int k) &#123; return fac[n] * facinv[k] % MOD * facinv[n - k] % MOD;&#125;int t, n, k, d;int main() &#123; freopen("ring.in", "r", stdin); freopen("ring.out", "w", stdout); fac[0] = facinv[0] = fac[1] = inv[1] = facinv[1] = 1; for (int i = 2; i &lt;= 1000000; ++i) &#123; fac[i] = 1ll * i * fac[i - 1] % MOD; inv[i] = (MOD - MOD / i) * inv[MOD % i] % MOD; facinv[i] = inv[i] * facinv[i - 1] % MOD; &#125; scanf("%d", &amp;t); while (t--) &#123; scanf("%d%d%d", &amp;n, &amp;k, &amp;d); if (k == 0) &#123; printf("%lld\n", fac[n]); continue; &#125; else if (k == n) &#123; if (d == 0) printf("%lld\n", fac[n]); else printf("0\n"); continue; &#125; ll ans = 0; for (int p = 1; p &lt;= n - k - d; ++p) &#123; if (p &gt; k || p &gt; n - k) break; ans = (ans + C(n - k - 1, p - 1) * C(k - 1, p - 1) % MOD * inv[p] % MOD) % MOD; &#125; ans = 1ll * n * ans % MOD; ans = ans * fac[k] % MOD * fac[n - k] % MOD; printf("%lld\n", ans); &#125; return 0;&#125;]]></content>
@@ -24,8 +38,8 @@
         <category>计蒜客</category>
       </categories>
       <tags>
-        <tag>dfs序</tag>
         <tag>树状数组</tag>
+        <tag>dfs序</tag>
         <tag>二维偏序</tag>
       </tags>
   </entry>
@@ -388,8 +402,8 @@
         <category>LibreOJ</category>
       </categories>
       <tags>
-        <tag>组合计数</tag>
         <tag>生成函数</tag>
+        <tag>组合计数</tag>
         <tag>动态规划</tag>
         <tag>背包</tag>
         <tag>树形dp</tag>
@@ -465,8 +479,8 @@
       </categories>
       <tags>
         <tag>FFT/NTT</tag>
-        <tag>组合计数</tag>
         <tag>生成函数</tag>
+        <tag>组合计数</tag>
         <tag>容斥原理</tag>
         <tag>启发式合并</tag>
       </tags>
@@ -481,8 +495,8 @@
       </categories>
       <tags>
         <tag>FFT/NTT</tag>
-        <tag>组合计数</tag>
         <tag>生成函数</tag>
+        <tag>组合计数</tag>
       </tags>
   </entry>
   <entry>
@@ -1091,8 +1105,8 @@
       </categories>
       <tags>
         <tag>主席树</tag>
-        <tag>树链剖分</tag>
         <tag>树状数组</tag>
+        <tag>树链剖分</tag>
         <tag>树套树</tag>
       </tags>
   </entry>
